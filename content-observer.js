@@ -2,6 +2,7 @@
   const MAX_ITEMS = 300
   const MAX_DOM_MARKERS = 120
   const SEND_DELAY = 900
+  const CONTEXT_INVALIDATED_PATTERN = /extension context invalidated|context invalidated/i
   const state = {
     startedAt: Date.now(),
     updatedAt: Date.now(),
@@ -22,16 +23,23 @@
   let mutationObserver = null
   let navigationInterval = 0
 
-  if (!hasRuntimeContext()) {
+  if (!getRuntime()) {
     return
   }
 
-  window.addEventListener('pagehide', stopObserver, { once: true })
-  collectStaticSnapshot()
-  installPerformanceObserver()
-  installMutationObserver()
-  installNavigationObserver()
-  scheduleSend()
+  try {
+    window.addEventListener('pagehide', stopObserver, { once: true })
+    collectStaticSnapshot()
+    installPerformanceObserver()
+    installMutationObserver()
+    installNavigationObserver()
+    scheduleSend()
+  } catch (error) {
+    if (!isExtensionContextInvalidated(error)) {
+      throw error
+    }
+    stopObserver()
+  }
 
   function collectStaticSnapshot() {
     collectScripts(document)
@@ -265,7 +273,7 @@
   }
 
   function scheduleSend() {
-    if (stopped || !hasRuntimeContext()) {
+    if (stopped || !getRuntime()) {
       stopObserver()
       return
     }
@@ -274,7 +282,8 @@
   }
 
   function sendSnapshot() {
-    if (stopped || !hasRuntimeContext()) {
+    const runtime = getRuntime()
+    if (stopped || !runtime) {
       stopObserver()
       return
     }
@@ -290,10 +299,12 @@
       domMarkers: [...state.domMarkers]
     }
     try {
-      const delivery = chrome.runtime.sendMessage({ type: 'DYNAMIC_PAGE_SNAPSHOT', snapshot })
-      if (delivery && typeof delivery.catch === 'function') {
-        delivery.catch(handleSendFailure)
-      }
+      runtime.sendMessage({ type: 'DYNAMIC_PAGE_SNAPSHOT', snapshot }, () => {
+        const error = getRuntimeLastError()
+        if (error) {
+          handleSendFailure(error)
+        }
+      })
     } catch (error) {
       handleSendFailure(error)
     }
@@ -306,14 +317,28 @@
   }
 
   function isExtensionContextInvalidated(error) {
-    return /extension context invalidated|context invalidated/i.test(String(error?.message || error))
+    return CONTEXT_INVALIDATED_PATTERN.test(String(error?.message || error))
   }
 
-  function hasRuntimeContext() {
+  function getRuntime() {
     try {
-      return Boolean(chrome?.runtime?.id)
-    } catch {
-      return false
+      if (typeof chrome === 'undefined' || !chrome.runtime || !chrome.runtime.id || typeof chrome.runtime.sendMessage !== 'function') {
+        return null
+      }
+      return chrome.runtime
+    } catch (error) {
+      if (isExtensionContextInvalidated(error)) {
+        stopObserver()
+      }
+      return null
+    }
+  }
+
+  function getRuntimeLastError() {
+    try {
+      return chrome?.runtime?.lastError || null
+    } catch (error) {
+      return error
     }
   }
 
