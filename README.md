@@ -27,6 +27,7 @@ StackPrism 栈棱镜是一个 Chrome / Edge Manifest V3 浏览器扩展，用于
 - 流量跟踪 / 归因检测：UTM 参数、gclid / gbraid / wbraid / dclid、fbclid、msclkid、ttclid、li_fat_id、yclid，以及 Voluum、RedTrack、Binom、BeMob、AdsBridge、Keitaro、CPV Lab 等流量跟踪平台。
 - 统计 / 分析检测：Google Analytics、百度统计、CNZZ/友盟、51.LA、腾讯 MTA、神策、GrowingIO、Yandex Metrica、Adobe Analytics、Matomo/Piwik、Plausible、Umami、GoatCounter、PostHog、Fathom、Clicky、Statcounter、Mixpanel、Amplitude、Hotjar、Clarity、Meta Pixel 等，并在证据里标注“开源 / 可自托管”“商用 / 知名统计”“广告转化统计”等类型。
 - 动态页面监控：内容脚本会持续监听页面交互后新增的脚本、样式、iframe、资源加载、feed 链接和关键 DOM 标记，下次打开插件或刷新检测时会合并这些动态结果。
+- 主动后台识别：页面加载和动态资源变化时会在后台更新识别结果，并在扩展图标上显示已识别技术数量。
 - 分类 Tab 过滤：按前端框架、前端库、UI / CSS 框架、CDN / 托管、Web 服务器、开发语言 / 运行时、网站程序、主题 / 模板、网站源码线索、探针 / 监控、RSS / 订阅、第三方登录 / OAuth、支付系统、广告 / 营销、统计 / 分析等分类查看结果。
 - 技术链接：检测结果里的技术名称会尽量链接到官网或官方仓库，点击后在新标签页打开。
 - 设置页：支持按分类开启 / 关闭识别结果，按技术名称隐藏指定结果，添加自定义规则 / 自定义匹配范围 / 自定义技术链接，并支持自定义 CSS 覆盖弹窗和设置页样式。

@@ -25,7 +25,24 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       .then(([data, rules, settings]) => {
         data.dynamic = normalizeDynamicSnapshot(message.snapshot, buildEffectivePageRules(rules.page || {}, settings))
         data.updatedAt = Date.now()
-        return chrome.storage.session.set({ [storageKey(tabId)]: data })
+        return saveTabDataAndBadge(tabId, data, settings)
+      })
+      .then(() => sendResponse({ ok: true }))
+      .catch(error => sendResponse({ ok: false, error: String(error) }))
+    return true
+  }
+
+  if (message.type === 'PAGE_DETECTION_RESULT') {
+    const tabId = Number(message.tabId)
+    if (!Number.isInteger(tabId) || tabId < 0) {
+      sendResponse({ ok: false, error: '缺少有效 tabId' })
+      return false
+    }
+    Promise.all([getTabData(tabId), loadDetectorSettings()])
+      .then(([data, settings]) => {
+        data.page = cleanPageDetectionRecord(message.page)
+        data.updatedAt = Date.now()
+        return saveTabDataAndBadge(tabId, data, settings)
       })
       .then(() => sendResponse({ ok: true }))
       .catch(error => sendResponse({ ok: false, error: String(error) }))
@@ -37,6 +54,19 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 chrome.tabs.onRemoved.addListener(tabId => {
   chrome.storage.session.remove(storageKey(tabId)).catch(() => {})
+})
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
+  if (changeInfo.status === 'loading') {
+    chrome.storage.session.remove(storageKey(tabId)).catch(() => {})
+    clearBadge(tabId)
+  }
+})
+
+chrome.storage.onChanged.addListener((changes, areaName) => {
+  if (areaName === 'sync' && changes[SETTINGS_STORAGE_KEY]) {
+    refreshAllBadges()
+  }
 })
 
 chrome.webRequest.onHeadersReceived.addListener(
@@ -57,7 +87,7 @@ chrome.webRequest.onHeadersReceived.addListener(
           data.frames = dedupeApiRecords([record, ...(data.frames || [])]).slice(0, 10)
         }
         data.updatedAt = Date.now()
-        return chrome.storage.session.set({ [storageKey(details.tabId)]: data })
+        return saveTabDataAndBadge(details.tabId, data, settings)
       })
       .catch(() => {})
   },
@@ -93,6 +123,8 @@ async function loadDetectorSettings() {
 
 function normalizeDetectorSettings(value = {}) {
   return {
+    disabledCategories: cleanStringArray(value.disabledCategories),
+    disabledTechnologies: cleanStringArray(value.disabledTechnologies),
     customRules: cleanCustomRules(value.customRules)
   }
 }
@@ -133,6 +165,121 @@ function buildEffectivePageRules(pageRules, settings) {
     ...pageRules,
     customRules: settings?.customRules || []
   }
+}
+
+async function saveTabDataAndBadge(tabId, data, settings) {
+  await chrome.storage.session.set({ [storageKey(tabId)]: data })
+  await updateBadgeForTab(tabId, data, settings)
+}
+
+async function updateBadgeForTab(tabId, data, settings) {
+  const count = countBadgeTechnologies(addStoredCustomHeaderRules(data || {}, settings), settings)
+  const text = formatBadgeCount(count)
+  try {
+    await chrome.action.setBadgeBackgroundColor({ tabId, color: '#0f766e' })
+    await chrome.action.setBadgeText({ tabId, text })
+    await chrome.action.setTitle({
+      tabId,
+      title: count > 0 ? `StackPrism 栈棱镜 · 已识别 ${count} 项技术` : 'StackPrism 栈棱镜'
+    })
+  } catch {
+    return
+  }
+}
+
+function countBadgeTechnologies(data, settings) {
+  const technologies = []
+  addAllTechnologies(technologies, data.page?.technologies)
+  addAllTechnologies(technologies, data.main?.technologies)
+  for (const api of data.apis || []) {
+    addAllTechnologies(technologies, api.technologies)
+  }
+  for (const frame of data.frames || []) {
+    addAllTechnologies(technologies, frame.technologies)
+  }
+  addAllTechnologies(technologies, data.dynamic?.technologies)
+  return filterTechnologiesBySettings(mergeTechnologyRecords(technologies), settings).length
+}
+
+function addAllTechnologies(target, items) {
+  if (Array.isArray(items)) {
+    target.push(...items)
+  }
+}
+
+function filterTechnologiesBySettings(technologies, settings) {
+  const disabledCategories = new Set(cleanStringArray(settings?.disabledCategories))
+  const disabledTechnologies = new Set(cleanStringArray(settings?.disabledTechnologies).map(name => normalizeTechName(name)))
+  return technologies.filter(tech => {
+    if (disabledCategories.has(tech.category)) {
+      return false
+    }
+    return !disabledTechnologies.has(normalizeTechName(tech.name))
+  })
+}
+
+function formatBadgeCount(count) {
+  if (!count) {
+    return ''
+  }
+  return count > 99 ? '99+' : String(count)
+}
+
+function cleanPageDetectionRecord(page) {
+  return {
+    url: String(page?.url || '').slice(0, 1000),
+    title: String(page?.title || '').slice(0, 300),
+    time: Date.now(),
+    technologies: cleanTechnologyRecords(page?.technologies)
+  }
+}
+
+function cleanTechnologyRecords(items) {
+  if (!Array.isArray(items)) {
+    return []
+  }
+  return items
+    .map(item => ({
+      category: String(item?.category || '其他库').slice(0, 80),
+      name: String(item?.name || '').slice(0, 160),
+      confidence: ['高', '中', '低'].includes(item?.confidence) ? item.confidence : '中',
+      evidence: cleanStringArray(item?.evidence).slice(0, 12),
+      source: String(item?.source || '页面扫描').slice(0, 80)
+    }))
+    .filter(item => item.name)
+    .slice(0, 400)
+}
+
+function clearBadge(tabId) {
+  chrome.action.setBadgeText({ tabId, text: '' }).catch(() => {})
+  chrome.action.setTitle({ tabId, title: 'StackPrism 栈棱镜' }).catch(() => {})
+}
+
+async function refreshAllBadges() {
+  try {
+    const [tabs, settings] = await Promise.all([chrome.tabs.query({}), loadDetectorSettings()])
+    for (const tab of tabs) {
+      if (typeof tab.id !== 'number' || tab.id < 0) {
+        continue
+      }
+      const data = await getTabData(tab.id)
+      if (data && Object.keys(data).length) {
+        await updateBadgeForTab(tab.id, data, settings)
+      } else {
+        clearBadge(tab.id)
+      }
+    }
+  } catch {
+    return
+  }
+}
+
+function normalizeTechName(name) {
+  return String(name || '')
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/\+/g, 'plus')
+    .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '')
 }
 
 function storageKey(tabId) {

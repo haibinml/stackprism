@@ -223,6 +223,7 @@ async function runDetection() {
     state.result = result
     state.activeCategory = '全部'
     renderResult(result)
+    reportPageDetectionToBackground(tab.id, pageData)
   } catch (error) {
     const message = String(error?.message || error)
     showError(`检测失败：${message}`)
@@ -233,6 +234,20 @@ async function runDetection() {
     }
     document.getElementById('rawOutput').textContent = JSON.stringify(state.result, null, 2)
   }
+}
+
+function reportPageDetectionToBackground(tabId, pageData) {
+  chrome.runtime
+    .sendMessage({
+      type: 'PAGE_DETECTION_RESULT',
+      tabId,
+      page: {
+        url: pageData.url || '',
+        title: pageData.title || '',
+        technologies: pageData.technologies || []
+      }
+    })
+    .catch(() => {})
 }
 
 function buildEffectivePageRules(pageRules, settings) {
