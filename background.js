@@ -2,8 +2,9 @@ const TAB_DATA_PREFIX = 'tab:'
 const MAX_API_RECORDS = 30
 const SETTINGS_STORAGE_KEY = 'stackPrismSettings'
 let techRulesPromise = null
+const activeDetectionTimers = new Map()
 
-importScripts('rule-loader.js')
+importScripts('rule-loader.js', 'page-detector.js')
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (!message || !message.type) {
@@ -29,6 +30,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         data.updatedAt = Date.now()
         return saveTabDataAndBadge(tabId, data, settings)
       })
+      .then(() => scheduleActivePageDetection(tabId, 900))
       .then(() => sendResponse({ ok: true }))
       .catch(error => sendResponse({ ok: false, error: String(error) }))
     return true
@@ -55,13 +57,20 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 })
 
 chrome.tabs.onRemoved.addListener(tabId => {
+  clearActiveDetectionTimer(tabId)
   chrome.storage.session.remove(storageKey(tabId)).catch(() => {})
 })
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
   if (changeInfo.status === 'loading') {
+    clearActiveDetectionTimer(tabId)
     chrome.storage.session.remove(storageKey(tabId)).catch(() => {})
     clearBadge(tabId)
+    return
+  }
+
+  if (changeInfo.status === 'complete') {
+    scheduleActivePageDetection(tabId, 600)
   }
 })
 
@@ -150,9 +159,11 @@ function cleanCustomRules(value) {
       confidence: ['高', '中', '低'].includes(rule?.confidence) ? rule.confidence : '中',
       matchType: rule?.matchType === 'keyword' ? 'keyword' : 'regex',
       patterns: cleanStringArray(rule?.patterns).slice(0, 60),
+      selectors: cleanStringArray(rule?.selectors).slice(0, 30),
+      globals: cleanStringArray(rule?.globals).slice(0, 30),
       matchIn: cleanStringArray(rule?.matchIn).slice(0, 10)
     }))
-    .filter(rule => rule.name && rule.patterns.length)
+    .filter(rule => rule.name && (rule.patterns.length || rule.selectors.length || rule.globals.length))
     .slice(0, 200)
 }
 
@@ -267,6 +278,52 @@ async function refreshAllBadges() {
     }
   } catch {
     return
+  }
+}
+
+async function runActivePageDetection(tabId) {
+  if (typeof tabId !== 'number' || tabId < 0) {
+    return
+  }
+
+  try {
+    const [data, rules, settings] = await Promise.all([getTabData(tabId), loadTechRules(), loadDetectorSettings()])
+    const pageRules = buildEffectivePageRules(rules.page || {}, settings)
+    const injection = await chrome.scripting.executeScript({
+      target: { tabId },
+      world: 'MAIN',
+      func: detectPageTechnologies,
+      args: [pageRules]
+    })
+    const page = injection?.[0]?.result
+    if (!page) {
+      return
+    }
+    data.page = cleanPageDetectionRecord(page)
+    data.updatedAt = Date.now()
+    await saveTabDataAndBadge(tabId, data, settings)
+  } catch {
+    return
+  }
+}
+
+function scheduleActivePageDetection(tabId, delay = 600) {
+  if (typeof tabId !== 'number' || tabId < 0) {
+    return
+  }
+  clearActiveDetectionTimer(tabId)
+  const timer = setTimeout(() => {
+    activeDetectionTimers.delete(tabId)
+    runActivePageDetection(tabId)
+  }, delay)
+  activeDetectionTimers.set(tabId, timer)
+}
+
+function clearActiveDetectionTimer(tabId) {
+  const timer = activeDetectionTimers.get(tabId)
+  if (timer) {
+    clearTimeout(timer)
+    activeDetectionTimers.delete(tabId)
   }
 }
 
