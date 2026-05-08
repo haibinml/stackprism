@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderExtensionMeta()
   bindRepositoryLink('appTitleLink')
   bindRepositoryLink('popupRepoLink')
-  document.getElementById('helpBtn').addEventListener('click', openHelpPage)
   document.getElementById('settingsBtn').addEventListener('click', openSettingsPage)
   document.getElementById('refreshBtn').addEventListener('click', runDetection)
   document.getElementById('copyBtn').addEventListener('click', copyResult)
@@ -84,10 +83,6 @@ function openSettingsPage() {
     }
     chrome.runtime.openOptionsPage?.()
   })
-}
-
-function openHelpPage() {
-  chrome.tabs.create({ url: chrome.runtime.getURL('help.html') })
 }
 
 async function loadSettings() {

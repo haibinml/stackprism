@@ -67,13 +67,15 @@ button:hover {
 }
 
 .topbar>div:first-child {
+  flex: 0 1 210px;
+  max-width: 210px;
   min-width: 0;
 }
 
 h1 {
   align-items: center;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 6px;
   font-size: 18px;
   line-height: 1.2;
@@ -82,7 +84,11 @@ h1 {
 
 .app-title-link {
   color: var(--text);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .app-title-link:hover {
@@ -101,7 +107,7 @@ h1 {
 }
 
 .url {
-  max-width: 286px;
+  max-width: 190px;
   margin: 0;
   color: var(--muted);
   overflow: hidden;
@@ -110,9 +116,15 @@ h1 {
 }
 
 .actions {
+  align-items: center;
   display: flex;
   flex: 0 0 auto;
   gap: 6px;
+  white-space: nowrap;
+}
+
+.actions button {
+  white-space: nowrap;
 }
 
 .status {
