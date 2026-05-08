@@ -1,5 +1,8 @@
 :root {
   color-scheme: light;
+  --popup-width: 440px;
+  --popup-header-height: 76px;
+  --popup-footer-height: 42px;
   --bg: #f6f7f9;
   --panel: #ffffff;
   --text: #17202a;
@@ -17,7 +20,7 @@
 }
 
 body {
-  width: 440px;
+  width: var(--popup-width);
   min-height: 520px;
   margin: 0;
   background: var(--bg);
@@ -41,15 +44,30 @@ button:hover {
 }
 
 .shell {
-  padding: 14px;
+  padding: calc(var(--popup-header-height) + 12px) 14px calc(var(--popup-footer-height) + 14px);
 }
 
 .topbar {
-  display: flex;
   align-items: flex-start;
+  background: rgba(246, 247, 249, 0.96);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 8px 20px rgba(20, 35, 50, 0.08);
+  display: flex;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 12px;
+  height: var(--popup-header-height);
+  left: 0;
+  margin: 0;
+  padding: 12px 14px 10px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: var(--popup-width);
+  z-index: 20;
+}
+
+.topbar>div:first-child {
+  min-width: 0;
 }
 
 h1 {
@@ -93,6 +111,7 @@ h1 {
 
 .actions {
   display: flex;
+  flex: 0 0 auto;
   gap: 6px;
 }
 
@@ -347,13 +366,23 @@ h1 {
 
 .app-footer {
   align-items: center;
+  background: rgba(246, 247, 249, 0.96);
+  border-top: 1px solid var(--line);
+  bottom: 0;
   color: var(--muted);
   display: flex;
   flex-wrap: wrap;
   font-size: 12px;
   gap: 8px;
   justify-content: space-between;
-  margin-top: 12px;
+  left: 0;
+  margin: 0;
+  min-height: var(--popup-footer-height);
+  padding: 10px 14px;
+  position: fixed;
+  right: 0;
+  width: var(--popup-width);
+  z-index: 20;
 }
 
 .app-footer a {
