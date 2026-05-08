@@ -137,8 +137,9 @@ h2 {
   overflow: auto;
   padding: 10px 14px;
   position: fixed;
-  right: 24px;
+  left: 50%;
   top: 20px;
+  transform: translateX(-50%);
   white-space: pre-wrap;
   z-index: 50;
 }
@@ -305,6 +306,7 @@ textarea:focus {
     left: 14px;
     right: 14px;
     top: 12px;
+    transform: none;
     max-width: none;
   }
 }
