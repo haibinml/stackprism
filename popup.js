@@ -14,6 +14,7 @@ const CATEGORY_ORDER = [
   'SaaS / 第三方服务',
   '第三方登录 / OAuth',
   '支付系统',
+  '广告 / 营销',
   '统计 / 分析',
   '分析与标签',
   '安全与协议',
@@ -726,7 +727,7 @@ function detectPageTechnologies(ruleConfig = {}) {
   detectSaasServices(add, resources, documentHtmlSample, globalKeys, ruleConfig.saasServices || [])
   detectThirdPartyLogins(add, resources, documentHtmlSample, globalKeys, ruleConfig.thirdPartyLogins || [])
   detectPaymentSystems(add, resources, documentHtmlSample, globalKeys, ruleConfig.paymentSystems || [])
-  detectAnalytics(add, resources, globalKeys, ruleConfig.analyticsProviders || [])
+  detectAnalytics(add, resources, documentHtmlSample, globalKeys, ruleConfig.analyticsProviders || [])
   detectSecurityAndProtocol(add)
 
   return {
@@ -1679,8 +1680,8 @@ function detectPageTechnologies(ruleConfig = {}) {
     }
   }
 
-  function detectAnalytics(add, resources, globalKeys, externalRules) {
-    const text = resources.text
+  function detectAnalytics(add, resources, html, globalKeys, externalRules) {
+    const text = `${location.href}\n${resources.text}\n${html}`
     if (hasGlobal('gtag') || hasGlobal('ga') || /googletagmanager\.com\/gtag|google-analytics\.com|analytics\.google\.com/.test(text)) {
       add('统计 / 分析', 'Google Analytics', hasGlobal('gtag') || hasGlobal('ga') ? '高' : '中', '商用 / 知名统计：存在 GA 全局对象或资源 URL')
     }
