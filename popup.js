@@ -23,15 +23,19 @@ const CATEGORY_ORDER = [
   '其他库'
 ]
 
+const SETTINGS_STORAGE_KEY = 'stackPrismSettings'
+
 const state = {
   result: null,
   activeCategory: '全部',
   rules: null,
   techLinks: null,
-  normalizedTechLinks: null
+  normalizedTechLinks: null,
+  settings: null
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('settingsBtn').addEventListener('click', () => chrome.runtime.openOptionsPage())
   document.getElementById('refreshBtn').addEventListener('click', runDetection)
   document.getElementById('copyBtn').addEventListener('click', copyResult)
   document.getElementById('sourceSearchBtn').addEventListener('click', searchPageSourceFromPopup)
@@ -40,8 +44,69 @@ document.addEventListener('DOMContentLoaded', () => {
       searchPageSourceFromPopup()
     }
   })
-  runDetection()
+  loadSettings()
+    .then(settings => {
+      state.settings = settings
+      applyCustomCss(settings.customCss)
+    })
+    .finally(runDetection)
 })
+
+async function loadSettings() {
+  try {
+    const stored = await chrome.storage.sync.get(SETTINGS_STORAGE_KEY)
+    return normalizeSettings(stored[SETTINGS_STORAGE_KEY])
+  } catch {
+    return normalizeSettings()
+  }
+}
+
+function normalizeSettings(value = {}) {
+  return {
+    disabledCategories: cleanStringArray(value.disabledCategories),
+    disabledTechnologies: cleanStringArray(value.disabledTechnologies),
+    customRules: cleanCustomRules(value.customRules),
+    customCss: typeof value.customCss === 'string' ? value.customCss.slice(0, 40000) : ''
+  }
+}
+
+function cleanStringArray(value) {
+  if (!Array.isArray(value)) {
+    return []
+  }
+  return [...new Set(value.map(item => String(item || '').trim()).filter(Boolean))]
+}
+
+function cleanCustomRules(value) {
+  if (!Array.isArray(value)) {
+    return []
+  }
+  return value
+    .map(rule => ({
+      name: String(rule?.name || '').trim().slice(0, 120),
+      category: String(rule?.category || '其他库').trim().slice(0, 80),
+      kind: String(rule?.kind || '自定义规则').trim().slice(0, 120),
+      confidence: ['高', '中', '低'].includes(rule?.confidence) ? rule.confidence : '中',
+      matchType: rule?.matchType === 'keyword' ? 'keyword' : 'regex',
+      patterns: cleanStringArray(rule?.patterns).slice(0, 60),
+      selectors: cleanStringArray(rule?.selectors).slice(0, 30),
+      globals: cleanStringArray(rule?.globals).slice(0, 30),
+      matchIn: cleanStringArray(rule?.matchIn).slice(0, 10),
+      url: /^https?:\/\//i.test(String(rule?.url || '')) ? String(rule.url).trim().slice(0, 500) : ''
+    }))
+    .filter(rule => rule.name && (rule.patterns.length || rule.selectors.length || rule.globals.length))
+    .slice(0, 200)
+}
+
+function applyCustomCss(css) {
+  let style = document.getElementById('stackPrismCustomCss')
+  if (!style) {
+    style = document.createElement('style')
+    style.id = 'stackPrismCustomCss'
+    document.documentElement.append(style)
+  }
+  style.textContent = String(css || '')
+}
 
 async function loadTechRules() {
   if (state.rules) {
@@ -99,13 +164,16 @@ async function runDetection() {
   document.getElementById('pageUrl').textContent = tab.url || '当前标签页'
 
   try {
+    state.settings = await loadSettings()
+    applyCustomCss(state.settings.customCss)
     const [rules] = await Promise.all([loadTechRules(), loadTechLinks()])
+    const pageRules = buildEffectivePageRules(rules.page || {}, state.settings)
     const [pageInjection, headerResponse] = await Promise.all([
       chrome.scripting.executeScript({
         target: { tabId: tab.id },
         world: 'MAIN',
         func: detectPageTechnologies,
-        args: [rules.page || {}]
+        args: [pageRules]
       }),
       chrome.runtime.sendMessage({ type: 'GET_HEADER_DATA', tabId: tab.id })
     ])
@@ -125,6 +193,13 @@ async function runDetection() {
       generatedAt: new Date().toISOString()
     }
     document.getElementById('rawOutput').textContent = JSON.stringify(state.result, null, 2)
+  }
+}
+
+function buildEffectivePageRules(pageRules, settings) {
+  return {
+    ...pageRules,
+    customRules: settings?.customRules || []
   }
 }
 
@@ -158,7 +233,7 @@ function combineResults(tab, pageData, headerData) {
     }))
   )
 
-  const merged = mergeTechnologies(all)
+  const merged = filterTechnologiesBySettings(mergeTechnologies(all), state.settings)
   const linked = attachTechnologyLinks(merged)
   const headers = headerData.main?.headers || {}
   return {
@@ -179,6 +254,17 @@ function combineResults(tab, pageData, headerData) {
   }
 }
 
+function filterTechnologiesBySettings(technologies, settings) {
+  const disabledCategories = new Set(cleanStringArray(settings?.disabledCategories))
+  const disabledTechnologies = new Set(cleanStringArray(settings?.disabledTechnologies).map(name => normalizeTechName(name)))
+  return technologies.filter(tech => {
+    if (disabledCategories.has(tech.category)) {
+      return false
+    }
+    return !disabledTechnologies.has(normalizeTechName(tech.name))
+  })
+}
+
 function attachTechnologyLinks(technologies) {
   return technologies.map(tech => ({
     ...tech,
@@ -187,6 +273,11 @@ function attachTechnologyLinks(technologies) {
 }
 
 function getTechnologyUrl(name) {
+  const customRule = (state.settings?.customRules || []).find(rule => normalizeTechName(rule.name) === normalizeTechName(name) && rule.url)
+  if (customRule) {
+    return customRule.url
+  }
+
   const links = state.techLinks?.links || {}
   const direct = links[name]
   if (direct) {
@@ -731,6 +822,7 @@ function detectPageTechnologies(ruleConfig = {}) {
   detectThirdPartyLogins(add, resources, documentHtmlSample, globalKeys, ruleConfig.thirdPartyLogins || [])
   detectPaymentSystems(add, resources, documentHtmlSample, globalKeys, ruleConfig.paymentSystems || [])
   detectAnalytics(add, resources, documentHtmlSample, globalKeys, ruleConfig.analyticsProviders || [])
+  detectCustomRules(add, resources, documentHtmlSample, globalKeys, ruleConfig.customRules || [])
   detectSecurityAndProtocol(add)
 
   return {
@@ -1684,6 +1776,26 @@ function detectPageTechnologies(ruleConfig = {}) {
     })
   }
 
+  function detectCustomRules(add, resources, html, globalKeys, externalRules) {
+    const bodyText = document.body?.innerText ? `\n${document.body.innerText.slice(0, 120000)}` : ''
+    const text = [
+      location.href,
+      document.title,
+      resources.text,
+      html,
+      bodyText,
+      globalKeys.join('\n')
+    ].join('\n')
+    detectJsonRuleList(add, externalRules, {
+      defaultCategory: '其他库',
+      resources,
+      html,
+      text,
+      sourceLabel: '自定义页面规则',
+      evidencePrefix: rule => (rule.kind ? `${rule.kind}：` : '')
+    })
+  }
+
   function detectProgrammingLanguages(add, resources, html, globalKeys, externalRules) {
     detectJsonRuleList(add, externalRules, {
       defaultCategory: '开发语言 / 运行时',
@@ -1747,12 +1859,12 @@ function detectPageTechnologies(ruleConfig = {}) {
   }
 
   function matchJsonRule(rule, context) {
-    const globalName = (rule.globals || []).find(name => hasGlobal(name))
+    const globalName = shouldMatchTarget(rule, 'globals') ? (rule.globals || []).find(name => hasGlobal(name)) : null
     if (globalName) {
       return { confidence: '高', evidence: `存在 window.${globalName}` }
     }
 
-    const selector = (rule.selectors || []).find(selectorText => hasSelector(selectorText))
+    const selector = shouldMatchTarget(rule, 'selectors') ? (rule.selectors || []).find(selectorText => hasSelector(selectorText)) : null
     if (selector) {
       return { confidence: '高', evidence: `DOM 匹配 ${selector}` }
     }
@@ -1767,13 +1879,13 @@ function detectPageTechnologies(ruleConfig = {}) {
       return { confidence: '高', evidence: `存在 ${className} 类名` }
     }
 
-    const patterns = (rule.patterns || []).map(pattern => compileRulePattern(pattern)).filter(Boolean)
+    const patterns = (rule.patterns || []).map(pattern => compileRulePattern(pattern, rule)).filter(Boolean)
     for (const pattern of patterns) {
-      const resource = (context.resources?.all || []).find(url => pattern.test(url))
+      const resource = shouldMatchTarget(rule, 'resources') ? (context.resources?.all || []).find(url => pattern.test(url)) : null
       if (resource) {
         return { confidence: '高', evidence: `资源 URL 匹配 ${shortUrl(resource)}` }
       }
-      if (!context.resourceOnly && pattern.test(context.text || '')) {
+      if (!context.resourceOnly && shouldMatchTarget(rule, 'html') && pattern.test(context.text || '')) {
         return { confidence: rule.confidence || '中', evidence: '页面源码或资源索引包含规则特征' }
       }
     }
@@ -1781,12 +1893,38 @@ function detectPageTechnologies(ruleConfig = {}) {
     return null
   }
 
-  function compileRulePattern(pattern) {
+  function compileRulePattern(pattern, rule) {
     try {
+      if (rule?.matchType === 'keyword') {
+        return new RegExp(escapeRegExp(pattern), 'i')
+      }
       return new RegExp(pattern, 'i')
     } catch {
       return null
     }
+  }
+
+  function shouldMatchTarget(rule, target) {
+    if (!Array.isArray(rule.matchIn) || !rule.matchIn.length) {
+      return true
+    }
+    if (target === 'resources') {
+      return rule.matchIn.some(item => ['resources', 'url', 'dynamic'].includes(item))
+    }
+    if (target === 'html') {
+      return rule.matchIn.some(item => ['html', 'body', 'title', 'url', 'resources'].includes(item))
+    }
+    if (target === 'globals') {
+      return rule.matchIn.some(item => ['html', 'body', 'resources', 'dynamic'].includes(item))
+    }
+    if (target === 'selectors') {
+      return rule.matchIn.some(item => ['html', 'body'].includes(item))
+    }
+    return rule.matchIn.includes(target)
+  }
+
+  function escapeRegExp(value) {
+    return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   }
 
   function detectAnalytics(add, resources, html, globalKeys, externalRules) {

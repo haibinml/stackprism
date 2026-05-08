@@ -1,5 +1,6 @@
 const TAB_DATA_PREFIX = 'tab:'
 const MAX_API_RECORDS = 30
+const SETTINGS_STORAGE_KEY = 'stackPrismSettings'
 let techRulesPromise = null
 const INTERESTING_HEADER_NAMES = [
   'server',
@@ -91,8 +92,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 
   if (message.type === 'GET_HEADER_DATA') {
-    getTabData(message.tabId)
-      .then(data => sendResponse({ ok: true, data }))
+    Promise.all([getTabData(message.tabId), loadDetectorSettings()])
+      .then(([data, settings]) => sendResponse({ ok: true, data: addStoredCustomHeaderRules(data, settings) }))
       .catch(error => sendResponse({ ok: false, error: String(error) }))
     return true
   }
@@ -103,9 +104,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       sendResponse({ ok: false, error: '缺少有效 tabId' })
       return false
     }
-    Promise.all([getTabData(tabId), loadTechRules()])
-      .then(([data, rules]) => {
-        data.dynamic = normalizeDynamicSnapshot(message.snapshot, rules.page || {})
+    Promise.all([getTabData(tabId), loadTechRules(), loadDetectorSettings()])
+      .then(([data, rules, settings]) => {
+        data.dynamic = normalizeDynamicSnapshot(message.snapshot, buildEffectivePageRules(rules.page || {}, settings))
         data.updatedAt = Date.now()
         return chrome.storage.session.set({ [storageKey(tabId)]: data })
       })
@@ -127,9 +128,9 @@ chrome.webRequest.onHeadersReceived.addListener(
       return
     }
 
-    Promise.all([getTabData(details.tabId), loadTechRules()])
-      .then(([data, rules]) => {
-        const record = buildHeaderRecord(details, rules.headers || {})
+    Promise.all([getTabData(details.tabId), loadTechRules(), loadDetectorSettings()])
+      .then(([data, rules, settings]) => {
+        const record = buildHeaderRecord(details, rules.headers || {}, settings)
         if (details.type === 'main_frame') {
           data.main = record
           data.apis = []
@@ -162,6 +163,53 @@ async function loadTechRules() {
       })
   }
   return techRulesPromise
+}
+
+async function loadDetectorSettings() {
+  try {
+    const stored = await chrome.storage.sync.get(SETTINGS_STORAGE_KEY)
+    return normalizeDetectorSettings(stored[SETTINGS_STORAGE_KEY])
+  } catch {
+    return normalizeDetectorSettings()
+  }
+}
+
+function normalizeDetectorSettings(value = {}) {
+  return {
+    customRules: cleanCustomRules(value.customRules)
+  }
+}
+
+function cleanStringArray(value) {
+  if (!Array.isArray(value)) {
+    return []
+  }
+  return [...new Set(value.map(item => String(item || '').trim()).filter(Boolean))]
+}
+
+function cleanCustomRules(value) {
+  if (!Array.isArray(value)) {
+    return []
+  }
+  return value
+    .map(rule => ({
+      name: String(rule?.name || '').trim().slice(0, 120),
+      category: String(rule?.category || '其他库').trim().slice(0, 80),
+      kind: String(rule?.kind || '自定义规则').trim().slice(0, 120),
+      confidence: ['高', '中', '低'].includes(rule?.confidence) ? rule.confidence : '中',
+      matchType: rule?.matchType === 'keyword' ? 'keyword' : 'regex',
+      patterns: cleanStringArray(rule?.patterns).slice(0, 60),
+      matchIn: cleanStringArray(rule?.matchIn).slice(0, 10)
+    }))
+    .filter(rule => rule.name && rule.patterns.length)
+    .slice(0, 200)
+}
+
+function buildEffectivePageRules(pageRules, settings) {
+  return {
+    ...pageRules,
+    customRules: settings?.customRules || []
+  }
 }
 
 function storageKey(tabId) {
@@ -247,6 +295,7 @@ function detectFromDynamicSnapshot(snapshot, pageRules) {
   applyDynamicRuleList(add, pageRules.paymentSystems, text, 'JSON 支付动态规则', '支付系统', rule => (rule.kind ? `${rule.kind}：` : ''))
   applyDynamicRuleList(add, pageRules.analyticsProviders, text, 'JSON 统计动态规则', '统计 / 分析', rule => (rule.kind ? `${rule.kind}：` : ''))
   applyDynamicRuleList(add, pageRules.feeds, text, 'JSON Feed 动态规则', 'RSS / 订阅')
+  applyDynamicRuleList(add, filterCustomRulesForTarget(pageRules.customRules, 'dynamic'), text, '自定义动态规则', '其他库', rule => (rule.kind ? `${rule.kind}：` : ''))
 
   for (const link of snapshot.feedLinks) {
     const value = `${link.href} ${link.type}`.toLowerCase()
@@ -340,7 +389,7 @@ function applyDynamicRuleList(add, rules, text, sourceLabel, defaultCategory, ev
   for (const rule of rules) {
     const matched = (rule.patterns || []).some(pattern => {
       try {
-        return new RegExp(pattern, 'i').test(text)
+        return compileRulePattern(pattern, rule).test(text)
       } catch {
         return false
       }
@@ -350,6 +399,24 @@ function applyDynamicRuleList(add, rules, text, sourceLabel, defaultCategory, ev
     }
     add(rule.category || defaultCategory || '其他库', rule.name, rule.confidence || '中', `${evidencePrefix(rule)}${sourceLabel} 匹配`)
   }
+}
+
+function filterCustomRulesForTarget(rules, target) {
+  if (!Array.isArray(rules)) {
+    return []
+  }
+  return rules.filter(rule => {
+    if (!Array.isArray(rule.matchIn) || !rule.matchIn.length) {
+      return true
+    }
+    if (target === 'dynamic') {
+      return rule.matchIn.some(item => ['dynamic', 'resources', 'url'].includes(item))
+    }
+    if (target === 'headers') {
+      return rule.matchIn.includes('headers')
+    }
+    return rule.matchIn.includes(target)
+  })
 }
 
 function mergeTechnologyRecords(items) {
@@ -382,7 +449,7 @@ function shortHeaderUrl(raw) {
   }
 }
 
-function buildHeaderRecord(details, headerRules) {
+function buildHeaderRecord(details, headerRules, settings) {
   const normalizedHeaders = normalizeHeaders(details.responseHeaders)
   const headers = pickHeaders(normalizedHeaders)
   return {
@@ -392,7 +459,7 @@ function buildHeaderRecord(details, headerRules) {
     statusCode: details.statusCode,
     time: Date.now(),
     headers,
-    technologies: detectFromHeaders(normalizedHeaders, details.url, headerRules)
+    technologies: detectFromHeaders(normalizedHeaders, details.url, headerRules, settings)
   }
 }
 
@@ -421,6 +488,46 @@ function pickHeaders(headers) {
     }
   }
   return picked
+}
+
+function addStoredCustomHeaderRules(data, settings) {
+  const customRules = filterCustomRulesForTarget(settings?.customRules, 'headers')
+  if (!customRules.length) {
+    return data
+  }
+
+  return {
+    ...data,
+    main: addCustomRulesToHeaderRecord(data.main, customRules),
+    apis: (data.apis || []).map(record => addCustomRulesToHeaderRecord(record, customRules)),
+    frames: (data.frames || []).map(record => addCustomRulesToHeaderRecord(record, customRules))
+  }
+}
+
+function addCustomRulesToHeaderRecord(record, customRules) {
+  if (!record?.headers) {
+    return record
+  }
+  const technologies = detectCustomHeaderRules(record, customRules)
+  if (!technologies.length) {
+    return record
+  }
+  return {
+    ...record,
+    technologies: mergeTechnologyRecords([...(record.technologies || []), ...technologies])
+  }
+}
+
+function detectCustomHeaderRules(record, customRules) {
+  const technologies = []
+  const add = createCollector(technologies, '响应头')
+  const headerBlob = lower(
+    Object.entries(record.headers || {})
+      .map(([name, value]) => `${name}: ${value}`)
+      .join('\n') + `\nurl: ${record.url || ''}`
+  )
+  applyHeaderRuleList(add, customRules, '其他库', headerBlob, '自定义响应头规则', rule => (rule.kind ? `${rule.kind}：` : ''))
+  return technologies
 }
 
 function sanitizeHeaderValue(name, value) {
@@ -459,7 +566,7 @@ function dedupeApiRecords(records) {
   return kept
 }
 
-function detectFromHeaders(headers, url, headerRules = {}) {
+function detectFromHeaders(headers, url, headerRules = {}, settings = {}) {
   const technologies = []
   const add = createCollector(technologies, '响应头')
   const server = lower(headers.server)
@@ -732,6 +839,7 @@ function detectFromHeaders(headers, url, headerRules = {}) {
   applyHeaderRuleList(add, headerRules.cdnProviders, 'CDN / 托管', headerBlob, 'JSON CDN 响应头规则')
   applyHeaderRuleList(add, headerRules.languages, '开发语言 / 运行时', headerBlob, 'JSON 语言响应头规则')
   applyHeaderRuleList(add, headerRules.websitePrograms, '网站程序', headerBlob, 'JSON 网站程序响应头规则', rule => (rule.kind ? `${rule.kind}：` : ''))
+  applyHeaderRuleList(add, filterCustomRulesForTarget(settings.customRules, 'headers'), '其他库', headerBlob, '自定义响应头规则', rule => (rule.kind ? `${rule.kind}：` : ''))
 
   return technologies
 }
@@ -744,7 +852,7 @@ function applyHeaderRuleList(add, rules, defaultCategory, headerBlob, sourceLabe
   for (const rule of rules) {
     const matched = (rule.patterns || []).some(pattern => {
       try {
-        return new RegExp(pattern, 'i').test(headerBlob)
+        return compileRulePattern(pattern, rule).test(headerBlob)
       } catch {
         return false
       }
@@ -753,6 +861,17 @@ function applyHeaderRuleList(add, rules, defaultCategory, headerBlob, sourceLabe
       add(rule.category || defaultCategory, rule.name, rule.confidence || '中', `${evidencePrefix(rule)}${sourceLabel} 匹配`)
     }
   }
+}
+
+function compileRulePattern(pattern, rule) {
+  if (rule?.matchType === 'keyword') {
+    return new RegExp(escapeRegExp(pattern), 'i')
+  }
+  return new RegExp(pattern, 'i')
+}
+
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
 function createCollector(target, defaultSource) {

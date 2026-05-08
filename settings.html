@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-CN">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>StackPrism 设置</title>
+    <link rel="stylesheet" href="settings.css">
+  </head>
+
+  <body>
+    <main class="settings-shell">
+      <header class="settings-header">
+        <div>
+          <h1>StackPrism 设置</h1>
+          <p>控制识别分类，添加自定义规则，并覆盖弹窗样式。</p>
+        </div>
+        <div class="header-actions">
+          <button id="saveBtn" type="button" class="primary">保存设置</button>
+          <button id="resetBtn" type="button">恢复默认</button>
+        </div>
+      </header>
+
+      <section id="status" class="status" aria-live="polite"></section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>识别开关</h2>
+          <div class="inline-actions">
+            <button id="enableAllBtn" type="button">全开</button>
+            <button id="disableAllBtn" type="button">全关</button>
+          </div>
+        </div>
+        <div id="categoryGrid" class="category-grid"></div>
+      </section>
+
+      <section class="panel two-column">
+        <div>
+          <h2>禁用指定技术</h2>
+          <p class="hint">每行一个技术名称。名称匹配后不会在结果里显示。</p>
+          <textarea id="disabledTechnologies" rows="9" spellcheck="false" placeholder="例如：&#10;Google Analytics&#10;WordPress 插件: akismet"></textarea>
+        </div>
+        <div>
+          <h2>自定义样式 CSS</h2>
+          <p class="hint">保存后会应用到弹窗和设置页。留空则不覆盖样式。</p>
+          <textarea id="customCss" rows="9" spellcheck="false" placeholder=".tech-name { color: #0f766e; }"></textarea>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>自定义规则</h2>
+          <button id="clearFormBtn" type="button">清空表单</button>
+        </div>
+
+        <datalist id="categoryList"></datalist>
+
+        <div class="rule-form">
+          <label>
+            <span>技术名称</span>
+            <input id="ruleName" type="text" placeholder="例如：MyCMS">
+          </label>
+          <label>
+            <span>分类</span>
+            <input id="ruleCategory" type="text" list="categoryList" placeholder="例如：网站程序">
+          </label>
+          <label>
+            <span>类型说明</span>
+            <input id="ruleKind" type="text" placeholder="例如：自定义 CMS">
+          </label>
+          <label>
+            <span>置信度</span>
+            <select id="ruleConfidence">
+              <option value="高">高</option>
+              <option value="中" selected>中</option>
+              <option value="低">低</option>
+            </select>
+          </label>
+          <label>
+            <span>匹配方式</span>
+            <select id="ruleMatchType">
+              <option value="regex" selected>正则表达式</option>
+              <option value="keyword">关键词</option>
+            </select>
+          </label>
+          <label>
+            <span>官网 / 仓库 URL</span>
+            <input id="ruleUrl" type="url" placeholder="https://example.com">
+          </label>
+        </div>
+
+        <div class="match-targets" aria-label="匹配范围">
+          <label><input type="checkbox" name="matchIn" value="url" checked> 页面 URL</label>
+          <label><input type="checkbox" name="matchIn" value="resources" checked> 资源 URL</label>
+          <label><input type="checkbox" name="matchIn" value="html" checked> DOM / 源码</label>
+          <label><input type="checkbox" name="matchIn" value="headers" checked> 响应头</label>
+          <label><input type="checkbox" name="matchIn" value="dynamic" checked> 动态资源</label>
+        </div>
+
+        <div class="rule-textareas">
+          <label>
+            <span>匹配规则，每行一个</span>
+            <textarea id="rulePatterns" rows="7" spellcheck="false" placeholder="wp-content/themes/my-theme&#10;X-Generator: MyCMS"></textarea>
+          </label>
+          <label>
+            <span>CSS 选择器，每行一个</span>
+            <textarea id="ruleSelectors" rows="7" spellcheck="false" placeholder="[data-powered-by='mycms']&#10;.mycms-root"></textarea>
+          </label>
+          <label>
+            <span>全局变量，每行一个</span>
+            <textarea id="ruleGlobals" rows="7" spellcheck="false" placeholder="MyCMS&#10;myApp.version"></textarea>
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button id="addRuleBtn" type="button" class="primary">添加规则</button>
+          <button id="updateRuleBtn" type="button">更新当前规则</button>
+        </div>
+
+        <div id="rulesList" class="rules-list"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>规则 JSON</h2>
+          <div class="inline-actions">
+            <button id="importRulesBtn" type="button">从 JSON 导入</button>
+            <button id="formatRulesBtn" type="button">格式化</button>
+          </div>
+        </div>
+        <textarea id="rulesJson" rows="13" spellcheck="false"></textarea>
+      </section>
+    </main>
+
+    <script src="settings.js"></script>
+  </body>
+
+</html>

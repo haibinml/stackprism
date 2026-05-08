@@ -29,6 +29,7 @@ StackPrism 栈棱镜是一个 Chrome / Edge Manifest V3 浏览器扩展，用于
 - 动态页面监控：内容脚本会持续监听页面交互后新增的脚本、样式、iframe、资源加载、feed 链接和关键 DOM 标记，下次打开插件或刷新检测时会合并这些动态结果。
 - 分类 Tab 过滤：按前端框架、前端库、UI / CSS 框架、CDN / 托管、Web 服务器、开发语言 / 运行时、网站程序、主题 / 模板、网站源码线索、探针 / 监控、RSS / 订阅、第三方登录 / OAuth、支付系统、广告 / 营销、统计 / 分析等分类查看结果。
 - 技术链接：检测结果里的技术名称会尽量链接到官网或官方仓库，点击后在新标签页打开。
+- 设置页：支持按分类开启 / 关闭识别结果，按技术名称隐藏指定结果，添加自定义规则 / 自定义匹配范围 / 自定义技术链接，并支持自定义 CSS 覆盖弹窗和设置页样式。
 - 网页源代码搜索：在当前页面 DOM 源码快照中搜索，支持区分大小写、全字匹配和正则表达式。
 - 支持复制完整 JSON 检测结果。
 
@@ -39,6 +40,7 @@ StackPrism 栈棱镜是一个 Chrome / Edge Manifest V3 浏览器扩展，用于
 - 需要执行浏览器 API 或 DOM 深度判断的检测仍保留在 `popup.js` / `background.js`，例如 React Fiber、Service Worker、响应头脱敏和私有 CDN 启发式判断。
 - 动态资源监听逻辑放在 `content-observer.js`，它只记录 URL、feed 链接和有限 DOM 标记，后台再用 `tech-rules.json` 做动态识别。
 - 新增规则时优先改 `tech-rules.json`：添加 `name`、`patterns`，需要时补 `kind`、`confidence`、`globals`、`selectors`、`classPrefixes`。
+- 不想改内置规则时，可以在扩展设置页添加自定义规则；每条规则支持 `patterns`、`selectors`、`globals`、`matchIn`、`matchType`、`category`、`confidence` 和技术链接。
 
 ## 安装
 
