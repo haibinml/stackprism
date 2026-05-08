@@ -158,11 +158,7 @@ async function loadTechRules() {
   }
 
   try {
-    const response = await fetch(chrome.runtime.getURL('tech-rules.json'))
-    if (!response.ok) {
-      throw new Error(`规则文件加载失败：${response.status}`)
-    }
-    state.rules = await response.json()
+    state.rules = await loadStackPrismRules()
   } catch {
     state.rules = { page: {}, headers: {} }
   }

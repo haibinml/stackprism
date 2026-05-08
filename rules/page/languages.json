@@ -1,0 +1,195 @@
+{
+  "page": {
+    "languages": [
+      {
+        "name": "JavaScript",
+        "kind": "浏览器脚本语言",
+        "confidence": "高",
+        "selectors": [
+          "script[src], script:not([type]), script[type='text/javascript'], script[type='module']"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "kind": "前端源码语言线索",
+        "confidence": "低",
+        "patterns": [
+          "tslib",
+          "\\.tsx?(?:\\?|#|$)",
+          "typescript"
+        ]
+      },
+      {
+        "name": "Node.js",
+        "kind": "后端运行时",
+        "patterns": [
+          "node_modules",
+          "express-session",
+          "connect.sid",
+          "/_next/",
+          "/_nuxt/",
+          "sveltekit",
+          "nestjs"
+        ]
+      },
+      {
+        "name": "PHP",
+        "kind": "后端语言",
+        "patterns": [
+          "\\.php(?:\\?|#|$)",
+          "index\\.php",
+          "phpsessid",
+          "PHPSESSID",
+          "wp-content",
+          "laravel",
+          "symfony",
+          "drupal",
+          "joomla",
+          "thinkphp",
+          "discuz"
+        ]
+      },
+      {
+        "name": "Python",
+        "kind": "后端语言",
+        "patterns": [
+          "django",
+          "flask",
+          "fastapi",
+          "csrfmiddlewaretoken",
+          "/static/admin/"
+        ]
+      },
+      {
+        "name": "Ruby",
+        "kind": "后端语言",
+        "patterns": [
+          "rails-ujs",
+          "authenticity_token",
+          "active_storage",
+          "turbo-rails"
+        ]
+      },
+      {
+        "name": "Java / JVM",
+        "kind": "后端语言 / 平台",
+        "patterns": [
+          "jsessionid",
+          "\\.jsp(?:\\?|#|$)",
+          "javax.faces",
+          "jakarta.faces",
+          "spring-security",
+          "wicket"
+        ]
+      },
+      {
+        "name": "JSP / JavaServer Pages",
+        "kind": "后端模板语言",
+        "confidence": "中",
+        "patterns": [
+          "\\.jsp(?:\\?|#|$)",
+          "\\.jspx(?:\\?|#|$)",
+          "JSESSIONID",
+          "javax\\.servlet\\.jsp",
+          "org\\.apache\\.jsp"
+        ]
+      },
+      {
+        "name": "Java Servlet",
+        "kind": "后端 Java Web 技术",
+        "patterns": [
+          "JSESSIONID",
+          "\\.do(?:\\?|#|$)",
+          "\\.action(?:\\?|#|$)",
+          "/servlet/",
+          "javax\\.servlet",
+          "jakarta\\.servlet"
+        ]
+      },
+      {
+        "name": "C# / .NET",
+        "kind": "后端语言 / 平台",
+        "patterns": [
+          "__VIEWSTATE",
+          "__EVENTVALIDATION",
+          "\\.aspx(?:\\?|#|$)",
+          "\\.ashx(?:\\?|#|$)",
+          "\\.asmx(?:\\?|#|$)",
+          "aspnet",
+          "/_framework/blazor"
+        ]
+      },
+      {
+        "name": "Classic ASP / VBScript",
+        "kind": "后端脚本语言",
+        "patterns": [
+          "\\.asp(?:\\?|#|$)",
+          "ASPSESSIONID",
+          "VBScript",
+          "Active Server Pages"
+        ]
+      },
+      {
+        "name": "ColdFusion / CFML",
+        "kind": "后端脚本语言",
+        "patterns": [
+          "\\.cfm(?:\\?|#|$)",
+          "\\.cfml(?:\\?|#|$)",
+          "CFID=",
+          "CFTOKEN=",
+          "coldfusion"
+        ]
+      },
+      {
+        "name": "Perl / CGI",
+        "kind": "后端脚本语言",
+        "patterns": [
+          "/cgi-bin/",
+          "\\.cgi(?:\\?|#|$)",
+          "\\.pl(?:\\?|#|$)",
+          "mod_perl",
+          "perl"
+        ]
+      },
+      {
+        "name": "Lua / OpenResty",
+        "kind": "后端脚本语言 / 网关运行时",
+        "patterns": [
+          "openresty",
+          "ngx_lua",
+          "lua-resty",
+          "x-lua"
+        ]
+      },
+      {
+        "name": "Go",
+        "kind": "后端语言",
+        "patterns": [
+          "gorilla.csrf",
+          "go-http-client",
+          "gin-gonic",
+          "fiber"
+        ]
+      },
+      {
+        "name": "Rust",
+        "kind": "后端语言",
+        "patterns": [
+          "actix",
+          "rocket",
+          "axum",
+          "warp"
+        ]
+      },
+      {
+        "name": "Elixir",
+        "kind": "后端语言",
+        "patterns": [
+          "phoenix_live_view",
+          "phx-click",
+          "phoenix"
+        ]
+      }
+    ]
+  }
+}

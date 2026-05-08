@@ -1,0 +1,1271 @@
+{
+  "page": {
+    "analyticsProviders": [
+      {
+        "name": "Google Analytics",
+        "kind": "商用 / 知名统计",
+        "confidence": "高",
+        "patterns": [
+          "googletagmanager\\.com/gtag",
+          "google-analytics\\.com/(?:analytics|ga)\\.js",
+          "analytics\\.google\\.com",
+          "gtag\\(",
+          "UA-\\d+-\\d+",
+          "G-[A-Z0-9]{6,}"
+        ],
+        "globals": [
+          "gtag",
+          "ga",
+          "GoogleAnalyticsObject"
+        ]
+      },
+      {
+        "name": "Google Tag Manager",
+        "kind": "商用 / 标签管理",
+        "confidence": "高",
+        "patterns": [
+          "googletagmanager\\.com/gtm\\.js",
+          "GTM-[A-Z0-9]+",
+          "dataLayer"
+        ],
+        "globals": [
+          "dataLayer"
+        ]
+      },
+      {
+        "name": "Baidu Tongji / 百度统计",
+        "kind": "商用 / 国内知名统计",
+        "confidence": "高",
+        "patterns": [
+          "hm\\.baidu\\.com/hm\\.js",
+          "hm\\.baidu\\.com/hm\\.gif",
+          "hm\\.src",
+          "_hmt",
+          "baidu\\.com/hm"
+        ],
+        "globals": [
+          "_hmt"
+        ]
+      },
+      {
+        "name": "CNZZ / Umeng Analytics",
+        "kind": "商用 / 国内知名统计",
+        "confidence": "高",
+        "patterns": [
+          "cnzz\\.com",
+          "s\\d+\\.cnzz\\.com/z_stat\\.php",
+          "z_stat\\.php",
+          "umeng\\.com",
+          "umtrack",
+          "_czc"
+        ],
+        "globals": [
+          "_czc"
+        ]
+      },
+      {
+        "name": "51.LA",
+        "kind": "商用 / 国内统计",
+        "confidence": "高",
+        "patterns": [
+          "51\\.la",
+          "js\\.users\\.51\\.la",
+          "sdk\\.51\\.la",
+          "LA.init"
+        ],
+        "globals": [
+          "LA"
+        ]
+      },
+      {
+        "name": "Tencent MTA / 腾讯统计",
+        "kind": "商用 / 国内统计",
+        "patterns": [
+          "pingjs\\.qq\\.com",
+          "tajs\\.qq\\.com",
+          "mta\\.qq\\.com",
+          "TencentMTA",
+          "MtaH5"
+        ],
+        "globals": [
+          "MtaH5"
+        ]
+      },
+      {
+        "name": "GrowingIO",
+        "kind": "商用 / 增长分析",
+        "patterns": [
+          "growingio\\.com",
+          "gio\\.js",
+          "assets\\.growingio\\.com"
+        ],
+        "globals": [
+          "gio"
+        ]
+      },
+      {
+        "name": "Sensors Data / 神策分析",
+        "kind": "商用 / 产品分析",
+        "patterns": [
+          "sensorsdata",
+          "sensorsdata\\.min\\.js",
+          "sa-sdk",
+          "sensorsAnalytics"
+        ],
+        "globals": [
+          "sensors",
+          "sensorsDataAnalytic201505"
+        ]
+      },
+      {
+        "name": "TalkingData",
+        "kind": "商用 / 国内统计",
+        "patterns": [
+          "talkingdata\\.com",
+          "tdsdk",
+          "TalkingData"
+        ],
+        "globals": [
+          "TalkingData"
+        ]
+      },
+      {
+        "name": "Youmeng+ / 友盟+",
+        "kind": "商用 / 国内统计",
+        "patterns": [
+          "umeng\\.com",
+          "cnzz\\.com",
+          "umtrack",
+          "aplus\\.js"
+        ]
+      },
+      {
+        "name": "Alibaba Aplus / 阿里统计",
+        "kind": "商用 / 国内统计",
+        "patterns": [
+          "g\\.alicdn\\.com/alilog",
+          "aplus\\.js",
+          "log\\.mmstat\\.com",
+          "arms-retcode",
+          "__bl"
+        ],
+        "globals": [
+          "goldlog",
+          "__bl"
+        ]
+      },
+      {
+        "name": "Yandex Metrica",
+        "kind": "商用 / 知名统计",
+        "patterns": [
+          "mc\\.yandex\\.ru/metrika",
+          "yandex\\.ru/metrika",
+          "ym\\(",
+          "Ya\\.Metrika"
+        ],
+        "globals": [
+          "ym",
+          "Ya"
+        ]
+      },
+      {
+        "name": "Adobe Analytics",
+        "kind": "商用 / 企业统计",
+        "patterns": [
+          "adobedtm\\.com",
+          "assets\\.adobedtm\\.com",
+          "omniture",
+          "s_code",
+          "AppMeasurement"
+        ],
+        "globals": [
+          "s",
+          "AppMeasurement"
+        ]
+      },
+      {
+        "name": "Adobe Launch",
+        "kind": "商用 / 标签管理",
+        "patterns": [
+          "assets\\.adobedtm\\.com",
+          "_satellite"
+        ],
+        "globals": [
+          "_satellite"
+        ]
+      },
+      {
+        "name": "Matomo / Piwik",
+        "kind": "开源 / 可自托管统计",
+        "confidence": "高",
+        "patterns": [
+          "matomo\\.js",
+          "piwik\\.js",
+          "matomo\\.php",
+          "piwik\\.php",
+          "_paq"
+        ],
+        "globals": [
+          "_paq",
+          "Matomo",
+          "Piwik"
+        ]
+      },
+      {
+        "name": "Plausible",
+        "kind": "开源 / 可自托管统计",
+        "confidence": "高",
+        "patterns": [
+          "plausible\\.io/js",
+          "plausible\\.js",
+          "data-domain=.*plausible",
+          "plausible-tracker"
+        ],
+        "globals": [
+          "plausible"
+        ]
+      },
+      {
+        "name": "Umami",
+        "kind": "开源 / 可自托管统计",
+        "confidence": "高",
+        "patterns": [
+          "umami\\.js",
+          "data-website-id",
+          "umami\\.is",
+          "analytics.umami"
+        ],
+        "globals": [
+          "umami"
+        ]
+      },
+      {
+        "name": "GoatCounter",
+        "kind": "开源 / 可自托管统计",
+        "patterns": [
+          "gc\\.ziggoat\\.com/count\\.js",
+          "goatcounter\\.com/count",
+          "goatcounter"
+        ],
+        "globals": [
+          "goatcounter"
+        ]
+      },
+      {
+        "name": "Open Web Analytics",
+        "kind": "开源 / 可自托管统计",
+        "patterns": [
+          "owa\\.tracker",
+          "OpenWebAnalytics",
+          "owa_cmds",
+          "owa.tracker"
+        ],
+        "globals": [
+          "OWA",
+          "owa_cmds"
+        ]
+      },
+      {
+        "name": "Ackee",
+        "kind": "开源 / 可自托管统计",
+        "patterns": [
+          "ackee-tracker",
+          "ackee\\.js",
+          "ackee\\.domainId"
+        ],
+        "globals": [
+          "ackeeTracker"
+        ]
+      },
+      {
+        "name": "Countly",
+        "kind": "开源 / 商用产品分析",
+        "patterns": [
+          "countly\\.js",
+          "cdn\\.count\\.ly",
+          "Countly"
+        ],
+        "globals": [
+          "Countly"
+        ]
+      },
+      {
+        "name": "PostHog",
+        "kind": "开源 / 商用产品分析",
+        "patterns": [
+          "posthog-js",
+          "app\\.posthog\\.com",
+          "us\\.i\\.posthog\\.com",
+          "posthog\\.capture"
+        ],
+        "globals": [
+          "posthog"
+        ]
+      },
+      {
+        "name": "Fathom Analytics",
+        "kind": "商用 / 隐私友好统计",
+        "patterns": [
+          "cdn\\.usefathom\\.com",
+          "usefathom\\.com/script",
+          "fathom\\.js"
+        ],
+        "globals": [
+          "fathom"
+        ]
+      },
+      {
+        "name": "Pirsch",
+        "kind": "商用 / 隐私友好统计",
+        "patterns": [
+          "api\\.pirsch\\.io",
+          "pirsch\\.io/pirsch",
+          "pirsch\\.js"
+        ]
+      },
+      {
+        "name": "Simple Analytics",
+        "kind": "商用 / 隐私友好统计",
+        "patterns": [
+          "scripts\\.simpleanalyticscdn\\.com",
+          "simpleanalytics\\.com/latest\\.js",
+          "queue\\.simpleanalyticscdn\\.com"
+        ]
+      },
+      {
+        "name": "Clicky",
+        "kind": "商用 / 统计",
+        "patterns": [
+          "static\\.getclicky\\.com",
+          "in\\.getclicky\\.com",
+          "clicky\\.js"
+        ],
+        "globals": [
+          "clicky"
+        ]
+      },
+      {
+        "name": "Statcounter",
+        "kind": "商用 / 统计",
+        "patterns": [
+          "statcounter\\.com/counter",
+          "c\\.statcounter\\.com",
+          "sc_project",
+          "statcounter\\.js"
+        ]
+      },
+      {
+        "name": "Woopra",
+        "kind": "商用 / 客户旅程分析",
+        "patterns": [
+          "woopra\\.com",
+          "static\\.woopra\\.com/js/w\\.js"
+        ],
+        "globals": [
+          "woopra"
+        ]
+      },
+      {
+        "name": "Heap",
+        "kind": "商用 / 产品分析",
+        "patterns": [
+          "heapanalytics\\.com",
+          "heap\\.load",
+          "cdn\\.heapanalytics\\.com"
+        ],
+        "globals": [
+          "heap"
+        ]
+      },
+      {
+        "name": "Mixpanel",
+        "kind": "商用 / 产品分析",
+        "patterns": [
+          "cdn\\.mxpnl\\.com",
+          "mixpanel\\.com",
+          "mixpanel\\.track"
+        ],
+        "globals": [
+          "mixpanel"
+        ]
+      },
+      {
+        "name": "Amplitude",
+        "kind": "商用 / 产品分析",
+        "patterns": [
+          "cdn\\.amplitude\\.com",
+          "api2\\.amplitude\\.com",
+          "amplitude-js"
+        ],
+        "globals": [
+          "amplitude"
+        ]
+      },
+      {
+        "name": "Kissmetrics",
+        "kind": "商用 / 产品分析",
+        "patterns": [
+          "kissmetrics\\.io",
+          "i\\.kissmetrics\\.io",
+          "scripts\\.kissmetrics\\.io"
+        ],
+        "globals": [
+          "_kmq"
+        ]
+      },
+      {
+        "name": "Segment",
+        "kind": "商用 / CDP",
+        "patterns": [
+          "cdn\\.segment\\.com/analytics\\.js",
+          "segment\\.com/analytics\\.js",
+          "analytics\\.load"
+        ],
+        "globals": [
+          "analytics"
+        ]
+      },
+      {
+        "name": "Microsoft Clarity",
+        "kind": "免费 / 知名统计",
+        "patterns": [
+          "clarity\\.ms/tag",
+          "clarity\\.ms/collect",
+          "clarity\\("
+        ],
+        "globals": [
+          "clarity"
+        ]
+      },
+      {
+        "name": "Hotjar",
+        "kind": "商用 / 热力图与行为分析",
+        "patterns": [
+          "static\\.hotjar\\.com",
+          "script\\.hotjar\\.com",
+          "hotjar\\.com",
+          "hj\\("
+        ],
+        "globals": [
+          "hj"
+        ]
+      },
+      {
+        "name": "Crazy Egg",
+        "kind": "商用 / 热力图",
+        "patterns": [
+          "script\\.crazyegg\\.com",
+          "crazyegg\\.com/pages/scripts"
+        ]
+      },
+      {
+        "name": "Lucky Orange",
+        "kind": "商用 / 热力图",
+        "patterns": [
+          "luckyorange\\.com",
+          "tools\\.luckyorange\\.com"
+        ]
+      },
+      {
+        "name": "Mouseflow",
+        "kind": "商用 / 会话回放",
+        "patterns": [
+          "mouseflow\\.com",
+          "cdn\\.mouseflow\\.com"
+        ],
+        "globals": [
+          "mouseflow"
+        ]
+      },
+      {
+        "name": "FullStory",
+        "kind": "商用 / 会话回放",
+        "patterns": [
+          "fullstory\\.com",
+          "edge\\.fullstory\\.com",
+          "_fs_namespace"
+        ],
+        "globals": [
+          "FS"
+        ]
+      },
+      {
+        "name": "LogRocket",
+        "kind": "商用 / 会话回放",
+        "patterns": [
+          "logrocket\\.io",
+          "cdn\\.lr-ingest\\.com",
+          "LogRocket"
+        ],
+        "globals": [
+          "LogRocket"
+        ]
+      },
+      {
+        "name": "Smartlook",
+        "kind": "商用 / 会话回放",
+        "patterns": [
+          "smartlook\\.com",
+          "web-sdk\\.smartlook\\.com"
+        ],
+        "globals": [
+          "smartlook"
+        ]
+      },
+      {
+        "name": "Meta Pixel",
+        "kind": "商用 / 广告转化统计",
+        "patterns": [
+          "connect\\.facebook\\.net/.*/fbevents\\.js",
+          "facebook\\.com/tr",
+          "fbq\\("
+        ],
+        "globals": [
+          "fbq"
+        ]
+      },
+      {
+        "name": "TikTok Pixel",
+        "kind": "商用 / 广告转化统计",
+        "patterns": [
+          "analytics\\.tiktok\\.com/i18n/pixel",
+          "ttq\\.load",
+          "tiktok pixel"
+        ],
+        "globals": [
+          "ttq"
+        ]
+      },
+      {
+        "name": "LinkedIn Insight Tag",
+        "kind": "商用 / 广告转化统计",
+        "patterns": [
+          "snap\\.licdn\\.com/li\\.lms-analytics",
+          "linkedin_data_partner_id",
+          "px\\.ads\\.linkedin\\.com"
+        ]
+      },
+      {
+        "name": "Pinterest Tag",
+        "kind": "商用 / 广告转化统计",
+        "patterns": [
+          "ct\\.pinterest\\.com",
+          "pintrk",
+          "s\\.pinimg\\.com/ct/core\\.js"
+        ],
+        "globals": [
+          "pintrk"
+        ]
+      },
+      {
+        "name": "Twitter / X Pixel",
+        "kind": "商用 / 广告转化统计",
+        "patterns": [
+          "static\\.ads-twitter\\.com/uwt\\.js",
+          "twq\\("
+        ],
+        "globals": [
+          "twq"
+        ]
+      },
+      {
+        "name": "Microsoft Advertising UET",
+        "kind": "商用 / 广告转化统计",
+        "patterns": [
+          "bat\\.bing\\.com/bat\\.js",
+          "uetq"
+        ],
+        "globals": [
+          "uetq"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Google Ads Conversion Tracking",
+        "kind": "广告分析 / 转化跟踪",
+        "confidence": "高",
+        "patterns": [
+          "googletagmanager\\.com/gtag/js\\?id=AW-",
+          "googleadservices\\.com/pagead/conversion",
+          "google_conversion_id",
+          "gtag\\('event',\\s*'conversion'",
+          "AW-[A-Z0-9_-]{6,}"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Google AdSense",
+        "kind": "广告联盟 / 内容广告",
+        "confidence": "高",
+        "patterns": [
+          "pagead2\\.googlesyndication\\.com/pagead/js/adsbygoogle\\.js",
+          "adsbygoogle",
+          "google_ad_client",
+          "data-ad-client"
+        ],
+        "globals": [
+          "adsbygoogle"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Google Publisher Tag",
+        "kind": "广告投放 / Header Bidding",
+        "patterns": [
+          "securepubads\\.g\\.doubleclick\\.net/tag/js/gpt\\.js",
+          "googletagservices\\.com/tag/js/gpt\\.js",
+          "googletag\\.pubads",
+          "googletag\\.defineSlot"
+        ],
+        "globals": [
+          "googletag"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Google Ad Manager / DoubleClick",
+        "kind": "广告服务器 / 广告联盟",
+        "patterns": [
+          "doubleclick\\.net",
+          "ad\\.doubleclick\\.net",
+          "pubads\\.g\\.doubleclick\\.net",
+          "gampad/ads",
+          "dfp\\.js",
+          "DARTIframe"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Google Campaign Manager / Floodlight",
+        "kind": "广告分析 / Floodlight 转化",
+        "patterns": [
+          "fls\\.doubleclick\\.net/activityi",
+          "ad\\.doubleclick\\.net/ddm/activity",
+          "floodlight",
+          "dc_pre=",
+          "src=\\d+;type=.*;cat="
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Amazon Ads",
+        "kind": "广告联盟 / 广告投放",
+        "patterns": [
+          "amazon-adsystem\\.com",
+          "aax\\.amazon-adsystem\\.com",
+          "c\\.amazon-adsystem\\.com",
+          "apstag",
+          "amzn_assoc"
+        ],
+        "globals": [
+          "apstag"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Prebid.js",
+        "kind": "Header Bidding / 广告竞价",
+        "confidence": "高",
+        "patterns": [
+          "prebid(?:\\.min)?\\.js",
+          "prebid\\.org",
+          "pbjs\\.que",
+          "pbjs\\.requestBids"
+        ],
+        "globals": [
+          "pbjs"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "OpenX",
+        "kind": "广告联盟 / 广告交易",
+        "patterns": [
+          "openx\\.net",
+          "servedbyopenx",
+          "ox-d\\.openx\\.net",
+          "u\\.openx\\.net"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "PubMatic",
+        "kind": "广告联盟 / SSP",
+        "patterns": [
+          "pubmatic\\.com",
+          "ads\\.pubmatic\\.com",
+          "image2\\.pubmatic\\.com",
+          "pwt\\.js",
+          "PubMatic"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Magnite / Rubicon Project",
+        "kind": "广告联盟 / SSP",
+        "patterns": [
+          "rubiconproject\\.com",
+          "fastlane\\.rubiconproject\\.com",
+          "magnite\\.com",
+          "rubicon"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Index Exchange",
+        "kind": "广告联盟 / 广告交易",
+        "patterns": [
+          "indexww\\.com",
+          "js-sec\\.indexww\\.com",
+          "casalemedia\\.com",
+          "htlb\\.cdn\\.indexww\\.com"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Xandr / AppNexus",
+        "kind": "广告联盟 / 广告交易",
+        "patterns": [
+          "adnxs\\.com",
+          "ib\\.adnxs\\.com",
+          "secure\\.adnxs\\.com",
+          "appnexus"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Criteo",
+        "kind": "广告重定向 / 广告联盟",
+        "patterns": [
+          "criteo\\.com",
+          "criteo\\.net",
+          "static\\.criteo\\.net/js/ld/ld\\.js",
+          "cto_bundle"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Taboola",
+        "kind": "原生广告联盟",
+        "patterns": [
+          "taboola\\.com",
+          "trc\\.taboola\\.com",
+          "cdn\\.taboola\\.com",
+          "_taboola"
+        ],
+        "globals": [
+          "_taboola"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Outbrain",
+        "kind": "原生广告联盟",
+        "patterns": [
+          "outbrain\\.com",
+          "widgets\\.outbrain\\.com",
+          "amplify\\.outbrain\\.com",
+          "OB_ADV_ID",
+          "outbrain_widget"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "MGID",
+        "kind": "原生广告联盟",
+        "patterns": [
+          "mgid\\.com",
+          "jsc\\.mgid\\.com",
+          "servicer\\.mgid\\.com"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Media.net",
+        "kind": "广告联盟 / 上下文广告",
+        "patterns": [
+          "media\\.net",
+          "contextual\\.media\\.net",
+          "static\\.media\\.net"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Adform",
+        "kind": "广告服务器 / 转化跟踪",
+        "patterns": [
+          "adform\\.net",
+          "track\\.adform\\.net",
+          "s1\\.adform\\.net",
+          "adftrack"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Teads",
+        "kind": "视频广告联盟",
+        "patterns": [
+          "teads\\.tv",
+          "a\\.teads\\.tv",
+          "cdn\\.teads\\.tv"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Equativ / Smart AdServer",
+        "kind": "广告服务器 / SSP",
+        "patterns": [
+          "smartadserver\\.com",
+          "equativ\\.com",
+          "sas\\.cmd",
+          "sas\\.call"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Sovrn",
+        "kind": "广告联盟 / SSP",
+        "patterns": [
+          "sovrn\\.com",
+          "lijit\\.com",
+          "ap\\.lijit\\.com",
+          "sovrn"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Sharethrough",
+        "kind": "原生广告联盟",
+        "patterns": [
+          "sharethrough\\.com",
+          "nativeads\\.sharethrough\\.com",
+          "sfp\\.js"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "TripleLift",
+        "kind": "广告联盟 / 原生广告",
+        "patterns": [
+          "3lift\\.com",
+          "tlx\\.3lift\\.com",
+          "triplelift"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Kevel / Adzerk",
+        "kind": "广告服务器",
+        "patterns": [
+          "adzerk\\.net",
+          "kevel\\.co",
+          "e-\\d+\\.adzerk\\.net",
+          "engine\\.adzerk\\.net"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "AdRoll / NextRoll",
+        "kind": "广告重定向 / 营销",
+        "patterns": [
+          "adroll\\.com",
+          "d\\.adroll\\.com",
+          "s\\.adroll\\.com",
+          "nextroll\\.com",
+          "adroll_adv_id"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "The Trade Desk",
+        "kind": "广告投放 / DSP",
+        "patterns": [
+          "adsrvr\\.org",
+          "thetradedesk\\.com",
+          "insight\\.adsrvr\\.org",
+          "ttdUniversalPixelApi"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Quantcast",
+        "kind": "受众分析 / 广告衡量",
+        "patterns": [
+          "quantserve\\.com",
+          "quantcast\\.com",
+          "quantcount\\.com",
+          "_qevents"
+        ],
+        "globals": [
+          "_qevents"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "UTM Campaign Parameters",
+        "kind": "流量来源 / 营销归因",
+        "patterns": [
+          "(?:\\?|&)(?:utm_source|utm_medium|utm_campaign|utm_term|utm_content)="
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Google Ads Click IDs",
+        "kind": "流量跟踪 / 广告点击归因",
+        "patterns": [
+          "(?:\\?|&)(?:gclid|gbraid|wbraid|dclid)="
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Meta Click ID",
+        "kind": "流量跟踪 / 广告点击归因",
+        "patterns": [
+          "(?:\\?|&)fbclid="
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Microsoft Ads Click ID",
+        "kind": "流量跟踪 / 广告点击归因",
+        "patterns": [
+          "(?:\\?|&)msclkid="
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "TikTok Click ID",
+        "kind": "流量跟踪 / 广告点击归因",
+        "patterns": [
+          "(?:\\?|&)ttclid="
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "LinkedIn Click ID",
+        "kind": "流量跟踪 / 广告点击归因",
+        "patterns": [
+          "(?:\\?|&)li_fat_id="
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Yandex Click ID",
+        "kind": "流量跟踪 / 广告点击归因",
+        "patterns": [
+          "(?:\\?|&)yclid="
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Voluum",
+        "kind": "流量跟踪 / Affiliate Tracker",
+        "patterns": [
+          "voluum\\.com",
+          "voluumtrk\\.com",
+          "voluum_dsp",
+          "trk\\.voluum"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "RedTrack",
+        "kind": "流量跟踪 / Affiliate Tracker",
+        "patterns": [
+          "redtrack\\.io",
+          "rdrtr\\.com",
+          "redtrack\\.js"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Binom",
+        "kind": "流量跟踪 / Affiliate Tracker",
+        "patterns": [
+          "binom\\.org",
+          "click\\.php\\?lp=",
+          "click\\.php\\?cnv_id=",
+          "lander\\?lp_key="
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "BeMob",
+        "kind": "流量跟踪 / Affiliate Tracker",
+        "patterns": [
+          "bemob\\.com",
+          "bemobtrk\\.com",
+          "bemob\\."
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "AdsBridge",
+        "kind": "流量跟踪 / Affiliate Tracker",
+        "patterns": [
+          "adsbridge\\.com",
+          "trk\\.adsbridge\\.com",
+          "adsbridge"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Keitaro",
+        "kind": "流量跟踪 / Affiliate Tracker",
+        "patterns": [
+          "keitaro\\.io",
+          "kclient\\.js",
+          "sub_id_\\d+",
+          "campaign_id=.*creative_id"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "CPV Lab",
+        "kind": "流量跟踪 / Affiliate Tracker",
+        "patterns": [
+          "cpvlab\\.pro",
+          "cpvlab",
+          "base2\\.php",
+          "adclick\\.php"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "CJ Affiliate",
+        "kind": "广告联盟 / Affiliate",
+        "patterns": [
+          "cj\\.com",
+          "commission-junction\\.com",
+          "anrdoezrs\\.net",
+          "jdoqocy\\.com",
+          "kqzyfj\\.com",
+          "qksrv\\.net"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Awin",
+        "kind": "广告联盟 / Affiliate",
+        "patterns": [
+          "awin1\\.com",
+          "awin\\.com",
+          "zanox\\.com",
+          "awstrack\\.me"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Rakuten Advertising",
+        "kind": "广告联盟 / Affiliate",
+        "patterns": [
+          "rakutenadvertising\\.com",
+          "linksynergy\\.com",
+          "linkshare\\.com",
+          "rakutenmarketing\\.com"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Impact",
+        "kind": "广告联盟 / Partnership",
+        "patterns": [
+          "impact\\.com",
+          "impactradius-event\\.com",
+          "impactradius\\.com",
+          "ir\\.api"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "TradeDoubler",
+        "kind": "广告联盟 / Affiliate",
+        "patterns": [
+          "tradedoubler\\.com",
+          "clk\\.tradedoubler\\.com",
+          "tbs\\.tradedoubler\\.com"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "ShareASale",
+        "kind": "广告联盟 / Affiliate",
+        "patterns": [
+          "shareasale\\.com",
+          "shareasale-analytics\\.com",
+          "shareasale\\.js"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Skimlinks",
+        "kind": "广告联盟 / 内容变现",
+        "patterns": [
+          "skimlinks\\.com",
+          "skimresources\\.com",
+          "s\\.skimresources\\.com/js/"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Sovrn Commerce / VigLink",
+        "kind": "广告联盟 / 内容变现",
+        "patterns": [
+          "viglink\\.com",
+          "sovrncommerce\\.com",
+          "vglnk\\.com"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Partnerize",
+        "kind": "广告联盟 / Partnership",
+        "patterns": [
+          "partnerize\\.com",
+          "prf\\.hn",
+          "performancehorizon\\.com"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Admitad",
+        "kind": "广告联盟 / Affiliate",
+        "patterns": [
+          "admitad\\.com",
+          "admitad\\.ru",
+          "ad\\.admitad\\.com"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "TUNE / HasOffers",
+        "kind": "广告联盟 / Affiliate 平台",
+        "patterns": [
+          "hasoffers\\.com",
+          "tune\\.com",
+          "offer18\\.com",
+          "tracking\\.hasoffers"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Baidu Union / 百度联盟",
+        "kind": "广告联盟 / 国内广告",
+        "patterns": [
+          "cpro\\.baidu\\.com",
+          "cpro\\.baidustatic\\.com",
+          "pos\\.baidu\\.com",
+          "dup\\.baidu\\.com",
+          "baidu_union",
+          "bdad"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Tencent Ads / 广点通",
+        "kind": "广告联盟 / 国内广告",
+        "patterns": [
+          "gdt\\.qq\\.com",
+          "e\\.qq\\.com",
+          "qzs\\.gdtimg\\.com",
+          "mi\\.gdt\\.qq\\.com",
+          "gdt_tracker",
+          "TencentGDT"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Alibaba Alimama / TANX",
+        "kind": "广告联盟 / 国内广告",
+        "patterns": [
+          "alimama\\.com",
+          "tanx\\.com",
+          "tanx\\.com/ex",
+          "g\\.alicdn\\.com/tanx",
+          "p\\.tanx\\.com",
+          "alimama"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "ByteDance OceanEngine / 巨量引擎",
+        "kind": "广告投放 / 国内广告",
+        "patterns": [
+          "oceanengine\\.com",
+          "ad\\.oceanengine\\.com",
+          "analytics\\.oceanengine\\.com",
+          "巨量引擎",
+          "字节广告",
+          "bytedance.*ad"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Kuaishou Ads / 磁力引擎",
+        "kind": "广告投放 / 国内广告",
+        "patterns": [
+          "e\\.kuaishou\\.com",
+          "ad\\.kuaishou\\.com",
+          "ad\\.partner\\.gifshow\\.com",
+          "磁力引擎",
+          "kuaishou.*ad"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Qihoo 360 Union / 360广告联盟",
+        "kind": "广告联盟 / 国内广告",
+        "patterns": [
+          "lianmeng\\.360\\.cn",
+          "s\\.lianmeng\\.360\\.cn",
+          "union\\.360\\.cn",
+          "360广告联盟"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "MediaV 聚效广告",
+        "kind": "广告联盟 / 国内广告",
+        "patterns": [
+          "mediav\\.com",
+          "max-l\\.mediav\\.com",
+          "material\\.mediav\\.com",
+          "show\\.mediav\\.com"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "Sogou Union / 搜狗联盟",
+        "kind": "广告联盟 / 国内广告",
+        "patterns": [
+          "union\\.sogou\\.com",
+          "theta\\.sogoucdn\\.com",
+          "sogou.*union",
+          "搜狗联盟"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "iFlytek Ads / 讯飞广告",
+        "kind": "广告联盟 / 国内广告",
+        "patterns": [
+          "iflyad\\.cn",
+          "iflytek.*ad",
+          "讯飞广告",
+          "mmp\\.iflytek\\.com"
+        ]
+      },
+      {
+        "category": "广告 / 营销",
+        "name": "JD Ads / 京准通",
+        "kind": "广告投放 / 国内广告",
+        "patterns": [
+          "jzt\\.jd\\.com",
+          "union\\.jd\\.com",
+          "京准通",
+          "jd.*ad"
+        ]
+      }
+    ]
+  }
+}

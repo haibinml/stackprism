@@ -1,0 +1,620 @@
+{
+  "page": {
+    "paymentSystems": [
+      {
+        "name": "支付宝支付",
+        "kind": "国内支付",
+        "confidence": "高",
+        "patterns": [
+          "openapi\\.alipay\\.com/gateway\\.do",
+          "alipay\\.trade",
+          "alipayjsapi",
+          "支付宝支付",
+          "alipay.com"
+        ]
+      },
+      {
+        "name": "微信支付",
+        "kind": "国内支付",
+        "confidence": "高",
+        "patterns": [
+          "pay\\.weixin\\.qq\\.com",
+          "wx\\.chooseWXPay",
+          "getBrandWCPayRequest",
+          "WeixinJSBridge.*getBrandWCPayRequest",
+          "微信支付"
+        ]
+      },
+      {
+        "name": "QQ 钱包",
+        "kind": "国内支付",
+        "patterns": [
+          "qpay\\.qq\\.com",
+          "mqqpay",
+          "QQ钱包",
+          "qqwallet"
+        ]
+      },
+      {
+        "name": "财付通 / Tenpay",
+        "kind": "国内支付",
+        "patterns": [
+          "tenpay\\.com",
+          "财付通",
+          "Tenpay"
+        ]
+      },
+      {
+        "name": "银联在线支付",
+        "kind": "国内银行卡支付",
+        "patterns": [
+          "unionpay",
+          "95516\\.com",
+          "upop",
+          "银联在线",
+          "ChinaPay"
+        ]
+      },
+      {
+        "name": "京东支付",
+        "kind": "国内支付",
+        "patterns": [
+          "jdpay",
+          "pay\\.jd\\.com",
+          "京东支付"
+        ]
+      },
+      {
+        "name": "百度收银台",
+        "kind": "国内支付",
+        "patterns": [
+          "bcebos.*pay",
+          "baifubao",
+          "百度收银台",
+          "百度钱包"
+        ]
+      },
+      {
+        "name": "百度钱包 / Baidu Wallet",
+        "kind": "第三方支付 / 国内支付",
+        "patterns": [
+          "baifubao\\.com",
+          "www\\.baifubao\\.com",
+          "wallet\\.baidu\\.com",
+          "baidu.*wallet",
+          "百度钱包",
+          "百付宝",
+          "baifubao"
+        ]
+      },
+      {
+        "name": "度小满支付",
+        "kind": "第三方支付 / 国内支付",
+        "patterns": [
+          "duxiaoman",
+          "duxiaomanpay",
+          "度小满支付",
+          "有钱花.*支付"
+        ]
+      },
+      {
+        "name": "美团支付",
+        "kind": "国内支付",
+        "patterns": [
+          "meituanpay",
+          "pay\\.meituan\\.com",
+          "美团支付"
+        ]
+      },
+      {
+        "name": "翼支付 / Bestpay",
+        "kind": "第三方支付 / 国内支付",
+        "patterns": [
+          "bestpay\\.com\\.cn",
+          "bestpay",
+          "翼支付",
+          "天翼支付"
+        ]
+      },
+      {
+        "name": "Ping++",
+        "kind": "聚合支付",
+        "patterns": [
+          "pingxx",
+          "pingplusplus",
+          "Pingpp",
+          "js\\.pingxx\\.com"
+        ]
+      },
+      {
+        "name": "云闪付",
+        "kind": "第三方支付 / 银联支付",
+        "patterns": [
+          "yunshanfu",
+          "云闪付",
+          "95516\\.com",
+          "银联云闪付",
+          "unionpay.*qr"
+        ]
+      },
+      {
+        "name": "易付宝 / Suning Pay",
+        "kind": "第三方支付 / 国内支付",
+        "patterns": [
+          "suningpay\\.com",
+          "pay\\.suning\\.com",
+          "epp\\.suning\\.com",
+          "易付宝",
+          "suning.*pay"
+        ]
+      },
+      {
+        "name": "网易支付",
+        "kind": "第三方支付 / 国内支付",
+        "patterns": [
+          "epay\\.163\\.com",
+          "网易支付",
+          "netease.*pay"
+        ]
+      },
+      {
+        "name": "拉卡拉支付",
+        "kind": "第三方支付 / 国内支付",
+        "patterns": [
+          "lakala\\.com",
+          "lklpay",
+          "拉卡拉",
+          "lakala"
+        ]
+      },
+      {
+        "name": "通联支付 / Allinpay",
+        "kind": "第三方支付 / 国内支付",
+        "patterns": [
+          "allinpay\\.com",
+          "allinpay",
+          "通联支付"
+        ]
+      },
+      {
+        "name": "富友支付 / Fuiou",
+        "kind": "第三方支付 / 国内支付",
+        "patterns": [
+          "fuiou\\.com",
+          "fuioupay",
+          "富友支付",
+          "富友"
+        ]
+      },
+      {
+        "name": "宝付支付 / Baofoo",
+        "kind": "第三方支付 / 国内支付",
+        "patterns": [
+          "baofoo\\.com",
+          "baofoo",
+          "宝付支付",
+          "宝付"
+        ]
+      },
+      {
+        "name": "银盛支付 / Ysepay",
+        "kind": "第三方支付 / 国内支付",
+        "patterns": [
+          "ysepay\\.com",
+          "yinshengpay",
+          "银盛支付",
+          "银盛"
+        ]
+      },
+      {
+        "name": "合利宝支付 / Helipay",
+        "kind": "第三方支付 / 国内支付",
+        "patterns": [
+          "helipay\\.com",
+          "helipay",
+          "合利宝"
+        ]
+      },
+      {
+        "name": "汇聚支付 / JoinPay",
+        "kind": "第三方支付 / 国内支付",
+        "patterns": [
+          "joinpay\\.com",
+          "joinpay",
+          "汇聚支付"
+        ]
+      },
+      {
+        "name": "杉德支付 / SandPay",
+        "kind": "第三方支付 / 国内支付",
+        "patterns": [
+          "sandpay\\.com\\.cn",
+          "sandpay",
+          "杉德支付",
+          "杉德"
+        ]
+      },
+      {
+        "name": "乐刷支付",
+        "kind": "第三方支付 / 国内支付",
+        "patterns": [
+          "leshua\\.com",
+          "leshua",
+          "乐刷支付",
+          "乐刷"
+        ]
+      },
+      {
+        "name": "钱方好近 / QFPay",
+        "kind": "第三方支付 / 国内支付",
+        "patterns": [
+          "qfpay\\.com",
+          "qfpay",
+          "钱方好近",
+          "钱方支付"
+        ]
+      },
+      {
+        "name": "收钱吧",
+        "kind": "第三方支付 / 聚合收款",
+        "patterns": [
+          "shouqianba\\.com",
+          "shouqianba",
+          "wosai",
+          "收钱吧"
+        ]
+      },
+      {
+        "name": "银联商务 / ChinaUMS",
+        "kind": "第三方支付 / 收单机构",
+        "patterns": [
+          "chinaums\\.com",
+          "chinaums",
+          "银联商务",
+          "全民付"
+        ]
+      },
+      {
+        "name": "易票联支付 / Epaylinks",
+        "kind": "第三方支付 / 国内支付",
+        "patterns": [
+          "epaylinks\\.cn",
+          "epaylinks",
+          "易票联支付",
+          "易票联"
+        ]
+      },
+      {
+        "name": "首信易支付 / PayEase",
+        "kind": "第三方支付 / 国内支付",
+        "patterns": [
+          "payease\\.net",
+          "payease",
+          "首信易支付"
+        ]
+      },
+      {
+        "name": "第四方支付 / 聚合支付",
+        "kind": "第四方支付 / 聚合收银台",
+        "patterns": [
+          "第四方支付",
+          "聚合支付",
+          "聚合收银台",
+          "免签支付",
+          "个人免签",
+          "支付通道",
+          "轮询收款码",
+          "当面付.*微信.*QQ"
+        ]
+      },
+      {
+        "name": "码支付 / CodePay",
+        "kind": "第四方支付 / 免签聚合支付",
+        "patterns": [
+          "codepay\\.fateqq\\.com",
+          "codepay",
+          "码支付",
+          "codepay_id",
+          "codepay_key",
+          "pay\\.codepay"
+        ]
+      },
+      {
+        "name": "易支付 / EPay 聚合支付",
+        "kind": "第四方支付 / 聚合支付",
+        "patterns": [
+          "彩虹易支付",
+          "易支付",
+          "epayapi\\.php",
+          "epay\\.config\\.php",
+          "/sdk/epay",
+          "submit\\.php\\?.*(?:alipay|wxpay|qqpay)",
+          "pay\\.php\\?.*(?:type|paytype)=(?:alipay|wxpay|qqpay)"
+        ]
+      },
+      {
+        "name": "PAYJS",
+        "kind": "第四方支付 / 微信支付聚合",
+        "patterns": [
+          "payjs\\.cn",
+          "payjs_order_id",
+          "PAYJS",
+          "jsapi\\.payjs\\.cn"
+        ]
+      },
+      {
+        "name": "虎皮椒支付 / XunhuPay",
+        "kind": "第四方支付 / 聚合支付",
+        "patterns": [
+          "xunhupay\\.com",
+          "xunhu",
+          "虎皮椒",
+          "xunhu.*pay"
+        ]
+      },
+      {
+        "name": "XorPay",
+        "kind": "第四方支付 / 个人收款聚合",
+        "patterns": [
+          "xorpay\\.com",
+          "xorpay",
+          "XorPay"
+        ]
+      },
+      {
+        "name": "MugglePay",
+        "kind": "第四方支付 / 加密货币聚合支付",
+        "patterns": [
+          "mugglepay\\.com",
+          "mugglepay",
+          "MugglePay"
+        ]
+      },
+      {
+        "name": "V免签",
+        "kind": "第四方支付 / 免签支付",
+        "patterns": [
+          "V免签",
+          "v免签",
+          "vpay",
+          "V免签监控端",
+          "免签约支付",
+          "vxpay\\.php",
+          "alipay_monitor"
+        ]
+      },
+      {
+        "name": "YPay / 源支付",
+        "kind": "第四方支付 / 聚合支付",
+        "patterns": [
+          "YPay",
+          "源支付",
+          "ypay",
+          "ypay_order",
+          "YPay聚合支付"
+        ]
+      },
+      {
+        "name": "连连支付",
+        "kind": "国内支付",
+        "patterns": [
+          "lianlianpay",
+          "lianlianpay.com",
+          "连连支付"
+        ]
+      },
+      {
+        "name": "易宝支付",
+        "kind": "国内支付",
+        "patterns": [
+          "yeepay",
+          "yeepay.com",
+          "易宝支付"
+        ]
+      },
+      {
+        "name": "汇付天下",
+        "kind": "国内支付",
+        "patterns": [
+          "chinapnr",
+          "huifu",
+          "汇付天下"
+        ]
+      },
+      {
+        "name": "快钱支付",
+        "kind": "国内支付",
+        "patterns": [
+          "99bill",
+          "快钱支付",
+          "kuaiqian"
+        ]
+      },
+      {
+        "name": "PayPal",
+        "kind": "国际支付",
+        "patterns": [
+          "paypal\\.com/sdk/js",
+          "paypalobjects\\.com",
+          "paypal.Buttons"
+        ]
+      },
+      {
+        "name": "Stripe",
+        "kind": "国际支付",
+        "patterns": [
+          "js\\.stripe\\.com",
+          "checkout\\.stripe\\.com",
+          "stripe\\.redirectToCheckout"
+        ]
+      },
+      {
+        "name": "Adyen",
+        "kind": "国际支付",
+        "patterns": [
+          "checkoutshopper-live\\.adyen\\.com",
+          "AdyenCheckout",
+          "adyen.com/checkout"
+        ]
+      },
+      {
+        "name": "Braintree",
+        "kind": "国际支付",
+        "patterns": [
+          "js\\.braintreegateway\\.com",
+          "braintreegateway.com",
+          "braintree.dropin"
+        ]
+      },
+      {
+        "name": "Paddle",
+        "kind": "国际支付",
+        "patterns": [
+          "cdn\\.paddle\\.com",
+          "Paddle.Checkout",
+          "paddle.com/paddle"
+        ]
+      },
+      {
+        "name": "Razorpay",
+        "kind": "国际支付",
+        "patterns": [
+          "checkout\\.razorpay\\.com",
+          "Razorpay",
+          "razorpay_payment_id"
+        ]
+      },
+      {
+        "name": "Klarna",
+        "kind": "先买后付",
+        "patterns": [
+          "x\\.klarnacdn\\.net",
+          "klarna.com",
+          "Klarna"
+        ]
+      },
+      {
+        "name": "Afterpay / Clearpay",
+        "kind": "先买后付",
+        "patterns": [
+          "afterpay",
+          "clearpay",
+          "afterpay.com"
+        ]
+      },
+      {
+        "name": "Square",
+        "kind": "国际第三方支付",
+        "patterns": [
+          "squareup\\.com",
+          "web\\.squarecdn\\.com",
+          "Square\\.payments",
+          "square\\.payments"
+        ]
+      },
+      {
+        "name": "Worldpay",
+        "kind": "国际第三方支付",
+        "patterns": [
+          "worldpay\\.com",
+          "secure\\.worldpay\\.com",
+          "worldpay"
+        ]
+      },
+      {
+        "name": "Checkout.com",
+        "kind": "国际第三方支付",
+        "patterns": [
+          "checkout\\.com",
+          "cko\\.js",
+          "checkout\\.frames",
+          "frames\\.checkout\\.com"
+        ]
+      },
+      {
+        "name": "Mollie",
+        "kind": "国际第三方支付",
+        "patterns": [
+          "mollie\\.com",
+          "js\\.mollie\\.com",
+          "mollie-components"
+        ]
+      },
+      {
+        "name": "Authorize.Net",
+        "kind": "国际第三方支付",
+        "patterns": [
+          "authorize\\.net",
+          "js\\.authorize\\.net",
+          "Accept\\.dispatchData",
+          "AcceptUI"
+        ]
+      },
+      {
+        "name": "CyberSource",
+        "kind": "国际第三方支付",
+        "patterns": [
+          "cybersource\\.com",
+          "flex\\.cybersource\\.com",
+          "cybersource"
+        ]
+      },
+      {
+        "name": "2Checkout / Verifone",
+        "kind": "国际第三方支付",
+        "patterns": [
+          "2checkout\\.com",
+          "2co\\.com",
+          "verifone\\.cloud",
+          "Verifone"
+        ]
+      },
+      {
+        "name": "PayU",
+        "kind": "国际第三方支付",
+        "patterns": [
+          "payu\\.com",
+          "secure\\.payu",
+          "payu\\.in",
+          "payu\\.latam"
+        ]
+      },
+      {
+        "name": "Payoneer",
+        "kind": "国际第三方支付",
+        "patterns": [
+          "payoneer\\.com",
+          "payoneer",
+          "checkout\\.payoneer"
+        ]
+      },
+      {
+        "name": "Paystack",
+        "kind": "国际第三方支付",
+        "patterns": [
+          "paystack\\.co",
+          "js\\.paystack\\.co",
+          "PaystackPop"
+        ]
+      },
+      {
+        "name": "Flutterwave",
+        "kind": "国际第三方支付",
+        "patterns": [
+          "flutterwave\\.com",
+          "checkout\\.flutterwave\\.com",
+          "FlutterwaveCheckout"
+        ]
+      },
+      {
+        "name": "Mercado Pago",
+        "kind": "国际第三方支付",
+        "patterns": [
+          "mercadopago\\.com",
+          "sdk\\.mercadopago\\.com",
+          "MercadoPago"
+        ]
+      }
+    ]
+  }
+}

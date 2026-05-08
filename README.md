@@ -37,11 +37,11 @@ StackPrism 栈棱镜是一个 Chrome / Edge Manifest V3 浏览器扩展，用于
 
 ## 规则维护
 
-- 可枚举规则集中放在 `tech-rules.json`，包括补充前端框架 / UI 框架 / 前端库 / 构建运行时、动态资源识别、响应头识别、RSS / 订阅、网站程序、CMS 主题 / 模板、探针 / 监控、第三方登录 / OAuth、支付系统、开发语言 / 运行时、广告 / 营销、统计 / 分析平台、补充 CDN、补充后端、补充 SaaS 等。
+- 可枚举规则集中放在 `rules/` 目录，`rules/index.json` 是加载清单，`rules/page/*.json` 负责页面源码、DOM、资源和动态变化线索，`rules/headers/*.json` 负责响应头线索。
 - 技术名称到官网 / 仓库的链接集中放在 `tech-links.json`；如果新增规则后希望技术名可点击，也在这里补同名链接。
-- 需要执行浏览器 API 或 DOM 深度判断的检测仍保留在 `popup.js` / `background.js`，例如 React Fiber、Service Worker、响应头脱敏和私有 CDN 启发式判断；可枚举规则优先放在 `tech-rules.json`。
-- 动态资源监听逻辑放在 `content-observer.js`，它只记录 URL、feed 链接和有限 DOM 标记，后台再用 `tech-rules.json` 做动态识别。
-- 新增规则时优先改 `tech-rules.json`：添加 `name`、`patterns`，需要时补 `kind`、`confidence`、`globals`、`selectors`、`classPrefixes`。
+- 需要执行浏览器 API 或 DOM 深度判断的检测仍保留在 `popup.js` / `background.js`，例如 React Fiber、Service Worker、响应头脱敏和私有 CDN 启发式判断；可枚举规则优先放到 `rules/` 对应分类文件。
+- 动态资源监听逻辑放在 `content-observer.js`，它只记录 URL、feed 链接和有限 DOM 标记，后台再用 `rules/` 里的规则做动态识别。
+- 新增规则时优先改 `rules/` 下对应分类 JSON：添加 `name`、`patterns`，需要时补 `kind`、`confidence`、`globals`、`selectors`、`classPrefixes`；如果新增了文件，要把路径加入 `rules/index.json`。
 - 不想改内置规则时，可以在扩展设置页添加自定义规则；每条规则支持 `patterns`、`selectors`、`globals`、`matchIn`、`matchType`、`category`、`confidence` 和技术链接。
 - 修改扩展运行文件时同步提升 `manifest.json` 里的 `version`；规则、弹窗、设置页、后台脚本和内容脚本更新都按插件版本更新处理。
 

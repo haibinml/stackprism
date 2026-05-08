@@ -1,0 +1,8 @@
+{
+  "headers": {
+    "unknownCdnPatterns": [
+      "(^|\\n)(x-cdn|x-cdn-provider|server-timing):",
+      "(^|\\n)(server|via|x-cache|x-cache-status|x-served-by):.*\\b(cdn|edge)\\b"
+    ]
+  }
+}

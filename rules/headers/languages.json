@@ -1,0 +1,132 @@
+{
+  "headers": {
+    "languages": [
+      {
+        "name": "PHP",
+        "patterns": [
+          "x-powered-by:.*php",
+          "server:.*php",
+          "set-cookie:.*phpsessid",
+          "\\.php(?:\\?|#|$)",
+          "x-generator:.*(?:wordpress|drupal|joomla|discuz|thinkphp)"
+        ]
+      },
+      {
+        "name": "Node.js",
+        "patterns": [
+          "x-powered-by:.*(?:express|koa|fastify|nestjs|node)",
+          "set-cookie:.*connect\\.sid"
+        ]
+      },
+      {
+        "name": "Python",
+        "patterns": [
+          "x-powered-by:.*(?:django|flask|fastapi)",
+          "server:.*(?:uvicorn|gunicorn|werkzeug)",
+          "set-cookie:.*csrftoken"
+        ]
+      },
+      {
+        "name": "Ruby",
+        "patterns": [
+          "x-powered-by:.*rails",
+          "server:.*(?:puma|unicorn|passenger)",
+          "x-runtime:"
+        ]
+      },
+      {
+        "name": "Java / JVM",
+        "patterns": [
+          "set-cookie:.*jsessionid",
+          "server:.*(?:tomcat|jetty|undertow|wildfly|weblogic|websphere)"
+        ]
+      },
+      {
+        "name": "JSP / JavaServer Pages",
+        "patterns": [
+          "set-cookie:.*jsessionid",
+          "\\.jsp(?:\\?|#|$)",
+          "\\.jspx(?:\\?|#|$)",
+          "server:.*(?:tomcat|jetty|weblogic|websphere)"
+        ]
+      },
+      {
+        "name": "Java Servlet",
+        "patterns": [
+          "set-cookie:.*jsessionid",
+          "\\.do(?:\\?|#|$)",
+          "\\.action(?:\\?|#|$)",
+          "x-powered-by:.*(?:servlet|jsp)",
+          "server:.*(?:tomcat|jetty|undertow|wildfly|weblogic|websphere)"
+        ]
+      },
+      {
+        "name": "C# / .NET",
+        "patterns": [
+          "x-aspnet",
+          "x-powered-by:.*asp\\.net",
+          "server:.*(?:iis|kestrel)",
+          "set-cookie:.*asp\\.net_sessionid",
+          "\\.aspx(?:\\?|#|$)",
+          "\\.ashx(?:\\?|#|$)",
+          "\\.asmx(?:\\?|#|$)"
+        ]
+      },
+      {
+        "name": "Classic ASP / VBScript",
+        "patterns": [
+          "set-cookie:.*aspsessionid",
+          "x-powered-by:.*asp",
+          "\\.asp(?:\\?|#|$)",
+          "server:.*iis"
+        ]
+      },
+      {
+        "name": "ColdFusion / CFML",
+        "patterns": [
+          "x-powered-by:.*coldfusion",
+          "set-cookie:.*(?:cfid|cftoken)",
+          "\\.cfm(?:\\?|#|$)",
+          "\\.cfml(?:\\?|#|$)"
+        ]
+      },
+      {
+        "name": "Perl / CGI",
+        "patterns": [
+          "server:.*mod_perl",
+          "/cgi-bin/",
+          "\\.cgi(?:\\?|#|$)",
+          "\\.pl(?:\\?|#|$)"
+        ]
+      },
+      {
+        "name": "Lua / OpenResty",
+        "patterns": [
+          "server:.*openresty",
+          "x-powered-by:.*(?:openresty|lua)",
+          "x-lua:"
+        ]
+      },
+      {
+        "name": "Go",
+        "patterns": [
+          "x-powered-by:.*(?:gin|fiber|go)",
+          "server:.*caddy"
+        ]
+      },
+      {
+        "name": "Rust",
+        "patterns": [
+          "x-powered-by:.*(?:actix|rocket|axum|warp)"
+        ]
+      },
+      {
+        "name": "Elixir",
+        "patterns": [
+          "x-powered-by:.*phoenix",
+          "server:.*cowboy"
+        ]
+      }
+    ]
+  }
+}

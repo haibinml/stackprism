@@ -1,0 +1,28 @@
+{
+  "page": {
+    "feeds": [
+      {
+        "name": "RSS Feed",
+        "patterns": [
+          "(?:^|/)(?:feed|rss)(?:/|\\.xml|\\.rss|$)",
+          "application/rss\\+xml"
+        ]
+      },
+      {
+        "name": "Atom Feed",
+        "patterns": [
+          "(?:^|/)atom(?:/|\\.xml|$)",
+          "application/atom\\+xml"
+        ]
+      },
+      {
+        "name": "JSON Feed",
+        "patterns": [
+          "jsonfeed|feed\\.json",
+          "application/feed\\+json",
+          "application/json\\+feed"
+        ]
+      }
+    ]
+  }
+}

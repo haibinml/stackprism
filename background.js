@@ -3,6 +3,8 @@ const MAX_API_RECORDS = 30
 const SETTINGS_STORAGE_KEY = 'stackPrismSettings'
 let techRulesPromise = null
 
+importScripts('rule-loader.js')
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (!message || !message.type) {
     return false
@@ -97,13 +99,7 @@ chrome.webRequest.onHeadersReceived.addListener(
 
 async function loadTechRules() {
   if (!techRulesPromise) {
-    techRulesPromise = fetch(chrome.runtime.getURL('tech-rules.json'))
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`规则文件加载失败：${response.status}`)
-        }
-        return response.json()
-      })
+    techRulesPromise = loadStackPrismRules()
       .catch(error => {
         techRulesPromise = null
         return {}

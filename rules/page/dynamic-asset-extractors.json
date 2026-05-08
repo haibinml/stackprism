@@ -1,0 +1,108 @@
+{
+  "page": {
+    "dynamicAssetExtractors": [
+      {
+        "category": "主题 / 模板",
+        "label": "WordPress 主题",
+        "pattern": "/wp-content/themes/([^/?#\"' <>]+)"
+      },
+      {
+        "category": "网站源码线索",
+        "label": "WordPress 插件",
+        "pattern": "/wp-content/plugins/([^/?#\"' <>]+)",
+        "limit": 30
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "Typecho 主题",
+        "pattern": "/usr/themes/([^/?#\"' <>]+)"
+      },
+      {
+        "category": "网站源码线索",
+        "label": "Typecho 插件",
+        "pattern": "/usr/plugins/([^/?#\"' <>]+)",
+        "limit": 20
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "Z-BlogPHP 主题",
+        "pattern": "/zb_users/theme/([^/?#\"' <>]+)"
+      },
+      {
+        "category": "网站源码线索",
+        "label": "Z-BlogPHP 插件",
+        "pattern": "/zb_users/plugin/([^/?#\"' <>]+)",
+        "limit": 20
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "DedeCMS 模板",
+        "pattern": "/templets/([^/?#\"' <>]+)"
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "Drupal 主题",
+        "pattern": "/(?:sites/all/themes|themes/(?:custom|contrib)|core/themes)/([^/?#\"' <>]+)"
+      },
+      {
+        "category": "网站源码线索",
+        "label": "Drupal 模块",
+        "pattern": "/(?:sites/all/modules|modules/(?:custom|contrib)|core/modules)/([^/?#\"' <>]+)",
+        "limit": 25
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "Joomla 模板",
+        "pattern": "/templates/([^/?#\"' <>]+)",
+        "requires": "joomla|/media/system/js/|com_content"
+      },
+      {
+        "category": "网站源码线索",
+        "label": "Joomla 组件",
+        "pattern": "/components/(com_[^/?#\"' <>]+)",
+        "requires": "joomla|/media/system/js/|com_content"
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "Discuz! 模板",
+        "pattern": "/template/([^/?#\"' <>]+)",
+        "requires": "discuz|forum\\.php|portal\\.php|ucenter"
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "Magento 主题",
+        "pattern": "/(?:static/version\\d+/)?frontend/([^/?#\"' <>]+)/([^/?#\"' <>]+)",
+        "format": "joinSlash"
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "OpenCart 主题",
+        "pattern": "/catalog/view/theme/([^/?#\"' <>]+)"
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "PrestaShop 主题",
+        "pattern": "/themes/([^/?#\"' <>]+)/(?:assets|css|js|modules)/",
+        "requires": "prestashop|/modules/ps_|var prestashop"
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "ECShop 模板",
+        "pattern": "/themes/([^/?#\"' <>]+)/(?:images|style|library|js)/",
+        "requires": "ecshop|flow\\.php\\?step=cart|ecjia"
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "EmpireCMS 模板/皮肤",
+        "pattern": "/skin/([^/?#\"' <>]+)/",
+        "requires": "empirecms|/e/(?:data|public)/"
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "Shopware 店面主题资源",
+        "pattern": "/theme/([^/?#\"' <>]+)/(?:css|js|assets)/",
+        "requires": "shopware|storefront"
+      }
+    ]
+  }
+}

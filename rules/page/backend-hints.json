@@ -1,0 +1,54 @@
+{
+  "page": {
+    "backendHints": [
+      {
+        "name": "Ruby on Rails",
+        "confidence": "中",
+        "patterns": [
+          "rails-ujs",
+          "authenticity_token",
+          "active_storage",
+          "data-turbo"
+        ]
+      },
+      {
+        "name": "Django",
+        "confidence": "中",
+        "patterns": [
+          "csrfmiddlewaretoken",
+          "/static/admin/",
+          "django.jQuery"
+        ]
+      },
+      {
+        "name": "Laravel",
+        "confidence": "中",
+        "patterns": [
+          "laravel-mix",
+          "livewire",
+          "wire:click",
+          "x-csrf-token"
+        ]
+      },
+      {
+        "name": "Spring Boot / Spring MVC",
+        "confidence": "低",
+        "patterns": [
+          "jsessionid",
+          "spring-security",
+          "_csrf"
+        ]
+      },
+      {
+        "name": "Phoenix LiveView",
+        "confidence": "高",
+        "patterns": [
+          "phoenix_live_view",
+          "phx-click",
+          "phx-submit",
+          "LiveSocket"
+        ]
+      }
+    ]
+  }
+}
