@@ -44,6 +44,7 @@ async function init() {
 
 function bindEvents() {
   bindRepositoryLink('settingsRepoLink')
+  document.getElementById('helpBtn').addEventListener('click', openHelpPage)
   document.getElementById('saveBtn').addEventListener('click', saveSettings)
   document.getElementById('resetBtn').addEventListener('click', resetSettings)
   document.getElementById('enableAllBtn').addEventListener('click', () => setAllCategories(true))
@@ -81,6 +82,10 @@ function openRuleContributionIssue() {
   const category = document.getElementById('ruleCategory').value.trim()
   const title = name ? `规则贡献：${category ? `${category} / ` : ''}${name}` : '规则贡献：'
   chrome.tabs.create({ url: `${RULE_CONTRIBUTION_URL}&title=${encodeURIComponent(title)}` })
+}
+
+function openHelpPage() {
+  chrome.tabs.create({ url: chrome.runtime.getURL('help.html') })
 }
 
 async function loadSettings() {
