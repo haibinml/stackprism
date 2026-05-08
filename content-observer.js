@@ -3,6 +3,7 @@
   const MAX_DOM_MARKERS = 120
   const SEND_DELAY = 900
   const CONTEXT_INVALIDATED_PATTERN = /extension context invalidated|context invalidated/i
+  const OBSERVER_INSTANCE_KEY = '__stackPrismContentObserver__'
   const state = {
     startedAt: Date.now(),
     updatedAt: Date.now(),
@@ -28,6 +29,8 @@
   }
 
   try {
+    replacePreviousObserver()
+    registerCurrentObserver()
     window.addEventListener('pagehide', stopObserver, { once: true })
     collectStaticSnapshot()
     installPerformanceObserver()
@@ -39,6 +42,27 @@
       throw error
     }
     stopObserver()
+  }
+
+  function replacePreviousObserver() {
+    try {
+      const previous = window[OBSERVER_INSTANCE_KEY]
+      if (previous && typeof previous.stop === 'function') {
+        previous.stop()
+      }
+    } catch {
+      return
+    }
+  }
+
+  function registerCurrentObserver() {
+    try {
+      window[OBSERVER_INSTANCE_KEY] = {
+        stop: stopObserver
+      }
+    } catch {
+      return
+    }
   }
 
   function collectStaticSnapshot() {
@@ -351,5 +375,12 @@
     }
     performanceObserver?.disconnect?.()
     mutationObserver?.disconnect?.()
+    try {
+      if (window[OBSERVER_INSTANCE_KEY]?.stop === stopObserver) {
+        delete window[OBSERVER_INSTANCE_KEY]
+      }
+    } catch {
+      return
+    }
   }
 })()
