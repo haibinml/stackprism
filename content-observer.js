@@ -22,6 +22,11 @@
   let mutationObserver = null
   let navigationInterval = 0
 
+  if (!hasRuntimeContext()) {
+    return
+  }
+
+  window.addEventListener('pagehide', stopObserver, { once: true })
   collectStaticSnapshot()
   installPerformanceObserver()
   installMutationObserver()
@@ -260,7 +265,8 @@
   }
 
   function scheduleSend() {
-    if (stopped) {
+    if (stopped || !hasRuntimeContext()) {
+      stopObserver()
       return
     }
     clearTimeout(sendTimer)
@@ -268,7 +274,8 @@
   }
 
   function sendSnapshot() {
-    if (stopped) {
+    if (stopped || !hasRuntimeContext()) {
+      stopObserver()
       return
     }
     state.updatedAt = Date.now()
@@ -300,6 +307,14 @@
 
   function isExtensionContextInvalidated(error) {
     return /extension context invalidated|context invalidated/i.test(String(error?.message || error))
+  }
+
+  function hasRuntimeContext() {
+    try {
+      return Boolean(chrome?.runtime?.id)
+    } catch {
+      return false
+    }
   }
 
   function stopObserver() {
