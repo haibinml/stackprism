@@ -45,6 +45,7 @@ const state = {
   settings: normalizeSettings(),
   editingIndex: -1
 }
+let statusTimer = 0
 
 document.addEventListener('DOMContentLoaded', init)
 
@@ -681,8 +682,16 @@ function applyCustomCss(css) {
 
 function showStatus(message, type = '') {
   const node = document.getElementById('status')
-  node.className = `status ${type}`.trim()
+  clearTimeout(statusTimer)
+  node.className = `msg ${type}`.trim()
   node.textContent = message
+  node.hidden = !message
+  if (message && type !== 'error') {
+    statusTimer = setTimeout(() => {
+      node.hidden = true
+      node.textContent = ''
+    }, 3200)
+  }
 }
 
 function showValidationErrors(errors) {

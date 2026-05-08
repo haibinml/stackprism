@@ -124,18 +124,35 @@ h2 {
   gap: 8px;
 }
 
-.status {
-  min-height: 22px;
-  margin-bottom: 12px;
-  color: var(--muted);
+.msg {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  color: var(--text);
+  line-height: 1.5;
+  max-height: min(48vh, 360px);
+  max-width: min(560px, calc(100vw - 32px));
+  overflow: auto;
+  padding: 10px 14px;
+  position: fixed;
+  right: 24px;
+  top: 20px;
   white-space: pre-wrap;
+  z-index: 50;
 }
 
-.status.ok {
-  color: var(--ok);
+.msg[hidden] {
+  display: none;
 }
 
-.status.error {
+.msg.ok {
+  border-left-color: var(--ok);
+}
+
+.msg.error {
+  border-left-color: var(--danger);
   color: var(--danger);
 }
 
@@ -282,5 +299,12 @@ textarea:focus {
 
   .settings-header {
     display: grid;
+  }
+
+  .msg {
+    left: 14px;
+    right: 14px;
+    top: 12px;
+    max-width: none;
   }
 }
