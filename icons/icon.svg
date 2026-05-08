@@ -16,9 +16,6 @@
       <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#0f172a" flood-opacity=".14"/>
     </filter>
   </defs>
-  <path d="M28 92h48l16 9H44z" fill="#5eead4" opacity=".24"/>
-  <path d="M24 76h52l20 10H43z" fill="#38bdf8" opacity=".22"/>
-  <path d="M21 60h58l23 11H43z" fill="#fbbf24" opacity=".24"/>
   <g filter="url(#softShadow)">
     <path d="M33 25h47l29 25-23 47H39L19 60z" fill="#ffffff"/>
   </g>
