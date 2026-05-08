@@ -35,7 +35,7 @@ StackPrism 栈棱镜是一个 Chrome / Edge Manifest V3 浏览器扩展，用于
 
 ## 规则维护
 
-- 可枚举规则集中放在 `tech-rules.json`，包括 RSS / 订阅、网站程序、CMS 主题 / 模板、探针 / 监控、第三方登录 / OAuth、支付系统、开发语言 / 运行时、广告 / 营销、统计 / 分析平台、补充 CDN、补充后端、补充 SaaS 等。
+- 可枚举规则集中放在 `tech-rules.json`，包括补充前端框架 / UI 框架 / 前端库 / 构建运行时、RSS / 订阅、网站程序、CMS 主题 / 模板、探针 / 监控、第三方登录 / OAuth、支付系统、开发语言 / 运行时、广告 / 营销、统计 / 分析平台、补充 CDN、补充后端、补充 SaaS 等。
 - 技术名称到官网 / 仓库的链接集中放在 `tech-links.json`；如果新增规则后希望技术名可点击，也在这里补同名链接。
 - 需要执行浏览器 API 或 DOM 深度判断的检测仍保留在 `popup.js` / `background.js`，例如 React Fiber、Service Worker、响应头脱敏和私有 CDN 启发式判断。
 - 动态资源监听逻辑放在 `content-observer.js`，它只记录 URL、feed 链接和有限 DOM 标记，后台再用 `tech-rules.json` 做动态识别。
