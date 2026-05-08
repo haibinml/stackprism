@@ -46,8 +46,7 @@ const state = {
   editingIndex: -1
 }
 let statusTimer = 0
-const STATUS_HIDE_DELAY = 3600
-const STATUS_ERROR_HIDE_DELAY = 9000
+const STATUS_HIDE_DELAY = 3000
 
 document.addEventListener('DOMContentLoaded', init)
 
@@ -689,11 +688,10 @@ function showStatus(message, type = '') {
   node.textContent = message
   node.hidden = !message
   if (message) {
-    const delay = type === 'error' ? STATUS_ERROR_HIDE_DELAY : STATUS_HIDE_DELAY
     statusTimer = setTimeout(() => {
       node.hidden = true
       node.textContent = ''
-    }, delay)
+    }, STATUS_HIDE_DELAY)
   }
 }
 
