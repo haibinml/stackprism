@@ -2,7 +2,7 @@
 
 StackPrism 栈棱镜是一个 Chrome / Edge Manifest V3 浏览器扩展，用于检测当前网页使用的技术线索，包括前端框架、前端库、UI / CSS 框架、构建工具、CDN / 托管、Web 服务器、后端框架、开发语言 / 运行时、网站程序、CMS 主题 / 模板、网站源码线索、探针 / 监控、RSS / 订阅、CMS / 电商平台、SaaS / 第三方服务、第三方登录 / OAuth、支付系统、广告 / 营销、统计 / 分析平台和标签脚本。
 
-命名参考了 Wappalyzer、BuiltWith、WhatRuns、SimilarTech 这类网页技术识别工具的产品命名方式，使用 `Stack` 表达技术栈，使用 `Prism / 栈棱镜` 表达把页面线索折射、拆解成可读技术清单。
+名称中的 `Stack` 表达网页技术栈，`Prism / 栈棱镜` 表达把页面线索折射、拆解成可读技术清单。
 
 ## 功能
 
@@ -47,7 +47,7 @@ StackPrism 栈棱镜是一个 Chrome / Edge Manifest V3 浏览器扩展，用于
 1. 打开 Chrome 或 Edge 的扩展管理页面。
 2. 开启“开发者模式”。
 3. 选择“加载已解压的扩展程序”。
-4. 选择本目录：`tech-detector-extension`。
+4. 选择本目录；克隆仓库后目录通常为 `stackprism`。
 5. 打开任意网页后点击扩展图标查看检测结果。
 
 ## 注意
