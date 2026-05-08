@@ -12,7 +12,10 @@
     <main class="shell">
       <header class="topbar">
         <div>
-          <h1>StackPrism 栈棱镜</h1>
+          <h1>
+            <a id="appTitleLink" class="app-title-link" href="https://github.com/setube/stackprism" target="_blank" rel="noreferrer">StackPrism 栈棱镜</a>
+            <span id="appVersion" class="version-badge"></span>
+          </h1>
           <p id="pageUrl" class="url">正在检测当前标签页...</p>
         </div>
         <div class="actions">
@@ -62,6 +65,11 @@
         <summary>原始线索</summary>
         <pre id="rawOutput"></pre>
       </details>
+
+      <footer class="app-footer">
+        <span>Copyright © 2026 StackPrism 栈棱镜</span>
+        <a id="popupRepoLink" href="https://github.com/setube/stackprism" target="_blank" rel="noreferrer">GitHub 仓库</a>
+      </footer>
     </main>
     <script src="popup.js"></script>
   </body>

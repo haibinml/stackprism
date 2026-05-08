@@ -24,6 +24,7 @@ const CATEGORY_ORDER = [
 ]
 
 const SETTINGS_STORAGE_KEY = 'stackPrismSettings'
+const REPOSITORY_URL = 'https://github.com/setube/stackprism'
 
 const state = {
   result: null,
@@ -35,6 +36,9 @@ const state = {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  renderExtensionMeta()
+  bindRepositoryLink('appTitleLink')
+  bindRepositoryLink('popupRepoLink')
   document.getElementById('settingsBtn').addEventListener('click', openSettingsPage)
   document.getElementById('refreshBtn').addEventListener('click', runDetection)
   document.getElementById('copyBtn').addEventListener('click', copyResult)
@@ -51,6 +55,25 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .finally(runDetection)
 })
+
+function renderExtensionMeta() {
+  const version = chrome.runtime.getManifest?.().version
+  const badge = document.getElementById('appVersion')
+  if (badge && version) {
+    badge.textContent = `v${version}`
+  }
+}
+
+function bindRepositoryLink(id) {
+  const link = document.getElementById(id)
+  if (!link) {
+    return
+  }
+  link.addEventListener('click', event => {
+    event.preventDefault()
+    chrome.tabs.create({ url: REPOSITORY_URL })
+  })
+}
 
 function openSettingsPage() {
   const url = chrome.runtime.getURL('settings.html')

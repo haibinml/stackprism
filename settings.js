@@ -1,4 +1,5 @@
 const SETTINGS_STORAGE_KEY = 'stackPrismSettings'
+const REPOSITORY_URL = 'https://github.com/setube/stackprism'
 const CATEGORY_ORDER = [
   '前端框架',
   'UI / CSS 框架',
@@ -32,6 +33,7 @@ const state = {
 document.addEventListener('DOMContentLoaded', init)
 
 async function init() {
+  renderExtensionMeta()
   renderCategoryDatalist()
   bindEvents()
   state.settings = await loadSettings()
@@ -40,6 +42,7 @@ async function init() {
 }
 
 function bindEvents() {
+  bindRepositoryLink('settingsRepoLink')
   document.getElementById('saveBtn').addEventListener('click', saveSettings)
   document.getElementById('resetBtn').addEventListener('click', resetSettings)
   document.getElementById('enableAllBtn').addEventListener('click', () => setAllCategories(true))
@@ -50,6 +53,25 @@ function bindEvents() {
   document.getElementById('importRulesBtn').addEventListener('click', importRulesJson)
   document.getElementById('formatRulesBtn').addEventListener('click', formatRulesJson)
   document.getElementById('customCss').addEventListener('input', event => applyCustomCss(event.target.value))
+}
+
+function renderExtensionMeta() {
+  const version = chrome.runtime.getManifest?.().version
+  const badge = document.getElementById('settingsVersion')
+  if (badge && version) {
+    badge.textContent = `v${version}`
+  }
+}
+
+function bindRepositoryLink(id) {
+  const link = document.getElementById(id)
+  if (!link) {
+    return
+  }
+  link.addEventListener('click', event => {
+    event.preventDefault()
+    chrome.tabs.create({ url: REPOSITORY_URL })
+  })
 }
 
 async function loadSettings() {

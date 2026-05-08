@@ -1755,52 +1755,313 @@
       {
         "category": "前端框架",
         "name": "React",
-        "patterns": ["react(?:\\.production|\\.development)?(?:\\.min)?\\.js", "react-dom", "__react"]
+        "confidence": "中",
+        "patterns": [
+          "react(?:\\.production|\\.development)?(?:\\.min)?\\.js",
+          "react-dom",
+          "__react"
+        ]
       },
       {
         "category": "前端框架",
         "name": "Vue",
-        "patterns": ["vue(?:\\.runtime)?(?:\\.global)?(?:\\.prod)?(?:\\.min)?\\.js", "vue-router", "pinia", "data-v-app"]
+        "confidence": "中",
+        "patterns": [
+          "vue(?:\\.runtime)?(?:\\.global)?(?:\\.prod)?(?:\\.min)?\\.js",
+          "vue-router",
+          "pinia",
+          "data-v-app"
+        ]
       },
       {
         "category": "前端框架",
         "name": "Angular / AngularJS",
-        "patterns": ["angular(?:\\.min)?\\.js", "@angular", "ng-version", "ng-app"]
+        "confidence": "中",
+        "patterns": [
+          "angular(?:\\.min)?\\.js",
+          "@angular",
+          "ng-version",
+          "ng-app"
+        ]
+      },
+      {
+        "category": "前端框架",
+        "name": "Next.js",
+        "confidence": "高",
+        "patterns": [
+          "/_next/",
+          "__next"
+        ]
+      },
+      {
+        "category": "前端框架",
+        "name": "Nuxt",
+        "confidence": "高",
+        "patterns": [
+          "/_nuxt/",
+          "__nuxt"
+        ]
       },
       {
         "category": "前端框架",
         "name": "Svelte",
-        "patterns": ["svelte", "svelte-"]
+        "confidence": "中",
+        "patterns": [
+          "svelte",
+          "svelte-"
+        ]
+      },
+      {
+        "category": "前端框架",
+        "name": "Astro",
+        "confidence": "中",
+        "patterns": [
+          "/_astro/",
+          "astro-island",
+          "astro-slot"
+        ]
+      },
+      {
+        "category": "前端框架",
+        "name": "jQuery",
+        "confidence": "中",
+        "patterns": [
+          "jquery(?:-\\d|\\.)"
+        ]
+      },
+      {
+        "category": "前端框架",
+        "name": "Alpine.js",
+        "confidence": "中",
+        "patterns": [
+          "alpinejs",
+          "x-data",
+          "x-init"
+        ]
+      },
+      {
+        "category": "前端框架",
+        "name": "htmx",
+        "confidence": "中",
+        "patterns": [
+          "htmx(?:\\.min)?\\.js",
+          "hx-get",
+          "hx-post"
+        ]
       },
       {
         "category": "UI / CSS 框架",
         "name": "Bootstrap",
-        "patterns": ["bootstrap(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)"]
+        "confidence": "中",
+        "patterns": [
+          "bootstrap(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)"
+        ]
       },
       {
         "category": "UI / CSS 框架",
         "name": "Tailwind CSS",
-        "patterns": ["cdn\\.tailwindcss\\.com", "tailwind(?:\\.min)?\\.css", "tailwind\\.config"]
+        "confidence": "中",
+        "patterns": [
+          "cdn\\.tailwindcss\\.com",
+          "tailwind(?:\\.min)?\\.css",
+          "tailwind\\.config"
+        ]
       },
       {
-        "category": "前端库",
-        "name": "ECharts",
-        "patterns": ["echarts(?:\\.min)?\\.js"]
+        "category": "UI / CSS 框架",
+        "name": "Ant Design",
+        "confidence": "中",
+        "patterns": [
+          "antd",
+          "ant-design",
+          "\\.ant-"
+        ]
       },
       {
-        "category": "前端库",
-        "name": "Three.js",
-        "patterns": ["three(?:\\.module)?(?:\\.min)?\\.js", "threejs"]
+        "category": "UI / CSS 框架",
+        "name": "Material UI",
+        "confidence": "中",
+        "patterns": [
+          "@mui",
+          "material-ui",
+          "mui-"
+        ]
       },
       {
-        "category": "构建与运行时",
-        "name": "Vite",
-        "patterns": ["/@vite/client", "__vite", "vite/client"]
+        "category": "UI / CSS 框架",
+        "name": "Element UI / Element Plus",
+        "confidence": "中",
+        "patterns": [
+          "element-plus",
+          "element-ui",
+          "\\.el-"
+        ]
       },
       {
         "category": "构建与运行时",
         "name": "Webpack",
-        "patterns": ["webpack", "webpackchunk", "webpackjsonp"]
+        "confidence": "中",
+        "patterns": [
+          "webpack",
+          "webpackchunk",
+          "webpackjsonp"
+        ]
+      },
+      {
+        "category": "构建与运行时",
+        "name": "Vite",
+        "confidence": "中",
+        "patterns": [
+          "/@vite/client",
+          "__vite",
+          "vite/client"
+        ]
+      },
+      {
+        "category": "前端库",
+        "name": "Axios",
+        "confidence": "中",
+        "patterns": [
+          "axios(?:\\.min)?\\.js"
+        ]
+      },
+      {
+        "category": "前端库",
+        "name": "ECharts",
+        "confidence": "中",
+        "patterns": [
+          "echarts(?:\\.min)?\\.js"
+        ]
+      },
+      {
+        "category": "前端库",
+        "name": "Chart.js",
+        "confidence": "中",
+        "patterns": [
+          "chart(?:\\.umd)?(?:\\.min)?\\.js",
+          "chartjs"
+        ]
+      },
+      {
+        "category": "前端库",
+        "name": "Three.js",
+        "confidence": "中",
+        "patterns": [
+          "three(?:\\.module)?(?:\\.min)?\\.js",
+          "threejs"
+        ]
+      },
+      {
+        "category": "前端库",
+        "name": "Swiper",
+        "confidence": "中",
+        "patterns": [
+          "swiper(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)"
+        ]
+      }
+    ],
+    "dynamicAssetExtractors": [
+      {
+        "category": "主题 / 模板",
+        "label": "WordPress 主题",
+        "pattern": "/wp-content/themes/([^/?#\"' <>]+)"
+      },
+      {
+        "category": "网站源码线索",
+        "label": "WordPress 插件",
+        "pattern": "/wp-content/plugins/([^/?#\"' <>]+)",
+        "limit": 30
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "Typecho 主题",
+        "pattern": "/usr/themes/([^/?#\"' <>]+)"
+      },
+      {
+        "category": "网站源码线索",
+        "label": "Typecho 插件",
+        "pattern": "/usr/plugins/([^/?#\"' <>]+)",
+        "limit": 20
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "Z-BlogPHP 主题",
+        "pattern": "/zb_users/theme/([^/?#\"' <>]+)"
+      },
+      {
+        "category": "网站源码线索",
+        "label": "Z-BlogPHP 插件",
+        "pattern": "/zb_users/plugin/([^/?#\"' <>]+)",
+        "limit": 20
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "DedeCMS 模板",
+        "pattern": "/templets/([^/?#\"' <>]+)"
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "Drupal 主题",
+        "pattern": "/(?:sites/all/themes|themes/(?:custom|contrib)|core/themes)/([^/?#\"' <>]+)"
+      },
+      {
+        "category": "网站源码线索",
+        "label": "Drupal 模块",
+        "pattern": "/(?:sites/all/modules|modules/(?:custom|contrib)|core/modules)/([^/?#\"' <>]+)",
+        "limit": 25
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "Joomla 模板",
+        "pattern": "/templates/([^/?#\"' <>]+)",
+        "requires": "joomla|/media/system/js/|com_content"
+      },
+      {
+        "category": "网站源码线索",
+        "label": "Joomla 组件",
+        "pattern": "/components/(com_[^/?#\"' <>]+)",
+        "requires": "joomla|/media/system/js/|com_content"
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "Discuz! 模板",
+        "pattern": "/template/([^/?#\"' <>]+)",
+        "requires": "discuz|forum\\.php|portal\\.php|ucenter"
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "Magento 主题",
+        "pattern": "/(?:static/version\\d+/)?frontend/([^/?#\"' <>]+)/([^/?#\"' <>]+)",
+        "format": "joinSlash"
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "OpenCart 主题",
+        "pattern": "/catalog/view/theme/([^/?#\"' <>]+)"
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "PrestaShop 主题",
+        "pattern": "/themes/([^/?#\"' <>]+)/(?:assets|css|js|modules)/",
+        "requires": "prestashop|/modules/ps_|var prestashop"
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "ECShop 模板",
+        "pattern": "/themes/([^/?#\"' <>]+)/(?:images|style|library|js)/",
+        "requires": "ecshop|flow\\.php\\?step=cart|ecjia"
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "EmpireCMS 模板/皮肤",
+        "pattern": "/skin/([^/?#\"' <>]+)/",
+        "requires": "empirecms|/e/(?:data|public)/"
+      },
+      {
+        "category": "主题 / 模板",
+        "label": "Shopware 店面主题资源",
+        "pattern": "/theme/([^/?#\"' <>]+)/(?:css|js|assets)/",
+        "requires": "shopware|storefront"
       }
     ],
     "websitePrograms": [
@@ -3007,114 +3268,1559 @@
     ]
   },
   "headers": {
+    "interestingHeaders": [
+      "server",
+      "x-powered-by",
+      "x-generator",
+      "x-aspnet-version",
+      "x-aspnetmvc-version",
+      "x-runtime",
+      "x-request-id",
+      "x-cache",
+      "x-cache-hits",
+      "x-served-by",
+      "x-vercel-id",
+      "x-matched-path",
+      "x-nf-request-id",
+      "x-render-origin-server",
+      "cf-ray",
+      "cf-cache-status",
+      "cf-polished",
+      "cf-request-id",
+      "x-amz-cf-id",
+      "x-amz-cf-pop",
+      "x-fastly-request-id",
+      "x-akamai-transformed",
+      "x-drupal-cache",
+      "x-drupal-dynamic-cache",
+      "x-pingback",
+      "x-litespeed-cache",
+      "x-turbo-charged-by",
+      "via",
+      "vary",
+      "link",
+      "set-cookie",
+      "content-type",
+      "server-timing",
+      "x-cdn",
+      "x-cdn-provider",
+      "x-edge-location",
+      "x-edge-request-id",
+      "x-cache-status",
+      "x-proxy-cache",
+      "x-cache-lookup",
+      "x-azure-ref",
+      "x-msedge-ref",
+      "x-goog-generation",
+      "x-goog-hash",
+      "x-oss-request-id",
+      "x-oss-server-time",
+      "x-cos-request-id",
+      "x-tencent-request-id",
+      "x-bce-request-id",
+      "x-qiniu-zone",
+      "x-upyun-request-id",
+      "x-sucuri-id",
+      "x-sucuri-cache",
+      "x-iinfo",
+      "x-px",
+      "x-hwcdn-cache",
+      "x-hwcdn-request-id"
+    ],
+    "serverProducts": [
+      {
+        "name": "Nginx",
+        "category": "Web 服务器",
+        "patterns": [
+          "nginx"
+        ]
+      },
+      {
+        "name": "OpenResty",
+        "category": "Web 服务器",
+        "patterns": [
+          "openresty"
+        ]
+      },
+      {
+        "name": "Tengine",
+        "category": "Web 服务器",
+        "patterns": [
+          "tengine"
+        ]
+      },
+      {
+        "name": "Apache HTTP Server",
+        "category": "Web 服务器",
+        "patterns": [
+          "apache"
+        ]
+      },
+      {
+        "name": "Microsoft IIS",
+        "category": "Web 服务器",
+        "patterns": [
+          "microsoft-iis|iis"
+        ]
+      },
+      {
+        "name": "LiteSpeed",
+        "category": "Web 服务器",
+        "patterns": [
+          "litespeed"
+        ]
+      },
+      {
+        "name": "Caddy",
+        "category": "Web 服务器",
+        "patterns": [
+          "caddy"
+        ]
+      },
+      {
+        "name": "Envoy",
+        "category": "Web 服务器",
+        "patterns": [
+          "envoy"
+        ]
+      },
+      {
+        "name": "Traefik",
+        "category": "Web 服务器",
+        "patterns": [
+          "traefik"
+        ]
+      },
+      {
+        "name": "HAProxy",
+        "category": "Web 服务器",
+        "patterns": [
+          "haproxy"
+        ]
+      },
+      {
+        "name": "Varnish",
+        "category": "Web 服务器",
+        "patterns": [
+          "varnish"
+        ]
+      },
+      {
+        "name": "Apache Traffic Server",
+        "category": "Web 服务器",
+        "patterns": [
+          "trafficserver|ats"
+        ]
+      },
+      {
+        "name": "Jetty",
+        "category": "Web 服务器",
+        "patterns": [
+          "jetty"
+        ]
+      },
+      {
+        "name": "Tomcat",
+        "category": "Web 服务器",
+        "patterns": [
+          "tomcat"
+        ]
+      },
+      {
+        "name": "Undertow",
+        "category": "Web 服务器",
+        "patterns": [
+          "undertow"
+        ]
+      },
+      {
+        "name": "WildFly",
+        "category": "Web 服务器",
+        "patterns": [
+          "wildfly"
+        ]
+      },
+      {
+        "name": "GlassFish",
+        "category": "Web 服务器",
+        "patterns": [
+          "glassfish"
+        ]
+      },
+      {
+        "name": "WebSphere",
+        "category": "Web 服务器",
+        "patterns": [
+          "websphere"
+        ]
+      },
+      {
+        "name": "WebLogic",
+        "category": "Web 服务器",
+        "patterns": [
+          "weblogic"
+        ]
+      },
+      {
+        "name": "Kestrel",
+        "category": "Web 服务器",
+        "patterns": [
+          "kestrel"
+        ]
+      },
+      {
+        "name": "Cowboy",
+        "category": "Web 服务器",
+        "patterns": [
+          "cowboy"
+        ]
+      },
+      {
+        "name": "Puma",
+        "category": "Web 服务器",
+        "patterns": [
+          "puma"
+        ]
+      },
+      {
+        "name": "Unicorn",
+        "category": "Web 服务器",
+        "patterns": [
+          "unicorn"
+        ]
+      },
+      {
+        "name": "uWSGI",
+        "category": "Web 服务器",
+        "patterns": [
+          "uwsgi"
+        ]
+      },
+      {
+        "name": "Gunicorn",
+        "category": "Web 服务器",
+        "patterns": [
+          "gunicorn"
+        ]
+      },
+      {
+        "name": "Werkzeug",
+        "category": "Web 服务器",
+        "patterns": [
+          "werkzeug"
+        ]
+      },
+      {
+        "name": "Node.js",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "node\\.?js"
+        ]
+      },
+      {
+        "name": "Deno",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "deno"
+        ]
+      },
+      {
+        "name": "Bun",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "\\bbun\\b"
+        ]
+      },
+      {
+        "name": "Vercel",
+        "category": "CDN / 托管",
+        "patterns": [
+          "vercel"
+        ]
+      },
+      {
+        "name": "Cloudflare",
+        "category": "CDN / 托管",
+        "patterns": [
+          "cloudflare"
+        ]
+      },
+      {
+        "name": "AmazonS3",
+        "category": "CDN / 托管",
+        "patterns": [
+          "amazons3|amazon s3|s3"
+        ]
+      },
+      {
+        "name": "Akamai",
+        "category": "CDN / 托管",
+        "patterns": [
+          "akamai|ghost"
+        ]
+      },
+      {
+        "name": "Fastly",
+        "category": "CDN / 托管",
+        "patterns": [
+          "fastly"
+        ]
+      },
+      {
+        "name": "Bunny CDN",
+        "category": "CDN / 托管",
+        "patterns": [
+          "bunnycdn|bunny"
+        ]
+      },
+      {
+        "name": "Gcore CDN",
+        "category": "CDN / 托管",
+        "patterns": [
+          "gcore"
+        ]
+      },
+      {
+        "name": "Tencent Cloud CDN",
+        "category": "CDN / 托管",
+        "patterns": [
+          "tencent|qcloud"
+        ]
+      },
+      {
+        "name": "Alibaba Cloud CDN",
+        "category": "CDN / 托管",
+        "patterns": [
+          "aliyun|alibaba|tengine"
+        ]
+      },
+      {
+        "name": "Huawei Cloud CDN",
+        "category": "CDN / 托管",
+        "patterns": [
+          "huawei|hwcdn"
+        ]
+      },
+      {
+        "name": "Baidu Cloud CDN",
+        "category": "CDN / 托管",
+        "patterns": [
+          "baidu|bce"
+        ]
+      }
+    ],
+    "poweredByProducts": [
+      {
+        "name": "Node.js",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "node\\.?js"
+        ]
+      },
+      {
+        "name": "Express",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "express"
+        ]
+      },
+      {
+        "name": "Koa",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "\\bkoa\\b"
+        ]
+      },
+      {
+        "name": "Fastify",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "fastify"
+        ]
+      },
+      {
+        "name": "Hapi",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "\\bhapi\\b|@hapi"
+        ]
+      },
+      {
+        "name": "NestJS",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "nestjs|nest\\.?js"
+        ]
+      },
+      {
+        "name": "Sails.js",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "sails\\.?js"
+        ]
+      },
+      {
+        "name": "AdonisJS",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "adonis"
+        ]
+      },
+      {
+        "name": "Meteor",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "meteor"
+        ]
+      },
+      {
+        "name": "Next.js",
+        "category": "前端框架",
+        "patterns": [
+          "next\\.?js"
+        ]
+      },
+      {
+        "name": "Nuxt",
+        "category": "前端框架",
+        "patterns": [
+          "nuxt"
+        ]
+      },
+      {
+        "name": "Remix",
+        "category": "前端框架",
+        "patterns": [
+          "remix"
+        ]
+      },
+      {
+        "name": "SvelteKit",
+        "category": "前端框架",
+        "patterns": [
+          "sveltekit"
+        ]
+      },
+      {
+        "name": "Deno",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "deno"
+        ]
+      },
+      {
+        "name": "Bun",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "\\bbun\\b"
+        ]
+      },
+      {
+        "name": "ASP.NET",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "asp\\.net"
+        ]
+      },
+      {
+        "name": "PHP",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "php"
+        ]
+      },
+      {
+        "name": "Laravel",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "laravel"
+        ]
+      },
+      {
+        "name": "Symfony",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "symfony"
+        ]
+      },
+      {
+        "name": "Yii",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "\\byii\\b"
+        ]
+      },
+      {
+        "name": "CodeIgniter",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "codeigniter"
+        ]
+      },
+      {
+        "name": "CakePHP",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "cakephp"
+        ]
+      },
+      {
+        "name": "Laminas / Zend Framework",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "laminas|zend framework|zend server"
+        ]
+      },
+      {
+        "name": "Django",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "django"
+        ]
+      },
+      {
+        "name": "Flask",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "flask"
+        ]
+      },
+      {
+        "name": "FastAPI",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "fastapi"
+        ]
+      },
+      {
+        "name": "Starlette",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "starlette"
+        ]
+      },
+      {
+        "name": "Tornado",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "tornado"
+        ]
+      },
+      {
+        "name": "Sanic",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "sanic"
+        ]
+      },
+      {
+        "name": "Bottle",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "bottle"
+        ]
+      },
+      {
+        "name": "CherryPy",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "cherrypy"
+        ]
+      },
+      {
+        "name": "Ruby on Rails",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "rails|phusion passenger"
+        ]
+      },
+      {
+        "name": "Sinatra",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "sinatra"
+        ]
+      },
+      {
+        "name": "Hanami",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "hanami"
+        ]
+      },
+      {
+        "name": "Spring Boot / Spring MVC",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "spring|springboot|spring boot"
+        ]
+      },
+      {
+        "name": "Play Framework",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "play framework|playframework"
+        ]
+      },
+      {
+        "name": "Vert.x",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "vert\\.x|vertx"
+        ]
+      },
+      {
+        "name": "Akka HTTP",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "akka"
+        ]
+      },
+      {
+        "name": "Phoenix",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "phoenix"
+        ]
+      },
+      {
+        "name": "Elixir / Plug",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "elixir|plug"
+        ]
+      },
+      {
+        "name": "Go",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "\\bgolang\\b|\\bgo\\b"
+        ]
+      },
+      {
+        "name": "Gin",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "\\bgin\\b"
+        ]
+      },
+      {
+        "name": "Fiber",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "\\bfiber\\b"
+        ]
+      },
+      {
+        "name": "Rust Actix",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "actix"
+        ]
+      },
+      {
+        "name": "Rust Rocket",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "rocket"
+        ]
+      },
+      {
+        "name": "Rust Axum",
+        "category": "后端 / 服务器框架",
+        "patterns": [
+          "axum"
+        ]
+      }
+    ],
+    "headerPatterns": [
+      {
+        "category": "后端 / 服务器框架",
+        "name": "ASP.NET",
+        "confidence": "高",
+        "patterns": [
+          "(?:^|\\n)x-aspnet(?:mvc)?-version:"
+        ],
+        "evidence": "存在 x-aspnet-* 响应头"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Ruby on Rails",
+        "confidence": "中",
+        "patterns": [
+          "(?:^|\\n)x-runtime:"
+        ],
+        "evidence": "存在 x-runtime 响应头"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "ASP.NET",
+        "confidence": "中",
+        "patterns": [
+          "x-aspnet|asp\\.net|\\.aspx|\\.ashx"
+        ],
+        "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Blazor",
+        "confidence": "中",
+        "patterns": [
+          "blazor"
+        ],
+        "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Java Servlet",
+        "confidence": "中",
+        "patterns": [
+          "jsessionid|servlet|j2ee|jakarta"
+        ],
+        "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Spring Boot / Spring MVC",
+        "confidence": "中",
+        "patterns": [
+          "spring|x-application-context"
+        ],
+        "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Ruby on Rails",
+        "confidence": "中",
+        "patterns": [
+          "rails|_rails|authenticity_token"
+        ],
+        "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Django",
+        "confidence": "中",
+        "patterns": [
+          "django|csrftoken"
+        ],
+        "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Flask",
+        "confidence": "中",
+        "patterns": [
+          "flask"
+        ],
+        "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "FastAPI",
+        "confidence": "中",
+        "patterns": [
+          "fastapi|uvicorn|starlette"
+        ],
+        "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Laravel",
+        "confidence": "中",
+        "patterns": [
+          "laravel|laravel_session|xsrf-token"
+        ],
+        "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Symfony",
+        "confidence": "中",
+        "patterns": [
+          "symfony|sf_redirect|sf_cookie"
+        ],
+        "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Yii",
+        "confidence": "中",
+        "patterns": [
+          "\\byii\\b|yii_csrf"
+        ],
+        "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "CakePHP",
+        "confidence": "中",
+        "patterns": [
+          "cakephp|cakecsrf"
+        ],
+        "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "CodeIgniter",
+        "confidence": "中",
+        "patterns": [
+          "ci_session|codeigniter"
+        ],
+        "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Phoenix",
+        "confidence": "中",
+        "patterns": [
+          "phoenix|_csrf_token"
+        ],
+        "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Go",
+        "confidence": "中",
+        "patterns": [
+          "gorilla\\.csrf|go-http-client|golang"
+        ],
+        "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "GraphQL",
+        "confidence": "中",
+        "patterns": [
+          "graphql"
+        ],
+        "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "gRPC",
+        "confidence": "中",
+        "patterns": [
+          "grpc"
+        ],
+        "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+      },
+      {
+        "category": "CMS / 电商平台",
+        "name": "Drupal",
+        "confidence": "高",
+        "patterns": [
+          "(?:^|\\n)x-drupal-(?:cache|dynamic-cache):",
+          "x-generator:.*drupal"
+        ],
+        "evidence": "存在 Drupal 响应头或 x-generator 线索"
+      },
+      {
+        "category": "CMS / 电商平台",
+        "name": "WordPress",
+        "confidence": "中",
+        "patterns": [
+          "(?:^|\\n)x-pingback:|x-generator:.*wordpress"
+        ],
+        "evidence": "存在 x-pingback 或 WordPress generator 响应头"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Cloudflare",
+        "confidence": "高",
+        "patterns": [
+          "(?:^|\\n)cf-(?:ray|cache-status|request-id|polished):",
+          "server:.*cloudflare"
+        ],
+        "evidence": "存在 Cloudflare 响应头"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Vercel",
+        "confidence": "高",
+        "patterns": [
+          "(?:^|\\n)x-vercel-id:",
+          "(?:^|\\n)x-matched-path:",
+          "server:.*vercel"
+        ],
+        "evidence": "存在 Vercel 响应头"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Netlify",
+        "confidence": "高",
+        "patterns": [
+          "(?:^|\\n)x-nf-request-id:"
+        ],
+        "evidence": "存在 x-nf-request-id 响应头"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "AWS CloudFront",
+        "confidence": "高",
+        "patterns": [
+          "(?:^|\\n)x-amz-cf-(?:id|pop):",
+          "x-cache:.*cloudfront",
+          "via:.*cloudfront"
+        ],
+        "evidence": "存在 CloudFront 响应头"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Fastly",
+        "confidence": "高",
+        "patterns": [
+          "(?:^|\\n)x-fastly-request-id:",
+          "x-served-by:.*fastly"
+        ],
+        "evidence": "存在 Fastly 响应头"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Akamai",
+        "confidence": "高",
+        "patterns": [
+          "(?:^|\\n)x-akamai-transformed:",
+          "server:.*akamai",
+          "via:.*akamai"
+        ],
+        "evidence": "存在 Akamai 响应头"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Varnish",
+        "confidence": "中",
+        "patterns": [
+          "via:.*varnish",
+          "x-cache:.*varnish"
+        ],
+        "evidence": "via/x-cache 包含 Varnish"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Azure CDN / Front Door",
+        "confidence": "高",
+        "patterns": [
+          "x-azure-ref|x-msedge-ref|azureedge|azurefd|frontdoor"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Google Cloud CDN / Storage",
+        "confidence": "高",
+        "patterns": [
+          "x-goog-|google cloud cdn|storage\\.googleapis\\.com|googleusercontent"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Bunny CDN",
+        "confidence": "高",
+        "patterns": [
+          "bunnycdn|b-cdn\\.net|x-bunny"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "KeyCDN",
+        "confidence": "高",
+        "patterns": [
+          "keycdn|kxcdn"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "CDN77",
+        "confidence": "高",
+        "patterns": [
+          "cdn77"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Gcore CDN",
+        "confidence": "高",
+        "patterns": [
+          "gcore|gcdn\\.co"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Edgio / Limelight",
+        "confidence": "高",
+        "patterns": [
+          "edgio|limelight|llnwd|x-ec-|edgecast"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "StackPath",
+        "confidence": "高",
+        "patterns": [
+          "stackpath"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "CacheFly",
+        "confidence": "高",
+        "patterns": [
+          "cachefly"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Imperva / Incapsula",
+        "confidence": "高",
+        "patterns": [
+          "x-iinfo|incapsula|imperva"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Sucuri CDN",
+        "confidence": "高",
+        "patterns": [
+          "x-sucuri-|sucuri"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Alibaba Cloud CDN",
+        "confidence": "高",
+        "patterns": [
+          "x-oss-|aliyun|alicdn|alibaba|alikunlun"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Tencent Cloud CDN",
+        "confidence": "高",
+        "patterns": [
+          "x-cos-|x-tencent-|qcloud|tencent|myqcloud|gtimg"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Baidu Cloud CDN",
+        "confidence": "高",
+        "patterns": [
+          "x-bce-|baidu|bcebos|yunjiasu"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Huawei Cloud CDN",
+        "confidence": "高",
+        "patterns": [
+          "x-hwcdn-|huaweicloud|hwcdn|cdnhwc"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Kingsoft Cloud CDN",
+        "confidence": "高",
+        "patterns": [
+          "ksyuncdn|ks-cdn|kingsoft"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Qiniu CDN",
+        "confidence": "高",
+        "patterns": [
+          "x-qiniu-|qiniu|qiniucdn|clouddn|qnssl"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "UpYun",
+        "confidence": "高",
+        "patterns": [
+          "x-upyun-|upyun|upaiyun"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "ChinaCache",
+        "confidence": "高",
+        "patterns": [
+          "chinacache|ccgslb"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Wangsu / CDNetworks",
+        "confidence": "高",
+        "patterns": [
+          "cdnetworks|wangsu|wswebcdn|wscdns|quantil|qtlcdn"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "BaishanCloud",
+        "confidence": "高",
+        "patterns": [
+          "baishancloud|bsgslb|qingcdn"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "UCloud CDN",
+        "confidence": "高",
+        "patterns": [
+          "ucloud|ufileos"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "JD Cloud CDN",
+        "confidence": "高",
+        "patterns": [
+          "jcloud|jdcloud"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Volcengine / BytePlus CDN",
+        "confidence": "高",
+        "patterns": [
+          "bytecdn|byteimg|volccdn|volcengine|byteplus"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Yandex CDN",
+        "confidence": "高",
+        "patterns": [
+          "yastatic|yandex\\.st"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Naver Cloud CDN",
+        "confidence": "高",
+        "patterns": [
+          "ncloud|ntruss|pstatic"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Kakao CDN",
+        "confidence": "高",
+        "patterns": [
+          "kakaocdn"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Azion",
+        "confidence": "高",
+        "patterns": [
+          "azion"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Medianova CDN",
+        "confidence": "高",
+        "patterns": [
+          "medianova|mncdn"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "QUIC.cloud",
+        "confidence": "高",
+        "patterns": [
+          "quic\\.cloud"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Cloudinary CDN",
+        "confidence": "高",
+        "patterns": [
+          "cloudinary"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Imgix",
+        "confidence": "高",
+        "patterns": [
+          "imgix"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "ImageKit",
+        "confidence": "高",
+        "patterns": [
+          "imagekit"
+        ],
+        "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "PHP",
+        "confidence": "中",
+        "patterns": [
+          "set-cookie:.*phpsessid"
+        ],
+        "evidence": "Set-Cookie 包含 PHPSESSID"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Laravel",
+        "confidence": "中",
+        "patterns": [
+          "set-cookie:.*(?:laravel_session|xsrf-token)"
+        ],
+        "evidence": "Set-Cookie 包含 Laravel 会话特征"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Java Servlet",
+        "confidence": "中",
+        "patterns": [
+          "set-cookie:.*jsessionid"
+        ],
+        "evidence": "Set-Cookie 包含 JSESSIONID"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "ASP.NET",
+        "confidence": "中",
+        "patterns": [
+          "set-cookie:.*asp\\.net_sessionid"
+        ],
+        "evidence": "Set-Cookie 包含 ASP.NET_SessionId"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Express Session",
+        "confidence": "中",
+        "patterns": [
+          "set-cookie:.*connect\\.sid"
+        ],
+        "evidence": "Set-Cookie 包含 connect.sid"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Django",
+        "confidence": "中",
+        "patterns": [
+          "set-cookie:.*(?:django|csrftoken)"
+        ],
+        "evidence": "Set-Cookie 包含 Django/csrftoken 特征"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Ruby on Rails",
+        "confidence": "低",
+        "patterns": [
+          "set-cookie:.*(?:^|,\\s*)_[a-z0-9_]*_session|set-cookie:.*_session_id"
+        ],
+        "evidence": "Set-Cookie 包含 Rails 风格会话 Cookie 名称"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Symfony",
+        "confidence": "中",
+        "patterns": [
+          "set-cookie:.*(?:symfony|sf_redirect|sf_cookie)"
+        ],
+        "evidence": "Set-Cookie 包含 Symfony 特征"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "CakePHP",
+        "confidence": "中",
+        "patterns": [
+          "set-cookie:.*(?:cakephp|cakecsrf)"
+        ],
+        "evidence": "Set-Cookie 包含 CakePHP 特征"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "CodeIgniter",
+        "confidence": "中",
+        "patterns": [
+          "set-cookie:.*ci_session"
+        ],
+        "evidence": "Set-Cookie 包含 ci_session"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Yii / CSRF-based Framework",
+        "confidence": "低",
+        "patterns": [
+          "set-cookie:.*(?:yii_csrf|_csrf)"
+        ],
+        "evidence": "Set-Cookie 包含 CSRF 框架线索"
+      },
+      {
+        "category": "后端 / 服务器框架",
+        "name": "Phoenix",
+        "confidence": "低",
+        "patterns": [
+          "set-cookie:.*(?:phoenix|_csrf_token)"
+        ],
+        "evidence": "Set-Cookie 包含 Phoenix/CSRF 线索"
+      },
+      {
+        "category": "CMS / 电商平台",
+        "name": "Shopify",
+        "confidence": "中",
+        "patterns": [
+          "url:.*(?:\\.myshopify\\.com|cdn\\.shopify\\.com)"
+        ],
+        "evidence": "URL 包含 Shopify 域名"
+      }
+    ],
+    "unknownCdnPatterns": [
+      "(^|\\n)(x-cdn|x-cdn-provider|server-timing):",
+      "(^|\\n)(server|via|x-cache|x-cache-status|x-served-by):.*\\b(cdn|edge)\\b"
+    ],
     "cdnProviders": [
       {
         "name": "Tencent EdgeOne",
-        "patterns": ["edgeone", "eo-cache-status", "tencentedgeone"]
+        "patterns": [
+          "edgeone",
+          "eo-cache-status",
+          "tencentedgeone"
+        ]
       },
       {
         "name": "Oracle Cloud CDN",
-        "patterns": ["oraclecloud", "oci-cdn"]
+        "patterns": [
+          "oraclecloud",
+          "oci-cdn"
+        ]
       },
       {
         "name": "IBM Cloud CDN",
-        "patterns": ["appdomain.cloud", "ibmcloud"]
+        "patterns": [
+          "appdomain.cloud",
+          "ibmcloud"
+        ]
       },
       {
         "name": "AWS Global Accelerator",
-        "patterns": ["awsglobalaccelerator"]
+        "patterns": [
+          "awsglobalaccelerator"
+        ]
       },
       {
         "name": "Backblaze B2",
-        "patterns": ["backblazeb2", "x-bz-"]
+        "patterns": [
+          "backblazeb2",
+          "x-bz-"
+        ]
       },
       {
         "name": "Wasabi Storage",
-        "patterns": ["wasabisys", "x-amz-request-id"]
+        "patterns": [
+          "wasabisys",
+          "x-amz-request-id"
+        ]
       }
     ],
     "languages": [
       {
         "name": "PHP",
-        "patterns": ["x-powered-by:.*php", "server:.*php", "set-cookie:.*phpsessid", "\\.php(?:\\?|#|$)", "x-generator:.*(?:wordpress|drupal|joomla|discuz|thinkphp)"]
+        "patterns": [
+          "x-powered-by:.*php",
+          "server:.*php",
+          "set-cookie:.*phpsessid",
+          "\\.php(?:\\?|#|$)",
+          "x-generator:.*(?:wordpress|drupal|joomla|discuz|thinkphp)"
+        ]
       },
       {
         "name": "Node.js",
-        "patterns": ["x-powered-by:.*(?:express|koa|fastify|nestjs|node)", "set-cookie:.*connect\\.sid"]
+        "patterns": [
+          "x-powered-by:.*(?:express|koa|fastify|nestjs|node)",
+          "set-cookie:.*connect\\.sid"
+        ]
       },
       {
         "name": "Python",
-        "patterns": ["x-powered-by:.*(?:django|flask|fastapi)", "server:.*(?:uvicorn|gunicorn|werkzeug)", "set-cookie:.*csrftoken"]
+        "patterns": [
+          "x-powered-by:.*(?:django|flask|fastapi)",
+          "server:.*(?:uvicorn|gunicorn|werkzeug)",
+          "set-cookie:.*csrftoken"
+        ]
       },
       {
         "name": "Ruby",
-        "patterns": ["x-powered-by:.*rails", "server:.*(?:puma|unicorn|passenger)", "x-runtime:"]
+        "patterns": [
+          "x-powered-by:.*rails",
+          "server:.*(?:puma|unicorn|passenger)",
+          "x-runtime:"
+        ]
       },
       {
         "name": "Java / JVM",
-        "patterns": ["set-cookie:.*jsessionid", "server:.*(?:tomcat|jetty|undertow|wildfly|weblogic|websphere)"]
+        "patterns": [
+          "set-cookie:.*jsessionid",
+          "server:.*(?:tomcat|jetty|undertow|wildfly|weblogic|websphere)"
+        ]
       },
       {
         "name": "JSP / JavaServer Pages",
-        "patterns": ["set-cookie:.*jsessionid", "\\.jsp(?:\\?|#|$)", "\\.jspx(?:\\?|#|$)", "server:.*(?:tomcat|jetty|weblogic|websphere)"]
+        "patterns": [
+          "set-cookie:.*jsessionid",
+          "\\.jsp(?:\\?|#|$)",
+          "\\.jspx(?:\\?|#|$)",
+          "server:.*(?:tomcat|jetty|weblogic|websphere)"
+        ]
       },
       {
         "name": "Java Servlet",
-        "patterns": ["set-cookie:.*jsessionid", "\\.do(?:\\?|#|$)", "\\.action(?:\\?|#|$)", "x-powered-by:.*(?:servlet|jsp)", "server:.*(?:tomcat|jetty|undertow|wildfly|weblogic|websphere)"]
+        "patterns": [
+          "set-cookie:.*jsessionid",
+          "\\.do(?:\\?|#|$)",
+          "\\.action(?:\\?|#|$)",
+          "x-powered-by:.*(?:servlet|jsp)",
+          "server:.*(?:tomcat|jetty|undertow|wildfly|weblogic|websphere)"
+        ]
       },
       {
         "name": "C# / .NET",
-        "patterns": ["x-aspnet", "x-powered-by:.*asp\\.net", "server:.*(?:iis|kestrel)", "set-cookie:.*asp\\.net_sessionid", "\\.aspx(?:\\?|#|$)", "\\.ashx(?:\\?|#|$)", "\\.asmx(?:\\?|#|$)"]
+        "patterns": [
+          "x-aspnet",
+          "x-powered-by:.*asp\\.net",
+          "server:.*(?:iis|kestrel)",
+          "set-cookie:.*asp\\.net_sessionid",
+          "\\.aspx(?:\\?|#|$)",
+          "\\.ashx(?:\\?|#|$)",
+          "\\.asmx(?:\\?|#|$)"
+        ]
       },
       {
         "name": "Classic ASP / VBScript",
-        "patterns": ["set-cookie:.*aspsessionid", "x-powered-by:.*asp", "\\.asp(?:\\?|#|$)", "server:.*iis"]
+        "patterns": [
+          "set-cookie:.*aspsessionid",
+          "x-powered-by:.*asp",
+          "\\.asp(?:\\?|#|$)",
+          "server:.*iis"
+        ]
       },
       {
         "name": "ColdFusion / CFML",
-        "patterns": ["x-powered-by:.*coldfusion", "set-cookie:.*(?:cfid|cftoken)", "\\.cfm(?:\\?|#|$)", "\\.cfml(?:\\?|#|$)"]
+        "patterns": [
+          "x-powered-by:.*coldfusion",
+          "set-cookie:.*(?:cfid|cftoken)",
+          "\\.cfm(?:\\?|#|$)",
+          "\\.cfml(?:\\?|#|$)"
+        ]
       },
       {
         "name": "Perl / CGI",
-        "patterns": ["server:.*mod_perl", "/cgi-bin/", "\\.cgi(?:\\?|#|$)", "\\.pl(?:\\?|#|$)"]
+        "patterns": [
+          "server:.*mod_perl",
+          "/cgi-bin/",
+          "\\.cgi(?:\\?|#|$)",
+          "\\.pl(?:\\?|#|$)"
+        ]
       },
       {
         "name": "Lua / OpenResty",
-        "patterns": ["server:.*openresty", "x-powered-by:.*(?:openresty|lua)", "x-lua:"]
+        "patterns": [
+          "server:.*openresty",
+          "x-powered-by:.*(?:openresty|lua)",
+          "x-lua:"
+        ]
       },
       {
         "name": "Go",
-        "patterns": ["x-powered-by:.*(?:gin|fiber|go)", "server:.*caddy"]
+        "patterns": [
+          "x-powered-by:.*(?:gin|fiber|go)",
+          "server:.*caddy"
+        ]
       },
       {
         "name": "Rust",
-        "patterns": ["x-powered-by:.*(?:actix|rocket|axum|warp)"]
+        "patterns": [
+          "x-powered-by:.*(?:actix|rocket|axum|warp)"
+        ]
       },
       {
         "name": "Elixir",
-        "patterns": ["x-powered-by:.*phoenix", "server:.*cowboy"]
+        "patterns": [
+          "x-powered-by:.*phoenix",
+          "server:.*cowboy"
+        ]
       }
     ],
     "websitePrograms": [
       {
         "name": "WordPress",
         "kind": "CMS / 博客",
-        "patterns": ["x-pingback", "x-generator:.*wordpress", "link:.*wp-json"]
+        "patterns": [
+          "x-pingback",
+          "x-generator:.*wordpress",
+          "link:.*wp-json"
+        ]
       },
       {
         "name": "Drupal",
         "kind": "CMS",
-        "patterns": ["x-drupal-cache", "x-generator:.*drupal"]
+        "patterns": [
+          "x-drupal-cache",
+          "x-generator:.*drupal"
+        ]
       },
       {
         "name": "Shopify",
         "kind": "SaaS 电商",
-        "patterns": ["myshopify.com", "cdn.shopify.com", "x-shopid"]
+        "patterns": [
+          "myshopify.com",
+          "cdn.shopify.com",
+          "x-shopid"
+        ]
       },
       {
         "name": "Magento / Adobe Commerce",
         "kind": "电商系统",
-        "patterns": ["x-magento", "magento"]
+        "patterns": [
+          "x-magento",
+          "magento"
+        ]
       }
     ]
   }
