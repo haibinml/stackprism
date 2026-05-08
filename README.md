@@ -4,6 +4,14 @@ StackPrism 栈棱镜是一个 Chrome / Edge Manifest V3 浏览器扩展，用于
 
 名称中的 `Stack` 表达网页技术栈，`Prism / 栈棱镜` 表达把页面线索折射、拆解成可读技术清单。
 
+## 图标预览
+
+图标源文件在 `icons/icon.svg`，扩展使用的 PNG 图标放在 `icons/` 目录。
+
+| 16x16 | 32x32 | 48x48 | 128x128 | 256x256 |
+| --- | --- | --- | --- | --- |
+| <img src="icons/icon16.png" width="16" height="16" alt="StackPrism 16x16 icon"> | <img src="icons/icon32.png" width="32" height="32" alt="StackPrism 32x32 icon"> | <img src="icons/icon48.png" width="48" height="48" alt="StackPrism 48x48 icon"> | <img src="icons/icon128.png" width="96" height="96" alt="StackPrism 128x128 icon"> | <img src="icons/icon256.png" width="128" height="128" alt="StackPrism 256x256 icon"> |
+
 ## 功能
 
 - 页面运行时检测：React、Vue、Angular、Next.js、Nuxt、Gatsby、Astro、jQuery、Alpine、Lit 等。

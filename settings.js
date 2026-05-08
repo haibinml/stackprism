@@ -25,6 +25,21 @@ const CATEGORY_ORDER = [
   '安全与协议',
   '其他库'
 ]
+const ALLOWED_CONFIDENCES = ['高', '中', '低']
+const ALLOWED_MATCH_TYPES = ['regex', 'keyword']
+const ALLOWED_MATCH_TARGETS = ['url', 'resources', 'html', 'headers', 'dynamic']
+const CUSTOM_RULE_LIMITS = {
+  rules: 200,
+  name: 120,
+  category: 80,
+  kind: 120,
+  url: 500,
+  patterns: 60,
+  selectors: 30,
+  globals: 30,
+  matchIn: 10,
+  item: 500
+}
 
 const state = {
   settings: normalizeSettings(),
@@ -115,7 +130,7 @@ function cleanCustomRules(value) {
       name: String(rule?.name || '').trim().slice(0, 120),
       category: String(rule?.category || '其他库').trim().slice(0, 80),
       kind: String(rule?.kind || '自定义规则').trim().slice(0, 120),
-      confidence: ['高', '中', '低'].includes(rule?.confidence) ? rule.confidence : '中',
+      confidence: ALLOWED_CONFIDENCES.includes(rule?.confidence) ? rule.confidence : '中',
       matchType: rule?.matchType === 'keyword' ? 'keyword' : 'regex',
       patterns: cleanStringArray(rule?.patterns).slice(0, 60),
       selectors: cleanStringArray(rule?.selectors).slice(0, 30),
@@ -246,21 +261,252 @@ function readRuleForm() {
     showStatus(regexError, 'error')
     return null
   }
+  const detailErrors = validateCustomRuleDetails(rule, '当前表单')
+  if (detailErrors.length) {
+    showValidationErrors(detailErrors)
+    return null
+  }
   return normalizeSettings({ customRules: [rule] }).customRules[0]
 }
 
-function validateRegexPatterns(rule) {
+function validateRegexPatterns(rule, label = '规则') {
   if (rule.matchType === 'keyword') {
     return ''
   }
-  for (const pattern of rule.patterns) {
+  for (const [index, pattern] of rule.patterns.entries()) {
     try {
       new RegExp(pattern, 'i')
     } catch (error) {
-      return `正则无效：${pattern}（${error.message}）`
+      return `${label} 的匹配规则第 ${index + 1} 行正则无效：${pattern}（${error.message}）`
     }
   }
   return ''
+}
+
+function validateCustomRulesPayload(value) {
+  const errors = []
+  const rules = []
+
+  if (!Array.isArray(value)) {
+    return {
+      errors: ['最外层必须是数组，也就是用 [ ] 包住所有规则。示例：[{"name":"MyCMS","patterns":["mycms"]}]'],
+      rules
+    }
+  }
+
+  if (value.length > CUSTOM_RULE_LIMITS.rules) {
+    errors.push(`规则最多保存 ${CUSTOM_RULE_LIMITS.rules} 条，当前是 ${value.length} 条。`)
+  }
+
+  value.forEach((rawRule, index) => {
+    const normalized = normalizeCustomRuleFromRaw(rawRule, index, errors)
+    if (normalized) {
+      rules.push(normalized)
+    }
+  })
+
+  return { errors, rules }
+}
+
+function normalizeCustomRuleFromRaw(rawRule, index, errors) {
+  const label = `第 ${index + 1} 条规则`
+  const startErrorCount = errors.length
+
+  if (!isPlainObject(rawRule)) {
+    errors.push(`${label} 必须是对象，也就是 { ... }。`)
+    return null
+  }
+
+  const name = readTextField(rawRule, 'name', label, errors, {
+    displayName: '技术名称 name',
+    required: true,
+    max: CUSTOM_RULE_LIMITS.name
+  })
+  const category = readTextField(rawRule, 'category', label, errors, {
+    displayName: '分类 category',
+    defaultValue: '其他库',
+    max: CUSTOM_RULE_LIMITS.category
+  })
+  const kind = readTextField(rawRule, 'kind', label, errors, {
+    displayName: '类型说明 kind',
+    defaultValue: '自定义规则',
+    max: CUSTOM_RULE_LIMITS.kind
+  })
+  const url = readUrlField(rawRule, label, errors)
+  const confidence = readEnumField(rawRule, 'confidence', label, errors, {
+    displayName: '置信度 confidence',
+    defaultValue: '中',
+    allowed: ALLOWED_CONFIDENCES
+  })
+  const matchType = readEnumField(rawRule, 'matchType', label, errors, {
+    displayName: '匹配方式 matchType',
+    defaultValue: 'regex',
+    allowed: ALLOWED_MATCH_TYPES
+  })
+  const patterns = readStringArrayField(rawRule, 'patterns', label, errors, {
+    displayName: '匹配规则 patterns',
+    max: CUSTOM_RULE_LIMITS.patterns
+  })
+  const selectors = readStringArrayField(rawRule, 'selectors', label, errors, {
+    displayName: 'CSS 选择器 selectors',
+    max: CUSTOM_RULE_LIMITS.selectors
+  })
+  const globals = readStringArrayField(rawRule, 'globals', label, errors, {
+    displayName: '全局变量 globals',
+    max: CUSTOM_RULE_LIMITS.globals
+  })
+  const matchIn = readStringArrayField(rawRule, 'matchIn', label, errors, {
+    displayName: '匹配范围 matchIn',
+    max: CUSTOM_RULE_LIMITS.matchIn
+  })
+
+  const rule = {
+    name,
+    category,
+    kind,
+    confidence,
+    matchType,
+    patterns,
+    selectors,
+    globals,
+    matchIn,
+    url
+  }
+
+  if (!patterns.length && !selectors.length && !globals.length) {
+    errors.push(`${label} 至少要填写 patterns、selectors、globals 其中一种。`)
+  }
+  errors.push(...validateCustomRuleDetails(rule, label))
+
+  return errors.length === startErrorCount ? rule : null
+}
+
+function validateCustomRuleDetails(rule, label) {
+  const errors = []
+  const regexError = validateRegexPatterns(rule, label)
+  if (regexError) {
+    errors.push(regexError)
+  }
+
+  for (const [index, selector] of (rule.selectors || []).entries()) {
+    try {
+      document.createDocumentFragment().querySelector(selector)
+    } catch (error) {
+      errors.push(`${label} 的 CSS 选择器第 ${index + 1} 行无效：${selector}（${error.message}）`)
+    }
+  }
+
+  for (const [index, globalName] of (rule.globals || []).entries()) {
+    if (!/^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)*$/.test(globalName)) {
+      errors.push(`${label} 的全局变量第 ${index + 1} 行写法不对：${globalName}。请写成 MyCMS 或 google.maps 这种变量名。`)
+    }
+  }
+
+  const invalidTargets = (rule.matchIn || []).filter(target => !ALLOWED_MATCH_TARGETS.includes(target))
+  if (invalidTargets.length) {
+    errors.push(`${label} 的 matchIn 有不认识的范围：${invalidTargets.join('、')}。只能写 ${ALLOWED_MATCH_TARGETS.join('、')}。`)
+  }
+
+  return errors
+}
+
+function readTextField(source, field, label, errors, options) {
+  if (source[field] === undefined || source[field] === null || source[field] === '') {
+    if (options.required) {
+      errors.push(`${label} 缺少 ${options.displayName}。`)
+      return ''
+    }
+    return options.defaultValue || ''
+  }
+
+  if (typeof source[field] !== 'string') {
+    errors.push(`${label} 的 ${options.displayName} 必须是文字。`)
+    return ''
+  }
+
+  const value = source[field].trim()
+  if (!value && options.required) {
+    errors.push(`${label} 的 ${options.displayName} 不能为空。`)
+  }
+  if (value.length > options.max) {
+    errors.push(`${label} 的 ${options.displayName} 最多 ${options.max} 个字，当前 ${value.length} 个字。`)
+  }
+  return value || options.defaultValue || ''
+}
+
+function readUrlField(source, label, errors) {
+  if (source.url === undefined || source.url === null || source.url === '') {
+    return ''
+  }
+  if (typeof source.url !== 'string') {
+    errors.push(`${label} 的官网 / 仓库 URL 必须是文字。`)
+    return ''
+  }
+
+  const value = source.url.trim()
+  if (value && !/^https?:\/\//i.test(value)) {
+    errors.push(`${label} 的官网 / 仓库 URL 必须以 http:// 或 https:// 开头。`)
+  }
+  if (value.length > CUSTOM_RULE_LIMITS.url) {
+    errors.push(`${label} 的官网 / 仓库 URL 最多 ${CUSTOM_RULE_LIMITS.url} 个字。`)
+  }
+  return value
+}
+
+function readEnumField(source, field, label, errors, options) {
+  if (source[field] === undefined || source[field] === null || source[field] === '') {
+    return options.defaultValue
+  }
+  if (typeof source[field] !== 'string') {
+    errors.push(`${label} 的 ${options.displayName} 必须是文字。`)
+    return options.defaultValue
+  }
+
+  const value = source[field].trim()
+  if (!options.allowed.includes(value)) {
+    errors.push(`${label} 的 ${options.displayName} 只能写 ${options.allowed.join('、')}，当前是 ${value || '空'}。`)
+    return options.defaultValue
+  }
+  return value
+}
+
+function readStringArrayField(source, field, label, errors, options) {
+  if (source[field] === undefined || source[field] === null) {
+    return []
+  }
+  if (!Array.isArray(source[field])) {
+    errors.push(`${label} 的 ${options.displayName} 必须是数组，例如 ["wp-content/themes/my-theme"]。`)
+    return []
+  }
+  if (source[field].length > options.max) {
+    errors.push(`${label} 的 ${options.displayName} 最多 ${options.max} 项，当前 ${source[field].length} 项。`)
+  }
+
+  const values = []
+  source[field].forEach((item, itemIndex) => {
+    if (typeof item !== 'string') {
+      errors.push(`${label} 的 ${options.displayName} 第 ${itemIndex + 1} 项必须是文字。`)
+      return
+    }
+
+    const value = item.trim()
+    if (!value) {
+      errors.push(`${label} 的 ${options.displayName} 第 ${itemIndex + 1} 项不能为空。`)
+      return
+    }
+    if (value.length > CUSTOM_RULE_LIMITS.item) {
+      errors.push(`${label} 的 ${options.displayName} 第 ${itemIndex + 1} 项最多 ${CUSTOM_RULE_LIMITS.item} 个字。`)
+      return
+    }
+    if (!values.includes(value)) {
+      values.push(value)
+    }
+  })
+  return values
+}
+
+function isPlainObject(value) {
+  return Object.prototype.toString.call(value) === '[object Object]'
 }
 
 function lines(value) {
@@ -346,31 +592,23 @@ function syncRulesJson() {
 }
 
 function importRulesJson() {
-  try {
-    const parsed = JSON.parse(document.getElementById('rulesJson').value || '[]')
-    const rules = cleanCustomRules(parsed)
-    const invalid = rules.find(rule => validateRegexPatterns(rule))
-    if (invalid) {
-      showStatus(validateRegexPatterns(invalid), 'error')
-      return
-    }
-    state.settings.customRules = rules
-    renderRulesList()
-    syncRulesJson()
-    showStatus('规则 JSON 已导入，记得保存设置。', 'ok')
-  } catch (error) {
-    showStatus(`JSON 解析失败：${error.message}`, 'error')
+  const rules = parseRulesJsonTextarea()
+  if (!rules) {
+    return
   }
+  state.settings.customRules = rules
+  renderRulesList()
+  syncRulesJson()
+  showStatus('规则 JSON 已导入，记得保存设置。', 'ok')
 }
 
 function formatRulesJson() {
-  try {
-    const parsed = JSON.parse(document.getElementById('rulesJson').value || '[]')
-    document.getElementById('rulesJson').value = JSON.stringify(cleanCustomRules(parsed), null, 2)
-    showStatus('规则 JSON 已格式化。', 'ok')
-  } catch (error) {
-    showStatus(`JSON 解析失败：${error.message}`, 'error')
+  const rules = parseRulesJsonTextarea()
+  if (!rules) {
+    return
   }
+  document.getElementById('rulesJson').value = JSON.stringify(rules, null, 2)
+  showStatus('规则 JSON 已格式化。', 'ok')
 }
 
 async function saveSettings() {
@@ -397,15 +635,18 @@ async function saveSettings() {
 }
 
 function parseRulesJsonForSave() {
+  return parseRulesJsonTextarea()
+}
+
+function parseRulesJsonTextarea() {
   try {
     const parsed = JSON.parse(document.getElementById('rulesJson').value || '[]')
-    const rules = cleanCustomRules(parsed)
-    const invalid = rules.find(rule => validateRegexPatterns(rule))
-    if (invalid) {
-      showStatus(validateRegexPatterns(invalid), 'error')
+    const validation = validateCustomRulesPayload(parsed)
+    if (validation.errors.length) {
+      showValidationErrors(validation.errors)
       return null
     }
-    return rules
+    return validation.rules
   } catch (error) {
     showStatus(`规则 JSON 解析失败：${error.message}`, 'error')
     return null
@@ -442,4 +683,10 @@ function showStatus(message, type = '') {
   const node = document.getElementById('status')
   node.className = `status ${type}`.trim()
   node.textContent = message
+}
+
+function showValidationErrors(errors) {
+  const visibleErrors = errors.slice(0, 6)
+  const more = errors.length > visibleErrors.length ? `\n还有 ${errors.length - visibleErrors.length} 个问题，请先修正上面的问题再保存。` : ''
+  showStatus(`规则语法检查未通过：\n${visibleErrors.join('\n')}${more}`, 'error')
 }

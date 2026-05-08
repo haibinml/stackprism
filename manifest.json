@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "StackPrism 栈棱镜",
   "description": "StackPrism 栈棱镜用于检测网页前端、后端、CDN、SaaS、广告营销、统计、登录、支付、网站程序和主题模板线索。",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "permissions": [
     "activeTab",
     "scripting",
@@ -15,6 +15,12 @@
   ],
   "background": {
     "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   },
   "content_scripts": [
     {
@@ -29,7 +35,13 @@
   ],
   "action": {
     "default_title": "StackPrism 栈棱镜",
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
   },
   "options_ui": {
     "page": "settings.html",
