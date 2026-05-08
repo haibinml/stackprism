@@ -42,6 +42,7 @@ StackPrism 栈棱镜是一个 Chrome / Edge Manifest V3 浏览器扩展，用于
 - 动态资源监听逻辑放在 `content-observer.js`，它只记录 URL、feed 链接和有限 DOM 标记，后台再用 `tech-rules.json` 做动态识别。
 - 新增规则时优先改 `tech-rules.json`：添加 `name`、`patterns`，需要时补 `kind`、`confidence`、`globals`、`selectors`、`classPrefixes`。
 - 不想改内置规则时，可以在扩展设置页添加自定义规则；每条规则支持 `patterns`、`selectors`、`globals`、`matchIn`、`matchType`、`category`、`confidence` 和技术链接。
+- 修改扩展运行文件时同步提升 `manifest.json` 里的 `version`；规则、弹窗、设置页、后台脚本和内容脚本更新都按插件版本更新处理。
 
 ## 安装
 

@@ -1,5 +1,6 @@
 const SETTINGS_STORAGE_KEY = 'stackPrismSettings'
 const REPOSITORY_URL = 'https://github.com/setube/stackprism'
+const RULE_CONTRIBUTION_URL = `${REPOSITORY_URL}/issues/new?template=rule_contribution.yml`
 const CATEGORY_ORDER = [
   '前端框架',
   'UI / CSS 框架',
@@ -50,6 +51,7 @@ function bindEvents() {
   document.getElementById('addRuleBtn').addEventListener('click', addRuleFromForm)
   document.getElementById('updateRuleBtn').addEventListener('click', updateRuleFromForm)
   document.getElementById('clearFormBtn').addEventListener('click', clearRuleForm)
+  document.getElementById('contributeRuleBtn').addEventListener('click', openRuleContributionIssue)
   document.getElementById('importRulesBtn').addEventListener('click', importRulesJson)
   document.getElementById('formatRulesBtn').addEventListener('click', formatRulesJson)
   document.getElementById('customCss').addEventListener('input', event => applyCustomCss(event.target.value))
@@ -72,6 +74,13 @@ function bindRepositoryLink(id) {
     event.preventDefault()
     chrome.tabs.create({ url: REPOSITORY_URL })
   })
+}
+
+function openRuleContributionIssue() {
+  const name = document.getElementById('ruleName').value.trim()
+  const category = document.getElementById('ruleCategory').value.trim()
+  const title = name ? `规则贡献：${category ? `${category} / ` : ''}${name}` : '规则贡献：'
+  chrome.tabs.create({ url: `${RULE_CONTRIBUTION_URL}&title=${encodeURIComponent(title)}` })
 }
 
 async function loadSettings() {
