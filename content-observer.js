@@ -17,6 +17,10 @@
     resourceCount: 0
   }
   let sendTimer = 0
+  let stopped = false
+  let performanceObserver = null
+  let mutationObserver = null
+  let navigationInterval = 0
 
   collectStaticSnapshot()
   installPerformanceObserver()
@@ -38,12 +42,16 @@
     }
     try {
       const observer = new PerformanceObserver(list => {
+        if (stopped) {
+          return
+        }
         for (const entry of list.getEntries()) {
           addUrl('resources', entry.name)
           state.resourceCount += 1
         }
         scheduleSend()
       })
+      performanceObserver = observer
       observer.observe({ type: 'resource', buffered: true })
     } catch {
       collectPerformanceResources()
@@ -53,6 +61,9 @@
   function installMutationObserver() {
     const root = document.documentElement || document
     const observer = new MutationObserver(mutations => {
+      if (stopped) {
+        return
+      }
       let changed = false
       for (const mutation of mutations) {
         for (const node of mutation.addedNodes) {
@@ -68,6 +79,7 @@
         scheduleSend()
       }
     })
+    mutationObserver = observer
     observer.observe(root, { childList: true, subtree: true })
   }
 
@@ -86,11 +98,17 @@
       return result
     }
     window.addEventListener('popstate', handleUrlChange)
-    window.setInterval(handleUrlChange, 1200)
+    navigationInterval = window.setInterval(handleUrlChange, 1200)
   }
 
   function handleUrlChange() {
+    if (stopped) {
+      return
+    }
     setTimeout(() => {
+      if (stopped) {
+        return
+      }
       if (state.url !== location.href) {
         state.url = location.href
         state.title = document.title
@@ -242,11 +260,17 @@
   }
 
   function scheduleSend() {
+    if (stopped) {
+      return
+    }
     clearTimeout(sendTimer)
     sendTimer = setTimeout(sendSnapshot, SEND_DELAY)
   }
 
   function sendSnapshot() {
+    if (stopped) {
+      return
+    }
     state.updatedAt = Date.now()
     state.title = document.title
     const snapshot = {
@@ -258,6 +282,34 @@
       feedLinks: state.feedLinks.map(link => ({ ...link })),
       domMarkers: [...state.domMarkers]
     }
-    chrome.runtime.sendMessage({ type: 'DYNAMIC_PAGE_SNAPSHOT', snapshot }).catch(() => {})
+    try {
+      const delivery = chrome.runtime.sendMessage({ type: 'DYNAMIC_PAGE_SNAPSHOT', snapshot })
+      if (delivery && typeof delivery.catch === 'function') {
+        delivery.catch(handleSendFailure)
+      }
+    } catch (error) {
+      handleSendFailure(error)
+    }
+  }
+
+  function handleSendFailure(error) {
+    if (isExtensionContextInvalidated(error)) {
+      stopObserver()
+    }
+  }
+
+  function isExtensionContextInvalidated(error) {
+    return /extension context invalidated|context invalidated/i.test(String(error?.message || error))
+  }
+
+  function stopObserver() {
+    stopped = true
+    clearTimeout(sendTimer)
+    if (navigationInterval) {
+      window.clearInterval(navigationInterval)
+      navigationInterval = 0
+    }
+    performanceObserver?.disconnect?.()
+    mutationObserver?.disconnect?.()
   }
 })()
