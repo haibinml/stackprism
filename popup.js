@@ -78,10 +78,7 @@ function bindRepositoryLink(id) {
 function openSettingsPage() {
   const url = chrome.runtime.getURL('settings.html')
   chrome.tabs.create({ url }, () => {
-    if (!chrome.runtime.lastError) {
-      return
-    }
-    chrome.runtime.openOptionsPage?.()
+    chrome.runtime.lastError
   })
 }
 
