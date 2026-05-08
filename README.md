@@ -21,7 +21,7 @@ StackPrism 栈棱镜是一个 Chrome / Edge Manifest V3 浏览器扩展，用于
 - RSS / 订阅检测：识别 `link rel="alternate"` 中的 RSS、Atom、JSON Feed，以及常见 feed URL 线索。
 - SaaS / 第三方服务检测：Stripe、PayPal、Auth0、Clerk、Firebase、Supabase、Intercom、Zendesk、HubSpot、Sentry、Datadog、Algolia、Cloudinary、Contentful、Google Maps、reCAPTCHA、Optimizely、Calendly 等。
 - 第三方登录 / OAuth 检测：QQ 登录、微信登录、微博登录、支付宝登录、钉钉、飞书、企业微信、华为、小米、百度、GitHub、Gitee、GitLab、Google、Apple、Microsoft、Facebook、Twitter/X、LinkedIn、Slack、Discord、Telegram、LINE、Kakao、Naver、Auth0、Okta、Keycloak、CAS、SAML、OpenID Connect/OAuth2 等。
-- 支付系统检测：支付宝支付、微信支付、QQ 钱包、财付通、银联在线、京东支付、百度收银台、美团支付、Ping++、连连支付、易宝支付、汇付天下、快钱、PayPal、Stripe、Adyen、Braintree、Paddle、Razorpay、Klarna、Afterpay/Clearpay 等。
+- 支付系统检测：支付宝支付、微信支付、QQ 钱包、财付通、银联在线、京东支付、百度收银台、百度钱包、翼支付、云闪付、易付宝、拉卡拉、通联、富友、宝付、银盛、合利宝、银联商务、收钱吧、Ping++、码支付、易支付、PAYJS、虎皮椒、V免签、连连支付、易宝支付、汇付天下、快钱、PayPal、Stripe、Adyen、Braintree、Paddle、Razorpay、Square、Worldpay、Checkout.com、Klarna、Afterpay/Clearpay 等。
 - 广告 / 营销检测：Google Ads、AdSense、Google Ad Manager / DoubleClick、Floodlight、Amazon Ads、Prebid.js、OpenX、PubMatic、Magnite、Index Exchange、Xandr、Criteo、Taboola、Outbrain、Media.net、AdRoll、The Trade Desk、CJ、Awin、Impact、Baidu Union、广点通、阿里妈妈 / TANX、巨量引擎、360广告联盟、MediaV、搜狗联盟等。
 - 流量跟踪 / 归因检测：UTM 参数、gclid / gbraid / wbraid / dclid、fbclid、msclkid、ttclid、li_fat_id、yclid，以及 Voluum、RedTrack、Binom、BeMob、AdsBridge、Keitaro、CPV Lab 等流量跟踪平台。
 - 统计 / 分析检测：Google Analytics、百度统计、CNZZ/友盟、51.LA、腾讯 MTA、神策、GrowingIO、Yandex Metrica、Adobe Analytics、Matomo/Piwik、Plausible、Umami、GoatCounter、PostHog、Fathom、Clicky、Statcounter、Mixpanel、Amplitude、Hotjar、Clarity、Meta Pixel 等，并在证据里标注“开源 / 可自托管”“商用 / 知名统计”“广告转化统计”等类型。

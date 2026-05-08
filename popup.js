@@ -1569,7 +1569,7 @@ function detectPageTechnologies(ruleConfig = {}) {
       defaultCategory: '支付系统',
       resources,
       html,
-      text: `${resources.text}\n${html}${bodyText}`,
+      text: `${location.href}\n${resources.text}\n${html}${bodyText}`,
       sourceLabel: 'JSON 支付规则',
       evidencePrefix: rule => (rule.kind ? `${rule.kind}：` : '')
     })
