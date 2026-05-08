@@ -296,6 +296,22 @@ h1 {
   margin-top: 5px;
 }
 
+.correction-link {
+  border: 0;
+  background: transparent;
+  color: var(--accent-dark);
+  font-size: 12px;
+  margin-top: 5px;
+  padding: 0;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.correction-link:hover {
+  color: var(--accent);
+}
+
 .empty {
   color: var(--muted);
   padding: 18px 12px;
