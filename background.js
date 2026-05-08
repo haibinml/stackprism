@@ -283,6 +283,7 @@ function detectFromDynamicSnapshot(snapshot, pageRules) {
 
   applyDynamicRuleList(add, DYNAMIC_TECH_RULES, text, '动态技术规则')
   applyDynamicRuleList(add, pageRules.dynamicTechnologies, text, 'JSON 动态技术规则')
+  detectDynamicMinifiedScriptFallback(add, snapshot, technologies)
   applyDynamicRuleList(add, pageRules.cdnProviders, text, 'JSON CDN 动态规则', 'CDN / 托管')
   applyDynamicRuleList(add, pageRules.websitePrograms, text, 'JSON 网站程序动态规则', '网站程序', rule => (rule.kind ? `${rule.kind}：` : ''))
   detectDynamicCmsThemesAndSource(add, text)
@@ -304,6 +305,148 @@ function detectFromDynamicSnapshot(snapshot, pageRules) {
   }
 
   return mergeTechnologyRecords(technologies)
+}
+
+function detectDynamicMinifiedScriptFallback(add, snapshot, currentTechnologies) {
+  const knownNames = new Set(currentTechnologies.map(tech => normalizeDynamicFallbackTechName(tech.name)))
+  const seen = new Set()
+  const urls = [...new Set([...(snapshot.scripts || []), ...(snapshot.resources || [])])]
+  for (const rawUrl of urls) {
+    const info = extractDynamicMinifiedScriptLibrary(rawUrl)
+    if (!info) {
+      continue
+    }
+    const normalized = normalizeDynamicFallbackTechName(info.name)
+    if (!normalized || seen.has(normalized) || knownNames.has(normalized)) {
+      continue
+    }
+    seen.add(normalized)
+    add(
+      '前端库',
+      `疑似前端库: ${info.name}`,
+      '低',
+      `兜底识别：根据动态脚本文件名 ${info.fileName} 判断，未匹配到内置规则或官网链接`
+    )
+    if (seen.size >= 20) {
+      break
+    }
+  }
+}
+
+function extractDynamicMinifiedScriptLibrary(rawUrl) {
+  let pathname = ''
+  try {
+    pathname = new URL(rawUrl).pathname
+  } catch {
+    pathname = String(rawUrl || '').split(/[?#]/)[0]
+  }
+  const fileName = safeDecodeURIComponent(pathname.split('/').filter(Boolean).pop() || '')
+  if (!/\.js$/i.test(fileName) || !/(?:^|[.-])min\.js$/i.test(fileName)) {
+    return null
+  }
+
+  const name = fileName
+    .replace(/\.js$/i, '')
+    .replace(/(?:[._-](?:min|prod|production|development|dev|bundle|bundled|umd|esm|cjs|iife|global|runtime|legacy|modern|browser|web|all|full))+$/gi, '')
+    .replace(/(?:[._-]v?\d+(?:\.\d+){1,4})$/i, '')
+    .replace(/(?:[._-][a-f0-9]{7,})$/i, '')
+    .replace(/^npm\./i, '')
+    .replace(/^@/, '')
+    .trim()
+
+  if (!isLikelyDynamicLibraryFileName(name)) {
+    return null
+  }
+  return { name, fileName }
+}
+
+function isLikelyDynamicLibraryFileName(name) {
+  if (!name || name.length < 2 || name.length > 60) {
+    return false
+  }
+  if (!/[a-z]/i.test(name)) {
+    return false
+  }
+  if (/^[a-f0-9]{8,}$/i.test(name) || /^[a-z0-9_-]{18,}$/i.test(name)) {
+    return false
+  }
+  const genericNames = new Set([
+    'app',
+    'application',
+    'main',
+    'index',
+    'home',
+    'base',
+    'core',
+    'common',
+    'commons',
+    'global',
+    'runtime',
+    'manifest',
+    'vendor',
+    'vendors',
+    'chunk',
+    'chunks',
+    'bundle',
+    'bundles',
+    'min',
+    'prod',
+    'production',
+    'development',
+    'dev',
+    'dist',
+    'all',
+    'full',
+    'browser',
+    'web',
+    'modern',
+    'legacy',
+    'umd',
+    'esm',
+    'cjs',
+    'iife',
+    'module',
+    'modules',
+    'plugin',
+    'plugins',
+    'lib',
+    'libs',
+    'cdn',
+    'scripts',
+    'script',
+    'custom',
+    'theme',
+    'frontend',
+    'backend',
+    'admin',
+    'site',
+    'page',
+    'public',
+    'static',
+    'lazyload',
+    'polyfill',
+    'polyfills',
+    'webpack',
+    'vite',
+    'parcel',
+    'rollup',
+    'esbuild',
+    'swc',
+    'turbopack',
+    'rspack',
+    'require',
+    'requirejs',
+    'system',
+    'systemjs'
+  ])
+  return !genericNames.has(name.toLowerCase())
+}
+
+function normalizeDynamicFallbackTechName(name) {
+  return String(name || '')
+    .toLowerCase()
+    .replace(/^疑似前端库:\s*/, '')
+    .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '')
 }
 
 function detectDynamicCmsThemesAndSource(add, text) {

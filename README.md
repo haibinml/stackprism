@@ -8,7 +8,7 @@ StackPrism 栈棱镜是一个 Chrome / Edge Manifest V3 浏览器扩展，用于
 
 - 页面运行时检测：React、Vue、Angular、Next.js、Nuxt、Gatsby、Astro、jQuery、Alpine、Lit 等。
 - 页面运行时检测：React、Vue、Angular、Next.js、Nuxt、Gatsby、Astro、Svelte、Qwik、Marko、Stencil、Aurelia、Knockout、Dojo、Ext JS、htmx、Hotwire 等。
-- 前端库检测：Lodash、Axios、Moment、Day.js、RxJS、Redux、Apollo、D3、ECharts、Chart.js、Three.js、GSAP、Swiper、Video.js、Monaco、CodeMirror、Mermaid、Socket.IO 等。
+- 前端库检测：Lodash、Axios、Moment、Day.js、RxJS、Redux、Apollo、D3、ECharts、Chart.js、Three.js、GSAP、Swiper、Video.js、Monaco、CodeMirror、Mermaid、Socket.IO 等；未命中内置规则时，会用 `.min.js` / `.umd.min.js` / `.bundle.min.js` 等脚本文件名做低置信度兜底识别，不绑定官网链接，并在证据中标明来源文件名。
 - UI 技术检测：Bootstrap、Tailwind CSS、Material UI、Ant Design、Element Plus、Vuetify、Chakra UI、Mantine、Radix UI、Headless UI、Fluent UI、Carbon、Kendo UI、DevExtreme、Vant、WeUI 等。
 - 资源与构建线索：Webpack、Vite、Parcel、RequireJS、SystemJS、PWA Manifest、Service Worker、CSS-in-JS、Workbox、Turbopack、Rspack、Rollup、esbuild、SWC。
 - CDN / 托管检测：Cloudflare、Akamai、CloudFront、Fastly、Azure、Google、jsDelivr、UNPKG、Bunny、KeyCDN、CDN77、Gcore、Edgio、StackPath、Imperva、Sucuri、Alibaba Cloud、Tencent Cloud、Baidu Cloud、Huawei Cloud、Qiniu、UpYun、ChinaCache、Wangsu/CDNetworks、BaishanCloud、Volcengine、Vercel、Netlify、Firebase、GitHub Pages、Cloudinary、Imgix 等，并包含私有 CDN 兜底识别。

@@ -93,9 +93,15 @@ function cleanCustomRules(value) {
   }
   return value
     .map(rule => ({
-      name: String(rule?.name || '').trim().slice(0, 120),
-      category: String(rule?.category || '其他库').trim().slice(0, 80),
-      kind: String(rule?.kind || '自定义规则').trim().slice(0, 120),
+      name: String(rule?.name || '')
+        .trim()
+        .slice(0, 120),
+      category: String(rule?.category || '其他库')
+        .trim()
+        .slice(0, 80),
+      kind: String(rule?.kind || '自定义规则')
+        .trim()
+        .slice(0, 120),
       confidence: ['高', '中', '低'].includes(rule?.confidence) ? rule.confidence : '中',
       matchType: rule?.matchType === 'keyword' ? 'keyword' : 'regex',
       patterns: cleanStringArray(rule?.patterns).slice(0, 60),
@@ -283,6 +289,10 @@ function attachTechnologyLinks(technologies) {
 }
 
 function getTechnologyUrl(name) {
+  if (/^疑似前端库:/i.test(String(name || '').trim())) {
+    return ''
+  }
+
   const customRule = (state.settings?.customRules || []).find(rule => normalizeTechName(rule.name) === normalizeTechName(name) && rule.url)
   if (customRule) {
     return customRule.url
@@ -819,6 +829,7 @@ function detectPageTechnologies(ruleConfig = {}) {
   detectFrontendFrameworks(add, resources, classTokens, documentHtmlSample, globalKeys)
   detectUiFrameworks(add, resources, classTokens, documentHtmlSample)
   detectAdditionalFrontendTechnologies(add, resources, classTokens, documentHtmlSample, globalKeys, ruleConfig.frontendExtra || [])
+  detectMinifiedScriptFallback(add, resources, technologies)
   detectBuildAndRuntime(add, resources, documentHtmlSample, globalKeys)
   detectCdnAndHosting(add, resources, ruleConfig.cdnProviders || [])
   detectBackendFrameworkHints(add, resources, documentHtmlSample, ruleConfig.backendHints || [])
@@ -1069,9 +1080,19 @@ function detectPageTechnologies(ruleConfig = {}) {
   function detectAdditionalFrontendTechnologies(add, resources, classes, html, globalKeys, externalRules) {
     const text = `${resources.text}\n${html}`
     const rules = [
-      { category: '前端框架', name: 'Qwik', patterns: [/qwikloader|\/q-[\w-]+\.js|@builder\.io\/qwik|q:container/], globals: ['qwikLoader'] },
+      {
+        category: '前端框架',
+        name: 'Qwik',
+        patterns: [/qwikloader|\/q-[\w-]+\.js|@builder\.io\/qwik|q:container/],
+        globals: ['qwikLoader']
+      },
       { category: '前端框架', name: 'Marko', patterns: [/marko(?:\.min)?\.js|@marko\//], globals: ['Marko'] },
-      { category: '前端框架', name: 'Stencil', patterns: [/@stencil|stencil(?:\.min)?\.js|stencil-hydrate|class="[^"]*hydrated/], globals: ['Stencil'] },
+      {
+        category: '前端框架',
+        name: 'Stencil',
+        patterns: [/@stencil|stencil(?:\.min)?\.js|stencil-hydrate|class="[^"]*hydrated/],
+        globals: ['Stencil']
+      },
       { category: '前端框架', name: 'Aurelia', patterns: [/aurelia(?:\.min)?\.js|aurelia-framework|au-target-id/], globals: ['aurelia'] },
       { category: '前端框架', name: 'Riot.js', patterns: [/riot(?:\+compiler)?(?:\.min)?\.js|riotjs/], globals: ['riot'] },
       { category: '前端框架', name: 'Knockout.js', patterns: [/knockout(?:\.min)?\.js|data-bind=/], globals: ['ko'] },
@@ -1085,32 +1106,85 @@ function detectPageTechnologies(ruleConfig = {}) {
       { category: '前端框架', name: 'Prototype.js', patterns: [/prototype(?:\.min)?\.js/], globals: ['Prototype'] },
       { category: '前端框架', name: 'YUI', patterns: [/yui(?:-min)?\.js|yahoo-dom-event|yuilibrary/], globals: ['YUI', 'YAHOO'] },
       { category: '前端框架', name: 'htmx', patterns: [/htmx(?:\.min)?\.js|hx-(?:get|post|put|delete|trigger|swap)=/], globals: ['htmx'] },
-      { category: '前端框架', name: 'Hotwire Turbo', patterns: [/turbo(?:\.min)?\.js|turbo-rails|<turbo-frame|data-turbo/], globals: ['Turbo'] },
+      {
+        category: '前端框架',
+        name: 'Hotwire Turbo',
+        patterns: [/turbo(?:\.min)?\.js|turbo-rails|<turbo-frame|data-turbo/],
+        globals: ['Turbo']
+      },
       { category: '前端框架', name: 'Unpoly', patterns: [/unpoly(?:\.min)?\.js|up-target=|up-follow/], globals: ['up'] },
 
       { category: 'UI / CSS 框架', name: 'Mantine', patterns: [/@mantine\/|mantine-/], classPrefixes: ['mantine-'] },
-      { category: 'UI / CSS 框架', name: 'HeroUI / NextUI', patterns: [/nextui|heroui|@nextui-org|@heroui\//], classPrefixes: ['nextui-', 'heroui-'] },
+      {
+        category: 'UI / CSS 框架',
+        name: 'HeroUI / NextUI',
+        patterns: [/nextui|heroui|@nextui-org|@heroui\//],
+        classPrefixes: ['nextui-', 'heroui-']
+      },
       { category: 'UI / CSS 框架', name: 'Radix UI', patterns: [/@radix-ui|data-radix|radix-/] },
       { category: 'UI / CSS 框架', name: 'Headless UI', patterns: [/headlessui|data-headlessui-state/] },
-      { category: 'UI / CSS 框架', name: 'daisyUI', patterns: [/daisyui|data-theme="(?:light|dark|cupcake|bumblebee|emerald|corporate|synthwave|retro|cyberpunk)/] },
-      { category: 'UI / CSS 框架', name: 'Fluent UI / Fabric', patterns: [/@fluentui|office-ui-fabric|ms-Fabric|ms-Button/], classPrefixes: ['ms-'] },
-      { category: 'UI / CSS 框架', name: 'Blueprint', patterns: [/@blueprintjs|blueprintjs|bp5-|bp4-|bp3-/], classPrefixes: ['bp5-', 'bp4-', 'bp3-'] },
-      { category: 'UI / CSS 框架', name: 'Carbon Design System', patterns: [/@carbon\/|carbon-components|cds--|bx--/], classPrefixes: ['cds--', 'bx--'] },
+      {
+        category: 'UI / CSS 框架',
+        name: 'daisyUI',
+        patterns: [/daisyui|data-theme="(?:light|dark|cupcake|bumblebee|emerald|corporate|synthwave|retro|cyberpunk)/]
+      },
+      {
+        category: 'UI / CSS 框架',
+        name: 'Fluent UI / Fabric',
+        patterns: [/@fluentui|office-ui-fabric|ms-Fabric|ms-Button/],
+        classPrefixes: ['ms-']
+      },
+      {
+        category: 'UI / CSS 框架',
+        name: 'Blueprint',
+        patterns: [/@blueprintjs|blueprintjs|bp5-|bp4-|bp3-/],
+        classPrefixes: ['bp5-', 'bp4-', 'bp3-']
+      },
+      {
+        category: 'UI / CSS 框架',
+        name: 'Carbon Design System',
+        patterns: [/@carbon\/|carbon-components|cds--|bx--/],
+        classPrefixes: ['cds--', 'bx--']
+      },
       { category: 'UI / CSS 框架', name: 'Clarity Design', patterns: [/clarity-ui|@clr\/|clr-/], classPrefixes: ['clr-'] },
       { category: 'UI / CSS 框架', name: 'Shoelace', patterns: [/shoelace\.style|@shoelace-style|<sl-[a-z-]+/], classPrefixes: ['sl-'] },
       { category: 'UI / CSS 框架', name: 'FAST', patterns: [/@microsoft\/fast|<fast-[a-z-]+/] },
-      { category: 'UI / CSS 框架', name: 'Kendo UI', patterns: [/kendo(?:\.min)?\.js|kendo-ui|kendo\./], globals: ['kendo'], classPrefixes: ['k-'] },
-      { category: 'UI / CSS 框架', name: 'DevExtreme', patterns: [/devextreme|dx\.all|dx-/], globals: ['DevExpress'], classPrefixes: ['dx-'] },
+      {
+        category: 'UI / CSS 框架',
+        name: 'Kendo UI',
+        patterns: [/kendo(?:\.min)?\.js|kendo-ui|kendo\./],
+        globals: ['kendo'],
+        classPrefixes: ['k-']
+      },
+      {
+        category: 'UI / CSS 框架',
+        name: 'DevExtreme',
+        patterns: [/devextreme|dx\.all|dx-/],
+        globals: ['DevExpress'],
+        classPrefixes: ['dx-']
+      },
       { category: 'UI / CSS 框架', name: 'Syncfusion Essential JS', patterns: [/syncfusion|ej2-|ejs-/], globals: ['ej'] },
       { category: 'UI / CSS 框架', name: 'Wijmo', patterns: [/wijmo|wj-/], globals: ['wijmo'], classPrefixes: ['wj-'] },
       { category: 'UI / CSS 框架', name: 'Webix', patterns: [/webix(?:\.min)?\.js|webix\.css/], globals: ['webix'] },
-      { category: 'UI / CSS 框架', name: 'UIkit', patterns: [/uikit(?:\.min)?\.(?:js|css)|uk-/], globals: ['UIkit'], classPrefixes: ['uk-'] },
+      {
+        category: 'UI / CSS 框架',
+        name: 'UIkit',
+        patterns: [/uikit(?:\.min)?\.(?:js|css)|uk-/],
+        globals: ['UIkit'],
+        classPrefixes: ['uk-']
+      },
       { category: 'UI / CSS 框架', name: 'Materialize CSS', patterns: [/materialize(?:\.min)?\.(?:js|css)/] },
       { category: 'UI / CSS 框架', name: 'Pure.css', patterns: [/pure(?:-min)?\.css|pure-g|pure-u-/], classPrefixes: ['pure-'] },
       { category: 'UI / CSS 框架', name: 'Skeleton CSS', patterns: [/skeleton(?:\.min)?\.css|skeleton-css/] },
       { category: 'UI / CSS 框架', name: 'Milligram', patterns: [/milligram(?:\.min)?\.css/] },
       { category: 'UI / CSS 框架', name: 'Metro UI', patterns: [/metro4|metro-ui|mif-/], globals: ['Metro'], classPrefixes: ['mif-'] },
-      { category: 'UI / CSS 框架', name: 'Framework7', patterns: [/framework7(?:\.bundle)?(?:\.min)?\.(?:js|css)|f7-/], globals: ['Framework7'], classPrefixes: ['f7-'] },
+      {
+        category: 'UI / CSS 框架',
+        name: 'Framework7',
+        patterns: [/framework7(?:\.bundle)?(?:\.min)?\.(?:js|css)|f7-/],
+        globals: ['Framework7'],
+        classPrefixes: ['f7-']
+      },
       { category: 'UI / CSS 框架', name: 'Onsen UI', patterns: [/onsenui|onsen-ui|<ons-[a-z-]+/], globals: ['ons'] },
       { category: 'UI / CSS 框架', name: 'WeUI', patterns: [/weui(?:\.min)?\.css|weui-/], classPrefixes: ['weui-'] },
       { category: 'UI / CSS 框架', name: 'Naive UI', patterns: [/naive-ui|n-config-provider|n-message-provider/] },
@@ -1139,7 +1213,12 @@ function detectPageTechnologies(ruleConfig = {}) {
       { category: '前端库', name: 'Highcharts', patterns: [/highcharts(?:\.js|\/)|code\.highcharts\.com/], globals: ['Highcharts'] },
       { category: '前端库', name: 'ApexCharts', patterns: [/apexcharts(?:\.min)?\.js/], globals: ['ApexCharts'] },
       { category: '前端库', name: 'Plotly.js', patterns: [/plotly(?:\.min)?\.js|cdn\.plot\.ly/], globals: ['Plotly'] },
-      { category: '前端库', name: 'Three.js', patterns: [/three(?:\.module)?(?:\.min)?\.js|threejs|@react-three\/fiber/], globals: ['THREE'] },
+      {
+        category: '前端库',
+        name: 'Three.js',
+        patterns: [/three(?:\.module)?(?:\.min)?\.js|threejs|@react-three\/fiber/],
+        globals: ['THREE']
+      },
       { category: '前端库', name: 'Babylon.js', patterns: [/babylon(?:\.max)?(?:\.min)?\.js/], globals: ['BABYLON'] },
       { category: '前端库', name: 'PixiJS', patterns: [/pixi(?:\.min)?\.js|pixijs/], globals: ['PIXI'] },
       { category: '前端库', name: 'Phaser', patterns: [/phaser(?:\.min)?\.js/], globals: ['Phaser'] },
@@ -1175,7 +1254,12 @@ function detectPageTechnologies(ruleConfig = {}) {
       { category: '前端库', name: 'SignalR', patterns: [/signalr(?:\.min)?\.js|@microsoft\/signalr/], globals: ['signalR'] },
       { category: '前端库', name: 'Pusher JS', patterns: [/js\.pusher\.com|pusher(?:\.min)?\.js/], globals: ['Pusher'] },
       { category: '前端库', name: 'Ably JS', patterns: [/cdn\.ably\.com|ably(?:\.min)?\.js/], globals: ['Ably'] },
-      { category: '构建与运行时', name: 'Workbox', patterns: [/workbox-(?:sw|routing|strategies)|workbox\.googleapis\.com/], globals: ['workbox'] },
+      {
+        category: '构建与运行时',
+        name: 'Workbox',
+        patterns: [/workbox-(?:sw|routing|strategies)|workbox\.googleapis\.com/],
+        globals: ['workbox']
+      },
       { category: '构建与运行时', name: 'Turborepo / Turbopack', patterns: [/turbopack|__turbopack/], globals: ['__turbopack_load__'] },
       { category: '构建与运行时', name: 'Rspack', patterns: [/rspack|__rspack_require__/] },
       { category: '构建与运行时', name: 'Rollup', patterns: [/rollup(?:\.config)?|\/rollup\//] },
@@ -1216,6 +1300,146 @@ function detectPageTechnologies(ruleConfig = {}) {
       text,
       sourceLabel: 'JSON 规则'
     })
+  }
+
+  function detectMinifiedScriptFallback(add, resources, currentTechnologies) {
+    const knownNames = new Set(currentTechnologies.map(tech => normalizeFallbackTechName(tech.name)))
+    const seen = new Set()
+    const scriptUrls = unique([...(resources.scripts || []), ...(resources.resourceTiming || [])])
+    for (const rawUrl of scriptUrls) {
+      const info = extractMinifiedScriptLibrary(rawUrl)
+      if (!info) {
+        continue
+      }
+      const normalized = normalizeFallbackTechName(info.name)
+      if (!normalized || seen.has(normalized) || knownNames.has(normalized)) {
+        continue
+      }
+      seen.add(normalized)
+      add('前端库', `疑似前端库: ${info.name}`, '低', `兜底识别：根据脚本文件名 ${info.fileName} 判断，未匹配到内置规则或官网链接`)
+      if (seen.size >= 20) {
+        break
+      }
+    }
+  }
+
+  function extractMinifiedScriptLibrary(rawUrl) {
+    let pathname = ''
+    try {
+      pathname = new URL(rawUrl, location.href).pathname
+    } catch {
+      pathname = String(rawUrl || '').split(/[?#]/)[0]
+    }
+    const fileName = safeDecodeURIComponent(pathname.split('/').filter(Boolean).pop() || '')
+    if (!/\.js$/i.test(fileName) || !/(?:^|[.-])min\.js$/i.test(fileName)) {
+      return null
+    }
+
+    let name = fileName
+      .replace(/\.js$/i, '')
+      .replace(
+        /(?:[._-](?:min|prod|production|development|dev|bundle|bundled|umd|esm|cjs|iife|global|runtime|legacy|modern|browser|web|all|full))+$/gi,
+        ''
+      )
+      .replace(/(?:[._-]v?\d+(?:\.\d+){1,4})$/i, '')
+      .replace(/(?:[._-][a-f0-9]{7,})$/i, '')
+      .replace(/^npm\./i, '')
+      .replace(/^@/, '')
+      .trim()
+
+    if (!isLikelyLibraryFileName(name)) {
+      return null
+    }
+    return { name, fileName }
+  }
+
+  function isLikelyLibraryFileName(name) {
+    if (!name || name.length < 2 || name.length > 60) {
+      return false
+    }
+    if (!/[a-z]/i.test(name)) {
+      return false
+    }
+    if (/^[a-f0-9]{8,}$/i.test(name) || /^[a-z0-9_-]{18,}$/i.test(name)) {
+      return false
+    }
+    const genericNames = new Set([
+      'app',
+      'application',
+      'main',
+      'index',
+      'home',
+      'base',
+      'core',
+      'common',
+      'commons',
+      'global',
+      'runtime',
+      'manifest',
+      'vendor',
+      'vendors',
+      'chunk',
+      'chunks',
+      'bundle',
+      'bundles',
+      'min',
+      'prod',
+      'production',
+      'development',
+      'dev',
+      'dist',
+      'all',
+      'full',
+      'browser',
+      'web',
+      'modern',
+      'legacy',
+      'umd',
+      'esm',
+      'cjs',
+      'iife',
+      'module',
+      'modules',
+      'plugin',
+      'plugins',
+      'lib',
+      'libs',
+      'cdn',
+      'scripts',
+      'script',
+      'custom',
+      'theme',
+      'frontend',
+      'backend',
+      'admin',
+      'site',
+      'page',
+      'public',
+      'static',
+      'lazyload',
+      'polyfill',
+      'polyfills',
+      'webpack',
+      'vite',
+      'parcel',
+      'rollup',
+      'esbuild',
+      'swc',
+      'turbopack',
+      'rspack',
+      'require',
+      'requirejs',
+      'system',
+      'systemjs'
+    ])
+    return !genericNames.has(name.toLowerCase())
+  }
+
+  function normalizeFallbackTechName(name) {
+    return String(name || '')
+      .toLowerCase()
+      .replace(/^疑似前端库:\s*/, '')
+      .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '')
   }
 
   function detectBuildAndRuntime(add, resources, html, globalKeys) {
@@ -1263,7 +1487,11 @@ function detectPageTechnologies(ruleConfig = {}) {
 
   function detectCdnAndHosting(add, resources, externalRules) {
     const rules = [
-      ['Cloudflare CDN', /cdnjs\.cloudflare\.com|static\.cloudflareinsights\.com|cloudflare\.com\/cdn-cgi|cloudflarestream\.com/, 'CDN / 托管'],
+      [
+        'Cloudflare CDN',
+        /cdnjs\.cloudflare\.com|static\.cloudflareinsights\.com|cloudflare\.com\/cdn-cgi|cloudflarestream\.com/,
+        'CDN / 托管'
+      ],
       ['Cloudflare Pages', /pages\.dev/, 'CDN / 托管'],
       ['jsDelivr', /cdn\.jsdelivr\.net|fastly\.jsdelivr\.net/, 'CDN / 托管'],
       ['UNPKG', /unpkg\.com/, 'CDN / 托管'],
@@ -1321,7 +1549,11 @@ function detectPageTechnologies(ruleConfig = {}) {
       ['Qiniu CDN', /qiniucdn\.com|clouddn\.com|qbox\.me|qnssl\.com|qiniu\.com/, 'CDN / 托管'],
       ['UpYun', /upaiyun\.com|upyun\.com|upyunso\.com/, 'CDN / 托管'],
       ['ChinaCache', /chinacache\.net|ccgslb\.com\.cn|ccgslb\.net/, 'CDN / 托管'],
-      ['Wangsu / CDNetworks', /cdnetworks\.net|wangsu\.com|wswebcdn\.com|wscdns\.com|panthercdn\.com|qtlcdn\.com|quantil\.com/, 'CDN / 托管'],
+      [
+        'Wangsu / CDNetworks',
+        /cdnetworks\.net|wangsu\.com|wswebcdn\.com|wscdns\.com|panthercdn\.com|qtlcdn\.com|quantil\.com/,
+        'CDN / 托管'
+      ],
       ['BaishanCloud', /baishancloud\.com|bsgslb\.com|qingcdn\.com/, 'CDN / 托管'],
       ['UCloud CDN', /ucloud\.cn|ufileos\.com|ucloudstack\.com/, 'CDN / 托管'],
       ['JD Cloud CDN', /jcloudcs\.com|jcloudedge\.com|jdcloud-oss\.com|jdcloud\.com/, 'CDN / 托管'],
@@ -1396,7 +1628,11 @@ function detectPageTechnologies(ruleConfig = {}) {
         if (normalizedHost === pageHost) {
           continue
         }
-        if (/(^cdn\d*\.|\.cdn\d*\.|-cdn\d*\.|^static\d*\.|\.static\d*\.|^assets\d*\.|\.assets\d*\.|^edge\d*\.|\.edge\d*\.|^media\d*\.)/.test(host)) {
+        if (
+          /(^cdn\d*\.|\.cdn\d*\.|-cdn\d*\.|^static\d*\.|\.static\d*\.|^assets\d*\.|\.assets\d*\.|^edge\d*\.|\.edge\d*\.|^media\d*\.)/.test(
+            host
+          )
+        ) {
           hosts.add(host)
         }
       } catch {
@@ -1411,18 +1647,36 @@ function detectPageTechnologies(ruleConfig = {}) {
     const rules = [
       { name: 'ASP.NET Web Forms', confidence: '高', patterns: [/__viewstate|__eventvalidation|webresource\.axd|scriptresource\.axd/] },
       { name: 'ASP.NET MVC / Core', confidence: '中', patterns: [/aspnet|asp-action=|asp-controller=|\.aspnetcore\./] },
-      { name: 'Blazor', confidence: '高', patterns: [/\/_framework\/blazor|blazor\.webassembly\.js|blazor\.server\.js/], globals: ['Blazor'] },
-      { name: 'Ruby on Rails', confidence: '中', patterns: [/csrf-param[^>]+authenticity_token|rails-ujs|turbo-rails|active_storage|data-remote=/] },
+      {
+        name: 'Blazor',
+        confidence: '高',
+        patterns: [/\/_framework\/blazor|blazor\.webassembly\.js|blazor\.server\.js/],
+        globals: ['Blazor']
+      },
+      {
+        name: 'Ruby on Rails',
+        confidence: '中',
+        patterns: [/csrf-param[^>]+authenticity_token|rails-ujs|turbo-rails|active_storage|data-remote=/]
+      },
       { name: 'Django', confidence: '中', patterns: [/csrfmiddlewaretoken|django\.jquery|\/static\/admin\/(?:css|js)\//] },
       { name: 'Flask', confidence: '低', patterns: [/flask(?:\.min)?\.js|csrf_token\(\)|\/static\/.*flask/] },
       { name: 'Laravel', confidence: '低', patterns: [/laravel-mix|\/vendor\/laravel|mix-manifest\.json/] },
-      { name: 'Laravel Livewire', confidence: '高', patterns: [/livewire(?:\.js|\/livewire\.js)|wire:(?:click|model|submit|loading)|data-livewire/] },
+      {
+        name: 'Laravel Livewire',
+        confidence: '高',
+        patterns: [/livewire(?:\.js|\/livewire\.js)|wire:(?:click|model|submit|loading)|data-livewire/]
+      },
       { name: 'Inertia.js', confidence: '高', patterns: [/@inertiajs|data-page="[^"]*component|inertia\.js/], globals: ['Inertia'] },
       { name: 'Symfony', confidence: '中', patterns: [/\/bundles\/(?:framework|sensio|fos)|symfony_profiler|_wdt/] },
       { name: 'Yii', confidence: '中', patterns: [/yii(?:\.activeForm|\.gridView)|yii\.js/] },
       { name: 'CakePHP', confidence: '低', patterns: [/cakephp|csrfToken.*cake/] },
       { name: 'CodeIgniter', confidence: '低', patterns: [/codeigniter|ci_session/] },
-      { name: 'Phoenix LiveView', confidence: '高', patterns: [/phoenix_live_view|phx-(?:click|submit|change|hook|value)|live_socket/], globals: ['LiveSocket'] },
+      {
+        name: 'Phoenix LiveView',
+        confidence: '高',
+        patterns: [/phoenix_live_view|phx-(?:click|submit|change|hook|value)|live_socket/],
+        globals: ['LiveSocket']
+      },
       { name: 'Phoenix Framework', confidence: '中', patterns: [/phoenix(?:\.js|_html)|phoenix_live_reload/] },
       { name: 'Vaadin', confidence: '高', patterns: [/vaadin-|\/vaadin\/|flow-client/], globals: ['Vaadin'] },
       { name: 'JavaServer Faces', confidence: '高', patterns: [/javax\.faces|jsf\.js|jakarta\.faces|mojarra/] },
@@ -1431,7 +1685,12 @@ function detectPageTechnologies(ruleConfig = {}) {
       { name: 'Struts', confidence: '低', patterns: [/struts|dojo\/struts|\.action(?:\?|")/] },
       { name: 'Grails', confidence: '低', patterns: [/grails|g:javascript|\/assets\/grails/] },
       { name: 'Play Framework', confidence: '低', patterns: [/play-framework|play\.api|csrfToken.*play/] },
-      { name: 'Meteor', confidence: '中', patterns: [/meteor_runtime_config|__meteor_runtime_config__|\/packages\/meteor/], globals: ['__meteor_runtime_config__'] },
+      {
+        name: 'Meteor',
+        confidence: '中',
+        patterns: [/meteor_runtime_config|__meteor_runtime_config__|\/packages\/meteor/],
+        globals: ['__meteor_runtime_config__']
+      },
       { name: 'Sails.js', confidence: '低', patterns: [/sails\.io\.js|io\.socket/] },
       { name: 'FeathersJS', confidence: '低', patterns: [/feathers-client|@feathersjs/] },
       { name: 'NestJS', confidence: '低', patterns: [/nestjs|@nestjs\//] },
@@ -1525,17 +1784,66 @@ function detectPageTechnologies(ruleConfig = {}) {
       { category: '主题 / 模板', label: 'Z-BlogPHP 主题', pattern: /\/zb_users\/theme\/([^\/?#"' <>)]+)/gi },
       { category: '网站源码线索', label: 'Z-BlogPHP 插件', pattern: /\/zb_users\/plugin\/([^\/?#"' <>)]+)/gi, limit: 20 },
       { category: '主题 / 模板', label: 'DedeCMS 模板', pattern: /\/templets\/([^\/?#"' <>)]+)/gi },
-      { category: '主题 / 模板', label: 'Joomla 模板', pattern: /\/templates\/([^\/?#"' <>)]+)/gi, requires: /joomla|\/media\/system\/js\/|com_content/ },
-      { category: '网站源码线索', label: 'Joomla 组件', pattern: /\/components\/(com_[^\/?#"' <>)]+)/gi, requires: /joomla|\/media\/system\/js\/|com_content/ },
-      { category: '主题 / 模板', label: 'Drupal 主题', pattern: /\/(?:sites\/all\/themes|themes\/(?:custom|contrib)|core\/themes)\/([^\/?#"' <>)]+)/gi },
-      { category: '网站源码线索', label: 'Drupal 模块', pattern: /\/(?:sites\/all\/modules|modules\/(?:custom|contrib)|core\/modules)\/([^\/?#"' <>)]+)/gi, limit: 25 },
-      { category: '主题 / 模板', label: 'Discuz! 模板', pattern: /\/template\/([^\/?#"' <>)]+)/gi, requires: /discuz|forum\.php|portal\.php|ucenter/ },
-      { category: '主题 / 模板', label: 'Magento 主题', pattern: /\/(?:static\/version\d+\/)?frontend\/([^\/?#"' <>)]+)\/([^\/?#"' <>)]+)/gi, format: groups => `${groups[0]}/${groups[1]}` },
+      {
+        category: '主题 / 模板',
+        label: 'Joomla 模板',
+        pattern: /\/templates\/([^\/?#"' <>)]+)/gi,
+        requires: /joomla|\/media\/system\/js\/|com_content/
+      },
+      {
+        category: '网站源码线索',
+        label: 'Joomla 组件',
+        pattern: /\/components\/(com_[^\/?#"' <>)]+)/gi,
+        requires: /joomla|\/media\/system\/js\/|com_content/
+      },
+      {
+        category: '主题 / 模板',
+        label: 'Drupal 主题',
+        pattern: /\/(?:sites\/all\/themes|themes\/(?:custom|contrib)|core\/themes)\/([^\/?#"' <>)]+)/gi
+      },
+      {
+        category: '网站源码线索',
+        label: 'Drupal 模块',
+        pattern: /\/(?:sites\/all\/modules|modules\/(?:custom|contrib)|core\/modules)\/([^\/?#"' <>)]+)/gi,
+        limit: 25
+      },
+      {
+        category: '主题 / 模板',
+        label: 'Discuz! 模板',
+        pattern: /\/template\/([^\/?#"' <>)]+)/gi,
+        requires: /discuz|forum\.php|portal\.php|ucenter/
+      },
+      {
+        category: '主题 / 模板',
+        label: 'Magento 主题',
+        pattern: /\/(?:static\/version\d+\/)?frontend\/([^\/?#"' <>)]+)\/([^\/?#"' <>)]+)/gi,
+        format: groups => `${groups[0]}/${groups[1]}`
+      },
       { category: '主题 / 模板', label: 'OpenCart 主题', pattern: /\/catalog\/view\/theme\/([^\/?#"' <>)]+)/gi },
-      { category: '主题 / 模板', label: 'PrestaShop 主题', pattern: /\/themes\/([^\/?#"' <>)]+)\/(?:assets|css|js|modules)\//gi, requires: /prestashop|\/modules\/ps_|var prestashop/ },
-      { category: '主题 / 模板', label: 'ECShop 模板', pattern: /\/themes\/([^\/?#"' <>)]+)\/(?:images|style|library|js)\//gi, requires: /ecshop|flow\.php\?step=cart|ecjia/ },
-      { category: '主题 / 模板', label: 'EmpireCMS 模板/皮肤', pattern: /\/skin\/([^\/?#"' <>)]+)\//gi, requires: /empirecms|\/e\/(?:data|public)\// },
-      { category: '主题 / 模板', label: 'Shopware 店面主题资源', pattern: /\/theme\/([^\/?#"' <>)]+)\/(?:css|js|assets)\//gi, requires: /shopware|storefront/ }
+      {
+        category: '主题 / 模板',
+        label: 'PrestaShop 主题',
+        pattern: /\/themes\/([^\/?#"' <>)]+)\/(?:assets|css|js|modules)\//gi,
+        requires: /prestashop|\/modules\/ps_|var prestashop/
+      },
+      {
+        category: '主题 / 模板',
+        label: 'ECShop 模板',
+        pattern: /\/themes\/([^\/?#"' <>)]+)\/(?:images|style|library|js)\//gi,
+        requires: /ecshop|flow\.php\?step=cart|ecjia/
+      },
+      {
+        category: '主题 / 模板',
+        label: 'EmpireCMS 模板/皮肤',
+        pattern: /\/skin\/([^\/?#"' <>)]+)\//gi,
+        requires: /empirecms|\/e\/(?:data|public)\//
+      },
+      {
+        category: '主题 / 模板',
+        label: 'Shopware 店面主题资源',
+        pattern: /\/theme\/([^\/?#"' <>)]+)\/(?:css|js|assets)\//gi,
+        requires: /shopware|storefront/
+      }
     ]
 
     for (const extractor of extractors) {
@@ -1576,7 +1884,10 @@ function detectPageTechnologies(ruleConfig = {}) {
     let count = 0
     const limit = extractor.limit || 12
     const seen = new Set()
-    const pattern = new RegExp(extractor.pattern.source, extractor.pattern.flags.includes('g') ? extractor.pattern.flags : `${extractor.pattern.flags}g`)
+    const pattern = new RegExp(
+      extractor.pattern.source,
+      extractor.pattern.flags.includes('g') ? extractor.pattern.flags : `${extractor.pattern.flags}g`
+    )
     let match
     while ((match = pattern.exec(text)) && count < limit) {
       const groups = match.slice(1).map(cleanAssetSlug)
@@ -1617,7 +1928,9 @@ function detectPageTechnologies(ruleConfig = {}) {
   }
 
   function shortPathEvidence(value) {
-    return String(value || '').replace(/\s+/g, ' ').slice(0, 160)
+    return String(value || '')
+      .replace(/\s+/g, ' ')
+      .slice(0, 160)
   }
 
   function detectSaasServices(add, resources, html, globalKeys, externalRules) {
@@ -1625,7 +1938,12 @@ function detectPageTechnologies(ruleConfig = {}) {
     const rules = [
       { name: 'Stripe', kind: '支付', patterns: [/js\.stripe\.com|checkout\.stripe\.com|stripe\.network/], globals: ['Stripe'] },
       { name: 'PayPal', kind: '支付', patterns: [/paypal\.com\/sdk\/js|paypalobjects\.com|paypal\.com\/checkoutnow/], globals: ['paypal'] },
-      { name: 'Adyen', kind: '支付', patterns: [/checkoutshopper-live\.adyen\.com|adyencheckout|adyen\.com\/checkout/], globals: ['AdyenCheckout'] },
+      {
+        name: 'Adyen',
+        kind: '支付',
+        patterns: [/checkoutshopper-live\.adyen\.com|adyencheckout|adyen\.com\/checkout/],
+        globals: ['AdyenCheckout']
+      },
       { name: 'Braintree', kind: '支付', patterns: [/js\.braintreegateway\.com|braintreegateway\.com/], globals: ['braintree'] },
       { name: 'Paddle', kind: '支付', patterns: [/cdn\.paddle\.com|paddle\.com\/paddle|paddle\.js/], globals: ['Paddle'] },
       { name: 'Razorpay', kind: '支付', patterns: [/checkout\.razorpay\.com|razorpay/], globals: ['Razorpay'] },
@@ -1633,12 +1951,27 @@ function detectPageTechnologies(ruleConfig = {}) {
       { name: 'Auth0', kind: '身份认证', patterns: [/cdn\.auth0\.com|auth0\.com|auth0-spa-js|auth0-lock/], globals: ['auth0'] },
       { name: 'Clerk', kind: '身份认证', patterns: [/js\.clerk\.com|clerk\.accounts\.dev|clerk\.dev|@clerk\//], globals: ['Clerk'] },
       { name: 'Okta', kind: '身份认证', patterns: [/okta\.com|oktaauth|okta-signin-widget/], globals: ['OktaAuth'] },
-      { name: 'Amazon Cognito', kind: '身份认证', patterns: [/amazoncognito\.com|cognito-idp|amazon-cognito-identity/], globals: ['AmazonCognitoIdentity'] },
+      {
+        name: 'Amazon Cognito',
+        kind: '身份认证',
+        patterns: [/amazoncognito\.com|cognito-idp|amazon-cognito-identity/],
+        globals: ['AmazonCognitoIdentity']
+      },
       { name: 'Stytch', kind: '身份认证', patterns: [/stytch\.com|js\.stytch\.com/], globals: ['Stytch'] },
-      { name: 'Firebase', kind: '后端云 / 认证', patterns: [/gstatic\.com\/firebasejs|firebaseapp\.com|firebaseio\.com|firebasestorage\.googleapis\.com/], globals: ['firebase'] },
+      {
+        name: 'Firebase',
+        kind: '后端云 / 认证',
+        patterns: [/gstatic\.com\/firebasejs|firebaseapp\.com|firebaseio\.com|firebasestorage\.googleapis\.com/],
+        globals: ['firebase']
+      },
       { name: 'Supabase', kind: '后端云 / 数据库', patterns: [/supabase\.co|supabase-js|supabase\.in/], globals: ['supabase'] },
 
-      { name: 'Intercom', kind: '客服聊天', patterns: [/widget\.intercom\.io|js\.intercomcdn\.com|intercomcdn\.com/], globals: ['Intercom', 'intercomSettings'] },
+      {
+        name: 'Intercom',
+        kind: '客服聊天',
+        patterns: [/widget\.intercom\.io|js\.intercomcdn\.com|intercomcdn\.com/],
+        globals: ['Intercom', 'intercomSettings']
+      },
       { name: 'Zendesk', kind: '客服支持', patterns: [/static\.zdassets\.com|zendesk\.com|zopim\.com/], globals: ['zE', 'Zendesk'] },
       { name: 'Crisp', kind: '客服聊天', patterns: [/client\.crisp\.chat|crisp\.chat/], globals: ['$crisp', 'CRISP_WEBSITE_ID'] },
       { name: 'Drift', kind: '客服聊天', patterns: [/js\.driftt\.com|drift\.com\/embed|drift\.load/], globals: ['drift'] },
@@ -1646,9 +1979,19 @@ function detectPageTechnologies(ruleConfig = {}) {
       { name: 'Freshchat', kind: '客服聊天', patterns: [/wchat\.freshchat\.com|freshchat/], globals: ['fcWidget'] },
       { name: 'Help Scout Beacon', kind: '客服支持', patterns: [/beacon-v2\.helpscout\.net|helpscout\.net\/beacon/], globals: ['Beacon'] },
       { name: 'LiveChat', kind: '客服聊天', patterns: [/cdn\.livechatinc\.com|livechatinc\.com/], globals: ['LiveChatWidget'] },
-      { name: 'Gorgias', kind: '客服支持', patterns: [/gorgias\.chat|config\.gorgias\.chat|client-builds\.gorgias\.chat/], globals: ['GorgiasChat'] },
+      {
+        name: 'Gorgias',
+        kind: '客服支持',
+        patterns: [/gorgias\.chat|config\.gorgias\.chat|client-builds\.gorgias\.chat/],
+        globals: ['GorgiasChat']
+      },
 
-      { name: 'HubSpot', kind: 'CRM / 营销自动化', patterns: [/js\.hs-scripts\.com|js\.hsforms\.net|hs-analytics\.net|hubspot\.com/], globals: ['_hsq', 'hbspt'] },
+      {
+        name: 'HubSpot',
+        kind: 'CRM / 营销自动化',
+        patterns: [/js\.hs-scripts\.com|js\.hsforms\.net|hs-analytics\.net|hubspot\.com/],
+        globals: ['_hsq', 'hbspt']
+      },
       { name: 'Salesforce', kind: 'CRM', patterns: [/salesforce\.com|force\.com|visualforce\.com|lightning\.force\.com/] },
       { name: 'Marketo', kind: '营销自动化', patterns: [/munchkin\.marketo\.net|marketo\.com/], globals: ['Munchkin'] },
       { name: 'Mailchimp', kind: '邮件营销', patterns: [/chimpstatic\.com|list-manage\.com|mailchimp\.com/] },
@@ -1660,31 +2003,76 @@ function detectPageTechnologies(ruleConfig = {}) {
       { name: 'Sentry', kind: '错误监控', patterns: [/browser\.sentry-cdn\.com|sentry\.io|sentry-cdn\.com/], globals: ['Sentry'] },
       { name: 'LogRocket', kind: '会话回放 / 监控', patterns: [/cdn\.lr-ingest\.com|logrocket\.io|logrocket/], globals: ['LogRocket'] },
       { name: 'FullStory', kind: '会话回放', patterns: [/fullstory\.com|edge\.fullstory\.com|fs\.js/], globals: ['FS'] },
-      { name: 'Datadog RUM', kind: '性能监控', patterns: [/datadoghq-browser-agent\.com|datadoghq\.com\/rum|dd_rum/], globals: ['DD_RUM', 'DD_LOGS'] },
-      { name: 'New Relic Browser', kind: '性能监控', patterns: [/js-agent\.newrelic\.com|bam\.nr-data\.net|newrelic/], globals: ['NREUM', 'newrelic'] },
+      {
+        name: 'Datadog RUM',
+        kind: '性能监控',
+        patterns: [/datadoghq-browser-agent\.com|datadoghq\.com\/rum|dd_rum/],
+        globals: ['DD_RUM', 'DD_LOGS']
+      },
+      {
+        name: 'New Relic Browser',
+        kind: '性能监控',
+        patterns: [/js-agent\.newrelic\.com|bam\.nr-data\.net|newrelic/],
+        globals: ['NREUM', 'newrelic']
+      },
       { name: 'PostHog', kind: '产品分析', patterns: [/posthog\.com|app\.posthog\.com|posthog-js/], globals: ['posthog'] },
       { name: 'Mixpanel', kind: '产品分析', patterns: [/cdn\.mxpnl\.com|mixpanel\.com|mixpanel/], globals: ['mixpanel'] },
       { name: 'Amplitude', kind: '产品分析', patterns: [/cdn\.amplitude\.com|amplitude\.com|amplitude-js/], globals: ['amplitude'] },
 
-      { name: 'Algolia', kind: '站内搜索', patterns: [/algolia\.net|algolianet\.com|algolia\.com|algoliasearch/], globals: ['algoliasearch'] },
+      {
+        name: 'Algolia',
+        kind: '站内搜索',
+        patterns: [/algolia\.net|algolianet\.com|algolia\.com|algoliasearch/],
+        globals: ['algoliasearch']
+      },
       { name: 'Typesense Cloud', kind: '站内搜索', patterns: [/typesense\.net|typesense\.org|typesense-js/], globals: ['Typesense'] },
-      { name: 'Cloudinary', kind: '媒体托管', patterns: [/res\.cloudinary\.com|cloudinary\.com|cloudinary-core/], globals: ['cloudinary', 'Cloudinary'] },
+      {
+        name: 'Cloudinary',
+        kind: '媒体托管',
+        patterns: [/res\.cloudinary\.com|cloudinary\.com|cloudinary-core/],
+        globals: ['cloudinary', 'Cloudinary']
+      },
       { name: 'Imgix', kind: '图片处理', patterns: [/imgix\.net|imgix\.js|ixlib=/], globals: ['imgix'] },
       { name: 'Contentful', kind: 'Headless CMS', patterns: [/contentful\.com|ctfassets\.net|contentful/], globals: ['contentful'] },
       { name: 'Sanity', kind: 'Headless CMS', patterns: [/cdn\.sanity\.io|sanity\.io|sanity-client/], globals: ['Sanity'] },
       { name: 'Prismic', kind: 'Headless CMS', patterns: [/prismic\.io|prismic\.cdn|prismic-javascript/], globals: ['Prismic'] },
-      { name: 'Storyblok', kind: 'Headless CMS', patterns: [/storyblok\.com|a\.storyblok\.com|storyblok-js-client/], globals: ['Storyblok'] },
+      {
+        name: 'Storyblok',
+        kind: 'Headless CMS',
+        patterns: [/storyblok\.com|a\.storyblok\.com|storyblok-js-client/],
+        globals: ['Storyblok']
+      },
       { name: 'Hygraph', kind: 'Headless CMS', patterns: [/hygraph\.com|graphcms\.com|graphassets\.com/] },
 
-      { name: 'Google Maps Platform', kind: '地图服务', patterns: [/maps\.googleapis\.com|maps\.gstatic\.com\/maps/], globals: ['google.maps'] },
+      {
+        name: 'Google Maps Platform',
+        kind: '地图服务',
+        patterns: [/maps\.googleapis\.com|maps\.gstatic\.com\/maps/],
+        globals: ['google.maps']
+      },
       { name: 'Mapbox', kind: '地图服务', patterns: [/api\.mapbox\.com|mapbox-gl|mapbox\.com/], globals: ['mapboxgl'] },
       { name: 'Google reCAPTCHA', kind: '验证码', patterns: [/google\.com\/recaptcha|gstatic\.com\/recaptcha/], globals: ['grecaptcha'] },
       { name: 'hCaptcha', kind: '验证码', patterns: [/hcaptcha\.com|js\.hcaptcha\.com/], globals: ['hcaptcha'] },
-      { name: 'Cloudflare Turnstile', kind: '验证码', patterns: [/challenges\.cloudflare\.com\/turnstile|turnstile/], globals: ['turnstile'] },
+      {
+        name: 'Cloudflare Turnstile',
+        kind: '验证码',
+        patterns: [/challenges\.cloudflare\.com\/turnstile|turnstile/],
+        globals: ['turnstile']
+      },
 
       { name: 'Optimizely', kind: 'A/B 测试', patterns: [/cdn\.optimizely\.com|optimizely\.com/], globals: ['optimizely'] },
-      { name: 'VWO', kind: 'A/B 测试', patterns: [/dev\.visualwebsiteoptimizer\.com|visualwebsiteoptimizer\.com|vwo/], globals: ['_vwo_code'] },
-      { name: 'LaunchDarkly', kind: 'Feature Flag', patterns: [/launchdarkly\.com|clientstream\.launchdarkly\.com|ldclient/], globals: ['LDClient'] },
+      {
+        name: 'VWO',
+        kind: 'A/B 测试',
+        patterns: [/dev\.visualwebsiteoptimizer\.com|visualwebsiteoptimizer\.com|vwo/],
+        globals: ['_vwo_code']
+      },
+      {
+        name: 'LaunchDarkly',
+        kind: 'Feature Flag',
+        patterns: [/launchdarkly\.com|clientstream\.launchdarkly\.com|ldclient/],
+        globals: ['LDClient']
+      },
       { name: 'Statsig', kind: 'Feature Flag / 实验', patterns: [/statsigapi\.net|statsig\.com|statsig-js/], globals: ['statsig'] },
       { name: 'GrowthBook', kind: 'Feature Flag / 实验', patterns: [/growthbook\.io|growthbook-js/], globals: ['growthbook'] },
 
@@ -1791,14 +2179,7 @@ function detectPageTechnologies(ruleConfig = {}) {
 
   function detectCustomRules(add, resources, html, globalKeys, externalRules) {
     const bodyText = document.body?.innerText ? `\n${document.body.innerText.slice(0, 120000)}` : ''
-    const text = [
-      location.href,
-      document.title,
-      resources.text,
-      html,
-      bodyText,
-      globalKeys.join('\n')
-    ].join('\n')
+    const text = [location.href, document.title, resources.text, html, bodyText, globalKeys.join('\n')].join('\n')
     detectJsonRuleList(add, externalRules, {
       defaultCategory: '其他库',
       resources,
@@ -1943,7 +2324,12 @@ function detectPageTechnologies(ruleConfig = {}) {
   function detectAnalytics(add, resources, html, globalKeys, externalRules) {
     const text = `${location.href}\n${resources.text}\n${html}`
     if (hasGlobal('gtag') || hasGlobal('ga') || /googletagmanager\.com\/gtag|google-analytics\.com|analytics\.google\.com/.test(text)) {
-      add('统计 / 分析', 'Google Analytics', hasGlobal('gtag') || hasGlobal('ga') ? '高' : '中', '商用 / 知名统计：存在 GA 全局对象或资源 URL')
+      add(
+        '统计 / 分析',
+        'Google Analytics',
+        hasGlobal('gtag') || hasGlobal('ga') ? '高' : '中',
+        '商用 / 知名统计：存在 GA 全局对象或资源 URL'
+      )
     }
     if (hasGlobal('dataLayer') || /googletagmanager\.com\/gtm\.js/.test(text)) {
       add('分析与标签', 'Google Tag Manager', hasGlobal('dataLayer') ? '高' : '中', '存在 dataLayer 或 GTM 脚本')
