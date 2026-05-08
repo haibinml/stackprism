@@ -1,0 +1,1309 @@
+{
+  "schemaVersion": 1,
+  "page": {
+    "feeds": [
+      {
+        "name": "RSS Feed",
+        "patterns": ["(?:^|/)(?:feed|rss)(?:/|\\\\.xml|\\\\.rss|$)", "application/rss\\\\+xml"]
+      },
+      {
+        "name": "Atom Feed",
+        "patterns": ["(?:^|/)atom(?:/|\\\\.xml|$)", "application/atom\\\\+xml"]
+      },
+      {
+        "name": "JSON Feed",
+        "patterns": ["jsonfeed|feed\\\\.json", "application/feed\\\\+json", "application/json\\\\+feed"]
+      }
+    ],
+    "analyticsProviders": [
+      {
+        "name": "Google Analytics",
+        "kind": "商用 / 知名统计",
+        "confidence": "高",
+        "patterns": ["googletagmanager\\\\.com/gtag", "google-analytics\\\\.com/(?:analytics|ga)\\\\.js", "analytics\\\\.google\\\\.com", "gtag\\(", "UA-\\\\d+-\\\\d+", "G-[A-Z0-9]{6,}"],
+        "globals": ["gtag", "ga", "GoogleAnalyticsObject"]
+      },
+      {
+        "name": "Google Tag Manager",
+        "kind": "商用 / 标签管理",
+        "confidence": "高",
+        "patterns": ["googletagmanager\\\\.com/gtm\\\\.js", "GTM-[A-Z0-9]+", "dataLayer"],
+        "globals": ["dataLayer"]
+      },
+      {
+        "name": "Baidu Tongji / 百度统计",
+        "kind": "商用 / 国内知名统计",
+        "confidence": "高",
+        "patterns": ["hm\\\\.baidu\\\\.com/hm\\\\.js", "hm\\\\.baidu\\\\.com/hm\\\\.gif", "hm\\\\.src", "_hmt", "baidu\\\\.com/hm"],
+        "globals": ["_hmt"]
+      },
+      {
+        "name": "CNZZ / Umeng Analytics",
+        "kind": "商用 / 国内知名统计",
+        "confidence": "高",
+        "patterns": ["cnzz\\\\.com", "s\\\\d+\\\\.cnzz\\\\.com/z_stat\\\\.php", "z_stat\\\\.php", "umeng\\\\.com", "umtrack", "_czc"],
+        "globals": ["_czc"]
+      },
+      {
+        "name": "51.LA",
+        "kind": "商用 / 国内统计",
+        "confidence": "高",
+        "patterns": ["51\\\\.la", "js\\\\.users\\\\.51\\\\.la", "sdk\\\\.51\\\\.la", "LA.init"],
+        "globals": ["LA"]
+      },
+      {
+        "name": "Tencent MTA / 腾讯统计",
+        "kind": "商用 / 国内统计",
+        "patterns": ["pingjs\\\\.qq\\\\.com", "tajs\\\\.qq\\\\.com", "mta\\\\.qq\\\\.com", "TencentMTA", "MtaH5"],
+        "globals": ["MtaH5"]
+      },
+      {
+        "name": "GrowingIO",
+        "kind": "商用 / 增长分析",
+        "patterns": ["growingio\\\\.com", "gio\\\\.js", "assets\\\\.growingio\\\\.com"],
+        "globals": ["gio"]
+      },
+      {
+        "name": "Sensors Data / 神策分析",
+        "kind": "商用 / 产品分析",
+        "patterns": ["sensorsdata", "sensorsdata\\\\.min\\\\.js", "sa-sdk", "sensorsAnalytics"],
+        "globals": ["sensors", "sensorsDataAnalytic201505"]
+      },
+      {
+        "name": "TalkingData",
+        "kind": "商用 / 国内统计",
+        "patterns": ["talkingdata\\\\.com", "tdsdk", "TalkingData"],
+        "globals": ["TalkingData"]
+      },
+      {
+        "name": "Youmeng+ / 友盟+",
+        "kind": "商用 / 国内统计",
+        "patterns": ["umeng\\\\.com", "cnzz\\\\.com", "umtrack", "aplus\\\\.js"]
+      },
+      {
+        "name": "Alibaba Aplus / 阿里统计",
+        "kind": "商用 / 国内统计",
+        "patterns": ["g\\\\.alicdn\\\\.com/alilog", "aplus\\\\.js", "log\\\\.mmstat\\\\.com", "arms-retcode", "__bl"],
+        "globals": ["goldlog", "__bl"]
+      },
+      {
+        "name": "Yandex Metrica",
+        "kind": "商用 / 知名统计",
+        "patterns": ["mc\\\\.yandex\\\\.ru/metrika", "yandex\\\\.ru/metrika", "ym\\(", "Ya\\\\.Metrika"],
+        "globals": ["ym", "Ya"]
+      },
+      {
+        "name": "Adobe Analytics",
+        "kind": "商用 / 企业统计",
+        "patterns": ["adobedtm\\\\.com", "assets\\\\.adobedtm\\\\.com", "omniture", "s_code", "AppMeasurement"],
+        "globals": ["s", "AppMeasurement"]
+      },
+      {
+        "name": "Adobe Launch",
+        "kind": "商用 / 标签管理",
+        "patterns": ["assets\\\\.adobedtm\\\\.com", "_satellite"],
+        "globals": ["_satellite"]
+      },
+      {
+        "name": "Matomo / Piwik",
+        "kind": "开源 / 可自托管统计",
+        "confidence": "高",
+        "patterns": ["matomo\\\\.js", "piwik\\\\.js", "matomo\\\\.php", "piwik\\\\.php", "_paq"],
+        "globals": ["_paq", "Matomo", "Piwik"]
+      },
+      {
+        "name": "Plausible",
+        "kind": "开源 / 可自托管统计",
+        "confidence": "高",
+        "patterns": ["plausible\\\\.io/js", "plausible\\\\.js", "data-domain=.*plausible", "plausible-tracker"],
+        "globals": ["plausible"]
+      },
+      {
+        "name": "Umami",
+        "kind": "开源 / 可自托管统计",
+        "confidence": "高",
+        "patterns": ["umami\\\\.js", "data-website-id", "umami\\\\.is", "analytics.umami"],
+        "globals": ["umami"]
+      },
+      {
+        "name": "GoatCounter",
+        "kind": "开源 / 可自托管统计",
+        "patterns": ["gc\\\\.ziggoat\\\\.com/count\\\\.js", "goatcounter\\\\.com/count", "goatcounter"],
+        "globals": ["goatcounter"]
+      },
+      {
+        "name": "Open Web Analytics",
+        "kind": "开源 / 可自托管统计",
+        "patterns": ["owa\\\\.tracker", "OpenWebAnalytics", "owa_cmds", "owa.tracker"],
+        "globals": ["OWA", "owa_cmds"]
+      },
+      {
+        "name": "Ackee",
+        "kind": "开源 / 可自托管统计",
+        "patterns": ["ackee-tracker", "ackee\\\\.js", "ackee\\\\.domainId"],
+        "globals": ["ackeeTracker"]
+      },
+      {
+        "name": "Countly",
+        "kind": "开源 / 商用产品分析",
+        "patterns": ["countly\\\\.js", "cdn\\\\.count\\\\.ly", "Countly"],
+        "globals": ["Countly"]
+      },
+      {
+        "name": "PostHog",
+        "kind": "开源 / 商用产品分析",
+        "patterns": ["posthog-js", "app\\\\.posthog\\\\.com", "us\\\\.i\\\\.posthog\\\\.com", "posthog\\\\.capture"],
+        "globals": ["posthog"]
+      },
+      {
+        "name": "Fathom Analytics",
+        "kind": "商用 / 隐私友好统计",
+        "patterns": ["cdn\\\\.usefathom\\\\.com", "usefathom\\\\.com/script", "fathom\\\\.js"],
+        "globals": ["fathom"]
+      },
+      {
+        "name": "Pirsch",
+        "kind": "商用 / 隐私友好统计",
+        "patterns": ["api\\\\.pirsch\\\\.io", "pirsch\\\\.io/pirsch", "pirsch\\\\.js"]
+      },
+      {
+        "name": "Simple Analytics",
+        "kind": "商用 / 隐私友好统计",
+        "patterns": ["scripts\\\\.simpleanalyticscdn\\\\.com", "simpleanalytics\\\\.com/latest\\\\.js", "queue\\\\.simpleanalyticscdn\\\\.com"]
+      },
+      {
+        "name": "Clicky",
+        "kind": "商用 / 统计",
+        "patterns": ["static\\\\.getclicky\\\\.com", "in\\\\.getclicky\\\\.com", "clicky\\\\.js"],
+        "globals": ["clicky"]
+      },
+      {
+        "name": "Statcounter",
+        "kind": "商用 / 统计",
+        "patterns": ["statcounter\\\\.com/counter", "c\\\\.statcounter\\\\.com", "sc_project", "statcounter\\\\.js"]
+      },
+      {
+        "name": "Woopra",
+        "kind": "商用 / 客户旅程分析",
+        "patterns": ["woopra\\\\.com", "static\\\\.woopra\\\\.com/js/w\\.js"],
+        "globals": ["woopra"]
+      },
+      {
+        "name": "Heap",
+        "kind": "商用 / 产品分析",
+        "patterns": ["heapanalytics\\\\.com", "heap\\\\.load", "cdn\\\\.heapanalytics\\\\.com"],
+        "globals": ["heap"]
+      },
+      {
+        "name": "Mixpanel",
+        "kind": "商用 / 产品分析",
+        "patterns": ["cdn\\\\.mxpnl\\\\.com", "mixpanel\\\\.com", "mixpanel\\\\.track"],
+        "globals": ["mixpanel"]
+      },
+      {
+        "name": "Amplitude",
+        "kind": "商用 / 产品分析",
+        "patterns": ["cdn\\\\.amplitude\\\\.com", "api2\\\\.amplitude\\\\.com", "amplitude-js"],
+        "globals": ["amplitude"]
+      },
+      {
+        "name": "Kissmetrics",
+        "kind": "商用 / 产品分析",
+        "patterns": ["kissmetrics\\\\.io", "i\\\\.kissmetrics\\\\.io", "scripts\\\\.kissmetrics\\\\.io"],
+        "globals": ["_kmq"]
+      },
+      {
+        "name": "Segment",
+        "kind": "商用 / CDP",
+        "patterns": ["cdn\\\\.segment\\\\.com/analytics\\\\.js", "segment\\\\.com/analytics\\\\.js", "analytics\\\\.load"],
+        "globals": ["analytics"]
+      },
+      {
+        "name": "Microsoft Clarity",
+        "kind": "免费 / 知名统计",
+        "patterns": ["clarity\\\\.ms/tag", "clarity\\\\.ms/collect", "clarity\\("],
+        "globals": ["clarity"]
+      },
+      {
+        "name": "Hotjar",
+        "kind": "商用 / 热力图与行为分析",
+        "patterns": ["static\\\\.hotjar\\\\.com", "script\\\\.hotjar\\\\.com", "hotjar\\\\.com", "hj\\("],
+        "globals": ["hj"]
+      },
+      {
+        "name": "Crazy Egg",
+        "kind": "商用 / 热力图",
+        "patterns": ["script\\\\.crazyegg\\\\.com", "crazyegg\\\\.com/pages/scripts"]
+      },
+      {
+        "name": "Lucky Orange",
+        "kind": "商用 / 热力图",
+        "patterns": ["luckyorange\\\\.com", "tools\\\\.luckyorange\\\\.com"]
+      },
+      {
+        "name": "Mouseflow",
+        "kind": "商用 / 会话回放",
+        "patterns": ["mouseflow\\\\.com", "cdn\\\\.mouseflow\\\\.com"],
+        "globals": ["mouseflow"]
+      },
+      {
+        "name": "FullStory",
+        "kind": "商用 / 会话回放",
+        "patterns": ["fullstory\\\\.com", "edge\\\\.fullstory\\\\.com", "_fs_namespace"],
+        "globals": ["FS"]
+      },
+      {
+        "name": "LogRocket",
+        "kind": "商用 / 会话回放",
+        "patterns": ["logrocket\\\\.io", "cdn\\\\.lr-ingest\\\\.com", "LogRocket"],
+        "globals": ["LogRocket"]
+      },
+      {
+        "name": "Smartlook",
+        "kind": "商用 / 会话回放",
+        "patterns": ["smartlook\\\\.com", "web-sdk\\\\.smartlook\\\\.com"],
+        "globals": ["smartlook"]
+      },
+      {
+        "name": "Meta Pixel",
+        "kind": "商用 / 广告转化统计",
+        "patterns": ["connect\\\\.facebook\\\\.net/.*/fbevents\\\\.js", "facebook\\\\.com/tr", "fbq\\("],
+        "globals": ["fbq"]
+      },
+      {
+        "name": "TikTok Pixel",
+        "kind": "商用 / 广告转化统计",
+        "patterns": ["analytics\\\\.tiktok\\\\.com/i18n/pixel", "ttq\\\\.load", "tiktok pixel"],
+        "globals": ["ttq"]
+      },
+      {
+        "name": "LinkedIn Insight Tag",
+        "kind": "商用 / 广告转化统计",
+        "patterns": ["snap\\\\.licdn\\\\.com/li\\\\.lms-analytics", "linkedin_data_partner_id", "px\\\\.ads\\\\.linkedin\\\\.com"]
+      },
+      {
+        "name": "Pinterest Tag",
+        "kind": "商用 / 广告转化统计",
+        "patterns": ["ct\\\\.pinterest\\\\.com", "pintrk", "s\\\\.pinimg\\\\.com/ct/core\\\\.js"],
+        "globals": ["pintrk"]
+      },
+      {
+        "name": "Twitter / X Pixel",
+        "kind": "商用 / 广告转化统计",
+        "patterns": ["static\\\\.ads-twitter\\\\.com/uwt\\\\.js", "twq\\("],
+        "globals": ["twq"]
+      },
+      {
+        "name": "Microsoft Advertising UET",
+        "kind": "商用 / 广告转化统计",
+        "patterns": ["bat\\\\.bing\\\\.com/bat\\\\.js", "uetq"],
+        "globals": ["uetq"]
+      }
+    ],
+    "dynamicTechnologies": [
+      {
+        "category": "前端框架",
+        "name": "React",
+        "patterns": ["react(?:\\\\.production|\\\\.development)?(?:\\\\.min)?\\\\.js", "react-dom", "__react"]
+      },
+      {
+        "category": "前端框架",
+        "name": "Vue",
+        "patterns": ["vue(?:\\\\.runtime)?(?:\\\\.global)?(?:\\\\.prod)?(?:\\\\.min)?\\\\.js", "vue-router", "pinia", "data-v-app"]
+      },
+      {
+        "category": "前端框架",
+        "name": "Angular / AngularJS",
+        "patterns": ["angular(?:\\\\.min)?\\\\.js", "@angular", "ng-version", "ng-app"]
+      },
+      {
+        "category": "前端框架",
+        "name": "Svelte",
+        "patterns": ["svelte", "svelte-"]
+      },
+      {
+        "category": "UI / CSS 框架",
+        "name": "Bootstrap",
+        "patterns": ["bootstrap(?:\\\\.bundle)?(?:\\\\.min)?\\\\.(?:js|css)"]
+      },
+      {
+        "category": "UI / CSS 框架",
+        "name": "Tailwind CSS",
+        "patterns": ["cdn\\\\.tailwindcss\\\\.com", "tailwind(?:\\\\.min)?\\\\.css", "tailwind\\\\.config"]
+      },
+      {
+        "category": "前端库",
+        "name": "ECharts",
+        "patterns": ["echarts(?:\\\\.min)?\\\\.js"]
+      },
+      {
+        "category": "前端库",
+        "name": "Three.js",
+        "patterns": ["three(?:\\\\.module)?(?:\\\\.min)?\\\\.js", "threejs"]
+      },
+      {
+        "category": "构建与运行时",
+        "name": "Vite",
+        "patterns": ["/@vite/client", "__vite", "vite/client"]
+      },
+      {
+        "category": "构建与运行时",
+        "name": "Webpack",
+        "patterns": ["webpack", "webpackchunk", "webpackjsonp"]
+      }
+    ],
+    "websitePrograms": [
+      {
+        "name": "WordPress",
+        "kind": "CMS / 博客",
+        "confidence": "高",
+        "patterns": ["/wp-content/", "/wp-includes/", "wp-emoji-release", "wp-json"],
+        "globals": ["wp"]
+      },
+      {
+        "name": "WooCommerce",
+        "kind": "电商插件",
+        "confidence": "高",
+        "patterns": ["woocommerce", "wc-cart-fragments", "wp-content/plugins/woocommerce"]
+      },
+      {
+        "name": "Drupal",
+        "kind": "CMS",
+        "confidence": "高",
+        "patterns": ["drupal-settings-json", "/sites/default/files", "drupal\\\\."],
+        "globals": ["Drupal"]
+      },
+      {
+        "name": "Joomla",
+        "kind": "CMS",
+        "patterns": ["com_content", "/media/system/js/", "joomla"]
+      },
+      {
+        "name": "Magento / Adobe Commerce",
+        "kind": "电商系统",
+        "patterns": ["Magento_", "mage/", "/static/version\\\\d+/frontend/", "requirejs-config.js"],
+        "globals": ["Magento"]
+      },
+      {
+        "name": "Shopify",
+        "kind": "SaaS 电商",
+        "patterns": ["cdn.shopify.com", "shopify-section", "myshopify.com"],
+        "globals": ["Shopify"]
+      },
+      {
+        "name": "OpenCart",
+        "kind": "电商系统",
+        "patterns": ["catalog/view/theme", "index.php\\\\?route=", "opencart"]
+      },
+      {
+        "name": "PrestaShop",
+        "kind": "电商系统",
+        "patterns": ["prestashop", "/modules/ps_", "var prestashop"]
+      },
+      {
+        "name": "Shopware",
+        "kind": "电商系统",
+        "patterns": ["shopware", "widgets/emotion", "storefront/js"]
+      },
+      {
+        "name": "BigCommerce",
+        "kind": "SaaS 电商",
+        "patterns": ["bigcommerce", "cdn11.bigcommerce.com", "stencil-utils"]
+      },
+      {
+        "name": "Salesforce Commerce Cloud",
+        "kind": "电商系统",
+        "patterns": ["demandware", "salesforce commerce cloud", "/on/demandware.static/"]
+      },
+      {
+        "name": "Discuz!",
+        "kind": "论坛",
+        "patterns": ["discuz", "static/image/common", "forum.php", "portal.php"]
+      },
+      {
+        "name": "phpBB",
+        "kind": "论坛",
+        "patterns": ["phpbb", "styles/prosilver", "viewtopic.php"]
+      },
+      {
+        "name": "vBulletin",
+        "kind": "论坛",
+        "patterns": ["vbulletin", "clientscript/vbulletin", "showthread.php"]
+      },
+      {
+        "name": "XenForo",
+        "kind": "论坛",
+        "patterns": ["xenforo", "data-template=", "js/xf/"]
+      },
+      {
+        "name": "Flarum",
+        "kind": "论坛",
+        "patterns": ["flarum", "flarum.core", "assets/forum-"]
+      },
+      {
+        "name": "Discourse",
+        "kind": "论坛 / 社区",
+        "patterns": ["discourse", "__DISCOURSE", "/assets/discourse-"],
+        "globals": ["Discourse"]
+      },
+      {
+        "name": "MediaWiki",
+        "kind": "Wiki",
+        "patterns": ["mediawiki", "mw.config", "load.php\\\\?modules="],
+        "globals": ["mw"]
+      },
+      {
+        "name": "Confluence",
+        "kind": "知识库",
+        "patterns": ["confluence", "atlassian", "/s/en_GB/"]
+      },
+      {
+        "name": "Moodle",
+        "kind": "学习管理系统",
+        "patterns": ["moodle", "moodledata", "theme/yui_combo.php"]
+      },
+      {
+        "name": "Ghost",
+        "kind": "博客",
+        "patterns": ["ghost", "/ghost/api/", "ghost-sdk"]
+      },
+      {
+        "name": "Typecho",
+        "kind": "博客",
+        "patterns": ["typecho", "usr/themes", "usr/plugins"]
+      },
+      {
+        "name": "Z-BlogPHP",
+        "kind": "博客",
+        "patterns": ["zblogphp", "zb_users", "zb_system"]
+      },
+      {
+        "name": "DedeCMS",
+        "kind": "CMS",
+        "patterns": ["dedecms", "/templets/", "/plus/"]
+      },
+      {
+        "name": "PHPCMS",
+        "kind": "CMS",
+        "patterns": ["phpcms", "/statics/js/", "content=\"phpcms"]
+      },
+      {
+        "name": "EmpireCMS",
+        "kind": "CMS",
+        "patterns": ["empirecms", "/e/data/", "/e/public/"]
+      },
+      {
+        "name": "Craft CMS",
+        "kind": "CMS",
+        "patterns": ["craftcms", "craft\\\\.csrfTokenName", "CRAFT_CSRF_TOKEN"]
+      },
+      {
+        "name": "Umbraco",
+        "kind": ".NET CMS",
+        "patterns": ["umbraco", "/umbraco/"]
+      },
+      {
+        "name": "Strapi",
+        "kind": "Headless CMS",
+        "patterns": ["strapi", "/uploads/", "strapi.io"]
+      },
+      {
+        "name": "Directus",
+        "kind": "Headless CMS",
+        "patterns": ["directus", "directus.io"]
+      },
+      {
+        "name": "Hexo",
+        "kind": "静态博客",
+        "patterns": ["hexo", "hexo-generator", "hexo-theme"]
+      },
+      {
+        "name": "Hugo",
+        "kind": "静态站点生成器",
+        "patterns": ["hugo", "generator\" content=\"hugo"]
+      },
+      {
+        "name": "Jekyll",
+        "kind": "静态站点生成器",
+        "patterns": ["jekyll", "generator\" content=\"jekyll"]
+      },
+      {
+        "name": "Docusaurus",
+        "kind": "文档站点",
+        "patterns": ["docusaurus", "__docusaurus", "/assets/js/webpack-runtime"]
+      },
+      {
+        "name": "VitePress",
+        "kind": "文档站点",
+        "patterns": ["vitepress", "VPContent", "/assets/chunks/"]
+      },
+      {
+        "name": "VuePress",
+        "kind": "文档站点",
+        "patterns": ["vuepress", "__VUEPRESS__"]
+      },
+      {
+        "name": "Docsify",
+        "kind": "文档站点",
+        "patterns": ["docsify", "window.$docsify"],
+        "globals": ["$docsify"]
+      },
+      {
+        "name": "GitBook",
+        "kind": "文档站点",
+        "patterns": ["gitbook", "gitbook.page.hasChanged"]
+      },
+      {
+        "name": "MkDocs",
+        "kind": "文档站点",
+        "patterns": ["mkdocs", "mkdocs_page_name", "material for mkdocs"]
+      },
+      {
+        "name": "ECShop",
+        "kind": "电商系统",
+        "patterns": ["ecshop", "themes/default/images/ecshop", "flow.php\\\\?step=cart", "ECSHOP"]
+      },
+      {
+        "name": "ShopXO",
+        "kind": "电商系统",
+        "patterns": ["shopxo", "public/static/index", "shopxo.net"]
+      },
+      {
+        "name": "Niushop",
+        "kind": "电商系统",
+        "patterns": ["niushop", "niucloud", "addon/shop", "牛之云"]
+      },
+      {
+        "name": "Youzan / 有赞",
+        "kind": "SaaS 电商",
+        "patterns": ["youzan.com", "koudaitong.com", "b.yzcdn.cn", "有赞"]
+      },
+      {
+        "name": "Weimob / 微盟",
+        "kind": "SaaS 电商",
+        "patterns": ["weimob.com", "weimobdc.com", "微盟"]
+      },
+      {
+        "name": "WShop / 微店",
+        "kind": "SaaS 电商",
+        "patterns": ["weidian.com", "vdian.com", "微店"]
+      },
+      {
+        "name": "Mabang ERP / 店铺系统",
+        "kind": "电商系统",
+        "patterns": ["mabangerp", "mabang", "马帮"]
+      }
+    ],
+    "probes": [
+      {
+        "name": "雅黑 PHP 探针",
+        "kind": "PHP 探针",
+        "confidence": "高",
+        "patterns": ["雅黑\\\\s*PHP\\\\s*探针", "yahei\\\\s*php\\\\s*probe", "YaHei.*PHP.*Probe", "雅黑探针"]
+      },
+      {
+        "name": "X-Prober",
+        "kind": "PHP 探针",
+        "confidence": "高",
+        "patterns": ["X-Prober", "xprober", "X\\\\s*Prober", "for\\\\s+X-Prober"]
+      },
+      {
+        "name": "LemonBench",
+        "kind": "服务器性能测试 / 探针",
+        "patterns": ["LemonBench", "LemonBenchIntl", "LemonBench Server Test"]
+      },
+      {
+        "name": "Bench.sh",
+        "kind": "服务器性能测试",
+        "patterns": ["bench\\\\.sh", "teddysun", "UnixBench", "I/O Speed"]
+      },
+      {
+        "name": "ServerStatus",
+        "kind": "服务器状态探针",
+        "confidence": "高",
+        "patterns": ["ServerStatus", "server-status", "serverstatus", "月流量", "在线率", "负载", "Mem Used"]
+      },
+      {
+        "name": "ServerStatus-Hotaru",
+        "kind": "服务器状态探针",
+        "patterns": ["ServerStatus-Hotaru", "hotaru_theme", "hotaru"]
+      },
+      {
+        "name": "ServerStatus-Rust",
+        "kind": "服务器状态探针",
+        "patterns": ["ServerStatus-Rust", "status-rust", "sergate"]
+      },
+      {
+        "name": "哪吒监控 / Nezha",
+        "kind": "服务器监控面板",
+        "confidence": "高",
+        "patterns": ["哪吒监控", "Nezha Monitoring", "nezha-dashboard", "nezha\\\\.service", "nezha", "/api/v1/ws/server"]
+      },
+      {
+        "name": "Uptime Kuma",
+        "kind": "可用性监控",
+        "confidence": "高",
+        "patterns": ["Uptime Kuma", "uptime-kuma", "kuma", "status-page"]
+      },
+      {
+        "name": "Netdata",
+        "kind": "实时性能监控",
+        "confidence": "高",
+        "patterns": ["Netdata", "netdata", "dashboard\\\\.js\\\\?v=", "registry.my-netdata.io"]
+      },
+      {
+        "name": "phpSysInfo",
+        "kind": "服务器信息探针",
+        "confidence": "高",
+        "patterns": ["phpSysInfo", "phpsysinfo", "templates/phpsysinfo", "xml.php\\\\?plugin="]
+      },
+      {
+        "name": "Linux Dash",
+        "kind": "服务器信息探针",
+        "patterns": ["linux-dash", "Linux Dash", "linux_dash", "server-info"]
+      },
+      {
+        "name": "Glances",
+        "kind": "服务器监控",
+        "patterns": ["Glances", "glances", "glances-web", "/api/3/"]
+      },
+      {
+        "name": "Cockpit",
+        "kind": "服务器管理面板",
+        "patterns": ["Cockpit", "cockpit/static", "cockpit-ws", "org.cockpit-project"]
+      },
+      {
+        "name": "Webmin",
+        "kind": "服务器管理面板",
+        "patterns": ["Webmin", "webmin", "session_login.cgi", "unauthenticated/css"]
+      },
+      {
+        "name": "aaPanel / 宝塔面板",
+        "kind": "服务器管理面板",
+        "patterns": ["宝塔面板", "BT-Panel", "aaPanel", "bt.cn", "app.bt.cn", "BTPanel"]
+      },
+      {
+        "name": "1Panel",
+        "kind": "服务器管理面板",
+        "patterns": ["1Panel", "1panel", "FIT2CLOUD", "/api/v1/auth/login"]
+      },
+      {
+        "name": "CasaOS",
+        "kind": "家庭服务器面板",
+        "patterns": ["CasaOS", "casaos", "IceWhale"]
+      },
+      {
+        "name": "Dashy",
+        "kind": "导航 / 状态面板",
+        "patterns": ["Dashy", "dashy", "lissy93"]
+      },
+      {
+        "name": "Heimdall",
+        "kind": "导航 / 状态面板",
+        "patterns": ["Heimdall", "heimdall", "laravel-heimdall"]
+      },
+      {
+        "name": "Homer Dashboard",
+        "kind": "导航 / 状态面板",
+        "patterns": ["Homer Dashboard", "homer.css", "homer-theme", "bastienwirtz/homer"]
+      },
+      {
+        "name": "Homarr",
+        "kind": "导航 / 状态面板",
+        "patterns": ["Homarr", "homarr", "manage your apps"]
+      },
+      {
+        "name": "Grafana",
+        "kind": "监控可视化",
+        "confidence": "高",
+        "patterns": ["Grafana", "grafana-app", "public/build/grafana", "grafanaBootData"]
+      },
+      {
+        "name": "Prometheus",
+        "kind": "监控系统",
+        "patterns": ["Prometheus", "prometheus", "graph\\\\?g0", "prometheus_target_interval_length_seconds"]
+      },
+      {
+        "name": "Alertmanager",
+        "kind": "告警系统",
+        "patterns": ["Alertmanager", "alertmanager", "/api/v2/alerts"]
+      },
+      {
+        "name": "Zabbix",
+        "kind": "监控系统",
+        "confidence": "高",
+        "patterns": ["Zabbix", "zabbix", "zbx_session", "jsLoader.php\\\\?ver="]
+      },
+      {
+        "name": "Nagios",
+        "kind": "监控系统",
+        "patterns": ["Nagios", "nagios", "nagiosxi", "status.cgi\\\\?host="]
+      },
+      {
+        "name": "Icinga",
+        "kind": "监控系统",
+        "patterns": ["Icinga", "icinga", "icingaweb2", "icingaweb"]
+      },
+      {
+        "name": "Cacti",
+        "kind": "网络监控",
+        "patterns": ["Cacti", "cacti", "graph_view.php", "cacti_web"]
+      },
+      {
+        "name": "LibreNMS",
+        "kind": "网络监控",
+        "patterns": ["LibreNMS", "librenms", "ajax_table.php"]
+      },
+      {
+        "name": "Observium",
+        "kind": "网络监控",
+        "patterns": ["Observium", "observium", "graphs/to=now"]
+      },
+      {
+        "name": "Munin",
+        "kind": "资源监控",
+        "patterns": ["Munin", "munin", "munin-cgi", "munin-graph"]
+      },
+      {
+        "name": "Smokeping",
+        "kind": "网络延迟监控",
+        "patterns": ["SmokePing", "smokeping", "cropper/smokeping", "smokeping.cgi"]
+      },
+      {
+        "name": "Ward",
+        "kind": "服务器仪表盘",
+        "patterns": ["Ward", "ward-dashboard", "Server dashboard"]
+      },
+      {
+        "name": "Statping / Statping-ng",
+        "kind": "状态页 / 可用性监控",
+        "patterns": ["Statping", "statping", "statping-ng", "statping_dashboard"]
+      },
+      {
+        "name": "Cachet",
+        "kind": "状态页",
+        "patterns": ["Cachet", "cachet", "cachethq"]
+      },
+      {
+        "name": "Healthchecks",
+        "kind": "任务健康检查",
+        "patterns": ["Healthchecks", "healthchecks.io", "hc-ping.com"]
+      },
+      {
+        "name": "Monitoror",
+        "kind": "状态墙",
+        "patterns": ["Monitoror", "monitoror"]
+      },
+      {
+        "name": "PhpVirtualBox",
+        "kind": "虚拟化管理面板",
+        "patterns": ["phpVirtualBox", "phpvirtualbox", "vboxwebsrv"]
+      },
+      {
+        "name": "Portainer",
+        "kind": "容器管理面板",
+        "patterns": ["Portainer", "portainer", "portainer.updatePassword"]
+      }
+    ],
+    "languages": [
+      {
+        "name": "JavaScript",
+        "kind": "浏览器脚本语言",
+        "confidence": "高",
+        "selectors": ["script[src], script:not([type]), script[type='text/javascript'], script[type='module']"]
+      },
+      {
+        "name": "TypeScript",
+        "kind": "前端源码语言线索",
+        "confidence": "低",
+        "patterns": ["tslib", "\\\\.tsx?(?:\\\\?|#|$)", "typescript"]
+      },
+      {
+        "name": "Node.js",
+        "kind": "后端运行时",
+        "patterns": ["node_modules", "express-session", "connect.sid", "/_next/", "/_nuxt/", "sveltekit", "nestjs"]
+      },
+      {
+        "name": "PHP",
+        "kind": "后端语言",
+        "patterns": ["\\\\.php(?:\\\\?|#|$)", "phpsessid", "wp-content", "laravel", "symfony", "drupal", "joomla"]
+      },
+      {
+        "name": "Python",
+        "kind": "后端语言",
+        "patterns": ["django", "flask", "fastapi", "csrfmiddlewaretoken", "/static/admin/"]
+      },
+      {
+        "name": "Ruby",
+        "kind": "后端语言",
+        "patterns": ["rails-ujs", "authenticity_token", "active_storage", "turbo-rails"]
+      },
+      {
+        "name": "Java / JVM",
+        "kind": "后端语言 / 平台",
+        "patterns": ["jsessionid", "\\\\.jsp(?:\\\\?|#|$)", "javax.faces", "jakarta.faces", "spring-security", "wicket"]
+      },
+      {
+        "name": "C# / .NET",
+        "kind": "后端语言 / 平台",
+        "patterns": ["__VIEWSTATE", "__EVENTVALIDATION", "\\\\.aspx(?:\\\\?|#|$)", "aspnet", "/_framework/blazor"]
+      },
+      {
+        "name": "Go",
+        "kind": "后端语言",
+        "patterns": ["gorilla.csrf", "go-http-client", "gin-gonic", "fiber"]
+      },
+      {
+        "name": "Rust",
+        "kind": "后端语言",
+        "patterns": ["actix", "rocket", "axum", "warp"]
+      },
+      {
+        "name": "Elixir",
+        "kind": "后端语言",
+        "patterns": ["phoenix_live_view", "phx-click", "phoenix"]
+      }
+    ],
+    "cdnProviders": [
+      {
+        "name": "Tencent EdgeOne",
+        "patterns": ["edgeone\\\\.ai", "edgeone\\\\.app", "tencentedgeone"]
+      },
+      {
+        "name": "AWS Global Accelerator",
+        "patterns": ["awsglobalaccelerator\\\\.com"]
+      },
+      {
+        "name": "Oracle Cloud CDN",
+        "patterns": ["oraclecloud\\\\.com", "oci-cdn"]
+      },
+      {
+        "name": "IBM Cloud CDN",
+        "patterns": ["cdn\\\\.appdomain\\\\.cloud", "ibmcloud"]
+      },
+      {
+        "name": "Linode / Akamai Object Storage",
+        "patterns": ["linodeobjects\\\\.com", "linodeusercontent\\\\.com"]
+      },
+      {
+        "name": "OVHcloud Object Storage",
+        "patterns": ["storage\\\\.ovh\\\\.net", "ovhcloud"]
+      },
+      {
+        "name": "Wasabi Storage",
+        "patterns": ["wasabisys\\\\.com"]
+      },
+      {
+        "name": "Backblaze B2",
+        "patterns": ["backblazeb2\\\\.com", "b2\\\\.backblazeb2\\\\.com"]
+      }
+    ],
+    "backendHints": [
+      {
+        "name": "Ruby on Rails",
+        "confidence": "中",
+        "patterns": ["rails-ujs", "authenticity_token", "active_storage", "data-turbo"]
+      },
+      {
+        "name": "Django",
+        "confidence": "中",
+        "patterns": ["csrfmiddlewaretoken", "/static/admin/", "django.jQuery"]
+      },
+      {
+        "name": "Laravel",
+        "confidence": "中",
+        "patterns": ["laravel-mix", "livewire", "wire:click", "x-csrf-token"]
+      },
+      {
+        "name": "Spring Boot / Spring MVC",
+        "confidence": "低",
+        "patterns": ["jsessionid", "spring-security", "_csrf"]
+      },
+      {
+        "name": "Phoenix LiveView",
+        "confidence": "高",
+        "patterns": ["phoenix_live_view", "phx-click", "phx-submit", "LiveSocket"]
+      }
+    ],
+    "thirdPartyLogins": [
+      {
+        "name": "QQ 登录",
+        "kind": "国内社交登录",
+        "confidence": "高",
+        "patterns": ["graph\\\\.qq\\\\.com/oauth2\\\\.0/authorize", "connect\\\\.qq\\\\.com", "QC\\\\.Login", "QQ登录", "qqlogin", "qqConnect"]
+      },
+      {
+        "name": "微信登录",
+        "kind": "国内社交登录",
+        "confidence": "高",
+        "patterns": ["open\\\\.weixin\\\\.qq\\\\.com/connect/qrconnect", "snsapi_login", "wxLogin", "微信登录", "wechat login", "WeixinJSBridge"]
+      },
+      {
+        "name": "微博登录",
+        "kind": "国内社交登录",
+        "patterns": ["api\\\\.weibo\\\\.com/oauth2/authorize", "WB2\\\\.anyWhere", "SinaWeibo", "微博登录", "weibo login"]
+      },
+      {
+        "name": "支付宝登录",
+        "kind": "国内账号登录",
+        "patterns": ["openauth\\\\.alipay\\\\.com", "auth\\\\.alipay\\\\.com", "alipay.*oauth", "支付宝登录"]
+      },
+      {
+        "name": "钉钉登录",
+        "kind": "企业登录",
+        "patterns": ["oapi\\\\.dingtalk\\\\.com/connect/qrconnect", "login\\\\.dingtalk\\\\.com", "DingTalk", "钉钉登录"]
+      },
+      {
+        "name": "飞书 / Lark 登录",
+        "kind": "企业登录",
+        "patterns": ["open\\\\.feishu\\\\.cn/open-apis/authen", "passport\\\\.feishu\\\\.cn", "passport\\\\.larksuite\\\\.com", "飞书登录", "Lark login"]
+      },
+      {
+        "name": "企业微信登录",
+        "kind": "企业登录",
+        "patterns": ["open\\\\.work\\\\.weixin\\\\.qq\\\\.com", "work.weixin.qq.com", "企业微信登录", "wecom"]
+      },
+      {
+        "name": "华为帐号登录",
+        "kind": "国内账号登录",
+        "patterns": ["oauth-login\\\\.cloud\\\\.huawei\\\\.com", "login\\\\.huawei\\\\.com/oauth2", "Huawei ID", "华为帐号登录"]
+      },
+      {
+        "name": "小米帐号登录",
+        "kind": "国内账号登录",
+        "patterns": ["account\\\\.xiaomi\\\\.com/oauth2", "小米账号登录", "mi account"]
+      },
+      {
+        "name": "百度帐号登录",
+        "kind": "国内账号登录",
+        "patterns": ["openapi\\\\.baidu\\\\.com/oauth/2\\\\.0/authorize", "passport\\\\.baidu\\\\.com", "百度登录"]
+      },
+      {
+        "name": "GitHub 登录",
+        "kind": "开发者 OAuth",
+        "patterns": ["github\\\\.com/login/oauth/authorize", "GitHub登录", "sign in with github"]
+      },
+      {
+        "name": "Gitee 登录",
+        "kind": "开发者 OAuth",
+        "patterns": ["gitee\\\\.com/oauth/authorize", "Gitee登录", "码云登录"]
+      },
+      {
+        "name": "GitLab 登录",
+        "kind": "开发者 OAuth",
+        "patterns": ["gitlab\\\\.com/oauth/authorize", "/oauth/authorize.*gitlab", "GitLab登录"]
+      },
+      {
+        "name": "Bitbucket 登录",
+        "kind": "开发者 OAuth",
+        "patterns": ["bitbucket\\\\.org/site/oauth2/authorize", "Bitbucket login"]
+      },
+      {
+        "name": "Google 登录",
+        "kind": "国际社交登录",
+        "confidence": "高",
+        "patterns": ["accounts\\\\.google\\\\.com/o/oauth2", "accounts\\\\.google\\\\.com/gsi/client", "Sign in with Google", "google.accounts.id", "g_id_onload"]
+      },
+      {
+        "name": "Apple 登录",
+        "kind": "国际账号登录",
+        "confidence": "高",
+        "patterns": ["appleid\\\\.apple\\\\.com/auth/authorize", "appleid\\\\.auth\\\\.js", "Sign in with Apple", "AppleID\\\\.auth"]
+      },
+      {
+        "name": "Microsoft 登录",
+        "kind": "企业 / 国际账号登录",
+        "patterns": ["login\\\\.microsoftonline\\\\.com", "login\\\\.live\\\\.com/oauth20_authorize", "msal", "Microsoft登录"]
+      },
+      {
+        "name": "Facebook 登录",
+        "kind": "国际社交登录",
+        "patterns": ["connect\\\\.facebook\\\\.net/.*/sdk\\\\.js", "facebook\\\\.com/.*/dialog/oauth", "FB\\\\.login", "Login with Facebook"]
+      },
+      {
+        "name": "Twitter / X 登录",
+        "kind": "国际社交登录",
+        "patterns": ["twitter\\\\.com/i/oauth2/authorize", "api\\\\.twitter\\\\.com/oauth", "x.com/i/oauth2/authorize", "Twitter登录"]
+      },
+      {
+        "name": "LinkedIn 登录",
+        "kind": "国际社交登录",
+        "patterns": ["linkedin\\\\.com/oauth/v2/authorization", "Sign in with LinkedIn"]
+      },
+      {
+        "name": "Slack 登录",
+        "kind": "团队协作登录",
+        "patterns": ["slack\\\\.com/oauth/v2/authorize", "slack\\\\.com/openid/connect/authorize", "Sign in with Slack"]
+      },
+      {
+        "name": "Discord 登录",
+        "kind": "社区账号登录",
+        "patterns": ["discord\\\\.com/oauth2/authorize", "discordapp\\\\.com/oauth2/authorize", "Discord登录"]
+      },
+      {
+        "name": "Telegram 登录",
+        "kind": "社交登录",
+        "patterns": ["oauth\\\\.telegram\\\\.org", "telegram-login", "TelegramLoginWidget"]
+      },
+      {
+        "name": "LINE 登录",
+        "kind": "社交登录",
+        "patterns": ["access\\\\.line\\\\.me/oauth2/v2\\\\.1/authorize", "LINE Login"]
+      },
+      {
+        "name": "Kakao 登录",
+        "kind": "社交登录",
+        "patterns": ["kauth\\\\.kakao\\\\.com/oauth/authorize", "Kakao.Auth", "카카오 로그인"]
+      },
+      {
+        "name": "Naver 登录",
+        "kind": "社交登录",
+        "patterns": ["nid\\\\.naver\\\\.com/oauth2\\\\.0/authorize", "Naver Login"]
+      },
+      {
+        "name": "Auth0 Universal Login",
+        "kind": "身份服务",
+        "patterns": ["auth0\\\\.com/authorize", "auth0\\\\.com/u/login", "auth0-spa-js", "Auth0Lock"]
+      },
+      {
+        "name": "Okta 登录",
+        "kind": "身份服务",
+        "patterns": ["okta\\\\.com/oauth2", "okta-signin-widget", "OktaAuth"]
+      },
+      {
+        "name": "Keycloak 登录",
+        "kind": "开源身份服务",
+        "patterns": ["keycloak", "/realms/.*/protocol/openid-connect/auth", "kc-form-login", "Keycloak"]
+      },
+      {
+        "name": "CAS 单点登录",
+        "kind": "SSO 协议",
+        "patterns": ["/cas/login", "service=.*cas", "Central Authentication Service"]
+      },
+      {
+        "name": "SAML 登录",
+        "kind": "SSO 协议",
+        "patterns": ["SAMLRequest", "SAMLResponse", "saml2", "saml/login"]
+      },
+      {
+        "name": "OpenID Connect / OAuth2",
+        "kind": "身份协议",
+        "patterns": ["openid-connect/auth", "oauth2/authorize", "response_type=code", "client_id=.*redirect_uri"]
+      }
+    ],
+    "paymentSystems": [
+      {
+        "name": "支付宝支付",
+        "kind": "国内支付",
+        "confidence": "高",
+        "patterns": ["openapi\\\\.alipay\\\\.com/gateway\\\\.do", "alipay\\\\.trade", "alipayjsapi", "支付宝支付", "alipay.com"]
+      },
+      {
+        "name": "微信支付",
+        "kind": "国内支付",
+        "confidence": "高",
+        "patterns": ["pay\\\\.weixin\\\\.qq\\\\.com", "wx\\\\.chooseWXPay", "getBrandWCPayRequest", "WeixinJSBridge.*getBrandWCPayRequest", "微信支付"]
+      },
+      {
+        "name": "QQ 钱包",
+        "kind": "国内支付",
+        "patterns": ["qpay\\\\.qq\\\\.com", "mqqpay", "QQ钱包", "qqwallet"]
+      },
+      {
+        "name": "财付通 / Tenpay",
+        "kind": "国内支付",
+        "patterns": ["tenpay\\\\.com", "财付通", "Tenpay"]
+      },
+      {
+        "name": "银联在线支付",
+        "kind": "国内银行卡支付",
+        "patterns": ["unionpay", "95516\\\\.com", "upop", "银联在线", "ChinaPay"]
+      },
+      {
+        "name": "京东支付",
+        "kind": "国内支付",
+        "patterns": ["jdpay", "pay\\\\.jd\\\\.com", "京东支付"]
+      },
+      {
+        "name": "百度收银台",
+        "kind": "国内支付",
+        "patterns": ["bcebos.*pay", "baifubao", "百度收银台", "百度钱包"]
+      },
+      {
+        "name": "美团支付",
+        "kind": "国内支付",
+        "patterns": ["meituanpay", "pay\\\\.meituan\\\\.com", "美团支付"]
+      },
+      {
+        "name": "Ping++",
+        "kind": "聚合支付",
+        "patterns": ["pingxx", "pingplusplus", "Pingpp", "js\\\\.pingxx\\\\.com"]
+      },
+      {
+        "name": "连连支付",
+        "kind": "国内支付",
+        "patterns": ["lianlianpay", "lianlianpay.com", "连连支付"]
+      },
+      {
+        "name": "易宝支付",
+        "kind": "国内支付",
+        "patterns": ["yeepay", "yeepay.com", "易宝支付"]
+      },
+      {
+        "name": "汇付天下",
+        "kind": "国内支付",
+        "patterns": ["chinapnr", "huifu", "汇付天下"]
+      },
+      {
+        "name": "快钱支付",
+        "kind": "国内支付",
+        "patterns": ["99bill", "快钱支付", "kuaiqian"]
+      },
+      {
+        "name": "PayPal",
+        "kind": "国际支付",
+        "patterns": ["paypal\\\\.com/sdk/js", "paypalobjects\\\\.com", "paypal.Buttons"]
+      },
+      {
+        "name": "Stripe",
+        "kind": "国际支付",
+        "patterns": ["js\\\\.stripe\\\\.com", "checkout\\\\.stripe\\\\.com", "stripe\\\\.redirectToCheckout"]
+      },
+      {
+        "name": "Adyen",
+        "kind": "国际支付",
+        "patterns": ["checkoutshopper-live\\\\.adyen\\\\.com", "AdyenCheckout", "adyen.com/checkout"]
+      },
+      {
+        "name": "Braintree",
+        "kind": "国际支付",
+        "patterns": ["js\\\\.braintreegateway\\\\.com", "braintreegateway.com", "braintree.dropin"]
+      },
+      {
+        "name": "Paddle",
+        "kind": "国际支付",
+        "patterns": ["cdn\\\\.paddle\\\\.com", "Paddle.Checkout", "paddle.com/paddle"]
+      },
+      {
+        "name": "Razorpay",
+        "kind": "国际支付",
+        "patterns": ["checkout\\\\.razorpay\\\\.com", "Razorpay", "razorpay_payment_id"]
+      },
+      {
+        "name": "Klarna",
+        "kind": "先买后付",
+        "patterns": ["x\\\\.klarnacdn\\\\.net", "klarna.com", "Klarna"]
+      },
+      {
+        "name": "Afterpay / Clearpay",
+        "kind": "先买后付",
+        "patterns": ["afterpay", "clearpay", "afterpay.com"]
+      }
+    ],
+    "saasServices": [
+      {
+        "name": "RSSHub",
+        "kind": "RSS 服务",
+        "patterns": ["rsshub", "rsshub.app"]
+      },
+      {
+        "name": "Substack",
+        "kind": "内容订阅平台",
+        "patterns": ["substackcdn.com", "substack.com"]
+      },
+      {
+        "name": "Beehiiv",
+        "kind": "内容订阅平台",
+        "patterns": ["beehiiv.com", "beehiiv.net"]
+      }
+    ]
+  },
+  "headers": {
+    "cdnProviders": [
+      {
+        "name": "Tencent EdgeOne",
+        "patterns": ["edgeone", "eo-cache-status", "tencentedgeone"]
+      },
+      {
+        "name": "Oracle Cloud CDN",
+        "patterns": ["oraclecloud", "oci-cdn"]
+      },
+      {
+        "name": "IBM Cloud CDN",
+        "patterns": ["appdomain.cloud", "ibmcloud"]
+      },
+      {
+        "name": "AWS Global Accelerator",
+        "patterns": ["awsglobalaccelerator"]
+      },
+      {
+        "name": "Backblaze B2",
+        "patterns": ["backblazeb2", "x-bz-"]
+      },
+      {
+        "name": "Wasabi Storage",
+        "patterns": ["wasabisys", "x-amz-request-id"]
+      }
+    ],
+    "languages": [
+      {
+        "name": "PHP",
+        "patterns": ["x-powered-by:.*php", "set-cookie:.*phpsessid", "\\\\.php(?:\\\\?|#|$)"]
+      },
+      {
+        "name": "Node.js",
+        "patterns": ["x-powered-by:.*(?:express|koa|fastify|nestjs|node)", "set-cookie:.*connect\\\\.sid"]
+      },
+      {
+        "name": "Python",
+        "patterns": ["x-powered-by:.*(?:django|flask|fastapi)", "server:.*(?:uvicorn|gunicorn|werkzeug)", "set-cookie:.*csrftoken"]
+      },
+      {
+        "name": "Ruby",
+        "patterns": ["x-powered-by:.*rails", "server:.*(?:puma|unicorn|passenger)", "x-runtime:"]
+      },
+      {
+        "name": "Java / JVM",
+        "patterns": ["set-cookie:.*jsessionid", "server:.*(?:tomcat|jetty|undertow|wildfly|weblogic|websphere)"]
+      },
+      {
+        "name": "C# / .NET",
+        "patterns": ["x-aspnet", "x-powered-by:.*asp\\\\.net", "server:.*(?:iis|kestrel)", "set-cookie:.*asp\\\\.net_sessionid"]
+      },
+      {
+        "name": "Go",
+        "patterns": ["x-powered-by:.*(?:gin|fiber|go)", "server:.*caddy"]
+      },
+      {
+        "name": "Rust",
+        "patterns": ["x-powered-by:.*(?:actix|rocket|axum|warp)"]
+      },
+      {
+        "name": "Elixir",
+        "patterns": ["x-powered-by:.*phoenix", "server:.*cowboy"]
+      }
+    ],
+    "websitePrograms": [
+      {
+        "name": "WordPress",
+        "kind": "CMS / 博客",
+        "patterns": ["x-pingback", "x-generator:.*wordpress", "link:.*wp-json"]
+      },
+      {
+        "name": "Drupal",
+        "kind": "CMS",
+        "patterns": ["x-drupal-cache", "x-generator:.*drupal"]
+      },
+      {
+        "name": "Shopify",
+        "kind": "SaaS 电商",
+        "patterns": ["myshopify.com", "cdn.shopify.com", "x-shopid"]
+      },
+      {
+        "name": "Magento / Adobe Commerce",
+        "kind": "电商系统",
+        "patterns": ["x-magento", "magento"]
+      }
+    ]
+  }
+}
