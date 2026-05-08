@@ -16,7 +16,7 @@
       <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#0f172a" flood-opacity=".14"/>
     </filter>
   </defs>
-  <g transform="translate(64 64) scale(1.16) translate(-64 -64)">
+  <g transform="translate(64 68) scale(1.34 1.48) translate(-64 -64)">
     <g filter="url(#softShadow)">
       <path d="M33 25h47l29 25-23 47H39L19 60z" fill="#ffffff"/>
     </g>
