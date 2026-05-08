@@ -6,6 +6,14 @@ const activeDetectionTimers = new Map()
 
 importScripts('rule-loader.js', 'page-detector.js')
 
+chrome.runtime.onInstalled.addListener(() => {
+  injectContentObserverIntoOpenTabs()
+})
+
+chrome.runtime.onStartup.addListener(() => {
+  injectContentObserverIntoOpenTabs()
+})
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (!message || !message.type) {
     return false
@@ -105,6 +113,30 @@ chrome.webRequest.onHeadersReceived.addListener(
   { urls: ['<all_urls>'] },
   ['responseHeaders', 'extraHeaders']
 )
+
+async function injectContentObserverIntoOpenTabs() {
+  try {
+    const tabs = await chrome.tabs.query({})
+    await Promise.allSettled(tabs.filter(canInjectContentObserver).map(tab => injectContentObserver(tab.id)))
+  } catch {
+    return
+  }
+}
+
+function canInjectContentObserver(tab) {
+  return typeof tab?.id === 'number' && /^https?:\/\//i.test(String(tab.url || ''))
+}
+
+async function injectContentObserver(tabId) {
+  try {
+    await chrome.scripting.executeScript({
+      target: { tabId },
+      files: ['content-observer.js']
+    })
+  } catch {
+    return
+  }
+}
 
 async function loadTechRules() {
   if (!techRulesPromise) {

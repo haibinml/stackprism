@@ -23,8 +23,14 @@
   let performanceObserver = null
   let mutationObserver = null
   let navigationInterval = 0
+  let originalPushState = null
+  let originalReplaceState = null
+  let wrappedPushState = null
+  let wrappedReplaceState = null
 
+  installContextInvalidationGuards()
   if (!getRuntime()) {
+    stopObserver()
     return
   }
 
@@ -41,7 +47,32 @@
     if (!isExtensionContextInvalidated(error)) {
       throw error
     }
-    stopObserver()
+    stopObserver({ keepErrorGuards: true })
+  }
+
+  function installContextInvalidationGuards() {
+    window.addEventListener('error', handleGlobalError)
+    window.addEventListener('unhandledrejection', handleUnhandledRejection)
+  }
+
+  function handleGlobalError(event) {
+    if (!isExtensionContextInvalidated(event.error || event.message)) {
+      return
+    }
+    event.preventDefault()
+    if (!getRuntime()) {
+      stopObserver({ keepErrorGuards: true })
+    }
+  }
+
+  function handleUnhandledRejection(event) {
+    if (!isExtensionContextInvalidated(event.reason)) {
+      return
+    }
+    event.preventDefault()
+    if (!getRuntime()) {
+      stopObserver({ keepErrorGuards: true })
+    }
   }
 
   function replacePreviousObserver() {
@@ -121,19 +152,21 @@
   }
 
   function installNavigationObserver() {
-    const originalPushState = history.pushState
-    const originalReplaceState = history.replaceState
+    originalPushState = history.pushState
+    originalReplaceState = history.replaceState
 
-    history.pushState = function pushState(...args) {
+    wrappedPushState = function pushState(...args) {
       const result = originalPushState.apply(this, args)
       handleUrlChange()
       return result
     }
-    history.replaceState = function replaceState(...args) {
+    wrappedReplaceState = function replaceState(...args) {
       const result = originalReplaceState.apply(this, args)
       handleUrlChange()
       return result
     }
+    history.pushState = wrappedPushState
+    history.replaceState = wrappedReplaceState
     window.addEventListener('popstate', handleUrlChange)
     navigationInterval = window.setInterval(handleUrlChange, 1200)
   }
@@ -336,7 +369,7 @@
 
   function handleSendFailure(error) {
     if (isExtensionContextInvalidated(error)) {
-      stopObserver()
+      stopObserver({ keepErrorGuards: true })
     }
   }
 
@@ -352,7 +385,7 @@
       return chrome.runtime
     } catch (error) {
       if (isExtensionContextInvalidated(error)) {
-        stopObserver()
+        stopObserver({ keepErrorGuards: true })
       }
       return null
     }
@@ -366,12 +399,24 @@
     }
   }
 
-  function stopObserver() {
+  function stopObserver(options = {}) {
+    const keepErrorGuards = Boolean(options?.keepErrorGuards)
     stopped = true
     clearTimeout(sendTimer)
     if (navigationInterval) {
       window.clearInterval(navigationInterval)
       navigationInterval = 0
+    }
+    window.removeEventListener('popstate', handleUrlChange)
+    if (history.pushState === wrappedPushState && originalPushState) {
+      history.pushState = originalPushState
+    }
+    if (history.replaceState === wrappedReplaceState && originalReplaceState) {
+      history.replaceState = originalReplaceState
+    }
+    if (!keepErrorGuards) {
+      window.removeEventListener('error', handleGlobalError)
+      window.removeEventListener('unhandledrejection', handleUnhandledRejection)
     }
     performanceObserver?.disconnect?.()
     mutationObserver?.disconnect?.()
