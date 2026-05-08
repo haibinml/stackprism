@@ -42,10 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('settingsBtn').addEventListener('click', openSettingsPage)
   document.getElementById('refreshBtn').addEventListener('click', runDetection)
   document.getElementById('copyBtn').addEventListener('click', copyResult)
-  document.getElementById('sourceSearchBtn').addEventListener('click', searchPageSourceFromPopup)
+  document.getElementById('sourceSearchBtn').addEventListener('click', runSourceSearchFromPopup)
   document.getElementById('sourceQuery').addEventListener('keydown', event => {
     if (event.key === 'Enter') {
-      searchPageSourceFromPopup()
+      runSourceSearchFromPopup()
     }
   })
   loadSettings()
@@ -83,6 +83,22 @@ function openSettingsPage() {
     }
     chrome.runtime.openOptionsPage?.()
   })
+}
+
+function runSourceSearchFromPopup() {
+  if (typeof searchPageSourceFromPopup === 'function') {
+    return searchPageSourceFromPopup()
+  }
+
+  const meta = document.getElementById('searchMeta')
+  const output = document.getElementById('sourceSearchOutput')
+  if (meta) {
+    meta.textContent = '源代码搜索模块加载失败，请刷新扩展后重试。'
+  }
+  if (output) {
+    output.textContent = ''
+  }
+  return Promise.resolve()
 }
 
 async function loadSettings() {
