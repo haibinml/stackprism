@@ -35,7 +35,7 @@ const state = {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('settingsBtn').addEventListener('click', () => chrome.runtime.openOptionsPage())
+  document.getElementById('settingsBtn').addEventListener('click', openSettingsPage)
   document.getElementById('refreshBtn').addEventListener('click', runDetection)
   document.getElementById('copyBtn').addEventListener('click', copyResult)
   document.getElementById('sourceSearchBtn').addEventListener('click', searchPageSourceFromPopup)
@@ -51,6 +51,16 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .finally(runDetection)
 })
+
+function openSettingsPage() {
+  const url = chrome.runtime.getURL('settings.html')
+  chrome.tabs.create({ url }, () => {
+    if (!chrome.runtime.lastError) {
+      return
+    }
+    chrome.runtime.openOptionsPage?.()
+  })
+}
 
 async function loadSettings() {
   try {
