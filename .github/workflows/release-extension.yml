@@ -1,0 +1,91 @@
+name: Build Extension Release
+
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Existing release tag to upload assets to, for example v1.0.17
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    name: Package browser extension
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Read and validate version
+        id: meta
+        shell: bash
+        env:
+          EVENT_TAG: ${{ github.event.release.tag_name }}
+          INPUT_TAG: ${{ inputs.release_tag }}
+        run: |
+          set -euo pipefail
+
+          version="$(node -p "require('./manifest.json').version")"
+          tag="${EVENT_TAG:-${INPUT_TAG:-}}"
+
+          if [ -z "$tag" ]; then
+            tag="v${version}"
+          fi
+
+          normalized_tag="${tag#v}"
+          if [ "$normalized_tag" != "$version" ]; then
+            echo "::error::Release tag $tag does not match manifest.json version $version."
+            exit 1
+          fi
+
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          echo "zip_name=stackprism-v${version}.zip" >> "$GITHUB_OUTPUT"
+
+      - name: Build extension zip
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          rm -rf dist package
+          mkdir -p dist package
+
+          cp manifest.json package/
+          cp background.js content-observer.js page-detector.js rule-loader.js tech-links.json package/
+          cp popup.html popup.css popup.js package/
+          cp settings.html settings.css settings.js package/
+          cp help.html help.css help.js package/
+          cp LICENSE package/
+          cp -R icons rules package/
+
+          (
+            cd package
+            zip -r "../dist/${{ steps.meta.outputs.zip_name }}" .
+          )
+
+          sha256sum "dist/${{ steps.meta.outputs.zip_name }}" > "dist/${{ steps.meta.outputs.zip_name }}.sha256"
+
+      - name: Upload package to release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          gh release upload "${{ steps.meta.outputs.tag }}" \
+            "dist/${{ steps.meta.outputs.zip_name }}" \
+            "dist/${{ steps.meta.outputs.zip_name }}.sha256" \
+            --clobber
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: stackprism-v${{ steps.meta.outputs.version }}
+          path: dist/
