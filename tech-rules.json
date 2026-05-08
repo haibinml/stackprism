@@ -762,7 +762,7 @@
       {
         "name": "Magento / Adobe Commerce",
         "kind": "电商系统",
-        "patterns": ["Magento_", "mage/", "/static/version\\d+/frontend/", "requirejs-config.js"],
+        "patterns": ["Magento_", "(?:^|/)static/(?:version\\d+/)?frontend/", "(?:^|/)pub/static/frontend/", "(?:^|/)frontend/[^\\s\"'<>?#]+/[^\\s\"'<>?#]+/(?:Magento_|mage/)", "requirejs-config\\.js.*(?:Magento_|mage)"],
         "globals": ["Magento"]
       },
       {
@@ -886,7 +886,7 @@
       {
         "name": "Strapi",
         "kind": "Headless CMS",
-        "patterns": ["strapi", "/uploads/", "strapi.io"]
+        "patterns": ["strapi", "strapi\\.io", "strapi-admin", "powered by strapi", "__strapi"]
       },
       {
         "name": "Directus",

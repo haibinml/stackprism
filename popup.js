@@ -1478,10 +1478,13 @@ function detectPageTechnologies(ruleConfig = {}) {
     if (/joomla/.test(generator) || /\/media\/system\/js\/|com_content|joomla/.test(resources.text + html)) {
       add('CMS / 电商平台', 'Joomla', /joomla/.test(generator) ? '高' : '中', '存在 Joomla 生成器或资源线索')
     }
+    const magentoText = resources.text + html
     if (
       /magento/.test(generator) ||
       hasGlobal('Magento') ||
-      /\/static\/version\d+\/frontend\/|mage\/|magento/.test(resources.text + html)
+      /(?:^|\/)static\/(?:version\d+\/)?frontend\/|(?:^|\/)pub\/static\/frontend\/|magento_|requirejs-config\.js|(?:^|[^a-z])magento(?:[^a-z]|$)/.test(
+        magentoText
+      )
     ) {
       add(
         'CMS / 电商平台',
