@@ -1,0 +1,98 @@
+{
+  "page": {
+    "buildRuntime": [
+      {
+        "category": "构建与运行时",
+        "name": "Webpack",
+        "confidence": "中",
+        "patterns": [
+          "webpack",
+          "__webpack_require__"
+        ],
+        "globals": [
+          "webpackChunk",
+          "webpackJsonp"
+        ]
+      },
+      {
+        "category": "构建与运行时",
+        "name": "Vite",
+        "confidence": "高",
+        "patterns": [
+          "/@vite/client",
+          "vite\\.svg",
+          "__vite",
+          "vite/client"
+        ]
+      },
+      {
+        "category": "构建与运行时",
+        "name": "Parcel",
+        "confidence": "中",
+        "patterns": [
+          "parcel",
+          "__parcel__"
+        ]
+      },
+      {
+        "category": "构建与运行时",
+        "name": "RequireJS / AMD",
+        "confidence": "中",
+        "patterns": [
+          "require(?:\\.min)?\\.js",
+          "requirejs"
+        ],
+        "globals": [
+          "requirejs"
+        ]
+      },
+      {
+        "category": "构建与运行时",
+        "name": "SystemJS",
+        "confidence": "中",
+        "patterns": [
+          "systemjs"
+        ],
+        "globals": [
+          "System"
+        ]
+      },
+      {
+        "category": "构建与运行时",
+        "name": "Babel Standalone",
+        "confidence": "高",
+        "globals": [
+          "Babel"
+        ],
+        "selectors": [
+          "script[type=\"text/babel\"]",
+          "script[type=\"text/jsx\"]"
+        ]
+      },
+      {
+        "category": "构建与运行时",
+        "name": "ES Modules",
+        "confidence": "中",
+        "selectors": [
+          "script[type=\"module\"]"
+        ]
+      },
+      {
+        "category": "构建与运行时",
+        "name": "PWA Manifest",
+        "confidence": "中",
+        "selectors": [
+          "link[rel=\"manifest\"]"
+        ]
+      },
+      {
+        "category": "构建与运行时",
+        "name": "Zone.js",
+        "confidence": "高",
+        "globals": [
+          "Zone"
+        ]
+      }
+    ]
+  }
+}

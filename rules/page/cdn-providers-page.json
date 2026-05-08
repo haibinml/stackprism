@@ -1,0 +1,758 @@
+{
+  "page": {
+    "cdnProviders": [
+      {
+        "category": "CDN / 托管",
+        "name": "Cloudflare CDN",
+        "confidence": "高",
+        "patterns": [
+          "cdnjs\\.cloudflare\\.com|static\\.cloudflareinsights\\.com|cloudflare\\.com\\/cdn-cgi|cloudflarestream\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Cloudflare Pages",
+        "confidence": "高",
+        "patterns": [
+          "pages\\.dev"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "jsDelivr",
+        "confidence": "高",
+        "patterns": [
+          "cdn\\.jsdelivr\\.net|fastly\\.jsdelivr\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "UNPKG",
+        "confidence": "高",
+        "patterns": [
+          "unpkg\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "cdnjs",
+        "confidence": "高",
+        "patterns": [
+          "cdnjs\\.cloudflare\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Google Hosted Libraries / Fonts",
+        "confidence": "高",
+        "patterns": [
+          "ajax\\.googleapis\\.com|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Google Cloud CDN / Storage",
+        "confidence": "高",
+        "patterns": [
+          "storage\\.googleapis\\.com|googleusercontent\\.com|gvt1\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Microsoft Ajax CDN",
+        "confidence": "高",
+        "patterns": [
+          "ajax\\.aspnetcdn\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "jQuery CDN",
+        "confidence": "高",
+        "patterns": [
+          "code\\.jquery\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "BootstrapCDN / StackPath",
+        "confidence": "高",
+        "patterns": [
+          "stackpath\\.bootstrapcdn\\.com|maxcdn\\.bootstrapcdn\\.com|netdna-ssl\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Skypack",
+        "confidence": "高",
+        "patterns": [
+          "cdn\\.skypack\\.dev"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "esm.sh",
+        "confidence": "高",
+        "patterns": [
+          "esm\\.sh"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "JSPM CDN",
+        "confidence": "高",
+        "patterns": [
+          "ga\\.jspm\\.io|jspm\\.dev"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Pika CDN",
+        "confidence": "高",
+        "patterns": [
+          "cdn\\.pika\\.dev"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "AWS CloudFront",
+        "confidence": "高",
+        "patterns": [
+          "cloudfront\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "AWS S3 / Static Hosting",
+        "confidence": "高",
+        "patterns": [
+          "s3[.-][a-z0-9-]+\\.amazonaws\\.com|s3\\.amazonaws\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Akamai",
+        "confidence": "高",
+        "patterns": [
+          "akamaihd\\.net|akamaiedge\\.net|edgesuite\\.net|akamai\\.net|akamaized\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Fastly",
+        "confidence": "高",
+        "patterns": [
+          "fastly\\.net|fastlylb\\.net|map\\.fastly\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Azure CDN / Front Door",
+        "confidence": "高",
+        "patterns": [
+          "azureedge\\.net|azurefd\\.net|afd\\.azureedge\\.net|z01\\.azurefd\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Bunny CDN",
+        "confidence": "高",
+        "patterns": [
+          "b-cdn\\.net|bunnycdn\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "KeyCDN",
+        "confidence": "高",
+        "patterns": [
+          "kxcdn\\.com|keycdn\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "CDN77",
+        "confidence": "高",
+        "patterns": [
+          "cdn77\\.org|cdn77\\.com|rsc\\.cdn77\\.org"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Gcore CDN",
+        "confidence": "高",
+        "patterns": [
+          "gcorelabs\\.com|gcdn\\.co|gcore\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Edgio / Limelight",
+        "confidence": "高",
+        "patterns": [
+          "llnwd\\.net|limelight\\.com|edgio\\.net|edgecastcdn\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "StackPath",
+        "confidence": "高",
+        "patterns": [
+          "stackpathcdn\\.com|stackpathdns\\.com|stackpath\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "CacheFly",
+        "confidence": "高",
+        "patterns": [
+          "cachefly\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Imperva / Incapsula",
+        "confidence": "高",
+        "patterns": [
+          "incapsula\\.com|impervadns\\.net|imperva\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Sucuri CDN",
+        "confidence": "高",
+        "patterns": [
+          "sucuri\\.net|sucuricdn\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "BelugaCDN",
+        "confidence": "高",
+        "patterns": [
+          "belugacdn\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Medianova CDN",
+        "confidence": "高",
+        "patterns": [
+          "mncdn\\.com|medianova\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "NGENIX CDN",
+        "confidence": "高",
+        "patterns": [
+          "ngenix\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "CDNvideo",
+        "confidence": "高",
+        "patterns": [
+          "cdnvideo\\.ru|cdnvideo\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Azion",
+        "confidence": "高",
+        "patterns": [
+          "azioncdn\\.net|azionedge\\.net|azion\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "GoCache",
+        "confidence": "高",
+        "patterns": [
+          "gocache\\.com\\.br|gocache\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Section.io",
+        "confidence": "高",
+        "patterns": [
+          "section\\.io|sectioncdn\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "QUIC.cloud",
+        "confidence": "高",
+        "patterns": [
+          "quic\\.cloud|quic\\.cloudns\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "CDNsun",
+        "confidence": "高",
+        "patterns": [
+          "cdnsun\\.com|cdnsun\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Leaseweb CDN",
+        "confidence": "高",
+        "patterns": [
+          "leasewebcdn\\.com|lswcdn\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "OVHcloud CDN",
+        "confidence": "高",
+        "patterns": [
+          "ovhcdn\\.com|ovhstatic\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Scaleway Object Storage / CDN",
+        "confidence": "高",
+        "patterns": [
+          "scw\\.cloud|scaleway\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Selectel CDN",
+        "confidence": "高",
+        "patterns": [
+          "selectel\\.ru|selcdn\\.ru"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Yandex CDN",
+        "confidence": "高",
+        "patterns": [
+          "yastatic\\.net|yandex\\.st"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "VK CDN",
+        "confidence": "高",
+        "patterns": [
+          "vk-cdn\\.net|userapi\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Naver Cloud CDN",
+        "confidence": "高",
+        "patterns": [
+          "ncloud\\.com|ntruss\\.com|pstatic\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Kakao CDN",
+        "confidence": "高",
+        "patterns": [
+          "kakaocdn\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "FPT CDN",
+        "confidence": "高",
+        "patterns": [
+          "fptcdn\\.net|fptcloud\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Viettel CDN",
+        "confidence": "高",
+        "patterns": [
+          "viettelcdn\\.vn|viettelidc\\.com\\.vn"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "VNCDN",
+        "confidence": "高",
+        "patterns": [
+          "vncdn\\.vn"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "BitGravity / Tata CDN",
+        "confidence": "高",
+        "patterns": [
+          "bitgravity\\.com|bitgravity\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Alibaba Cloud CDN",
+        "confidence": "高",
+        "patterns": [
+          "alicdn\\.com|aliyuncs\\.com|alikunlun\\.com|taobaocdn\\.com|alicdn\\.cn"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Tencent Cloud CDN",
+        "confidence": "高",
+        "patterns": [
+          "qcloudcdn\\.com|myqcloud\\.com|gtimg\\.com|tencent-cloud\\.net|tencentcs\\.com|tencentcdn\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Baidu Cloud CDN",
+        "confidence": "高",
+        "patterns": [
+          "bdstatic\\.com|baidustatic\\.com|bdimg\\.com|bcebos\\.com|yunjiasu-cdn\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Huawei Cloud CDN",
+        "confidence": "高",
+        "patterns": [
+          "huaweicloud\\.com|huaweicloudcdn\\.com|cdnhwc\\d*\\.com|hwcdn\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Kingsoft Cloud CDN",
+        "confidence": "高",
+        "patterns": [
+          "ksyuncdn\\.com|ks-cdn\\.com|ksyun\\.com|ks-cdn\\d*\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Qiniu CDN",
+        "confidence": "高",
+        "patterns": [
+          "qiniucdn\\.com|clouddn\\.com|qbox\\.me|qnssl\\.com|qiniu\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "UpYun",
+        "confidence": "高",
+        "patterns": [
+          "upaiyun\\.com|upyun\\.com|upyunso\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "ChinaCache",
+        "confidence": "高",
+        "patterns": [
+          "chinacache\\.net|ccgslb\\.com\\.cn|ccgslb\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Wangsu / CDNetworks",
+        "confidence": "高",
+        "patterns": [
+          "cdnetworks\\.net|wangsu\\.com|wswebcdn\\.com|wscdns\\.com|panthercdn\\.com|qtlcdn\\.com|quantil\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "BaishanCloud",
+        "confidence": "高",
+        "patterns": [
+          "baishancloud\\.com|bsgslb\\.com|qingcdn\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "UCloud CDN",
+        "confidence": "高",
+        "patterns": [
+          "ucloud\\.cn|ufileos\\.com|ucloudstack\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "JD Cloud CDN",
+        "confidence": "高",
+        "patterns": [
+          "jcloudcs\\.com|jcloudedge\\.com|jdcloud-oss\\.com|jdcloud\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Volcengine / BytePlus CDN",
+        "confidence": "高",
+        "patterns": [
+          "bytecdn\\.cn|byteimg\\.com|bytegoofy\\.com|volccdn\\.com|byteplus\\.com|volces\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "360 CDN / 奇舞团静态资源",
+        "confidence": "高",
+        "patterns": [
+          "qhimg\\.com|qhres\\.com|baomitu\\.com|360tres\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "NetEase CDN",
+        "confidence": "高",
+        "patterns": [
+          "nosdn\\.127\\.net|126\\.net|163cdn\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Sina CDN",
+        "confidence": "高",
+        "patterns": [
+          "sinaimg\\.cn|sinajs\\.cn|sina\\.com\\.cn\\/js"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "BootCDN",
+        "confidence": "高",
+        "patterns": [
+          "bootcdn\\.net|bootcss\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Staticfile CDN",
+        "confidence": "高",
+        "patterns": [
+          "staticfile\\.org|staticfile\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "npmmirror CDN",
+        "confidence": "高",
+        "patterns": [
+          "npmmirror\\.com|cdn\\.npmmirror\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Vercel",
+        "confidence": "高",
+        "patterns": [
+          "vercel\\.app|vercel-insights\\.com|_vercel"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Netlify",
+        "confidence": "高",
+        "patterns": [
+          "netlify\\.app|netlify\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Firebase Hosting",
+        "confidence": "高",
+        "patterns": [
+          "firebaseapp\\.com|web\\.app"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "GitHub Pages / GitHub Assets",
+        "confidence": "高",
+        "patterns": [
+          "github\\.io|githubusercontent\\.com|githubassets\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "GitLab Pages",
+        "confidence": "高",
+        "patterns": [
+          "gitlab\\.io"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Render",
+        "confidence": "高",
+        "patterns": [
+          "onrender\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Fly.io",
+        "confidence": "高",
+        "patterns": [
+          "fly\\.dev|fly\\.io"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Railway",
+        "confidence": "高",
+        "patterns": [
+          "railway\\.app"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Heroku",
+        "confidence": "高",
+        "patterns": [
+          "herokuapp\\.com|herokucdn\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Deno Deploy",
+        "confidence": "高",
+        "patterns": [
+          "deno\\.dev|deno\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Surge",
+        "confidence": "高",
+        "patterns": [
+          "surge\\.sh"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "DigitalOcean App Platform / Spaces CDN",
+        "confidence": "高",
+        "patterns": [
+          "ondigitalocean\\.app|cdn\\.digitaloceanspaces\\.com|digitaloceanspaces\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Shopify CDN",
+        "confidence": "高",
+        "patterns": [
+          "cdn\\.shopify\\.com|shopifycdn\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "WordPress.com CDN",
+        "confidence": "高",
+        "patterns": [
+          "wp\\.com|files\\.wordpress\\.com|i\\d\\.wp\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Wix CDN",
+        "confidence": "高",
+        "patterns": [
+          "wixstatic\\.com|parastorage\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Squarespace CDN",
+        "confidence": "高",
+        "patterns": [
+          "static1\\.squarespace\\.com|squarespace-cdn\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Webflow CDN",
+        "confidence": "高",
+        "patterns": [
+          "assets\\.website-files\\.com|global-uploads\\.webflow\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Cloudinary CDN",
+        "confidence": "高",
+        "patterns": [
+          "res\\.cloudinary\\.com|cloudinary\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Imgix",
+        "confidence": "高",
+        "patterns": [
+          "imgix\\.net|ixlib="
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "ImageKit",
+        "confidence": "高",
+        "patterns": [
+          "imagekit\\.io|ik\\.imagekit\\.io"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Sirv CDN",
+        "confidence": "高",
+        "patterns": [
+          "sirv\\.com|sirvcdn\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Uploadcare CDN",
+        "confidence": "高",
+        "patterns": [
+          "ucarecdn\\.com|uploadcare\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Contentful Assets CDN",
+        "confidence": "高",
+        "patterns": [
+          "ctfassets\\.net|images\\.ctfassets\\.net"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Sanity CDN",
+        "confidence": "高",
+        "patterns": [
+          "cdn\\.sanity\\.io"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Storyblok CDN",
+        "confidence": "高",
+        "patterns": [
+          "a\\.storyblok\\.com|img2\\.storyblok\\.com"
+        ]
+      },
+      {
+        "category": "CDN / 托管",
+        "name": "Prismic CDN",
+        "confidence": "高",
+        "patterns": [
+          "prismic\\.io|prismic\\.cdn"
+        ]
+      }
+    ]
+  }
+}

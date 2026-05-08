@@ -1,0 +1,37 @@
+{
+  "page": {
+    "websitePrograms": [
+      {
+        "category": "CMS / 电商平台",
+        "name": "Wix",
+        "confidence": "中",
+        "patterns": [
+          "wixstatic\\.com",
+          "wix-code",
+          "x-wix"
+        ]
+      },
+      {
+        "category": "CMS / 电商平台",
+        "name": "Squarespace",
+        "confidence": "中",
+        "patterns": [
+          "squarespace\\.com",
+          "static1\\.squarespace\\.com"
+        ]
+      },
+      {
+        "category": "CMS / 电商平台",
+        "name": "Webflow",
+        "confidence": "高",
+        "patterns": [
+          "webflow\\.js",
+          "webflow\\.com"
+        ],
+        "selectors": [
+          "html[data-wf-page]"
+        ]
+      }
+    ]
+  }
+}

@@ -108,11 +108,10 @@ chrome.webRequest.onHeadersReceived.addListener(
 
 async function loadTechRules() {
   if (!techRulesPromise) {
-    techRulesPromise = loadStackPrismRules()
-      .catch(error => {
-        techRulesPromise = null
-        return {}
-      })
+    techRulesPromise = loadStackPrismRules().catch(error => {
+      techRulesPromise = null
+      return {}
+    })
   }
   return techRulesPromise
 }
@@ -405,6 +404,9 @@ function detectFromDynamicSnapshot(snapshot, pageRules) {
     .toLowerCase()
 
   applyDynamicRuleList(add, pageRules.dynamicTechnologies, text, 'JSON 动态技术规则')
+  applyDynamicRuleList(add, pageRules.frontendFrameworks, text, 'JSON 前端框架动态规则', '前端框架')
+  applyDynamicRuleList(add, pageRules.uiFrameworks, text, 'JSON UI 框架动态规则', 'UI / CSS 框架')
+  applyDynamicRuleList(add, pageRules.buildRuntime, text, 'JSON 构建运行时动态规则', '构建与运行时')
   detectDynamicMinifiedScriptFallback(add, snapshot, technologies)
   applyDynamicRuleList(add, pageRules.cdnProviders, text, 'JSON CDN 动态规则', 'CDN / 托管')
   applyDynamicRuleList(add, pageRules.websitePrograms, text, 'JSON 网站程序动态规则', '网站程序', rule =>

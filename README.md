@@ -8,8 +8,8 @@ StackPrism 栈棱镜是一个 Chrome / Edge Manifest V3 浏览器扩展，用于
 
 图标源文件在 `icons/icon.svg`，扩展使用的 PNG 图标放在 `icons/` 目录。
 
-| 16x16 | 32x32 | 48x48 | 128x128 | 256x256 |
-| --- | --- | --- | --- | --- |
+| 16x16                                                                           | 32x32                                                                           | 48x48                                                                           | 128x128                                                                            | 256x256                                                                              |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
 | <img src="icons/icon16.png" width="16" height="16" alt="StackPrism 16x16 icon"> | <img src="icons/icon32.png" width="32" height="32" alt="StackPrism 32x32 icon"> | <img src="icons/icon48.png" width="48" height="48" alt="StackPrism 48x48 icon"> | <img src="icons/icon128.png" width="96" height="96" alt="StackPrism 128x128 icon"> | <img src="icons/icon256.png" width="128" height="128" alt="StackPrism 256x256 icon"> |
 
 ## 功能
@@ -47,7 +47,7 @@ StackPrism 栈棱镜是一个 Chrome / Edge Manifest V3 浏览器扩展，用于
 
 - 可枚举规则集中放在 `rules/` 目录，`rules/index.json` 是加载清单，`rules/page/*.json` 负责页面源码、DOM、资源和动态变化线索，`rules/headers/*.json` 负责响应头线索。
 - 技术名称到官网 / 仓库的链接集中放在 `tech-links.json`；如果新增规则后希望技术名可点击，也在这里补同名链接。
-- 需要执行浏览器 API 或 DOM 深度判断的检测仍保留在 `popup.js` / `background.js`，例如 React Fiber、Service Worker、响应头脱敏和私有 CDN 启发式判断；可枚举规则优先放到 `rules/` 对应分类文件。
+- 需要执行浏览器 API 或 DOM 深度判断的检测仍保留在 `page-detector.js` / `background.js`，例如 React Fiber、Tailwind 类名计分、Service Worker、响应头脱敏和私有 CDN 启发式判断；可枚举规则优先放到 `rules/` 对应分类文件。
 - 动态资源监听逻辑放在 `content-observer.js`，它只记录 URL、feed 链接和有限 DOM 标记，后台再用 `rules/` 里的规则做动态识别。
 - 新增规则时优先改 `rules/` 下对应分类 JSON：添加 `name`、`patterns`，需要时补 `kind`、`confidence`、`globals`、`selectors`、`classPrefixes`；如果新增了文件，要把路径加入 `rules/index.json`。
 - 不想改内置规则时，可以在扩展设置页添加自定义规则；每条规则支持 `patterns`、`selectors`、`globals`、`matchIn`、`matchType`、`category`、`confidence` 和技术链接。
