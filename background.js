@@ -237,6 +237,8 @@ function detectFromDynamicSnapshot(snapshot, pageRules) {
   applyDynamicRuleList(add, pageRules.dynamicTechnologies, text, 'JSON 动态技术规则')
   applyDynamicRuleList(add, pageRules.cdnProviders, text, 'JSON CDN 动态规则', 'CDN / 托管')
   applyDynamicRuleList(add, pageRules.websitePrograms, text, 'JSON 网站程序动态规则', '网站程序', rule => (rule.kind ? `${rule.kind}：` : ''))
+  detectDynamicCmsThemesAndSource(add, text)
+  applyDynamicRuleList(add, pageRules.cmsThemes, text, 'JSON 主题模板动态规则', '主题 / 模板', rule => (rule.kind ? `${rule.kind}：` : ''))
   applyDynamicRuleList(add, pageRules.probes, text, 'JSON 探针动态规则', '探针 / 监控', rule => (rule.kind ? `${rule.kind}：` : ''))
   applyDynamicRuleList(add, pageRules.languages, text, 'JSON 语言动态规则', '开发语言 / 运行时', rule => (rule.kind ? `${rule.kind}：` : ''))
   applyDynamicRuleList(add, pageRules.backendHints, text, 'JSON 后端动态规则', '后端 / 服务器框架')
@@ -253,6 +255,81 @@ function detectFromDynamicSnapshot(snapshot, pageRules) {
   }
 
   return mergeTechnologyRecords(technologies)
+}
+
+function detectDynamicCmsThemesAndSource(add, text) {
+  const extractors = [
+    { category: '主题 / 模板', label: 'WordPress 主题', pattern: /\/wp-content\/themes\/([^\/?#"' <>)]+)/gi },
+    { category: '网站源码线索', label: 'WordPress 插件', pattern: /\/wp-content\/plugins\/([^\/?#"' <>)]+)/gi, limit: 30 },
+    { category: '主题 / 模板', label: 'Typecho 主题', pattern: /\/usr\/themes\/([^\/?#"' <>)]+)/gi },
+    { category: '网站源码线索', label: 'Typecho 插件', pattern: /\/usr\/plugins\/([^\/?#"' <>)]+)/gi, limit: 20 },
+    { category: '主题 / 模板', label: 'Z-BlogPHP 主题', pattern: /\/zb_users\/theme\/([^\/?#"' <>)]+)/gi },
+    { category: '网站源码线索', label: 'Z-BlogPHP 插件', pattern: /\/zb_users\/plugin\/([^\/?#"' <>)]+)/gi, limit: 20 },
+    { category: '主题 / 模板', label: 'DedeCMS 模板', pattern: /\/templets\/([^\/?#"' <>)]+)/gi },
+    { category: '主题 / 模板', label: 'Drupal 主题', pattern: /\/(?:sites\/all\/themes|themes\/(?:custom|contrib)|core\/themes)\/([^\/?#"' <>)]+)/gi },
+    { category: '网站源码线索', label: 'Drupal 模块', pattern: /\/(?:sites\/all\/modules|modules\/(?:custom|contrib)|core\/modules)\/([^\/?#"' <>)]+)/gi, limit: 25 },
+    { category: '主题 / 模板', label: 'Joomla 模板', pattern: /\/templates\/([^\/?#"' <>)]+)/gi, requires: /joomla|\/media\/system\/js\/|com_content/ },
+    { category: '网站源码线索', label: 'Joomla 组件', pattern: /\/components\/(com_[^\/?#"' <>)]+)/gi, requires: /joomla|\/media\/system\/js\/|com_content/ },
+    { category: '主题 / 模板', label: 'Discuz! 模板', pattern: /\/template\/([^\/?#"' <>)]+)/gi, requires: /discuz|forum\.php|portal\.php|ucenter/ },
+    { category: '主题 / 模板', label: 'Magento 主题', pattern: /\/(?:static\/version\d+\/)?frontend\/([^\/?#"' <>)]+)\/([^\/?#"' <>)]+)/gi, format: groups => `${groups[0]}/${groups[1]}` },
+    { category: '主题 / 模板', label: 'OpenCart 主题', pattern: /\/catalog\/view\/theme\/([^\/?#"' <>)]+)/gi },
+    { category: '主题 / 模板', label: 'PrestaShop 主题', pattern: /\/themes\/([^\/?#"' <>)]+)\/(?:assets|css|js|modules)\//gi, requires: /prestashop|\/modules\/ps_|var prestashop/ },
+    { category: '主题 / 模板', label: 'ECShop 模板', pattern: /\/themes\/([^\/?#"' <>)]+)\/(?:images|style|library|js)\//gi, requires: /ecshop|flow\.php\?step=cart|ecjia/ },
+    { category: '主题 / 模板', label: 'EmpireCMS 模板/皮肤', pattern: /\/skin\/([^\/?#"' <>)]+)\//gi, requires: /empirecms|\/e\/(?:data|public)\// },
+    { category: '主题 / 模板', label: 'Shopware 店面主题资源', pattern: /\/theme\/([^\/?#"' <>)]+)\/(?:css|js|assets)\//gi, requires: /shopware|storefront/ }
+  ]
+
+  for (const extractor of extractors) {
+    collectDynamicAssetDirectoryMatches(add, text, extractor)
+  }
+}
+
+function collectDynamicAssetDirectoryMatches(add, text, extractor) {
+  if (extractor.requires && !extractor.requires.test(text)) {
+    return
+  }
+
+  let count = 0
+  const limit = extractor.limit || 12
+  const seen = new Set()
+  const pattern = new RegExp(extractor.pattern.source, extractor.pattern.flags.includes('g') ? extractor.pattern.flags : `${extractor.pattern.flags}g`)
+  let match
+  while ((match = pattern.exec(text)) && count < limit) {
+    const groups = match.slice(1).map(cleanDynamicAssetSlug)
+    if (groups.some(value => !value)) {
+      continue
+    }
+    const value = extractor.format ? extractor.format(groups, match) : groups[0]
+    const key = `${extractor.category}::${extractor.label}::${value}`.toLowerCase()
+    if (seen.has(key)) {
+      continue
+    }
+    seen.add(key)
+    count += 1
+    add(extractor.category, `${extractor.label}: ${value}`, '高', `动态资源路径包含 ${shortHeaderUrl(match[0])}`)
+  }
+}
+
+function cleanDynamicAssetSlug(value) {
+  const decoded = safeDecodeURIComponent(String(value || ''))
+    .replace(/\\/g, '/')
+    .replace(/['")<>]/g, '')
+    .trim()
+  if (!decoded || decoded.length > 90 || decoded.includes('/')) {
+    return ''
+  }
+  if (/^(?:assets?|static|public|dist|build|cache|css|js|img|images?|fonts?|vendor)$/i.test(decoded)) {
+    return ''
+  }
+  return decoded
+}
+
+function safeDecodeURIComponent(value) {
+  try {
+    return decodeURIComponent(value)
+  } catch {
+    return value
+  }
 }
 
 function applyDynamicRuleList(add, rules, text, sourceLabel, defaultCategory, evidencePrefix = () => '') {

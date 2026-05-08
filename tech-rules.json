@@ -975,6 +975,107 @@
         "patterns": ["mabangerp", "mabang", "马帮"]
       }
     ],
+    "cmsThemes": [
+      {
+        "name": "Elementor",
+        "category": "主题 / 模板",
+        "kind": "WordPress 页面构建器 / 模板系统",
+        "confidence": "高",
+        "patterns": ["/wp-content/plugins/elementor/", "elementor-frontend", "elementor-widget", "elementor-kit-"],
+        "globals": ["elementorFrontend"]
+      },
+      {
+        "name": "Divi Theme / Builder",
+        "category": "主题 / 模板",
+        "kind": "WordPress 主题 / 页面构建器",
+        "patterns": ["/wp-content/themes/Divi/", "/wp-content/themes/divi/", "et_pb_", "Divi Builder", "elegantthemes"]
+      },
+      {
+        "name": "Avada / Fusion Builder",
+        "category": "主题 / 模板",
+        "kind": "WordPress 主题 / 页面构建器",
+        "patterns": ["/wp-content/themes/Avada/", "/wp-content/themes/avada/", "fusion-builder", "fusion-body", "avada-"]
+      },
+      {
+        "name": "Astra Theme",
+        "category": "主题 / 模板",
+        "kind": "WordPress 主题",
+        "patterns": ["/wp-content/themes/astra/", "astra-theme", "ast-container", "astra-addon"]
+      },
+      {
+        "name": "GeneratePress",
+        "category": "主题 / 模板",
+        "kind": "WordPress 主题",
+        "patterns": ["/wp-content/themes/generatepress/", "generatepress", "inside-article", "generateblocks"]
+      },
+      {
+        "name": "OceanWP",
+        "category": "主题 / 模板",
+        "kind": "WordPress 主题",
+        "patterns": ["/wp-content/themes/oceanwp/", "oceanwp", "oceanwp-theme"]
+      },
+      {
+        "name": "Flatsome",
+        "category": "主题 / 模板",
+        "kind": "WordPress / WooCommerce 主题",
+        "patterns": ["/wp-content/themes/flatsome/", "flatsome", "ux-builder", "ux-theme"]
+      },
+      {
+        "name": "Woodmart",
+        "category": "主题 / 模板",
+        "kind": "WordPress / WooCommerce 主题",
+        "patterns": ["/wp-content/themes/woodmart/", "woodmart", "wd-"]
+      },
+      {
+        "name": "Kadence Theme",
+        "category": "主题 / 模板",
+        "kind": "WordPress 主题",
+        "patterns": ["/wp-content/themes/kadence/", "kadence", "kadence-blocks"]
+      },
+      {
+        "name": "Blocksy",
+        "category": "主题 / 模板",
+        "kind": "WordPress 主题",
+        "patterns": ["/wp-content/themes/blocksy/", "blocksy", "ct-container"]
+      },
+      {
+        "name": "Bricks Builder",
+        "category": "主题 / 模板",
+        "kind": "WordPress 主题 / 页面构建器",
+        "patterns": ["/wp-content/themes/bricks/", "bricksbuilder", "bricks-is-frontend", "brxe-"],
+        "globals": ["bricksData"]
+      },
+      {
+        "name": "Beaver Builder",
+        "category": "主题 / 模板",
+        "kind": "WordPress 页面构建器",
+        "patterns": ["/wp-content/plugins/bb-plugin/", "fl-builder", "beaver-builder"]
+      },
+      {
+        "name": "WPBakery / Visual Composer",
+        "category": "主题 / 模板",
+        "kind": "WordPress 页面构建器 / 模板系统",
+        "patterns": ["/wp-content/plugins/js_composer/", "wpb-js-composer", "vc_row", "wpb_wrapper", "visual-composer"]
+      },
+      {
+        "name": "Shopify Dawn Theme",
+        "category": "主题 / 模板",
+        "kind": "Shopify 官方主题",
+        "patterns": ["Shopify.theme.*Dawn", "dawn-theme", "global\\.js.*dawn", "section-main-product"]
+      },
+      {
+        "name": "Magento Luma Theme",
+        "category": "主题 / 模板",
+        "kind": "Magento 官方主题",
+        "patterns": ["/frontend/Magento/luma/", "Magento/luma", "theme-frontend-luma"]
+      },
+      {
+        "name": "PrestaShop Classic Theme",
+        "category": "主题 / 模板",
+        "kind": "PrestaShop 官方主题",
+        "patterns": ["/themes/classic/assets/", "prestashop.*classic", "theme-classic"]
+      }
+    ],
     "probes": [
       {
         "name": "雅黑 PHP 探针",
