@@ -1,57 +1,35 @@
-# StackPrism 栈棱镜
+<p align="center">
+  <img src="icons/icon256.png" width="128" height="128" alt="StackPrism 栈棱镜图标">
+</p>
 
-StackPrism 栈棱镜是一个 Chrome / Edge Manifest V3 浏览器扩展，用于检测当前网页使用的技术线索，包括前端框架、前端库、UI / CSS 框架、构建工具、CDN / 托管、Web 服务器、后端框架、开发语言 / 运行时、网站程序、CMS 主题 / 模板、网站源码线索、探针 / 监控、RSS / 订阅、CMS / 电商平台、SaaS / 第三方服务、第三方登录 / OAuth、支付系统、广告 / 营销、统计 / 分析平台和标签脚本。
+<h1 align="center">StackPrism 栈棱镜</h1>
 
-名称中的 `Stack` 表达网页技术栈，`Prism / 栈棱镜` 表达把页面线索折射、拆解成可读技术清单。
+<p align="center">一个用于检测网页技术栈线索的 Chrome / Edge Manifest V3 浏览器扩展。</p>
 
-## 图标预览
-
-图标源文件在 `icons/icon.svg`，扩展使用的 PNG 图标放在 `icons/` 目录。
-
-| 16x16                                                                           | 32x32                                                                           | 48x48                                                                           | 128x128                                                                            | 256x256                                                                              |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| <img src="icons/icon16.png" width="16" height="16" alt="StackPrism 16x16 icon"> | <img src="icons/icon32.png" width="32" height="32" alt="StackPrism 32x32 icon"> | <img src="icons/icon48.png" width="48" height="48" alt="StackPrism 48x48 icon"> | <img src="icons/icon128.png" width="96" height="96" alt="StackPrism 128x128 icon"> | <img src="icons/icon256.png" width="128" height="128" alt="StackPrism 256x256 icon"> |
+StackPrism 栈棱镜会从页面运行时、DOM、资源 URL、响应头、动态加载资源和源码快照中收集线索，并按分类展示检测结果。
 
 ## 功能
 
-- 页面运行时检测：React、Vue、Angular、Next.js、Nuxt、Gatsby、Astro、jQuery、Alpine、Lit 等。
-- 页面运行时检测：React、Vue、Angular、Next.js、Nuxt、Gatsby、Astro、Svelte、Qwik、Marko、Stencil、Aurelia、Knockout、Dojo、Ext JS、htmx、Hotwire 等。
-- 前端库检测：Lodash、Axios、Moment、Day.js、RxJS、Redux、Apollo、D3、ECharts、Chart.js、Three.js、GSAP、Swiper、Video.js、Monaco、CodeMirror、Mermaid、Socket.IO 等；未命中内置规则时，会用 `.min.js` / `.umd.min.js` / `.bundle.min.js` 等脚本文件名做低置信度兜底识别，不绑定官网链接，并在证据中标明来源文件名。
-- UI 技术检测：Bootstrap、Tailwind CSS、Material UI、Ant Design、Element Plus、Vuetify、Chakra UI、Mantine、Radix UI、Headless UI、Fluent UI、Carbon、Kendo UI、DevExtreme、Vant、WeUI 等。
-- 资源与构建线索：Webpack、Vite、Parcel、RequireJS、SystemJS、PWA Manifest、Service Worker、CSS-in-JS、Workbox、Turbopack、Rspack、Rollup、esbuild、SWC。
-- CDN / 托管检测：Cloudflare、Akamai、CloudFront、Fastly、Azure、Google、jsDelivr、UNPKG、Bunny、KeyCDN、CDN77、Gcore、Edgio、StackPath、Imperva、Sucuri、Alibaba Cloud、Tencent Cloud、Baidu Cloud、Huawei Cloud、Qiniu、UpYun、ChinaCache、Wangsu/CDNetworks、BaishanCloud、Volcengine、Vercel、Netlify、Firebase、GitHub Pages、Cloudinary、Imgix 等，并包含私有 CDN 兜底识别。
-- 响应头检测：Server、X-Powered-By、X-Generator、Cloudflare/Vercel/Netlify/CloudFront/Fastly/Akamai/Azure/Google/国内云厂商等特征头。
-- 后端线索检测：Express、Koa、Fastify、NestJS、ASP.NET、Blazor、PHP、Laravel、Symfony、Django、Flask、FastAPI、Ruby on Rails、Spring、Java Servlet、Phoenix、Go、Rust Actix/Rocket/Axum、GraphQL、gRPC 等。
-- 开发语言 / 运行时检测：JavaScript、TypeScript、Node.js、PHP、JSP / JavaServer Pages、Java Servlet、Python、Ruby、Classic ASP、ASP.NET、ColdFusion / CFML、Perl / CGI、OpenResty / Lua、Go、Rust、Elixir 等。
-- 网站程序检测：WordPress、WooCommerce、Drupal、Joomla、Magento、Shopify、Discuz!、phpBB、XenForo、Discourse、MediaWiki、Moodle、Ghost、Typecho、DedeCMS、Hexo、Hugo、Jekyll、Docusaurus、VitePress、Docsify 等。
-- CMS 主题 / 模板 / 源码线索检测：可从目录识别 WordPress 主题名、WordPress 插件名、Typecho / Z-BlogPHP 主题与插件、DedeCMS 模板、Discuz! 模板、Drupal 主题与模块、Joomla 模板与组件、Magento / OpenCart / PrestaShop / ECShop / Shopware 主题资源，并补充识别 Elementor、Divi、Avada、Astra、GeneratePress、OceanWP、Flatsome、Woodmart、Kadence、Blocksy、Bricks、Beaver Builder、WPBakery 等常见主题和模板系统。
-- 电商系统检测：Shopify、WooCommerce、Magento、OpenCart、PrestaShop、Shopware、BigCommerce、Salesforce Commerce Cloud、ECShop、ShopXO、Niushop、有赞、微盟、微店等。
-- 探针 / 监控检测：雅黑 PHP 探针、X-Prober、ServerStatus、ServerStatus-Hotaru、哪吒监控、Uptime Kuma、Netdata、phpSysInfo、Glances、Cockpit、Webmin、宝塔/aaPanel、1Panel、CasaOS、Grafana、Prometheus、Zabbix、Nagios、Cacti、LibreNMS、Munin、Smokeping、Portainer 等。
-- RSS / 订阅检测：识别 `link rel="alternate"` 中的 RSS、Atom、JSON Feed，以及常见 feed URL 线索。
-- SaaS / 第三方服务检测：Stripe、PayPal、Auth0、Clerk、Firebase、Supabase、Intercom、Zendesk、HubSpot、Sentry、Datadog、Algolia、Cloudinary、Contentful、Google Maps、reCAPTCHA、Optimizely、Calendly 等。
-- 第三方登录 / OAuth 检测：QQ 登录、微信登录、微博登录、支付宝登录、钉钉、飞书、企业微信、华为、小米、百度、GitHub、Gitee、GitLab、Google、Apple、Microsoft、Facebook、Twitter/X、LinkedIn、Slack、Discord、Telegram、LINE、Kakao、Naver、Auth0、Okta、Keycloak、CAS、SAML、OpenID Connect/OAuth2 等。
-- 支付系统检测：支付宝支付、微信支付、QQ 钱包、财付通、银联在线、京东支付、百度收银台、百度钱包、翼支付、云闪付、易付宝、拉卡拉、通联、富友、宝付、银盛、合利宝、银联商务、收钱吧、Ping++、码支付、易支付、PAYJS、虎皮椒、V免签、连连支付、易宝支付、汇付天下、快钱、PayPal、Stripe、Adyen、Braintree、Paddle、Razorpay、Square、Worldpay、Checkout.com、Klarna、Afterpay/Clearpay 等。
-- 广告 / 营销检测：Google Ads、AdSense、Google Ad Manager / DoubleClick、Floodlight、Amazon Ads、Prebid.js、OpenX、PubMatic、Magnite、Index Exchange、Xandr、Criteo、Taboola、Outbrain、Media.net、AdRoll、The Trade Desk、CJ、Awin、Impact、Baidu Union、广点通、阿里妈妈 / TANX、巨量引擎、360广告联盟、MediaV、搜狗联盟等。
-- 流量跟踪 / 归因检测：UTM 参数、gclid / gbraid / wbraid / dclid、fbclid、msclkid、ttclid、li_fat_id、yclid，以及 Voluum、RedTrack、Binom、BeMob、AdsBridge、Keitaro、CPV Lab 等流量跟踪平台。
-- 统计 / 分析检测：Google Analytics、百度统计、CNZZ/友盟、51.LA、腾讯 MTA、神策、GrowingIO、Yandex Metrica、Adobe Analytics、Matomo/Piwik、Plausible、Umami、GoatCounter、PostHog、Fathom、Clicky、Statcounter、Mixpanel、Amplitude、Hotjar、Clarity、Meta Pixel 等，并在证据里标注“开源 / 可自托管”“商用 / 知名统计”“广告转化统计”等类型。
-- 动态页面监控：内容脚本会持续监听页面交互后新增的脚本、样式、iframe、资源加载、feed 链接和关键 DOM 标记，下次打开插件或刷新检测时会合并这些动态结果。
-- 主动后台识别：页面加载和动态资源变化时会在后台更新识别结果，并在扩展图标上显示已识别技术数量。
-- 分类 Tab 过滤：按前端框架、前端库、UI / CSS 框架、CDN / 托管、Web 服务器、开发语言 / 运行时、网站程序、主题 / 模板、网站源码线索、探针 / 监控、RSS / 订阅、第三方登录 / OAuth、支付系统、广告 / 营销、统计 / 分析等分类查看结果。
-- 技术链接：检测结果里的技术名称会尽量链接到官网或官方仓库，点击后在新标签页打开。
-- 设置页：支持按分类开启 / 关闭识别结果，按技术名称隐藏指定结果，添加自定义规则 / 自定义匹配范围 / 自定义技术链接，并支持自定义 CSS 覆盖弹窗和设置页样式。
-- 使用说明页：从弹窗或设置页打开，包含面向新手的自定义规则填写教程和可照抄示例。
-- 网页源代码搜索：在当前页面 DOM 源码快照中搜索，支持区分大小写、全字匹配和正则表达式。
-- 支持复制完整 JSON 检测结果。
+- 主动后台识别：页面加载和动态资源变化时自动检测，并在扩展图标上显示识别数量。
+- 分类结果展示：按前端框架、前端库、UI / CSS 框架、构建与运行时、CDN / 托管、Web 服务器、后端 / 服务器框架、开发语言 / 运行时、网站程序、主题 / 模板、网站源码线索、探针 / 监控、RSS / 订阅、CMS / 电商平台、SaaS / 第三方服务、第三方登录 / OAuth、支付系统、广告 / 营销、统计 / 分析、安全与协议等类别过滤结果。
+- 动态页面监控：页面交互后新增的脚本、样式、iframe、资源和关键 DOM 标记会被持续记录并合并到检测结果。
+- 技术名称跳转：检测结果里的技术名称可点击，优先跳转到官网或官方仓库。
+- 网页源代码搜索：支持在当前页面 DOM 源码快照中搜索，包含区分大小写、全字匹配和正则表达式选项。
+- 设置页：支持开启 / 关闭指定识别类别、隐藏指定技术、自定义规则、自定义匹配范围、自定义技术链接和自定义 CSS。
+- 自定义规则校验：保存前会检查规则 JSON、正则表达式、CSS 选择器、字段格式和数量限制，并给出错误提示。
+- 规则贡献入口：设置页可直接打开规则贡献议题模板，方便补充新的检测规则。
+- 使用说明页：提供面向新手的规则填写教程和示例。
+- 结果复制：支持复制完整 JSON 检测结果。
 
 ## 规则维护
 
 - 可枚举规则集中放在 `rules/` 目录，`rules/index.json` 是加载清单，`rules/page/*.json` 负责页面源码、DOM、资源和动态变化线索，`rules/headers/*.json` 负责响应头线索。
 - 技术名称到官网 / 仓库的链接集中放在 `tech-links.json`；如果新增规则后希望技术名可点击，也在这里补同名链接。
-- 需要执行浏览器 API 或 DOM 深度判断的检测仍保留在 `page-detector.js` / `background.js`，例如 React Fiber、Tailwind 类名计分、Service Worker、响应头脱敏和私有 CDN 启发式判断；可枚举规则优先放到 `rules/` 对应分类文件。
+- 需要执行浏览器 API 或 DOM 深度判断的检测仍保留在 `page-detector.js` / `background.js`；可枚举规则优先放到 `rules/` 对应分类文件。
 - 动态资源监听逻辑放在 `content-observer.js`，它只记录 URL、feed 链接和有限 DOM 标记，后台再用 `rules/` 里的规则做动态识别。
 - 新增规则时优先改 `rules/` 下对应分类 JSON：添加 `name`、`patterns`，需要时补 `kind`、`confidence`、`globals`、`selectors`、`classPrefixes`；如果新增了文件，要把路径加入 `rules/index.json`。
 - 不想改内置规则时，可以在扩展设置页添加自定义规则；每条规则支持 `patterns`、`selectors`、`globals`、`matchIn`、`matchType`、`category`、`confidence` 和技术链接。
-- 修改扩展运行文件时同步提升 `manifest.json` 里的 `version`；规则、弹窗、设置页、后台脚本和内容脚本更新都按插件版本更新处理。
+- 修改扩展运行文件时同步提升 `manifest.json` 里的 `version`；规则、弹窗、设置页、后台脚本、内容脚本和图标资源更新都按插件版本更新处理。
 
 ## 安装
 
