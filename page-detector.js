@@ -2,12 +2,13 @@ function detectPageTechnologies(ruleConfig = {}) {
   const technologies = []
   const resources = collectResources()
   const classTokens = collectClassTokens()
+  const cssVariables = collectCssVariables()
   const documentHtmlSample = getHtmlSample()
   const globalKeys = safeGlobalKeys()
   const add = createCollector(technologies)
 
   detectFrontendFrameworks(add, resources, classTokens, documentHtmlSample, globalKeys, ruleConfig.frontendFrameworks || [])
-  detectUiFrameworks(add, resources, classTokens, documentHtmlSample, ruleConfig.uiFrameworks || [])
+  detectUiFrameworks(add, resources, classTokens, cssVariables, documentHtmlSample, ruleConfig.uiFrameworks || [])
   detectAdditionalFrontendTechnologies(add, resources, classTokens, documentHtmlSample, ruleConfig.frontendExtra || [])
   detectMinifiedScriptFallback(add, resources, technologies)
   detectBuildAndRuntime(add, resources, documentHtmlSample, globalKeys, ruleConfig.buildRuntime || [])
@@ -43,6 +44,7 @@ function detectPageTechnologies(ruleConfig = {}) {
       scripts: resources.scripts.slice(0, 120),
       stylesheets: resources.stylesheets.slice(0, 120),
       resourceDomains: summarizeDomains(resources.all),
+      cssVariableCount: cssVariables.names.length,
       metaGenerator: getMetaContent('generator'),
       manifest: document.querySelector("link[rel='manifest']")?.href || null
     }
@@ -78,6 +80,37 @@ function detectPageTechnologies(ruleConfig = {}) {
     return counts
   }
 
+  function collectCssVariables() {
+    const names = new Set()
+    const values = {}
+    const targets = [document.documentElement, document.body].filter(Boolean)
+
+    for (const target of targets) {
+      try {
+        const style = getComputedStyle(target)
+        for (let index = 0; index < style.length; index += 1) {
+          const name = style.item(index)
+          if (!name || !name.startsWith('--')) {
+            continue
+          }
+          names.add(name)
+          if (!values[name]) {
+            values[name] = style.getPropertyValue(name).trim().slice(0, 160)
+          }
+        }
+      } catch {
+        continue
+      }
+    }
+
+    const orderedNames = [...names].slice(0, 500)
+    return {
+      names: orderedNames,
+      values,
+      text: orderedNames.map(name => `${name}: ${values[name] || ''}`).join('\n').toLowerCase()
+    }
+  }
+
   function getHtmlSample() {
     const html = document.documentElement?.outerHTML || ''
     return html.slice(0, 500000).toLowerCase()
@@ -107,7 +140,7 @@ function detectPageTechnologies(ruleConfig = {}) {
     })
   }
 
-  function detectUiFrameworks(add, resources, classes, html, externalRules) {
+  function detectUiFrameworks(add, resources, classes, cssVariables, html, externalRules) {
     if (scoreTailwind(classes) >= 10) {
       add('UI / CSS 框架', 'Tailwind CSS', '中', '存在大量 Tailwind 风格原子类名')
     }
@@ -116,8 +149,9 @@ function detectPageTechnologies(ruleConfig = {}) {
       defaultCategory: 'UI / CSS 框架',
       resources,
       classes,
+      cssVariables,
       html,
-      text: `${resources.text}\n${html}`,
+      text: `${resources.text}\n${html}\n${cssVariables.text}`,
       resourceConfidence: '中',
       sourceLabel: 'JSON UI 框架规则'
     })
@@ -620,6 +654,11 @@ ${html}`
       return { confidence: '高', evidence: `存在 ${className} 类名` }
     }
 
+    const cssVariableMatch = matchCssVariables(rule, context.cssVariables)
+    if (cssVariableMatch) {
+      return cssVariableMatch
+    }
+
     const patterns = (rule.patterns || []).map(pattern => compileRulePattern(pattern, rule)).filter(Boolean)
     for (const pattern of patterns) {
       const resource = shouldMatchTarget(rule, 'resources') ? (context.resources?.all || []).find(url => pattern.test(url)) : null
@@ -632,6 +671,26 @@ ${html}`
     }
 
     return null
+  }
+
+  function matchCssVariables(rule, cssVariables) {
+    if (!Array.isArray(rule.cssVariables) || !rule.cssVariables.length || !cssVariables?.names?.length) {
+      return null
+    }
+
+    const normalizedNames = new Set(cssVariables.names.map(name => name.toLowerCase()))
+    const matched = rule.cssVariables.filter(name => normalizedNames.has(String(name).toLowerCase()))
+    const minMatches = Math.max(1, Number(rule.minCssVariableMatches || 1))
+    if (matched.length < minMatches) {
+      return null
+    }
+
+    const preview = matched.slice(0, 6).join(', ')
+    const suffix = matched.length > 6 ? ` 等 ${matched.length} 个` : ''
+    return {
+      confidence: rule.confidence || '高',
+      evidence: `CSS 变量匹配 ${preview}${suffix}`
+    }
   }
 
   function compileRulePattern(pattern, rule) {

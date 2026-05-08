@@ -31,6 +31,40 @@
       },
       {
         "category": "UI / CSS 框架",
+        "name": "shadcn/ui",
+        "confidence": "高",
+        "patterns": [
+          "shadcn",
+          "@shadcn\\/ui",
+          "components\\/ui",
+          "class-variance-authority"
+        ],
+        "cssVariables": [
+          "--background",
+          "--foreground",
+          "--card",
+          "--card-foreground",
+          "--popover",
+          "--popover-foreground",
+          "--primary",
+          "--primary-foreground",
+          "--secondary",
+          "--secondary-foreground",
+          "--muted",
+          "--muted-foreground",
+          "--accent",
+          "--accent-foreground",
+          "--destructive",
+          "--destructive-foreground",
+          "--border",
+          "--input",
+          "--ring",
+          "--radius"
+        ],
+        "minCssVariableMatches": 10
+      },
+      {
+        "category": "UI / CSS 框架",
         "name": "Material UI",
         "confidence": "中",
         "patterns": [

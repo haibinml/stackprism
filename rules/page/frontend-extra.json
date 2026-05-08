@@ -571,6 +571,48 @@
       },
       {
         "category": "前端库",
+        "name": "Jotai",
+        "patterns": [
+          "jotai(?:\\/|\\.)|@jotai\\/"
+        ]
+      },
+      {
+        "category": "前端库",
+        "name": "Valtio",
+        "patterns": [
+          "valtio(?:\\/|\\.)|@valtio\\/"
+        ]
+      },
+      {
+        "category": "前端库",
+        "name": "TanStack Query",
+        "patterns": [
+          "@tanstack\\/react-query|@tanstack\\/query-core|react-query"
+        ]
+      },
+      {
+        "category": "前端库",
+        "name": "tRPC",
+        "patterns": [
+          "@trpc\\/client|@trpc\\/react-query|trpc\\."
+        ]
+      },
+      {
+        "category": "前端库",
+        "name": "React Hook Form",
+        "patterns": [
+          "react-hook-form|useFormContext|useController"
+        ]
+      },
+      {
+        "category": "前端库",
+        "name": "Zod",
+        "patterns": [
+          "zod(?:\\/|\\.)|zod-error|ZodError"
+        ]
+      },
+      {
+        "category": "前端库",
         "name": "Pinia",
         "patterns": [
           "pinia(?:\\.iife)?(?:\\.prod)?\\.js|\\/pinia\\/"
