@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "StackPrism",
   "description": "StackPrism 用于检测网页前端、后端、CDN、SaaS、广告营销、统计、登录、支付、网站程序和主题模板线索。",
-  "version": "1.0.69",
+  "version": "1.0.70",
   "permissions": ["activeTab", "scripting", "tabs", "storage", "webRequest"],
   "host_permissions": ["<all_urls>"],
   "background": {

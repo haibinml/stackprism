@@ -4,6 +4,8 @@ const MAX_API_RECORDS = 30
 const SETTINGS_STORAGE_KEY = 'stackPrismSettings'
 const POPUP_CACHE_STALE_MS = 2 * 60 * 1000
 const POPUP_CACHE_SCHEMA_VERSION = 1
+const DYNAMIC_FAST_LOOKUP_RULE_MIN = 1000
+const DYNAMIC_SNAPSHOT_PROCESS_DELAY = 800
 const CATEGORY_ORDER = [
   '前端框架',
   'UI / CSS 框架',
@@ -32,7 +34,11 @@ let techRulesPromise = null
 let techLinksPromise = null
 let detectorSettingsPromise = null
 let detectorSettingsCache = null
+const compiledRulePatternCache = new WeakMap()
+const dynamicFrontendRuleKeyCache = new WeakMap()
 const activeDetectionTimers = new Map()
+const pendingDynamicSnapshots = new Map()
+const dynamicSnapshotTimers = new Map()
 const themeStyleFetchCache = new Map()
 
 importScripts('rule-loader.js', 'page-detector.js')
@@ -114,16 +120,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       sendResponse({ ok: false, error: '缺少有效 tabId' })
       return false
     }
-    Promise.all([getTabData(tabId), loadTechRules(), loadDetectorSettings()])
-      .then(([data, rules, settings]) => {
-        data.dynamic = normalizeDynamicSnapshot(message.snapshot, buildEffectivePageRules(rules.page || {}, settings))
-        data.updatedAt = Date.now()
-        return saveTabDataAndBadge(tabId, data, settings)
-      })
-      .then(() => scheduleActivePageDetection(tabId, 900))
-      .then(() => sendResponse({ ok: true }))
-      .catch(error => sendResponse({ ok: false, error: String(error) }))
-    return true
+    queueDynamicSnapshot(tabId, message.snapshot)
+    sendResponse({ ok: true })
+    return false
   }
 
   if (message.type === 'PAGE_DETECTION_RESULT') {
@@ -149,12 +148,16 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 chrome.tabs.onRemoved.addListener(tabId => {
   clearActiveDetectionTimer(tabId)
+  clearDynamicSnapshotTimer(tabId)
+  pendingDynamicSnapshots.delete(tabId)
   chrome.storage.session.remove([storageKey(tabId), popupStorageKey(tabId)]).catch(() => {})
 })
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
   if (changeInfo.status === 'loading') {
     clearActiveDetectionTimer(tabId)
+    clearDynamicSnapshotTimer(tabId)
+    pendingDynamicSnapshots.delete(tabId)
     chrome.storage.session.remove([storageKey(tabId), popupStorageKey(tabId)]).catch(() => {})
     clearBadge(tabId)
     return
@@ -1122,6 +1125,41 @@ function clearActiveDetectionTimer(tabId) {
   }
 }
 
+function queueDynamicSnapshot(tabId, snapshot) {
+  if (typeof tabId !== 'number' || tabId < 0) {
+    return
+  }
+  pendingDynamicSnapshots.set(tabId, snapshot)
+  clearDynamicSnapshotTimer(tabId)
+  const timer = setTimeout(() => {
+    dynamicSnapshotTimers.delete(tabId)
+    processQueuedDynamicSnapshot(tabId).catch(() => {})
+  }, DYNAMIC_SNAPSHOT_PROCESS_DELAY)
+  dynamicSnapshotTimers.set(tabId, timer)
+}
+
+function clearDynamicSnapshotTimer(tabId) {
+  const timer = dynamicSnapshotTimers.get(tabId)
+  if (timer) {
+    clearTimeout(timer)
+    dynamicSnapshotTimers.delete(tabId)
+  }
+}
+
+async function processQueuedDynamicSnapshot(tabId) {
+  const snapshot = pendingDynamicSnapshots.get(tabId)
+  pendingDynamicSnapshots.delete(tabId)
+  if (!snapshot) {
+    return
+  }
+
+  const [data, rules, settings] = await Promise.all([getTabData(tabId), loadTechRules(), loadDetectorSettings()])
+  data.dynamic = normalizeDynamicSnapshot(snapshot, buildEffectivePageRules(rules.page || {}, settings), data.dynamic)
+  data.updatedAt = Date.now()
+  await saveTabDataAndBadge(tabId, data, settings)
+  scheduleActivePageDetection(tabId, 900)
+}
+
 function normalizeTechName(name) {
   return String(name || '')
     .toLowerCase()
@@ -1156,7 +1194,7 @@ async function getPopupCache(tabId) {
   return result[key] || null
 }
 
-function normalizeDynamicSnapshot(snapshot, pageRules) {
+function normalizeDynamicSnapshot(snapshot, pageRules, previousDynamic) {
   const clean = {
     url: String(snapshot?.url || ''),
     title: String(snapshot?.title || ''),
@@ -1171,8 +1209,25 @@ function normalizeDynamicSnapshot(snapshot, pageRules) {
     feedLinks: cleanFeedLinks(snapshot?.feedLinks),
     domMarkers: cleanStringList(snapshot?.domMarkers, 120)
   }
+  clean.signature = buildDynamicSnapshotSignature(clean)
+  if (previousDynamic?.signature === clean.signature && Array.isArray(previousDynamic.technologies)) {
+    clean.technologies = previousDynamic.technologies
+    return clean
+  }
   clean.technologies = detectFromDynamicSnapshot(clean, pageRules)
   return clean
+}
+
+function buildDynamicSnapshotSignature(snapshot) {
+  return [
+    snapshot.url,
+    ...snapshot.resources,
+    ...snapshot.scripts,
+    ...snapshot.stylesheets,
+    ...snapshot.iframes,
+    ...snapshot.feedLinks.map(link => `${link.href}|${link.type}|${link.title}`),
+    ...snapshot.domMarkers
+  ].join('\n')
 }
 
 function cleanStringList(value, max) {
@@ -1211,36 +1266,39 @@ function detectFromDynamicSnapshot(snapshot, pageRules) {
   ]
     .join('\n')
     .toLowerCase()
+  const context = buildDynamicMatchContext(snapshot, text)
 
-  applyDynamicRuleList(add, pageRules.dynamicTechnologies, text, 'JSON 动态技术规则')
-  applyDynamicRuleList(add, pageRules.frontendFrameworks, text, 'JSON 前端框架动态规则', '前端框架')
-  applyDynamicRuleList(add, pageRules.uiFrameworks, text, 'JSON UI 框架动态规则', 'UI / CSS 框架')
-  applyDynamicRuleList(add, pageRules.frontendExtra, text, 'JSON 前端库动态规则', '前端库')
-  applyDynamicRuleList(add, pageRules.buildRuntime, text, 'JSON 构建运行时动态规则', '构建与运行时')
+  applyDynamicRuleList(add, pageRules.dynamicTechnologies, context, 'JSON 动态技术规则')
+  applyDynamicRuleList(add, pageRules.frontendFrameworks, context, 'JSON 前端框架动态规则', '前端框架')
+  applyDynamicRuleList(add, pageRules.uiFrameworks, context, 'JSON UI 框架动态规则', 'UI / CSS 框架')
+  applyDynamicRuleList(add, pageRules.frontendExtra, context, 'JSON 前端库动态规则', '前端库')
+  applyDynamicRuleList(add, pageRules.buildRuntime, context, 'JSON 构建运行时动态规则', '构建与运行时')
   detectDynamicMinifiedScriptFallback(add, snapshot, technologies)
-  applyDynamicRuleList(add, pageRules.cdnProviders, text, 'JSON CDN 动态规则', 'CDN / 托管')
-  applyDynamicRuleList(add, pageRules.websitePrograms, text, 'JSON 网站程序动态规则', '网站程序', rule =>
+  applyDynamicRuleList(add, pageRules.cdnProviders, context, 'JSON CDN 动态规则', 'CDN / 托管')
+  applyDynamicRuleList(add, pageRules.websitePrograms, context, 'JSON 网站程序动态规则', '网站程序', rule =>
     rule.kind ? `${rule.kind}：` : ''
   )
   detectDynamicCmsThemesAndSource(add, text, pageRules.dynamicAssetExtractors || [])
-  applyDynamicRuleList(add, pageRules.cmsThemes, text, 'JSON 主题模板动态规则', '主题 / 模板', rule => (rule.kind ? `${rule.kind}：` : ''))
-  applyDynamicRuleList(add, pageRules.probes, text, 'JSON 探针动态规则', '探针 / 监控', rule => (rule.kind ? `${rule.kind}：` : ''))
-  applyDynamicRuleList(add, pageRules.languages, text, 'JSON 语言动态规则', '开发语言 / 运行时', rule =>
+  applyDynamicRuleList(add, pageRules.cmsThemes, context, 'JSON 主题模板动态规则', '主题 / 模板', rule =>
     rule.kind ? `${rule.kind}：` : ''
   )
-  applyDynamicRuleList(add, pageRules.backendHints, text, 'JSON 后端动态规则', '后端 / 服务器框架')
-  applyDynamicRuleList(add, pageRules.saasServices, text, 'JSON SaaS 动态规则', 'SaaS / 第三方服务', rule =>
+  applyDynamicRuleList(add, pageRules.probes, context, 'JSON 探针动态规则', '探针 / 监控', rule => (rule.kind ? `${rule.kind}：` : ''))
+  applyDynamicRuleList(add, pageRules.languages, context, 'JSON 语言动态规则', '开发语言 / 运行时', rule =>
     rule.kind ? `${rule.kind}：` : ''
   )
-  applyDynamicRuleList(add, pageRules.thirdPartyLogins, text, 'JSON 第三方登录动态规则', '第三方登录 / OAuth', rule =>
+  applyDynamicRuleList(add, pageRules.backendHints, context, 'JSON 后端动态规则', '后端 / 服务器框架')
+  applyDynamicRuleList(add, pageRules.saasServices, context, 'JSON SaaS 动态规则', 'SaaS / 第三方服务', rule =>
     rule.kind ? `${rule.kind}：` : ''
   )
-  applyDynamicRuleList(add, pageRules.paymentSystems, text, 'JSON 支付动态规则', '支付系统', rule => (rule.kind ? `${rule.kind}：` : ''))
-  applyDynamicRuleList(add, pageRules.analyticsProviders, text, 'JSON 统计动态规则', '统计 / 分析', rule =>
+  applyDynamicRuleList(add, pageRules.thirdPartyLogins, context, 'JSON 第三方登录动态规则', '第三方登录 / OAuth', rule =>
     rule.kind ? `${rule.kind}：` : ''
   )
-  applyDynamicRuleList(add, pageRules.feeds, text, 'JSON Feed 动态规则', 'RSS / 订阅')
-  applyDynamicRuleList(add, filterCustomRulesForTarget(pageRules.customRules, 'dynamic'), text, '自定义动态规则', '其他库', rule =>
+  applyDynamicRuleList(add, pageRules.paymentSystems, context, 'JSON 支付动态规则', '支付系统', rule => (rule.kind ? `${rule.kind}：` : ''))
+  applyDynamicRuleList(add, pageRules.analyticsProviders, context, 'JSON 统计动态规则', '统计 / 分析', rule =>
+    rule.kind ? `${rule.kind}：` : ''
+  )
+  applyDynamicRuleList(add, pageRules.feeds, context, 'JSON Feed 动态规则', 'RSS / 订阅')
+  applyDynamicRuleList(add, filterCustomRulesForTarget(pageRules.customRules, 'dynamic'), context, '自定义动态规则', '其他库', rule =>
     rule.kind ? `${rule.kind}：` : ''
   )
 
@@ -1251,6 +1309,144 @@ function detectFromDynamicSnapshot(snapshot, pageRules) {
   }
 
   return mergeTechnologyRecords(technologies)
+}
+
+function buildDynamicMatchContext(snapshot, text) {
+  const resourceUrls = [
+    ...(snapshot.resources || []),
+    ...(snapshot.scripts || []),
+    ...(snapshot.stylesheets || []),
+    ...(snapshot.iframes || [])
+  ]
+  const uniqueResourceUrls = [...new Set(resourceUrls.map(url => String(url || '')).filter(Boolean))]
+  return {
+    text,
+    lowerText: text,
+    resourceText: uniqueResourceUrls.join('\n').toLowerCase(),
+    frontendResourceNames: collectDynamicFrontendResourceNames(uniqueResourceUrls)
+  }
+}
+
+function collectDynamicFrontendResourceNames(urls) {
+  const names = new Map()
+  for (const rawUrl of urls) {
+    addDynamicFrontendResourceNames(names, rawUrl)
+  }
+  return names
+}
+
+function addDynamicFrontendResourceNames(target, rawUrl) {
+  let url
+  try {
+    url = new URL(rawUrl)
+  } catch {
+    return
+  }
+
+  const host = url.hostname.toLowerCase()
+  const pathname = safeDecodeURIComponent(url.pathname || '')
+  const lowerPath = pathname.toLowerCase()
+  const add = name => addDynamicFrontendResourceName(target, name, rawUrl)
+
+  if (lowerPath.includes('/ajax/libs/')) {
+    add(pathname.split('/ajax/libs/')[1]?.split('/')[0])
+  }
+
+  if (/^(?:cdn|fastly|gcore)\.jsdelivr\.net$/.test(host)) {
+    collectJsDelivrPackageNames(pathname, add)
+  }
+
+  if (host === 'unpkg.com' || host === 'esm.sh' || host === 'esm.run' || host === 'cdn.skypack.dev') {
+    add(extractPackageNameFromPath(pathname))
+  }
+
+  if (host === 'jspm.dev') {
+    add(extractPackageNameFromPath(pathname.replace(/^\/npm:/, '/')))
+  }
+
+  if (host === 'ga.jspm.io') {
+    const match = pathname.match(/\/npm:((?:@[^/@?#,]+\/)?[^/@?#,]+)/i)
+    add(match?.[1])
+  }
+
+  if (host === 'bundle.run' || host === 'cdn.pika.dev') {
+    add(extractPackageNameFromPath(pathname))
+  }
+
+  if (host === 'cdn.staticfile.net' || host === 'cdn.staticfile.org' || host === 'lib.baomitu.com' || host === 'cdn.baomitu.com') {
+    add(pathname.split('/').filter(Boolean)[0])
+  }
+
+  if (host === 'ajax.googleapis.com' || host === 'ajax.aspnetcdn.com') {
+    add(pathname.split('/ajax/libs/')[1]?.split('/')[0] || pathname.split('/').filter(Boolean)[1])
+  }
+
+  if (host === 'rawcdn.githack.com' || host === 'rawgit.com' || host === 'cdn.rawgit.com') {
+    const parts = pathname.split('/').filter(Boolean)
+    add(parts[1])
+  }
+
+  if (host === 'gitcdn.xyz' || host === 'gitcdn.link') {
+    const parts = pathname.split('/').filter(Boolean)
+    const repoIndex = parts.indexOf('repo')
+    add(repoIndex >= 0 ? parts[repoIndex + 2] : '')
+  }
+}
+
+function collectJsDelivrPackageNames(pathname, add) {
+  const npmPattern = /(?:^|[,/])npm\/((?:@[^/@?#,]+\/)?[^/@?#,]+)/gi
+  let match
+  while ((match = npmPattern.exec(pathname))) {
+    add(match[1])
+  }
+
+  const githubPattern = /(?:^|[,/])gh\/[^/@?#,]+\/([^/@?#,]+)/gi
+  while ((match = githubPattern.exec(pathname))) {
+    add(match[1])
+  }
+}
+
+function extractPackageNameFromPath(pathname) {
+  const parts = pathname.split('/').filter(Boolean)
+  if (/^v\d+$/i.test(parts[0])) {
+    parts.shift()
+  }
+  if (!parts.length) {
+    return ''
+  }
+
+  if (parts[0].startsWith('@')) {
+    return parts.length > 1 ? `${parts[0]}/${stripPackageVersion(parts[1])}` : ''
+  }
+  return stripPackageVersion(parts[0])
+}
+
+function stripPackageVersion(value) {
+  const text = String(value || '')
+  if (text.startsWith('@')) {
+    return text
+  }
+  return text.replace(/@[^/]*$/, '')
+}
+
+function addDynamicFrontendResourceName(target, name, rawUrl) {
+  const key = normalizeDynamicFrontendResourceName(name)
+  if (!key || target.has(key)) {
+    return
+  }
+  target.set(key, rawUrl)
+}
+
+function normalizeDynamicFrontendResourceName(name) {
+  const value = safeDecodeURIComponent(String(name || ''))
+    .trim()
+    .replace(/^\/+|\/+$/g, '')
+    .toLowerCase()
+  if (value.startsWith('@')) {
+    const parts = value.split('/')
+    return parts.length > 1 ? `${parts[0]}/${stripPackageVersion(parts[1])}` : value
+  }
+  return stripPackageVersion(value)
 }
 
 function detectDynamicMinifiedScriptFallback(add, snapshot, currentTechnologies) {
@@ -1480,22 +1676,39 @@ function safeDecodeURIComponent(value) {
   }
 }
 
-function applyDynamicRuleList(add, rules, text, sourceLabel, defaultCategory, evidencePrefix = () => '') {
+function applyDynamicRuleList(add, rules, contextOrText, sourceLabel, defaultCategory, evidencePrefix = () => '') {
   if (!Array.isArray(rules) || !rules.length) {
     return
   }
 
+  const context =
+    typeof contextOrText === 'string'
+      ? { text: contextOrText, lowerText: contextOrText.toLowerCase(), resourceText: contextOrText.toLowerCase() }
+      : contextOrText || {}
+  const useFrontendLookup = shouldUseDynamicFrontendLookup(rules, defaultCategory)
+
   for (const rule of rules) {
-    if (!matchesRuleTextHints(rule, text)) {
+    const frontendLookupUrl = useFrontendLookup ? matchDynamicFrontendLookup(rule, context, defaultCategory) : ''
+    if (frontendLookupUrl) {
+      add(
+        rule.category || defaultCategory || '其他库',
+        rule.name,
+        rule.confidence || '中',
+        `${evidencePrefix(rule)}资源 URL 匹配 ${shortHeaderUrl(frontendLookupUrl)}`
+      )
       continue
     }
-    const matched = (rule.patterns || []).some(pattern => {
-      try {
-        return compileRulePattern(pattern, rule).test(text)
-      } catch {
-        return false
-      }
-    })
+
+    if (useFrontendLookup && isDynamicFrontendResourceOnlyRule(rule, defaultCategory)) {
+      continue
+    }
+
+    if (!matchesRuleTextHints(rule, context)) {
+      continue
+    }
+    const matchText =
+      rule?.resourceOnly === true ? context.resourceText || context.lowerText || '' : context.lowerText || context.text || ''
+    const matched = matchesCompiledRulePatterns(rule, matchText)
     if (!matched) {
       continue
     }
@@ -1503,11 +1716,90 @@ function applyDynamicRuleList(add, rules, text, sourceLabel, defaultCategory, ev
   }
 }
 
-function matchesRuleTextHints(rule, text) {
+function shouldUseDynamicFrontendLookup(rules, defaultCategory) {
+  if (!Array.isArray(rules) || rules.length < DYNAMIC_FAST_LOOKUP_RULE_MIN) {
+    return false
+  }
+  return rules.some(rule => isDynamicFrontendResourceOnlyRule(rule, defaultCategory))
+}
+
+function isDynamicFrontendResourceOnlyRule(rule, defaultCategory) {
+  const category = rule?.category || defaultCategory || ''
+  if (category !== '前端库' || rule?.resourceOnly !== true) {
+    return false
+  }
+  const hints = Array.isArray(rule.resourceHints) ? rule.resourceHints.join('\n').toLowerCase() : ''
+  return /cdnjs|jsdelivr|unpkg|esm\.|skypack|jspm|staticfile|bootcdn|baomitu|googleapis|aspnetcdn|githack|rawgit|gitcdn|bundle\.run|pika/.test(
+    hints
+  )
+}
+
+function matchDynamicFrontendLookup(rule, context, defaultCategory) {
+  if (!isDynamicFrontendResourceOnlyRule(rule, defaultCategory)) {
+    return ''
+  }
+  for (const key of getDynamicFrontendRuleLookupKeys(rule)) {
+    const url = context.frontendResourceNames?.get(key)
+    if (url) {
+      return url
+    }
+  }
+  return ''
+}
+
+function getDynamicFrontendRuleLookupKeys(rule) {
+  if (!rule || typeof rule !== 'object') {
+    return []
+  }
+
+  const cached = dynamicFrontendRuleKeyCache.get(rule)
+  if (cached) {
+    return cached
+  }
+
+  const keys = new Set([normalizeDynamicFrontendResourceName(rule.name)])
+  for (const pattern of rule.patterns || []) {
+    for (const name of extractDynamicFrontendNamesFromPattern(pattern)) {
+      keys.add(normalizeDynamicFrontendResourceName(name))
+    }
+  }
+  const values = [...keys].filter(Boolean)
+  dynamicFrontendRuleKeyCache.set(rule, values)
+  return values
+}
+
+function extractDynamicFrontendNamesFromPattern(pattern) {
+  const text = String(pattern || '')
+    .replace(/\\\./g, '.')
+    .replace(/\\\//g, '/')
+    .replace(/\\-/g, '-')
+  const names = []
+  const extractors = [
+    /ajax\/libs\/([^/\\([?:|]+)/i,
+    /npm\/((?:@[^/\\([?:|]+\/)?[^/@/\\([?:|]+)/i,
+    /npm:((?:@[^/\\([?:|]+\/)?[^/@/\\([?:|]+)/i,
+    /(?:unpkg|esm\.sh|esm\.run|bundle\.run|cdn\.pika\.dev|cdn\.skypack\.dev)\/((?:@[^/\\([?:|]+\/)?[^/@/\\([?:|]+)/i,
+    /gh\/[^/\\([?:|]+\/([^/@/\\([?:|]+)/i,
+    /(?:staticfile\.(?:net|org)|baomitu\.com|googleapis\.com|aspnetcdn\.com)\/(?:ajax\/libs\/)?([^/\\([?:|]+)/i
+  ]
+
+  for (const extractor of extractors) {
+    const match = text.match(extractor)
+    if (match?.[1]) {
+      names.push(match[1])
+    }
+  }
+  return names
+}
+
+function matchesRuleTextHints(rule, contextOrText) {
   if (!Array.isArray(rule.resourceHints) || !rule.resourceHints.length) {
     return true
   }
-  const value = String(text || '').toLowerCase()
+  const value =
+    typeof contextOrText === 'string'
+      ? contextOrText.toLowerCase()
+      : contextOrText?.lowerText || String(contextOrText?.text || '').toLowerCase()
   return rule.resourceHints.some(hint => value.includes(String(hint || '').toLowerCase()))
 }
 
@@ -1851,13 +2143,52 @@ function matchesHeaderPatterns(patterns, text, rule = {}) {
   if (!Array.isArray(patterns) || !patterns.length) {
     return false
   }
-  return patterns.some(pattern => {
+  return getCompiledRulePatterns(rule, patterns).some(pattern => {
+    pattern.lastIndex = 0
+    return pattern.test(text)
+  })
+}
+
+function matchesCompiledRulePatterns(rule, text) {
+  if (!rule || !Array.isArray(rule.patterns) || !rule.patterns.length) {
+    return false
+  }
+  if (rule.matchType === 'keyword') {
+    const value = String(text || '').toLowerCase()
+    return rule.patterns.some(pattern => value.includes(String(pattern || '').toLowerCase()))
+  }
+  return getCompiledRulePatterns(rule, rule.patterns).some(pattern => {
+    pattern.lastIndex = 0
+    return pattern.test(text)
+  })
+}
+
+function getCompiledRulePatterns(rule, patterns) {
+  const sourcePatterns = Array.isArray(patterns) ? patterns : []
+  if (!rule || typeof rule !== 'object') {
+    return sourcePatterns.flatMap(pattern => {
+      try {
+        return [compileRulePattern(pattern, rule)]
+      } catch {
+        return []
+      }
+    })
+  }
+
+  const cached = compiledRulePatternCache.get(rule)
+  if (cached && cached.source === sourcePatterns) {
+    return cached.compiled
+  }
+
+  const compiled = sourcePatterns.flatMap(pattern => {
     try {
-      return compileRulePattern(pattern, rule).test(text)
+      return [compileRulePattern(pattern, rule)]
     } catch {
-      return false
+      return []
     }
   })
+  compiledRulePatternCache.set(rule, { source: sourcePatterns, compiled })
+  return compiled
 }
 
 function compileRulePattern(pattern, rule) {
