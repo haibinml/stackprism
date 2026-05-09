@@ -1456,6 +1456,96 @@
           ]
         },
         {
+          "defaults": {
+            "kind": "招聘 / ATS",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Greenhouse Job Board",
+              "patterns": ["boards\\.greenhouse\\.io|job-boards\\.greenhouse\\.io|boards-api\\.greenhouse\\.io"]
+            },
+            {
+              "name": "Lever Jobs",
+              "patterns": ["jobs\\.lever\\.co|api\\.lever\\.co/v0/postings"]
+            },
+            {
+              "name": "Workable",
+              "patterns": ["apply\\.workable\\.com|www\\.workable\\.com/widgets|workable\\.com/api/accounts/[^\\s\"'<>]*/jobs"]
+            },
+            {
+              "name": "Ashby",
+              "patterns": ["jobs\\.ashbyhq\\.com|embed\\.ashbyhq\\.com|api\\.ashbyhq\\.com/posting-api"]
+            },
+            {
+              "name": "SmartRecruiters",
+              "patterns": ["jobs\\.smartrecruiters\\.com|api\\.smartrecruiters\\.com|smartrecruiters\\.com/[^\\s\"'<>]*(?:careers|jobs)"]
+            },
+            {
+              "name": "BambooHR Careers",
+              "patterns": ["[a-z0-9-]+\\.bamboohr\\.com/careers|bamboohr\\.com/jobs/embed2\\.php|api\\.bamboohr\\.com"]
+            },
+            {
+              "name": "iCIMS Talent Cloud",
+              "patterns": ["careers\\.icims\\.com|icims\\.com/jobs|platform\\.icims\\.com"]
+            },
+            {
+              "name": "JazzHR",
+              "patterns": ["applytojob\\.com|jazz\\.co/apply|jazzhr\\.com/[^\\s\"'<>]*(?:jobs|apply)"]
+            },
+            {
+              "name": "Recruitee",
+              "patterns": ["recruitee\\.com/c/|recruitee\\.com/o/|recruitee\\.com/api/offers|cdn\\.recruitee\\.com"]
+            },
+            {
+              "name": "Teamtailor",
+              "patterns": ["teamtailor\\.com/jobs|teamtailor-cdn\\.com|api\\.teamtailor\\.com"]
+            },
+            {
+              "name": "Comeet",
+              "patterns": ["www\\.comeet\\.co/jobs-api|comeet\\.co/careers|comeet\\.co/jobs"]
+            },
+            {
+              "name": "Jobvite",
+              "patterns": ["jobs\\.jobvite\\.com|jobvite\\.com/(?:job|jobs)|jobvite\\.com/CompanyJobs"]
+            },
+            {
+              "name": "Personio Recruiting",
+              "patterns": [
+                "jobs\\.personio\\.com|personio\\.de/[^\\s\"'<>]*(?:jobs|recruiting)|personio\\.com/[^\\s\"'<>]*(?:jobs|recruiting)"
+              ]
+            },
+            {
+              "name": "Pinpoint ATS",
+              "patterns": ["pinpointhq\\.com/postings|pinpointhq\\.com/jobs|pinpointhq\\.com/[^\\s\"'<>]*(?:careers|ats)"]
+            },
+            {
+              "name": "Breezy HR",
+              "patterns": ["breezy\\.hr/p/|breezy\\.hr/embed|breezy\\.hr/api"]
+            },
+            {
+              "name": "Recruiterbox",
+              "patterns": ["recruiterbox\\.com/jobs|recruiterbox\\.com/embed|apply\\.recruiterbox\\.com"]
+            },
+            {
+              "name": "Workday Recruiting",
+              "patterns": ["myworkdayjobs\\.com|workdayjobs\\.com/[^\\s\"'<>]*(?:job|jobs)|wd1\\.myworkdaysite\\.com"]
+            },
+            {
+              "name": "Eightfold AI Careers",
+              "patterns": ["eightfold\\.ai/[^\\s\"'<>]*(?:careers|jobs)|api\\.eightfold\\.ai|cdn\\.eightfold\\.ai"]
+            },
+            {
+              "name": "Fountain",
+              "patterns": ["fountain\\.com/jobs|fountain\\.com/[^\\s\"'<>]*(?:applicants|apply)|api\\.fountain\\.com"]
+            },
+            {
+              "name": "Indeed Apply",
+              "patterns": ["indeed\\.com/[^\\s\"'<>]*(?:applystart|indeedapply)|indeed\\.com/viewjob|apply\\.indeed\\.com"]
+            }
+          ]
+        },
+        {
           "name": "Airtable",
           "kind": "表格 / 数据库",
           "patterns": ["airtable\\.com\\/embed|airtable\\.com"]
