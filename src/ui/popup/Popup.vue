@@ -85,48 +85,54 @@
           </div>
         </nav>
 
-        <Transition name="sections-fade" mode="out-in">
-          <section :key="state.activeCategory + '|' + (state.result?.updatedAt || 0)" class="sections">
-            <div v-if="!state.result?.technologies?.length" class="empty">
-              <SearchX class="empty-icon" :size="32" :stroke-width="1.5" />
-              <p>未检测到明确技术线索</p>
-              <p class="empty-hint">刷新页面后重新打开插件，以便捕获主文档响应头。</p>
-            </div>
-            <div v-else-if="!filteredSections.length" class="empty">
-              <Inbox class="empty-icon" :size="28" :stroke-width="1.5" />
-              <p>当前分类没有检测结果</p>
-            </div>
-            <section v-for="group in filteredSections" :key="group.category" class="category">
-              <h2>
-                <span>{{ group.category }}</span>
-                <span class="count">{{ group.items.length }} 项</span>
-              </h2>
-              <article v-for="tech in group.items" :key="`${tech.name}|${tech.category}`" class="tech">
-                <div class="tech-head">
-                  <span v-if="!tech.url && isFrontendFallback(tech)" class="tech-name">{{ tech.name }}</span>
-                  <button
-                    v-else
-                    type="button"
-                    class="tech-name tech-link"
-                    :title="`打开 ${tech.name} 官网或仓库`"
-                    @click="openTechnologyLink(tech)"
-                  >
-                    <span>{{ tech.name }}</span>
-                    <ExternalLink class="tech-link-icon" :size="12" :stroke-width="2" />
-                  </button>
-                  <span :class="['confidence', confidenceClass(tech.confidence)]">{{ tech.confidence }}置信度</span>
-                </div>
-                <details v-if="tech.evidence?.length || tech.sources?.length" class="tech-disclosure">
-                  <summary class="source-row">
-                    <ChevronRight class="source-chevron" :size="11" :stroke-width="2.4" />
-                    <span v-if="tech.sources?.length" class="source-chips">
-                      <span v-for="src in tech.sources" :key="src" class="source-chip">{{ src }}</span>
-                    </span>
-                    <span v-else class="source-empty">查看证据</span>
-                  </summary>
+        <div ref="sectionsScroller" class="sections-scroller" @scroll="onSectionsScroll">
+          <Transition name="sections-fade" mode="out-in">
+            <section :key="state.activeCategory + '|' + (state.result?.updatedAt || 0)" class="sections">
+              <div v-if="!state.result?.technologies?.length" class="empty">
+                <SearchX class="empty-icon" :size="32" :stroke-width="1.5" />
+                <p>未检测到明确技术线索</p>
+                <p class="empty-hint">刷新页面后重新打开插件，以便捕获主文档响应头。</p>
+              </div>
+              <div v-else-if="!filteredSections.length" class="empty">
+                <Inbox class="empty-icon" :size="28" :stroke-width="1.5" />
+                <p>当前分类没有检测结果</p>
+              </div>
+              <section v-for="group in filteredSections" :key="group.category" class="category">
+                <h2>
+                  <span>{{ group.category }}</span>
+                  <span class="count">{{ group.items.length }} 项</span>
+                </h2>
+                <article v-for="tech in group.items" :key="`${tech.name}|${tech.category}`" class="tech">
+                  <div class="tech-head">
+                    <span v-if="!tech.url && isFrontendFallback(tech)" class="tech-name">{{ tech.name }}</span>
+                    <button
+                      v-else
+                      type="button"
+                      class="tech-name tech-link"
+                      :title="`打开 ${tech.name} 官网或仓库`"
+                      @click="openTechnologyLink(tech)"
+                    >
+                      <span>{{ tech.name }}</span>
+                      <ExternalLink class="tech-link-icon" :size="12" :stroke-width="2" />
+                    </button>
+                    <span :class="['confidence', confidenceClass(tech.confidence)]">{{ tech.confidence }}置信度</span>
+                  </div>
                   <ul v-if="tech.evidence?.length" class="evidence">
-                    <li v-for="(ev, i) in tech.evidence" :key="i">{{ ev }}</li>
+                    <li v-for="(ev, i) in tech.evidence.slice(0, 4)" :key="i">{{ ev }}</li>
                   </ul>
+                  <div v-if="tech.sources?.length" class="source">
+                    来源：
+                    <button
+                      v-for="src in tech.sources"
+                      :key="src"
+                      type="button"
+                      class="source-link"
+                      :title="`查看 ${src} 来源的原始数据`"
+                      @click="openSourceRaw(tech, src)"
+                    >
+                      {{ src }}
+                    </button>
+                  </div>
                   <button
                     type="button"
                     class="correction-link"
@@ -136,10 +142,16 @@
                     <Flag :size="11" :stroke-width="2" />
                     <span>识别不准确，点击纠正</span>
                   </button>
-                </details>
-              </article>
+                </article>
+              </section>
             </section>
-          </section>
+          </Transition>
+        </div>
+
+        <Transition name="scroll-top-fade">
+          <button v-show="showScrollTop" type="button" class="scroll-top" title="返回顶部" @click="scrollSectionsTop">
+            <ArrowUp :size="16" :stroke-width="2" />
+          </button>
         </Transition>
       </template>
     </template>
@@ -211,8 +223,8 @@
 <script setup lang="ts">
   import { onMounted, onBeforeUnmount, reactive, ref, computed, watch, type Ref } from 'vue'
   import {
+    ArrowUp,
     Ban,
-    ChevronRight,
     Copy,
     ExternalLink,
     FileCode,
@@ -265,6 +277,8 @@
   const rawOutputText = ref(RAW_PLACEHOLDER)
   const theme = ref<ThemeMode>('auto')
   const footerPanel = ref<'search' | 'raw' | null>(null)
+  const sectionsScroller = ref<HTMLElement | null>(null)
+  const showScrollTop = ref(false)
 
   const toggleFooterPanel = (name: 'search' | 'raw') => {
     if (footerPanel.value === name) {
@@ -275,6 +289,20 @@
     if (name === 'raw') {
       renderRawOutput().catch(() => {})
     }
+  }
+
+  const openSourceRaw = (_tech: any, _source: string) => {
+    footerPanel.value = 'raw'
+    renderRawOutput().catch(() => {})
+  }
+
+  const onSectionsScroll = (event: Event) => {
+    const target = event.currentTarget as HTMLElement
+    showScrollTop.value = target.scrollTop > 240
+  }
+
+  const scrollSectionsTop = () => {
+    sectionsScroller.value?.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const toggleTheme = async () => {
@@ -791,19 +819,24 @@
 <style>
   body {
     width: var(--popup-width);
-    min-height: 520px;
+    height: 600px;
     font-size: 13px;
     line-height: 1.45;
+    overflow: hidden;
   }
 </style>
 
 <style scoped>
-  /* layout shell */
+  /* layout shell：flex column，整体高度 100vh，sections-scroller 独占滚动区 */
   .shell {
-    padding: calc(var(--popup-header-height) + 8px) 16px calc(var(--popup-footer-height) + 12px);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 0;
+    position: relative;
   }
 
-  /* topbar：左右两区，brand 与 actions 主次分明 */
+  /* topbar：flex 项，不再 fixed，自然占据顶部 */
   .topbar {
     background: var(--panel-translucent);
     border-bottom: 1px solid var(--line);
@@ -811,15 +844,11 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    flex-shrink: 0;
     gap: 12px;
     height: var(--popup-header-height);
-    left: 0;
     margin: 0;
     padding: 12px 16px 8px;
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: var(--popup-width);
     z-index: 20;
   }
 
@@ -919,9 +948,10 @@
   .status {
     border-bottom: 1px solid var(--line);
     color: var(--muted);
+    flex-shrink: 0;
     font-size: 12px;
-    margin: 0 -4px 12px;
-    padding: 0 4px 10px;
+    margin: 0;
+    padding: 8px 16px 10px;
   }
 
   .status.error {
@@ -933,9 +963,10 @@
     align-items: baseline;
     border-bottom: 1px solid var(--line);
     display: flex;
+    flex-shrink: 0;
     gap: 20px;
-    margin-bottom: 12px;
-    padding: 4px 4px 14px;
+    margin: 0;
+    padding: 14px 16px;
   }
 
   .summary > div {
@@ -968,9 +999,10 @@
     align-items: center;
     border-bottom: 1px solid var(--line);
     display: flex;
+    flex-shrink: 0;
     gap: 12px;
-    margin: 0 -4px 12px;
-    padding: 0 4px 10px;
+    margin: 0;
+    padding: 12px 16px;
   }
 
   .segment {
@@ -1029,10 +1061,12 @@
     align-items: center;
     color: var(--muted);
     display: flex;
+    flex: 1 1 auto;
     flex-direction: column;
     font-size: 13px;
     gap: 12px;
-    padding: 64px 24px 32px;
+    justify-content: center;
+    padding: 32px 24px;
   }
 
   .loading p {
@@ -1048,6 +1082,49 @@
     to {
       transform: rotate(360deg);
     }
+  }
+
+  /* scroll-top：sections 滚动 > 240px 出现，固定在 sections 区域右下角 */
+  .scroll-top {
+    align-items: center;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    bottom: calc(var(--popup-footer-height) + 12px);
+    box-shadow: 0 4px 12px rgba(20, 35, 50, 0.1);
+    color: var(--muted);
+    cursor: pointer;
+    display: inline-flex;
+    height: 32px;
+    justify-content: center;
+    padding: 0;
+    position: absolute;
+    right: 12px;
+    transition:
+      background 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
+    width: 32px;
+    z-index: 18;
+  }
+
+  .scroll-top:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+  }
+
+  .scroll-top-fade-enter-active,
+  .scroll-top-fade-leave-active {
+    transition:
+      opacity 0.18s ease,
+      transform 0.18s ease;
+  }
+
+  .scroll-top-fade-enter-from,
+  .scroll-top-fade-leave-to {
+    opacity: 0;
+    transform: scale(0.8) translateY(8px);
   }
 
   /* sections 切换淡入，从无→有数据 / 切分类时整体过渡 */
@@ -1066,6 +1143,14 @@
   .sections-fade-leave-to {
     opacity: 0;
     transform: translateY(-2px);
+  }
+
+  /* sections-scroller：唯一滚动容器，flex 1 占据剩余空间 */
+  .sections-scroller {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 12px 16px;
   }
 
   /* sections：去 panel 化，标题 + 列表条目 */
@@ -1188,75 +1273,49 @@
     color: var(--confidence-low-text);
   }
 
-  /* tech-disclosure：来源 chips 折叠面板，点击 summary 展开证据 + 纠正按钮 */
-  .tech-disclosure {
-    margin-top: 6px;
-  }
-
-  .tech-disclosure > summary {
-    align-items: center;
-    color: var(--muted);
-    cursor: pointer;
-    display: inline-flex;
-    flex-wrap: wrap;
-    font-size: 11px;
-    gap: 6px;
-    list-style: none;
-    padding: 2px 0;
-    user-select: none;
-  }
-
-  .tech-disclosure > summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .source-chevron {
-    color: var(--muted);
-    flex-shrink: 0;
-    transition: transform 0.15s ease;
-  }
-
-  .tech-disclosure[open] .source-chevron {
-    transform: rotate(90deg);
-  }
-
-  .source-chips {
-    align-items: center;
-    display: inline-flex;
-    flex-wrap: wrap;
-    gap: 4px;
-  }
-
-  .source-chip {
-    background: var(--accent-soft);
-    border-radius: 3px;
-    color: var(--muted);
-    font-size: 11px;
-    padding: 1px 6px;
-    transition: color 0.15s ease;
-  }
-
-  .tech-disclosure > summary:hover .source-chip {
-    color: var(--accent);
-  }
-
-  .source-empty {
-    color: var(--muted);
-  }
-
   .evidence {
     color: var(--muted);
     font-size: 12px;
-    margin: 6px 0 0;
-    padding-left: 18px;
+    margin: 4px 0 0;
+    padding-left: 16px;
   }
 
   .evidence li {
-    margin: 2px 0;
+    margin: 1px 0;
     overflow-wrap: anywhere;
   }
 
-  /* correction-link：折叠面板里固定显示，整体克制 */
+  /* source 行：每个来源是 button，点击打开 raw 面板查看 JSON */
+  .source {
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 11px;
+    gap: 4px;
+    margin-top: 4px;
+  }
+
+  .source-link {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px dashed var(--line);
+    border-radius: 0;
+    color: var(--muted);
+    cursor: pointer;
+    font: inherit;
+    font-size: 11px;
+    padding: 0 1px;
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .source-link:hover {
+    border-bottom-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* correction-link：默认低调，hover .tech 时显现 */
   .correction-link {
     align-items: center;
     background: transparent;
@@ -1267,9 +1326,17 @@
     font-size: 11px;
     gap: 4px;
     margin-top: 6px;
+    opacity: 0;
     padding: 0;
     text-align: left;
-    transition: color 0.15s ease;
+    transition:
+      opacity 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .tech:hover .correction-link,
+  .correction-link:focus-visible {
+    opacity: 1;
   }
 
   .correction-link:hover {
@@ -1307,8 +1374,10 @@
   .unsupported {
     align-items: center;
     display: flex;
+    flex: 1 1 auto;
     flex-direction: column;
-    padding: 56px 24px 32px;
+    justify-content: center;
+    padding: 24px;
     text-align: center;
   }
 
@@ -1342,18 +1411,14 @@
     background: var(--panel-translucent);
     backdrop-filter: saturate(180%) blur(8px);
     border-top: 1px solid var(--line);
-    bottom: 0;
     color: var(--muted);
     display: flex;
+    flex-shrink: 0;
     gap: 8px;
     justify-content: space-between;
-    left: 0;
     margin: 0;
     min-height: var(--popup-footer-height);
     padding: 6px 12px;
-    position: fixed;
-    right: 0;
-    width: var(--popup-width);
     z-index: 20;
   }
 
@@ -1400,7 +1465,7 @@
     color: var(--accent);
   }
 
-  /* footer-panel：从底部抽屉式滑出，固定在 footer 上方 */
+  /* footer-panel：从底部抽屉式滑出，相对 .shell 绝对定位在 footer 上方 */
   .footer-panel {
     background: var(--panel);
     border-top: 1px solid var(--line);
@@ -1409,10 +1474,9 @@
     display: flex;
     flex-direction: column;
     left: 0;
-    max-height: 60vh;
-    position: fixed;
+    max-height: 60%;
+    position: absolute;
     right: 0;
-    width: var(--popup-width);
     z-index: 19;
   }
 
