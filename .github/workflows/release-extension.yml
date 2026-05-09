@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       release_tag:
-        description: Existing release tag to upload assets to, for example v1.0.17
+        description: 已存在的 release tag，留空则自动按 manifest.json 版本拼成 v{version}
         required: false
         type: string
 
@@ -16,31 +16,31 @@ permissions:
 
 jobs:
   package:
-    name: Package browser extension
+    name: 打包浏览器扩展
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: 检出仓库
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
+      - name: 安装 pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10
 
-      - name: Setup Node
+      - name: 安装 Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
 
-      - name: Install dependencies
+      - name: 安装依赖
         run: pnpm install --frozen-lockfile
 
-      - name: Build extension
+      - name: 构建扩展
         run: pnpm run build
 
-      - name: Read and validate version
+      - name: 读取版本号并校验
         id: meta
         shell: bash
         env:
@@ -58,7 +58,7 @@ jobs:
 
           normalized_tag="${tag#v}"
           if [ "$normalized_tag" != "$version" ]; then
-            echo "::error::Release tag $tag does not match dist/manifest.json version $version."
+            echo "::error::Release tag $tag 与 dist/manifest.json 中的版本号 $version 不一致。"
             exit 1
           fi
 
@@ -67,7 +67,7 @@ jobs:
           echo "zip_name=stackprism-v${version}.zip" >> "$GITHUB_OUTPUT"
           echo "crx_name=stackprism-v${version}.crx" >> "$GITHUB_OUTPUT"
 
-      - name: Pack zip
+      - name: 打包 zip
         shell: bash
         run: |
           set -euo pipefail
@@ -78,7 +78,7 @@ jobs:
           )
           sha256sum "release/${{ steps.meta.outputs.zip_name }}" > "release/${{ steps.meta.outputs.zip_name }}.sha256"
 
-      - name: Pack crx
+      - name: 签名 crx
         id: crx
         shell: bash
         env:
@@ -96,7 +96,7 @@ jobs:
           rm -f extension.pem
           echo "skipped=false" >> "$GITHUB_OUTPUT"
 
-      - name: Upload package to release
+      - name: 上传产物到 release
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
@@ -114,7 +114,7 @@ jobs:
           fi
           gh release upload "${{ steps.meta.outputs.tag }}" "${assets[@]}" --clobber
 
-      - name: Upload workflow artifact
+      - name: 归档产物
         uses: actions/upload-artifact@v4
         with:
           name: stackprism-v${{ steps.meta.outputs.version }}
