@@ -353,4 +353,184 @@ examplepay-sdk</pre
   })
 </script>
 
-<style src="@/ui/shared/styles/help.css"></style>
+<style>
+body {
+  font-size: 15px;
+  line-height: 1.65;
+}
+</style>
+
+<style scoped>
+.help-shell {
+  margin: 0 auto;
+  max-width: 1040px;
+  padding: 24px;
+}
+
+.help-header {
+  align-items: flex-start;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1 {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 26px;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+p + p {
+  margin-top: 8px;
+}
+
+.version-badge {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 7px;
+}
+
+.help-header p,
+.panel p,
+.plain-list,
+.steps {
+  color: var(--muted);
+}
+
+.panel {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  margin-bottom: 14px;
+  padding: 16px;
+}
+
+.steps,
+.plain-list {
+  padding-left: 22px;
+}
+
+.steps li,
+.plain-list li {
+  margin: 6px 0;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.field-grid > div {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.field-grid.compact {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+code {
+  background: #eef2f7;
+  border-radius: 4px;
+  color: #334155;
+  font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', monospace;
+  font-size: 0.92em;
+  padding: 1px 5px;
+}
+
+.example {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  margin: 0;
+}
+
+dt,
+dd {
+  border-bottom: 1px solid var(--line);
+  margin: 0;
+  padding: 10px 12px;
+}
+
+dt {
+  background: #f8fafc;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+dd:last-child,
+dt:nth-last-child(2) {
+  border-bottom: 0;
+}
+
+pre {
+  background: var(--code-bg);
+  border-radius: 6px;
+  color: var(--code-text);
+  font-size: 13px;
+  margin: 0;
+  overflow: auto;
+  padding: 10px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+@media (max-width: 760px) {
+  .help-shell {
+    padding: 14px;
+  }
+
+  .help-header,
+  .field-grid,
+  .field-grid.compact,
+  dl {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  dt {
+    border-bottom: 0;
+    padding-bottom: 4px;
+  }
+}
+</style>

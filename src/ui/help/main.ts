@@ -1,3 +1,4 @@
+import '@/ui/shared/styles/tokens.css'
 import { createApp } from 'vue'
 import Help from './Help.vue'
 
