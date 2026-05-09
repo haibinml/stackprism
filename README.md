@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="icons/icon256.png" width="128" height="128" alt="StackPrism 栈棱镜图标">
+  <img src="public/icons/icon256.png" width="128" height="128" alt="StackPrism 栈棱镜图标">
 </p>
 
 <h1 align="center">StackPrism / 栈棱镜</h1>
