@@ -597,6 +597,108 @@
         },
         {
           "defaults": {
+            "kind": "视频托管 / 嵌入播放器",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "YouTube Embed",
+              "patterns": ["youtube\\.com/(?:embed/|iframe_api)|youtube-nocookie\\.com/embed/"]
+            },
+            {
+              "name": "Vimeo Player",
+              "patterns": ["player\\.vimeo\\.com/(?:api/player\\.js|video/)|f\\.vimeocdn\\.com"]
+            },
+            {
+              "name": "Wistia",
+              "patterns": [
+                "fast\\.wistia\\.com/assets/external/E-v1\\.js|fast\\.wistia\\.(?:com|net)/(?:embed|assets)|wistia\\.com/[^\\s\"'<>]*(?:embed|medias)"
+              ]
+            },
+            {
+              "name": "Vidyard",
+              "patterns": ["play\\.vidyard\\.com/(?:embed|player|watch)|cdn\\.vidyard\\.com|vidyard\\.com/[^\\s\"'<>]*(?:embed|player)"]
+            },
+            {
+              "name": "Brightcove Player",
+              "patterns": ["players\\.brightcove\\.net|videojs\\.brightcove\\.net|brightcove\\.com/[^\\s\"'<>]*(?:player|embed)"]
+            },
+            {
+              "name": "Kaltura Player",
+              "patterns": [
+                "(?:cdnapi|cdnapisec)\\.kaltura\\.com|kaltura\\.com/p/[^\\s\"'<>]*(?:embed|sp)|kaltura\\.com/[^\\s\"'<>]*kaltura_player"
+              ]
+            },
+            {
+              "name": "Mux Video",
+              "patterns": ["stream\\.mux\\.com|image\\.mux\\.com|player\\.mux\\.com|mux\\.com/[^\\s\"'<>]*(?:embed|player)"]
+            },
+            {
+              "name": "Cloudflare Stream",
+              "patterns": [
+                "iframe\\.videodelivery\\.net|customer-[a-z0-9]+\\.cloudflarestream\\.com|videodelivery\\.net/[^\\s\"'<>]*(?:embed|manifest|video)"
+              ]
+            },
+            {
+              "name": "Bunny Stream",
+              "patterns": ["iframe\\.mediadelivery\\.net/embed|video\\.bunnycdn\\.com|vz-[a-z0-9-]+\\.b-cdn\\.net"]
+            },
+            {
+              "name": "Dacast",
+              "patterns": ["player\\.dacast\\.com|iframe\\.dacast\\.com|dacast\\.com/[^\\s\"'<>]*(?:player|embed)"]
+            },
+            {
+              "name": "SproutVideo",
+              "patterns": ["videos\\.sproutvideo\\.com|embed\\.sproutvideo\\.com|sproutvideo\\.com/[^\\s\"'<>]*(?:embed|videos)"]
+            },
+            {
+              "name": "Loom Embed",
+              "patterns": ["loom\\.com/embed/|cdn\\.loom\\.com|www\\.loom\\.com/share/[^\\s\"'<>]*(?:embed|sid=)"]
+            },
+            {
+              "name": "Panopto",
+              "patterns": ["panopto\\.com/Panopto/(?:Pages/Embed|Scripts)|[a-z0-9.-]+\\.panopto\\.com/Panopto/"]
+            },
+            {
+              "name": "Uscreen",
+              "patterns": ["assets\\.uscreen\\.tv|uscreen\\.io/[^\\s\"'<>]*(?:embed|player)|uscreen\\.tv/[^\\s\"'<>]*(?:embed|player)"]
+            },
+            {
+              "name": "Streamable",
+              "patterns": ["streamable\\.com/(?:e|o)/|cdn\\.streamable\\.com"]
+            },
+            {
+              "name": "JW Player Embed",
+              "patterns": ["cdn\\.jwplayer\\.com/(?:players|libraries)|content\\.jwplatform\\.com/(?:players|videos)|jwpsrv\\.com"]
+            },
+            {
+              "name": "Dailymotion Embed",
+              "patterns": ["geo\\.dailymotion\\.com/player|dailymotion\\.com/embed/video|dmcdn\\.net"]
+            },
+            {
+              "name": "Rumble Embed",
+              "patterns": ["rumble\\.com/(?:embed|embedJS)|rumble\\.com/[^\\s\"'<>]*\\?pub="]
+            },
+            {
+              "name": "Twitch Embed",
+              "patterns": ["player\\.twitch\\.tv|embed\\.twitch\\.tv|twitch\\.tv/embed/"]
+            },
+            {
+              "name": "VdoCipher",
+              "patterns": ["player\\.vdocipher\\.com|vdocipher\\.com/[^\\s\"'<>]*(?:iframe|player)|otp\\.video"]
+            },
+            {
+              "name": "Spotlightr",
+              "patterns": ["cdn\\.spotlightr\\.com|video\\.spotlightr\\.com|spotlightr\\.com/[^\\s\"'<>]*(?:embed|watch)"]
+            },
+            {
+              "name": "Adilo",
+              "patterns": ["embed\\.adilo\\.com|player\\.adilo\\.com|adilo\\.bigcommand\\.com"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "Headless CMS"
           },
           "rules": [
