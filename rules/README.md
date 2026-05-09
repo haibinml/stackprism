@@ -32,3 +32,5 @@
 `page/php-ecosystem-assets.json` 是人工维护的 PHP 生态资源路径规则，覆盖 Laravel 生态包、Symfony Bundle、PHP CMS、电商、后台、网盘、Webmail、数据库管理等常见系统。该文件里的批量规则默认使用 `resourceOnly: true` 和 `resourceHints`，只根据页面实际加载过的资源 URL 判断，不把整页源码当作大范围关键词池。
 
 `page/backend-enterprise-assets.json` 是人工维护的后端与企业系统资源路径规则，覆盖 Java/.NET/Python/Ruby 生态框架、企业 CMS、SSO、DevOps、代码托管、制品仓库、数据平台和监控面板。该文件同样优先使用产品专属资源路径、`resourceOnly: true` 和 `resourceHints`，减少通用目录名造成的误报。
+
+`page/selfhosted-saas-assets.json` 是人工维护的自托管 SaaS、协作和数据产品资源路径规则，覆盖错误监控、会话回放、功能开关、客服工单、低代码、知识库、项目管理、团队通讯、联邦社交、文件协作和监控组件。规则优先匹配产品名静态资源或专属入口，避免只靠通用构建目录判断。

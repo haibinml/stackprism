@@ -1,0 +1,1064 @@
+{
+  "page": {
+    "saasServices": [
+      {
+        "category": "SaaS / 第三方服务",
+        "name": "GlitchTip",
+        "kind": "错误监控 / Sentry 兼容",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "glitchtip"
+        ],
+        "patterns": [
+          "glitchtip[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "SaaS / 第三方服务",
+        "name": "OpenReplay",
+        "kind": "会话回放 / 用户行为分析",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "openreplay"
+        ],
+        "patterns": [
+          "openreplay[^\\s\"'<>]*\\.(?:js|css|svg|png|wasm)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "SaaS / 第三方服务",
+        "name": "Highlight.io",
+        "kind": "会话回放 / 错误监控",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "highlight.io",
+          "highlight-run"
+        ],
+        "patterns": [
+          "highlight(?:\\.io|-run)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "SaaS / 第三方服务",
+        "name": "SigNoz",
+        "kind": "可观测性 / APM",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "signoz"
+        ],
+        "patterns": [
+          "signoz[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "SaaS / 第三方服务",
+        "name": "Flagsmith",
+        "kind": "功能开关",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "flagsmith"
+        ],
+        "patterns": [
+          "flagsmith[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "SaaS / 第三方服务",
+        "name": "Unleash",
+        "kind": "功能开关",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "unleash"
+        ],
+        "patterns": [
+          "unleash[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "SaaS / 第三方服务",
+        "name": "Flagr",
+        "kind": "功能开关 / 实验平台",
+        "confidence": "中",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "flagr"
+        ],
+        "patterns": [
+          "flagr[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "SaaS / 第三方服务",
+        "name": "GrowthBook",
+        "kind": "功能开关 / A/B 测试",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "growthbook"
+        ],
+        "patterns": [
+          "growthbook[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "SaaS / 第三方服务",
+        "name": "Chatwoot",
+        "kind": "客服 / 在线聊天",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "chatwoot",
+          "/packs/js/sdk"
+        ],
+        "patterns": [
+          "(?:^|/)packs/js/sdk[^\\s\"'<>]*\\.js(?:\\?|$)",
+          "chatwoot[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "SaaS / 第三方服务",
+        "name": "Zammad",
+        "kind": "客服 / 工单",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "zammad"
+        ],
+        "patterns": [
+          "zammad[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "SaaS / 第三方服务",
+        "name": "FreeScout",
+        "kind": "客服 / 工单",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "freescout"
+        ],
+        "patterns": [
+          "freescout[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "SaaS / 第三方服务",
+        "name": "UVdesk",
+        "kind": "客服 / 工单",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "uvdesk"
+        ],
+        "patterns": [
+          "uvdesk[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "SaaS / 第三方服务",
+        "name": "Papercups",
+        "kind": "客服 / 在线聊天",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "papercups"
+        ],
+        "patterns": [
+          "papercups[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "SaaS / 第三方服务",
+        "name": "Erxes",
+        "kind": "客服 / 营销 CRM",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "erxes"
+        ],
+        "patterns": [
+          "erxes[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "SaaS / 第三方服务",
+        "name": "Fider",
+        "kind": "用户反馈",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "fider"
+        ],
+        "patterns": [
+          "fider[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "SaaS / 第三方服务",
+        "name": "Formbricks",
+        "kind": "问卷 / 用户反馈",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "formbricks"
+        ],
+        "patterns": [
+          "formbricks[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "SaaS / 第三方服务",
+        "name": "Cal.com",
+        "kind": "预约排期",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "cal.com",
+          "calcom"
+        ],
+        "patterns": [
+          "(?:cal\\.com|calcom)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "SaaS / 第三方服务",
+        "name": "Listmonk",
+        "kind": "邮件营销 / 通讯列表",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "listmonk"
+        ],
+        "patterns": [
+          "listmonk[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "SaaS / 第三方服务",
+        "name": "Keila",
+        "kind": "邮件营销 / 通讯列表",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "keila"
+        ],
+        "patterns": [
+          "keila[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "统计 / 分析",
+        "name": "Shynet",
+        "kind": "开源统计",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "shynet"
+        ],
+        "patterns": [
+          "shynet[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "统计 / 分析",
+        "name": "OpenPanel",
+        "kind": "开源统计",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "openpanel"
+        ],
+        "patterns": [
+          "openpanel[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "统计 / 分析",
+        "name": "GoAccess",
+        "kind": "日志统计",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "goaccess"
+        ],
+        "patterns": [
+          "goaccess[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "统计 / 分析",
+        "name": "Swetrix",
+        "kind": "隐私友好统计",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "swetrix"
+        ],
+        "patterns": [
+          "swetrix[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      }
+    ],
+    "websitePrograms": [
+      {
+        "category": "网站程序",
+        "name": "NocoDB",
+        "kind": "低代码 / 数据库界面",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "nocodb"
+        ],
+        "patterns": [
+          "nocodb[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Baserow",
+        "kind": "低代码 / 数据库界面",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "baserow"
+        ],
+        "patterns": [
+          "baserow[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Appsmith",
+        "kind": "低代码 / 内部工具",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "appsmith"
+        ],
+        "patterns": [
+          "appsmith[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "ToolJet",
+        "kind": "低代码 / 内部工具",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "tooljet"
+        ],
+        "patterns": [
+          "tooljet[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Budibase",
+        "kind": "低代码 / 内部工具",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "budibase"
+        ],
+        "patterns": [
+          "budibase[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "n8n",
+        "kind": "自动化工作流",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "n8n"
+        ],
+        "patterns": [
+          "(?:^|/)n8n[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+          "n8n-editor-ui[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Node-RED",
+        "kind": "自动化工作流 / IoT",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "node-red"
+        ],
+        "patterns": [
+          "node-red[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Huginn",
+        "kind": "自动化工作流",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "huginn"
+        ],
+        "patterns": [
+          "huginn[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Outline Wiki",
+        "kind": "知识库 / 文档",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "outline"
+        ],
+        "patterns": [
+          "outline[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Wiki.js",
+        "kind": "知识库 / Wiki",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "wiki.js",
+          "wikijs"
+        ],
+        "patterns": [
+          "(?:wiki\\.js|wikijs)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "BookStack",
+        "kind": "知识库 / 文档",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "bookstack"
+        ],
+        "patterns": [
+          "bookstack[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "HedgeDoc",
+        "kind": "协作文档",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "hedgedoc"
+        ],
+        "patterns": [
+          "hedgedoc[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "CodiMD",
+        "kind": "协作文档",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "codimd"
+        ],
+        "patterns": [
+          "codimd[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Memos",
+        "kind": "笔记 / 轻量知识库",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "memos"
+        ],
+        "patterns": [
+          "memos[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "AFFiNE",
+        "kind": "知识库 / 白板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "affine"
+        ],
+        "patterns": [
+          "affine[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Documize",
+        "kind": "知识库 / 文档",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "documize"
+        ],
+        "patterns": [
+          "documize[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "DokuWiki",
+        "kind": "Wiki",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "/lib/exe/",
+          "dokuwiki"
+        ],
+        "patterns": [
+          "(?:^|/)lib/exe/(?:js|css)\\.php\\?[^\\s\"'<>]*",
+          "dokuwiki[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "XWiki",
+        "kind": "Wiki",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "xwiki"
+        ],
+        "patterns": [
+          "xwiki[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "MediaWiki VisualEditor",
+        "kind": "Wiki 编辑器",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "ext.visualEditor",
+          "visualeditor"
+        ],
+        "patterns": [
+          "(?:ext\\.visualEditor|visualeditor)[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Excalidraw",
+        "kind": "白板 / 绘图",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "excalidraw"
+        ],
+        "patterns": [
+          "excalidraw[^\\s\"'<>]*\\.(?:js|css|svg|png|wasm)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Penpot",
+        "kind": "设计协作",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "penpot"
+        ],
+        "patterns": [
+          "penpot[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Draw.io / diagrams.net",
+        "kind": "绘图 / 流程图",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "diagrams.net",
+          "draw.io",
+          "drawio"
+        ],
+        "patterns": [
+          "(?:diagrams\\.net|draw\\.io|drawio)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Plane",
+        "kind": "项目管理",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "plane"
+        ],
+        "patterns": [
+          "plane[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "OpenProject",
+        "kind": "项目管理",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "openproject"
+        ],
+        "patterns": [
+          "openproject[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Taiga",
+        "kind": "项目管理",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "taiga"
+        ],
+        "patterns": [
+          "taiga[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Leantime",
+        "kind": "项目管理",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "leantime"
+        ],
+        "patterns": [
+          "leantime[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Kanboard",
+        "kind": "项目管理 / 看板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "kanboard"
+        ],
+        "patterns": [
+          "kanboard[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Wekan",
+        "kind": "项目管理 / 看板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "wekan"
+        ],
+        "patterns": [
+          "wekan[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Mattermost",
+        "kind": "团队通讯",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "mattermost"
+        ],
+        "patterns": [
+          "mattermost[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Rocket.Chat",
+        "kind": "团队通讯",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "rocket.chat",
+          "rocketchat"
+        ],
+        "patterns": [
+          "(?:rocket\\.chat|rocketchat)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Zulip",
+        "kind": "团队通讯",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "zulip"
+        ],
+        "patterns": [
+          "zulip[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Matrix Element Web",
+        "kind": "团队通讯 / Matrix 客户端",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "element-web",
+          "matrix"
+        ],
+        "patterns": [
+          "element-web[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+          "matrix-react-sdk[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Jitsi Meet",
+        "kind": "视频会议",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "lib-jitsi-meet",
+          "jitsi"
+        ],
+        "patterns": [
+          "lib-jitsi-meet[^\\s\"'<>]*\\.js(?:\\?|$)",
+          "jitsi[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "BigBlueButton",
+        "kind": "视频会议 / 在线课堂",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "bigbluebutton",
+          "/html5client/"
+        ],
+        "patterns": [
+          "(?:^|/)html5client/(?:locale|fonts|resources)(?:/|[?#]|$)",
+          "bigbluebutton[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Mastodon",
+        "kind": "联邦社交",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "mastodon"
+        ],
+        "patterns": [
+          "mastodon[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Pleroma",
+        "kind": "联邦社交",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "pleroma"
+        ],
+        "patterns": [
+          "pleroma[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Misskey",
+        "kind": "联邦社交",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "misskey"
+        ],
+ "patterns": [
+          "misskey[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Lemmy",
+        "kind": "联邦社区",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "lemmy"
+        ],
+        "patterns": [
+          "lemmy[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "PeerTube",
+        "kind": "联邦视频平台",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "peertube"
+        ],
+        "patterns": [
+          "peertube[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Pixelfed",
+        "kind": "联邦图片社区",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "pixelfed"
+        ],
+        "patterns": [
+          "pixelfed[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Seafile",
+        "kind": "网盘 / 文件协作",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "seafile"
+        ],
+        "patterns": [
+          "seafile[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Pydio Cells",
+        "kind": "网盘 / 文件协作",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "pydio"
+        ],
+        "patterns": [
+          "pydio[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Syncthing",
+        "kind": "文件同步",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "syncthing"
+        ],
+        "patterns": [
+          "syncthing[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "FileRun",
+        "kind": "网盘 / 文件管理",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "filerun"
+        ],
+        "patterns": [
+          "filerun[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      }
+    ],
+    "probes": [
+      {
+        "category": "探针 / 监控",
+        "name": "VictoriaMetrics",
+        "kind": "监控 / 时序数据库",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "victoriametrics"
+        ],
+        "patterns": [
+          "victoriametrics[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "探针 / 监控",
+        "name": "Thanos",
+        "kind": "监控 / Prometheus 长期存储",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "thanos"
+        ],
+        "patterns": [
+          "thanos[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "探针 / 监控",
+        "name": "Cortex",
+        "kind": "监控 / 指标平台",
+        "confidence": "中",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "cortex"
+        ],
+        "patterns": [
+          "cortex[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "探针 / 监控",
+        "name": "Loki",
+        "kind": "日志平台",
+        "confidence": "中",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "loki"
+        ],
+        "patterns": [
+          "loki[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "探针 / 监控",
+        "name": "Jaeger",
+        "kind": "链路追踪",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "jaeger"
+        ],
+        "patterns": [
+          "jaeger[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "探针 / 监控",
+        "name": "Zipkin",
+        "kind": "链路追踪",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "zipkin"
+        ],
+        "patterns": [
+          "zipkin[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "探针 / 监控",
+        "name": "Tempo",
+        "kind": "链路追踪",
+        "confidence": "中",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "tempo"
+        ],
+        "patterns": [
+          "tempo[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      }
+    ]
+  }
+}
