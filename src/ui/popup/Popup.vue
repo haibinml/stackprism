@@ -87,7 +87,7 @@
 
         <div ref="sectionsScroller" class="sections-scroller" @scroll="onSectionsScroll">
           <Transition name="sections-fade" mode="out-in">
-            <section :key="state.activeCategory + '|' + (state.result?.updatedAt || 0)" class="sections">
+            <section :key="state.activeCategory" class="sections">
               <div v-if="!state.result?.technologies?.length" class="empty">
                 <SearchX class="empty-icon" :size="32" :stroke-width="1.5" />
                 <p>未检测到明确技术线索</p>
@@ -865,6 +865,9 @@
     if (!(popupKey in changes)) return
     const newPopup = changes[popupKey].newValue
     if (!newPopup || typeof newPopup !== 'object') return
+    const incomingUpdatedAt = Number(newPopup.sourceUpdatedAt || newPopup.updatedAt || 0)
+    const currentUpdatedAt = Number(state.result?.updatedAt || 0)
+    if (incomingUpdatedAt && currentUpdatedAt && incomingUpdatedAt === currentUpdatedAt) return
     state.result = newPopup
     state.rawResult = null
     state.rawLoaded = false
