@@ -86,6 +86,48 @@
               "name": "Freshchat",
               "patterns": ["wchat\\.freshchat\\.com|freshchat"],
               "globals": ["fcWidget"]
+            },
+            {
+              "defaults": {
+                "matchIn": ["resources"]
+              },
+              "rules": [
+                {
+                  "name": "Tidio",
+                  "patterns": ["code\\.tidio\\.co/[^\\s\"'<>]+\\.js|tidiochat\\.com"],
+                  "globals": ["tidioChatApi"]
+                },
+                {
+                  "name": "Olark",
+                  "patterns": ["static\\.olark\\.com/jsclient/loader\\.js|olark\\.com/jsclient/loader\\.js"],
+                  "globals": ["olark"]
+                },
+                {
+                  "name": "Userlike",
+                  "patterns": ["userlike-cdn-widgets|userlike\\.com[^\\s\"'<>]*/(?:widget|widgets|assets)"],
+                  "globals": ["userlike", "Userlike"]
+                },
+                {
+                  "name": "JivoChat",
+                  "patterns": ["code\\.jivosite\\.com/widget/|jivosite\\.com[^\\s\"'<>]*/widget"],
+                  "globals": ["jivo_api"]
+                },
+                {
+                  "name": "Smartsupp",
+                  "patterns": ["www\\.smartsuppchat\\.com/loader\\.js|smartsuppchat\\.com"],
+                  "globals": ["smartsupp", "_smartsupp"]
+                },
+                {
+                  "name": "Chatra",
+                  "patterns": ["call\\.chatra\\.io/chatra\\.js|chatra\\.io[^\\s\"'<>]*/chatra"],
+                  "globals": ["Chatra", "ChatraID"]
+                },
+                {
+                  "name": "Chaport",
+                  "patterns": ["app\\.chaport\\.com/javascripts/insert\\.js|chaport\\.com[^\\s\"'<>]*/javascripts"],
+                  "globals": ["Chaport"]
+                }
+              ]
             }
           ]
         },
@@ -106,6 +148,60 @@
           "kind": "客服支持",
           "patterns": ["gorgias\\.chat|config\\.gorgias\\.chat|client-builds\\.gorgias\\.chat"],
           "globals": ["GorgiasChat"]
+        },
+        {
+          "defaults": {
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "LiveAgent",
+              "kind": "客服支持",
+              "patterns": ["ladesk\\.com/scripts/track\\.js|liveagent\\.com[^\\s\"'<>]*/scripts/track\\.js"],
+              "globals": ["LiveAgent"]
+            },
+            {
+              "name": "Zoho SalesIQ",
+              "kind": "客服聊天 / 客户互动",
+              "patterns": ["salesiq\\.zoho\\.com/widget|salesiq\\.zohopublic\\.com/widget|zoho\\.com/salesiq"],
+              "globals": ["$zoho.salesiq"]
+            },
+            {
+              "name": "Kommunicate",
+              "kind": "客服聊天 / 聊天机器人",
+              "patterns": ["widget\\.kommunicate\\.io|kommunicate\\.app|kommunicate\\.io[^\\s\"'<>]*/(?:widget|v2)"],
+              "globals": ["Kommunicate"]
+            },
+            {
+              "name": "Ada",
+              "kind": "客服聊天 / AI 客服",
+              "patterns": ["static\\.ada\\.support|ada\\.support[^\\s\"'<>]*/(?:embed|chat)"],
+              "globals": ["adaEmbed"]
+            },
+            {
+              "name": "Kustomer",
+              "kind": "客服支持",
+              "patterns": ["cdn\\.kustomerapp\\.com/chat-web|kustomerapp\\.com[^\\s\"'<>]*/chat"],
+              "globals": ["Kustomer"]
+            },
+            {
+              "name": "Front Chat",
+              "kind": "客服聊天",
+              "patterns": ["chat-assets\\.frontapp\\.com|frontapp\\.com[^\\s\"'<>]*/chat"],
+              "globals": ["FrontChat"]
+            },
+            {
+              "name": "Re:amaze",
+              "kind": "客服聊天 / 客服支持",
+              "patterns": ["cdn\\.reamaze\\.com/assets/reamaze\\.js|reamaze\\.com[^\\s\"'<>]*/assets"],
+              "globals": ["Reamaze"]
+            },
+            {
+              "name": "Genesys Cloud Web Messaging",
+              "kind": "客服聊天 / 联络中心",
+              "patterns": ["apps\\.mypurecloud\\.com/widgets|webmessaging\\.mypurecloud\\.com|genesyscloud\\.com[^\\s\"'<>]*/webmessaging"]
+            }
+          ]
         },
         {
           "name": "HubSpot",
