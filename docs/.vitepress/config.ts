@@ -4,6 +4,7 @@ export default defineConfig({
   lang: 'zh-CN',
   title: 'StackPrism',
   description: '网页技术栈检测扩展 · 使用文档',
+  base: '/stackprism/',
   lastUpdated: true,
   head: [['meta', { name: 'theme-color', content: '#0f766e' }]],
   themeConfig: {
