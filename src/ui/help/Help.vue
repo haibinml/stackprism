@@ -553,7 +553,7 @@ examplepay-sdk</pre
     background: var(--panel);
     border: 1px solid var(--line);
     border-radius: 6px;
-    margin-top: 12px;
+    margin: 12px 0;
     overflow: hidden;
   }
 

@@ -6,8 +6,13 @@ const isPlainObject = (value: unknown): boolean => Object.prototype.toString.cal
 
 const isRuleGroup = (value: any): boolean => isPlainObject(value) && Array.isArray(value.rules)
 
-const normalizeRuleObject = (object: any) =>
-  Object.fromEntries(Object.entries(object).map(([key, value]) => [key, normalizeRuleValue(value)]))
+const normalizeRuleObject = (object: any) => {
+  const result: any = {}
+  for (const key in object) {
+    result[key] = normalizeRuleValue(object[key])
+  }
+  return result
+}
 
 const expandRuleGroup = (group: any, inheritedDefaults: any) => {
   const defaults = {
@@ -15,10 +20,15 @@ const expandRuleGroup = (group: any, inheritedDefaults: any) => {
     ...(isPlainObject(group.defaults) ? group.defaults : {}),
     ...(isPlainObject(group.$defaults) ? group.$defaults : {})
   }
-  return group.rules.flatMap((rule: any) => normalizeRuleArrayItem(rule, defaults))
+  const out: any[] = []
+  for (const rule of group.rules) {
+    const items = normalizeRuleArrayItem(rule, defaults)
+    for (let i = 0; i < items.length; i++) out.push(items[i])
+  }
+  return out
 }
 
-const normalizeRuleArrayItem = (item: any, defaults: any): any => {
+const normalizeRuleArrayItem = (item: any, defaults: any): any[] => {
   if (isRuleGroup(item)) {
     return expandRuleGroup(item, defaults)
   }
@@ -30,21 +40,33 @@ const normalizeRuleArrayItem = (item: any, defaults: any): any => {
 
 const normalizeRuleValue = (value: any): any => {
   if (Array.isArray(value)) {
-    return value.flatMap(item => normalizeRuleArrayItem(item, {}))
+    const out: any[] = []
+    for (const item of value) {
+      const items = normalizeRuleArrayItem(item, {})
+      for (let i = 0; i < items.length; i++) out.push(items[i])
+    }
+    return out
   }
   if (isRuleGroup(value)) {
     return expandRuleGroup(value, {})
   }
   if (isPlainObject(value)) {
-    return Object.fromEntries(Object.entries(value).map(([key, child]) => [key, normalizeRuleValue(child)]))
+    const result: any = {}
+    for (const key in value) {
+      result[key] = normalizeRuleValue(value[key])
+    }
+    return result
   }
   return value
 }
 
 const mergeRulePartial = (target: any, source: any) => {
-  for (const [key, value] of Object.entries(normalizeRuleValue(source) || {})) {
+  const normalized = normalizeRuleValue(source) || {}
+  for (const key in normalized) {
+    const value = normalized[key]
     if (Array.isArray(value)) {
-      target[key] = [...(Array.isArray(target[key]) ? target[key] : []), ...value]
+      const dst = Array.isArray(target[key]) ? target[key] : (target[key] = [])
+      for (let i = 0; i < value.length; i++) dst.push(value[i])
       continue
     }
     if (value && typeof value === 'object') {

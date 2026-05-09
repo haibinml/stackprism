@@ -123,8 +123,9 @@ const mergeDisplayTechnologyRecords = (items: any[]) => {
       category,
       name: item.name,
       confidence: item.confidence || '低',
-      evidence: [],
-      sources: new Set(),
+      evidence: [] as string[],
+      evidenceSet: new Set<string>(),
+      sources: new Set<string>(),
       url: item.url || ''
     }
     if (!current.url && item.url) {
@@ -132,7 +133,8 @@ const mergeDisplayTechnologyRecords = (items: any[]) => {
     }
     current.confidence = strongerConfidence(current.confidence, item.confidence || '低')
     for (const evidence of item.evidence || []) {
-      if (evidence && !current.evidence.includes(evidence)) {
+      if (evidence && !current.evidenceSet.has(evidence)) {
+        current.evidenceSet.add(evidence)
         current.evidence.push(evidence)
       }
     }
@@ -144,7 +146,10 @@ const mergeDisplayTechnologyRecords = (items: any[]) => {
 
   return [...map.values()]
     .map(item => ({
-      ...item,
+      category: item.category,
+      name: item.name,
+      confidence: item.confidence,
+      url: item.url,
       evidence: item.evidence.slice(0, 8),
       sources: [...item.sources]
     }))

@@ -16,8 +16,11 @@ const DYNAMIC_FAST_LOOKUP_RULE_MIN = 1000
 const DYNAMIC_SNAPSHOT_PROCESS_DELAY = 800
 
 const dynamicFrontendRuleKeyCache = new WeakMap()
+const dynamicFrontendHintsFlagCache = new WeakMap()
 const pendingDynamicSnapshots = new Map()
 const dynamicSnapshotTimers = new Map()
+const DYNAMIC_FRONTEND_CDN_PATTERN =
+  /cdnjs|jsdelivr|unpkg|esm\.|skypack|jspm|staticfile|bootcdn|baomitu|googleapis|aspnetcdn|githack|rawgit|gitcdn|bundle\.run|pika/
 
 // ----- 底层纯函数 -----
 
@@ -377,15 +380,22 @@ const getDynamicFrontendRuleLookupKeys = rule => {
   return values
 }
 
+const matchesDynamicFrontendCdnHints = rule => {
+  if (!rule || typeof rule !== 'object') return false
+  const cached = dynamicFrontendHintsFlagCache.get(rule)
+  if (cached !== undefined) return cached
+  const hints = Array.isArray(rule.resourceHints) ? rule.resourceHints.join('\n').toLowerCase() : ''
+  const result = DYNAMIC_FRONTEND_CDN_PATTERN.test(hints)
+  dynamicFrontendHintsFlagCache.set(rule, result)
+  return result
+}
+
 const isDynamicFrontendResourceOnlyRule = (rule, defaultCategory) => {
   const category = rule?.category || defaultCategory || ''
   if (category !== '前端库' || rule?.resourceOnly !== true) {
     return false
   }
-  const hints = Array.isArray(rule.resourceHints) ? rule.resourceHints.join('\n').toLowerCase() : ''
-  return /cdnjs|jsdelivr|unpkg|esm\.|skypack|jspm|staticfile|bootcdn|baomitu|googleapis|aspnetcdn|githack|rawgit|gitcdn|bundle\.run|pika/.test(
-    hints
-  )
+  return matchesDynamicFrontendCdnHints(rule)
 }
 
 const shouldUseDynamicFrontendLookup = (rules, defaultCategory) => {

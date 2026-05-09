@@ -77,13 +77,22 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
 
   function collectClassTokens() {
     const counts = {}
-    const nodes = [...document.querySelectorAll('[class]')].slice(0, 2500)
-    for (const node of nodes) {
-      const raw = typeof node.className === 'string' ? node.className : node.getAttribute('class') || ''
-      for (const token of raw.split(/\s+/)) {
-        if (!token) {
-          continue
+    const nodes = document.querySelectorAll('[class]')
+    const limit = Math.min(nodes.length, 1000)
+    for (let i = 0; i < limit; i++) {
+      const list = nodes[i].classList
+      if (list && list.length) {
+        for (let j = 0; j < list.length; j++) {
+          const token = list[j]
+          if (!token) continue
+          counts[token] = (counts[token] || 0) + 1
         }
+        continue
+      }
+      const raw = typeof nodes[i].className === 'string' ? nodes[i].className : nodes[i].getAttribute('class') || ''
+      if (!raw) continue
+      for (const token of raw.split(/\s+/)) {
+        if (!token) continue
         counts[token] = (counts[token] || 0) + 1
       }
     }
@@ -761,11 +770,13 @@ ${html}`
     }
 
     const lowerResources = context.resources?.text || ''
-    if (context._lowerHtml === undefined) {
-      context._lowerHtml = (context.text || '').toLowerCase()
+    const getLowerHtml = () => {
+      if (context._lowerHtml === undefined) {
+        context._lowerHtml = (context.text || '').toLowerCase()
+      }
+      return context._lowerHtml
     }
-    const lowerHtml = context._lowerHtml
-    if (!passesRulePrefilter(rule, lowerResources, lowerHtml)) {
+    if (!passesRulePrefilter(rule, lowerResources, getLowerHtml)) {
       return null
     }
 
@@ -878,14 +889,23 @@ ${html}`
     const cached = ruleCombinedCache.get(rule)
     if (cached && cached.source === patterns) return cached.compiled
     let compiled = null
-    try {
-      const segments = patterns
-        .map(pattern => String(pattern || '').trim())
-        .filter(Boolean)
-        .map(escapeRegExp)
-      if (segments.length) compiled = new RegExp(segments.join('|'), 'i')
-    } catch {
-      compiled = null
+    if (typeof rule.__keywordCombined === 'string' && rule.__keywordCombined) {
+      try {
+        compiled = new RegExp(rule.__keywordCombined, 'i')
+      } catch {
+        compiled = null
+      }
+    }
+    if (!compiled) {
+      try {
+        const segments = patterns
+          .map(pattern => String(pattern || '').trim())
+          .filter(Boolean)
+          .map(escapeRegExp)
+        if (segments.length) compiled = new RegExp(segments.join('|'), 'i')
+      } catch {
+        compiled = null
+      }
     }
     ruleCombinedCache.set(rule, { source: patterns, compiled })
     return compiled
@@ -893,6 +913,10 @@ ${html}`
 
   function getRuleAutoHints(rule) {
     if (!rule || typeof rule !== 'object') return []
+    if (Array.isArray(rule.__hints) && rule.__hints.length) {
+      ruleHintCache.set(rule, rule.__hints)
+      return rule.__hints
+    }
     const cached = ruleHintCache.get(rule)
     if (cached) return cached
     const patterns = rule.patterns || []
@@ -918,14 +942,18 @@ ${html}`
     return unique
   }
 
-  function passesRulePrefilter(rule, lowerResources, lowerHtml) {
+  function passesRulePrefilter(rule, lowerResources, getLowerHtml) {
     if (!rule) return true
     if (Array.isArray(rule.resourceHints) && rule.resourceHints.length) return true
     const hints = getRuleAutoHints(rule)
     if (!hints.length) return true
     for (const hint of hints) {
       if (lowerResources && lowerResources.includes(hint)) return true
-      if (lowerHtml && lowerHtml.includes(hint)) return true
+    }
+    const lowerHtml = typeof getLowerHtml === 'function' ? getLowerHtml() : getLowerHtml || ''
+    if (!lowerHtml) return false
+    for (const hint of hints) {
+      if (lowerHtml.includes(hint)) return true
     }
     return false
   }
@@ -1054,16 +1082,14 @@ ${html}`
   function scoreTailwind(classes) {
     const tokens = Object.keys(classes)
     let score = 0
-    const patterns = [
-      /^(sm|md|lg|xl|2xl):/,
-      /^-?(m|p|mt|mr|mb|ml|mx|my|pt|pr|pb|pl|px|py)-/,
-      /^(text|bg|border|ring|shadow|rounded|grid|flex|items|justify|gap|space|w|h|min-w|max-w|min-h|max-h)-/,
-      /^(hover|focus|active|disabled|dark):/,
-      /\[[^\]]+\]/
-    ]
-    for (const token of tokens.slice(0, 5000)) {
-      if (patterns.some(pattern => pattern.test(token))) {
-        score += Math.min(classes[token], 3)
+    let count = 0
+    const TAILWIND_PATTERN =
+      /^(?:sm|md|lg|xl|2xl):|^-?(?:m|p|mt|mr|mb|ml|mx|my|pt|pr|pb|pl|px|py)-|^(?:text|bg|border|ring|shadow|rounded|grid|flex|items|justify|gap|space|w|h|min-w|max-w|min-h|max-h)-|^(?:hover|focus|active|disabled|dark):|\[[^\]]+\]/
+    for (const token of tokens) {
+      if (count++ >= 5000) break
+      if (TAILWIND_PATTERN.test(token)) {
+        const c = classes[token]
+        score += c < 3 ? c : 3
       }
     }
     return score

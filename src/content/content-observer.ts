@@ -28,6 +28,8 @@
   let originalReplaceState = null
   let wrappedPushState = null
   let wrappedReplaceState = null
+  let pendingMutationNodes = []
+  let pendingMutationFrame = 0
 
   // ----- 底层 helper -----
 
@@ -176,13 +178,17 @@
     return changed
   }
 
+  const SUBTREE_SCAN_LIMIT = 200
+  const SUBTREE_SELECTOR = 'script[src], link[href], iframe[src], [id], [class], [data-v-app], [ng-version], astro-island, astro-slot'
+
   const collectFromElement = element => {
     let changed = false
     changed = collectElementIfRelevant(element) || changed
-    for (const node of element.querySelectorAll?.(
-      'script[src], link[href], iframe[src], [id], [class], [data-v-app], [ng-version], astro-island, astro-slot'
-    ) || []) {
-      changed = collectElementIfRelevant(node) || changed
+    if (!element.querySelectorAll || !element.childElementCount) return changed
+    const matches = element.querySelectorAll(SUBTREE_SELECTOR)
+    const limit = matches.length < SUBTREE_SCAN_LIMIT ? matches.length : SUBTREE_SCAN_LIMIT
+    for (let i = 0; i < limit; i++) {
+      changed = collectElementIfRelevant(matches[i]) || changed
     }
     return changed
   }
@@ -281,6 +287,15 @@
     const keepErrorGuards = Boolean(options?.keepErrorGuards)
     stopped = true
     clearTimeout(sendTimer)
+    if (pendingMutationFrame) {
+      if (typeof cancelAnimationFrame === 'function') {
+        cancelAnimationFrame(pendingMutationFrame)
+      } else {
+        clearTimeout(pendingMutationFrame)
+      }
+      pendingMutationFrame = 0
+    }
+    pendingMutationNodes = []
     if (navigationInterval) {
       window.clearInterval(navigationInterval)
       navigationInterval = 0
@@ -348,22 +363,54 @@
     }
   }
 
+  const processPendingMutationNodes = () => {
+    pendingMutationFrame = 0
+    if (stopped) return
+    const nodes = pendingMutationNodes
+    pendingMutationNodes = []
+    if (!nodes.length) return
+    const processed = []
+    let changed = false
+    for (const node of nodes) {
+      if (!node.isConnected) continue
+      let containedByAncestor = false
+      for (let i = 0; i < processed.length; i++) {
+        if (processed[i].contains(node)) {
+          containedByAncestor = true
+          break
+        }
+      }
+      if (containedByAncestor) continue
+      processed.push(node)
+      changed = collectFromElement(node) || changed
+    }
+    if (changed) {
+      state.updatedAt = Date.now()
+      scheduleSend()
+    }
+  }
+
+  const scheduleMutationFlush = () => {
+    if (pendingMutationFrame || stopped) return
+    if (typeof requestAnimationFrame === 'function') {
+      pendingMutationFrame = requestAnimationFrame(processPendingMutationNodes)
+    } else {
+      pendingMutationFrame = setTimeout(processPendingMutationNodes, 16)
+    }
+  }
+
   const installMutationObserver = () => {
     const root = document.documentElement || document
     const observer = new MutationObserver(mutations => {
       if (stopped) return
-      let changed = false
       for (const mutation of mutations) {
         for (const node of mutation.addedNodes) {
           if (node.nodeType !== Node.ELEMENT_NODE) continue
           state.mutationCount += 1
-          changed = collectFromElement(node) || changed
+          pendingMutationNodes.push(node)
         }
       }
-      if (changed) {
-        state.updatedAt = Date.now()
-        scheduleSend()
-      }
+      if (pendingMutationNodes.length) scheduleMutationFlush()
     })
     mutationObserver = observer
     observer.observe(root, { childList: true, subtree: true })

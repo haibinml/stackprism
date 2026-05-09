@@ -63,7 +63,17 @@ export const getCompiledCombinedPattern = (rule: any, patterns: unknown): RegExp
     return cached.compiled
   }
 
-  const compiled = rule.matchType === 'keyword' ? buildCombinedKeywordPattern(sourcePatterns) : null
+  let compiled: RegExp | null = null
+  if (rule.matchType === 'keyword') {
+    if (typeof rule.__keywordCombined === 'string' && rule.__keywordCombined) {
+      try {
+        compiled = new RegExp(rule.__keywordCombined, 'i')
+      } catch {
+        compiled = null
+      }
+    }
+    if (!compiled) compiled = buildCombinedKeywordPattern(sourcePatterns)
+  }
   compiledCombinedPatternCache.set(rule, { source: sourcePatterns, compiled })
   return compiled
 }
@@ -98,6 +108,10 @@ const extractHintCandidates = (rule: any): string[] => {
 
 export const getRuleAutoHints = (rule: any): string[] => {
   if (!rule || typeof rule !== 'object') return []
+  if (Array.isArray(rule.__hints) && rule.__hints.length) {
+    autoHintCache.set(rule, rule.__hints)
+    return rule.__hints
+  }
   const cached = autoHintCache.get(rule)
   if (cached) return cached
   const candidates = extractHintCandidates(rule)
