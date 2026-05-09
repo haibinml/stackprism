@@ -390,6 +390,100 @@
           "globals": ["Typesense"]
         },
         {
+          "defaults": {
+            "kind": "电商搜索 / 个性化推荐",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Constructor.io",
+              "patterns": ["cdn\\.constructor\\.io|cnstrc\\.com|constructor\\.io/[^\\s\"'<>]*(?:autocomplete|recommendations|search)"]
+            },
+            {
+              "name": "Bloomreach Discovery",
+              "patterns": ["cdn\\.brcdn\\.com|br-trk[^\\s\"'<>]*\\.js|bloomreach\\.com/[^\\s\"'<>]*(?:discovery|recommendations|search)"]
+            },
+            {
+              "name": "Nosto",
+              "patterns": ["connect\\.nosto\\.com|static\\.nosto\\.com|nostojs"]
+            },
+            {
+              "name": "Searchspring",
+              "patterns": [
+                "cdn\\.searchspring\\.net|snapui\\.searchspring\\.io|searchspring\\.net/[^\\s\"'<>]*(?:autocomplete|search|recommend)"
+              ]
+            },
+            {
+              "name": "Klevu",
+              "patterns": ["js\\.klevu\\.com|cdn\\.klevu\\.com|box\\.klevu\\.com|klevu\\.com/[^\\s\"'<>]*(?:js|search|recommend)"]
+            },
+            {
+              "name": "Doofinder",
+              "patterns": ["cdn\\.doofinder\\.com|(?:eu|us|global)\\d*-search\\.doofinder\\.com|doofinder\\.com/[^\\s\"'<>]*(?:js|search)"]
+            },
+            {
+              "name": "Clerk.io Recommendations",
+              "patterns": ["cdn\\.clerk\\.io|api\\.clerk\\.io|clerk\\.io/[^\\s\"'<>]*(?:static|recommendations|search)"]
+            },
+            {
+              "name": "Dynamic Yield",
+              "patterns": ["cdn\\.dynamicyield\\.com|st\\.dynamicyield\\.com|dy-api\\.com|dynamicyield\\.com/[^\\s\"'<>]*(?:scripts|api)"]
+            },
+            {
+              "name": "Monetate",
+              "patterns": ["se\\.monetate\\.net|engine\\.monetate\\.net|monetate\\.net/[^\\s\"'<>]*(?:js|api|engine)"]
+            },
+            {
+              "name": "Barilliance",
+              "patterns": ["barilliance\\.net|cdn\\.barilliance\\.com|barilliance\\.com/[^\\s\"'<>]*(?:api|js|recommend)"]
+            },
+            {
+              "name": "Recombee",
+              "patterns": ["client-rapi\\.recombee\\.com|rapi\\.recombee\\.com|recombee\\.com/[^\\s\"'<>]*(?:api|recomm)"]
+            },
+            {
+              "name": "Algonomy",
+              "patterns": [
+                "recs\\.richrelevance\\.com|media\\.richrelevance\\.com|algorecs\\.com|algonomy\\.com/[^\\s\"'<>]*(?:recommend|personalization)"
+              ]
+            },
+            {
+              "name": "Syte",
+              "patterns": ["cdn\\.syteapi\\.com|syteapi\\.com|syte\\.ai/[^\\s\"'<>]*(?:widget|api|search)"]
+            },
+            {
+              "name": "Vue.ai",
+              "patterns": ["cdn\\.vue\\.ai|assets\\.vue\\.ai|vue\\.ai/[^\\s\"'<>]*(?:widget|recommend|personalization)"]
+            },
+            {
+              "name": "Findify",
+              "patterns": [
+                "cdn\\.findify\\.io|api\\.findify\\.io|findify-assets\\.s3\\.amazonaws\\.com|findify\\.io/[^\\s\"'<>]*(?:js|search)"
+              ]
+            },
+            {
+              "name": "Unbxd",
+              "patterns": ["libraries\\.unbxdapi\\.com|search\\.unbxdapi\\.com|unbxd\\.io|unbxd\\.com/[^\\s\"'<>]*(?:search|recommend)"]
+            },
+            {
+              "name": "Retail Rocket",
+              "patterns": ["retailrocket\\.net|cdn\\.retailrocket\\.net|retailrocket\\.com/[^\\s\"'<>]*(?:tracking|recommend)"]
+            },
+            {
+              "name": "Prefixbox",
+              "patterns": ["cdn\\.prefixbox\\.com|api\\.prefixbox\\.com|prefixbox\\.com/[^\\s\"'<>]*(?:search|autocomplete)"]
+            },
+            {
+              "name": "Luigi's Box",
+              "patterns": ["scripts\\.luigisbox\\.com|live\\.luigisbox\\.com|luigisbox\\.com/[^\\s\"'<>]*(?:autocomplete|search|recommend)"]
+            },
+            {
+              "name": "Attraqt",
+              "patterns": ["cdn\\.attraqt\\.io|attraqt\\.io/[^\\s\"'<>]*(?:search|recommend|personalisation)"]
+            }
+          ]
+        },
+        {
           "name": "Cloudinary",
           "kind": "媒体托管",
           "patterns": ["res\\.cloudinary\\.com|cloudinary\\.com|cloudinary-core"],
