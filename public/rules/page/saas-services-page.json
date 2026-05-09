@@ -200,6 +200,112 @@
               "name": "Genesys Cloud Web Messaging",
               "kind": "客服聊天 / 联络中心",
               "patterns": ["apps\\.mypurecloud\\.com/widgets|webmessaging\\.mypurecloud\\.com|genesyscloud\\.com[^\\s\"'<>]*/webmessaging"]
+            },
+            {
+              "name": "Freshdesk Support Widget",
+              "kind": "客服支持 / 工单",
+              "patterns": ["assets\\.freshdesk\\.com/widget/freshwidget\\.js|[a-z0-9-]+\\.freshdesk\\.com/(?:widget|support|helpdesk)"]
+            },
+            {
+              "name": "Freshservice Portal",
+              "kind": "客服支持 / ITSM",
+              "patterns": ["assets\\.freshservice\\.com|[a-z0-9-]+\\.freshservice\\.com/(?:support|helpdesk|assets|widget)"]
+            },
+            {
+              "name": "Zoho Desk ASAP",
+              "kind": "客服支持 / 工单",
+              "patterns": [
+                "desk\\.zoho\\.com/portal/api/feedbackwidget|desk\\.zoho\\.com/portal/[^\\s\"'<>]*/widgets|zohodesk\\.com/portal/api/feedbackwidget"
+              ]
+            },
+            {
+              "name": "Gladly Sidekick",
+              "kind": "客服聊天 / 客户支持",
+              "patterns": ["cdn\\.gladly\\.com|gladly\\.com/[^\\s\"'<>]*(?:sidekick|chat|web-sdk)"]
+            },
+            {
+              "name": "Dixa Messenger",
+              "kind": "客服聊天 / 联络中心",
+              "patterns": ["messenger\\.dixa\\.io|cdn\\.dixa\\.io|dixa\\.com/[^\\s\"'<>]*(?:messenger|widget)"]
+            },
+            {
+              "name": "Kayako Messenger",
+              "kind": "客服聊天 / 客服支持",
+              "patterns": ["assets\\.kayako\\.com|cdn\\.kayako\\.com|kayako\\.com/[^\\s\"'<>]*(?:messenger|widget|embed)"]
+            },
+            {
+              "name": "HelpCrunch",
+              "kind": "客服聊天 / 客服支持",
+              "patterns": ["widget\\.helpcrunch\\.com|helpcrunch\\.com/[^\\s\"'<>]*(?:sdk|widget|embed)"]
+            },
+            {
+              "name": "HappyFox Help Desk",
+              "kind": "客服支持 / 工单",
+              "patterns": ["happyfoxchat\\.com|happyfox\\.com/[^\\s\"'<>]*(?:widget|helpdesk|support-center)"]
+            },
+            {
+              "name": "Groove Helpdesk",
+              "kind": "客服支持 / 知识库",
+              "patterns": ["assets\\.groovehq\\.com|groovehq\\.com/[^\\s\"'<>]*(?:widgets|help|knowledge_base)"]
+            },
+            {
+              "name": "HelpDesk.com",
+              "kind": "客服支持 / 工单",
+              "patterns": ["cdn\\.helpdesk\\.com|helpdesk\\.com/[^\\s\"'<>]*(?:widget|chat|helpdesk)"]
+            },
+            {
+              "name": "Helpshift Web Chat",
+              "kind": "客服聊天 / 移动客服",
+              "patterns": ["webchat\\.helpshift\\.com|helpshift\\.com/[^\\s\"'<>]*(?:webchat|sdk|embed)"]
+            },
+            {
+              "name": "Salesforce Embedded Service",
+              "kind": "客服聊天 / CRM 客服",
+              "patterns": [
+                "service\\.force\\.com/embeddedservice|embeddedservice/(?:[^\\s\"'<>]+/)?(?:esw|bootstrap)\\.min\\.js|embeddedservice_bootstrap"
+              ]
+            },
+            {
+              "name": "Comm100 Live Chat",
+              "kind": "客服聊天 / 联络中心",
+              "patterns": ["chatserver\\.comm100\\.com|comm100\\.com/[^\\s\"'<>]*(?:chatserver|livechat|visitorchat)"]
+            },
+            {
+              "name": "Sprinklr Live Chat",
+              "kind": "客服聊天 / 联络中心",
+              "patterns": ["prod-live-chat\\.sprinklr\\.com|sprinklr\\.com/[^\\s\"'<>]*(?:livechat|live-chat|webchat)"]
+            },
+            {
+              "name": "eGain",
+              "kind": "客服聊天 / 知识库",
+              "patterns": ["egain\\.cloud|egain\\.com/[^\\s\"'<>]*(?:chat|web-chat|digital)"]
+            },
+            {
+              "name": "Talkdesk Digital Engagement",
+              "kind": "客服聊天 / 联络中心",
+              "patterns": ["cdn\\.talkdeskapp\\.com|talkdeskapp\\.com|talkdesk\\.com/[^\\s\"'<>]*(?:digital|chat|widget)"]
+            },
+            {
+              "name": "NICE CXone Chat",
+              "kind": "客服聊天 / 联络中心",
+              "patterns": ["cxone\\.niceincontact\\.com|niceincontact\\.com/[^\\s\"'<>]*(?:chat|cxone)|nice-cxone\\.com"]
+            },
+            {
+              "name": "Oracle Service Cloud",
+              "kind": "客服支持 / 工单",
+              "patterns": [
+                "static\\.custhelp\\.com|rightnow\\.custhelp\\.com|oraclecloud\\.com/[^\\s\"'<>]*(?:RightNow|servicecloud|service-cloud)"
+              ]
+            },
+            {
+              "name": "Deskpro",
+              "kind": "客服支持 / 工单",
+              "patterns": ["cdn\\.deskpro\\.com|deskpro\\.com/[^\\s\"'<>]*(?:widget|messenger|helpdesk)"]
+            },
+            {
+              "name": "UserEcho",
+              "kind": "客服支持 / 反馈社区",
+              "patterns": ["cdn\\.userecho\\.com|userecho\\.com/[^\\s\"'<>]*(?:widget|forum|feedback)"]
             }
           ]
         },
