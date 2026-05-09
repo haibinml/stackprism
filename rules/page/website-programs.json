@@ -10,47 +10,25 @@
             "name": "WordPress",
             "category": "网站程序",
             "kind": "CMS / 博客",
-            "patterns": [
-              "/wp-content/",
-              "/wp-includes/",
-              "wp-emoji-release",
-              "wp-json"
-            ],
-            "globals": [
-              "wp"
-            ]
+            "patterns": ["/wp-admin/", "/wp-json", "/wp-content/", "/wp-includes/", "wp-emoji-release"]
           },
           {
             "name": "WooCommerce",
             "kind": "电商插件",
-            "patterns": [
-              "woocommerce",
-              "wc-cart-fragments",
-              "wp-content/plugins/woocommerce"
-            ]
+            "patterns": ["woocommerce", "wc-cart-fragments", "wp-content/plugins/woocommerce"]
           },
           {
             "name": "Drupal",
             "kind": "CMS",
-            "patterns": [
-              "drupal-settings-json",
-              "/sites/default/files",
-              "drupal\\."
-            ],
-            "globals": [
-              "Drupal"
-            ]
+            "patterns": ["drupal-settings-json", "/sites/default/files", "drupal\\."],
+            "globals": ["Drupal"]
           }
         ]
       },
       {
         "name": "Joomla",
         "kind": "CMS",
-        "patterns": [
-          "com_content",
-          "/media/system/js/",
-          "joomla"
-        ]
+        "patterns": ["com_content", "/media/system/js/", "joomla"]
       },
       {
         "name": "Magento / Adobe Commerce",
@@ -62,21 +40,13 @@
           "(?:^|/)frontend/[^\\s\"'<>?#]+/[^\\s\"'<>?#]+/(?:Magento_|mage/)",
           "requirejs-config\\.js.*(?:Magento_|mage)"
         ],
-        "globals": [
-          "Magento"
-        ]
+        "globals": ["Magento"]
       },
       {
         "name": "Shopify",
         "kind": "SaaS 电商",
-        "patterns": [
-          "cdn.shopify.com",
-          "shopify-section",
-          "myshopify.com"
-        ],
-        "globals": [
-          "Shopify"
-        ]
+        "patterns": ["cdn.shopify.com", "shopify-section", "myshopify.com"],
+        "globals": ["Shopify"]
       },
       {
         "defaults": {
@@ -85,47 +55,27 @@
         "rules": [
           {
             "name": "OpenCart",
-            "patterns": [
-              "catalog/view/theme",
-              "index.php\\?route=",
-              "opencart"
-            ]
+            "patterns": ["catalog/view/theme", "index.php\\?route=", "opencart"]
           },
           {
             "name": "PrestaShop",
-            "patterns": [
-              "prestashop",
-              "/modules/ps_",
-              "var prestashop"
-            ]
+            "patterns": ["prestashop", "/modules/ps_", "var prestashop"]
           },
           {
             "name": "Shopware",
-            "patterns": [
-              "shopware",
-              "widgets/emotion",
-              "storefront/js"
-            ]
+            "patterns": ["shopware", "widgets/emotion", "storefront/js"]
           }
         ]
       },
       {
         "name": "BigCommerce",
         "kind": "SaaS 电商",
-        "patterns": [
-          "bigcommerce",
-          "cdn11.bigcommerce.com",
-          "stencil-utils"
-        ]
+        "patterns": ["bigcommerce", "cdn11.bigcommerce.com", "stencil-utils"]
       },
       {
         "name": "Salesforce Commerce Cloud",
         "kind": "电商系统",
-        "patterns": [
-          "demandware",
-          "salesforce commerce cloud",
-          "/on/demandware.static/"
-        ]
+        "patterns": ["demandware", "salesforce commerce cloud", "/on/demandware.static/"]
       },
       {
         "defaults": {
@@ -138,86 +88,51 @@
               "content=[\"'][^\"']*Discuz!",
               "discuz_uid",
               "discuz_tips",
+              "discuz_tips\\.js",
               "static/image/common",
-              "forum.php",
-              "portal.php"
+              "data/cache/common_[^\\s\"'<>]*\\.js",
+              "source/plugin/"
             ]
           },
           {
             "name": "phpBB",
-            "patterns": [
-              "phpbb",
-              "styles/prosilver",
-              "viewtopic.php"
-            ]
+            "patterns": ["phpbb", "styles/prosilver", "viewtopic.php"]
           },
           {
             "name": "vBulletin",
-            "patterns": [
-              "vbulletin",
-              "clientscript/vbulletin",
-              "showthread.php"
-            ]
+            "patterns": ["vbulletin", "clientscript/vbulletin", "showthread.php"]
           },
           {
             "name": "XenForo",
-            "patterns": [
-              "xenforo",
-              "data-template=",
-              "js/xf/"
-            ]
+            "patterns": ["xenforo", "data-template=", "js/xf/"]
           },
           {
             "name": "Flarum",
-            "patterns": [
-              "flarum",
-              "flarum.core",
-              "assets/forum-"
-            ]
+            "patterns": ["flarum", "flarum.core", "assets/forum-"]
           }
         ]
       },
       {
         "name": "Discourse",
         "kind": "论坛 / 社区",
-        "patterns": [
-          "discourse",
-          "__DISCOURSE",
-          "/assets/discourse-"
-        ],
-        "globals": [
-          "Discourse"
-        ]
+        "patterns": ["discourse", "__DISCOURSE", "/assets/discourse-"],
+        "globals": ["Discourse"]
       },
       {
         "name": "MediaWiki",
         "kind": "Wiki",
-        "patterns": [
-          "mediawiki",
-          "mw.config",
-          "load.php\\?modules="
-        ],
-        "globals": [
-          "mw"
-        ]
+        "patterns": ["mediawiki", "mw.config", "load.php\\?modules="],
+        "globals": ["mw"]
       },
       {
         "name": "Confluence",
         "kind": "知识库",
-        "patterns": [
-          "confluence",
-          "atlassian",
-          "/s/en_GB/"
-        ]
+        "patterns": ["confluence", "atlassian", "/s/en_GB/"]
       },
       {
         "name": "Moodle",
         "kind": "学习管理系统",
-        "patterns": [
-          "moodle",
-          "moodledata",
-          "theme/yui_combo.php"
-        ]
+        "patterns": ["moodle", "moodledata", "theme/yui_combo.php"]
       },
       {
         "defaults": {
@@ -227,28 +142,15 @@
           {
             "name": "Ghost",
             "category": "网站程序",
-            "patterns": [
-              "/ghost/api/",
-              "ghost-sdk",
-              "ghost/content/api",
-              "generator:\\s*ghost(?:\\s|$)"
-            ]
+            "patterns": ["/ghost/api/", "ghost-sdk", "ghost/content/api", "generator:\\s*ghost(?:\\s|$)"]
           },
           {
             "name": "Typecho",
-            "patterns": [
-              "typecho",
-              "usr/themes",
-              "usr/plugins"
-            ]
+            "patterns": ["typecho", "usr/themes", "usr/plugins"]
           },
           {
             "name": "Z-BlogPHP",
-            "patterns": [
-              "zblogphp",
-              "zb_users",
-              "zb_system"
-            ]
+            "patterns": ["zblogphp", "zb_users", "zb_system"]
           }
         ]
       },
@@ -259,89 +161,51 @@
         "rules": [
           {
             "name": "DedeCMS",
-            "patterns": [
-              "dedecms",
-              "/templets/",
-              "/plus/"
-            ]
+            "patterns": ["dedecms", "/templets/", "/plus/"]
           },
           {
             "name": "PHPCMS",
-            "patterns": [
-              "phpcms",
-              "/statics/js/",
-              "content=\"phpcms"
-            ]
+            "patterns": ["phpcms", "/statics/js/", "content=\"phpcms"]
           },
           {
             "name": "EmpireCMS",
-            "patterns": [
-              "empirecms",
-              "/e/data/",
-              "/e/public/"
-            ]
+            "patterns": ["empirecms", "/e/data/", "/e/public/"]
           },
           {
             "name": "Craft CMS",
-            "patterns": [
-              "craftcms",
-              "craft\\.csrfTokenName",
-              "CRAFT_CSRF_TOKEN"
-            ]
+            "patterns": ["craftcms", "craft\\.csrfTokenName", "CRAFT_CSRF_TOKEN"]
           }
         ]
       },
       {
         "name": "Umbraco",
         "kind": ".NET CMS",
-        "patterns": [
-          "umbraco",
-          "/umbraco/"
-        ]
+        "patterns": ["umbraco", "/umbraco/"]
       },
       {
         "name": "Strapi",
         "kind": "Headless CMS",
-        "patterns": [
-          "strapi",
-          "strapi\\.io",
-          "strapi-admin",
-          "powered by strapi",
-          "__strapi"
-        ]
+        "patterns": ["strapi", "strapi\\.io", "strapi-admin", "powered by strapi", "__strapi"]
       },
       {
         "name": "Directus",
         "kind": "Headless CMS",
-        "patterns": [
-          "directus",
-          "directus.io"
-        ]
+        "patterns": ["directus", "directus.io"]
       },
       {
         "name": "Hexo",
         "kind": "静态博客",
-        "patterns": [
-          "hexo",
-          "hexo-generator",
-          "hexo-theme"
-        ]
+        "patterns": ["hexo", "hexo-generator", "hexo-theme"]
       },
       {
         "name": "Hugo",
         "kind": "静态站点生成器",
-        "patterns": [
-          "hugo",
-          "generator\" content=\"hugo"
-        ]
+        "patterns": ["hugo", "generator\" content=\"hugo"]
       },
       {
         "name": "Jekyll",
         "kind": "静态站点生成器",
-        "patterns": [
-          "jekyll",
-          "generator\" content=\"jekyll"
-        ]
+        "patterns": ["jekyll", "generator\" content=\"jekyll"]
       },
       {
         "defaults": {
@@ -350,51 +214,28 @@
         "rules": [
           {
             "name": "Docusaurus",
-            "patterns": [
-              "docusaurus",
-              "__docusaurus",
-              "/assets/js/webpack-runtime"
-            ]
+            "patterns": ["docusaurus", "__docusaurus", "/assets/js/webpack-runtime"]
           },
           {
             "name": "VitePress",
-            "patterns": [
-              "vitepress",
-              "VPContent",
-              "/assets/chunks/"
-            ]
+            "patterns": ["vitepress", "VPContent", "/assets/chunks/"]
           },
           {
             "name": "VuePress",
-            "patterns": [
-              "vuepress",
-              "__VUEPRESS__"
-            ]
+            "patterns": ["vuepress", "__VUEPRESS__"]
           },
           {
             "name": "Docsify",
-            "patterns": [
-              "docsify",
-              "window.$docsify"
-            ],
-            "globals": [
-              "$docsify"
-            ]
+            "patterns": ["docsify", "window.$docsify"],
+            "globals": ["$docsify"]
           },
           {
             "name": "GitBook",
-            "patterns": [
-              "gitbook",
-              "gitbook.page.hasChanged"
-            ]
+            "patterns": ["gitbook", "gitbook.page.hasChanged"]
           },
           {
             "name": "MkDocs",
-            "patterns": [
-              "mkdocs",
-              "mkdocs_page_name",
-              "material for mkdocs"
-            ]
+            "patterns": ["mkdocs", "mkdocs_page_name", "material for mkdocs"]
           }
         ]
       },
@@ -405,29 +246,15 @@
         "rules": [
           {
             "name": "ECShop",
-            "patterns": [
-              "ecshop",
-              "themes/default/images/ecshop",
-              "flow.php\\?step=cart",
-              "ECSHOP"
-            ]
+            "patterns": ["ecshop", "themes/default/images/ecshop", "flow.php\\?step=cart", "ECSHOP"]
           },
           {
             "name": "ShopXO",
-            "patterns": [
-              "shopxo",
-              "public/static/index",
-              "shopxo.net"
-            ]
+            "patterns": ["shopxo", "public/static/index", "shopxo.net"]
           },
           {
             "name": "Niushop",
-            "patterns": [
-              "niushop",
-              "niucloud",
-              "addon/shop",
-              "牛之云"
-            ]
+            "patterns": ["niushop", "niucloud", "addon/shop", "牛之云"]
           }
         ]
       },
@@ -438,39 +265,22 @@
         "rules": [
           {
             "name": "Youzan / 有赞",
-            "patterns": [
-              "youzan.com",
-              "koudaitong.com",
-              "b.yzcdn.cn",
-              "有赞"
-            ]
+            "patterns": ["youzan.com", "koudaitong.com", "b.yzcdn.cn", "有赞"]
           },
           {
             "name": "Weimob / 微盟",
-            "patterns": [
-              "weimob.com",
-              "weimobdc.com",
-              "微盟"
-            ]
+            "patterns": ["weimob.com", "weimobdc.com", "微盟"]
           },
           {
             "name": "WShop / 微店",
-            "patterns": [
-              "weidian.com",
-              "vdian.com",
-              "微店"
-            ]
+            "patterns": ["weidian.com", "vdian.com", "微店"]
           }
         ]
       },
       {
         "name": "Mabang ERP / 店铺系统",
         "kind": "电商系统",
-        "patterns": [
-          "mabangerp",
-          "mabang",
-          "马帮"
-        ]
+        "patterns": ["mabangerp", "mabang", "马帮"]
       }
     ]
   }

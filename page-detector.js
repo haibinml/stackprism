@@ -734,7 +734,10 @@ ${html}`
     for (const pattern of patterns) {
       const resource = shouldMatchTarget(rule, 'resources') ? (context.resources?.all || []).find(url => pattern.test(url)) : null
       if (resource) {
-        return { confidence: rule.confidence || context.resourceConfidence || '高', evidence: `资源 URL 匹配 ${shortUrl(resource)}` }
+        return {
+          confidence: rule.confidence || context.resourceConfidence || '高',
+          evidence: `资源 URL 匹配 ${shortUrl(resource)}`
+        }
       }
       if (!ruleResourceOnly && !context.resourceOnly && shouldMatchTarget(rule, 'html') && pattern.test(context.text || '')) {
         return { confidence: rule.confidence || '中', evidence: '页面源码或资源索引包含规则特征' }
@@ -849,7 +852,19 @@ ${html}`
         }
         value = value[key]
       }
-      return true
+      return !isDomNamedGlobal(value)
+    } catch {
+      return false
+    }
+  }
+
+  function isDomNamedGlobal(value) {
+    try {
+      return (
+        (typeof Element !== 'undefined' && value instanceof Element) ||
+        (typeof HTMLCollection !== 'undefined' && value instanceof HTMLCollection) ||
+        (typeof NodeList !== 'undefined' && value instanceof NodeList)
+      )
     } catch {
       return false
     }
