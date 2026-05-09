@@ -7,7 +7,7 @@ import { buildPopupRawResult, cleanPageDetectionRecord, cleanTechnologyRecords, 
 import { runActivePageDetection, saveTabDataAndBadge } from './detection'
 import { loadDetectorSettings } from './detector-settings'
 
-export function registerMessageRouter() {
+export const registerMessageRouter = () => {
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (!message || !message.type) return false
 

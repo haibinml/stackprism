@@ -1,6 +1,6 @@
 const STYLE_ID = 'stackPrismCustomCss'
 
-export function applyCustomCss(css: string): void {
+export const applyCustomCss = (css: string): void => {
   if (typeof document === 'undefined') return
   let style = document.getElementById(STYLE_ID) as HTMLStyleElement | null
   if (!style) {

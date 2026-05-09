@@ -1,15 +1,11 @@
 const TAB_DATA_PREFIX = 'tab:'
 const POPUP_DATA_PREFIX = 'popup:'
 
-export function storageKey(tabId: number): string {
-  return `${TAB_DATA_PREFIX}${tabId}`
-}
+export const storageKey = (tabId: number): string => `${TAB_DATA_PREFIX}${tabId}`
 
-export function popupStorageKey(tabId: number): string {
-  return `${POPUP_DATA_PREFIX}${tabId}`
-}
+export const popupStorageKey = (tabId: number): string => `${POPUP_DATA_PREFIX}${tabId}`
 
-export async function getTabData(tabId: number): Promise<any> {
+export const getTabData = async (tabId: number): Promise<any> => {
   const key = storageKey(tabId)
   try {
     const stored = await chrome.storage.session.get(key)
@@ -19,7 +15,7 @@ export async function getTabData(tabId: number): Promise<any> {
   }
 }
 
-export async function getPopupCache(tabId: number): Promise<any> {
+export const getPopupCache = async (tabId: number): Promise<any> => {
   const key = popupStorageKey(tabId)
   try {
     const stored = await chrome.storage.session.get(key)
@@ -29,18 +25,24 @@ export async function getPopupCache(tabId: number): Promise<any> {
   }
 }
 
-export async function writeTabData(tabId: number, tabData: Record<string, unknown>, popupRecord: any): Promise<void> {
+export const writeTabData = async (
+  tabId: number,
+  tabData: Record<string, unknown>,
+  popupRecord: any
+): Promise<void> => {
   await chrome.storage.session.set({
     [storageKey(tabId)]: tabData,
     [popupStorageKey(tabId)]: popupRecord
   })
 }
 
-export async function clearTabSession(tabId: number): Promise<void> {
+export const clearTabSession = async (tabId: number): Promise<void> => {
   await chrome.storage.session.remove([storageKey(tabId), popupStorageKey(tabId)]).catch(() => {})
 }
 
-export async function getTabSnapshot(tabId: number): Promise<{ id: number; url: string; title: string }> {
+export const getTabSnapshot = async (
+  tabId: number
+): Promise<{ id: number; url: string; title: string }> => {
   try {
     const tab = await chrome.tabs.get(tabId)
     return {
@@ -53,12 +55,12 @@ export async function getTabSnapshot(tabId: number): Promise<{ id: number; url: 
   }
 }
 
-export function formatBadgeCount(count: number): string {
+export const formatBadgeCount = (count: number): string => {
   if (!count) return ''
   return count > 99 ? '99+' : String(count)
 }
 
-export async function updateBadgeForTab(tabId: number, popup: any): Promise<void> {
+export const updateBadgeForTab = async (tabId: number, popup: any): Promise<void> => {
   const count = Number(popup?.counts?.total || 0)
   const text = formatBadgeCount(count)
   try {
@@ -73,7 +75,7 @@ export async function updateBadgeForTab(tabId: number, popup: any): Promise<void
   }
 }
 
-export function clearBadge(tabId: number): void {
+export const clearBadge = (tabId: number): void => {
   chrome.action.setBadgeText({ tabId, text: '' }).catch(() => {})
   chrome.action.setTitle({ tabId, title: 'StackPrism 栈棱镜' }).catch(() => {})
 }

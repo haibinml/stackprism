@@ -7,7 +7,15 @@ interface TechLinksData {
 
 let techLinksPromise: Promise<TechLinksData> | null = null
 
-export async function loadTechLinks(): Promise<TechLinksData> {
+const buildNormalizedTechLinks = (links: Record<string, string>): Map<string, string> => {
+  const normalized = new Map<string, string>()
+  for (const [name, url] of Object.entries(links || {})) {
+    normalized.set(normalizeTechName(name), url)
+  }
+  return normalized
+}
+
+export const loadTechLinks = async (): Promise<TechLinksData> => {
   if (!techLinksPromise) {
     techLinksPromise = fetch(chrome.runtime.getURL('tech-links.json'))
       .then(response => {
@@ -28,20 +36,14 @@ export async function loadTechLinks(): Promise<TechLinksData> {
   return techLinksPromise
 }
 
-function buildNormalizedTechLinks(links: Record<string, string>): Map<string, string> {
-  const normalized = new Map<string, string>()
-  for (const [name, url] of Object.entries(links || {})) {
-    normalized.set(normalizeTechName(name), url)
-  }
-  return normalized
-}
-
-export async function getTechnologyUrl(name: string, settings: any = {}): Promise<string> {
+export const getTechnologyUrl = async (name: string, settings: any = {}): Promise<string> => {
   if (/^疑似前端库:/i.test(String(name || '').trim())) {
     return ''
   }
 
-  const customRule = (settings.customRules || []).find((rule: any) => normalizeTechName(rule.name) === normalizeTechName(name) && rule.url)
+  const customRule = (settings.customRules || []).find(
+    (rule: any) => normalizeTechName(rule.name) === normalizeTechName(name) && rule.url
+  )
   if (customRule) {
     return customRule.url
   }
@@ -67,11 +69,10 @@ export async function getTechnologyUrl(name: string, settings: any = {}): Promis
   return normalizedLinks.get(simplified) || ''
 }
 
-export async function attachTechnologyLinks(technologies: any[], settings: any) {
-  return Promise.all(
+export const attachTechnologyLinks = async (technologies: any[], settings: any) =>
+  Promise.all(
     technologies.map(async tech => {
       const url = tech.url || (await getTechnologyUrl(tech.name, settings).catch(() => ''))
       return { ...tech, url }
     })
   )
-}

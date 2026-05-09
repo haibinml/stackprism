@@ -1,7 +1,9 @@
 import type { Message, MessageType, ResponseFor } from '@/types/messages'
 
-export function sendMessage<T extends MessageType>(msg: Extract<Message, { type: T }>): Promise<ResponseFor<T>> {
-  return new Promise((resolve, reject) => {
+export const sendMessage = <T extends MessageType>(
+  msg: Extract<Message, { type: T }>
+): Promise<ResponseFor<T>> =>
+  new Promise((resolve, reject) => {
     chrome.runtime.sendMessage(msg, (response: ResponseFor<T>) => {
       const error = chrome.runtime.lastError
       if (error) {
@@ -11,7 +13,6 @@ export function sendMessage<T extends MessageType>(msg: Extract<Message, { type:
       resolve(response)
     })
   })
-}
 
 type Handler<T extends MessageType> = (
   msg: Extract<Message, { type: T }>,
@@ -22,7 +23,7 @@ type HandlerMap = {
   [K in MessageType]?: Handler<K>
 }
 
-export function registerMessageHandlers(handlers: HandlerMap): void {
+export const registerMessageHandlers = (handlers: HandlerMap): void => {
   chrome.runtime.onMessage.addListener((rawMsg, sender, sendResponse) => {
     const msg = rawMsg as Message
     const handler = handlers[msg.type]

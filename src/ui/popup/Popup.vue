@@ -150,12 +150,12 @@
   })
   const rawOutputText = ref(RAW_PLACEHOLDER)
 
-  function setStatus(message: string) {
+  const setStatus = (message: string) => {
     status.text = message
     status.isError = false
   }
 
-  function showError(message: string) {
+  const showError = (message: string) => {
     status.text = message
     status.isError = true
     state.result = null
@@ -208,23 +208,23 @@
       .map(category => ({ category, items: grouped[category] }))
   })
 
-  function isFrontendFallback(item: any) {
+  const isFrontendFallback = (item: any) => {
     return item?.category === '前端库' && /^疑似前端库:/i.test(String(item?.name || '').trim())
   }
 
-  function getFocusTechnologies(technologies: any[]) {
+  const getFocusTechnologies = (technologies: any[]) => {
     const high = technologies.filter(tech => tech.confidence === '高')
     if (high.length) return high.slice(0, 60)
     return [...technologies].sort((a, b) => confidenceRank(b.confidence) - confidenceRank(a.confidence)).slice(0, 30)
   }
 
-  function getFilteredTechnologies(result: any) {
+  const getFilteredTechnologies = (result: any) => {
     if (state.activeCategory === FOCUS_CATEGORY) return getFocusTechnologies(result.technologies)
     if (state.activeCategory === '全部') return result.technologies
     return result.technologies.filter((tech: any) => tech.category === state.activeCategory)
   }
 
-  async function loadSettings() {
+  const loadSettings = async () => {
     try {
       const stored = await chrome.storage.sync.get(SETTINGS_STORAGE_KEY)
       return normalizeSettings(stored[SETTINGS_STORAGE_KEY])
@@ -233,7 +233,7 @@
     }
   }
 
-  function emptyPopupResult(tab: any = {}) {
+  const emptyPopupResult = (tab: any = {}) => {
     return {
       url: tab.url || '',
       title: tab.title || '',
@@ -247,30 +247,30 @@
     }
   }
 
-  async function requestPopupResult(tabId: number) {
+  const requestPopupResult = async (tabId: number) => {
     const response = await chrome.runtime.sendMessage({ type: 'GET_POPUP_RESULT', tabId })
     if (!response?.ok) throw new Error(response?.error || '后台没有返回结果')
     return response
   }
 
-  async function requestPopupRawResult(tabId: number) {
+  const requestPopupRawResult = async (tabId: number) => {
     const response = await chrome.runtime.sendMessage({ type: 'GET_POPUP_RAW_RESULT', tabId })
     if (!response?.ok) throw new Error(response?.error || '后台没有返回原始线索')
     return response.data || {}
   }
 
-  function requestBackgroundDetection(tabId: number) {
+  const requestBackgroundDetection = (tabId: number) => {
     chrome.runtime.sendMessage({ type: 'START_BACKGROUND_DETECTION', tabId }).catch(() => {})
   }
 
-  function clearCacheRefreshTimer() {
+  const clearCacheRefreshTimer = () => {
     if (state.cacheRefreshTimer) {
       clearTimeout(state.cacheRefreshTimer)
       state.cacheRefreshTimer = 0
     }
   }
 
-  function scheduleCachedResultRefresh(tabId: number, previousUpdatedAt: number, attempt: number) {
+  const scheduleCachedResultRefresh = (tabId: number, previousUpdatedAt: number, attempt: number) => {
     clearCacheRefreshTimer()
     if (attempt >= CACHE_REFRESH_DELAYS.length) return
     state.cacheRefreshTimer = window.setTimeout(() => {
@@ -278,7 +278,7 @@
     }, CACHE_REFRESH_DELAYS[attempt])
   }
 
-  async function refreshCachedResultIfReady(tabId: number, previousUpdatedAt: number, attempt: number) {
+  const refreshCachedResultIfReady = async (tabId: number, previousUpdatedAt: number, attempt: number) => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
     if (!tab || tab.id !== tabId) return
 
@@ -298,14 +298,14 @@
     scheduleCachedResultRefresh(tabId, previousUpdatedAt, attempt + 1)
   }
 
-  function formatCachedResultStatus(result: any, response: any) {
+  const formatCachedResultStatus = (result: any, response: any) => {
     const highCount = result.counts?.high ?? result.technologies.filter((tech: any) => tech.confidence === '高').length
     const updatedAt = Number(response?.updatedAt || result.updatedAt || 0)
     const age = updatedAt ? `，缓存更新于 ${formatAge(Date.now() - updatedAt)} 前` : ''
     return `已显示后台缓存：发现 ${result.technologies.length} 项技术线索，其中 ${highCount} 项为高置信度${age}。点击"刷新"可重新检测。`
   }
 
-  function formatAge(ms: number) {
+  const formatAge = (ms: number) => {
     const seconds = Math.max(0, Math.round(ms / 1000))
     if (seconds < 60) return `${seconds} 秒`
     const minutes = Math.round(seconds / 60)
@@ -313,7 +313,7 @@
     return `${Math.round(minutes / 60)} 小时`
   }
 
-  async function loadCachedDetection() {
+  const loadCachedDetection = async () => {
     setStatus('正在读取后台缓存结果。')
     state.result = null
     clearCacheRefreshTimer()
@@ -356,7 +356,7 @@
     }
   }
 
-  async function runDetection({ force = false } = {}) {
+  const runDetection = async ({ force = false } = {}) => {
     setStatus(force ? '已请求后台重新检测，当前结果可先使用。' : '已请求后台检测。')
     clearCacheRefreshTimer()
 
@@ -373,11 +373,11 @@
     scheduleCachedResultRefresh(tab.id, previousUpdatedAt, 0)
   }
 
-  function selectCategory(category: string) {
+  const selectCategory = (category: string) => {
     state.activeCategory = category
   }
 
-  async function openTechnologyLink(tech: any) {
+  const openTechnologyLink = async (tech: any) => {
     if (tech.url) {
       chrome.tabs.create({ url: tech.url })
       return
@@ -396,7 +396,7 @@
     }
   }
 
-  function openCorrectionIssue(tech: any) {
+  const openCorrectionIssue = (tech: any) => {
     const ctx = {
       url: state.result?.url || '',
       title: state.result?.title || '',
@@ -406,18 +406,18 @@
     chrome.tabs.create({ url: buildCorrectionIssueUrl(tech, ctx) })
   }
 
-  function openSettings() {
+  const openSettings = () => {
     const settingsPage = chrome.runtime.getManifest().options_ui?.page
     const url = chrome.runtime.getURL(settingsPage || 'src/ui/settings/index.html')
     chrome.tabs.create({ url })
   }
 
-  function openRepository(event: Event) {
+  const openRepository = (event: Event) => {
     event.preventDefault()
     chrome.tabs.create({ url: REPOSITORY_URL })
   }
 
-  async function copyResult() {
+  const copyResult = async () => {
     if (!state.result) return
     try {
       const raw = await getRawResult()
@@ -428,7 +428,7 @@
     }
   }
 
-  async function getRawResult() {
+  const getRawResult = async () => {
     if (state.rawLoaded) return state.rawResult
     const tabId = state.currentTabId || (await getActiveTabId())
     const raw = await requestPopupRawResult(tabId)
@@ -437,21 +437,21 @@
     return raw
   }
 
-  async function getActiveTabId() {
+  const getActiveTabId = async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
     if (!tab || !tab.id) throw new Error('无法读取当前标签页。')
     state.currentTabId = tab.id
     return tab.id
   }
 
-  async function onRawPanelToggle(event: Event) {
+  const onRawPanelToggle = async (event: Event) => {
     const details = event.target as HTMLDetailsElement
     if (details.open) {
       await renderRawOutput()
     }
   }
 
-  async function renderRawOutput() {
+  const renderRawOutput = async () => {
     if (!state.result) {
       rawOutputText.value = '暂无原始线索。'
       return
@@ -469,7 +469,7 @@
     }
   }
 
-  async function searchPageSourceFromPopup() {
+  const searchPageSourceFromPopup = async () => {
     const query = search.query
     if (!query) {
       search.meta = '请输入要搜索的内容。'
@@ -524,7 +524,7 @@
     }
   }
 
-  function formatSearchResult(result: any) {
+  const formatSearchResult = (result: any) => {
     const lines = [
       `查询: ${result.query}`,
       `模式: ${describeSearchOptions(result.options)}`,
@@ -550,7 +550,7 @@
     return lines.join('\n')
   }
 
-  function describeSearchOptions(options: any) {
+  const describeSearchOptions = (options: any) => {
     const parts: string[] = []
     parts.push(options.useRegex ? '正则表达式' : '普通文本')
     parts.push(options.caseSensitive ? '区分大小写' : '忽略大小写')

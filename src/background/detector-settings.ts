@@ -7,7 +7,7 @@ let techRulesPromise: Promise<any> | null = null
 let detectorSettingsPromise: Promise<any> | null = null
 let detectorSettingsCache: any = null
 
-export async function loadTechRules() {
+export const loadTechRules = async () => {
   if (!techRulesPromise) {
     techRulesPromise = loadStackPrismRules().catch(() => {
       techRulesPromise = null
@@ -17,7 +17,7 @@ export async function loadTechRules() {
   return techRulesPromise
 }
 
-export async function loadDetectorSettings() {
+export const loadDetectorSettings = async () => {
   if (detectorSettingsCache) {
     return detectorSettingsCache
   }
@@ -37,15 +37,13 @@ export async function loadDetectorSettings() {
   return detectorSettingsPromise
 }
 
-export function applyDetectorSettingsUpdate(rawValue: unknown) {
+export const applyDetectorSettingsUpdate = (rawValue: unknown) => {
   detectorSettingsCache = normalizeSettings(rawValue)
   detectorSettingsPromise = Promise.resolve(detectorSettingsCache)
   return detectorSettingsCache
 }
 
-export function buildEffectivePageRules(pageRules: any, settings: any) {
-  return {
-    ...pageRules,
-    customRules: settings?.customRules || []
-  }
-}
+export const buildEffectivePageRules = (pageRules: any, settings: any) => ({
+  ...pageRules,
+  customRules: settings?.customRules || []
+})

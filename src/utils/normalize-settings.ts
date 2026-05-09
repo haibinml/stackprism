@@ -9,31 +9,27 @@ import {
   type MatchType
 } from '@/types/settings'
 
-export function cleanStringArray(value: unknown): string[] {
+export const cleanStringArray = (value: unknown): string[] => {
   if (!Array.isArray(value)) return []
   const trimmed = value.map(item => String(item ?? '').trim()).filter(Boolean)
   return [...new Set(trimmed)]
 }
 
-function cleanRuleUrl(value: unknown): string {
+const cleanRuleUrl = (value: unknown): string => {
   const text = String(value ?? '').trim()
   if (!/^https?:\/\//i.test(text)) return ''
   return text.slice(0, CUSTOM_RULE_LIMITS.url)
 }
 
-function pickConfidence(value: unknown): Confidence {
-  return ALLOWED_CONFIDENCES.includes(value as Confidence) ? (value as Confidence) : '中'
-}
+const pickConfidence = (value: unknown): Confidence =>
+  ALLOWED_CONFIDENCES.includes(value as Confidence) ? (value as Confidence) : '中'
 
-function pickMatchType(value: unknown): MatchType {
-  return value === 'keyword' ? 'keyword' : 'regex'
-}
+const pickMatchType = (value: unknown): MatchType => (value === 'keyword' ? 'keyword' : 'regex')
 
-function pickMatchTargets(value: unknown): MatchTarget[] {
-  return cleanStringArray(value).slice(0, CUSTOM_RULE_LIMITS.matchIn) as MatchTarget[]
-}
+const pickMatchTargets = (value: unknown): MatchTarget[] =>
+  cleanStringArray(value).slice(0, CUSTOM_RULE_LIMITS.matchIn) as MatchTarget[]
 
-export function cleanCustomRules(value: unknown): CustomRule[] {
+export const cleanCustomRules = (value: unknown): CustomRule[] => {
   if (!Array.isArray(value)) return []
   return value
     .map((rule: Record<string, unknown> = {}): CustomRule => {
@@ -61,7 +57,7 @@ export function cleanCustomRules(value: unknown): CustomRule[] {
     .slice(0, CUSTOM_RULE_LIMITS.rules)
 }
 
-export function normalizeSettings(value: unknown = {}): DetectorSettings {
+export const normalizeSettings = (value: unknown = {}): DetectorSettings => {
   const v = (value ?? {}) as Partial<DetectorSettings>
   const customCss = typeof v.customCss === 'string' ? v.customCss.slice(0, CUSTOM_RULE_LIMITS.customCss) : ''
   return {
@@ -72,6 +68,4 @@ export function normalizeSettings(value: unknown = {}): DetectorSettings {
   }
 }
 
-export function defaultSettings(): DetectorSettings {
-  return { ...DEFAULT_SETTINGS, customRules: [] }
-}
+export const defaultSettings = (): DetectorSettings => ({ ...DEFAULT_SETTINGS, customRules: [] })

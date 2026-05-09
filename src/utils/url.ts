@@ -1,4 +1,4 @@
-export function normalizeHttpUrl(rawUrl: unknown, baseUrl = ''): string {
+export const normalizeHttpUrl = (rawUrl: unknown, baseUrl = ''): string => {
   let value = String(rawUrl ?? '').trim()
   if (!value || /^(?:data|blob|javascript|about|chrome|chrome-extension):/i.test(value)) {
     return ''
@@ -21,11 +21,9 @@ export function normalizeHttpUrl(rawUrl: unknown, baseUrl = ''): string {
   }
 }
 
-export function cleanTechnologyUrl(value: unknown): string {
-  return normalizeHttpUrl(value).slice(0, 1000)
-}
+export const cleanTechnologyUrl = (value: unknown): string => normalizeHttpUrl(value).slice(0, 1000)
 
-export function safeDecodeURIComponent(value: unknown): string {
+export const safeDecodeURIComponent = (value: unknown): string => {
   try {
     return decodeURIComponent(String(value ?? ''))
   } catch {

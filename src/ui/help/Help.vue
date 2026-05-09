@@ -339,12 +339,12 @@ examplepay-sdk</pre
 
   const version = ref('')
 
-  function openSettings() {
+  const openSettings = () => {
     const settingsPage = chrome.runtime.getManifest().options_ui?.page
     chrome.tabs.create({ url: chrome.runtime.getURL(settingsPage || 'src/ui/settings/index.html') })
   }
 
-  function openRepo() {
+  const openRepo = () => {
     chrome.tabs.create({ url: REPOSITORY_URL })
   }
 

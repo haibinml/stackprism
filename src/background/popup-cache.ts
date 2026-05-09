@@ -16,61 +16,18 @@ import { normalizeTechName } from '@/utils/tech-name'
 export const POPUP_CACHE_STALE_MS = 2 * 60 * 1000
 const POPUP_CACHE_SCHEMA_VERSION = 1
 
-export async function getPopupResultResponse(tabId: number) {
-  const [storedPopup, settings] = await Promise.all([getPopupCache(tabId), loadDetectorSettings()])
-  const cachedPopup = getCachedPopupResult(storedPopup, settings)
-  if (cachedPopup) {
-    return {
-      ok: true,
-      data: cachedPopup,
-      hasCache: Boolean(cachedPopup.hasCache),
-      stale: !cachedPopup.sourceUpdatedAt || Date.now() - cachedPopup.sourceUpdatedAt > POPUP_CACHE_STALE_MS,
-      updatedAt: cachedPopup.sourceUpdatedAt || 0
-    }
-  }
+export const hasStoredDetection = (data: any) =>
+  Boolean(
+    data?.page || data?.main || data?.dynamic || (data?.apis || []).length || (data?.frames || []).length
+  )
 
-  const [data, tab] = await Promise.all([getTabData(tabId), getTabSnapshot(tabId)])
-  const popup = buildPopupCacheRecord(data, settings, tab)
-  if (hasStoredDetection(data)) {
-    const { popup: legacyPopup, ...tabData } = data || {}
-    const nextStorage: Record<string, unknown> = { [popupStorageKey(tabId)]: popup }
-    if (legacyPopup) {
-      nextStorage[storageKey(tabId)] = tabData
-    }
-    chrome.storage.session.set(nextStorage).catch(() => {})
-  }
+export const getStoredUpdatedAt = (data: any) =>
+  Number(data?.updatedAt || data?.page?.time || data?.dynamic?.updatedAt || data?.main?.time || 0)
 
-  const updatedAt = getStoredUpdatedAt(data)
-  return {
-    ok: true,
-    data: popup,
-    hasCache: hasStoredDetection(data),
-    stale: !updatedAt || Date.now() - updatedAt > POPUP_CACHE_STALE_MS,
-    updatedAt
-  }
-}
+const unique = (items: any[]) => [...new Set(items.filter(Boolean))]
 
-export function buildPopupCacheRecord(data: any, settings: any, tab: any) {
-  const hydrated = addStoredCustomHeaderRules(data || {}, settings)
-  const sourceUpdatedAt = getStoredUpdatedAt(hydrated)
-  return {
-    ...buildPopupResult(hydrated, settings, tab),
-    cacheVersion: POPUP_CACHE_SCHEMA_VERSION,
-    settingsKey: buildSettingsCacheKey(settings),
-    hasCache: hasStoredDetection(hydrated),
-    sourceUpdatedAt,
-    builtAt: Date.now()
-  }
-}
-
-function getCachedPopupResult(popup: any, settings: any) {
-  if (!popup || popup.cacheVersion !== POPUP_CACHE_SCHEMA_VERSION) return null
-  if (popup.settingsKey !== buildSettingsCacheKey(settings)) return null
-  return popup
-}
-
-function buildSettingsCacheKey(settings: any = {}) {
-  return JSON.stringify({
+const buildSettingsCacheKey = (settings: any = {}) =>
+  JSON.stringify({
     disabledCategories: cleanStringArray(settings.disabledCategories),
     disabledTechnologies: cleanStringArray(settings.disabledTechnologies),
     customRules: (settings.customRules || []).map((rule: any) => ({
@@ -86,95 +43,79 @@ function buildSettingsCacheKey(settings: any = {}) {
       url: rule.url || ''
     }))
   })
+
+const getCachedPopupResult = (popup: any, settings: any) => {
+  if (!popup || popup.cacheVersion !== POPUP_CACHE_SCHEMA_VERSION) return null
+  if (popup.settingsKey !== buildSettingsCacheKey(settings)) return null
+  return popup
 }
 
-function buildPopupResult(data: any, settings: any, tab: any) {
-  const technologies = buildDisplayTechnologies(data, settings)
-  const resources = mergeResourceSummary(data.page?.resources || {}, data.dynamic || {})
-  const headers = data.main?.headers || {}
+const compareDisplayTechnologies = (a: any, b: any) => {
+  const categoryDelta = categoryIndex(a.category) - categoryIndex(b.category)
+  if (categoryDelta !== 0) return categoryDelta
+  const confidenceDelta = confidenceRank(b.confidence) - confidenceRank(a.confidence)
+  if (confidenceDelta !== 0) return confidenceDelta
+  return a.name.localeCompare(b.name)
+}
+
+const cleanPopupTechnology = (tech: any) => ({
+  category: String(tech?.category || '其他库').slice(0, 80),
+  name: String(tech?.name || '').slice(0, 160),
+  confidence: ['高', '中', '低'].includes(tech?.confidence) ? tech.confidence : '中',
+  evidence: cleanStringArray(tech?.evidence).slice(0, 8),
+  sources: cleanStringArray(tech?.sources).slice(0, 8),
+  url: cleanTechnologyUrl(tech?.url)
+})
+
+const buildTechnologyCounts = (technologies: any[]) => ({
+  total: technologies.length,
+  high: technologies.filter(tech => tech.confidence === '高').length,
+  medium: technologies.filter(tech => tech.confidence === '中').length,
+  low: technologies.filter(tech => tech.confidence === '低').length
+})
+
+const buildCategoryCounts = (technologies: any[]) =>
+  technologies.reduce((acc: Record<string, number>, tech) => {
+    acc[tech.category] = (acc[tech.category] || 0) + 1
+    return acc
+  }, {})
+
+const mergeResourceSummary = (pageResources: any, dynamic: any) => {
+  const scripts = unique([...(pageResources.scripts || []), ...(dynamic.scripts || [])])
+  const stylesheets = unique([...(pageResources.stylesheets || []), ...(dynamic.stylesheets || [])])
+  const dynamicResources = unique([...(dynamic.resources || []), ...(dynamic.iframes || [])])
+  const all = unique([...scripts, ...stylesheets, ...dynamicResources])
   return {
-    url: data.page?.url || data.dynamic?.url || tab?.url || '',
-    title: data.page?.title || data.dynamic?.title || tab?.title || '',
-    generatedAt: new Date().toISOString(),
-    updatedAt: getStoredUpdatedAt(data),
-    technologies: technologies.map(cleanPopupTechnology),
-    counts: buildTechnologyCounts(technologies),
-    categoryCounts: buildCategoryCounts(technologies),
-    resources: { total: resources.total || 0 },
-    headerCount: Object.keys(headers).length
+    ...pageResources,
+    total: Math.max(pageResources.total || 0, all.length),
+    scripts: scripts.slice(0, 180),
+    stylesheets: stylesheets.slice(0, 180),
+    dynamicResources: dynamicResources.slice(0, 220),
+    dynamicFeedLinks: dynamic.feedLinks || [],
+    dynamicDomMarkers: dynamic.domMarkers || [],
+    dynamicMutationCount: dynamic.mutationCount || 0,
+    dynamicUpdatedAt: dynamic.updatedAt || null
   }
 }
 
-export async function buildPopupRawResult(data: any, settings: any, tab: any) {
-  const technologies = await attachTechnologyLinks(buildDisplayTechnologies(data, settings), settings)
-  const resources = mergeResourceSummary(data.page?.resources || {}, data.dynamic || {})
-  const headers = data.main?.headers || {}
-  return {
-    url: data.page?.url || data.dynamic?.url || tab?.url || '',
-    title: data.page?.title || data.dynamic?.title || tab?.title || '',
-    generatedAt: new Date().toISOString(),
-    technologies,
-    resources,
-    headers,
-    apiObservations: data.apis || [],
-    frameObservations: data.frames || [],
-    dynamicObservations: data.dynamic || null,
-    notes: [
-      '前端框架和 UI 框架主要通过页面运行时、DOM、资源 URL 和样式类名判断。',
-      'Web 服务器、CDN 和后端框架主要依赖响应头与 Cookie 命名线索；如果站点隐藏响应头，结果会保守显示。',
-      '动态监控会累计页面交互后新增的脚本、样式、iframe、feed 链接和资源加载，再与当前扫描结果合并。'
-    ]
-  }
-}
-
-function buildDisplayTechnologies(data: any, settings: any) {
-  const all: any[] = []
-  addAllTechnologies(all, data.page?.technologies)
-  addAllTechnologies(all, data.main?.technologies)
-  for (const api of data.apis || []) {
-    addAllTechnologies(
-      all,
-      (api.technologies || []).map((tech: any) => ({
-        ...tech,
-        source: `${tech.source || '响应头'} · API`
-      }))
-    )
-  }
-  for (const frame of data.frames || []) {
-    addAllTechnologies(
-      all,
-      (frame.technologies || []).map((tech: any) => ({
-        ...tech,
-        source: `${tech.source || '响应头'} · iframe`
-      }))
-    )
-  }
-  addAllTechnologies(
-    all,
-    (data.dynamic?.technologies || []).map((tech: any) => ({
-      ...tech,
-      source: `${tech.source || '动态监控'} · 页面交互后`
-    }))
-  )
-  return filterTechnologiesBySettings(mergeDisplayTechnologyRecords(all), settings)
-}
-
-function addAllTechnologies(target: any[], items: any[]) {
+const addAllTechnologies = (target: any[], items: any[]) => {
   if (Array.isArray(items)) {
     target.push(...items)
   }
 }
 
-export function filterTechnologiesBySettings(technologies: any[], settings: any) {
+export const filterTechnologiesBySettings = (technologies: any[], settings: any) => {
   const disabledCategories = new Set(cleanStringArray(settings?.disabledCategories))
-  const disabledTechnologies = new Set(cleanStringArray(settings?.disabledTechnologies).map(name => normalizeTechName(name)))
+  const disabledTechnologies = new Set(
+    cleanStringArray(settings?.disabledTechnologies).map(name => normalizeTechName(name))
+  )
   return technologies.filter(tech => {
     if (disabledCategories.has(tech.category)) return false
     return !disabledTechnologies.has(normalizeTechName(tech.name))
   })
 }
 
-function mergeDisplayTechnologyRecords(items: any[]) {
+const mergeDisplayTechnologyRecords = (items: any[]) => {
   const map = new Map()
   for (const item of suppressDuplicateWebsiteProgramCategories(
     suppressWordPressThemeDirectoryFallbacks(suppressFrontendFallbackDuplicates(items))
@@ -214,100 +155,125 @@ function mergeDisplayTechnologyRecords(items: any[]) {
     .sort(compareDisplayTechnologies)
 }
 
-function compareDisplayTechnologies(a: any, b: any) {
-  const categoryDelta = categoryIndex(a.category) - categoryIndex(b.category)
-  if (categoryDelta !== 0) return categoryDelta
-  const confidenceDelta = confidenceRank(b.confidence) - confidenceRank(a.confidence)
-  if (confidenceDelta !== 0) return confidenceDelta
-  return a.name.localeCompare(b.name)
+const buildDisplayTechnologies = (data: any, settings: any) => {
+  const all: any[] = []
+  addAllTechnologies(all, data.page?.technologies)
+  addAllTechnologies(all, data.main?.technologies)
+  for (const api of data.apis || []) {
+    addAllTechnologies(
+      all,
+      (api.technologies || []).map((tech: any) => ({
+        ...tech,
+        source: `${tech.source || '响应头'} · API`
+      }))
+    )
+  }
+  for (const frame of data.frames || []) {
+    addAllTechnologies(
+      all,
+      (frame.technologies || []).map((tech: any) => ({
+        ...tech,
+        source: `${tech.source || '响应头'} · iframe`
+      }))
+    )
+  }
+  addAllTechnologies(
+    all,
+    (data.dynamic?.technologies || []).map((tech: any) => ({
+      ...tech,
+      source: `${tech.source || '动态监控'} · 页面交互后`
+    }))
+  )
+  return filterTechnologiesBySettings(mergeDisplayTechnologyRecords(all), settings)
 }
 
-function cleanPopupTechnology(tech: any) {
+const buildPopupResult = (data: any, settings: any, tab: any) => {
+  const technologies = buildDisplayTechnologies(data, settings)
+  const resources = mergeResourceSummary(data.page?.resources || {}, data.dynamic || {})
+  const headers = data.main?.headers || {}
   return {
-    category: String(tech?.category || '其他库').slice(0, 80),
-    name: String(tech?.name || '').slice(0, 160),
-    confidence: ['高', '中', '低'].includes(tech?.confidence) ? tech.confidence : '中',
-    evidence: cleanStringArray(tech?.evidence).slice(0, 8),
-    sources: cleanStringArray(tech?.sources).slice(0, 8),
-    url: cleanTechnologyUrl(tech?.url)
+    url: data.page?.url || data.dynamic?.url || tab?.url || '',
+    title: data.page?.title || data.dynamic?.title || tab?.title || '',
+    generatedAt: new Date().toISOString(),
+    updatedAt: getStoredUpdatedAt(data),
+    technologies: technologies.map(cleanPopupTechnology),
+    counts: buildTechnologyCounts(technologies),
+    categoryCounts: buildCategoryCounts(technologies),
+    resources: { total: resources.total || 0 },
+    headerCount: Object.keys(headers).length
   }
 }
 
-function buildTechnologyCounts(technologies: any[]) {
+export const buildPopupRawResult = async (data: any, settings: any, tab: any) => {
+  const technologies = await attachTechnologyLinks(buildDisplayTechnologies(data, settings), settings)
+  const resources = mergeResourceSummary(data.page?.resources || {}, data.dynamic || {})
+  const headers = data.main?.headers || {}
   return {
-    total: technologies.length,
-    high: technologies.filter(tech => tech.confidence === '高').length,
-    medium: technologies.filter(tech => tech.confidence === '中').length,
-    low: technologies.filter(tech => tech.confidence === '低').length
+    url: data.page?.url || data.dynamic?.url || tab?.url || '',
+    title: data.page?.title || data.dynamic?.title || tab?.title || '',
+    generatedAt: new Date().toISOString(),
+    technologies,
+    resources,
+    headers,
+    apiObservations: data.apis || [],
+    frameObservations: data.frames || [],
+    dynamicObservations: data.dynamic || null,
+    notes: [
+      '前端框架和 UI 框架主要通过页面运行时、DOM、资源 URL 和样式类名判断。',
+      'Web 服务器、CDN 和后端框架主要依赖响应头与 Cookie 命名线索；如果站点隐藏响应头，结果会保守显示。',
+      '动态监控会累计页面交互后新增的脚本、样式、iframe、feed 链接和资源加载，再与当前扫描结果合并。'
+    ]
   }
 }
 
-function buildCategoryCounts(technologies: any[]) {
-  return technologies.reduce((acc: Record<string, number>, tech) => {
-    acc[tech.category] = (acc[tech.category] || 0) + 1
-    return acc
-  }, {})
-}
-
-function mergeResourceSummary(pageResources: any, dynamic: any) {
-  const scripts = unique([...(pageResources.scripts || []), ...(dynamic.scripts || [])])
-  const stylesheets = unique([...(pageResources.stylesheets || []), ...(dynamic.stylesheets || [])])
-  const dynamicResources = unique([...(dynamic.resources || []), ...(dynamic.iframes || [])])
-  const all = unique([...scripts, ...stylesheets, ...dynamicResources])
+export const buildPopupCacheRecord = (data: any, settings: any, tab: any) => {
+  const hydrated = addStoredCustomHeaderRules(data || {}, settings)
+  const sourceUpdatedAt = getStoredUpdatedAt(hydrated)
   return {
-    ...pageResources,
-    total: Math.max(pageResources.total || 0, all.length),
-    scripts: scripts.slice(0, 180),
-    stylesheets: stylesheets.slice(0, 180),
-    dynamicResources: dynamicResources.slice(0, 220),
-    dynamicFeedLinks: dynamic.feedLinks || [],
-    dynamicDomMarkers: dynamic.domMarkers || [],
-    dynamicMutationCount: dynamic.mutationCount || 0,
-    dynamicUpdatedAt: dynamic.updatedAt || null
+    ...buildPopupResult(hydrated, settings, tab),
+    cacheVersion: POPUP_CACHE_SCHEMA_VERSION,
+    settingsKey: buildSettingsCacheKey(settings),
+    hasCache: hasStoredDetection(hydrated),
+    sourceUpdatedAt,
+    builtAt: Date.now()
   }
 }
 
-export function hasStoredDetection(data: any) {
-  return Boolean(data?.page || data?.main || data?.dynamic || (data?.apis || []).length || (data?.frames || []).length)
-}
+export const getPopupResultResponse = async (tabId: number) => {
+  const [storedPopup, settings] = await Promise.all([getPopupCache(tabId), loadDetectorSettings()])
+  const cachedPopup = getCachedPopupResult(storedPopup, settings)
+  if (cachedPopup) {
+    return {
+      ok: true,
+      data: cachedPopup,
+      hasCache: Boolean(cachedPopup.hasCache),
+      stale: !cachedPopup.sourceUpdatedAt || Date.now() - cachedPopup.sourceUpdatedAt > POPUP_CACHE_STALE_MS,
+      updatedAt: cachedPopup.sourceUpdatedAt || 0
+    }
+  }
 
-export function getStoredUpdatedAt(data: any) {
-  return Number(data?.updatedAt || data?.page?.time || data?.dynamic?.updatedAt || data?.main?.time || 0)
-}
+  const [data, tab] = await Promise.all([getTabData(tabId), getTabSnapshot(tabId)])
+  const popup = buildPopupCacheRecord(data, settings, tab)
+  if (hasStoredDetection(data)) {
+    const { popup: legacyPopup, ...tabData } = data || {}
+    const nextStorage: Record<string, unknown> = { [popupStorageKey(tabId)]: popup }
+    if (legacyPopup) {
+      nextStorage[storageKey(tabId)] = tabData
+    }
+    chrome.storage.session.set(nextStorage).catch(() => {})
+  }
 
-function unique(items: any[]) {
-  return [...new Set(items.filter(Boolean))]
-}
-
-export function cleanPageDetectionRecord(page: any) {
+  const updatedAt = getStoredUpdatedAt(data)
   return {
-    url: String(page?.url || '').slice(0, 1000),
-    title: String(page?.title || '').slice(0, 300),
-    time: Date.now(),
-    technologies: cleanTechnologyRecords(page?.technologies),
-    resources: cleanPageResources(page?.resources)
+    ok: true,
+    data: popup,
+    hasCache: hasStoredDetection(data),
+    stale: !updatedAt || Date.now() - updatedAt > POPUP_CACHE_STALE_MS,
+    updatedAt
   }
 }
 
-function cleanPageResources(resources: any) {
-  return {
-    total: Number(resources?.total || 0),
-    scripts: cleanStringList(resources?.scripts, 160),
-    stylesheets: cleanStringList(resources?.stylesheets, 160),
-    themeAssetUrls: cleanStringList(resources?.themeAssetUrls, 100),
-    resourceDomains: cleanResourceDomains(resources?.resourceDomains),
-    cssVariableCount: Number(resources?.cssVariableCount || 0),
-    metaGenerator: String(resources?.metaGenerator || '').slice(0, 200),
-    manifest: String(resources?.manifest || '').slice(0, 1000) || null
-  }
-}
-
-function cleanStringList(value: any, max: number): string[] {
-  if (!Array.isArray(value)) return []
-  return [...new Set(value.map(item => String(item || '').slice(0, 1000)).filter(Boolean))].slice(-max)
-}
-
-function cleanResourceDomains(value: any): any[] {
+const cleanResourceDomains = (value: any): any[] => {
   if (!Array.isArray(value)) return []
   return value
     .map(item => ({
@@ -318,7 +284,23 @@ function cleanResourceDomains(value: any): any[] {
     .slice(0, 40)
 }
 
-export function cleanTechnologyRecords(items: any) {
+const cleanStringList = (value: any, max: number): string[] => {
+  if (!Array.isArray(value)) return []
+  return [...new Set(value.map(item => String(item || '').slice(0, 1000)).filter(Boolean))].slice(-max)
+}
+
+const cleanPageResources = (resources: any) => ({
+  total: Number(resources?.total || 0),
+  scripts: cleanStringList(resources?.scripts, 160),
+  stylesheets: cleanStringList(resources?.stylesheets, 160),
+  themeAssetUrls: cleanStringList(resources?.themeAssetUrls, 100),
+  resourceDomains: cleanResourceDomains(resources?.resourceDomains),
+  cssVariableCount: Number(resources?.cssVariableCount || 0),
+  metaGenerator: String(resources?.metaGenerator || '').slice(0, 200),
+  manifest: String(resources?.manifest || '').slice(0, 1000) || null
+})
+
+export const cleanTechnologyRecords = (items: any) => {
   if (!Array.isArray(items)) return []
   return items
     .map(item => ({
@@ -332,3 +314,11 @@ export function cleanTechnologyRecords(items: any) {
     .filter(item => item.name)
     .slice(0, 400)
 }
+
+export const cleanPageDetectionRecord = (page: any) => ({
+  url: String(page?.url || '').slice(0, 1000),
+  title: String(page?.title || '').slice(0, 300),
+  time: Date.now(),
+  technologies: cleanTechnologyRecords(page?.technologies),
+  resources: cleanPageResources(page?.resources)
+})

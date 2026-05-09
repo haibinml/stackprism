@@ -5,14 +5,14 @@ import { buildEffectivePageRules, loadDetectorSettings, loadTechRules } from './
 
 const activeDetectionTimers = new Map<number, ReturnType<typeof setTimeout>>()
 
-export async function saveTabDataAndBadge(tabId: number, data: any, settings: any) {
+export const saveTabDataAndBadge = async (tabId: number, data: any, settings: any) => {
   const popup = buildPopupCacheRecord(data, settings, await getTabSnapshot(tabId))
   const { popup: _legacyPopup, ...tabData } = data || {}
   await writeTabData(tabId, tabData, popup)
   await updateBadgeForTab(tabId, popup)
 }
 
-export async function refreshAllBadges() {
+export const refreshAllBadges = async () => {
   try {
     const [tabs, settings] = await Promise.all([chrome.tabs.query({}), loadDetectorSettings()])
     for (const tab of tabs) {
@@ -29,11 +29,15 @@ export async function refreshAllBadges() {
   }
 }
 
-export async function runActivePageDetection(tabId: number) {
+export const runActivePageDetection = async (tabId: number) => {
   if (typeof tabId !== 'number' || tabId < 0) return
 
   try {
-    const [data, rules, settings] = await Promise.all([getTabData(tabId), loadTechRules(), loadDetectorSettings()])
+    const [data, rules, settings] = await Promise.all([
+      getTabData(tabId),
+      loadTechRules(),
+      loadDetectorSettings()
+    ])
     const pageRules = buildEffectivePageRules(rules.page || {}, settings)
     await chrome.scripting.executeScript({
       target: { tabId },
@@ -60,7 +64,15 @@ export async function runActivePageDetection(tabId: number) {
   }
 }
 
-export function scheduleActivePageDetection(tabId: number, delay = 600) {
+export const clearActiveDetectionTimer = (tabId: number) => {
+  const timer = activeDetectionTimers.get(tabId)
+  if (timer) {
+    clearTimeout(timer)
+    activeDetectionTimers.delete(tabId)
+  }
+}
+
+export const scheduleActivePageDetection = (tabId: number, delay = 600) => {
   if (typeof tabId !== 'number' || tabId < 0) return
   clearActiveDetectionTimer(tabId)
   const timer = setTimeout(() => {
@@ -68,12 +80,4 @@ export function scheduleActivePageDetection(tabId: number, delay = 600) {
     runActivePageDetection(tabId)
   }, delay)
   activeDetectionTimers.set(tabId, timer)
-}
-
-export function clearActiveDetectionTimer(tabId: number) {
-  const timer = activeDetectionTimers.get(tabId)
-  if (timer) {
-    clearTimeout(timer)
-    activeDetectionTimers.delete(tabId)
-  }
 }

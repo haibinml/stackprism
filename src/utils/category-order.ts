@@ -23,18 +23,18 @@ export const CATEGORY_ORDER: readonly string[] = [
   '其他库'
 ]
 
-export function categoryIndex(category: string): number {
+export const categoryIndex = (category: string): number => {
   const index = CATEGORY_ORDER.indexOf(category)
   return index === -1 ? CATEGORY_ORDER.length : index
 }
 
-export function confidenceRank(value: string): number {
+export const confidenceRank = (value: string): number => {
   if (value === '高') return 0
   if (value === '中') return 1
   return 2
 }
 
-export function confidenceClass(value: string): 'high' | 'medium' | 'low' {
+export const confidenceClass = (value: string): 'high' | 'medium' | 'low' => {
   if (value === '高') return 'high'
   if (value === '中') return 'medium'
   return 'low'

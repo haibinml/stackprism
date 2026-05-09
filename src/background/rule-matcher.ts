@@ -1,17 +1,16 @@
 const compiledRulePatternCache = new WeakMap<object, { source: unknown; compiled: RegExp[] }>()
 
-export function escapeRegExp(value: unknown): string {
-  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-}
+export const escapeRegExp = (value: unknown): string =>
+  String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
-export function compileRulePattern(pattern: string, rule: any): RegExp {
+export const compileRulePattern = (pattern: string, rule: any): RegExp => {
   if (rule?.matchType === 'keyword') {
     return new RegExp(escapeRegExp(pattern), 'i')
   }
   return new RegExp(pattern, 'i')
 }
 
-export function getCompiledRulePatterns(rule: any, patterns: unknown): RegExp[] {
+export const getCompiledRulePatterns = (rule: any, patterns: unknown): RegExp[] => {
   const sourcePatterns: any[] = Array.isArray(patterns) ? patterns : []
   if (!rule || typeof rule !== 'object') {
     return sourcePatterns.flatMap(pattern => {
@@ -39,7 +38,7 @@ export function getCompiledRulePatterns(rule: any, patterns: unknown): RegExp[] 
   return compiled
 }
 
-export function matchesCompiledRulePatterns(rule: any, text: string): boolean {
+export const matchesCompiledRulePatterns = (rule: any, text: string): boolean => {
   if (!rule || !Array.isArray(rule.patterns) || !rule.patterns.length) {
     return false
   }
@@ -53,7 +52,7 @@ export function matchesCompiledRulePatterns(rule: any, text: string): boolean {
   })
 }
 
-export function matchesHeaderPatterns(patterns: unknown, text: string, rule: any = {}): boolean {
+export const matchesHeaderPatterns = (patterns: unknown, text: string, rule: any = {}): boolean => {
   if (!Array.isArray(patterns) || !patterns.length) {
     return false
   }
@@ -63,7 +62,7 @@ export function matchesHeaderPatterns(patterns: unknown, text: string, rule: any
   })
 }
 
-export function matchesRuleTextHints(rule: any, contextOrText: any): boolean {
+export const matchesRuleTextHints = (rule: any, contextOrText: any): boolean => {
   if (!Array.isArray(rule.resourceHints) || !rule.resourceHints.length) {
     return true
   }
@@ -74,8 +73,8 @@ export function matchesRuleTextHints(rule: any, contextOrText: any): boolean {
   return rule.resourceHints.some((hint: string) => value.includes(String(hint || '').toLowerCase()))
 }
 
-export function createCollector(target: any[], defaultSource?: string) {
-  return function add(category: string, name: string, confidence: string, evidence?: string) {
+export const createCollector = (target: any[], defaultSource?: string) =>
+  (category: string, name: string, confidence: string, evidence?: string) => {
     target.push({
       category,
       name,
@@ -84,13 +83,10 @@ export function createCollector(target: any[], defaultSource?: string) {
       source: defaultSource
     })
   }
-}
 
-export function lower(value: unknown): string {
-  return String(value || '').toLowerCase()
-}
+export const lower = (value: unknown): string => String(value || '').toLowerCase()
 
-export function filterCustomRulesForTarget(rules: any[], target: string): any[] {
+export const filterCustomRulesForTarget = (rules: any[], target: string): any[] => {
   if (!Array.isArray(rules)) {
     return []
   }

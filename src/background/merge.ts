@@ -2,7 +2,119 @@ import { normalizeTechName } from '@/utils/tech-name'
 import { safeDecodeURIComponent } from '@/utils/url'
 import { cleanStringArray } from '@/utils/normalize-settings'
 
-export function mergeTechnologyRecords(items: any[]) {
+export const cleanWordPressThemeSlug = (value: unknown): string => {
+  const decoded = safeDecodeURIComponent(String(value || ''))
+    .replace(/\\/g, '/')
+    .replace(/['")<>]/g, '')
+    .trim()
+  if (!decoded || decoded.includes('/') || decoded.length > 90) return ''
+  return decoded
+}
+
+export const normalizeWordPressThemeSlug = (value: unknown): string =>
+  cleanWordPressThemeSlug(value).toLowerCase()
+
+export const strongerConfidence = (a: string, b: string) => {
+  const ranks: Record<string, number> = { 高: 3, 中: 2, 低: 1 }
+  return (ranks[b] || 1) > (ranks[a] || 1) ? b : a
+}
+
+export const shortHeaderUrl = (raw: unknown): string => {
+  try {
+    const url = new URL(String(raw))
+    return `${url.hostname}${url.pathname}`.slice(0, 120)
+  } catch {
+    return String(raw).slice(0, 120)
+  }
+}
+
+export const normalizeDynamicFallbackTechName = (name: unknown): string =>
+  String(name || '')
+    .toLowerCase()
+    .replace(/^疑似前端库:\s*/, '')
+    .replace(/(?:\.js|js)$/i, '')
+    .replace(/(?:[._-]pkgd)$/i, '')
+    .replace(/[^a-z0-9一-龥]+/g, '')
+
+export const isFrontendFallback = (item: any) =>
+  item?.category === '前端库' && /^疑似前端库:/i.test(String(item?.name || '').trim())
+
+const isWordPressThemeDirectoryFallbackEvidence = (evidenceText: string) =>
+  /(?:资源或源码路径包含|动态资源路径包含)/i.test(evidenceText) &&
+  /\/wp-content\/themes\//i.test(evidenceText)
+
+const extractWordPressStyleThemeSlug = (item: any) => {
+  if (String(item?.category || '') !== '主题 / 模板') return ''
+  const evidenceText = cleanStringArray(item?.evidence).join('\n')
+  if (item?.source !== '主题样式表' && !/WordPress style\.css 主题头/i.test(evidenceText)) return ''
+  const slug =
+    item.themeSlug ||
+    evidenceText.match(/目录:\s*([^，,\s]+)/)?.[1] ||
+    evidenceText.match(/\/wp-content\/themes\/([^/?#"' <>)]+)\/style\.css/i)?.[1]
+  return normalizeWordPressThemeSlug(slug)
+}
+
+const extractWordPressDirectoryThemeSlug = (item: any) => {
+  if (String(item?.category || '') !== '主题 / 模板') return ''
+  const nameMatch = String(item?.name || '').match(/^WordPress 主题:\s*(.+)$/i)
+  if (!nameMatch) return ''
+
+  const evidenceText = cleanStringArray(item?.evidence).join('\n')
+  if (!isWordPressThemeDirectoryFallbackEvidence(evidenceText)) return ''
+
+  const nameSlug = normalizeWordPressThemeSlug(nameMatch[1])
+  const evidenceSlug = normalizeWordPressThemeSlug(
+    evidenceText.match(/\/wp-content\/themes\/([^/?#"' <>)]+)/i)?.[1]
+  )
+  if (nameSlug && evidenceSlug && nameSlug !== evidenceSlug) return ''
+  return evidenceSlug || nameSlug
+}
+
+export const suppressFrontendFallbackDuplicates = (items: any[]) => {
+  if (!Array.isArray(items) || !items.length) return []
+
+  const knownNames = new Set(
+    items
+      .filter(item => item?.category === '前端库' && !isFrontendFallback(item))
+      .map(item => normalizeDynamicFallbackTechName(item.name))
+      .filter(Boolean)
+  )
+  if (!knownNames.size) return items
+
+  return items.filter(
+    item => !isFrontendFallback(item) || !knownNames.has(normalizeDynamicFallbackTechName(item.name))
+  )
+}
+
+export const suppressDuplicateWebsiteProgramCategories = (items: any[]) => {
+  if (!Array.isArray(items) || !items.length) return []
+
+  const websiteProgramNames = new Set(
+    items
+      .filter(item => item?.category === '网站程序')
+      .map(item => normalizeTechName(item.name))
+      .filter(Boolean)
+  )
+  if (!websiteProgramNames.size) return items
+
+  return items.filter(
+    item => item?.category !== 'CMS / 电商平台' || !websiteProgramNames.has(normalizeTechName(item.name))
+  )
+}
+
+export const suppressWordPressThemeDirectoryFallbacks = (items: any[]) => {
+  if (!Array.isArray(items) || !items.length) return []
+
+  const styleHeaderSlugs = new Set(items.map(extractWordPressStyleThemeSlug).filter(Boolean))
+  if (!styleHeaderSlugs.size) return items
+
+  return items.filter(item => {
+    const directorySlug = extractWordPressDirectoryThemeSlug(item)
+    return !directorySlug || !styleHeaderSlugs.has(directorySlug)
+  })
+}
+
+export const mergeTechnologyRecords = (items: any[]) => {
   const map = new Map<string, any>()
   for (const item of suppressDuplicateWebsiteProgramCategories(
     suppressWordPressThemeDirectoryFallbacks(suppressFrontendFallbackDuplicates(items))
@@ -21,113 +133,4 @@ export function mergeTechnologyRecords(items: any[]) {
     map.set(key, current)
   }
   return [...map.values()]
-}
-
-export function suppressFrontendFallbackDuplicates(items: any[]) {
-  if (!Array.isArray(items) || !items.length) return []
-
-  const knownNames = new Set(
-    items
-      .filter(item => item?.category === '前端库' && !isFrontendFallback(item))
-      .map(item => normalizeDynamicFallbackTechName(item.name))
-      .filter(Boolean)
-  )
-  if (!knownNames.size) return items
-
-  return items.filter(item => !isFrontendFallback(item) || !knownNames.has(normalizeDynamicFallbackTechName(item.name)))
-}
-
-export function isFrontendFallback(item: any) {
-  return item?.category === '前端库' && /^疑似前端库:/i.test(String(item?.name || '').trim())
-}
-
-export function suppressDuplicateWebsiteProgramCategories(items: any[]) {
-  if (!Array.isArray(items) || !items.length) return []
-
-  const websiteProgramNames = new Set(
-    items
-      .filter(item => item?.category === '网站程序')
-      .map(item => normalizeTechName(item.name))
-      .filter(Boolean)
-  )
-  if (!websiteProgramNames.size) return items
-
-  return items.filter(item => item?.category !== 'CMS / 电商平台' || !websiteProgramNames.has(normalizeTechName(item.name)))
-}
-
-export function suppressWordPressThemeDirectoryFallbacks(items: any[]) {
-  if (!Array.isArray(items) || !items.length) return []
-
-  const styleHeaderSlugs = new Set(items.map(extractWordPressStyleThemeSlug).filter(Boolean))
-  if (!styleHeaderSlugs.size) return items
-
-  return items.filter(item => {
-    const directorySlug = extractWordPressDirectoryThemeSlug(item)
-    return !directorySlug || !styleHeaderSlugs.has(directorySlug)
-  })
-}
-
-function extractWordPressStyleThemeSlug(item: any) {
-  if (String(item?.category || '') !== '主题 / 模板') return ''
-  const evidenceText = cleanStringArray(item?.evidence).join('\n')
-  if (item?.source !== '主题样式表' && !/WordPress style\.css 主题头/i.test(evidenceText)) return ''
-  const slug =
-    item.themeSlug ||
-    evidenceText.match(/目录:\s*([^，,\s]+)/)?.[1] ||
-    evidenceText.match(/\/wp-content\/themes\/([^/?#"' <>)]+)\/style\.css/i)?.[1]
-  return normalizeWordPressThemeSlug(slug)
-}
-
-function extractWordPressDirectoryThemeSlug(item: any) {
-  if (String(item?.category || '') !== '主题 / 模板') return ''
-  const nameMatch = String(item?.name || '').match(/^WordPress 主题:\s*(.+)$/i)
-  if (!nameMatch) return ''
-
-  const evidenceText = cleanStringArray(item?.evidence).join('\n')
-  if (!isWordPressThemeDirectoryFallbackEvidence(evidenceText)) return ''
-
-  const nameSlug = normalizeWordPressThemeSlug(nameMatch[1])
-  const evidenceSlug = normalizeWordPressThemeSlug(evidenceText.match(/\/wp-content\/themes\/([^/?#"' <>)]+)/i)?.[1])
-  if (nameSlug && evidenceSlug && nameSlug !== evidenceSlug) return ''
-  return evidenceSlug || nameSlug
-}
-
-function isWordPressThemeDirectoryFallbackEvidence(evidenceText: string) {
-  return /(?:资源或源码路径包含|动态资源路径包含)/i.test(evidenceText) && /\/wp-content\/themes\//i.test(evidenceText)
-}
-
-export function normalizeWordPressThemeSlug(value: unknown): string {
-  return cleanWordPressThemeSlug(value).toLowerCase()
-}
-
-export function cleanWordPressThemeSlug(value: unknown): string {
-  const decoded = safeDecodeURIComponent(String(value || ''))
-    .replace(/\\/g, '/')
-    .replace(/['")<>]/g, '')
-    .trim()
-  if (!decoded || decoded.includes('/') || decoded.length > 90) return ''
-  return decoded
-}
-
-export function strongerConfidence(a: string, b: string) {
-  const ranks: Record<string, number> = { 高: 3, 中: 2, 低: 1 }
-  return (ranks[b] || 1) > (ranks[a] || 1) ? b : a
-}
-
-export function shortHeaderUrl(raw: unknown): string {
-  try {
-    const url = new URL(String(raw))
-    return `${url.hostname}${url.pathname}`.slice(0, 120)
-  } catch {
-    return String(raw).slice(0, 120)
-  }
-}
-
-export function normalizeDynamicFallbackTechName(name: unknown): string {
-  return String(name || '')
-    .toLowerCase()
-    .replace(/^疑似前端库:\s*/, '')
-    .replace(/(?:\.js|js)$/i, '')
-    .replace(/(?:[._-]pkgd)$/i, '')
-    .replace(/[^a-z0-9一-龥]+/g, '')
 }

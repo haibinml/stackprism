@@ -8,7 +8,7 @@ export interface CorrectionContext {
   version?: string
 }
 
-export function buildCorrectionIssueUrl(tech: TechnologyRecord, ctx: CorrectionContext = {}): string {
+export const buildCorrectionIssueUrl = (tech: TechnologyRecord, ctx: CorrectionContext = {}): string => {
   const title = `识别纠正：${tech.name || '未知技术'}`
   const evidenceLines = tech.evidence?.length ? tech.evidence.slice(0, 8).map(item => `- ${item}`) : ['- 无']
 
@@ -47,7 +47,7 @@ export function buildCorrectionIssueUrl(tech: TechnologyRecord, ctx: CorrectionC
   return issueUrl.toString()
 }
 
-export function buildRuleContributionUrl(name?: string, category?: string): string {
+export const buildRuleContributionUrl = (name?: string, category?: string): string => {
   const trimmedName = (name ?? '').trim()
   const trimmedCategory = (category ?? '').trim()
   const title = trimmedName ? `规则贡献：${trimmedCategory ? `${trimmedCategory} / ` : ''}${trimmedName}` : '规则贡献：'

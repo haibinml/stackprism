@@ -213,18 +213,17 @@
     )
   )
 
-  function lines(value: string) {
+  const lines = (value: string) => {
     return String(value || '')
       .split(/\r?\n/)
       .map(line => line.trim())
       .filter(Boolean)
   }
 
-  function isPlainObject(value: unknown): boolean {
-    return Object.prototype.toString.call(value) === '[object Object]'
-  }
+  const isPlainObject = (value: unknown): boolean =>
+    Object.prototype.toString.call(value) === '[object Object]'
 
-  function showStatus(message: string, type: '' | 'ok' | 'error' = '') {
+  const showStatus = (message: string, type: '' | 'ok' | 'error' = '') => {
     status.message = message
     status.type = type
     if (statusTimer) clearTimeout(statusTimer)
@@ -236,13 +235,13 @@
     }
   }
 
-  function showValidationErrors(errors: string[]) {
+  const showValidationErrors = (errors: string[]) => {
     const visible = errors.slice(0, 6)
     const more = errors.length > visible.length ? `\n还有 ${errors.length - visible.length} 个问题，请先修正上面的问题再保存。` : ''
     showStatus(`规则语法检查未通过：\n${visible.join('\n')}${more}`, 'error')
   }
 
-  function validateRegexPatterns(rule: any, label = '规则') {
+  const validateRegexPatterns = (rule: any, label = '规则') => {
     if (rule.matchType === 'keyword') return ''
     for (const [index, pattern] of rule.patterns.entries()) {
       try {
@@ -254,7 +253,7 @@
     return ''
   }
 
-  function validateCustomRuleDetails(rule: any, label: string) {
+  const validateCustomRuleDetails = (rule: any, label: string) => {
     const errors: string[] = []
     const regexError = validateRegexPatterns(rule, label)
     if (regexError) errors.push(regexError)
@@ -281,7 +280,7 @@
     return errors
   }
 
-  function readTextField(source: any, field: string, label: string, errors: string[], options: any) {
+  const readTextField = (source: any, field: string, label: string, errors: string[], options: any) => {
     if (source[field] === undefined || source[field] === null || source[field] === '') {
       if (options.required) {
         errors.push(`${label} 缺少 ${options.displayName}。`)
@@ -303,7 +302,7 @@
     return value || options.defaultValue || ''
   }
 
-  function readUrlField(source: any, label: string, errors: string[]) {
+  const readUrlField = (source: any, label: string, errors: string[]) => {
     if (source.url === undefined || source.url === null || source.url === '') return ''
     if (typeof source.url !== 'string') {
       errors.push(`${label} 的官网 / 仓库 URL 必须是文字。`)
@@ -319,7 +318,7 @@
     return value
   }
 
-  function readEnumField(source: any, field: string, label: string, errors: string[], options: any) {
+  const readEnumField = (source: any, field: string, label: string, errors: string[], options: any) => {
     if (source[field] === undefined || source[field] === null || source[field] === '') return options.defaultValue
     if (typeof source[field] !== 'string') {
       errors.push(`${label} 的 ${options.displayName} 必须是文字。`)
@@ -333,7 +332,7 @@
     return value
   }
 
-  function readStringArrayField(source: any, field: string, label: string, errors: string[], options: any) {
+  const readStringArrayField = (source: any, field: string, label: string, errors: string[], options: any) => {
     if (source[field] === undefined || source[field] === null) return []
     if (!Array.isArray(source[field])) {
       errors.push(`${label} 的 ${options.displayName} 必须是数组，例如 ["wp-content/themes/my-theme"]。`)
@@ -362,7 +361,7 @@
     return values
   }
 
-  function normalizeCustomRuleFromRaw(rawRule: any, index: number, errors: string[]) {
+  const normalizeCustomRuleFromRaw = (rawRule: any, index: number, errors: string[]) => {
     const label = `第 ${index + 1} 条规则`
     const startCount = errors.length
     if (!isPlainObject(rawRule)) {
@@ -421,7 +420,7 @@
     return errors.length === startCount ? rule : null
   }
 
-  function validateCustomRulesPayload(value: unknown) {
+  const validateCustomRulesPayload = (value: unknown) => {
     const errors: string[] = []
     const rules: any[] = []
     if (!Array.isArray(value)) {
@@ -440,7 +439,7 @@
     return { errors, rules }
   }
 
-  async function loadSettings() {
+  const loadSettings = async () => {
     try {
       const stored = await chrome.storage.sync.get(SETTINGS_STORAGE_KEY)
       return normalizeSettings(stored[SETTINGS_STORAGE_KEY])
@@ -449,7 +448,7 @@
     }
   }
 
-  function syncFromSettings() {
+  const syncFromSettings = () => {
     const disabled = new Set(state.settings.disabledCategories)
     for (const cat of CATEGORY_ORDER) enabledCategories[cat] = !disabled.has(cat)
     disabledTechnologiesText.value = state.settings.disabledTechnologies.join('\n')
@@ -457,7 +456,7 @@
     rulesJsonText.value = JSON.stringify(state.settings.customRules, null, 2)
   }
 
-  function collectCategorySettings() {
+  const collectCategorySettings = () => {
     const disabled: string[] = []
     for (const cat of CATEGORY_ORDER) {
       if (!enabledCategories[cat]) disabled.push(cat)
@@ -465,12 +464,12 @@
     state.settings.disabledCategories = disabled
   }
 
-  function setAllCategories(value: boolean) {
+  const setAllCategories = (value: boolean) => {
     for (const cat of CATEGORY_ORDER) enabledCategories[cat] = value
     collectCategorySettings()
   }
 
-  function readRuleForm() {
+  const readRuleForm = () => {
     const rule = {
       name: form.name.trim(),
       category: form.category.trim() || '其他库',
@@ -512,11 +511,11 @@
     return cleanCustomRules([rule])[0]
   }
 
-  function syncRulesJson() {
+  const syncRulesJson = () => {
     rulesJsonText.value = JSON.stringify(state.settings.customRules, null, 2)
   }
 
-  function addRuleFromForm() {
+  const addRuleFromForm = () => {
     const rule = readRuleForm()
     if (!rule) return
     state.settings.customRules.push(rule)
@@ -525,7 +524,7 @@
     showStatus('规则已添加，记得保存设置。', 'ok')
   }
 
-  function updateRuleFromForm() {
+  const updateRuleFromForm = () => {
     if (state.editingIndex < 0 || state.editingIndex >= state.settings.customRules.length) {
       showStatus('当前没有正在编辑的规则。', 'error')
       return
@@ -538,7 +537,7 @@
     showStatus('规则已更新，记得保存设置。', 'ok')
   }
 
-  function fillRuleForm(rule: any, index: number) {
+  const fillRuleForm = (rule: any, index: number) => {
     state.editingIndex = index
     form.name = rule.name || ''
     form.category = rule.category || ''
@@ -552,7 +551,7 @@
     form.matchIn = rule.matchIn?.length ? [...rule.matchIn] : ['url', 'resources', 'html', 'headers', 'dynamic']
   }
 
-  function clearRuleForm() {
+  const clearRuleForm = () => {
     state.editingIndex = -1
     form.name = ''
     form.category = ''
@@ -566,12 +565,12 @@
     form.matchIn = ['url', 'resources', 'html', 'headers', 'dynamic']
   }
 
-  function deleteRule(index: number) {
+  const deleteRule = (index: number) => {
     state.settings.customRules.splice(index, 1)
     syncRulesJson()
   }
 
-  function parseRulesJsonTextarea() {
+  const parseRulesJsonTextarea = () => {
     try {
       const parsed = JSON.parse(rulesJsonText.value || '[]')
       const validation = validateCustomRulesPayload(parsed)
@@ -586,7 +585,7 @@
     }
   }
 
-  function importRulesJson() {
+  const importRulesJson = () => {
     const rules = parseRulesJsonTextarea()
     if (!rules) return
     state.settings.customRules = rules
@@ -594,14 +593,14 @@
     showStatus('规则 JSON 已导入，记得保存设置。', 'ok')
   }
 
-  function formatRulesJson() {
+  const formatRulesJson = () => {
     const rules = parseRulesJsonTextarea()
     if (!rules) return
     rulesJsonText.value = JSON.stringify(rules, null, 2)
     showStatus('规则 JSON 已格式化。', 'ok')
   }
 
-  async function saveSettings() {
+  const saveSettings = async () => {
     collectCategorySettings()
     const jsonRules = parseRulesJsonTextarea()
     if (!jsonRules) return
@@ -622,7 +621,7 @@
     }
   }
 
-  async function resetSettings() {
+  const resetSettings = async () => {
     if (!confirm('确定恢复默认设置？自定义规则和自定义 CSS 会被清空。')) return
     state.settings = defaultSettings()
     try {
@@ -636,15 +635,15 @@
     }
   }
 
-  function openHelp() {
+  const openHelp = () => {
     chrome.tabs.create({ url: chrome.runtime.getURL('src/ui/help/index.html') })
   }
 
-  function openContribute() {
+  const openContribute = () => {
     chrome.tabs.create({ url: buildRuleContributionUrl(form.name, form.category) })
   }
 
-  function openRepository(event: Event) {
+  const openRepository = (event: Event) => {
     event.preventDefault()
     chrome.tabs.create({ url: REPOSITORY_URL })
   }
