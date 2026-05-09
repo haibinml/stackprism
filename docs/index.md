@@ -45,10 +45,10 @@ StackPrism 是一个 Chrome MV3 扩展。打开任意网页，点击插件弹窗
 
 ## 怎么用
 
-- 第一次使用？看 [安装与启用](/guide/install)
-- 想添加自己的识别规则？看 [自定义规则](/config/custom-rules)
-- 想知道 28000 条规则怎么组织？看 [规则文件格式](/dev/rule-format)
-- 想给项目贡献规则？看 [贡献规则](/dev/contribute-rules)
+- 第一次使用？看 [安装与启用](/guide/install.md)
+- 想添加自己的识别规则？看 [自定义规则](/config/custom-rules.md)
+- 想知道 28000 条规则怎么组织？看 [规则文件格式](/dev/rule-format.md)
+- 想给项目贡献规则？看 [贡献规则](/dev/contribute-rules.md)
 
 ## 为什么
 

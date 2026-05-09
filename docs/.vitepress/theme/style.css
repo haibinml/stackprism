@@ -1,0 +1,137 @@
+/**
+ * VitePress 默认主题的 brand token 覆盖
+ * 走 --vp-c-brand-* 让 nav active / link / 按钮 / 进度条等全部跟随
+ * 浅色：teal 实色；暗色：cyan tint
+ */
+
+:root {
+  --vp-c-brand-1: #0f766e;
+  --vp-c-brand-2: #115e59;
+  --vp-c-brand-3: #134e4a;
+  --vp-c-brand-soft: rgba(15, 118, 110, 0.14);
+  --vp-c-brand-mute: rgba(15, 118, 110, 0.08);
+
+  /* nav / sidebar / footer 用这些品牌色派生 */
+  --vp-c-text-1: #1f2937;
+  --vp-c-text-2: #475569;
+  --vp-c-text-3: #64748b;
+
+  /* button: cta */
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-text: #ffffff;
+  --vp-button-brand-bg: var(--vp-c-brand-1);
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-hover-text: #ffffff;
+  --vp-button-brand-hover-bg: var(--vp-c-brand-2);
+  --vp-button-brand-active-border: transparent;
+  --vp-button-brand-active-text: #ffffff;
+  --vp-button-brand-active-bg: var(--vp-c-brand-3);
+
+  /* 首页 hero 文本渐变（标题"StackPrism"） */
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(120deg, #0f766e 30%, #14b8a6);
+
+  /* 首页 hero 图片背后的彩色光晕 */
+  --vp-home-hero-image-background-image: linear-gradient(-45deg, #0f766e 50%, #2dd4bf 50%);
+  --vp-home-hero-image-filter: blur(56px);
+
+  /* 自定义块（tip / warning / danger）的左侧条颜色跟着品牌色 */
+  --vp-custom-block-tip-border: transparent;
+  --vp-custom-block-tip-text: var(--vp-c-brand-2);
+  --vp-custom-block-tip-bg: var(--vp-c-brand-soft);
+
+  /* 代码块标题与 background */
+  --vp-code-tab-active-bar-color: var(--vp-c-brand-1);
+  --vp-code-tab-active-text-color: var(--vp-c-text-1);
+}
+
+.dark {
+  --vp-c-brand-1: #2dd4bf;
+  --vp-c-brand-2: #14b8a6;
+  --vp-c-brand-3: #0d9488;
+  --vp-c-brand-soft: rgba(45, 212, 191, 0.16);
+  --vp-c-brand-mute: rgba(45, 212, 191, 0.08);
+
+  --vp-c-text-1: #e2e8f0;
+  --vp-c-text-2: #cbd5e1;
+  --vp-c-text-3: #94a3b8;
+
+  --vp-home-hero-name-background: linear-gradient(120deg, #2dd4bf 30%, #5eead4);
+  --vp-home-hero-image-background-image: linear-gradient(-45deg, #2dd4bf 50%, #14b8a6 50%);
+  --vp-home-hero-image-filter: blur(64px);
+}
+
+@media (min-width: 640px) {
+  :root {
+    --vp-home-hero-image-filter: blur(72px);
+  }
+}
+
+@media (min-width: 960px) {
+  :root {
+    --vp-home-hero-image-filter: blur(96px);
+  }
+}
+
+/* 让 hero 图片漂浮：默认 svg 没有阴影/动效，加一个 idle 浮动 */
+.VPHomeHero .VPImage {
+  animation: hero-float 6s ease-in-out infinite;
+  filter: drop-shadow(0 18px 40px rgba(15, 118, 110, 0.3));
+}
+
+.dark .VPHomeHero .VPImage {
+  filter: drop-shadow(0 18px 40px rgba(45, 212, 191, 0.35));
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* feature 卡片：hover 抬升 + 边框跟随品牌色 */
+.VPFeature {
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.VPFeature:hover {
+  border-color: var(--vp-c-brand-2);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(15, 118, 110, 0.12);
+}
+
+.dark .VPFeature:hover {
+  box-shadow: 0 12px 32px rgba(45, 212, 191, 0.18);
+}
+
+/* 中文阅读：行高与字号微调 */
+:root {
+  --vp-layout-max-width: 1440px;
+}
+
+.VPDoc h1 {
+  letter-spacing: -0.02em;
+}
+
+.VPDoc h2 {
+  letter-spacing: -0.01em;
+}
+
+.VPDoc :not(pre) > code {
+  background: var(--vp-c-brand-mute);
+  color: var(--vp-c-brand-2);
+  font-size: 0.86em;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.dark .VPDoc :not(pre) > code {
+  color: var(--vp-c-brand-1);
+}
