@@ -570,6 +570,96 @@
           ]
         },
         {
+          "defaults": {
+            "kind": "产品引导 / 用户反馈",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Pendo",
+              "patterns": ["cdn\\.pendo\\.io/agent/static|app\\.pendo\\.io/(?:data|agent)|pendo\\.io/[^\\s\"'<>]*(?:agent|guide)"]
+            },
+            {
+              "name": "Appcues",
+              "patterns": ["fast\\.appcues\\.com|api\\.appcues\\.net|appcues\\.com/[^\\s\"'<>]*(?:sdk|embed|flow)"]
+            },
+            {
+              "name": "Userpilot",
+              "patterns": ["js\\.userpilot\\.io|api\\.userpilot\\.io|userpilot\\.io/[^\\s\"'<>]*(?:sdk|widget|script)"]
+            },
+            {
+              "name": "Chameleon Tours",
+              "patterns": ["fast\\.chameleon\\.io|chmln-cdn\\.com|chameleon\\.io/[^\\s\"'<>]*(?:messo|script|embed)"]
+            },
+            {
+              "name": "WalkMe",
+              "patterns": ["cdn\\.walkme\\.com/users|ec\\.walkme\\.com|walkme\\.com/[^\\s\"'<>]*(?:users|embed|walkme)"]
+            },
+            {
+              "name": "Whatfix",
+              "patterns": ["cdn\\.whatfix\\.com|whatfix\\.com/[^\\s\"'<>]*(?:prod|embed|widgets?)"]
+            },
+            {
+              "name": "UserGuiding",
+              "patterns": ["js\\.userguiding\\.com|static\\.userguiding\\.com|userguiding\\.com/[^\\s\"'<>]*(?:sdk|embed|resources)"]
+            },
+            {
+              "name": "Product Fruits",
+              "patterns": [
+                "app\\.productfruits\\.com/static|cdn\\.productfruits\\.com|productfruits\\.com/[^\\s\"'<>]*(?:static|widget|script)"
+              ]
+            },
+            {
+              "name": "Usetiful",
+              "patterns": ["js\\.usetiful\\.com|usetiful\\.com/dist/usetiful\\.js|usetiful\\.com/[^\\s\"'<>]*(?:embed|widget)"]
+            },
+            {
+              "name": "Userflow",
+              "patterns": ["js\\.userflow\\.com|beacon\\.userflow\\.com|userflow\\.com/[^\\s\"'<>]*(?:embed|sdk|js)"]
+            },
+            {
+              "name": "Userlane",
+              "patterns": ["cdn\\.userlane\\.com|api\\.userlane\\.com|userlane\\.com/[^\\s\"'<>]*(?:embed|widget|snippet)"]
+            },
+            {
+              "name": "Stonly",
+              "patterns": ["stonly\\.com/js/widget|cdn\\.stonly\\.com|stonly\\.com/[^\\s\"'<>]*(?:widget|embed)"]
+            },
+            {
+              "name": "CommandBar",
+              "patterns": ["static\\.commandbar\\.com|api\\.commandbar\\.com|commandbar\\.com/[^\\s\"'<>]*(?:latest|sdk|embed)"]
+            },
+            {
+              "name": "HelpHero",
+              "patterns": ["app\\.helphero\\.co/embed|static\\.helphero\\.co|helphero\\.co/[^\\s\"'<>]*(?:embed|widget)"]
+            },
+            {
+              "name": "UserVoice",
+              "patterns": ["widget\\.uservoice\\.com|cdn\\.uservoice\\.com|uservoice\\.com/[^\\s\"'<>]*(?:widget|embed|forums)"]
+            },
+            {
+              "name": "Canny",
+              "patterns": ["canny\\.io/sdk\\.js|cdn\\.canny\\.io|canny\\.io/[^\\s\"'<>]*(?:sdk|widget|changelog)"]
+            },
+            {
+              "name": "Beamer",
+              "patterns": ["app\\.getbeamer\\.com/js/beamer-embed\\.js|static\\.getbeamer\\.com|beamer\\.com/[^\\s\"'<>]*(?:embed|widget)"]
+            },
+            {
+              "name": "Headway",
+              "patterns": ["cdn\\.headwayapp\\.co/widget|headwayapp\\.co/[^\\s\"'<>]*(?:widget|changelog)"]
+            },
+            {
+              "name": "Frill",
+              "patterns": ["widget\\.frill\\.co|cdn\\.frill\\.co|frill\\.co/[^\\s\"'<>]*(?:widget|embed|changelog)"]
+            },
+            {
+              "name": "AnnounceKit",
+              "patterns": ["announcekit\\.app/widget|cdn\\.announcekit\\.app|announcekit\\.co/[^\\s\"'<>]*(?:widget|embed)"]
+            }
+          ]
+        },
+        {
           "name": "Algolia",
           "kind": "站内搜索",
           "patterns": ["algolia\\.net|algolianet\\.com|algolia\\.com|algoliasearch"],
