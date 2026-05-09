@@ -888,11 +888,6 @@
     user-select: none;
   }
 
-  .toggle-item input[type='checkbox'] {
-    accent-color: var(--accent);
-    cursor: pointer;
-  }
-
   /* two-column / rule-textareas */
   .two-column,
   .rule-textareas {
@@ -918,7 +913,6 @@
 
   input[type='text'],
   input[type='url'],
-  select,
   textarea {
     background: var(--panel);
     border: 1px solid var(--line);
@@ -931,6 +925,11 @@
     width: 100%;
   }
 
+  select {
+    font-size: 13px;
+    width: 100%;
+  }
+
   textarea {
     font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', monospace;
     font-size: 12px;
@@ -939,7 +938,6 @@
   }
 
   input:focus,
-  select:focus,
   textarea:focus {
     border-color: var(--accent);
     outline: none;
@@ -967,10 +965,6 @@
     display: inline-flex;
     font-size: 13px;
     gap: 6px;
-  }
-
-  .match-targets input[type='checkbox'] {
-    accent-color: var(--accent);
   }
 
   /* form-actions */

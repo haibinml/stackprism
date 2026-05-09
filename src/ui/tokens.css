@@ -95,6 +95,31 @@
 
 * {
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 4px;
+  transition: background 0.15s ease;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 body {
@@ -139,4 +164,100 @@ button.primary {
 button.primary:hover {
   background: var(--accent-dark);
   color: #ffffff;
+}
+
+input[type='checkbox'] {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--panel);
+  border: 1.5px solid var(--line);
+  border-radius: 3px;
+  cursor: pointer;
+  display: inline-block;
+  flex-shrink: 0;
+  height: 14px;
+  margin: 0;
+  position: relative;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+  vertical-align: middle;
+  width: 14px;
+}
+
+input[type='checkbox']:hover {
+  border-color: var(--accent);
+}
+
+input[type='checkbox']:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+input[type='checkbox']:checked::after {
+  animation: checkbox-pop 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  border: solid #ffffff;
+  border-width: 0 1.5px 1.5px 0;
+  content: '';
+  height: 7px;
+  left: 3.5px;
+  position: absolute;
+  top: 0.5px;
+  transform: rotate(45deg);
+  width: 4px;
+}
+
+input[type='checkbox']:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+@keyframes checkbox-pop {
+  0% {
+    opacity: 0;
+    transform: rotate(45deg) scale(0);
+  }
+  60% {
+    opacity: 1;
+    transform: rotate(45deg) scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(45deg) scale(1);
+  }
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--panel);
+  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) calc(50% - 1px),
+    calc(100% - 9px) calc(50% - 1px);
+  background-repeat: no-repeat;
+  background-size:
+    5px 5px,
+    5px 5px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text);
+  cursor: pointer;
+  padding: 7px 32px 7px 10px;
+  transition: border-color 0.15s ease;
+}
+
+select:hover {
+  background-image: linear-gradient(45deg, transparent 50%, var(--accent) 50%), linear-gradient(135deg, var(--accent) 50%, transparent 50%);
+  border-color: var(--accent);
+}
+
+select:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+select option {
+  background: var(--panel);
+  color: var(--text);
 }

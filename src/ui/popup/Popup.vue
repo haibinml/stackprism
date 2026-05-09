@@ -16,100 +16,108 @@
       </div>
     </header>
 
-    <section class="status" :class="{ error: status.isError }">{{ status.text }}</section>
+    <div v-if="!state.pageSupported" class="unsupported">
+      <h2>当前页面不支持检测</h2>
+      <p>{{ unsupportedReason }}</p>
+      <p class="unsupported-hint">在普通网页（http:// 或 https://）上重新打开扩展即可。</p>
+    </div>
 
-    <section class="summary" aria-label="检测概览">
-      <div>
-        <span>{{ totalCount }}</span>
-        <label>技术</label>
-      </div>
-      <div>
-        <span>{{ resourceCount }}</span>
-        <label>资源</label>
-      </div>
-      <div>
-        <span>{{ headerCount }}</span>
-        <label>响应头</label>
-      </div>
-    </section>
+    <template v-else>
+      <section v-if="status.text" class="status" :class="{ error: status.isError }">{{ status.text }}</section>
 
-    <nav class="tabs" aria-label="技术分类过滤">
-      <button
-        v-for="item in tabItems"
-        :key="item.category"
-        type="button"
-        :class="['tab', { active: state.activeCategory === item.category }]"
-        :aria-pressed="state.activeCategory === item.category"
-        @click="selectCategory(item.category)"
-      >
-        <span>{{ item.category }}</span>
-        <span class="tab-count">{{ item.count }}</span>
-      </button>
-    </nav>
-
-    <section class="sections">
-      <div v-if="!state.result?.technologies?.length" class="empty">
-        未检测到明确技术线索。可以刷新页面后再打开插件，以便捕获主文档响应头。
-      </div>
-      <div v-else-if="!filteredSections.length" class="empty">当前分类没有检测结果。</div>
-      <section v-for="group in filteredSections" :key="group.category" class="category">
-        <h2>
-          <span>{{ group.category }}</span>
-          <span class="count">{{ group.items.length }} 项</span>
-        </h2>
-        <article v-for="tech in group.items" :key="`${tech.name}|${tech.category}`" class="tech">
-          <div class="tech-head">
-            <span v-if="!tech.url && isFrontendFallback(tech)" class="tech-name">{{ tech.name }}</span>
-            <button
-              v-else
-              type="button"
-              class="tech-name tech-link"
-              :title="`打开 ${tech.name} 官网或仓库`"
-              @click="openTechnologyLink(tech)"
-            >
-              {{ tech.name }}
-            </button>
-            <span :class="['confidence', confidenceClass(tech.confidence)]">{{ tech.confidence }}置信度</span>
-          </div>
-          <ul v-if="tech.evidence?.length" class="evidence">
-            <li v-for="(ev, i) in tech.evidence.slice(0, 4)" :key="i">{{ ev }}</li>
-          </ul>
-          <div v-if="tech.sources?.length" class="source">来源：{{ tech.sources.join('、') }}</div>
-          <button type="button" class="correction-link" title="打开 GitHub 议题并自动填写这条识别结果" @click="openCorrectionIssue(tech)">
-            识别不准确，点击纠正
-          </button>
-        </article>
+      <section class="summary" aria-label="检测概览">
+        <div>
+          <span>{{ totalCount }}</span>
+          <label>技术</label>
+        </div>
+        <div>
+          <span>{{ resourceCount }}</span>
+          <label>资源</label>
+        </div>
+        <div>
+          <span>{{ headerCount }}</span>
+          <label>响应头</label>
+        </div>
       </section>
-    </section>
 
-    <section class="source-search" aria-label="网页源代码搜索">
-      <div class="panel-title">网页源代码搜索</div>
-      <div class="search-row">
-        <input v-model="search.query" type="search" placeholder="输入关键词或正则表达式" @keydown.enter="searchPageSourceFromPopup" />
-        <button type="button" @click="searchPageSourceFromPopup">搜索</button>
-      </div>
-      <div class="search-options">
-        <label>
-          <input v-model="search.caseSensitive" type="checkbox" />
-          区分大小写
-        </label>
-        <label>
-          <input v-model="search.wholeWord" type="checkbox" />
-          全字匹配
-        </label>
-        <label>
-          <input v-model="search.useRegex" type="checkbox" />
-          正则表达式
-        </label>
-      </div>
-      <div class="search-meta">{{ search.meta }}</div>
-      <pre class="search-output">{{ search.output }}</pre>
-    </section>
+      <nav class="tabs" aria-label="技术分类过滤">
+        <button
+          v-for="item in tabItems"
+          :key="item.category"
+          type="button"
+          :class="['tab', { active: state.activeCategory === item.category }]"
+          :aria-pressed="state.activeCategory === item.category"
+          @click="selectCategory(item.category)"
+        >
+          <span>{{ item.category }}</span>
+          <span class="tab-count">{{ item.count }}</span>
+        </button>
+      </nav>
 
-    <details class="raw-panel" @toggle="onRawPanelToggle">
-      <summary>原始线索</summary>
-      <pre>{{ rawOutputText }}</pre>
-    </details>
+      <section class="sections">
+        <div v-if="!state.result?.technologies?.length" class="empty">
+          未检测到明确技术线索。可以刷新页面后再打开插件，以便捕获主文档响应头。
+        </div>
+        <div v-else-if="!filteredSections.length" class="empty">当前分类没有检测结果。</div>
+        <section v-for="group in filteredSections" :key="group.category" class="category">
+          <h2>
+            <span>{{ group.category }}</span>
+            <span class="count">{{ group.items.length }} 项</span>
+          </h2>
+          <article v-for="tech in group.items" :key="`${tech.name}|${tech.category}`" class="tech">
+            <div class="tech-head">
+              <span v-if="!tech.url && isFrontendFallback(tech)" class="tech-name">{{ tech.name }}</span>
+              <button
+                v-else
+                type="button"
+                class="tech-name tech-link"
+                :title="`打开 ${tech.name} 官网或仓库`"
+                @click="openTechnologyLink(tech)"
+              >
+                {{ tech.name }}
+              </button>
+              <span :class="['confidence', confidenceClass(tech.confidence)]">{{ tech.confidence }}置信度</span>
+            </div>
+            <ul v-if="tech.evidence?.length" class="evidence">
+              <li v-for="(ev, i) in tech.evidence.slice(0, 4)" :key="i">{{ ev }}</li>
+            </ul>
+            <div v-if="tech.sources?.length" class="source">来源：{{ tech.sources.join('、') }}</div>
+            <button type="button" class="correction-link" title="打开 GitHub 议题并自动填写这条识别结果" @click="openCorrectionIssue(tech)">
+              识别不准确，点击纠正
+            </button>
+          </article>
+        </section>
+      </section>
+
+      <section class="source-search" aria-label="网页源代码搜索">
+        <div class="panel-title">网页源代码搜索</div>
+        <div class="search-row">
+          <input v-model="search.query" type="search" placeholder="输入关键词或正则表达式" @keydown.enter="searchPageSourceFromPopup" />
+          <button type="button" @click="searchPageSourceFromPopup">搜索</button>
+        </div>
+        <div class="search-options">
+          <label>
+            <input v-model="search.caseSensitive" type="checkbox" />
+            区分大小写
+          </label>
+          <label>
+            <input v-model="search.wholeWord" type="checkbox" />
+            全字匹配
+          </label>
+          <label>
+            <input v-model="search.useRegex" type="checkbox" />
+            正则表达式
+          </label>
+        </div>
+        <div class="search-meta">{{ search.meta }}</div>
+        <pre class="search-output">{{ search.output }}</pre>
+      </section>
+
+      <details class="raw-panel" @toggle="onRawPanelToggle">
+        <summary>原始线索</summary>
+        <pre>{{ rawOutputText }}</pre>
+      </details>
+    </template>
 
     <footer class="app-footer">
       <span>Copyright © 2026 StackPrism</span>
@@ -136,11 +144,13 @@
     activeCategory: FOCUS_CATEGORY as string,
     currentTabId: 0,
     settings: normalizeSettings(),
-    cacheRefreshTimer: 0
+    cacheRefreshTimer: 0,
+    pageSupported: true
   })
 
-  const status = reactive({ text: '正在读取后台缓存结果。', isError: false })
+  const status = reactive({ text: '', isError: false })
   const pageUrl = ref('正在检测当前标签页...')
+  const unsupportedReason = ref('')
   const version = ref('')
   const search = reactive({
     query: '',
@@ -300,30 +310,36 @@
       state.rawResult = null
       state.rawLoaded = false
       rawOutputText.value = RAW_PLACEHOLDER
-      setStatus(formatCachedResultStatus(result, response))
+      setStatus('')
       return
     }
 
     scheduleCachedResultRefresh(tabId, previousUpdatedAt, attempt + 1)
   }
 
-  const formatCachedResultStatus = (result: any, response: any) => {
-    const highCount = result.counts?.high ?? result.technologies.filter((tech: any) => tech.confidence === '高').length
-    const updatedAt = Number(response?.updatedAt || result.updatedAt || 0)
-    const age = updatedAt ? `，缓存更新于 ${formatAge(Date.now() - updatedAt)} 前` : ''
-    return `已显示后台缓存：发现 ${result.technologies.length} 项技术线索，其中 ${highCount} 项为高置信度${age}。点击"刷新"可重新检测。`
+  const checkPageSupport = (url: string): { supported: boolean; reason: string } => {
+    if (!url) return { supported: false, reason: '当前标签页还没有加载网页。' }
+    if (/^chrome:/i.test(url)) return { supported: false, reason: 'Chrome 浏览器内置页面无法注入检测脚本。' }
+    if (/^edge:/i.test(url)) return { supported: false, reason: 'Edge 浏览器内置页面无法注入检测脚本。' }
+    if (/^(brave|opera|vivaldi):/i.test(url)) return { supported: false, reason: '浏览器内置页面无法注入检测脚本。' }
+    if (/^chrome-extension:/i.test(url)) return { supported: false, reason: '扩展程序内部页面无法识别。' }
+    if (/^(moz-extension|safari-web-extension):/i.test(url)) return { supported: false, reason: '扩展程序内部页面无法识别。' }
+    if (/^about:/i.test(url)) return { supported: false, reason: '浏览器内部页面无法注入检测脚本。' }
+    if (/^view-source:/i.test(url)) return { supported: false, reason: '查看源码页面不支持检测。' }
+    if (/^(devtools|chrome-search|chrome-untrusted):/i.test(url)) return { supported: false, reason: '当前页面不支持检测。' }
+    return { supported: true, reason: '' }
   }
 
-  const formatAge = (ms: number) => {
-    const seconds = Math.max(0, Math.round(ms / 1000))
-    if (seconds < 60) return `${seconds} 秒`
-    const minutes = Math.round(seconds / 60)
-    if (minutes < 60) return `${minutes} 分钟`
-    return `${Math.round(minutes / 60)} 小时`
+  const markUnsupportedPage = (url: string, reason: string) => {
+    state.pageSupported = false
+    state.result = null
+    unsupportedReason.value = reason
+    pageUrl.value = url || '当前标签页'
+    setStatus('')
+    clearCacheRefreshTimer()
   }
 
   const loadCachedDetection = async () => {
-    setStatus('正在读取后台缓存结果。')
     state.result = null
     clearCacheRefreshTimer()
 
@@ -333,8 +349,16 @@
       return
     }
 
+    const support = checkPageSupport(tab.url || '')
+    if (!support.supported) {
+      markUnsupportedPage(tab.url || '', support.reason)
+      return
+    }
+
+    state.pageSupported = true
     pageUrl.value = tab.url || '当前标签页'
     state.currentTabId = tab.id
+    setStatus('正在读取后台缓存结果。')
 
     try {
       state.settings = state.settings || (await loadSettings())
@@ -353,20 +377,19 @@
       }
 
       if (response.stale) {
-        setStatus(`${formatCachedResultStatus(result, response)} 后台正在更新缓存，当前结果可先使用。`)
+        setStatus('后台正在更新缓存，当前结果可先使用。')
         requestBackgroundDetection(tab.id)
         scheduleCachedResultRefresh(tab.id, response.updatedAt || 0, 0)
         return
       }
 
-      setStatus(formatCachedResultStatus(result, response))
+      setStatus('')
     } catch (error: any) {
       showError(`读取后台缓存失败：${String(error?.message || error)}`)
     }
   }
 
   const runDetection = async ({ force = false } = {}) => {
-    setStatus(force ? '已请求后台重新检测，当前结果可先使用。' : '已请求后台检测。')
     clearCacheRefreshTimer()
 
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
@@ -374,6 +397,15 @@
       showError('无法读取当前标签页。')
       return
     }
+
+    const support = checkPageSupport(tab.url || '')
+    if (!support.supported) {
+      markUnsupportedPage(tab.url || '', support.reason)
+      return
+    }
+
+    state.pageSupported = true
+    setStatus(force ? '已请求后台重新检测，当前结果可先使用。' : '已请求后台检测。')
     pageUrl.value = tab.url || '当前标签页'
     state.currentTabId = tab.id
 
@@ -577,7 +609,7 @@
     state.rawResult = null
     state.rawLoaded = false
     rawOutputText.value = RAW_PLACEHOLDER
-    setStatus(formatCachedResultStatus(newPopup, { updatedAt: newPopup.sourceUpdatedAt }))
+    setStatus('')
   }
 
   onMounted(async () => {
@@ -958,6 +990,35 @@
     font-size: 13px;
     padding: 24px 12px;
     text-align: center;
+  }
+
+  /* unsupported：当前页面（chrome:// / 扩展页 / about:）无法注入检测脚本 */
+  .unsupported {
+    padding: 48px 24px 24px;
+    text-align: center;
+  }
+
+  .unsupported h2 {
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+    text-transform: none;
+  }
+
+  .unsupported p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .unsupported-hint {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 8px !important;
+    opacity: 0.75;
   }
 
   /* 源代码搜索 + 原始线索：合并视觉，使用区段标题 */
