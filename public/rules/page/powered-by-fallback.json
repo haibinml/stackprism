@@ -198,7 +198,126 @@
               "patterns": ["powered by next.js", "built with next.js", "built with nextjs"]
             },
             { "name": "Nuxt", "url": "https://nuxt.com", "patterns": ["powered by nuxt", "built with nuxt"] },
-            { "name": "SvelteKit", "url": "https://svelte.dev/docs/kit", "patterns": ["powered by sveltekit", "built with sveltekit"] }
+            { "name": "SvelteKit", "url": "https://svelte.dev/docs/kit", "patterns": ["powered by sveltekit", "built with sveltekit"] },
+            {
+              "name": "Astro Starlight",
+              "url": "https://starlight.astro.build",
+              "patterns": ["powered by starlight", "built with starlight"]
+            },
+            { "name": "Zola", "url": "https://www.getzola.org", "patterns": ["powered by zola", "built with zola"] },
+            { "name": "Middleman", "url": "https://middlemanapp.com", "patterns": ["powered by middleman", "built with middleman"] },
+            { "name": "Strapi", "url": "https://strapi.io", "patterns": ["powered by strapi"] },
+            { "name": "Directus", "url": "https://directus.io", "patterns": ["powered by directus"] },
+            { "name": "Payload CMS", "url": "https://payloadcms.com", "patterns": ["powered by payload cms", "powered by payloadcms"] },
+            { "name": "Keystone", "url": "https://keystonejs.com", "patterns": ["powered by keystone", "powered by keystonejs"] },
+            { "name": "Sanity", "url": "https://www.sanity.io", "patterns": ["powered by sanity"] },
+            { "name": "Contentful", "url": "https://www.contentful.com", "patterns": ["powered by contentful"] },
+            { "name": "Prismic", "url": "https://prismic.io", "patterns": ["powered by prismic"] },
+            { "name": "Storyblok", "url": "https://www.storyblok.com", "patterns": ["powered by storyblok"] },
+            { "name": "TinaCMS", "url": "https://tina.io", "patterns": ["powered by tinacms", "powered by tina cms"] },
+            { "name": "Outline", "url": "https://www.getoutline.com", "patterns": ["powered by outline"] },
+            { "name": "HedgeDoc", "url": "https://hedgedoc.org", "patterns": ["powered by hedgedoc"] },
+            { "name": "CodiMD", "url": "https://github.com/hackmdio/codimd", "patterns": ["powered by codimd"] },
+            { "name": "BlueSpice", "url": "https://bluespice.com", "patterns": ["powered by bluespice"] },
+            { "name": "Semantic MediaWiki", "url": "https://www.semantic-mediawiki.org", "patterns": ["powered by semantic mediawiki"] },
+            { "name": "Mastodon", "url": "https://joinmastodon.org", "patterns": ["powered by mastodon"] },
+            { "name": "Misskey", "url": "https://misskey-hub.net", "patterns": ["powered by misskey"] },
+            { "name": "Pleroma", "url": "https://pleroma.social", "patterns": ["powered by pleroma"] },
+            { "name": "Lemmy", "url": "https://join-lemmy.org", "patterns": ["powered by lemmy"] },
+            { "name": "PeerTube", "url": "https://joinpeertube.org", "patterns": ["powered by peertube"] },
+            { "name": "Funkwhale", "url": "https://funkwhale.audio", "patterns": ["powered by funkwhale"] },
+            { "name": "WriteFreely", "url": "https://writefreely.org", "patterns": ["powered by writefreely"] },
+            { "name": "Rocket.Chat", "url": "https://www.rocket.chat", "patterns": ["powered by rocket.chat", "powered by rocketchat"] },
+            { "name": "Mattermost", "url": "https://mattermost.com", "patterns": ["powered by mattermost"] },
+            { "name": "Zulip", "url": "https://zulip.com", "patterns": ["powered by zulip"] },
+            {
+              "name": "Matrix Synapse",
+              "url": "https://matrix-org.github.io/synapse",
+              "patterns": ["powered by matrix synapse", "powered by synapse"]
+            },
+            { "name": "LinkStack", "url": "https://linkstack.org", "patterns": ["powered by linkstack"] },
+            { "name": "LittleLink", "url": "https://littlelink.io", "patterns": ["powered by littlelink"] },
+            { "name": "YOURLS", "url": "https://yourls.org", "patterns": ["powered by yourls"] },
+            { "name": "FreshRSS", "url": "https://freshrss.org", "patterns": ["powered by freshrss"] },
+            { "name": "Miniflux", "url": "https://miniflux.app", "patterns": ["powered by miniflux"] },
+            { "name": "Wallabag", "url": "https://wallabag.org", "patterns": ["powered by wallabag"] },
+            { "name": "Shaarli", "url": "https://shaarli.readthedocs.io", "patterns": ["powered by shaarli"] },
+            { "name": "LimeSurvey", "url": "https://www.limesurvey.org", "patterns": ["powered by limesurvey"] },
+            { "name": "Formbricks", "url": "https://formbricks.com", "patterns": ["powered by formbricks"] },
+            { "name": "Appsmith", "url": "https://www.appsmith.com", "patterns": ["powered by appsmith"] },
+            { "name": "Budibase", "url": "https://budibase.com", "patterns": ["powered by budibase"] },
+            { "name": "NocoDB", "url": "https://www.nocodb.com", "patterns": ["powered by nocodb"] },
+            { "name": "Baserow", "url": "https://baserow.io", "patterns": ["powered by baserow"] },
+            { "name": "ToolJet", "url": "https://www.tooljet.com", "patterns": ["powered by tooljet"] },
+            { "name": "Ghostfolio", "url": "https://ghostfol.io", "patterns": ["powered by ghostfolio"] },
+            {
+              "name": "Firefly III",
+              "url": "https://www.firefly-iii.org",
+              "patterns": ["powered by firefly iii", "powered by firefly-iii"]
+            },
+            { "name": "Invoice Ninja", "url": "https://www.invoiceninja.com", "patterns": ["powered by invoice ninja"] },
+            {
+              "name": "Keycloak",
+              "category": "第三方登录 / OAuth",
+              "url": "https://www.keycloak.org",
+              "patterns": ["powered by keycloak"]
+            },
+            {
+              "name": "Authentik",
+              "category": "第三方登录 / OAuth",
+              "url": "https://goauthentik.io",
+              "patterns": ["powered by authentik"]
+            },
+            {
+              "name": "Authelia",
+              "category": "第三方登录 / OAuth",
+              "url": "https://www.authelia.com",
+              "patterns": ["powered by authelia"]
+            },
+            { "name": "Casdoor", "category": "第三方登录 / OAuth", "url": "https://casdoor.org", "patterns": ["powered by casdoor"] },
+            { "name": "Logto", "category": "第三方登录 / OAuth", "url": "https://logto.io", "patterns": ["powered by logto"] },
+            { "name": "Grafana", "category": "探针 / 监控", "url": "https://grafana.com", "patterns": ["powered by grafana"] },
+            { "name": "Prometheus", "category": "探针 / 监控", "url": "https://prometheus.io", "patterns": ["powered by prometheus"] },
+            {
+              "name": "Alertmanager",
+              "category": "探针 / 监控",
+              "url": "https://prometheus.io/docs/alerting/latest/alertmanager",
+              "patterns": ["powered by alertmanager"]
+            },
+            { "name": "Netdata", "category": "探针 / 监控", "url": "https://www.netdata.cloud", "patterns": ["powered by netdata"] },
+            { "name": "Kibana", "category": "探针 / 监控", "url": "https://www.elastic.co/kibana", "patterns": ["powered by kibana"] },
+            {
+              "name": "OpenSearch Dashboards",
+              "category": "探针 / 监控",
+              "url": "https://opensearch.org/docs/latest/dashboards/",
+              "patterns": ["powered by opensearch dashboards"]
+            },
+            { "name": "Metabase", "category": "探针 / 监控", "url": "https://www.metabase.com", "patterns": ["powered by metabase"] },
+            {
+              "name": "Apache Superset",
+              "category": "探针 / 监控",
+              "url": "https://superset.apache.org",
+              "patterns": ["powered by apache superset", "powered by superset"]
+            },
+            { "name": "Redash", "category": "探针 / 监控", "url": "https://redash.io", "patterns": ["powered by redash"] },
+            { "name": "Umami", "category": "统计 / 分析", "url": "https://umami.is", "patterns": ["powered by umami"] },
+            {
+              "name": "Plausible Analytics",
+              "category": "统计 / 分析",
+              "url": "https://plausible.io",
+              "patterns": ["powered by plausible"]
+            },
+            { "name": "Fathom Analytics", "category": "统计 / 分析", "url": "https://usefathom.com", "patterns": ["powered by fathom"] },
+            {
+              "name": "GoatCounter",
+              "category": "统计 / 分析",
+              "url": "https://www.goatcounter.com",
+              "patterns": ["powered by goatcounter"]
+            },
+            { "name": "PostHog", "category": "统计 / 分析", "url": "https://posthog.com", "patterns": ["powered by posthog"] },
+            { "name": "Ackee", "category": "统计 / 分析", "url": "https://ackee.electerious.com", "patterns": ["powered by ackee"] },
+            { "name": "Mautic", "category": "广告 / 营销", "url": "https://www.mautic.org", "patterns": ["powered by mautic"] },
+            { "name": "Listmonk", "category": "广告 / 营销", "url": "https://listmonk.app", "patterns": ["powered by listmonk"] }
           ]
         }
       ]
