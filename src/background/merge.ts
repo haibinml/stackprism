@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { normalizeTechName } from '@/utils/tech-name'
 import { safeDecodeURIComponent } from '@/utils/url'
 import { cleanStringArray } from '@/utils/normalize-settings'

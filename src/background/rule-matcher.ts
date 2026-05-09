@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 const compiledRulePatternCache = new WeakMap<object, { source: unknown; compiled: RegExp[] }>()
 
 export function escapeRegExp(value: unknown): string {

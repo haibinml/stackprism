@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { mergeTechnologyRecords } from './merge'
 import { compileRulePattern, createCollector, filterCustomRulesForTarget, lower, matchesHeaderPatterns } from './rule-matcher'
 

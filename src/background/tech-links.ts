@@ -1,6 +1,3 @@
-// @ts-nocheck
- 
-
 import { normalizeTechName } from '@/utils/tech-name'
 
 interface TechLinksData {

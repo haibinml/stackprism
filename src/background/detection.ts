@@ -1,13 +1,7 @@
-// @ts-nocheck
-
 import { augmentPageWithWordPressThemeStyles } from './wordpress'
 import { buildPopupCacheRecord, cleanPageDetectionRecord } from './popup-cache'
 import { clearBadge, getTabData, getTabSnapshot, updateBadgeForTab, writeTabData } from './tab-store'
-import {
-  buildEffectivePageRules,
-  loadDetectorSettings,
-  loadTechRules
-} from './detector-settings'
+import { buildEffectivePageRules, loadDetectorSettings, loadTechRules } from './detector-settings'
 
 const activeDetectionTimers = new Map<number, ReturnType<typeof setTimeout>>()
 
@@ -39,11 +33,7 @@ export async function runActivePageDetection(tabId: number) {
   if (typeof tabId !== 'number' || tabId < 0) return
 
   try {
-    const [data, rules, settings] = await Promise.all([
-      getTabData(tabId),
-      loadTechRules(),
-      loadDetectorSettings()
-    ])
+    const [data, rules, settings] = await Promise.all([getTabData(tabId), loadTechRules(), loadDetectorSettings()])
     const pageRules = buildEffectivePageRules(rules.page || {}, settings)
     await chrome.scripting.executeScript({
       target: { tabId },

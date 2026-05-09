@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 import { safeDecodeURIComponent } from '@/utils/url'
 import {
   mergeTechnologyRecords,

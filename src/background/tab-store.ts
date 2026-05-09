@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 const TAB_DATA_PREFIX = 'tab:'
 const POPUP_DATA_PREFIX = 'popup:'
 

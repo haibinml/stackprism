@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { loadStackPrismRules } from './rule-loader'
 import { normalizeSettings } from '@/utils/normalize-settings'
 

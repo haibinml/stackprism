@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { attachTechnologyLinks } from './tech-links'
 import { addStoredCustomHeaderRules } from './headers'
 import { getPopupCache, getTabData, getTabSnapshot, popupStorageKey, storageKey } from './tab-store'

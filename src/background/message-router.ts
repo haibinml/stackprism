@@ -1,16 +1,9 @@
-// @ts-nocheck
-
 import { getTechnologyUrl } from './tech-links'
 import { augmentPageWithWordPressThemeStyles, detectWordPressThemeStylesFromPage } from './wordpress'
 import { getTabData, getTabSnapshot } from './tab-store'
 import { queueDynamicSnapshot } from './dynamic-snapshot'
 import { addStoredCustomHeaderRules } from './headers'
-import {
-  buildPopupRawResult,
-  cleanPageDetectionRecord,
-  cleanTechnologyRecords,
-  getPopupResultResponse
-} from './popup-cache'
+import { buildPopupRawResult, cleanPageDetectionRecord, cleanTechnologyRecords, getPopupResultResponse } from './popup-cache'
 import { runActivePageDetection, saveTabDataAndBadge } from './detection'
 import { loadDetectorSettings } from './detector-settings'
 
@@ -44,9 +37,7 @@ export function registerMessageRouter() {
         return false
       }
       Promise.all([getTabData(tabId), loadDetectorSettings(), getTabSnapshot(tabId)])
-        .then(([data, settings, tab]) =>
-          buildPopupRawResult(addStoredCustomHeaderRules(data, settings), settings, tab)
-        )
+        .then(([data, settings, tab]) => buildPopupRawResult(addStoredCustomHeaderRules(data, settings), settings, tab))
         .then(data => sendResponse({ ok: true, data }))
         .catch(error => sendResponse({ ok: false, error: String(error) }))
       return true
