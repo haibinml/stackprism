@@ -266,6 +266,213 @@
             {
               "name": "ntfy",
               "patterns": ["<title>\\s*ntfy(?:\\s*</title>|\\s+-)", "ntfy[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "Paperless-ngx",
+              "patterns": [
+                "<title>\\s*Paperless(?:-ngx)?(?:\\s*</title>|\\s+-)",
+                "paperless(?:-ngx)?[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Papermerge",
+              "patterns": ["<title>\\s*Papermerge(?:\\s*</title>|\\s+-)", "papermerge[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Stirling PDF",
+              "patterns": [
+                "<title>\\s*Stirling(?:\\s+PDF)?(?:\\s*</title>|\\s+-)",
+                "stirling(?:-?pdf)?[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Docmost",
+              "patterns": ["<title>\\s*Docmost(?:\\s*</title>|\\s+-)", "docmost[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "CryptPad",
+              "patterns": ["<title>\\s*CryptPad(?:\\s*</title>|\\s+-)", "cryptpad[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "ONLYOFFICE Docs",
+              "patterns": [
+                "<title>\\s*ONLYOFFICE(?:\\s+Docs)?(?:\\s*</title>|\\s+-)",
+                "(?:^|/)web-apps/apps/(?:api|documenteditor|presentationeditor|spreadsheeteditor)(?:/|[?#]|$)"
+              ]
+            },
+            {
+              "name": "Collabora Online",
+              "patterns": ["<title>\\s*Collabora Online(?:\\s*</title>|\\s+-)", "(?:^|/)browser/[^\\s\"'<>]*/cool\\.html(?:[?#]|$)"]
+            },
+            {
+              "name": "Planka",
+              "patterns": ["<title>\\s*Planka(?:\\s*</title>|\\s+-)", "planka[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Focalboard",
+              "patterns": ["<title>\\s*Focalboard(?:\\s*</title>|\\s+-)", "focalboard[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "Vikunja",
+              "patterns": ["<title>\\s*Vikunja(?:\\s*</title>|\\s+-)", "vikunja[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Huly",
+              "patterns": ["<title>\\s*Huly(?:\\s*</title>|\\s+-)", "huly[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Linkwarden",
+              "patterns": ["<title>\\s*Linkwarden(?:\\s*</title>|\\s+-)", "linkwarden[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "linkding",
+              "patterns": ["<title>\\s*linkding(?:\\s*</title>|\\s+-)", "linkding[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "Shaarli",
+              "patterns": ["<title>\\s*Shaarli(?:\\s*</title>|\\s+-)", "shaarli[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "ArchiveBox",
+              "patterns": ["<title>\\s*ArchiveBox(?:\\s*</title>|\\s+-)", "archivebox[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Mealie",
+              "patterns": ["<title>\\s*Mealie(?:\\s*</title>|\\s+-)", "mealie[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Tandoor Recipes",
+              "patterns": [
+                "<title>\\s*Tandoor(?:\\s+Recipes)?(?:\\s*</title>|\\s+-)",
+                "tandoor[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Grocy",
+              "patterns": ["<title>\\s*Grocy(?:\\s*</title>|\\s+-)", "grocy[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Monica",
+              "confidence": "中",
+              "patterns": [
+                "<title>\\s*Monica(?:\\s*</title>|\\s+-\\s+Personal CRM)",
+                "monica[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Actual Budget",
+              "patterns": [
+                "<title>\\s*Actual Budget(?:\\s*</title>|\\s+-)",
+                "actual-(?:budget|server)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Firefly III",
+              "patterns": ["<title>\\s*Firefly III(?:\\s*</title>|\\s+-)", "firefly-iii[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Invoice Ninja",
+              "patterns": [
+                "<title>\\s*Invoice Ninja(?:\\s*</title>|\\s+-)",
+                "(?:invoice-ninja|invoiceninja)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Kimai",
+              "patterns": ["<title>\\s*Kimai(?:\\s*</title>|\\s+-)", "kimai[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Snipe-IT",
+              "patterns": [
+                "<title>\\s*Snipe-IT(?:\\s*</title>|\\s+-)",
+                "(?:snipe-it|snipeit)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Plex",
+              "confidence": "中",
+              "patterns": [
+                "<title>\\s*Plex(?:\\s*</title>|\\s+-)",
+                "(?:^|[\\/._-])plex(?:[\\/._-]|[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$))"
+              ]
+            },
+            {
+              "name": "Emby",
+              "patterns": ["<title>\\s*Emby(?:\\s*</title>|\\s+-)", "emby[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Jellyseerr",
+              "patterns": ["<title>\\s*Jellyseerr(?:\\s*</title>|\\s+-)", "jellyseerr[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Overseerr",
+              "patterns": ["<title>\\s*Overseerr(?:\\s*</title>|\\s+-)", "overseerr[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Komga",
+              "patterns": ["<title>\\s*Komga(?:\\s*</title>|\\s+-)", "komga[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Kavita",
+              "confidence": "中",
+              "patterns": ["<title>\\s*Kavita(?:\\s*</title>|\\s+-)", "kavita[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Calibre-Web",
+              "patterns": ["<title>\\s*Calibre-Web(?:\\s*</title>|\\s+-)", "calibre-web[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Tube Archivist",
+              "patterns": [
+                "<title>\\s*Tube Archivist(?:\\s*</title>|\\s+-)",
+                "(?:tube-archivist|tubearchivist)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Sonarr",
+              "patterns": ["<title>\\s*Sonarr(?:\\s*</title>|\\s+-)", "sonarr[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Radarr",
+              "patterns": ["<title>\\s*Radarr(?:\\s*</title>|\\s+-)", "radarr[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Lidarr",
+              "patterns": ["<title>\\s*Lidarr(?:\\s*</title>|\\s+-)", "lidarr[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Readarr",
+              "patterns": ["<title>\\s*Readarr(?:\\s*</title>|\\s+-)", "readarr[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Bazarr",
+              "patterns": ["<title>\\s*Bazarr(?:\\s*</title>|\\s+-)", "bazarr[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Prowlarr",
+              "patterns": ["<title>\\s*Prowlarr(?:\\s*</title>|\\s+-)", "prowlarr[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Jackett",
+              "patterns": ["<title>\\s*Jackett(?:\\s*</title>|\\s+-)", "jackett[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "qBittorrent Web UI",
+              "patterns": [
+                "<title>\\s*qBittorrent(?:\\s+Web\\s+UI)?(?:\\s*</title>|\\s+-)",
+                "qbittorrent[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Transmission Web",
+              "patterns": [
+                "<title>\\s*Transmission(?:\\s+Web\\s+Interface)?(?:\\s*</title>|\\s+-)",
+                "(?:^|/)transmission/web/(?:style|javascript|images)(?:/|[?#]|$)"
+              ]
+            },
+            {
+              "name": "SABnzbd",
+              "patterns": ["<title>\\s*SABnzbd(?:\\s*</title>|\\s+-)", "sabnzbd[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
             }
           ]
         }

@@ -364,6 +364,30 @@
           "patterns": ["wekan[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
+          "name": "Planka",
+          "kind": "项目管理 / 看板",
+          "resourceHints": ["planka"],
+          "patterns": ["planka[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+        },
+        {
+          "name": "Focalboard",
+          "kind": "项目管理 / 看板",
+          "resourceHints": ["focalboard"],
+          "patterns": ["focalboard[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+        },
+        {
+          "name": "Vikunja",
+          "kind": "任务管理",
+          "resourceHints": ["vikunja"],
+          "patterns": ["vikunja[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+        },
+        {
+          "name": "Huly",
+          "kind": "项目管理 / 团队协作",
+          "resourceHints": ["huly"],
+          "patterns": ["huly[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+        },
+        {
           "defaults": {
             "kind": "团队通讯"
           },
@@ -469,6 +493,241 @@
           "kind": "网盘 / 文件管理",
           "resourceHints": ["filerun"],
           "patterns": ["filerun[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+        },
+        {
+          "defaults": {
+            "kind": "文档 / 文件处理"
+          },
+          "rules": [
+            {
+              "name": "Paperless-ngx",
+              "resourceHints": ["paperless-ngx", "paperless"],
+              "patterns": ["paperless(?:-ngx)?[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Papermerge",
+              "resourceHints": ["papermerge"],
+              "patterns": ["papermerge[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Stirling PDF",
+              "resourceHints": ["stirling-pdf", "stirlingpdf"],
+              "patterns": ["stirling(?:-?pdf)?[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "ONLYOFFICE Docs",
+              "resourceHints": ["onlyoffice", "/web-apps/apps/"],
+              "patterns": [
+                "(?:^|/)web-apps/apps/(?:api|documenteditor|presentationeditor|spreadsheeteditor)(?:/|[?#]|$)",
+                "onlyoffice[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Collabora Online",
+              "resourceHints": ["cool.html", "collabora"],
+              "patterns": ["(?:^|/)browser/[^\\s\"'<>]*/cool\\.html(?:[?#]|$)", "collabora[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "CryptPad",
+              "resourceHints": ["cryptpad"],
+              "patterns": ["cryptpad[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Docmost",
+              "resourceHints": ["docmost"],
+              "patterns": ["docmost[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "kind": "书签 / 网页归档"
+          },
+          "rules": [
+            {
+              "name": "Linkwarden",
+              "resourceHints": ["linkwarden"],
+              "patterns": ["linkwarden[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "linkding",
+              "resourceHints": ["linkding"],
+              "patterns": ["linkding[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "Shaarli",
+              "resourceHints": ["shaarli"],
+              "patterns": ["shaarli[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "ArchiveBox",
+              "resourceHints": ["archivebox"],
+              "patterns": ["archivebox[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "kind": "生活 / 个人管理"
+          },
+          "rules": [
+            {
+              "name": "Mealie",
+              "resourceHints": ["mealie"],
+              "patterns": ["mealie[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Tandoor Recipes",
+              "resourceHints": ["tandoor", "recipes"],
+              "patterns": ["tandoor[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Grocy",
+              "resourceHints": ["grocy"],
+              "patterns": ["grocy[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Monica",
+              "confidence": "中",
+              "resourceHints": ["monica"],
+              "patterns": ["monica[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Actual Budget",
+              "confidence": "中",
+              "resourceHints": ["actual-budget", "actual-server"],
+              "patterns": ["actual-(?:budget|server)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Firefly III",
+              "resourceHints": ["firefly-iii"],
+              "patterns": ["firefly-iii[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Invoice Ninja",
+              "resourceHints": ["invoice-ninja", "invoiceninja"],
+              "patterns": ["(?:invoice-ninja|invoiceninja)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Kimai",
+              "resourceHints": ["kimai"],
+              "patterns": ["kimai[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Snipe-IT",
+              "resourceHints": ["snipe-it", "snipeit"],
+              "patterns": ["(?:snipe-it|snipeit)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "kind": "媒体服务器 / 媒体管理"
+          },
+          "rules": [
+            {
+              "name": "Plex",
+              "confidence": "中",
+              "resourceHints": ["plex"],
+              "patterns": ["(?:^|[\\/._-])plex(?:[\\/._-]|[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$))"]
+            },
+            {
+              "name": "Emby",
+              "resourceHints": ["emby"],
+              "patterns": ["emby[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Jellyseerr",
+              "resourceHints": ["jellyseerr"],
+              "patterns": ["jellyseerr[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Overseerr",
+              "resourceHints": ["overseerr"],
+              "patterns": ["overseerr[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Komga",
+              "resourceHints": ["komga"],
+              "patterns": ["komga[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Kavita",
+              "confidence": "中",
+              "resourceHints": ["kavita"],
+              "patterns": ["kavita[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Calibre-Web",
+              "resourceHints": ["calibre-web"],
+              "patterns": ["calibre-web[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Tube Archivist",
+              "resourceHints": ["tube-archivist", "tubearchivist"],
+              "patterns": ["(?:tube-archivist|tubearchivist)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "kind": "媒体自动化 / 下载管理"
+          },
+          "rules": [
+            {
+              "name": "Sonarr",
+              "resourceHints": ["sonarr"],
+              "patterns": ["sonarr[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Radarr",
+              "resourceHints": ["radarr"],
+              "patterns": ["radarr[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Lidarr",
+              "resourceHints": ["lidarr"],
+              "patterns": ["lidarr[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Readarr",
+              "resourceHints": ["readarr"],
+              "patterns": ["readarr[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Bazarr",
+              "resourceHints": ["bazarr"],
+              "patterns": ["bazarr[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Prowlarr",
+              "resourceHints": ["prowlarr"],
+              "patterns": ["prowlarr[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Jackett",
+              "resourceHints": ["jackett"],
+              "patterns": ["jackett[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "qBittorrent Web UI",
+              "resourceHints": ["qbittorrent"],
+              "patterns": ["qbittorrent[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "Transmission Web",
+              "resourceHints": ["transmission"],
+              "patterns": [
+                "(?:^|/)transmission/web/(?:style|javascript|images)(?:/|[?#]|$)",
+                "transmission[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "SABnzbd",
+              "resourceHints": ["sabnzbd"],
+              "patterns": ["sabnzbd[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            }
+          ]
         }
       ]
     },
