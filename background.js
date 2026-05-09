@@ -3,6 +3,7 @@ const MAX_API_RECORDS = 30
 const SETTINGS_STORAGE_KEY = 'stackPrismSettings'
 let techRulesPromise = null
 const activeDetectionTimers = new Map()
+const themeStyleFetchCache = new Map()
 
 importScripts('rule-loader.js', 'page-detector.js')
 
@@ -23,6 +24,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     Promise.all([getTabData(message.tabId), loadDetectorSettings()])
       .then(([data, settings]) => sendResponse({ ok: true, data: addStoredCustomHeaderRules(data, settings) }))
       .catch(error => sendResponse({ ok: false, error: String(error) }))
+    return true
+  }
+
+  if (message.type === 'GET_WORDPRESS_THEME_DETAILS') {
+    detectWordPressThemeStylesFromPage(message.page)
+      .then(technologies => sendResponse({ ok: true, technologies: cleanTechnologyRecords(technologies) }))
+      .catch(error => sendResponse({ ok: false, error: String(error), technologies: [] }))
     return true
   }
 
@@ -51,8 +59,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       return false
     }
     Promise.all([getTabData(tabId), loadDetectorSettings()])
-      .then(([data, settings]) => {
-        data.page = cleanPageDetectionRecord(message.page)
+      .then(async ([data, settings]) => {
+        const page = await augmentPageWithWordPressThemeStyles(message.page)
+        data.page = cleanPageDetectionRecord(page)
         data.updatedAt = Date.now()
         return saveTabDataAndBadge(tabId, data, settings)
       })
@@ -282,7 +291,8 @@ function cleanTechnologyRecords(items) {
       name: String(item?.name || '').slice(0, 160),
       confidence: ['高', '中', '低'].includes(item?.confidence) ? item.confidence : '中',
       evidence: cleanStringArray(item?.evidence).slice(0, 12),
-      source: String(item?.source || '页面扫描').slice(0, 80)
+      source: String(item?.source || '页面扫描').slice(0, 80),
+      url: cleanTechnologyUrl(item?.url)
     }))
     .filter(item => item.name)
     .slice(0, 400)
@@ -330,12 +340,301 @@ async function runActivePageDetection(tabId) {
     if (!page) {
       return
     }
-    data.page = cleanPageDetectionRecord(page)
+    const augmentedPage = await augmentPageWithWordPressThemeStyles(page)
+    data.page = cleanPageDetectionRecord(augmentedPage)
     data.updatedAt = Date.now()
     await saveTabDataAndBadge(tabId, data, settings)
   } catch {
     return
   }
+}
+
+async function augmentPageWithWordPressThemeStyles(page) {
+  const technologies = await detectWordPressThemeStylesFromPage(page)
+  if (!technologies.length) {
+    return page
+  }
+
+  return {
+    ...page,
+    technologies: mergeTechnologyRecords([...(page?.technologies || []), ...technologies])
+  }
+}
+
+async function detectWordPressThemeStylesFromPage(page) {
+  const requests = collectWordPressThemeStyleRequests(page).slice(0, 5)
+  if (!requests.length) {
+    return []
+  }
+
+  const results = await Promise.allSettled(
+    requests.map(async request => {
+      const cssText = await fetchWordPressThemeStyle(request.styleUrl)
+      const info = parseWordPressThemeHeader(cssText)
+      return info ? buildWordPressThemeTechnology(info, request) : null
+    })
+  )
+
+  return results
+    .filter(result => result.status === 'fulfilled' && result.value)
+    .map(result => result.value)
+}
+
+function collectWordPressThemeStyleRequests(page) {
+  const baseUrl = String(page?.url || '')
+  const rawUrls = []
+  const addUrl = value => {
+    if (typeof value === 'string' && value.trim()) {
+      rawUrls.push(value)
+    }
+  }
+  const addList = values => {
+    if (Array.isArray(values)) {
+      values.forEach(addUrl)
+    }
+  }
+
+  addUrl(baseUrl)
+  const resources = page?.resources || {}
+  for (const key of ['scripts', 'stylesheets', 'themeAssetUrls', 'dynamicResources', 'resourceTiming', 'images', 'all', 'resources', 'iframes']) {
+    addList(resources[key])
+  }
+  for (const key of ['scripts', 'stylesheets', 'resources', 'iframes']) {
+    addList(page?.[key])
+  }
+
+  const byStyleUrl = new Map()
+  for (const rawUrl of rawUrls) {
+    const request = extractWordPressThemeStyleRequest(rawUrl, baseUrl)
+    if (request && !byStyleUrl.has(request.styleUrl)) {
+      byStyleUrl.set(request.styleUrl, request)
+    }
+  }
+  return [...byStyleUrl.values()]
+}
+
+function extractWordPressThemeStyleRequest(rawUrl, baseUrl) {
+  const absoluteUrl = normalizeHttpUrl(rawUrl, baseUrl)
+  if (!absoluteUrl) {
+    return null
+  }
+
+  let parsed
+  try {
+    parsed = new URL(absoluteUrl)
+  } catch {
+    return null
+  }
+
+  const match = parsed.pathname.match(/\/wp-content\/themes\/([^/?#"' <>]+)(?:\/|$)/i)
+  if (!match) {
+    return null
+  }
+
+  const slug = cleanWordPressThemeSlug(match[1])
+  if (!slug) {
+    return null
+  }
+
+  const prefix = parsed.pathname.slice(0, match.index)
+  const styleUrl = new URL(`${prefix}/wp-content/themes/${match[1]}/style.css`, parsed.origin)
+  return { slug, styleUrl: styleUrl.toString() }
+}
+
+async function fetchWordPressThemeStyle(styleUrl) {
+  const cached = themeStyleFetchCache.get(styleUrl)
+  if (cached && cached.expiresAt > Date.now()) {
+    return cached.value
+  }
+
+  let value = ''
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), 3500)
+  try {
+    const response = await fetch(styleUrl, {
+      cache: 'force-cache',
+      credentials: 'omit',
+      redirect: 'follow',
+      signal: controller.signal
+    })
+    const contentType = response.headers.get('content-type') || ''
+    if (response.ok && isLikelyWordPressThemeStyleContentType(contentType)) {
+      value = await readResponseTextWithLimit(response, 65536)
+    }
+  } catch {
+    value = ''
+  } finally {
+    clearTimeout(timer)
+  }
+
+  rememberThemeStyleFetch(styleUrl, value)
+  return value
+}
+
+function rememberThemeStyleFetch(styleUrl, value) {
+  themeStyleFetchCache.set(styleUrl, {
+    expiresAt: Date.now() + 10 * 60 * 1000,
+    value
+  })
+  if (themeStyleFetchCache.size > 120) {
+    themeStyleFetchCache.delete(themeStyleFetchCache.keys().next().value)
+  }
+}
+
+function isLikelyWordPressThemeStyleContentType(contentType) {
+  if (!contentType) {
+    return true
+  }
+  return /(?:text\/css|text\/plain|application\/octet-stream|charset=)/i.test(contentType)
+}
+
+async function readResponseTextWithLimit(response, maxBytes) {
+  if (!response.body?.getReader) {
+    return (await response.text()).slice(0, maxBytes)
+  }
+
+  const reader = response.body.getReader()
+  const decoder = new TextDecoder()
+  let received = 0
+  let text = ''
+
+  try {
+    while (received < maxBytes) {
+      const { done, value } = await reader.read()
+      if (done) {
+        break
+      }
+      received += value.byteLength
+      text += decoder.decode(value, { stream: true })
+    }
+    text += decoder.decode()
+  } finally {
+    reader.cancel().catch(() => {})
+  }
+
+  return text.slice(0, maxBytes)
+}
+
+function parseWordPressThemeHeader(cssText) {
+  const sample = String(cssText || '').slice(0, 32768)
+  if (!sample) {
+    return null
+  }
+
+  const comment = sample.match(/\/\*[\s\S]*?\*\//)?.[0] || sample.slice(0, 8192)
+  const fields = {
+    'theme name': 'themeName',
+    'theme uri': 'themeUri',
+    author: 'author',
+    'author uri': 'authorUri',
+    description: 'description',
+    version: 'version',
+    template: 'template',
+    'text domain': 'textDomain',
+    tags: 'tags',
+    license: 'license',
+    'license uri': 'licenseUri',
+    'requires at least': 'requiresAtLeast',
+    'requires php': 'requiresPhp'
+  }
+  const info = {}
+
+  for (const rawLine of comment.split(/\r?\n/)) {
+    const line = rawLine
+      .replace(/^\s*\/\*+/, '')
+      .replace(/\*\/\s*$/, '')
+      .replace(/^\s*\*\s?/, '')
+      .trim()
+    const match = line.match(/^([A-Za-z][A-Za-z ]{1,40})\s*:\s*(.+)$/)
+    if (!match) {
+      continue
+    }
+    const key = fields[match[1].trim().toLowerCase()]
+    if (!key || info[key]) {
+      continue
+    }
+    const value = cleanWordPressThemeHeaderValue(match[2])
+    if (value) {
+      info[key] = value
+    }
+  }
+
+  return info.themeName ? info : null
+}
+
+function buildWordPressThemeTechnology(info, request) {
+  const evidence = [
+    `WordPress style.css 主题头：Theme Name: ${info.themeName}${info.version ? `，Version: ${info.version}` : ''}，目录: ${request.slug}`,
+    `样式表：${shortHeaderUrl(request.styleUrl)}`
+  ]
+  if (info.themeUri) {
+    evidence.push(`Theme URI: ${info.themeUri}`)
+  }
+  if (info.author) {
+    evidence.push(`Author: ${info.author}`)
+  }
+  if (info.template) {
+    evidence.push(`Template: ${info.template}`)
+  }
+  if (info.textDomain) {
+    evidence.push(`Text Domain: ${info.textDomain}`)
+  }
+
+  return {
+    category: '主题 / 模板',
+    name: `WordPress 主题: ${info.themeName}`.slice(0, 160),
+    confidence: '高',
+    evidence,
+    source: '主题样式表',
+    url: cleanTechnologyUrl(info.themeUri) || cleanTechnologyUrl(info.authorUri)
+  }
+}
+
+function normalizeHttpUrl(rawUrl, baseUrl = '') {
+  let value = String(rawUrl || '').trim()
+  if (!value || /^(?:data|blob|javascript|about|chrome|chrome-extension):/i.test(value)) {
+    return ''
+  }
+  if (!baseUrl && /^\/\//.test(value)) {
+    value = `https:${value}`
+  }
+  if (!baseUrl && /^www\./i.test(value)) {
+    value = `https://${value}`
+  }
+  try {
+    const url = baseUrl ? new URL(value, baseUrl) : new URL(value)
+    if (!/^https?:$/i.test(url.protocol)) {
+      return ''
+    }
+    url.hash = ''
+    return url.toString()
+  } catch {
+    return ''
+  }
+}
+
+function cleanTechnologyUrl(value) {
+  const url = normalizeHttpUrl(value)
+  return url.slice(0, 1000)
+}
+
+function cleanWordPressThemeSlug(value) {
+  const decoded = safeDecodeURIComponent(String(value || ''))
+    .replace(/\\/g, '/')
+    .replace(/['")<>]/g, '')
+    .trim()
+  if (!decoded || decoded.includes('/') || decoded.length > 90) {
+    return ''
+  }
+  return decoded
+}
+
+function cleanWordPressThemeHeaderValue(value) {
+  return String(value || '')
+    .replace(/[\u0000-\u001f\u007f]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 300)
 }
 
 function scheduleActivePageDetection(tabId, delay = 600) {
@@ -750,6 +1049,9 @@ function mergeTechnologyRecords(items) {
   for (const item of items) {
     const key = `${item.category}::${item.name}`.toLowerCase()
     const current = map.get(key) || { ...item, evidence: [] }
+    if (!current.url && item.url) {
+      current.url = item.url
+    }
     for (const evidence of item.evidence || []) {
       if (!current.evidence.includes(evidence)) {
         current.evidence.push(evidence)

@@ -228,6 +228,10 @@ async function runDetection() {
     ])
 
     const pageData = pageInjection?.[0]?.result || emptyPageResult(tab.url)
+    const themeTechnologies = await requestWordPressThemeDetails(pageData)
+    if (themeTechnologies.length) {
+      pageData.technologies = [...(pageData.technologies || []), ...themeTechnologies]
+    }
     const headerData = headerResponse?.ok ? headerResponse.data || {} : {}
     const result = combineResults(tab, pageData, headerData)
     state.result = result
@@ -243,6 +247,18 @@ async function runDetection() {
       generatedAt: new Date().toISOString()
     }
     document.getElementById('rawOutput').textContent = JSON.stringify(state.result, null, 2)
+  }
+}
+
+async function requestWordPressThemeDetails(pageData) {
+  try {
+    const response = await chrome.runtime.sendMessage({
+      type: 'GET_WORDPRESS_THEME_DETAILS',
+      page: pageData
+    })
+    return response?.ok && Array.isArray(response.technologies) ? response.technologies : []
+  } catch {
+    return []
   }
 }
 
@@ -416,7 +432,11 @@ function mergeTechnologies(items) {
       name: item.name,
       confidence: item.confidence || '低',
       evidence: [],
-      sources: new Set()
+      sources: new Set(),
+      url: item.url || ''
+    }
+    if (!current.url && item.url) {
+      current.url = item.url
     }
     current.confidence = strongerConfidence(current.confidence, item.confidence || '低')
     for (const evidence of item.evidence || []) {
