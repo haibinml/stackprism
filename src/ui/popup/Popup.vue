@@ -36,75 +36,103 @@
     <template v-else>
       <section v-if="status.text" class="status" :class="{ error: status.isError }">{{ status.text }}</section>
 
-      <section class="summary" aria-label="检测概览">
-        <div>
-          <span>{{ totalCount }}</span>
-          <label>技术</label>
-        </div>
-        <div>
-          <span>{{ resourceCount }}</span>
-          <label>资源</label>
-        </div>
-        <div>
-          <span>{{ headerCount }}</span>
-          <label>响应头</label>
-        </div>
-      </section>
+      <div v-if="isLoading" class="loading">
+        <Loader2 class="loading-spinner" :size="28" :stroke-width="1.8" />
+        <p>正在读取后台缓存...</p>
+      </div>
 
-      <nav class="tabs" aria-label="技术分类过滤">
-        <button
-          v-for="item in tabItems"
-          :key="item.category"
-          type="button"
-          :class="['tab', { active: state.activeCategory === item.category }]"
-          :aria-pressed="state.activeCategory === item.category"
-          @click="selectCategory(item.category)"
-        >
-          <span>{{ item.category }}</span>
-          <span class="tab-count">{{ item.count }}</span>
-        </button>
-      </nav>
-
-      <section class="sections">
-        <div v-if="!state.result?.technologies?.length" class="empty">
-          <SearchX class="empty-icon" :size="32" :stroke-width="1.5" />
-          <p>未检测到明确技术线索</p>
-          <p class="empty-hint">刷新页面后重新打开插件，以便捕获主文档响应头。</p>
-        </div>
-        <div v-else-if="!filteredSections.length" class="empty">
-          <Inbox class="empty-icon" :size="28" :stroke-width="1.5" />
-          <p>当前分类没有检测结果</p>
-        </div>
-        <section v-for="group in filteredSections" :key="group.category" class="category">
-          <h2>
-            <span>{{ group.category }}</span>
-            <span class="count">{{ group.items.length }} 项</span>
-          </h2>
-          <article v-for="tech in group.items" :key="`${tech.name}|${tech.category}`" class="tech">
-            <div class="tech-head">
-              <span v-if="!tech.url && isFrontendFallback(tech)" class="tech-name">{{ tech.name }}</span>
-              <button
-                v-else
-                type="button"
-                class="tech-name tech-link"
-                :title="`打开 ${tech.name} 官网或仓库`"
-                @click="openTechnologyLink(tech)"
-              >
-                <span>{{ tech.name }}</span>
-                <ExternalLink class="tech-link-icon" :size="12" :stroke-width="2" />
-              </button>
-              <span :class="['confidence', confidenceClass(tech.confidence)]">{{ tech.confidence }}置信度</span>
-            </div>
-            <ul v-if="tech.evidence?.length" class="evidence">
-              <li v-for="(ev, i) in tech.evidence.slice(0, 4)" :key="i">{{ ev }}</li>
-            </ul>
-            <div v-if="tech.sources?.length" class="source">来源：{{ tech.sources.join('、') }}</div>
-            <button type="button" class="correction-link" title="打开 GitHub 议题并自动填写这条识别结果" @click="openCorrectionIssue(tech)">
-              识别不准确，点击纠正
-            </button>
-          </article>
+      <template v-else>
+        <section class="summary" aria-label="检测概览">
+          <div>
+            <span>{{ animatedTotal }}</span>
+            <label>技术</label>
+          </div>
+          <div>
+            <span>{{ animatedResource }}</span>
+            <label>资源</label>
+          </div>
+          <div>
+            <span>{{ animatedHeader }}</span>
+            <label>响应头</label>
+          </div>
         </section>
-      </section>
+
+        <nav class="filter-bar" aria-label="技术分类过滤">
+          <div class="segment" role="tablist">
+            <button
+              type="button"
+              role="tab"
+              :class="['segment-btn', { active: state.activeCategory === FOCUS_CATEGORY }]"
+              :aria-selected="state.activeCategory === FOCUS_CATEGORY"
+              @click="selectCategory(FOCUS_CATEGORY)"
+            >
+              <span>重点</span>
+              <span class="segment-count">{{ focusCount }}</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              :class="['segment-btn', { active: state.activeCategory === '全部' }]"
+              :aria-selected="state.activeCategory === '全部'"
+              @click="selectCategory('全部')"
+            >
+              <span>全部</span>
+              <span class="segment-count">{{ totalCount }}</span>
+            </button>
+          </div>
+          <div class="filter-select">
+            <Select v-model="categoryFilterValue" :options="categoryFilterOptions" placeholder="选择分类" />
+          </div>
+        </nav>
+
+        <Transition name="sections-fade" mode="out-in">
+          <section :key="state.activeCategory + '|' + (state.result?.updatedAt || 0)" class="sections">
+            <div v-if="!state.result?.technologies?.length" class="empty">
+              <SearchX class="empty-icon" :size="32" :stroke-width="1.5" />
+              <p>未检测到明确技术线索</p>
+              <p class="empty-hint">刷新页面后重新打开插件，以便捕获主文档响应头。</p>
+            </div>
+            <div v-else-if="!filteredSections.length" class="empty">
+              <Inbox class="empty-icon" :size="28" :stroke-width="1.5" />
+              <p>当前分类没有检测结果</p>
+            </div>
+            <section v-for="group in filteredSections" :key="group.category" class="category">
+              <h2>
+                <span>{{ group.category }}</span>
+                <span class="count">{{ group.items.length }} 项</span>
+              </h2>
+              <article v-for="tech in group.items" :key="`${tech.name}|${tech.category}`" class="tech">
+                <div class="tech-head">
+                  <span v-if="!tech.url && isFrontendFallback(tech)" class="tech-name">{{ tech.name }}</span>
+                  <button
+                    v-else
+                    type="button"
+                    class="tech-name tech-link"
+                    :title="`打开 ${tech.name} 官网或仓库`"
+                    @click="openTechnologyLink(tech)"
+                  >
+                    <span>{{ tech.name }}</span>
+                    <ExternalLink class="tech-link-icon" :size="12" :stroke-width="2" />
+                  </button>
+                  <span :class="['confidence', confidenceClass(tech.confidence)]">{{ tech.confidence }}置信度</span>
+                </div>
+                <ul v-if="tech.evidence?.length" class="evidence">
+                  <li v-for="(ev, i) in tech.evidence.slice(0, 4)" :key="i">{{ ev }}</li>
+                </ul>
+                <div v-if="tech.sources?.length" class="source">来源：{{ tech.sources.join('、') }}</div>
+                <button
+                  type="button"
+                  class="correction-link"
+                  title="打开 GitHub 议题并自动填写这条识别结果"
+                  @click="openCorrectionIssue(tech)"
+                >
+                  识别不准确，点击纠正
+                </button>
+              </article>
+            </section>
+          </section>
+        </Transition>
+      </template>
 
       <section class="source-search" aria-label="网页源代码搜索">
         <div class="panel-title">网页源代码搜索</div>
@@ -144,8 +172,9 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, onBeforeUnmount, reactive, ref, computed } from 'vue'
-  import { Ban, Copy, ExternalLink, Inbox, Monitor, Moon, RefreshCw, SearchX, Settings2, Sun } from 'lucide-vue-next'
+  import { onMounted, onBeforeUnmount, reactive, ref, computed, watch, type Ref } from 'vue'
+  import { Ban, Copy, ExternalLink, Inbox, Loader2, Monitor, Moon, RefreshCw, SearchX, Settings2, Sun } from 'lucide-vue-next'
+  import Select from '@/ui/components/Select.vue'
   import { categoryIndex, confidenceClass, confidenceRank } from '@/utils/category-order'
   import { applyCustomCss } from '@/utils/apply-custom-css'
   import { normalizeSettings } from '@/utils/normalize-settings'
@@ -170,6 +199,7 @@
   const pageUrl = ref('正在检测当前标签页...')
   const unsupportedReason = ref('')
   const version = ref('')
+  const isLoading = ref(true)
   const search = reactive({
     query: '',
     caseSensitive: false,
@@ -208,6 +238,43 @@
   const totalCount = computed(() => state.result?.technologies?.length ?? 0)
   const resourceCount = computed(() => state.result?.resources?.total ?? 0)
 
+  const useAnimatedCounter = (target: Ref<number>, duration = 480) => {
+    const display = ref(target.value || 0)
+    let frame = 0
+    watch(target, newVal => {
+      const start = display.value
+      const end = Number(newVal) || 0
+      if (start === end) {
+        display.value = end
+        return
+      }
+      if (frame) cancelAnimationFrame(frame)
+      const startTime = performance.now()
+      const tick = (now: number) => {
+        const progress = Math.min((now - startTime) / duration, 1)
+        const eased = 1 - Math.pow(1 - progress, 3)
+        display.value = Math.round(start + (end - start) * eased)
+        if (progress < 1) {
+          frame = requestAnimationFrame(tick)
+        } else {
+          display.value = end
+          frame = 0
+        }
+      }
+      frame = requestAnimationFrame(tick)
+    })
+    return display
+  }
+
+  const animatedTotal = useAnimatedCounter(totalCount)
+  const animatedResource = useAnimatedCounter(resourceCount)
+  const animatedHeader = useAnimatedCounter(headerCount)
+
+  const focusCount = computed(() => {
+    if (!state.result?.technologies?.length) return 0
+    return getFocusTechnologies(state.result.technologies).length
+  })
+
   const groupedTechnologies = computed(() => {
     const result = state.result
     if (!result?.technologies) return {}
@@ -223,12 +290,24 @@
     if (!result?.technologies) return []
     const grouped = groupedTechnologies.value
     const categories = Object.keys(grouped).sort((a, b) => categoryIndex(a) - categoryIndex(b))
-    const focusCount = getFocusTechnologies(result.technologies).length
-    return [
-      { category: FOCUS_CATEGORY, count: focusCount },
-      { category: '全部', count: result.technologies.length },
-      ...categories.map(category => ({ category, count: grouped[category].length }))
-    ]
+    return categories.map(category => ({ category, count: grouped[category].length }))
+  })
+
+  const categoryFilterOptions = computed(() =>
+    tabItems.value.map(item => ({ value: item.category, label: `${item.category} · ${item.count}` }))
+  )
+
+  const categoryFilterValue = computed({
+    get: () => {
+      const cat = state.activeCategory
+      if (cat === FOCUS_CATEGORY || cat === '全部') return ''
+      return cat
+    },
+    set: value => {
+      if (value && value !== FOCUS_CATEGORY && value !== '全部') {
+        state.activeCategory = value
+      }
+    }
   })
 
   const filteredSections = computed(() => {
@@ -359,16 +438,19 @@
 
   const loadCachedDetection = async () => {
     state.result = null
+    isLoading.value = true
     clearCacheRefreshTimer()
 
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
     if (!tab || !tab.id) {
+      isLoading.value = false
       showError('无法读取当前标签页。')
       return
     }
 
     const support = checkPageSupport(tab.url || '')
     if (!support.supported) {
+      isLoading.value = false
       markUnsupportedPage(tab.url || '', support.reason)
       return
     }
@@ -376,7 +458,7 @@
     state.pageSupported = true
     pageUrl.value = tab.url || '当前标签页'
     state.currentTabId = tab.id
-    setStatus('正在读取后台缓存结果。')
+    setStatus('')
 
     try {
       state.settings = state.settings || (await loadSettings())
@@ -386,6 +468,7 @@
 
       state.result = result
       state.activeCategory = FOCUS_CATEGORY
+      isLoading.value = false
 
       if (!response.hasCache) {
         setStatus('还没有后台缓存，已请求后台检测；稍后会自动读取新结果，也可以点击"刷新"立即检测。')
@@ -403,6 +486,7 @@
 
       setStatus('')
     } catch (error: any) {
+      isLoading.value = false
       showError(`读取后台缓存失败：${String(error?.message || error)}`)
     }
   }
@@ -820,57 +904,109 @@
     font-size: 12px;
   }
 
-  /* tabs：底部下划线 + accent 文字（替代药丸全填充）*/
-  .tabs {
+  /* filter-bar：左侧 segment + 右侧分类下拉 */
+  .filter-bar {
+    align-items: center;
     border-bottom: 1px solid var(--line);
     display: flex;
-    gap: 2px;
+    gap: 12px;
     margin: 0 -4px 12px;
-    overflow-x: auto;
-    padding: 0 4px;
-    scrollbar-width: none;
+    padding: 0 4px 10px;
   }
 
-  .tabs::-webkit-scrollbar {
-    display: none;
+  .segment {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    display: inline-flex;
+    flex: 0 0 auto;
+    padding: 2px;
   }
 
-  .tab {
+  .segment-btn {
+    align-items: center;
     background: transparent;
     border: 0;
-    border-bottom: 2px solid transparent;
-    border-radius: 0;
+    border-radius: 4px;
     color: var(--muted);
     cursor: pointer;
-    flex: 0 0 auto;
+    display: inline-flex;
     font-size: 12px;
-    margin-bottom: -1px;
-    padding: 8px 10px;
+    gap: 6px;
+    padding: 4px 10px;
     transition:
-      color 0.15s ease,
-      border-color 0.15s ease;
-    white-space: nowrap;
+      background 0.15s ease,
+      color 0.15s ease;
   }
 
-  .tab:hover {
+  .segment-btn:hover:not(.active) {
     color: var(--text);
   }
 
-  .tab.active {
-    border-bottom-color: var(--accent);
+  .segment-btn.active {
+    background: var(--panel);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
     color: var(--accent);
     font-weight: 600;
   }
 
-  .tab-count {
+  .segment-count {
     color: var(--muted);
     font-size: 11px;
     font-variant-numeric: tabular-nums;
-    margin-left: 4px;
   }
 
-  .tab.active .tab-count {
+  .segment-btn.active .segment-count {
     color: var(--accent);
+  }
+
+  .filter-select {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  /* loading：spinner + 文字，等后台缓存返回时占位 */
+  .loading {
+    align-items: center;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    gap: 12px;
+    padding: 64px 24px 32px;
+  }
+
+  .loading p {
+    margin: 0;
+  }
+
+  .loading-spinner {
+    animation: spin 0.9s linear infinite;
+    color: var(--accent);
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* sections 切换淡入，从无→有数据 / 切分类时整体过渡 */
+  .sections-fade-enter-active,
+  .sections-fade-leave-active {
+    transition:
+      opacity 0.18s ease,
+      transform 0.18s ease;
+  }
+
+  .sections-fade-enter-from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  .sections-fade-leave-to {
+    opacity: 0;
+    transform: translateY(-2px);
   }
 
   /* sections：去 panel 化，标题 + 列表条目 */
@@ -902,9 +1038,13 @@
     text-transform: none;
   }
 
-  /* tech 列表条目化：hairline 分隔，hover 整行高亮 */
+  /* tech 列表条目化：hairline 分隔，hover 整行高亮
+     content-visibility: auto 让浏览器跳过屏幕外条目的 layout/paint，
+     contain-intrinsic-size 给屏幕外占位高度，列表很长时主线程压力锐减 */
   .tech {
     border-radius: 6px;
+    contain-intrinsic-size: 0 64px;
+    content-visibility: auto;
     padding: 8px 10px;
     transition: background 0.15s ease;
   }
