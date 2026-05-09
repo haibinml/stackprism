@@ -634,27 +634,30 @@ ${html}`
   }
 
   function matchJsonRule(rule, context) {
-    const globalName = shouldMatchTarget(rule, 'globals') ? (rule.globals || []).find(name => hasGlobal(name)) : null
+    const ruleResourceOnly = rule?.resourceOnly === true
+    const globalName = !ruleResourceOnly && shouldMatchTarget(rule, 'globals') ? (rule.globals || []).find(name => hasGlobal(name)) : null
     if (globalName) {
       return { confidence: '高', evidence: `存在 window.${globalName}` }
     }
 
-    const selector = shouldMatchTarget(rule, 'selectors') ? (rule.selectors || []).find(selectorText => hasSelector(selectorText)) : null
+    const selector = !ruleResourceOnly && shouldMatchTarget(rule, 'selectors') ? (rule.selectors || []).find(selectorText => hasSelector(selectorText)) : null
     if (selector) {
       return { confidence: '高', evidence: `DOM 匹配 ${selector}` }
     }
 
-    const classPrefix = (rule.classPrefixes || []).find(prefix => context.classes && hasClassPrefix(context.classes, prefix))
+    const classPrefix = !ruleResourceOnly
+      ? (rule.classPrefixes || []).find(prefix => context.classes && hasClassPrefix(context.classes, prefix))
+      : null
     if (classPrefix) {
       return { confidence: '高', evidence: `存在 ${classPrefix}* 类名` }
     }
 
-    const className = (rule.classNames || []).find(name => context.classes && context.classes[name] > 0)
+    const className = !ruleResourceOnly ? (rule.classNames || []).find(name => context.classes && context.classes[name] > 0) : null
     if (className) {
       return { confidence: '高', evidence: `存在 ${className} 类名` }
     }
 
-    const cssVariableMatch = matchCssVariables(rule, context.cssVariables)
+    const cssVariableMatch = ruleResourceOnly ? null : matchCssVariables(rule, context.cssVariables)
     if (cssVariableMatch) {
       return cssVariableMatch
     }
@@ -665,7 +668,7 @@ ${html}`
       if (resource) {
         return { confidence: context.resourceConfidence || '高', evidence: `资源 URL 匹配 ${shortUrl(resource)}` }
       }
-      if (!context.resourceOnly && shouldMatchTarget(rule, 'html') && pattern.test(context.text || '')) {
+      if (!ruleResourceOnly && !context.resourceOnly && shouldMatchTarget(rule, 'html') && pattern.test(context.text || '')) {
         return { confidence: rule.confidence || '中', evidence: '页面源码或资源索引包含规则特征' }
       }
     }
