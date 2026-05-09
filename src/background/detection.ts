@@ -1,5 +1,6 @@
 import { augmentPageWithWordPressThemeStyles } from './wordpress'
 import { buildPopupCacheRecord, cleanPageDetectionRecord } from './popup-cache'
+import { fetchMainHeadersFallback } from './headers'
 import { clearBadge, getTabData, getTabSnapshot, updateBadgeForTab, writeTabData } from './tab-store'
 import { buildEffectivePageRules, loadDetectorSettings, loadTechRules } from './detector-settings'
 
@@ -53,6 +54,12 @@ export const runActivePageDetection = async (tabId: number) => {
 
     const augmentedPage = await augmentPageWithWordPressThemeStyles(page)
     data.page = cleanPageDetectionRecord(augmentedPage)
+
+    if (!data.main) {
+      const fallback = await fetchMainHeadersFallback((page as any).url || '', rules.headers || {}, settings)
+      if (fallback) data.main = fallback
+    }
+
     data.updatedAt = Date.now()
     await saveTabDataAndBadge(tabId, data, settings)
   } catch {

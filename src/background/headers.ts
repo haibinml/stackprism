@@ -112,6 +112,32 @@ const detectFromHeaders = (headers: Record<string, string>, url: string, headerR
   return technologies
 }
 
+export const fetchMainHeadersFallback = async (url: string, headerRules: any, settings: any) => {
+  if (!url || !/^https?:/i.test(url)) return null
+  try {
+    let response = await fetch(url, { method: 'HEAD', credentials: 'omit', cache: 'no-store', redirect: 'follow' })
+    if (!response.ok && response.status !== 405 && response.status !== 0) {
+      response = await fetch(url, { method: 'GET', credentials: 'omit', cache: 'no-store', redirect: 'follow' })
+    }
+    const responseHeaders: Array<{ name: string; value: string }> = []
+    response.headers.forEach((value, name) => responseHeaders.push({ name, value }))
+    if (!responseHeaders.length) return null
+    return buildHeaderRecord(
+      {
+        url: response.url || url,
+        type: 'main_frame',
+        method: 'HEAD',
+        statusCode: response.status,
+        responseHeaders
+      },
+      headerRules,
+      settings
+    )
+  } catch {
+    return null
+  }
+}
+
 export const buildHeaderRecord = (details: any, headerRules: any, settings: any) => {
   const normalizedHeaders = normalizeHeaders(details.responseHeaders)
   const headers = pickHeaders(normalizedHeaders, headerRules.interestingHeaders || [])
