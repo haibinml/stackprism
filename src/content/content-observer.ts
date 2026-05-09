@@ -29,75 +29,91 @@
   let wrappedPushState = null
   let wrappedReplaceState = null
 
-  installContextInvalidationGuards()
-  if (!getRuntime()) {
-    stopObserver()
-    return
-  }
+  // ----- 底层 helper -----
 
-  try {
-    replacePreviousObserver()
-    registerCurrentObserver()
-    window.addEventListener('pagehide', stopObserver, { once: true })
-    collectStaticSnapshot()
-    installPerformanceObserver()
-    installMutationObserver()
-    installNavigationObserver()
-    scheduleSend()
-  } catch (error) {
-    if (!isExtensionContextInvalidated(error)) {
-      throw error
-    }
-    stopObserver({ keepErrorGuards: true })
-  }
-
-  function installContextInvalidationGuards() {
-    window.addEventListener('error', handleGlobalError)
-    window.addEventListener('unhandledrejection', handleUnhandledRejection)
-  }
-
-  function handleGlobalError(event) {
-    if (!isExtensionContextInvalidated(event.error || event.message)) {
-      return
-    }
-    event.preventDefault()
-    if (!getRuntime()) {
-      stopObserver({ keepErrorGuards: true })
+  const trimList = (list, max) => {
+    if (list.length > max) {
+      list.splice(0, list.length - max)
     }
   }
 
-  function handleUnhandledRejection(event) {
-    if (!isExtensionContextInvalidated(event.reason)) {
-      return
-    }
-    event.preventDefault()
-    if (!getRuntime()) {
-      stopObserver({ keepErrorGuards: true })
-    }
-  }
+  const isExtensionContextInvalidated = error => CONTEXT_INVALIDATED_PATTERN.test(String(error?.message || error))
 
-  function replacePreviousObserver() {
+  const getRuntimeLastError = () => {
     try {
-      const previous = window[OBSERVER_INSTANCE_KEY]
-      if (previous && typeof previous.stop === 'function') {
-        previous.stop()
+      return chrome?.runtime?.lastError || null
+    } catch (error) {
+      return error
+    }
+  }
+
+  const addUrl = (key, value) => {
+    if (!value) return false
+    const normalized = String(value)
+    if (!normalized || state[key].includes(normalized)) return false
+    state[key].push(normalized)
+    trimList(state[key], MAX_ITEMS)
+    return true
+  }
+
+  const addFeedLink = (href, type, title) => {
+    if (!href || state.feedLinks.some(link => link.href === href)) return false
+    state.feedLinks.push({ href, type, title })
+    trimList(state.feedLinks, 60)
+    return true
+  }
+
+  const addDomMarker = marker => {
+    if (!marker || state.domMarkers.includes(marker)) return false
+    state.domMarkers.push(marker)
+    trimList(state.domMarkers, MAX_DOM_MARKERS)
+    return true
+  }
+
+  // ----- 静态快照采集 -----
+
+  const collectScripts = root => {
+    for (const script of root.scripts || []) {
+      addUrl('scripts', script.src)
+      addUrl('resources', script.src)
+    }
+  }
+
+  const collectStylesheets = root => {
+    for (const link of root.querySelectorAll?.("link[rel~='stylesheet'], link[as='style']") || []) {
+      addUrl('stylesheets', link.href)
+      addUrl('resources', link.href)
+    }
+  }
+
+  const collectIframes = root => {
+    for (const frame of root.querySelectorAll?.('iframe[src]') || []) {
+      addUrl('iframes', frame.src)
+      addUrl('resources', frame.src)
+    }
+  }
+
+  const collectFeedLinks = root => {
+    for (const link of root.querySelectorAll?.("link[rel~='alternate']") || []) {
+      const href = link.href || link.getAttribute('href')
+      const type = String(link.type || '').toLowerCase()
+      if (href && /rss|atom|feed|json/.test(`${type} ${href}`.toLowerCase())) {
+        addFeedLink(href, type, link.title || '')
+      }
+    }
+  }
+
+  const collectPerformanceResources = () => {
+    try {
+      for (const entry of performance.getEntriesByType('resource')) {
+        addUrl('resources', entry.name)
       }
     } catch {
       return
     }
   }
 
-  function registerCurrentObserver() {
-    try {
-      window[OBSERVER_INSTANCE_KEY] = {
-        stop: stopObserver
-      }
-    } catch {
-      return
-    }
-  }
-
-  function collectStaticSnapshot() {
+  const collectStaticSnapshot = () => {
     collectScripts(document)
     collectStylesheets(document)
     collectIframes(document)
@@ -105,129 +121,9 @@
     collectPerformanceResources()
   }
 
-  function installPerformanceObserver() {
-    if (!('PerformanceObserver' in window)) {
-      return
-    }
-    try {
-      const observer = new PerformanceObserver(list => {
-        if (stopped) {
-          return
-        }
-        for (const entry of list.getEntries()) {
-          addUrl('resources', entry.name)
-          state.resourceCount += 1
-        }
-        scheduleSend()
-      })
-      performanceObserver = observer
-      observer.observe({ type: 'resource', buffered: true })
-    } catch {
-      collectPerformanceResources()
-    }
-  }
+  // ----- 元素动态采集 -----
 
-  function installMutationObserver() {
-    const root = document.documentElement || document
-    const observer = new MutationObserver(mutations => {
-      if (stopped) {
-        return
-      }
-      let changed = false
-      for (const mutation of mutations) {
-        for (const node of mutation.addedNodes) {
-          if (node.nodeType !== Node.ELEMENT_NODE) {
-            continue
-          }
-          state.mutationCount += 1
-          changed = collectFromElement(node) || changed
-        }
-      }
-      if (changed) {
-        state.updatedAt = Date.now()
-        scheduleSend()
-      }
-    })
-    mutationObserver = observer
-    observer.observe(root, { childList: true, subtree: true })
-  }
-
-  function installNavigationObserver() {
-    originalPushState = history.pushState
-    originalReplaceState = history.replaceState
-
-    wrappedPushState = function pushState(...args) {
-      const result = originalPushState.apply(this, args)
-      handleUrlChange()
-      return result
-    }
-    wrappedReplaceState = function replaceState(...args) {
-      const result = originalReplaceState.apply(this, args)
-      handleUrlChange()
-      return result
-    }
-    history.pushState = wrappedPushState
-    history.replaceState = wrappedReplaceState
-    window.addEventListener('popstate', handleUrlChange)
-    navigationInterval = window.setInterval(handleUrlChange, 1200)
-  }
-
-  function handleUrlChange() {
-    if (stopped) {
-      return
-    }
-    setTimeout(() => {
-      if (stopped) {
-        return
-      }
-      if (state.url !== location.href) {
-        state.url = location.href
-        state.title = document.title
-        collectStaticSnapshot()
-        addDomMarker(`route:${location.pathname}${location.search}`)
-        scheduleSend()
-      }
-    }, 60)
-  }
-
-  function collectFromElement(element) {
-    let changed = false
-    changed = collectElementIfRelevant(element) || changed
-    for (const node of element.querySelectorAll?.(
-      'script[src], link[href], iframe[src], [id], [class], [data-v-app], [ng-version], astro-island, astro-slot'
-    ) || []) {
-      changed = collectElementIfRelevant(node) || changed
-    }
-    return changed
-  }
-
-  function collectElementIfRelevant(element) {
-    const tagName = element.tagName?.toLowerCase()
-    let changed = false
-    if (tagName === 'script') {
-      changed = addUrl('scripts', element.src) || changed
-      changed = addUrl('resources', element.src) || changed
-    } else if (tagName === 'link') {
-      const href = element.href || element.getAttribute('href')
-      const rel = String(element.rel || element.getAttribute('rel') || '').toLowerCase()
-      const type = String(element.type || '').toLowerCase()
-      if (rel.includes('stylesheet') || element.as === 'style') {
-        changed = addUrl('stylesheets', href) || changed
-        changed = addUrl('resources', href) || changed
-      }
-      if (rel.includes('alternate') && /rss|atom|feed|json/.test(`${type} ${href}`.toLowerCase())) {
-        changed = addFeedLink(href, type, element.title || '') || changed
-      }
-    } else if (tagName === 'iframe') {
-      changed = addUrl('iframes', element.src) || changed
-      changed = addUrl('resources', element.src) || changed
-    }
-
-    changed = collectDomMarker(element) || changed
-    return changed
-  }
-
-  function collectDomMarker(element) {
+  const collectDomMarker = element => {
     const markers = []
     const id = element.id ? `#${element.id}` : ''
     const className = typeof element.className === 'string' ? element.className : element.getAttribute?.('class') || ''
@@ -254,94 +150,66 @@
     return changed
   }
 
-  function collectScripts(root) {
-    for (const script of root.scripts || []) {
-      addUrl('scripts', script.src)
-      addUrl('resources', script.src)
-    }
-  }
-
-  function collectStylesheets(root) {
-    for (const link of root.querySelectorAll?.("link[rel~='stylesheet'], link[as='style']") || []) {
-      addUrl('stylesheets', link.href)
-      addUrl('resources', link.href)
-    }
-  }
-
-  function collectIframes(root) {
-    for (const frame of root.querySelectorAll?.('iframe[src]') || []) {
-      addUrl('iframes', frame.src)
-      addUrl('resources', frame.src)
-    }
-  }
-
-  function collectFeedLinks(root) {
-    for (const link of root.querySelectorAll?.("link[rel~='alternate']") || []) {
-      const href = link.href || link.getAttribute('href')
-      const type = String(link.type || '').toLowerCase()
-      if (href && /rss|atom|feed|json/.test(`${type} ${href}`.toLowerCase())) {
-        addFeedLink(href, type, link.title || '')
+  const collectElementIfRelevant = element => {
+    const tagName = element.tagName?.toLowerCase()
+    let changed = false
+    if (tagName === 'script') {
+      changed = addUrl('scripts', element.src) || changed
+      changed = addUrl('resources', element.src) || changed
+    } else if (tagName === 'link') {
+      const href = element.href || element.getAttribute('href')
+      const rel = String(element.rel || element.getAttribute('rel') || '').toLowerCase()
+      const type = String(element.type || '').toLowerCase()
+      if (rel.includes('stylesheet') || element.as === 'style') {
+        changed = addUrl('stylesheets', href) || changed
+        changed = addUrl('resources', href) || changed
       }
+      if (rel.includes('alternate') && /rss|atom|feed|json/.test(`${type} ${href}`.toLowerCase())) {
+        changed = addFeedLink(href, type, element.title || '') || changed
+      }
+    } else if (tagName === 'iframe') {
+      changed = addUrl('iframes', element.src) || changed
+      changed = addUrl('resources', element.src) || changed
     }
+
+    changed = collectDomMarker(element) || changed
+    return changed
   }
 
-  function collectPerformanceResources() {
+  const collectFromElement = element => {
+    let changed = false
+    changed = collectElementIfRelevant(element) || changed
+    for (const node of element.querySelectorAll?.(
+      'script[src], link[href], iframe[src], [id], [class], [data-v-app], [ng-version], astro-island, astro-slot'
+    ) || []) {
+      changed = collectElementIfRelevant(node) || changed
+    }
+    return changed
+  }
+
+  // ----- 生命周期与发送（互相递归调用，运行时已就绪） -----
+
+  const getRuntime = () => {
     try {
-      for (const entry of performance.getEntriesByType('resource')) {
-        addUrl('resources', entry.name)
+      if (typeof chrome === 'undefined' || !chrome.runtime || !chrome.runtime.id || typeof chrome.runtime.sendMessage !== 'function') {
+        return null
       }
-    } catch {
-      return
+      return chrome.runtime
+    } catch (error) {
+      if (isExtensionContextInvalidated(error)) {
+        stopObserver({ keepErrorGuards: true })
+      }
+      return null
     }
   }
 
-  function addUrl(key, value) {
-    if (!value) {
-      return false
-    }
-    const normalized = String(value)
-    if (!normalized || state[key].includes(normalized)) {
-      return false
-    }
-    state[key].push(normalized)
-    trimList(state[key], MAX_ITEMS)
-    return true
-  }
-
-  function addFeedLink(href, type, title) {
-    if (!href || state.feedLinks.some(link => link.href === href)) {
-      return false
-    }
-    state.feedLinks.push({ href, type, title })
-    trimList(state.feedLinks, 60)
-    return true
-  }
-
-  function addDomMarker(marker) {
-    if (!marker || state.domMarkers.includes(marker)) {
-      return false
-    }
-    state.domMarkers.push(marker)
-    trimList(state.domMarkers, MAX_DOM_MARKERS)
-    return true
-  }
-
-  function trimList(list, max) {
-    if (list.length > max) {
-      list.splice(0, list.length - max)
+  const handleSendFailure = error => {
+    if (isExtensionContextInvalidated(error)) {
+      stopObserver({ keepErrorGuards: true })
     }
   }
 
-  function scheduleSend() {
-    if (stopped || !getRuntime()) {
-      stopObserver()
-      return
-    }
-    clearTimeout(sendTimer)
-    sendTimer = setTimeout(sendSnapshot, SEND_DELAY)
-  }
-
-  function sendSnapshot() {
+  const sendSnapshot = () => {
     const runtime = getRuntime()
     if (stopped || !runtime) {
       stopObserver()
@@ -370,39 +238,46 @@
     }
   }
 
-  function handleSendFailure(error) {
-    if (isExtensionContextInvalidated(error)) {
+  const scheduleSend = () => {
+    if (stopped || !getRuntime()) {
+      stopObserver()
+      return
+    }
+    clearTimeout(sendTimer)
+    sendTimer = setTimeout(sendSnapshot, SEND_DELAY)
+  }
+
+  const handleUrlChange = () => {
+    if (stopped) return
+    setTimeout(() => {
+      if (stopped) return
+      if (state.url !== location.href) {
+        state.url = location.href
+        state.title = document.title
+        collectStaticSnapshot()
+        addDomMarker(`route:${location.pathname}${location.search}`)
+        scheduleSend()
+      }
+    }, 60)
+  }
+
+  const handleGlobalError = event => {
+    if (!isExtensionContextInvalidated(event.error || event.message)) return
+    event.preventDefault()
+    if (!getRuntime()) {
       stopObserver({ keepErrorGuards: true })
     }
   }
 
-  function isExtensionContextInvalidated(error) {
-    return CONTEXT_INVALIDATED_PATTERN.test(String(error?.message || error))
-  }
-
-  function getRuntime() {
-    try {
-      if (typeof chrome === 'undefined' || !chrome.runtime || !chrome.runtime.id || typeof chrome.runtime.sendMessage !== 'function') {
-        return null
-      }
-      return chrome.runtime
-    } catch (error) {
-      if (isExtensionContextInvalidated(error)) {
-        stopObserver({ keepErrorGuards: true })
-      }
-      return null
+  const handleUnhandledRejection = event => {
+    if (!isExtensionContextInvalidated(event.reason)) return
+    event.preventDefault()
+    if (!getRuntime()) {
+      stopObserver({ keepErrorGuards: true })
     }
   }
 
-  function getRuntimeLastError() {
-    try {
-      return chrome?.runtime?.lastError || null
-    } catch (error) {
-      return error
-    }
-  }
-
-  function stopObserver(options = {}) {
+  const stopObserver = (options = {}) => {
     const keepErrorGuards = Boolean(options?.keepErrorGuards)
     stopped = true
     clearTimeout(sendTimer)
@@ -430,5 +305,116 @@
     } catch {
       return
     }
+  }
+
+  // ----- 安装观察器 -----
+
+  const replacePreviousObserver = () => {
+    try {
+      const previous = window[OBSERVER_INSTANCE_KEY]
+      if (previous && typeof previous.stop === 'function') {
+        previous.stop()
+      }
+    } catch {
+      return
+    }
+  }
+
+  const registerCurrentObserver = () => {
+    try {
+      window[OBSERVER_INSTANCE_KEY] = {
+        stop: stopObserver
+      }
+    } catch {
+      return
+    }
+  }
+
+  const installPerformanceObserver = () => {
+    if (!('PerformanceObserver' in window)) return
+    try {
+      const observer = new PerformanceObserver(list => {
+        if (stopped) return
+        for (const entry of list.getEntries()) {
+          addUrl('resources', entry.name)
+          state.resourceCount += 1
+        }
+        scheduleSend()
+      })
+      performanceObserver = observer
+      observer.observe({ type: 'resource', buffered: true })
+    } catch {
+      collectPerformanceResources()
+    }
+  }
+
+  const installMutationObserver = () => {
+    const root = document.documentElement || document
+    const observer = new MutationObserver(mutations => {
+      if (stopped) return
+      let changed = false
+      for (const mutation of mutations) {
+        for (const node of mutation.addedNodes) {
+          if (node.nodeType !== Node.ELEMENT_NODE) continue
+          state.mutationCount += 1
+          changed = collectFromElement(node) || changed
+        }
+      }
+      if (changed) {
+        state.updatedAt = Date.now()
+        scheduleSend()
+      }
+    })
+    mutationObserver = observer
+    observer.observe(root, { childList: true, subtree: true })
+  }
+
+  const installNavigationObserver = () => {
+    originalPushState = history.pushState
+    originalReplaceState = history.replaceState
+
+    wrappedPushState = function pushState(...args) {
+      const result = originalPushState.apply(this, args)
+      handleUrlChange()
+      return result
+    }
+    wrappedReplaceState = function replaceState(...args) {
+      const result = originalReplaceState.apply(this, args)
+      handleUrlChange()
+      return result
+    }
+    history.pushState = wrappedPushState
+    history.replaceState = wrappedReplaceState
+    window.addEventListener('popstate', handleUrlChange)
+    navigationInterval = window.setInterval(handleUrlChange, 1200)
+  }
+
+  const installContextInvalidationGuards = () => {
+    window.addEventListener('error', handleGlobalError)
+    window.addEventListener('unhandledrejection', handleUnhandledRejection)
+  }
+
+  // ----- 主程序 -----
+
+  installContextInvalidationGuards()
+  if (!getRuntime()) {
+    stopObserver()
+    return
+  }
+
+  try {
+    replacePreviousObserver()
+    registerCurrentObserver()
+    window.addEventListener('pagehide', stopObserver, { once: true })
+    collectStaticSnapshot()
+    installPerformanceObserver()
+    installMutationObserver()
+    installNavigationObserver()
+    scheduleSend()
+  } catch (error) {
+    if (!isExtensionContextInvalidated(error)) {
+      throw error
+    }
+    stopObserver({ keepErrorGuards: true })
   }
 })()
