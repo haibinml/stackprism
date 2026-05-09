@@ -500,7 +500,10 @@ ${html}`
       .replace(/\\/g, '/')
       .replace(/['")<>]/g, '')
       .trim()
-    if (!decoded || decoded.length > 90 || decoded.includes('/')) {
+    if (!decoded || decoded.length > 90 || decoded.includes('/') || /[*{}[\]]/.test(decoded)) {
+      return ''
+    }
+    if (!/[a-z0-9\u4e00-\u9fa5]/i.test(decoded)) {
       return ''
     }
     if (/^(?:assets?|static|public|dist|build|cache|css|js|img|images?|fonts?|vendor)$/i.test(decoded)) {
