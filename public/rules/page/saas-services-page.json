@@ -244,6 +244,83 @@
           "globals": ["_cio"]
         },
         {
+          "defaults": {
+            "kind": "隐私合规 / Cookie 同意",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "OneTrust",
+              "patterns": ["cdn\\.cookielaw\\.org|geolocation\\.onetrust\\.com|optanon\\.blob\\.core\\.windows\\.net"],
+              "globals": ["OneTrust", "Optanon"]
+            },
+            {
+              "name": "Cookiebot",
+              "patterns": ["consent\\.cookiebot\\.com/(?:uc|sdk|scripts?)[^\\s\"'<>]*\\.js|cookiebot\\.com[^\\s\"'<>]*/uc\\.js"],
+              "globals": ["Cookiebot"]
+            },
+            {
+              "name": "CookieYes",
+              "patterns": ["cdn-cookieyes\\.com/client_data/[^\\s\"'<>]*\\.js|cookieyes\\.com/client_data/[^\\s\"'<>]*\\.js"],
+              "globals": ["Cookieyes"]
+            },
+            {
+              "name": "iubenda",
+              "patterns": ["cdn\\.iubenda\\.com/(?:cs|iubenda)[^\\s\"'<>]*\\.js|iubenda\\.com[^\\s\"'<>]*/(?:cs|privacy)"],
+              "globals": ["_iub", "Iubenda"]
+            },
+            {
+              "name": "Didomi",
+              "patterns": ["sdk\\.privacy-center\\.org|notice\\.didomi\\.io|didomi\\.io[^\\s\"'<>]*/(?:sdk|notice)"],
+              "globals": ["Didomi"]
+            },
+            {
+              "name": "TrustArc",
+              "patterns": ["consent\\.trustarc\\.com|trustarc\\.com[^\\s\"'<>]*/(?:notice|consent)"],
+              "globals": ["truste"]
+            },
+            {
+              "name": "Quantcast Choice",
+              "patterns": ["quantcast\\.mgr\\.consensu\\.org|cmp\\.quantcast\\.com|choice\\.quantcast\\.com"]
+            },
+            {
+              "name": "Termly",
+              "patterns": [
+                "app\\.termly\\.io/(?:embed|resource-blocker)[^\\s\"'<>]*\\.js|termly\\.io[^\\s\"'<>]*/(?:embed|resource-blocker)"
+              ]
+            },
+            {
+              "name": "Osano",
+              "patterns": ["cmp\\.osano\\.com|osano\\.com[^\\s\"'<>]*/(?:cmp|consent)"],
+              "globals": ["Osano"]
+            },
+            {
+              "name": "Usercentrics CMP",
+              "patterns": ["app\\.usercentrics\\.eu/browser-ui|privacy-proxy\\.usercentrics\\.eu|usercentrics\\.eu[^\\s\"'<>]*/browser-ui"],
+              "globals": ["UC_UI", "usercentrics"]
+            },
+            {
+              "name": "Sourcepoint CMP",
+              "patterns": ["cdn\\.privacy-mgmt\\.com|sourcepoint\\.mgr\\.consensu\\.org|sp-prod\\.net"]
+            },
+            {
+              "name": "Ketch",
+              "patterns": ["global\\.ketchcdn\\.com|cdn\\.ketchjs\\.com|ketch\\.com[^\\s\"'<>]*/(?:sdk|consent)"],
+              "globals": ["ketch"]
+            },
+            {
+              "name": "Axeptio",
+              "patterns": ["static\\.axept\\.io/sdk\\.js|axeptio\\.eu[^\\s\"'<>]*/sdk"],
+              "globals": ["axeptioSettings"]
+            },
+            {
+              "name": "Civic Cookie Control",
+              "patterns": ["cc\\.cdn\\.civiccomputing\\.com|civiccomputing\\.com[^\\s\"'<>]*/cookie-control"],
+              "globals": ["CookieControl"]
+            }
+          ]
+        },
+        {
           "name": "OneSignal",
           "kind": "消息推送",
           "patterns": ["onesignal\\.com|onesignalcdn\\.com|onesignal-sdk"],
