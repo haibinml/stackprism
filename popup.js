@@ -701,7 +701,7 @@ function extractWordPressDirectoryThemeSlug(item) {
   }
 
   const evidenceText = cleanStringArray(item?.evidence).join('\n')
-  if (!/资源或源码路径包含/i.test(evidenceText) || !/\/wp-content\/themes\//i.test(evidenceText)) {
+  if (!isWordPressThemeDirectoryFallbackEvidence(evidenceText)) {
     return ''
   }
 
@@ -711,6 +711,10 @@ function extractWordPressDirectoryThemeSlug(item) {
     return ''
   }
   return evidenceSlug || nameSlug
+}
+
+function isWordPressThemeDirectoryFallbackEvidence(evidenceText) {
+  return /(?:资源或源码路径包含|动态资源路径包含)/i.test(evidenceText) && /\/wp-content\/themes\//i.test(evidenceText)
 }
 
 function normalizeWordPressThemeSlug(value) {
