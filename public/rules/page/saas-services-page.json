@@ -245,6 +245,106 @@
         },
         {
           "defaults": {
+            "kind": "营销自动化 / 获客",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Iterable",
+              "patterns": ["static\\.iterable\\.com|js\\.iterable\\.com|iterable\\.com/[^\\s\"'<>]*(?:analytics|tracking|embed)"]
+            },
+            {
+              "name": "Attentive",
+              "patterns": ["cdn\\.attn\\.tv|creatives\\.attn\\.tv|attentivemobile\\.com/[^\\s\"'<>]*(?:sdk|tag|script)"]
+            },
+            {
+              "name": "Postscript",
+              "patterns": ["sdk\\.postscript\\.io|cdn\\.postscript\\.io|postscript\\.io/[^\\s\"'<>]*(?:sdk|widget|popup)"]
+            },
+            {
+              "name": "Sendlane",
+              "patterns": ["popups\\.sendlane\\.com|cdn\\.sendlane\\.com|sendlane\\.com/[^\\s\"'<>]*(?:js|popup|forms)"]
+            },
+            {
+              "name": "Omnisend Marketing",
+              "patterns": ["omnisnippet1\\.com|omnisrc\\.com|omnisend\\.com/[^\\s\"'<>]*(?:inshop|snippet|forms)"]
+            },
+            {
+              "name": "ActiveCampaign Tracking",
+              "patterns": ["trackcmp\\.net|activehosted\\.com/f/embed|activecampaign\\.com/[^\\s\"'<>]*(?:embed|tracking)"]
+            },
+            {
+              "name": "Drip Marketing",
+              "patterns": ["tag\\.getdrip\\.com|cdn\\.getdrip\\.com|getdrip\\.com/[^\\s\"'<>]*(?:forms|tracking|widget)"]
+            },
+            {
+              "name": "Kit Forms",
+              "patterns": ["f\\.convertkit\\.com|cdn\\.convertkit\\.com|app\\.convertkit\\.com/[^\\s\"'<>]*(?:forms|landing_pages)"]
+            },
+            {
+              "name": "MailerLite Forms",
+              "patterns": ["assets\\.mailerlite\\.com|static\\.mailerlite\\.com|mailerlite\\.com/[^\\s\"'<>]*(?:webforms|universal|embed)"]
+            },
+            {
+              "name": "Brevo Tracking",
+              "patterns": ["sibautomation\\.com|sibforms\\.com|sendinblue\\.com/[^\\s\"'<>]*(?:automation|forms|tracker)"]
+            },
+            {
+              "name": "Privy Popups",
+              "patterns": ["cdn\\.privy\\.com|d3bbh1b55jpyk\\.cloudfront\\.net|privy\\.com/[^\\s\"'<>]*(?:assets|widget|popup)"]
+            },
+            {
+              "name": "Justuno",
+              "patterns": ["cdn\\.justuno\\.com|cdn\\.jst\\.ai|justuno\\.com/[^\\s\"'<>]*(?:embed|assets|widget)"]
+            },
+            {
+              "name": "Wisepops",
+              "patterns": ["wisepops\\.net|cdn\\.wisepops\\.com|wisepops\\.com/[^\\s\"'<>]*(?:scripts|embed|tag)"]
+            },
+            {
+              "name": "OptiMonk",
+              "patterns": ["cdn\\.optimonk\\.com|optimonk\\.com/[^\\s\"'<>]*(?:public|embed|script)"]
+            },
+            {
+              "name": "Sleeknote",
+              "patterns": [
+                "sleeknotecustomerscripts\\.sleeknote\\.com|scripts\\.sleeknote\\.com|sleeknote\\.com/[^\\s\"'<>]*(?:snippet|script)"
+              ]
+            },
+            {
+              "name": "Yieldify",
+              "patterns": ["app\\.yieldify\\.com|assets\\.yieldify\\.com|yieldify\\.com/[^\\s\"'<>]*(?:js|tag|assets)"]
+            },
+            {
+              "name": "Salesfire",
+              "patterns": ["assets\\.salesfire\\.co\\.uk|cdn\\.salesfire\\.co\\.uk|salesfire\\.co\\.uk/[^\\s\"'<>]*(?:js|widgets|scripts)"]
+            },
+            {
+              "name": "Personyze",
+              "patterns": ["personyze\\.com/[^\\s\"'<>]*(?:script|tracker|widget)|cdn\\.personyze\\.com"]
+            },
+            {
+              "name": "Insider Web Personalization",
+              "patterns": [
+                "hit\\.useinsider\\.com|image\\.useinsider\\.com|f\\.useinsider\\.com|useinsider\\.com/[^\\s\"'<>]*(?:tag|web-sdk|personalization)"
+              ]
+            },
+            {
+              "name": "Emarsys Web Extend",
+              "patterns": ["cdn\\.emarsys\\.net|webextend\\.emarsys\\.net|scarabresearch\\.com/js"]
+            },
+            {
+              "name": "Ometria",
+              "patterns": ["cdn\\.ometria\\.com|api\\.ometria\\.com|ometria\\.com/[^\\s\"'<>]*(?:javascript|tracking|forms)"]
+            },
+            {
+              "name": "Bluecore",
+              "patterns": ["js\\.bluecore\\.com|cdn\\.bluecore\\.com|api\\.bluecore\\.com|bluecore\\.com/[^\\s\"'<>]*(?:tracking|scripts)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "隐私合规 / Cookie 同意",
             "matchIn": ["resources"]
           },
