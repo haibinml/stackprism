@@ -30,3 +30,5 @@
 `page/drupal-modules.json` 和 `page/drupal-themes.json` 是根据 Drupal.org 公开项目接口补充的模块和主题规则，识别 `/modules/contrib/{machine}/`、`/modules/custom/{machine}/`、`/themes/contrib/{machine}/`、`/themes/custom/{machine}/` 等资源路径。规则只匹配资源 URL，并使用 `resourceHints` 快速跳过无关资源。
 
 `page/php-ecosystem-assets.json` 是人工维护的 PHP 生态资源路径规则，覆盖 Laravel 生态包、Symfony Bundle、PHP CMS、电商、后台、网盘、Webmail、数据库管理等常见系统。该文件里的批量规则默认使用 `resourceOnly: true` 和 `resourceHints`，只根据页面实际加载过的资源 URL 判断，不把整页源码当作大范围关键词池。
+
+`page/backend-enterprise-assets.json` 是人工维护的后端与企业系统资源路径规则，覆盖 Java/.NET/Python/Ruby 生态框架、企业 CMS、SSO、DevOps、代码托管、制品仓库、数据平台和监控面板。该文件同样优先使用产品专属资源路径、`resourceOnly: true` 和 `resourceHints`，减少通用目录名造成的误报。

@@ -29,6 +29,7 @@
     "page/backend-hints.json",
     "page/backend-hints-page.json",
     "page/php-ecosystem-assets.json",
+    "page/backend-enterprise-assets.json",
     "page/third-party-logins.json",
     "page/payment-systems.json",
     "page/saas-services.json",
