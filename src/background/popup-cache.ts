@@ -9,6 +9,7 @@ import {
   suppressFrontendFallbackDuplicates,
   suppressWordPressThemeDirectoryFallbacks
 } from './merge'
+import { loadDetectorSettings } from './detector-settings'
 import { categoryIndex, confidenceRank } from '@/utils/category-order'
 import { cleanTechnologyUrl } from '@/utils/url'
 import { cleanStringArray } from '@/utils/normalize-settings'
@@ -16,13 +17,6 @@ import { normalizeTechName } from '@/utils/tech-name'
 
 export const POPUP_CACHE_STALE_MS = 2 * 60 * 1000
 const POPUP_CACHE_SCHEMA_VERSION = 1
-
-// loadDetectorSettings is provided by index.ts to avoid circular import
-let loadDetectorSettings: () => Promise<any> = async () => ({})
-
-export function configurePopupCache(deps: { loadDetectorSettings: () => Promise<any> }) {
-  loadDetectorSettings = deps.loadDetectorSettings
-}
 
 export async function getPopupResultResponse(tabId: number) {
   const [storedPopup, settings] = await Promise.all([getPopupCache(tabId), loadDetectorSettings()])

@@ -13,6 +13,12 @@ import {
   matchesRuleTextHints
 } from './rule-matcher'
 import { getTabData } from './tab-store'
+import { saveTabDataAndBadge, scheduleActivePageDetection } from './detection'
+import {
+  buildEffectivePageRules,
+  loadDetectorSettings,
+  loadTechRules
+} from './detector-settings'
 
 const DYNAMIC_FAST_LOOKUP_RULE_MIN = 1000
 const DYNAMIC_SNAPSHOT_PROCESS_DELAY = 800
@@ -20,26 +26,6 @@ const DYNAMIC_SNAPSHOT_PROCESS_DELAY = 800
 const dynamicFrontendRuleKeyCache = new WeakMap()
 const pendingDynamicSnapshots = new Map()
 const dynamicSnapshotTimers = new Map()
-
-let scheduleActivePageDetection: (tabId: number, delay?: number) => void = () => {}
-let saveTabDataAndBadge: (tabId: number, data: any, settings: any) => Promise<void> = async () => {}
-let loadTechRules: () => Promise<any> = async () => ({})
-let loadDetectorSettings: () => Promise<any> = async () => ({})
-let buildEffectivePageRules: (pageRules: any, settings: any) => any = (p) => p
-
-export function configureDynamicSnapshot(deps: {
-  scheduleActivePageDetection: (tabId: number, delay?: number) => void
-  saveTabDataAndBadge: (tabId: number, data: any, settings: any) => Promise<void>
-  loadTechRules: () => Promise<any>
-  loadDetectorSettings: () => Promise<any>
-  buildEffectivePageRules: (pageRules: any, settings: any) => any
-}) {
-  scheduleActivePageDetection = deps.scheduleActivePageDetection
-  saveTabDataAndBadge = deps.saveTabDataAndBadge
-  loadTechRules = deps.loadTechRules
-  loadDetectorSettings = deps.loadDetectorSettings
-  buildEffectivePageRules = deps.buildEffectivePageRules
-}
 
 export function clearPendingDynamicSnapshot(tabId: number) {
   pendingDynamicSnapshots.delete(tabId)

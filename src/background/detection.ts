@@ -1,0 +1,89 @@
+// @ts-nocheck
+
+import { augmentPageWithWordPressThemeStyles } from './wordpress'
+import { buildPopupCacheRecord, cleanPageDetectionRecord } from './popup-cache'
+import { clearBadge, getTabData, getTabSnapshot, updateBadgeForTab, writeTabData } from './tab-store'
+import {
+  buildEffectivePageRules,
+  loadDetectorSettings,
+  loadTechRules
+} from './detector-settings'
+
+const activeDetectionTimers = new Map<number, ReturnType<typeof setTimeout>>()
+
+export async function saveTabDataAndBadge(tabId: number, data: any, settings: any) {
+  const popup = buildPopupCacheRecord(data, settings, await getTabSnapshot(tabId))
+  const { popup: _legacyPopup, ...tabData } = data || {}
+  await writeTabData(tabId, tabData, popup)
+  await updateBadgeForTab(tabId, popup)
+}
+
+export async function refreshAllBadges() {
+  try {
+    const [tabs, settings] = await Promise.all([chrome.tabs.query({}), loadDetectorSettings()])
+    for (const tab of tabs) {
+      if (typeof tab.id !== 'number' || tab.id < 0) continue
+      const data = await getTabData(tab.id)
+      if (data && Object.keys(data).length) {
+        await saveTabDataAndBadge(tab.id, data, settings)
+      } else {
+        clearBadge(tab.id)
+      }
+    }
+  } catch {
+    return
+  }
+}
+
+export async function runActivePageDetection(tabId: number) {
+  if (typeof tabId !== 'number' || tabId < 0) return
+
+  try {
+    const [data, rules, settings] = await Promise.all([
+      getTabData(tabId),
+      loadTechRules(),
+      loadDetectorSettings()
+    ])
+    const pageRules = buildEffectivePageRules(rules.page || {}, settings)
+    await chrome.scripting.executeScript({
+      target: { tabId },
+      world: 'MAIN',
+      func: r => {
+        ;(window as any).__SP_RULES__ = r
+      },
+      args: [pageRules]
+    })
+    const injection = await chrome.scripting.executeScript({
+      target: { tabId },
+      world: 'MAIN',
+      files: ['injected/page-detector.iife.js']
+    })
+    const page = injection?.[0]?.result
+    if (!page) return
+
+    const augmentedPage = await augmentPageWithWordPressThemeStyles(page)
+    data.page = cleanPageDetectionRecord(augmentedPage)
+    data.updatedAt = Date.now()
+    await saveTabDataAndBadge(tabId, data, settings)
+  } catch {
+    return
+  }
+}
+
+export function scheduleActivePageDetection(tabId: number, delay = 600) {
+  if (typeof tabId !== 'number' || tabId < 0) return
+  clearActiveDetectionTimer(tabId)
+  const timer = setTimeout(() => {
+    activeDetectionTimers.delete(tabId)
+    runActivePageDetection(tabId)
+  }, delay)
+  activeDetectionTimers.set(tabId, timer)
+}
+
+export function clearActiveDetectionTimer(tabId: number) {
+  const timer = activeDetectionTimers.get(tabId)
+  if (timer) {
+    clearTimeout(timer)
+    activeDetectionTimers.delete(tabId)
+  }
+}
