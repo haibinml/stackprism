@@ -623,6 +623,100 @@
           ]
         },
         {
+          "defaults": {
+            "kind": "状态页 / 事件通知",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Atlassian Statuspage",
+              "patterns": ["cdn\\.statuspage\\.io|statuspage\\.io/(?:assets|api|pages)|statuspage\\.io/api/v2"]
+            },
+            {
+              "name": "Instatus",
+              "patterns": ["instatus\\.com/[^\\s\"'<>]*(?:widget|embed|status|api)|status\\.instatus\\.com"]
+            },
+            {
+              "name": "Better Stack Status Page",
+              "patterns": [
+                "uptime\\.betterstack\\.com/[^\\s\"'<>]*(?:status|status-badges|widgets)|betteruptime\\.com/[^\\s\"'<>]*(?:status|widgets)"
+              ]
+            },
+            {
+              "name": "Status.io",
+              "patterns": ["cdn\\.status\\.io|status\\.io/(?:pages|api|assets)|status\\.io/[^\\s\"'<>]*(?:statuspage|widget)"]
+            },
+            {
+              "name": "Freshstatus",
+              "patterns": ["freshstatus\\.io/[^\\s\"'<>]*(?:status|widget|assets|api)|public\\.freshstatus\\.io"]
+            },
+            {
+              "name": "StatusCast",
+              "patterns": ["statuscast\\.com/[^\\s\"'<>]*(?:embed|widget|status|assets)|cdn\\.statuscast\\.com"]
+            },
+            {
+              "name": "Statuspal",
+              "patterns": [
+                "statuspal\\.io/[^\\s\"'<>]*(?:embed|status|widget|assets|api)|statuspal\\.eu/[^\\s\"'<>]*(?:embed|status|widget|assets|api)"
+              ]
+            },
+            {
+              "name": "Hund Status",
+              "patterns": ["hund\\.io/[^\\s\"'<>]*(?:status|widget|embed|assets)|cdn\\.hund\\.io"]
+            },
+            {
+              "name": "Sorry App Status Page",
+              "patterns": ["sorryapp\\.com/[^\\s\"'<>]*(?:status|widget|embed|assets)|status\\.sorryapp\\.com"]
+            },
+            {
+              "name": "incident.io Status Page",
+              "patterns": ["status\\.incident\\.io|incident\\.io/[^\\s\"'<>]*(?:status|status-page)|assets\\.incident\\.io"]
+            },
+            {
+              "name": "FireHydrant Status Page",
+              "patterns": [
+                "status\\.firehydrant\\.io|firehydrant\\.io/[^\\s\"'<>]*(?:status-page|status_pages|status)|cdn\\.firehydrant\\.io"
+              ]
+            },
+            {
+              "name": "Rootly Status Page",
+              "patterns": ["status\\.rootly\\.com|rootly\\.com/[^\\s\"'<>]*(?:status-page|status_pages|status)|cdn\\.rootly\\.com"]
+            },
+            {
+              "name": "Squadcast Status Page",
+              "patterns": ["status\\.squadcast\\.com|squadcast\\.com/[^\\s\"'<>]*(?:status-page|status_pages|status)|cdn\\.squadcast\\.com"]
+            },
+            {
+              "name": "UptimeRobot Status Page",
+              "patterns": ["stats\\.uptimerobot\\.com|uptimerobot\\.com/[^\\s\"'<>]*(?:status-page|status_pages|status|monitor)"]
+            },
+            {
+              "name": "Hyperping Status Page",
+              "patterns": ["status\\.hyperping\\.io|hyperping\\.io/[^\\s\"'<>]*(?:status|widget|embed)|cdn\\.hyperping\\.io"]
+            },
+            {
+              "name": "StatusCake Pages",
+              "patterns": ["statuscake\\.com/[^\\s\"'<>]*(?:status|status-page|uptime)|uptime\\.statuscake\\.com"]
+            },
+            {
+              "name": "Pingdom Status Page",
+              "patterns": ["stats\\.pingdom\\.com|pingdom\\.com/[^\\s\"'<>]*(?:status-page|public-status|status)"]
+            },
+            {
+              "name": "Cronitor Status Page",
+              "patterns": ["status\\.cronitor\\.io|cronitorstatus\\.com|cronitor\\.io/[^\\s\"'<>]*(?:status|status-page)"]
+            },
+            {
+              "name": "Pulsetic Status Page",
+              "patterns": ["status\\.pulsetic\\.com|pulsetic\\.com/[^\\s\"'<>]*(?:status|status-page|widget)|cdn\\.pulsetic\\.com"]
+            },
+            {
+              "name": "StatusGator",
+              "patterns": ["statusgator\\.com/[^\\s\"'<>]*(?:statuspage|status-page|status|widget)|cdn\\.statusgator\\.com"]
+            }
+          ]
+        },
+        {
           "name": "OneSignal",
           "kind": "消息推送",
           "patterns": ["onesignal\\.com|onesignalcdn\\.com|onesignal-sdk"],
