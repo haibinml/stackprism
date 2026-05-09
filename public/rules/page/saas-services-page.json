@@ -1746,6 +1746,100 @@
           ]
         },
         {
+          "defaults": {
+            "kind": "电子签名 / 合同",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "DocuSign Embedded Signing",
+              "patterns": [
+                "apps\\.docusign\\.com|apps-d\\.docusign\\.com|demo\\.docusign\\.net|docusign\\.net/[^\\s\"'<>]*(?:signing|envelope|recipient|embedded)"
+              ]
+            },
+            {
+              "name": "Adobe Acrobat Sign",
+              "patterns": ["secure\\.adobesign\\.com|echosign\\.com|adobesign\\.com/[^\\s\"'<>]*(?:public|sign|widget|api)"]
+            },
+            {
+              "name": "Dropbox Sign",
+              "patterns": [
+                "app\\.hellosign\\.com|hellosign\\.com/[^\\s\"'<>]*(?:embedded|sign|api)|dropboxsign\\.com/[^\\s\"'<>]*(?:embed|sign|api)"
+              ]
+            },
+            {
+              "name": "PandaDoc Embed",
+              "patterns": [
+                "app\\.pandadoc\\.com/[^\\s\"'<>]*(?:document|s/|a/)|cdn\\.pandadoc-static\\.com|pandadoc\\.com/[^\\s\"'<>]*(?:embed|app)"
+              ]
+            },
+            {
+              "name": "signNow",
+              "patterns": ["app\\.signnow\\.com|signnow\\.com/[^\\s\"'<>]*(?:document|embed|api|s/)"]
+            },
+            {
+              "name": "SignRequest",
+              "patterns": ["signrequest\\.com/[^\\s\"'<>]*(?:#/sign|document|api|embed)"]
+            },
+            {
+              "name": "RightSignature",
+              "patterns": ["rightsignature\\.com/[^\\s\"'<>]*(?:signature|document|embedded|api)"]
+            },
+            {
+              "name": "DocHub",
+              "patterns": ["dochub\\.com/[^\\s\"'<>]*(?:sign|document|editor|embed|api)"]
+            },
+            {
+              "name": "DocuSeal",
+              "patterns": ["docuseal\\.com/[^\\s\"'<>]*(?:d/|s/|embed|forms)|cdn\\.docuseal\\.com"]
+            },
+            {
+              "name": "Juro",
+              "patterns": ["app\\.juro\\.com|juro\\.com/[^\\s\"'<>]*(?:sign|contracts|embed)"]
+            },
+            {
+              "name": "Ironclad",
+              "patterns": ["ironcladapp\\.com|ironclad\\.app/[^\\s\"'<>]*(?:contract|sign|embed)"]
+            },
+            {
+              "name": "Concord Contracts",
+              "patterns": ["app\\.concordnow\\.com|concordnow\\.com/[^\\s\"'<>]*(?:contracts|documents|sign)"]
+            },
+            {
+              "name": "Oneflow",
+              "patterns": ["app\\.oneflow\\.com|oneflow\\.com/[^\\s\"'<>]*(?:contract|sign|document|embed)"]
+            },
+            {
+              "name": "Yousign",
+              "patterns": ["api\\.yousign\\.com|app\\.yousign\\.com|yousign\\.app|yousign\\.com/[^\\s\"'<>]*(?:sign|embed)"]
+            },
+            {
+              "name": "GetAccept",
+              "patterns": ["app\\.getaccept\\.com|cdn\\.getaccept\\.com|getaccept\\.com/[^\\s\"'<>]*(?:document|sign|embed)"]
+            },
+            {
+              "name": "Signeasy",
+              "patterns": ["app\\.signeasy\\.com|signeasy\\.com/[^\\s\"'<>]*(?:sign|document|embed|api)"]
+            },
+            {
+              "name": "Signable",
+              "patterns": ["app\\.signable\\.co\\.uk|signable\\.co\\.uk/[^\\s\"'<>]*(?:document|sign|embed|api)"]
+            },
+            {
+              "name": "BoldSign",
+              "patterns": ["app\\.boldsign\\.com|boldsign\\.com/[^\\s\"'<>]*(?:document|sign|embed|api)"]
+            },
+            {
+              "name": "Scrive",
+              "patterns": ["app\\.scrive\\.com|scrive\\.com/[^\\s\"'<>]*(?:sign|document|api|embed)"]
+            },
+            {
+              "name": "Xodo Sign / eversign",
+              "patterns": ["app\\.eversign\\.com|eversign\\.com/[^\\s\"'<>]*(?:document|sign|embedded|api)|xodosign\\.com"]
+            }
+          ]
+        },
+        {
           "name": "Airtable",
           "kind": "表格 / 数据库",
           "patterns": ["airtable\\.com\\/embed|airtable\\.com"]
