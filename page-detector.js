@@ -606,11 +606,18 @@ ${html}`
 
   function detectProbeTools(add, resources, html, globalKeys, externalRules) {
     const titleText = document.title ? `\n${document.title}` : ''
+    const appMetadataText = [
+      getMetaContent('apple-mobile-web-app-title'),
+      getMetaContent('application-name')
+    ]
+      .filter(Boolean)
+      .join('\n')
+    const appMetadata = appMetadataText ? `\n${appMetadataText}` : ''
     detectJsonRuleList(add, externalRules, {
       defaultCategory: '探针 / 监控',
       resources,
       html: '',
-      text: `${location.href}\n${resources.text}${titleText}`,
+      text: `${location.href}\n${resources.text}${titleText}${appMetadata}`,
       sourceLabel: 'JSON 探针规则',
       evidencePrefix: rule => (rule.kind ? `${rule.kind}：` : '')
     })

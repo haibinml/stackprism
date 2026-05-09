@@ -92,7 +92,8 @@
               "nezha-dashboard",
               "nezha\\.service",
               "nezha",
-              "/api/v1/ws/server"
+              "/api/v1/ws/server",
+              "/api/v1/server-group(?:[?#\\s]|$)"
             ]
           },
           {
