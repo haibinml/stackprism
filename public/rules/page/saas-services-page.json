@@ -421,6 +421,102 @@
           ]
         },
         {
+          "defaults": {
+            "kind": "无障碍辅助",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "UserWay Widget",
+              "patterns": ["cdn\\.userway\\.org/widget\\.js|userway\\.org/[^\\s\"'<>]*(?:widget|accessibility)"]
+            },
+            {
+              "name": "accessiBe Widget",
+              "patterns": ["acsbapp\\.com/apps/app/|acsbapp\\.com/apps/app/dist/js/app\\.js|accessibe\\.com/[^\\s\"'<>]*(?:widget|app)"]
+            },
+            {
+              "name": "AudioEye",
+              "patterns": ["wsm\\.audioeye\\.com|audioeye\\.com/[^\\s\"'<>]*(?:widget|launcher|js)"]
+            },
+            {
+              "name": "EqualWeb",
+              "patterns": ["cdn\\.equalweb\\.com|equalweb\\.com/[^\\s\"'<>]*(?:accessibility|widget|js)"]
+            },
+            {
+              "name": "Recite Me",
+              "patterns": ["api\\.reciteme\\.com|cdn\\.reciteme\\.com|reciteme\\.com/[^\\s\"'<>]*(?:button|toolbar|js)"]
+            },
+            {
+              "name": "Browsealoud",
+              "patterns": ["browsealoud\\.com/plus/scripts/ba\\.js|texthelp\\.com/[^\\s\"'<>]*(?:browsealoud|reachdeck)"]
+            },
+            {
+              "name": "Allyable",
+              "patterns": ["cdn\\.allyable\\.com|allyable\\.com/[^\\s\"'<>]*(?:widget|accessibility|js)"]
+            },
+            {
+              "name": "Monsido",
+              "patterns": ["cdn\\.monsido\\.com|monsido\\.com/[^\\s\"'<>]*(?:tracking|script|accessibility)"]
+            },
+            {
+              "name": "Siteimprove Accessibility",
+              "patterns": ["siteimproveanalytics\\.com/js/siteanalyze_|siteimprove\\.com/[^\\s\"'<>]*(?:accessibility|script)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "kind": "翻译本地化",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Weglot Translate",
+              "patterns": ["cdn\\.weglot\\.com/weglot\\.min\\.js|weglot\\.com/[^\\s\"'<>]*(?:weglot|switcher|api)"]
+            },
+            {
+              "name": "Localize.js",
+              "patterns": ["global\\.localizecdn\\.com/localize\\.js|cdn\\.localizejs\\.com|localizejs\\.com"]
+            },
+            {
+              "name": "Phrase Strings",
+              "patterns": ["phraseapp\\.com/assets/in-context-editor|phrase\\.com/[^\\s\"'<>]*(?:in-context|ota|sdk)"]
+            },
+            {
+              "name": "Transifex Live",
+              "patterns": ["cdn\\.transifex\\.com/live\\.js|transifex\\.com/[^\\s\"'<>]*(?:live|native|sdk)"]
+            },
+            {
+              "name": "Crowdin In-Context",
+              "patterns": ["crowdin\\.com/js/crowdin-jipt|cdn\\.crowdin\\.com|crowdin\\.com/[^\\s\"'<>]*(?:jipt|in-context)"]
+            },
+            {
+              "name": "Smartling",
+              "patterns": ["cdn\\.smartling\\.com|smartling\\.com/[^\\s\"'<>]*(?:context|translator|js)"]
+            },
+            {
+              "name": "GTranslate Widget",
+              "patterns": ["translate\\.google\\.com/translate_a/element\\.js|gtranslate\\.net/[^\\s\"'<>]*(?:widget|float|js)"]
+            },
+            {
+              "name": "Bablic",
+              "patterns": ["cdn\\.bablic\\.com|bablic\\.com/[^\\s\"'<>]*(?:snippet|js|widget)"]
+            },
+            {
+              "name": "Langify",
+              "patterns": ["cdn\\.langify-app\\.com|langify-app\\.com|langify\\.com/[^\\s\"'<>]*(?:switcher|script)"]
+            },
+            {
+              "name": "ConveyThis",
+              "patterns": ["cdn\\.conveythis\\.com/javascript|conveythis\\.com/[^\\s\"'<>]*(?:javascript|widget)"]
+            },
+            {
+              "name": "Lokalise",
+              "patterns": ["ota\\.lokalise\\.com|lokalise\\.cloud|lokalise\\.com/[^\\s\"'<>]*(?:ota|sdk|in-context)"]
+            }
+          ]
+        },
+        {
           "name": "OneSignal",
           "kind": "消息推送",
           "patterns": ["onesignal\\.com|onesignalcdn\\.com|onesignal-sdk"],
