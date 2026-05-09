@@ -53,4 +53,13 @@ StackPrism会从页面运行时、DOM、资源 URL、响应头、动态加载资
 
 ## 开源协议
 
-本项目基于 CC BY-NC-SA 4.0 协议授权，详见 [LICENSE](LICENSE)。
+本项目基于 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/) 协议授权。
+
+简单说：
+
+- 可以自由使用、修改、传播
+- 必须署名（保留原作者信息）
+- **不得用于商业用途**
+- 二次创作需用同样协议发布
+
+完整法律文本见 [LICENSE](LICENSE)。
