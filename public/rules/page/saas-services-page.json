@@ -578,6 +578,124 @@
           "globals": ["Calendly"]
         },
         {
+          "defaults": {
+            "kind": "预约排程",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Cal.com",
+              "patterns": ["app\\.cal\\.com|(?:^|[/:.])cal\\.com/(?:embed|booking|api/bookings)"]
+            },
+            {
+              "name": "Acuity Scheduling",
+              "patterns": ["embed\\.acuityscheduling\\.com|acuityscheduling\\.com/schedule\\.php|acuityplatform\\.com/embed"]
+            },
+            {
+              "name": "YouCanBookMe",
+              "patterns": ["cdn\\.youcanbook\\.me|booking\\.youcanbook\\.me|youcanbook\\.me/[^\\s\"'<>]*(?:embed|widget)"]
+            },
+            {
+              "name": "SavvyCal",
+              "patterns": ["cdn\\.savvycal\\.com|savvycal\\.com/[^\\s\"'<>]*(?:embed|widget|booking)"]
+            },
+            {
+              "name": "OnceHub",
+              "patterns": ["cdn\\.oncehub\\.com|oncehub\\.com/[^\\s\"'<>]*(?:widget|embed)|scheduleonce\\.com"]
+            },
+            {
+              "name": "Chili Piper",
+              "patterns": ["js\\.chilipiper\\.com|chilipiper\\.com/[^\\s\"'<>]*(?:concierge|book|router)"]
+            },
+            {
+              "name": "TidyCal",
+              "patterns": ["(?:^|[/:.])tidycal\\.com/[^\\s\"'<>]*(?:embed|booking|widgets?)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "kind": "活动 / 票务",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Eventbrite Widgets",
+              "patterns": ["eventbrite\\.com/static/widgets|eventbrite\\.com/tickets-external|eventbrite\\.com/e/[^\\s\"'<>]*tickets"]
+            },
+            {
+              "name": "Humanitix",
+              "patterns": ["events\\.humanitix\\.com|humanitix\\.com/[^\\s\"'<>]*(?:widgets|checkout|tickets)"]
+            },
+            {
+              "name": "Ticket Tailor",
+              "patterns": ["cdn\\.tickettailor\\.com|tickettailor\\.com/[^\\s\"'<>]*(?:checkout|all-tickets|events|embed)"]
+            },
+            {
+              "name": "Tito",
+              "patterns": [
+                "js\\.tito\\.io|(?:^|[/:.])ti\\.to/[^\\s\"'<>]+/[^\\s\"'<>]+|(?:^|[/:.])tito\\.io/[^\\s\"'<>]*(?:embed|checkout)"
+              ]
+            },
+            {
+              "name": "Luma Events",
+              "patterns": ["(?:^|[/:.])lu\\.ma/(?:embed|event)|api\\.lu\\.ma"]
+            },
+            {
+              "name": "Meetup",
+              "patterns": ["meetupstatic\\.com|(?:^|[/:.])meetup\\.com/[^\\s\"'<>]*/events/"]
+            },
+            {
+              "name": "Eventzilla",
+              "patterns": ["cdn\\.eventzilla\\.net|eventzilla\\.net/[^\\s\"'<>]*(?:web/event|widgets|ticketing)"]
+            },
+            {
+              "name": "Splash",
+              "patterns": ["event\\.splashthat\\.com|splashthat\\.com/[^\\s\"'<>]*(?:embed|event)|splash\\.events"]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "kind": "会员社区 / 创作者变现",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Memberstack",
+              "patterns": ["api\\.memberstack\\.com|static\\.memberstack\\.com|memberstack\\.com/scripts"]
+            },
+            {
+              "name": "Outseta",
+              "patterns": ["cdn\\.outseta\\.com|js\\.outseta\\.com|outseta\\.com/[^\\s\"'<>]*(?:embed|widget)"]
+            },
+            {
+              "name": "Circle.so",
+              "patterns": ["app\\.circle\\.so|circle\\.so/[^\\s\"'<>]*(?:embed|checkout|api)|circlecdn\\.com"]
+            },
+            {
+              "name": "Mighty Networks",
+              "patterns": ["assets\\.mightynetworks\\.com|mightybell\\.com|mightynetworks\\.com/[^\\s\"'<>]*(?:embed|join)"]
+            },
+            {
+              "name": "Patreon",
+              "patterns": ["c6\\.patreon\\.com|(?:^|[/:.])patreon\\.com/(?:widgets|[^\\s\"'<>]*(?:bePatron|join))"]
+            },
+            {
+              "name": "Ko-fi",
+              "patterns": ["storage\\.ko-fi\\.com/cdn/scripts|(?:^|[/:.])ko-fi\\.com/[^\\s\"'<>]*(?:widgets|cdn|button)"]
+            },
+            {
+              "name": "Buy Me a Coffee Widget",
+              "patterns": ["cdn\\.buymeacoffee\\.com/widget|(?:^|[/:.])buymeacoffee\\.com/[^\\s\"'<>]*(?:widget|button)"]
+            },
+            {
+              "name": "Podia",
+              "patterns": ["cdn\\.podia\\.com|(?:^|[/:.])podia\\.com/[^\\s\"'<>]*(?:embed|checkout|products)"]
+            }
+          ]
+        },
+        {
           "name": "Airtable",
           "kind": "表格 / 数据库",
           "patterns": ["airtable\\.com\\/embed|airtable\\.com"]
