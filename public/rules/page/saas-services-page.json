@@ -506,6 +506,62 @@
           "patterns": ["airtable\\.com\\/embed|airtable\\.com"]
         },
         {
+          "defaults": {
+            "kind": "表单 / 问卷",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Jotform",
+              "patterns": ["cdn\\.jotfor\\.ms|js\\.jotform\\.com/JotForm\\.js|jotform\\.com/(?:jsform|form)/"]
+            },
+            {
+              "name": "Formspree",
+              "patterns": ["formspree\\.io/(?:js|f|forms|library)|formspree\\.io[^\\s\"'<>]*formbutton"]
+            },
+            {
+              "name": "Formstack",
+              "patterns": ["static\\.formstack\\.com|formstack\\.com/forms/js\\.php|formstack\\.io/forms/js\\.php"]
+            },
+            {
+              "name": "Paperform",
+              "patterns": ["paperform\\.co/(?:__embed|forms|embed)|paperform\\.co[^\\s\"'<>]*embed"]
+            },
+            {
+              "name": "Tally",
+              "patterns": ["tally\\.so/widgets/embed\\.js|tally\\.so/embed/"]
+            },
+            {
+              "name": "Cognito Forms",
+              "patterns": ["cognitoforms\\.com/f/seamless\\.js|cognitoforms\\.com/forms/"]
+            },
+            {
+              "name": "Wufoo",
+              "patterns": ["wufoo\\.com/scripts/embed/form\\.js|wufoo\\.com/forms/"]
+            },
+            {
+              "name": "SurveyMonkey",
+              "patterns": ["surveymonkey\\.com/jsEmbed\\.aspx|surveymonkey\\.com/r/"]
+            },
+            {
+              "name": "Qualtrics",
+              "patterns": ["siteintercept\\.qualtrics\\.com|qualtrics\\.com/jfe/form/|qualtrics\\.com[^\\s\"'<>]*/WRQualtrics"]
+            },
+            {
+              "name": "Google Forms",
+              "patterns": ["docs\\.google\\.com/forms/(?:d|u/\\d+/d)/"]
+            },
+            {
+              "name": "Microsoft Forms",
+              "patterns": ["forms\\.office\\.com/(?:Pages/ResponsePage\\.aspx|r/)"]
+            },
+            {
+              "name": "Fillout",
+              "patterns": ["forms\\.fillout\\.com|server\\.fillout\\.com/embed|fillout\\.com/embed"]
+            }
+          ]
+        },
+        {
           "name": "Notion",
           "kind": "文档 / 站点",
           "patterns": ["notion\\.so|notion-static\\.com|notion\\.site"]
