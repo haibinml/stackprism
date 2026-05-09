@@ -3,6 +3,8 @@ node_modules/
 .cache/
 .parcel-cache/
 .vite/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
 
 # Build and packaged extension output
 dist/
