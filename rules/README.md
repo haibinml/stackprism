@@ -26,3 +26,5 @@
 `page/wordpress-plugins.json` 是根据 WordPress.org 公开插件目录补充的热门插件规则，识别 `/wp-content/plugins/{slug}/` 资源路径。规则分类为“网站源码线索”，只匹配资源 URL，并使用 `resourceHints` 快速跳过非 WordPress 插件资源。
 
 `page/wordpress-themes.json` 是根据 WordPress.org 公开主题目录补充的热门主题规则，识别 `/wp-content/themes/{slug}/` 资源路径。规则分类为“主题 / 模板”，只匹配资源 URL，并使用 `resourceHints` 快速跳过非 WordPress 主题资源。
+
+`page/drupal-modules.json` 和 `page/drupal-themes.json` 是根据 Drupal.org 公开项目接口补充的模块和主题规则，识别 `/modules/contrib/{machine}/`、`/modules/custom/{machine}/`、`/themes/contrib/{machine}/`、`/themes/custom/{machine}/` 等资源路径。规则只匹配资源 URL，并使用 `resourceHints` 快速跳过无关资源。
