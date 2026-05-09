@@ -1044,6 +1044,102 @@
           "globals": ["growthbook"]
         },
         {
+          "defaults": {
+            "kind": "Feature Flag / 实验平台",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "ConfigCat",
+              "patterns": ["cdn\\.configcat\\.com|configcat\\.com/[^\\s\"'<>]*(?:sdk|config|flags)|configcat-js"]
+            },
+            {
+              "name": "Split.io",
+              "patterns": ["sdk\\.split\\.io|cdn\\.split\\.io|events\\.split\\.io|split\\.io/[^\\s\"'<>]*(?:sdk|browser|events)"]
+            },
+            {
+              "name": "DevCycle",
+              "patterns": ["client-sdk\\.devcycle\\.com|events\\.devcycle\\.com|devcycle\\.com/[^\\s\"'<>]*(?:client-sdk|sdk|events)"]
+            },
+            {
+              "name": "CloudBees Feature Management",
+              "patterns": [
+                "app\\.rollout\\.io|statestore\\.rollout\\.io|rollout\\.io/[^\\s\"'<>]*(?:scripts|sdk)|cloudbees\\.com/[^\\s\"'<>]*feature-management"
+              ]
+            },
+            {
+              "name": "Harness Feature Flags",
+              "patterns": [
+                "sdk\\.ff\\.harness\\.io|config\\.ff\\.harness\\.io|events\\.ff\\.harness\\.io|harness\\.io/[^\\s\"'<>]*feature-flags"
+              ]
+            },
+            {
+              "name": "Taplytics",
+              "patterns": ["js\\.taplytics\\.com|api\\.taplytics\\.com|taplytics\\.com/[^\\s\"'<>]*(?:sdk|js|experiment)"]
+            },
+            {
+              "name": "AB Tasty",
+              "patterns": ["try\\.abtasty\\.com|ariane\\.abtasty\\.com|abtasty\\.com/[^\\s\"'<>]*(?:js|tag|variation)"]
+            },
+            {
+              "name": "Kameleoon",
+              "patterns": ["static\\.kameleoon\\.com|events\\.kameleoon\\.com|kameleoon\\.(?:eu|com)/[^\\s\"'<>]*(?:js|sdk|client)"]
+            },
+            {
+              "name": "Convert Experiences",
+              "patterns": ["cdn-[0-9]+\\.convertexperiments\\.com|convert\\.com/[^\\s\"'<>]*(?:js|experiments)|convertglobal"]
+            },
+            {
+              "name": "SiteSpect",
+              "patterns": ["cdn\\.sitespect\\.com|sitespect\\.com/[^\\s\"'<>]*(?:__ssobj|sdk|api)|__ssobj"]
+            },
+            {
+              "name": "Eppo",
+              "patterns": ["cdn\\.geteppo\\.com|eppo\\.cloud|geteppo\\.com/[^\\s\"'<>]*(?:sdk|client|experiment)"]
+            },
+            {
+              "name": "Mutiny",
+              "patterns": [
+                "client-registry\\.mutinycdn\\.com|cdn\\.mutinycdn\\.com|mutinyhq\\.io/[^\\s\"'<>]*(?:client|personalize|script)"
+              ]
+            },
+            {
+              "name": "Intellimize",
+              "patterns": ["cdn\\.intellimize\\.co|log\\.intellimize\\.co|intellimize\\.co/[^\\s\"'<>]*(?:sdk|optimize|experiments)"]
+            },
+            {
+              "name": "Adobe Target",
+              "patterns": [
+                "mboxedge[0-9]*\\.tt\\.omtrdc\\.net|adobe\\.target\\.(?:getOffer|triggerView)|assets\\.adobedtm\\.com/[^\\s\"'<>]*at\\.js"
+              ]
+            },
+            {
+              "name": "Oracle Maxymiser",
+              "patterns": ["service\\.maxymiser\\.net|maxymiser\\.com/[^\\s\"'<>]*(?:cdn|js|mmcore)|mmapi"]
+            },
+            {
+              "name": "Convertize",
+              "patterns": ["cdn\\.convertize\\.io|scripts\\.convertize\\.io|convertize\\.com/[^\\s\"'<>]*(?:experiments|script|widget)"]
+            },
+            {
+              "name": "FeatureHub",
+              "patterns": ["edge\\.featurehub\\.io|featurehub\\.io/[^\\s\"'<>]*(?:sdk|client|features)|featurehub-javascript"]
+            },
+            {
+              "name": "Hypertune",
+              "patterns": ["edge\\.hypertune\\.com|hypertune\\.com/[^\\s\"'<>]*(?:sdk|client|flags)|hypertune-js"]
+            },
+            {
+              "name": "FeatBit",
+              "patterns": ["featbit\\.co/[^\\s\"'<>]*(?:sdk|flags|events)|featbit\\.com/[^\\s\"'<>]*(?:sdk|flags|events)|featbit-js"]
+            },
+            {
+              "name": "Tggl",
+              "patterns": ["api\\.tggl\\.io|cdn\\.tggl\\.io|tggl\\.io/[^\\s\"'<>]*(?:sdk|client|flags)"]
+            }
+          ]
+        },
+        {
           "name": "Typeform",
           "kind": "表单",
           "patterns": ["embed\\.typeform\\.com|typeform\\.com"],
