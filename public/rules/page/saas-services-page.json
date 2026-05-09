@@ -696,6 +696,96 @@
           ]
         },
         {
+          "defaults": {
+            "kind": "评价 / UGC",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Trustpilot Widget",
+              "patterns": ["widget\\.trustpilot\\.com|trustpilot\\.com/[^\\s\"'<>]*(?:widget|review|api)"]
+            },
+            {
+              "name": "Yotpo Reviews",
+              "patterns": ["staticw2\\.yotpo\\.com|cdn-widgetsrepository\\.yotpo\\.com|yotpo\\.com/[^\\s\"'<>]*(?:widget|reviews)"]
+            },
+            {
+              "name": "Judge.me Reviews",
+              "patterns": ["cdn\\.judge\\.me|judge\\.me/[^\\s\"'<>]*(?:assets|widgets|reviews)"]
+            },
+            {
+              "name": "Stamped Reviews",
+              "patterns": ["cdn1\\.stamped\\.io|stamped\\.io/[^\\s\"'<>]*(?:files|widget|reviews)"]
+            },
+            {
+              "name": "Reviews.io",
+              "patterns": ["widget\\.reviews\\.io|assets\\.reviews\\.io|reviews\\.io/[^\\s\"'<>]*(?:widget|front-api|merchant)"]
+            },
+            {
+              "name": "Bazaarvoice",
+              "patterns": [
+                "apps\\.bazaarvoice\\.com|display\\.ugc\\.bazaarvoice\\.com|bazaarvoice\\.com/[^\\s\"'<>]*(?:deployments|bv\\.js|reviews)"
+              ]
+            },
+            {
+              "name": "PowerReviews",
+              "patterns": ["ui\\.powerreviews\\.com|display\\.powerreviews\\.com|powerreviews\\.com/[^\\s\"'<>]*(?:engine|reviews|widgets)"]
+            },
+            {
+              "name": "Loox Reviews",
+              "patterns": ["looxcdn\\.com|loox\\.io/[^\\s\"'<>]*(?:widget|reviews|assets)"]
+            },
+            {
+              "name": "Okendo Reviews",
+              "patterns": ["cdn\\.okendo\\.io|d3hw6dc1ow8pp2\\.cloudfront\\.net|okendo\\.io/[^\\s\"'<>]*(?:reviews|widgets)"]
+            },
+            {
+              "name": "Feefo Reviews",
+              "patterns": ["api\\.feefo\\.com|feefo\\.com/[^\\s\"'<>]*(?:feefo-widget|reviews|merchant)"]
+            },
+            {
+              "name": "Fera Reviews",
+              "patterns": ["cdn\\.fera\\.ai|fera\\.ai/[^\\s\"'<>]*(?:reviews|widgets)"]
+            },
+            {
+              "name": "Shopper Approved",
+              "patterns": ["shopperapproved\\.com/[^\\s\"'<>]*(?:widgets|reviews|seal|merchant)"]
+            },
+            {
+              "name": "Sitejabber",
+              "patterns": ["static\\.sitejabber\\.com|sitejabber\\.com/[^\\s\"'<>]*(?:widgets|reviews|js)"]
+            },
+            {
+              "name": "Google Customer Reviews",
+              "patterns": ["apis\\.google\\.com/js/platform\\.js\\?onload=renderOptIn|googlecommerce\\.com/trustedstores"]
+            },
+            {
+              "name": "Kudobuzz Reviews",
+              "patterns": ["cdn\\.kudobuzz\\.com|kudobuzz\\.com/[^\\s\"'<>]*(?:widgets|reviews)"]
+            },
+            {
+              "name": "Growave",
+              "patterns": ["static\\.growave\\.io|app\\.growave\\.io|growave\\.io/[^\\s\"'<>]*(?:widgets|reviews)"]
+            },
+            {
+              "name": "Rivyo Reviews",
+              "patterns": ["rivyo\\.app|thimatic-apps\\.com/[^\\s\"'<>]*(?:rivyo|reviews)"]
+            },
+            {
+              "name": "Ali Reviews",
+              "patterns": ["alireviews\\.fireapps\\.io|fireapps\\.io/[^\\s\"'<>]*ali-reviews|cdn\\.fireapps\\.io/[^\\s\"'<>]*ali"]
+            },
+            {
+              "name": "Opinew Reviews",
+              "patterns": ["cdn\\.opinew\\.com|opinew\\.com/[^\\s\"'<>]*(?:widgets|reviews)"]
+            },
+            {
+              "name": "Junip Reviews",
+              "patterns": ["cdn\\.junip\\.co|scripts\\.junip\\.co|junip\\.co/[^\\s\"'<>]*(?:reviews|widgets)"]
+            }
+          ]
+        },
+        {
           "name": "Airtable",
           "kind": "表格 / 数据库",
           "patterns": ["airtable\\.com\\/embed|airtable\\.com"]
