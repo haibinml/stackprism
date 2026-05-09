@@ -27,7 +27,7 @@ StackPrism会从页面运行时、DOM、资源 URL、响应头、动态加载资
 - 技术名称到官网 / 仓库的链接集中放在 `tech-links.json`；如果新增规则后希望技术名可点击，也在这里补同名链接。
 - 需要执行浏览器 API 或 DOM 深度判断的检测仍保留在 `page-detector.js` / `background.js`；可枚举规则优先放到 `rules/` 对应分类文件。
 - 动态资源监听逻辑放在 `content-observer.js`，它只记录 URL、feed 链接和有限 DOM 标记，后台再用 `rules/` 里的规则做动态识别。
-- 新增规则时优先改 `rules/` 下对应分类 JSON：添加 `name`、`patterns`，需要时补 `kind`、`confidence`、`globals`、`selectors`、`classPrefixes`；如果新增了文件，要把路径加入 `rules/index.json`。
+- 新增规则时优先改 `rules/` 下对应分类 JSON：添加 `name`、`patterns`，需要时补 `kind`、`confidence`、`globals`、`selectors`、`classPrefixes`；如果一批规则公共字段重复，可以用 `defaults + rules` 规则组减少重复；如果新增了文件，要把路径加入 `rules/index.json`。
 - 不想改内置规则时，可以在扩展设置页添加自定义规则；每条规则支持 `patterns`、`selectors`、`globals`、`matchIn`、`matchType`、`category`、`confidence` 和技术链接。
 - 修改扩展运行文件时同步提升 `manifest.json` 里的 `version`；规则、弹窗、设置页、后台脚本、内容脚本和图标资源更新都按插件版本更新处理。
 

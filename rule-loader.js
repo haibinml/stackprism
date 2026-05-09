@@ -31,7 +31,7 @@
   }
 
   function mergeRulePartial(target, source) {
-    for (const [key, value] of Object.entries(source || {})) {
+    for (const [key, value] of Object.entries(normalizeRuleValue(source) || {})) {
       if (Array.isArray(value)) {
         target[key] = [...(Array.isArray(target[key]) ? target[key] : []), ...value]
         continue
@@ -47,6 +47,55 @@
     }
 
     return target
+  }
+
+  function normalizeRuleValue(value) {
+    if (Array.isArray(value)) {
+      return value.flatMap(item => normalizeRuleArrayItem(item, {}))
+    }
+
+    if (isRuleGroup(value)) {
+      return expandRuleGroup(value, {})
+    }
+
+    if (isPlainObject(value)) {
+      return Object.fromEntries(Object.entries(value).map(([key, child]) => [key, normalizeRuleValue(child)]))
+    }
+
+    return value
+  }
+
+  function normalizeRuleArrayItem(item, defaults) {
+    if (isRuleGroup(item)) {
+      return expandRuleGroup(item, defaults)
+    }
+
+    if (!isPlainObject(item)) {
+      return [item]
+    }
+
+    return [{ ...defaults, ...normalizeRuleObject(item) }]
+  }
+
+  function expandRuleGroup(group, inheritedDefaults) {
+    const defaults = {
+      ...inheritedDefaults,
+      ...(isPlainObject(group.defaults) ? group.defaults : {}),
+      ...(isPlainObject(group.$defaults) ? group.$defaults : {})
+    }
+    return group.rules.flatMap(rule => normalizeRuleArrayItem(rule, defaults))
+  }
+
+  function normalizeRuleObject(object) {
+    return Object.fromEntries(Object.entries(object).map(([key, value]) => [key, normalizeRuleValue(value)]))
+  }
+
+  function isRuleGroup(value) {
+    return isPlainObject(value) && Array.isArray(value.rules)
+  }
+
+  function isPlainObject(value) {
+    return Object.prototype.toString.call(value) === '[object Object]'
   }
 
   global.loadStackPrismRules = loadStackPrismRules
