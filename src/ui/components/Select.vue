@@ -1,6 +1,7 @@
 <template>
-  <div class="sp-select" :class="{ open: isOpen, disabled }">
+  <div class="sp-select" :class="{ open: isOpen, disabled, creatable }">
     <button
+      v-if="!creatable"
       ref="triggerRef"
       type="button"
       class="sp-select-trigger"
@@ -15,15 +16,33 @@
       </span>
       <ChevronDown class="sp-select-chevron" :class="{ flipped: isOpen }" :size="14" :stroke-width="2" />
     </button>
+
+    <div v-else class="sp-select-trigger sp-select-input-wrap" :class="{ disabled }">
+      <input
+        ref="inputRef"
+        type="text"
+        class="sp-select-input"
+        :value="modelValue"
+        :placeholder="placeholder"
+        :disabled="disabled"
+        @input="onInput"
+        @focus="open"
+        @keydown="onKeyDown"
+      />
+      <button type="button" class="sp-chevron-btn" tabindex="-1" :disabled="disabled" @mousedown.prevent="toggleFromInput">
+        <ChevronDown class="sp-select-chevron" :class="{ flipped: isOpen }" :size="14" :stroke-width="2" />
+      </button>
+    </div>
+
     <transition name="sp-fade">
-      <ul v-if="isOpen" ref="listRef" class="sp-select-list" role="listbox">
+      <ul v-if="isOpen && filteredOptions.length" ref="listRef" class="sp-select-list" role="listbox">
         <li
-          v-for="(opt, i) in options"
+          v-for="(opt, i) in filteredOptions"
           :key="opt.value"
           :class="['sp-select-option', { selected: opt.value === modelValue, focused: i === focusIndex }]"
           role="option"
           :aria-selected="opt.value === modelValue"
-          @click="selectOption(opt.value)"
+          @mousedown.prevent="selectOption(opt.value)"
           @mouseenter="focusIndex = i"
         >
           <span>{{ opt.label }}</span>
@@ -48,6 +67,7 @@
     options: SelectOption[]
     placeholder?: string
     disabled?: boolean
+    creatable?: boolean
   }>()
 
   const emit = defineEmits<{
@@ -57,14 +77,28 @@
   const isOpen = ref(false)
   const focusIndex = ref(-1)
   const triggerRef = ref<HTMLButtonElement | null>(null)
+  const inputRef = ref<HTMLInputElement | null>(null)
   const listRef = ref<HTMLUListElement | null>(null)
 
-  const selectedLabel = computed(() => props.options.find(o => o.value === props.modelValue)?.label ?? '')
+  const selectedLabel = computed(() => {
+    const matched = props.options.find(o => o.value === props.modelValue)
+    if (matched) return matched.label
+    return props.modelValue || ''
+  })
+
+  const filteredOptions = computed(() => {
+    if (!props.creatable) return props.options
+    const query = props.modelValue.trim().toLowerCase()
+    if (!query) return props.options
+    const exact = props.options.find(o => o.value === props.modelValue)
+    if (exact) return props.options
+    return props.options.filter(o => o.label.toLowerCase().includes(query) || o.value.toLowerCase().includes(query))
+  })
 
   const open = () => {
     if (props.disabled) return
     isOpen.value = true
-    const idx = props.options.findIndex(o => o.value === props.modelValue)
+    const idx = filteredOptions.value.findIndex(o => o.value === props.modelValue)
     focusIndex.value = idx >= 0 ? idx : 0
   }
 
@@ -77,39 +111,68 @@
     else open()
   }
 
+  const toggleFromInput = () => {
+    if (isOpen.value) {
+      close()
+    } else {
+      inputRef.value?.focus()
+      open()
+    }
+  }
+
   const selectOption = (value: string) => {
     emit('update:modelValue', value)
     close()
-    triggerRef.value?.focus()
+    if (props.creatable) inputRef.value?.focus()
+    else triggerRef.value?.focus()
+  }
+
+  const onInput = (event: Event) => {
+    const target = event.target as HTMLInputElement
+    emit('update:modelValue', target.value)
+    if (!isOpen.value) open()
+    else focusIndex.value = 0
   }
 
   const onKeyDown = (e: KeyboardEvent) => {
     if (props.disabled) return
     if (!isOpen.value) {
-      if (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === 'Enter' || e.key === ' ') {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp' || (!props.creatable && (e.key === 'Enter' || e.key === ' '))) {
         e.preventDefault()
         open()
       }
       return
     }
+
+    const list = filteredOptions.value
     if (e.key === 'Escape') {
       e.preventDefault()
       close()
     } else if (e.key === 'ArrowDown') {
       e.preventDefault()
-      focusIndex.value = (focusIndex.value + 1) % props.options.length
+      if (list.length) focusIndex.value = (focusIndex.value + 1) % list.length
     } else if (e.key === 'ArrowUp') {
       e.preventDefault()
-      focusIndex.value = (focusIndex.value - 1 + props.options.length) % props.options.length
+      if (list.length) focusIndex.value = (focusIndex.value - 1 + list.length) % list.length
     } else if (e.key === 'Home') {
       e.preventDefault()
       focusIndex.value = 0
     } else if (e.key === 'End') {
       e.preventDefault()
-      focusIndex.value = props.options.length - 1
-    } else if (e.key === 'Enter' || e.key === ' ') {
+      focusIndex.value = Math.max(0, list.length - 1)
+    } else if (e.key === 'Enter') {
+      const opt = list[focusIndex.value]
+      if (opt) {
+        e.preventDefault()
+        selectOption(opt.value)
+      } else if (props.creatable) {
+        close()
+      } else {
+        e.preventDefault()
+      }
+    } else if (e.key === ' ' && !props.creatable) {
       e.preventDefault()
-      const opt = props.options[focusIndex.value]
+      const opt = list[focusIndex.value]
       if (opt) selectOption(opt.value)
     } else if (e.key === 'Tab') {
       close()
@@ -120,6 +183,7 @@
     if (!isOpen.value) return
     const target = e.target as Node
     if (triggerRef.value?.contains(target)) return
+    if (inputRef.value?.contains(target)) return
     if (listRef.value?.contains(target)) return
     close()
   }
@@ -161,16 +225,55 @@
     width: 100%;
   }
 
-  .sp-select-trigger:hover:not(:disabled),
+  .sp-select-trigger:hover:not(:disabled):not(.disabled),
   .sp-select.open .sp-select-trigger,
-  .sp-select-trigger:focus-visible {
+  .sp-select-trigger:focus-visible,
+  .sp-select-trigger:focus-within {
     border-color: var(--accent);
     outline: none;
   }
 
-  .sp-select-trigger:disabled {
+  .sp-select-trigger:disabled,
+  .sp-select-trigger.disabled {
     cursor: not-allowed;
     opacity: 0.6;
+  }
+
+  .sp-select-input-wrap {
+    padding: 0 4px 0 0;
+  }
+
+  .sp-select-input {
+    background: transparent;
+    border: 0;
+    color: var(--text);
+    flex: 1;
+    font: inherit;
+    font-size: 13px;
+    min-width: 0;
+    outline: none;
+    padding: 7px 0 7px 10px;
+  }
+
+  .sp-select-input::placeholder {
+    color: var(--muted);
+  }
+
+  .sp-chevron-btn {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    height: 24px;
+    justify-content: center;
+    padding: 0;
+    width: 24px;
+  }
+
+  .sp-chevron-btn:disabled {
+    cursor: not-allowed;
   }
 
   .sp-select-value {
@@ -196,7 +299,7 @@
   }
 
   .sp-select.open .sp-select-chevron,
-  .sp-select-trigger:hover:not(:disabled) .sp-select-chevron {
+  .sp-select-trigger:hover:not(:disabled):not(.disabled) .sp-select-chevron {
     color: var(--accent);
   }
 

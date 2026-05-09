@@ -79,10 +79,6 @@
         </div>
       </div>
 
-      <datalist id="categoryList">
-        <option v-for="cat in CATEGORY_ORDER" :key="cat" :value="cat" />
-      </datalist>
-
       <div class="rule-form">
         <label>
           <span>技术名称</span>
@@ -90,7 +86,7 @@
         </label>
         <label>
           <span>分类</span>
-          <input v-model="form.category" type="text" list="categoryList" placeholder="例如：网站程序" />
+          <Select v-model="form.category" :options="categoryOptions" creatable placeholder="例如：网站程序" />
         </label>
         <label>
           <span>类型说明</span>
@@ -204,6 +200,8 @@
     { value: 'regex', label: '正则表达式' },
     { value: 'keyword', label: '关键词' }
   ]
+
+  const categoryOptions = CATEGORY_ORDER.map(cat => ({ value: cat, label: cat }))
 
   const state = reactive({
     settings: defaultSettings(),
