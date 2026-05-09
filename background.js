@@ -1,4 +1,5 @@
 const TAB_DATA_PREFIX = 'tab:'
+const POPUP_DATA_PREFIX = 'popup:'
 const MAX_API_RECORDS = 30
 const SETTINGS_STORAGE_KEY = 'stackPrismSettings'
 const POPUP_CACHE_STALE_MS = 2 * 60 * 1000
@@ -148,13 +149,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 chrome.tabs.onRemoved.addListener(tabId => {
   clearActiveDetectionTimer(tabId)
-  chrome.storage.session.remove(storageKey(tabId)).catch(() => {})
+  chrome.storage.session.remove([storageKey(tabId), popupStorageKey(tabId)]).catch(() => {})
 })
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
   if (changeInfo.status === 'loading') {
     clearActiveDetectionTimer(tabId)
-    chrome.storage.session.remove(storageKey(tabId)).catch(() => {})
+    chrome.storage.session.remove([storageKey(tabId), popupStorageKey(tabId)]).catch(() => {})
     clearBadge(tabId)
     return
   }
@@ -302,16 +303,17 @@ function buildEffectivePageRules(pageRules, settings) {
 }
 
 async function saveTabDataAndBadge(tabId, data, settings) {
-  data.popup = buildPopupCacheRecord(data, settings, await getTabSnapshot(tabId))
-  await chrome.storage.session.set({ [storageKey(tabId)]: data })
-  await updateBadgeForTab(tabId, data, settings)
+  const popup = buildPopupCacheRecord(data, settings, await getTabSnapshot(tabId))
+  const { popup: _legacyPopup, ...tabData } = data || {}
+  await chrome.storage.session.set({
+    [storageKey(tabId)]: tabData,
+    [popupStorageKey(tabId)]: popup
+  })
+  await updateBadgeForTab(tabId, popup)
 }
 
-async function updateBadgeForTab(tabId, data, settings) {
-  const cachedPopup = getCachedPopupResult(data, settings)
-  const count = cachedPopup
-    ? cachedPopup.counts?.total || 0
-    : countBadgeTechnologies(addStoredCustomHeaderRules(data || {}, settings), settings)
+async function updateBadgeForTab(tabId, popup) {
+  const count = Number(popup?.counts?.total || 0)
   const text = formatBadgeCount(count)
   try {
     await chrome.action.setBadgeBackgroundColor({ tabId, color: '#0f766e' })
@@ -323,20 +325,6 @@ async function updateBadgeForTab(tabId, data, settings) {
   } catch {
     return
   }
-}
-
-function countBadgeTechnologies(data, settings) {
-  const technologies = []
-  addAllTechnologies(technologies, data.page?.technologies)
-  addAllTechnologies(technologies, data.main?.technologies)
-  for (const api of data.apis || []) {
-    addAllTechnologies(technologies, api.technologies)
-  }
-  for (const frame of data.frames || []) {
-    addAllTechnologies(technologies, frame.technologies)
-  }
-  addAllTechnologies(technologies, data.dynamic?.technologies)
-  return filterTechnologiesBySettings(mergeTechnologyRecords(technologies), settings).length
 }
 
 function addAllTechnologies(target, items) {
@@ -377,13 +365,27 @@ async function getTabSnapshot(tabId) {
 }
 
 async function getPopupResultResponse(tabId) {
-  const [data, settings] = await Promise.all([getTabData(tabId), loadDetectorSettings()])
-  let popup = getCachedPopupResult(data, settings)
-  if (!popup) {
-    popup = buildPopupCacheRecord(data, settings, await getTabSnapshot(tabId))
-    if (hasStoredDetection(data)) {
-      chrome.storage.session.set({ [storageKey(tabId)]: { ...data, popup } }).catch(() => {})
+  const [storedPopup, settings] = await Promise.all([getPopupCache(tabId), loadDetectorSettings()])
+  const cachedPopup = getCachedPopupResult(storedPopup, settings)
+  if (cachedPopup) {
+    return {
+      ok: true,
+      data: cachedPopup,
+      hasCache: Boolean(cachedPopup.hasCache),
+      stale: !cachedPopup.sourceUpdatedAt || Date.now() - cachedPopup.sourceUpdatedAt > POPUP_CACHE_STALE_MS,
+      updatedAt: cachedPopup.sourceUpdatedAt || 0
     }
+  }
+
+  const [data, tab] = await Promise.all([getTabData(tabId), getTabSnapshot(tabId)])
+  const popup = buildPopupCacheRecord(data, settings, tab)
+  if (hasStoredDetection(data)) {
+    const { popup: _legacyPopup, ...tabData } = data || {}
+    const nextStorage = { [popupStorageKey(tabId)]: popup }
+    if (_legacyPopup) {
+      nextStorage[storageKey(tabId)] = tabData
+    }
+    chrome.storage.session.set(nextStorage).catch(() => {})
   }
 
   const updatedAt = getStoredUpdatedAt(data)
@@ -403,20 +405,17 @@ function buildPopupCacheRecord(data, settings, tab) {
     ...buildPopupResult(hydrated, settings, tab),
     cacheVersion: POPUP_CACHE_SCHEMA_VERSION,
     settingsKey: buildSettingsCacheKey(settings),
+    hasCache: hasStoredDetection(hydrated),
     sourceUpdatedAt,
     builtAt: Date.now()
   }
 }
 
-function getCachedPopupResult(data, settings) {
-  const popup = data?.popup
+function getCachedPopupResult(popup, settings) {
   if (!popup || popup.cacheVersion !== POPUP_CACHE_SCHEMA_VERSION) {
     return null
   }
   if (popup.settingsKey !== buildSettingsCacheKey(settings)) {
-    return null
-  }
-  if (Number(popup.sourceUpdatedAt || 0) !== getStoredUpdatedAt(data || {})) {
     return null
   }
   return popup
@@ -1135,6 +1134,10 @@ function storageKey(tabId) {
   return `${TAB_DATA_PREFIX}${tabId}`
 }
 
+function popupStorageKey(tabId) {
+  return `${POPUP_DATA_PREFIX}${tabId}`
+}
+
 async function getTabData(tabId) {
   if (typeof tabId !== 'number' || tabId < 0) {
     return {}
@@ -1142,6 +1145,15 @@ async function getTabData(tabId) {
   const key = storageKey(tabId)
   const result = await chrome.storage.session.get(key)
   return result[key] || {}
+}
+
+async function getPopupCache(tabId) {
+  if (typeof tabId !== 'number' || tabId < 0) {
+    return null
+  }
+  const key = popupStorageKey(tabId)
+  const result = await chrome.storage.session.get(key)
+  return result[key] || null
 }
 
 function normalizeDynamicSnapshot(snapshot, pageRules) {
