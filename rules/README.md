@@ -14,3 +14,5 @@
 `page/frontend-package-cdn-libraries.json` 是基于同一批前端库名称扩展出的公共 npm 包 CDN 规则，覆盖 jsDelivr、UNPKG、esm.sh、Skypack、JSPM 等常见资源 URL。它同样只匹配资源 URL，用于识别不通过 cdnjs 加载的同名库。
 
 公共包 CDN 规则使用带包名边界的正则匹配，避免 `d3` 命中 `d3-array`、`react` 命中 `react-dom` 这类包名前缀误报。
+
+`page/frontend-regional-cdn-libraries.json` 是基于同一批前端库名称扩展出的区域公共静态库 CDN 规则，覆盖 BootCDN、Staticfile、Baomitu、Microsoft Ajax CDN、Google Hosted Libraries 等资源 URL。它只匹配资源 URL，并使用路径边界减少包名前缀误报。

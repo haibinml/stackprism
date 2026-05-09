@@ -8,6 +8,7 @@
     "page/frontend-extra.json",
     "page/frontend-cdn-libraries.json",
     "page/frontend-package-cdn-libraries.json",
+    "page/frontend-regional-cdn-libraries.json",
     "page/analytics-providers.json",
     "page/dynamic-technologies.json",
     "page/dynamic-asset-extractors.json",
