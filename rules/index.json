@@ -24,6 +24,7 @@
     "page/wordpress-themes.json",
     "page/drupal-themes.json",
     "page/probes.json",
+    "page/admin-panels-page.json",
     "page/languages.json",
     "page/cdn-providers.json",
     "page/cdn-providers-page.json",

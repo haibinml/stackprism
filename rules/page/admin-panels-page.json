@@ -1,0 +1,275 @@
+{
+  "page": {
+    "probes": {
+      "defaults": {
+        "category": "探针 / 监控",
+        "confidence": "高",
+        "matchType": "regex"
+      },
+      "rules": [
+        {
+          "defaults": {
+            "kind": "服务器 / 主机管理面板"
+          },
+          "rules": [
+            {
+              "name": "CloudPanel",
+              "patterns": [
+                "(?:^|\\n)CloudPanel(?:\\s*(?:Login|Panel|Dashboard|登录|控制台)|\\s*$)",
+                "cloudpanel[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "HestiaCP",
+              "patterns": [
+                "(?:^|\\n)(?:HestiaCP|Hestia Control Panel)(?:\\s*(?:Login|Panel|登录|控制台)|\\s*$)",
+                "hestia(?:cp|-control-panel)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "CyberPanel",
+              "patterns": [
+                "(?:^|\\n)CyberPanel(?:\\s*(?:Login|Dashboard|登录|控制台)|\\s*$)",
+                "cyberpanel[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "ISPConfig",
+              "patterns": [
+                "(?:^|\\n)ISPConfig(?:\\s*(?:Login|Dashboard|登录|控制台)|\\s*$)",
+                "ispconfig[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Virtualmin",
+              "patterns": [
+                "(?:^|\\n)Virtualmin(?:\\s*(?:Login|Panel|登录|控制台)|\\s*$)",
+                "virtual-server-theme[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "VestaCP",
+              "patterns": [
+                "(?:^|\\n)(?:VestaCP|Vesta Control Panel)(?:\\s*(?:Login|登录)|\\s*$)",
+                "vesta(?:cp)?[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Froxlor",
+              "patterns": [
+                "(?:^|\\n)Froxlor(?:\\s*(?:Server Management Panel|Login|登录)|\\s*$)",
+                "froxlor[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "DirectAdmin",
+              "patterns": [
+                "(?:^|\\n)DirectAdmin(?:\\s*(?:Login|Web Control Panel|登录|控制台)|\\s*$)",
+                "(?:^|/)CMD_LOGIN(?:[?#\\s]|$)",
+                "directadmin[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "cPanel",
+              "patterns": [
+                "(?:^|\\n)cPanel(?:\\s*(?:Login|Webmail|登录)|\\s*$)",
+                "(?:^|/)cPanel_magic_revision_[0-9]+/",
+                "(?:^|/)frontend/(?:paper_lantern|jupiter)(?:/|[?#]|$)"
+              ]
+            },
+            {
+              "name": "Plesk",
+              "patterns": [
+                "(?:^|\\n)Plesk(?:\\s*(?:Obsidian|Login|登录|控制台)|\\s*$)",
+                "plesk(?:-ui-library)?[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+                "(?:^|/)theme/plesk(?:/|[?#]|$)"
+              ]
+            },
+            {
+              "name": "Ajenti",
+              "patterns": ["(?:^|\\n)Ajenti(?:\\s*(?:Login|Panel|登录|控制台)|\\s*$)", "ajenti[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "kind": "网络 / NAS / 家庭服务器面板"
+          },
+          "rules": [
+            {
+              "name": "OpenWrt LuCI",
+              "patterns": [
+                "(?:^|\\n)(?:OpenWrt|LuCI)(?:\\s*(?:-|Login|登录|管理界面)|\\s*$)",
+                "(?:^|/)luci-static/(?:bootstrap|material|resources|openwrt2020)(?:/|[?#]|$)"
+              ]
+            },
+            {
+              "name": "TrueNAS",
+              "patterns": [
+                "(?:^|\\n)TrueNAS(?:\\s*(?:Login|Scale|Core|登录|控制台)|\\s*$)",
+                "truenas[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "OpenMediaVault",
+              "patterns": [
+                "(?:^|\\n)openmediavault(?:\\s*(?:Workbench|Login|登录|控制台)|\\s*$)",
+                "openmediavault[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Unraid",
+              "patterns": [
+                "(?:^|\\n)Unraid(?:\\s*(?:Login|Dashboard|登录|控制台)|\\s*$)",
+                "(?:^|/)webGui/(?:styles|scripts|images)(?:/|[?#]|$)"
+              ]
+            },
+            {
+              "name": "Home Assistant",
+              "patterns": [
+                "(?:^|\\n)Home Assistant(?:\\s*(?:Login|登录|控制台)|\\s*$)",
+                "(?:^|/)static/(?:frontend_latest|frontend_es5)(?:/|[?#]|$)"
+              ]
+            },
+            {
+              "name": "Frigate NVR",
+              "patterns": [
+                "(?:^|\\n)Frigate(?:\\s*(?:NVR|Login|Dashboard|登录|控制台)|\\s*$)",
+                "frigate[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "File Browser",
+              "kind": "文件管理面板",
+              "patterns": [
+                "(?:^|\\n)File Browser(?:\\s*(?:Login|登录|控制台)|\\s*$)",
+                "filebrowser[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Tiny File Manager",
+              "kind": "文件管理面板",
+              "patterns": [
+                "(?:^|\\n)Tiny File Manager(?:\\s*(?:Login|登录)|\\s*$)",
+                "tinyfilemanager[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "websitePrograms": {
+      "defaults": {
+        "category": "网站程序",
+        "confidence": "高",
+        "matchType": "regex"
+      },
+      "rules": [
+        {
+          "defaults": {
+            "kind": "数据库 / 数据平台管理面板"
+          },
+          "rules": [
+            {
+              "name": "phpMyAdmin",
+              "patterns": [
+                "<title>\\s*phpMyAdmin(?:\\s*</title>|\\s+-)",
+                "(?:^|/)phpmyadmin/(?:index\\.php|themes|js|libraries)(?:/|[?#]|$)"
+              ]
+            },
+            {
+              "name": "Adminer",
+              "patterns": ["<title>\\s*Adminer(?:\\s*</title>|\\s+-)", "(?:^|/)adminer(?:-[0-9.]+)?\\.php(?:[?#\\s]|$)"]
+            },
+            {
+              "name": "pgAdmin",
+              "patterns": ["<title>\\s*pgAdmin(?:\\s*</title>|\\s+-)", "(?:^|/)static/js/generated/(?:app|vendor|pgadmin)[^\\s\"'<>]*"]
+            },
+            {
+              "name": "MinIO Console",
+              "patterns": ["<title>\\s*MinIO(?:\\s+Console)?(?:\\s*</title>|\\s+-)", "minio[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "Hasura Console",
+              "patterns": ["<title>\\s*Hasura(?:\\s+Console)?(?:\\s*</title>|\\s+-)", "hasura[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "RabbitMQ Management",
+              "patterns": ["<title>\\s*RabbitMQ Management(?:\\s*</title>|\\s+-)", "rabbitmq[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "Kafka UI",
+              "patterns": ["<title>\\s*Kafka UI(?:\\s*</title>|\\s+-)", "kafka-ui[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "Redpanda Console",
+              "patterns": ["<title>\\s*Redpanda Console(?:\\s*</title>|\\s+-)", "redpanda[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "RedisInsight",
+              "patterns": ["<title>\\s*RedisInsight(?:\\s*</title>|\\s+-)", "redisinsight[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "Mongo Express",
+              "patterns": ["<title>\\s*Mongo Express(?:\\s*</title>|\\s+-)", "mongo-express[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "kind": "自托管应用"
+          },
+          "rules": [
+            {
+              "name": "Immich",
+              "patterns": ["<title>\\s*Immich(?:\\s*</title>|\\s+-)", "immich[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "PhotoPrism",
+              "patterns": ["<title>\\s*PhotoPrism(?:\\s*</title>|\\s+-)", "photoprism[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Jellyfin",
+              "patterns": ["<title>\\s*Jellyfin(?:\\s*</title>|\\s+-)", "jellyfin[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Navidrome",
+              "patterns": ["<title>\\s*Navidrome(?:\\s*</title>|\\s+-)", "navidrome[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Audiobookshelf",
+              "patterns": [
+                "<title>\\s*Audiobookshelf(?:\\s*</title>|\\s+-)",
+                "audiobookshelf[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "FreshRSS",
+              "patterns": ["<title>\\s*FreshRSS(?:\\s*</title>|\\s+-)", "freshrss[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "Miniflux",
+              "patterns": ["<title>\\s*Miniflux(?:\\s*</title>|\\s+-)", "miniflux[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "Wallabag",
+              "patterns": ["<title>\\s*Wallabag(?:\\s*</title>|\\s+-)", "wallabag[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "ProjectSend",
+              "patterns": ["<title>\\s*ProjectSend(?:\\s*</title>|\\s+-)", "projectsend[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "Gotify",
+              "patterns": ["<title>\\s*Gotify(?:\\s*</title>|\\s+-)", "gotify[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "ntfy",
+              "patterns": ["<title>\\s*ntfy(?:\\s*</title>|\\s+-)", "ntfy[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
