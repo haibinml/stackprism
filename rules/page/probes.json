@@ -43,81 +43,88 @@
         ]
       },
       {
-        "name": "ServerStatus",
-        "kind": "服务器状态探针",
-        "confidence": "高",
-        "patterns": [
-          "ServerStatus",
-          "server-status",
-          "serverstatus",
-          "月流量",
-          "在线率",
-          "负载",
-          "Mem Used"
+        "defaults": {
+          "kind": "服务器状态探针"
+        },
+        "rules": [
+          {
+            "name": "ServerStatus",
+            "confidence": "高",
+            "patterns": [
+              "ServerStatus",
+              "server-status",
+              "serverstatus",
+              "月流量",
+              "在线率",
+              "负载",
+              "Mem Used"
+            ]
+          },
+          {
+            "name": "ServerStatus-Hotaru",
+            "patterns": [
+              "ServerStatus-Hotaru",
+              "hotaru_theme",
+              "hotaru"
+            ]
+          },
+          {
+            "name": "ServerStatus-Rust",
+            "patterns": [
+              "ServerStatus-Rust",
+              "status-rust",
+              "sergate"
+            ]
+          }
         ]
       },
       {
-        "name": "ServerStatus-Hotaru",
-        "kind": "服务器状态探针",
-        "patterns": [
-          "ServerStatus-Hotaru",
-          "hotaru_theme",
-          "hotaru"
-        ]
-      },
-      {
-        "name": "ServerStatus-Rust",
-        "kind": "服务器状态探针",
-        "patterns": [
-          "ServerStatus-Rust",
-          "status-rust",
-          "sergate"
-        ]
-      },
-      {
-        "name": "哪吒监控 / Nezha",
-        "kind": "服务器监控面板",
-        "confidence": "高",
-        "patterns": [
-          "哪吒监控",
-          "Nezha Monitoring",
-          "nezha-dashboard",
-          "nezha\\.service",
-          "nezha",
-          "/api/v1/ws/server"
-        ]
-      },
-      {
-        "name": "Uptime Kuma",
-        "kind": "可用性监控",
-        "confidence": "高",
-        "patterns": [
-          "Uptime Kuma",
-          "uptime-kuma",
-          "kuma",
-          "status-page"
-        ]
-      },
-      {
-        "name": "Netdata",
-        "kind": "实时性能监控",
-        "confidence": "高",
-        "patterns": [
-          "Netdata",
-          "netdata",
-          "dashboard\\.js\\?v=",
-          "registry.my-netdata.io"
-        ]
-      },
-      {
-        "name": "phpSysInfo",
-        "kind": "服务器信息探针",
-        "confidence": "高",
-        "patterns": [
-          "phpSysInfo",
-          "phpsysinfo",
-          "templates/phpsysinfo",
-          "xml.php\\?plugin="
+        "defaults": {
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "哪吒监控 / Nezha",
+            "kind": "服务器监控面板",
+            "patterns": [
+              "哪吒监控",
+              "Nezha Monitoring",
+              "nezha-dashboard",
+              "nezha\\.service",
+              "nezha",
+              "/api/v1/ws/server"
+            ]
+          },
+          {
+            "name": "Uptime Kuma",
+            "kind": "可用性监控",
+            "patterns": [
+              "Uptime Kuma",
+              "uptime-kuma",
+              "kuma",
+              "status-page"
+            ]
+          },
+          {
+            "name": "Netdata",
+            "kind": "实时性能监控",
+            "patterns": [
+              "Netdata",
+              "netdata",
+              "dashboard\\.js\\?v=",
+              "registry.my-netdata.io"
+            ]
+          },
+          {
+            "name": "phpSysInfo",
+            "kind": "服务器信息探针",
+            "patterns": [
+              "phpSysInfo",
+              "phpsysinfo",
+              "templates/phpsysinfo",
+              "xml.php\\?plugin="
+            ]
+          }
         ]
       },
       {
@@ -141,45 +148,48 @@
         ]
       },
       {
-        "name": "Cockpit",
-        "kind": "服务器管理面板",
-        "patterns": [
-          "Cockpit",
-          "cockpit/static",
-          "cockpit-ws",
-          "org.cockpit-project"
-        ]
-      },
-      {
-        "name": "Webmin",
-        "kind": "服务器管理面板",
-        "patterns": [
-          "Webmin",
-          "webmin",
-          "session_login.cgi",
-          "unauthenticated/css"
-        ]
-      },
-      {
-        "name": "aaPanel / 宝塔面板",
-        "kind": "服务器管理面板",
-        "patterns": [
-          "宝塔面板",
-          "BT-Panel",
-          "aaPanel",
-          "bt.cn",
-          "app.bt.cn",
-          "BTPanel"
-        ]
-      },
-      {
-        "name": "1Panel",
-        "kind": "服务器管理面板",
-        "patterns": [
-          "1Panel",
-          "1panel",
-          "FIT2CLOUD",
-          "/api/v1/auth/login"
+        "defaults": {
+          "kind": "服务器管理面板"
+        },
+        "rules": [
+          {
+            "name": "Cockpit",
+            "patterns": [
+              "Cockpit",
+              "cockpit/static",
+              "cockpit-ws",
+              "org.cockpit-project"
+            ]
+          },
+          {
+            "name": "Webmin",
+            "patterns": [
+              "Webmin",
+              "webmin",
+              "session_login.cgi",
+              "unauthenticated/css"
+            ]
+          },
+          {
+            "name": "aaPanel / 宝塔面板",
+            "patterns": [
+              "宝塔面板",
+              "BT-Panel",
+              "aaPanel",
+              "bt.cn",
+              "app.bt.cn",
+              "BTPanel"
+            ]
+          },
+          {
+            "name": "1Panel",
+            "patterns": [
+              "1Panel",
+              "1panel",
+              "FIT2CLOUD",
+              "/api/v1/auth/login"
+            ]
+          }
         ]
       },
       {
@@ -192,40 +202,43 @@
         ]
       },
       {
-        "name": "Dashy",
-        "kind": "导航 / 状态面板",
-        "patterns": [
-          "Dashy",
-          "dashy",
-          "lissy93"
-        ]
-      },
-      {
-        "name": "Heimdall",
-        "kind": "导航 / 状态面板",
-        "patterns": [
-          "Heimdall",
-          "heimdall",
-          "laravel-heimdall"
-        ]
-      },
-      {
-        "name": "Homer Dashboard",
-        "kind": "导航 / 状态面板",
-        "patterns": [
-          "Homer Dashboard",
-          "homer.css",
-          "homer-theme",
-          "bastienwirtz/homer"
-        ]
-      },
-      {
-        "name": "Homarr",
-        "kind": "导航 / 状态面板",
-        "patterns": [
-          "Homarr",
-          "homarr",
-          "manage your apps"
+        "defaults": {
+          "kind": "导航 / 状态面板"
+        },
+        "rules": [
+          {
+            "name": "Dashy",
+            "patterns": [
+              "Dashy",
+              "dashy",
+              "lissy93"
+            ]
+          },
+          {
+            "name": "Heimdall",
+            "patterns": [
+              "Heimdall",
+              "heimdall",
+              "laravel-heimdall"
+            ]
+          },
+          {
+            "name": "Homer Dashboard",
+            "patterns": [
+              "Homer Dashboard",
+              "homer.css",
+              "homer-theme",
+              "bastienwirtz/homer"
+            ]
+          },
+          {
+            "name": "Homarr",
+            "patterns": [
+              "Homarr",
+              "homarr",
+              "manage your apps"
+            ]
+          }
         ]
       },
       {
@@ -259,62 +272,70 @@
         ]
       },
       {
-        "name": "Zabbix",
-        "kind": "监控系统",
-        "confidence": "高",
-        "patterns": [
-          "Zabbix",
-          "zabbix",
-          "zbx_session",
-          "jsLoader.php\\?ver="
+        "defaults": {
+          "kind": "监控系统"
+        },
+        "rules": [
+          {
+            "name": "Zabbix",
+            "confidence": "高",
+            "patterns": [
+              "Zabbix",
+              "zabbix",
+              "zbx_session",
+              "jsLoader.php\\?ver="
+            ]
+          },
+          {
+            "name": "Nagios",
+            "patterns": [
+              "Nagios",
+              "nagios",
+              "nagiosxi",
+              "status.cgi\\?host="
+            ]
+          },
+          {
+            "name": "Icinga",
+            "patterns": [
+              "Icinga",
+              "icinga",
+              "icingaweb2",
+              "icingaweb"
+            ]
+          }
         ]
       },
       {
-        "name": "Nagios",
-        "kind": "监控系统",
-        "patterns": [
-          "Nagios",
-          "nagios",
-          "nagiosxi",
-          "status.cgi\\?host="
-        ]
-      },
-      {
-        "name": "Icinga",
-        "kind": "监控系统",
-        "patterns": [
-          "Icinga",
-          "icinga",
-          "icingaweb2",
-          "icingaweb"
-        ]
-      },
-      {
-        "name": "Cacti",
-        "kind": "网络监控",
-        "patterns": [
-          "Cacti",
-          "cacti",
-          "graph_view.php",
-          "cacti_web"
-        ]
-      },
-      {
-        "name": "LibreNMS",
-        "kind": "网络监控",
-        "patterns": [
-          "LibreNMS",
-          "librenms",
-          "ajax_table.php"
-        ]
-      },
-      {
-        "name": "Observium",
-        "kind": "网络监控",
-        "patterns": [
-          "Observium",
-          "observium",
-          "graphs/to=now"
+        "defaults": {
+          "kind": "网络监控"
+        },
+        "rules": [
+          {
+            "name": "Cacti",
+            "patterns": [
+              "Cacti",
+              "cacti",
+              "graph_view.php",
+              "cacti_web"
+            ]
+          },
+          {
+            "name": "LibreNMS",
+            "patterns": [
+              "LibreNMS",
+              "librenms",
+              "ajax_table.php"
+            ]
+          },
+          {
+            "name": "Observium",
+            "patterns": [
+              "Observium",
+              "observium",
+              "graphs/to=now"
+            ]
+          }
         ]
       },
       {

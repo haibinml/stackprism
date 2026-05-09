@@ -2,210 +2,212 @@
   "page": {
     "dynamicTechnologies": [
       {
-        "category": "前端框架",
-        "name": "React",
-        "confidence": "中",
-        "patterns": [
-          "react(?:\\.production|\\.development)?(?:\\.min)?\\.js",
-          "react-dom",
-          "__react"
+        "defaults": {
+          "category": "前端框架"
+        },
+        "rules": [
+          {
+            "defaults": {
+              "confidence": "中"
+            },
+            "rules": [
+              {
+                "name": "React",
+                "patterns": [
+                  "react(?:\\.production|\\.development)?(?:\\.min)?\\.js",
+                  "react-dom",
+                  "__react"
+                ]
+              },
+              {
+                "name": "Vue",
+                "patterns": [
+                  "vue(?:\\.runtime)?(?:\\.global)?(?:\\.prod)?(?:\\.min)?\\.js",
+                  "vue-router",
+                  "pinia",
+                  "data-v-app"
+                ]
+              },
+              {
+                "name": "Angular / AngularJS",
+                "patterns": [
+                  "angular(?:\\.min)?\\.js",
+                  "@angular",
+                  "ng-version",
+                  "ng-app"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Next.js",
+            "confidence": "高",
+            "patterns": [
+              "/_next/",
+              "__next"
+            ]
+          },
+          {
+            "name": "Nuxt",
+            "confidence": "高",
+            "patterns": [
+              "/_nuxt/",
+              "__nuxt"
+            ]
+          },
+          {
+            "defaults": {
+              "confidence": "中"
+            },
+            "rules": [
+              {
+                "name": "Svelte",
+                "patterns": [
+                  "svelte",
+                  "svelte-"
+                ]
+              },
+              {
+                "name": "Astro",
+                "patterns": [
+                  "/_astro/",
+                  "astro-island",
+                  "astro-slot"
+                ]
+              },
+              {
+                "name": "jQuery",
+                "patterns": [
+                  "jquery(?:-\\d|\\.)"
+                ]
+              },
+              {
+                "name": "Alpine.js",
+                "patterns": [
+                  "alpinejs",
+                  "x-data",
+                  "x-init"
+                ]
+              },
+              {
+                "name": "htmx",
+                "patterns": [
+                  "htmx(?:\\.min)?\\.js",
+                  "hx-get",
+                  "hx-post"
+                ]
+              }
+            ]
+          }
         ]
       },
       {
-        "category": "前端框架",
-        "name": "Vue",
-        "confidence": "中",
-        "patterns": [
-          "vue(?:\\.runtime)?(?:\\.global)?(?:\\.prod)?(?:\\.min)?\\.js",
-          "vue-router",
-          "pinia",
-          "data-v-app"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Angular / AngularJS",
-        "confidence": "中",
-        "patterns": [
-          "angular(?:\\.min)?\\.js",
-          "@angular",
-          "ng-version",
-          "ng-app"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Next.js",
-        "confidence": "高",
-        "patterns": [
-          "/_next/",
-          "__next"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Nuxt",
-        "confidence": "高",
-        "patterns": [
-          "/_nuxt/",
-          "__nuxt"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Svelte",
-        "confidence": "中",
-        "patterns": [
-          "svelte",
-          "svelte-"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Astro",
-        "confidence": "中",
-        "patterns": [
-          "/_astro/",
-          "astro-island",
-          "astro-slot"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "jQuery",
-        "confidence": "中",
-        "patterns": [
-          "jquery(?:-\\d|\\.)"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Alpine.js",
-        "confidence": "中",
-        "patterns": [
-          "alpinejs",
-          "x-data",
-          "x-init"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "htmx",
-        "confidence": "中",
-        "patterns": [
-          "htmx(?:\\.min)?\\.js",
-          "hx-get",
-          "hx-post"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Bootstrap",
-        "confidence": "中",
-        "patterns": [
-          "bootstrap(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Tailwind CSS",
-        "confidence": "中",
-        "patterns": [
-          "cdn\\.tailwindcss\\.com",
-          "tailwind(?:\\.min)?\\.css",
-          "tailwind\\.config"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Ant Design",
-        "confidence": "中",
-        "patterns": [
-          "antd",
-          "ant-design",
-          "\\.ant-"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Material UI",
-        "confidence": "中",
-        "patterns": [
-          "@mui",
-          "material-ui",
-          "mui-"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Element UI / Element Plus",
-        "confidence": "中",
-        "patterns": [
-          "element-plus",
-          "element-ui",
-          "\\.el-"
-        ]
-      },
-      {
-        "category": "构建与运行时",
-        "name": "Webpack",
-        "confidence": "中",
-        "patterns": [
-          "webpack",
-          "webpackchunk",
-          "webpackjsonp"
-        ]
-      },
-      {
-        "category": "构建与运行时",
-        "name": "Vite",
-        "confidence": "中",
-        "patterns": [
-          "/@vite/client",
-          "__vite",
-          "vite/client"
-        ]
-      },
-      {
-        "category": "前端库",
-        "name": "Axios",
-        "confidence": "中",
-        "patterns": [
-          "axios(?:\\.min)?\\.js"
-        ]
-      },
-      {
-        "category": "前端库",
-        "name": "ECharts",
-        "confidence": "中",
-        "patterns": [
-          "echarts(?:\\.min)?\\.js"
-        ]
-      },
-      {
-        "category": "前端库",
-        "name": "Chart.js",
-        "confidence": "中",
-        "patterns": [
-          "chart(?:\\.umd)?(?:\\.min)?\\.js",
-          "chartjs"
-        ]
-      },
-      {
-        "category": "前端库",
-        "name": "Three.js",
-        "confidence": "中",
-        "patterns": [
-          "three(?:\\.module)?(?:\\.min)?\\.js",
-          "threejs"
-        ]
-      },
-      {
-        "category": "前端库",
-        "name": "Swiper",
-        "confidence": "中",
-        "patterns": [
-          "swiper(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)"
+        "defaults": {
+          "confidence": "中"
+        },
+        "rules": [
+          {
+            "defaults": {
+              "category": "UI / CSS 框架"
+            },
+            "rules": [
+              {
+                "name": "Bootstrap",
+                "patterns": [
+                  "bootstrap(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)"
+                ]
+              },
+              {
+                "name": "Tailwind CSS",
+                "patterns": [
+                  "cdn\\.tailwindcss\\.com",
+                  "tailwind(?:\\.min)?\\.css",
+                  "tailwind\\.config"
+                ]
+              },
+              {
+                "name": "Ant Design",
+                "patterns": [
+                  "antd",
+                  "ant-design",
+                  "\\.ant-"
+                ]
+              },
+              {
+                "name": "Material UI",
+                "patterns": [
+                  "@mui",
+                  "material-ui",
+                  "mui-"
+                ]
+              },
+              {
+                "name": "Element UI / Element Plus",
+                "patterns": [
+                  "element-plus",
+                  "element-ui",
+                  "\\.el-"
+                ]
+              }
+            ]
+          },
+          {
+            "category": "构建与运行时",
+            "name": "Webpack",
+            "patterns": [
+              "webpack",
+              "webpackchunk",
+              "webpackjsonp"
+            ]
+          },
+          {
+            "category": "构建与运行时",
+            "name": "Vite",
+            "patterns": [
+              "/@vite/client",
+              "__vite",
+              "vite/client"
+            ]
+          },
+          {
+            "defaults": {
+              "category": "前端库"
+            },
+            "rules": [
+              {
+                "name": "Axios",
+                "patterns": [
+                  "axios(?:\\.min)?\\.js"
+                ]
+              },
+              {
+                "name": "ECharts",
+                "patterns": [
+                  "echarts(?:\\.min)?\\.js"
+                ]
+              },
+              {
+                "name": "Chart.js",
+                "patterns": [
+                  "chart(?:\\.umd)?(?:\\.min)?\\.js",
+                  "chartjs"
+                ]
+              },
+              {
+                "name": "Three.js",
+                "patterns": [
+                  "three(?:\\.module)?(?:\\.min)?\\.js",
+                  "threejs"
+                ]
+              },
+              {
+                "name": "Swiper",
+                "patterns": [
+                  "swiper(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)"
+                ]
+              }
+            ]
+          }
         ]
       }
     ]

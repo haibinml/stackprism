@@ -2,46 +2,49 @@
   "page": {
     "paymentSystems": [
       {
-        "name": "支付宝支付",
-        "kind": "国内支付",
-        "confidence": "高",
-        "patterns": [
-          "openapi\\.alipay\\.com/gateway\\.do",
-          "alipay\\.trade",
-          "alipayjsapi",
-          "支付宝支付",
-          "alipay.com"
-        ]
-      },
-      {
-        "name": "微信支付",
-        "kind": "国内支付",
-        "confidence": "高",
-        "patterns": [
-          "pay\\.weixin\\.qq\\.com",
-          "wx\\.chooseWXPay",
-          "getBrandWCPayRequest",
-          "WeixinJSBridge.*getBrandWCPayRequest",
-          "微信支付"
-        ]
-      },
-      {
-        "name": "QQ 钱包",
-        "kind": "国内支付",
-        "patterns": [
-          "qpay\\.qq\\.com",
-          "mqqpay",
-          "QQ钱包",
-          "qqwallet"
-        ]
-      },
-      {
-        "name": "财付通 / Tenpay",
-        "kind": "国内支付",
-        "patterns": [
-          "tenpay\\.com",
-          "财付通",
-          "Tenpay"
+        "defaults": {
+          "kind": "国内支付"
+        },
+        "rules": [
+          {
+            "name": "支付宝支付",
+            "confidence": "高",
+            "patterns": [
+              "openapi\\.alipay\\.com/gateway\\.do",
+              "alipay\\.trade",
+              "alipayjsapi",
+              "支付宝支付",
+              "alipay.com"
+            ]
+          },
+          {
+            "name": "微信支付",
+            "confidence": "高",
+            "patterns": [
+              "pay\\.weixin\\.qq\\.com",
+              "wx\\.chooseWXPay",
+              "getBrandWCPayRequest",
+              "WeixinJSBridge.*getBrandWCPayRequest",
+              "微信支付"
+            ]
+          },
+          {
+            "name": "QQ 钱包",
+            "patterns": [
+              "qpay\\.qq\\.com",
+              "mqqpay",
+              "QQ钱包",
+              "qqwallet"
+            ]
+          },
+          {
+            "name": "财付通 / Tenpay",
+            "patterns": [
+              "tenpay\\.com",
+              "财付通",
+              "Tenpay"
+            ]
+          }
         ]
       },
       {
@@ -138,120 +141,115 @@
         ]
       },
       {
-        "name": "易付宝 / Suning Pay",
-        "kind": "第三方支付 / 国内支付",
-        "patterns": [
-          "suningpay\\.com",
-          "pay\\.suning\\.com",
-          "epp\\.suning\\.com",
-          "易付宝",
-          "suning.*pay"
-        ]
-      },
-      {
-        "name": "网易支付",
-        "kind": "第三方支付 / 国内支付",
-        "patterns": [
-          "epay\\.163\\.com",
-          "网易支付",
-          "netease.*pay"
-        ]
-      },
-      {
-        "name": "拉卡拉支付",
-        "kind": "第三方支付 / 国内支付",
-        "patterns": [
-          "lakala\\.com",
-          "lklpay",
-          "拉卡拉",
-          "lakala"
-        ]
-      },
-      {
-        "name": "通联支付 / Allinpay",
-        "kind": "第三方支付 / 国内支付",
-        "patterns": [
-          "allinpay\\.com",
-          "allinpay",
-          "通联支付"
-        ]
-      },
-      {
-        "name": "富友支付 / Fuiou",
-        "kind": "第三方支付 / 国内支付",
-        "patterns": [
-          "fuiou\\.com",
-          "fuioupay",
-          "富友支付",
-          "富友"
-        ]
-      },
-      {
-        "name": "宝付支付 / Baofoo",
-        "kind": "第三方支付 / 国内支付",
-        "patterns": [
-          "baofoo\\.com",
-          "baofoo",
-          "宝付支付",
-          "宝付"
-        ]
-      },
-      {
-        "name": "银盛支付 / Ysepay",
-        "kind": "第三方支付 / 国内支付",
-        "patterns": [
-          "ysepay\\.com",
-          "yinshengpay",
-          "银盛支付",
-          "银盛"
-        ]
-      },
-      {
-        "name": "合利宝支付 / Helipay",
-        "kind": "第三方支付 / 国内支付",
-        "patterns": [
-          "helipay\\.com",
-          "helipay",
-          "合利宝"
-        ]
-      },
-      {
-        "name": "汇聚支付 / JoinPay",
-        "kind": "第三方支付 / 国内支付",
-        "patterns": [
-          "joinpay\\.com",
-          "joinpay",
-          "汇聚支付"
-        ]
-      },
-      {
-        "name": "杉德支付 / SandPay",
-        "kind": "第三方支付 / 国内支付",
-        "patterns": [
-          "sandpay\\.com\\.cn",
-          "sandpay",
-          "杉德支付",
-          "杉德"
-        ]
-      },
-      {
-        "name": "乐刷支付",
-        "kind": "第三方支付 / 国内支付",
-        "patterns": [
-          "leshua\\.com",
-          "leshua",
-          "乐刷支付",
-          "乐刷"
-        ]
-      },
-      {
-        "name": "钱方好近 / QFPay",
-        "kind": "第三方支付 / 国内支付",
-        "patterns": [
-          "qfpay\\.com",
-          "qfpay",
-          "钱方好近",
-          "钱方支付"
+        "defaults": {
+          "kind": "第三方支付 / 国内支付"
+        },
+        "rules": [
+          {
+            "name": "易付宝 / Suning Pay",
+            "patterns": [
+              "suningpay\\.com",
+              "pay\\.suning\\.com",
+              "epp\\.suning\\.com",
+              "易付宝",
+              "suning.*pay"
+            ]
+          },
+          {
+            "name": "网易支付",
+            "patterns": [
+              "epay\\.163\\.com",
+              "网易支付",
+              "netease.*pay"
+            ]
+          },
+          {
+            "name": "拉卡拉支付",
+            "patterns": [
+              "lakala\\.com",
+              "lklpay",
+              "拉卡拉",
+              "lakala"
+            ]
+          },
+          {
+            "name": "通联支付 / Allinpay",
+            "patterns": [
+              "allinpay\\.com",
+              "allinpay",
+              "通联支付"
+            ]
+          },
+          {
+            "name": "富友支付 / Fuiou",
+            "patterns": [
+              "fuiou\\.com",
+              "fuioupay",
+              "富友支付",
+              "富友"
+            ]
+          },
+          {
+            "name": "宝付支付 / Baofoo",
+            "patterns": [
+              "baofoo\\.com",
+              "baofoo",
+              "宝付支付",
+              "宝付"
+            ]
+          },
+          {
+            "name": "银盛支付 / Ysepay",
+            "patterns": [
+              "ysepay\\.com",
+              "yinshengpay",
+              "银盛支付",
+              "银盛"
+            ]
+          },
+          {
+            "name": "合利宝支付 / Helipay",
+            "patterns": [
+              "helipay\\.com",
+              "helipay",
+              "合利宝"
+            ]
+          },
+          {
+            "name": "汇聚支付 / JoinPay",
+            "patterns": [
+              "joinpay\\.com",
+              "joinpay",
+              "汇聚支付"
+            ]
+          },
+          {
+            "name": "杉德支付 / SandPay",
+            "patterns": [
+              "sandpay\\.com\\.cn",
+              "sandpay",
+              "杉德支付",
+              "杉德"
+            ]
+          },
+          {
+            "name": "乐刷支付",
+            "patterns": [
+              "leshua\\.com",
+              "leshua",
+              "乐刷支付",
+              "乐刷"
+            ]
+          },
+          {
+            "name": "钱方好近 / QFPay",
+            "patterns": [
+              "qfpay\\.com",
+              "qfpay",
+              "钱方好近",
+              "钱方支付"
+            ]
+          }
         ]
       },
       {
@@ -395,93 +393,97 @@
         ]
       },
       {
-        "name": "连连支付",
-        "kind": "国内支付",
-        "patterns": [
-          "lianlianpay",
-          "lianlianpay.com",
-          "连连支付"
+        "defaults": {
+          "kind": "国内支付"
+        },
+        "rules": [
+          {
+            "name": "连连支付",
+            "patterns": [
+              "lianlianpay",
+              "lianlianpay.com",
+              "连连支付"
+            ]
+          },
+          {
+            "name": "易宝支付",
+            "patterns": [
+              "yeepay",
+              "yeepay.com",
+              "易宝支付"
+            ]
+          },
+          {
+            "name": "汇付天下",
+            "patterns": [
+              "chinapnr",
+              "huifu",
+              "汇付天下"
+            ]
+          },
+          {
+            "name": "快钱支付",
+            "patterns": [
+              "99bill",
+              "快钱支付",
+              "kuaiqian"
+            ]
+          }
         ]
       },
       {
-        "name": "易宝支付",
-        "kind": "国内支付",
-        "patterns": [
-          "yeepay",
-          "yeepay.com",
-          "易宝支付"
-        ]
-      },
-      {
-        "name": "汇付天下",
-        "kind": "国内支付",
-        "patterns": [
-          "chinapnr",
-          "huifu",
-          "汇付天下"
-        ]
-      },
-      {
-        "name": "快钱支付",
-        "kind": "国内支付",
-        "patterns": [
-          "99bill",
-          "快钱支付",
-          "kuaiqian"
-        ]
-      },
-      {
-        "name": "PayPal",
-        "kind": "国际支付",
-        "patterns": [
-          "paypal\\.com/sdk/js",
-          "paypalobjects\\.com",
-          "paypal.Buttons"
-        ]
-      },
-      {
-        "name": "Stripe",
-        "kind": "国际支付",
-        "patterns": [
-          "js\\.stripe\\.com",
-          "checkout\\.stripe\\.com",
-          "stripe\\.redirectToCheckout"
-        ]
-      },
-      {
-        "name": "Adyen",
-        "kind": "国际支付",
-        "patterns": [
-          "checkoutshopper-live\\.adyen\\.com",
-          "AdyenCheckout",
-          "adyen.com/checkout"
-        ]
-      },
-      {
-        "name": "Braintree",
-        "kind": "国际支付",
-        "patterns": [
-          "js\\.braintreegateway\\.com",
-          "braintreegateway.com",
-          "braintree.dropin"
-        ]
-      },
-      {
-        "name": "Paddle",
-        "kind": "国际支付",
-        "patterns": [
-          "cdn\\.paddle\\.com",
-          "Paddle.Checkout",
-          "paddle.com/paddle"
-        ]
-      },
-      {
-        "name": "Razorpay",
-        "kind": "国际支付",
-        "patterns": [
-          "checkout\\.razorpay\\.com",
-          "Razorpay",
-          "razorpay_payment_id"
+        "defaults": {
+          "kind": "国际支付"
+        },
+        "rules": [
+          {
+            "name": "PayPal",
+            "patterns": [
+              "paypal\\.com/sdk/js",
+              "paypalobjects\\.com",
+              "paypal.Buttons"
+            ]
+          },
+          {
+            "name": "Stripe",
+            "patterns": [
+              "js\\.stripe\\.com",
+              "checkout\\.stripe\\.com",
+              "stripe\\.redirectToCheckout"
+            ]
+          },
+          {
+            "name": "Adyen",
+            "patterns": [
+              "checkoutshopper-live\\.adyen\\.com",
+              "AdyenCheckout",
+              "adyen.com/checkout"
+            ]
+          },
+          {
+            "name": "Braintree",
+            "patterns": [
+              "js\\.braintreegateway\\.com",
+              "braintreegateway.com",
+              "braintree.dropin"
+            ]
+          },
+          {
+            "name": "Paddle",
+            "patterns": [
+              "cdn\\.paddle\\.com",
+              "Paddle.Checkout",
+              "paddle.com/paddle"
+            ]
+          },
+          {
+            "name": "Razorpay",
+            "patterns": [
+              "checkout\\.razorpay\\.com",
+              "Razorpay",
+              "razorpay_payment_id"
+            ]
+          }
         ]
       },
       {
@@ -503,116 +505,111 @@
         ]
       },
       {
-        "name": "Square",
-        "kind": "国际第三方支付",
-        "patterns": [
-          "squareup\\.com",
-          "web\\.squarecdn\\.com",
-          "Square\\.payments",
-          "square\\.payments"
-        ]
-      },
-      {
-        "name": "Worldpay",
-        "kind": "国际第三方支付",
-        "patterns": [
-          "worldpay\\.com",
-          "secure\\.worldpay\\.com",
-          "worldpay"
-        ]
-      },
-      {
-        "name": "Checkout.com",
-        "kind": "国际第三方支付",
-        "patterns": [
-          "checkout\\.com",
-          "cko\\.js",
-          "checkout\\.frames",
-          "frames\\.checkout\\.com"
-        ]
-      },
-      {
-        "name": "Mollie",
-        "kind": "国际第三方支付",
-        "patterns": [
-          "mollie\\.com",
-          "js\\.mollie\\.com",
-          "mollie-components"
-        ]
-      },
-      {
-        "name": "Authorize.Net",
-        "kind": "国际第三方支付",
-        "patterns": [
-          "authorize\\.net",
-          "js\\.authorize\\.net",
-          "Accept\\.dispatchData",
-          "AcceptUI"
-        ]
-      },
-      {
-        "name": "CyberSource",
-        "kind": "国际第三方支付",
-        "patterns": [
-          "cybersource\\.com",
-          "flex\\.cybersource\\.com",
-          "cybersource"
-        ]
-      },
-      {
-        "name": "2Checkout / Verifone",
-        "kind": "国际第三方支付",
-        "patterns": [
-          "2checkout\\.com",
-          "2co\\.com",
-          "verifone\\.cloud",
-          "Verifone"
-        ]
-      },
-      {
-        "name": "PayU",
-        "kind": "国际第三方支付",
-        "patterns": [
-          "payu\\.com",
-          "secure\\.payu",
-          "payu\\.in",
-          "payu\\.latam"
-        ]
-      },
-      {
-        "name": "Payoneer",
-        "kind": "国际第三方支付",
-        "patterns": [
-          "payoneer\\.com",
-          "payoneer",
-          "checkout\\.payoneer"
-        ]
-      },
-      {
-        "name": "Paystack",
-        "kind": "国际第三方支付",
-        "patterns": [
-          "paystack\\.co",
-          "js\\.paystack\\.co",
-          "PaystackPop"
-        ]
-      },
-      {
-        "name": "Flutterwave",
-        "kind": "国际第三方支付",
-        "patterns": [
-          "flutterwave\\.com",
-          "checkout\\.flutterwave\\.com",
-          "FlutterwaveCheckout"
-        ]
-      },
-      {
-        "name": "Mercado Pago",
-        "kind": "国际第三方支付",
-        "patterns": [
-          "mercadopago\\.com",
-          "sdk\\.mercadopago\\.com",
-          "MercadoPago"
+        "defaults": {
+          "kind": "国际第三方支付"
+        },
+        "rules": [
+          {
+            "name": "Square",
+            "patterns": [
+              "squareup\\.com",
+              "web\\.squarecdn\\.com",
+              "Square\\.payments",
+              "square\\.payments"
+            ]
+          },
+          {
+            "name": "Worldpay",
+            "patterns": [
+              "worldpay\\.com",
+              "secure\\.worldpay\\.com",
+              "worldpay"
+            ]
+          },
+          {
+            "name": "Checkout.com",
+            "patterns": [
+              "checkout\\.com",
+              "cko\\.js",
+              "checkout\\.frames",
+              "frames\\.checkout\\.com"
+            ]
+          },
+          {
+            "name": "Mollie",
+            "patterns": [
+              "mollie\\.com",
+              "js\\.mollie\\.com",
+              "mollie-components"
+            ]
+          },
+          {
+            "name": "Authorize.Net",
+            "patterns": [
+              "authorize\\.net",
+              "js\\.authorize\\.net",
+              "Accept\\.dispatchData",
+              "AcceptUI"
+            ]
+          },
+          {
+            "name": "CyberSource",
+            "patterns": [
+              "cybersource\\.com",
+              "flex\\.cybersource\\.com",
+              "cybersource"
+            ]
+          },
+          {
+            "name": "2Checkout / Verifone",
+            "patterns": [
+              "2checkout\\.com",
+              "2co\\.com",
+              "verifone\\.cloud",
+              "Verifone"
+            ]
+          },
+          {
+            "name": "PayU",
+            "patterns": [
+              "payu\\.com",
+              "secure\\.payu",
+              "payu\\.in",
+              "payu\\.latam"
+            ]
+          },
+          {
+            "name": "Payoneer",
+            "patterns": [
+              "payoneer\\.com",
+              "payoneer",
+              "checkout\\.payoneer"
+            ]
+          },
+          {
+            "name": "Paystack",
+            "patterns": [
+              "paystack\\.co",
+              "js\\.paystack\\.co",
+              "PaystackPop"
+            ]
+          },
+          {
+            "name": "Flutterwave",
+            "patterns": [
+              "flutterwave\\.com",
+              "checkout\\.flutterwave\\.com",
+              "FlutterwaveCheckout"
+            ]
+          },
+          {
+            "name": "Mercado Pago",
+            "patterns": [
+              "mercadopago\\.com",
+              "sdk\\.mercadopago\\.com",
+              "MercadoPago"
+            ]
+          }
         ]
       }
     ]

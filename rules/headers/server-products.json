@@ -2,283 +2,264 @@
   "headers": {
     "serverProducts": [
       {
-        "name": "Nginx",
-        "category": "Web 服务器",
-        "patterns": [
-          "nginx"
+        "defaults": {
+          "category": "Web 服务器"
+        },
+        "rules": [
+          {
+            "name": "Nginx",
+            "patterns": [
+              "nginx"
+            ]
+          },
+          {
+            "name": "OpenResty",
+            "patterns": [
+              "openresty"
+            ]
+          },
+          {
+            "name": "Tengine",
+            "patterns": [
+              "tengine"
+            ]
+          },
+          {
+            "name": "Apache HTTP Server",
+            "patterns": [
+              "apache"
+            ]
+          },
+          {
+            "name": "Microsoft IIS",
+            "patterns": [
+              "microsoft-iis|iis"
+            ]
+          },
+          {
+            "name": "LiteSpeed",
+            "patterns": [
+              "litespeed"
+            ]
+          },
+          {
+            "name": "Caddy",
+            "patterns": [
+              "caddy"
+            ]
+          },
+          {
+            "name": "Envoy",
+            "patterns": [
+              "envoy"
+            ]
+          },
+          {
+            "name": "Traefik",
+            "patterns": [
+              "traefik"
+            ]
+          },
+          {
+            "name": "HAProxy",
+            "patterns": [
+              "haproxy"
+            ]
+          },
+          {
+            "name": "Varnish",
+            "patterns": [
+              "varnish"
+            ]
+          },
+          {
+            "name": "Apache Traffic Server",
+            "patterns": [
+              "trafficserver|ats"
+            ]
+          },
+          {
+            "name": "Jetty",
+            "patterns": [
+              "jetty"
+            ]
+          },
+          {
+            "name": "Tomcat",
+            "patterns": [
+              "tomcat"
+            ]
+          },
+          {
+            "name": "Undertow",
+            "patterns": [
+              "undertow"
+            ]
+          },
+          {
+            "name": "WildFly",
+            "patterns": [
+              "wildfly"
+            ]
+          },
+          {
+            "name": "GlassFish",
+            "patterns": [
+              "glassfish"
+            ]
+          },
+          {
+            "name": "WebSphere",
+            "patterns": [
+              "websphere"
+            ]
+          },
+          {
+            "name": "WebLogic",
+            "patterns": [
+              "weblogic"
+            ]
+          },
+          {
+            "name": "Kestrel",
+            "patterns": [
+              "kestrel"
+            ]
+          },
+          {
+            "name": "Cowboy",
+            "patterns": [
+              "cowboy"
+            ]
+          },
+          {
+            "name": "Puma",
+            "patterns": [
+              "puma"
+            ]
+          },
+          {
+            "name": "Unicorn",
+            "patterns": [
+              "unicorn"
+            ]
+          },
+          {
+            "name": "uWSGI",
+            "patterns": [
+              "uwsgi"
+            ]
+          },
+          {
+            "name": "Gunicorn",
+            "patterns": [
+              "gunicorn"
+            ]
+          },
+          {
+            "name": "Werkzeug",
+            "patterns": [
+              "werkzeug"
+            ]
+          }
         ]
       },
       {
-        "name": "OpenResty",
-        "category": "Web 服务器",
-        "patterns": [
-          "openresty"
+        "defaults": {
+          "category": "后端 / 服务器框架"
+        },
+        "rules": [
+          {
+            "name": "Node.js",
+            "patterns": [
+              "node\\.?js"
+            ]
+          },
+          {
+            "name": "Deno",
+            "patterns": [
+              "deno"
+            ]
+          },
+          {
+            "name": "Bun",
+            "patterns": [
+              "\\bbun\\b"
+            ]
+          }
         ]
       },
       {
-        "name": "Tengine",
-        "category": "Web 服务器",
-        "patterns": [
-          "tengine"
-        ]
-      },
-      {
-        "name": "Apache HTTP Server",
-        "category": "Web 服务器",
-        "patterns": [
-          "apache"
-        ]
-      },
-      {
-        "name": "Microsoft IIS",
-        "category": "Web 服务器",
-        "patterns": [
-          "microsoft-iis|iis"
-        ]
-      },
-      {
-        "name": "LiteSpeed",
-        "category": "Web 服务器",
-        "patterns": [
-          "litespeed"
-        ]
-      },
-      {
-        "name": "Caddy",
-        "category": "Web 服务器",
-        "patterns": [
-          "caddy"
-        ]
-      },
-      {
-        "name": "Envoy",
-        "category": "Web 服务器",
-        "patterns": [
-          "envoy"
-        ]
-      },
-      {
-        "name": "Traefik",
-        "category": "Web 服务器",
-        "patterns": [
-          "traefik"
-        ]
-      },
-      {
-        "name": "HAProxy",
-        "category": "Web 服务器",
-        "patterns": [
-          "haproxy"
-        ]
-      },
-      {
-        "name": "Varnish",
-        "category": "Web 服务器",
-        "patterns": [
-          "varnish"
-        ]
-      },
-      {
-        "name": "Apache Traffic Server",
-        "category": "Web 服务器",
-        "patterns": [
-          "trafficserver|ats"
-        ]
-      },
-      {
-        "name": "Jetty",
-        "category": "Web 服务器",
-        "patterns": [
-          "jetty"
-        ]
-      },
-      {
-        "name": "Tomcat",
-        "category": "Web 服务器",
-        "patterns": [
-          "tomcat"
-        ]
-      },
-      {
-        "name": "Undertow",
-        "category": "Web 服务器",
-        "patterns": [
-          "undertow"
-        ]
-      },
-      {
-        "name": "WildFly",
-        "category": "Web 服务器",
-        "patterns": [
-          "wildfly"
-        ]
-      },
-      {
-        "name": "GlassFish",
-        "category": "Web 服务器",
-        "patterns": [
-          "glassfish"
-        ]
-      },
-      {
-        "name": "WebSphere",
-        "category": "Web 服务器",
-        "patterns": [
-          "websphere"
-        ]
-      },
-      {
-        "name": "WebLogic",
-        "category": "Web 服务器",
-        "patterns": [
-          "weblogic"
-        ]
-      },
-      {
-        "name": "Kestrel",
-        "category": "Web 服务器",
-        "patterns": [
-          "kestrel"
-        ]
-      },
-      {
-        "name": "Cowboy",
-        "category": "Web 服务器",
-        "patterns": [
-          "cowboy"
-        ]
-      },
-      {
-        "name": "Puma",
-        "category": "Web 服务器",
-        "patterns": [
-          "puma"
-        ]
-      },
-      {
-        "name": "Unicorn",
-        "category": "Web 服务器",
-        "patterns": [
-          "unicorn"
-        ]
-      },
-      {
-        "name": "uWSGI",
-        "category": "Web 服务器",
-        "patterns": [
-          "uwsgi"
-        ]
-      },
-      {
-        "name": "Gunicorn",
-        "category": "Web 服务器",
-        "patterns": [
-          "gunicorn"
-        ]
-      },
-      {
-        "name": "Werkzeug",
-        "category": "Web 服务器",
-        "patterns": [
-          "werkzeug"
-        ]
-      },
-      {
-        "name": "Node.js",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "node\\.?js"
-        ]
-      },
-      {
-        "name": "Deno",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "deno"
-        ]
-      },
-      {
-        "name": "Bun",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "\\bbun\\b"
-        ]
-      },
-      {
-        "name": "Vercel",
-        "category": "CDN / 托管",
-        "patterns": [
-          "vercel"
-        ]
-      },
-      {
-        "name": "Cloudflare",
-        "category": "CDN / 托管",
-        "patterns": [
-          "cloudflare"
-        ]
-      },
-      {
-        "name": "AmazonS3",
-        "category": "CDN / 托管",
-        "patterns": [
-          "amazons3|amazon s3|s3"
-        ]
-      },
-      {
-        "name": "Akamai",
-        "category": "CDN / 托管",
-        "patterns": [
-          "akamai|ghost"
-        ]
-      },
-      {
-        "name": "Fastly",
-        "category": "CDN / 托管",
-        "patterns": [
-          "fastly"
-        ]
-      },
-      {
-        "name": "Bunny CDN",
-        "category": "CDN / 托管",
-        "patterns": [
-          "bunnycdn|bunny"
-        ]
-      },
-      {
-        "name": "Gcore CDN",
-        "category": "CDN / 托管",
-        "patterns": [
-          "gcore"
-        ]
-      },
-      {
-        "name": "Tencent Cloud CDN",
-        "category": "CDN / 托管",
-        "patterns": [
-          "tencent|qcloud"
-        ]
-      },
-      {
-        "name": "Alibaba Cloud CDN",
-        "category": "CDN / 托管",
-        "patterns": [
-          "aliyun|alibaba|tengine"
-        ]
-      },
-      {
-        "name": "Huawei Cloud CDN",
-        "category": "CDN / 托管",
-        "patterns": [
-          "huawei|hwcdn"
-        ]
-      },
-      {
-        "name": "Baidu Cloud CDN",
-        "category": "CDN / 托管",
-        "patterns": [
-          "baidu|bce"
+        "defaults": {
+          "category": "CDN / 托管"
+        },
+        "rules": [
+          {
+            "name": "Vercel",
+            "patterns": [
+              "vercel"
+            ]
+          },
+          {
+            "name": "Cloudflare",
+            "patterns": [
+              "cloudflare"
+            ]
+          },
+          {
+            "name": "AmazonS3",
+            "patterns": [
+              "amazons3|amazon s3|s3"
+            ]
+          },
+          {
+            "name": "Akamai",
+            "patterns": [
+              "akamai|ghost"
+            ]
+          },
+          {
+            "name": "Fastly",
+            "patterns": [
+              "fastly"
+            ]
+          },
+          {
+            "name": "Bunny CDN",
+            "patterns": [
+              "bunnycdn|bunny"
+            ]
+          },
+          {
+            "name": "Gcore CDN",
+            "patterns": [
+              "gcore"
+            ]
+          },
+          {
+            "name": "Tencent Cloud CDN",
+            "patterns": [
+              "tencent|qcloud"
+            ]
+          },
+          {
+            "name": "Alibaba Cloud CDN",
+            "patterns": [
+              "aliyun|alibaba|tengine"
+            ]
+          },
+          {
+            "name": "Huawei Cloud CDN",
+            "patterns": [
+              "huawei|hwcdn"
+            ]
+          },
+          {
+            "name": "Baidu Cloud CDN",
+            "patterns": [
+              "baidu|bce"
+            ]
+          }
         ]
       }
     ]

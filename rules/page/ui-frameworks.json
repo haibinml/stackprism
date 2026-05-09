@@ -2,264 +2,265 @@
   "page": {
     "uiFrameworks": [
       {
-        "category": "UI / CSS 框架",
-        "name": "Bootstrap",
-        "confidence": "高",
-        "patterns": [
-          "bootstrap(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)"
-        ],
-        "globals": [
-          "bootstrap"
-        ],
-        "classNames": [
-          "container",
-          "row",
-          "navbar",
-          "modal",
-          "dropdown-menu"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Tailwind CSS",
-        "confidence": "高",
-        "patterns": [
-          "cdn\\.tailwindcss\\.com",
-          "tailwind(?:\\.min)?\\.css",
-          "tailwind\\.config"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "shadcn/ui",
-        "confidence": "高",
-        "patterns": [
-          "shadcn",
-          "@shadcn\\/ui",
-          "components\\/ui",
-          "class-variance-authority"
-        ],
-        "cssVariables": [
-          "--background",
-          "--foreground",
-          "--card",
-          "--card-foreground",
-          "--popover",
-          "--popover-foreground",
-          "--primary",
-          "--primary-foreground",
-          "--secondary",
-          "--secondary-foreground",
-          "--muted",
-          "--muted-foreground",
-          "--accent",
-          "--accent-foreground",
-          "--destructive",
-          "--destructive-foreground",
-          "--border",
-          "--input",
-          "--ring",
-          "--radius"
-        ],
-        "minCssVariableMatches": 10
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Material UI",
-        "confidence": "中",
-        "patterns": [
-          "@mui",
-          "material-ui",
-          "mui-",
-          "data-emotion=\"css"
-        ],
-        "classPrefixes": [
-          "Mui"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Ant Design",
-        "confidence": "中",
-        "patterns": [
-          "antd",
-          "ant-design"
-        ],
-        "classPrefixes": [
-          "ant-"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Element UI / Element Plus",
-        "confidence": "中",
-        "patterns": [
-          "element-plus",
-          "element-ui"
-        ],
-        "classPrefixes": [
-          "el-"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Vuetify",
-        "confidence": "高",
-        "patterns": [
-          "vuetify"
-        ],
-        "selectors": [
-          ".v-application"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Chakra UI",
-        "confidence": "中",
-        "patterns": [
-          "@chakra-ui",
-          "chakra-ui"
-        ],
-        "classPrefixes": [
-          "chakra-"
-        ],
-        "selectors": [
-          "[data-theme][style*=\"--chakra\"]"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Bulma",
-        "confidence": "中",
-        "patterns": [
-          "bulma(?:\\.min)?\\.css"
-        ],
-        "classNames": [
-          "columns",
-          "column",
-          "is-primary",
-          "navbar-menu"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Semantic UI / Fomantic UI",
-        "confidence": "中",
-        "patterns": [
-          "semantic(?:\\.min)?\\.(?:css|js)",
-          "fomantic"
-        ],
-        "selectors": [
-          ".ui.button",
-          ".ui.menu",
-          ".ui.dropdown"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Foundation",
-        "confidence": "中",
-        "patterns": [
-          "foundation(?:\\.min)?\\.(?:css|js)"
-        ],
-        "classNames": [
-          "grid-x",
-          "top-bar",
-          "callout"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Ionic",
-        "confidence": "高",
-        "patterns": [
-          "@ionic",
-          "ionic"
-        ],
-        "selectors": [
-          "ion-app",
-          "ion-content",
-          "ion-button"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Quasar",
-        "confidence": "中",
-        "patterns": [
-          "quasar"
-        ],
-        "globals": [
-          "Quasar"
-        ],
-        "classPrefixes": [
-          "q-"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Prime UI",
-        "confidence": "中",
-        "patterns": [
-          "primevue",
-          "primereact",
-          "primeng"
-        ],
-        "classPrefixes": [
-          "p-"
-        ],
-        "selectors": [
-          ".p-component",
-          ".p-button",
-          ".p-dialog"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Vant",
-        "confidence": "中",
-        "patterns": [
-          "vant(?:\\.min)?"
-        ],
-        "classPrefixes": [
-          "van-"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Arco Design",
-        "confidence": "中",
-        "patterns": [
-          "arco-design"
-        ],
-        "classPrefixes": [
-          "arco-"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "TDesign",
-        "confidence": "中",
-        "patterns": [
-          "tdesign"
-        ],
-        "classPrefixes": [
-          "tdesign-"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Layui",
-        "confidence": "中",
-        "patterns": [
-          "layui"
-        ],
-        "classPrefixes": [
-          "layui-"
-        ],
-        "classNames": [
-          "layui-btn",
-          "layui-form"
+        "defaults": {
+          "category": "UI / CSS 框架"
+        },
+        "rules": [
+          {
+            "defaults": {
+              "confidence": "高"
+            },
+            "rules": [
+              {
+                "name": "Bootstrap",
+                "patterns": [
+                  "bootstrap(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)"
+                ],
+                "globals": [
+                  "bootstrap"
+                ],
+                "classNames": [
+                  "container",
+                  "row",
+                  "navbar",
+                  "modal",
+                  "dropdown-menu"
+                ]
+              },
+              {
+                "name": "Tailwind CSS",
+                "patterns": [
+                  "cdn\\.tailwindcss\\.com",
+                  "tailwind(?:\\.min)?\\.css",
+                  "tailwind\\.config"
+                ]
+              },
+              {
+                "name": "shadcn/ui",
+                "patterns": [
+                  "shadcn",
+                  "@shadcn\\/ui",
+                  "components\\/ui",
+                  "class-variance-authority"
+                ],
+                "cssVariables": [
+                  "--background",
+                  "--foreground",
+                  "--card",
+                  "--card-foreground",
+                  "--popover",
+                  "--popover-foreground",
+                  "--primary",
+                  "--primary-foreground",
+                  "--secondary",
+                  "--secondary-foreground",
+                  "--muted",
+                  "--muted-foreground",
+                  "--accent",
+                  "--accent-foreground",
+                  "--destructive",
+                  "--destructive-foreground",
+                  "--border",
+                  "--input",
+                  "--ring",
+                  "--radius"
+                ],
+                "minCssVariableMatches": 10
+              }
+            ]
+          },
+          {
+            "defaults": {
+              "confidence": "中"
+            },
+            "rules": [
+              {
+                "name": "Material UI",
+                "patterns": [
+                  "@mui",
+                  "material-ui",
+                  "mui-",
+                  "data-emotion=\"css"
+                ],
+                "classPrefixes": [
+                  "Mui"
+                ]
+              },
+              {
+                "name": "Ant Design",
+                "patterns": [
+                  "antd",
+                  "ant-design"
+                ],
+                "classPrefixes": [
+                  "ant-"
+                ]
+              },
+              {
+                "name": "Element UI / Element Plus",
+                "patterns": [
+                  "element-plus",
+                  "element-ui"
+                ],
+                "classPrefixes": [
+                  "el-"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Vuetify",
+            "confidence": "高",
+            "patterns": [
+              "vuetify"
+            ],
+            "selectors": [
+              ".v-application"
+            ]
+          },
+          {
+            "defaults": {
+              "confidence": "中"
+            },
+            "rules": [
+              {
+                "name": "Chakra UI",
+                "patterns": [
+                  "@chakra-ui",
+                  "chakra-ui"
+                ],
+                "classPrefixes": [
+                  "chakra-"
+                ],
+                "selectors": [
+                  "[data-theme][style*=\"--chakra\"]"
+                ]
+              },
+              {
+                "name": "Bulma",
+                "patterns": [
+                  "bulma(?:\\.min)?\\.css"
+                ],
+                "classNames": [
+                  "columns",
+                  "column",
+                  "is-primary",
+                  "navbar-menu"
+                ]
+              },
+              {
+                "name": "Semantic UI / Fomantic UI",
+                "patterns": [
+                  "semantic(?:\\.min)?\\.(?:css|js)",
+                  "fomantic"
+                ],
+                "selectors": [
+                  ".ui.button",
+                  ".ui.menu",
+                  ".ui.dropdown"
+                ]
+              },
+              {
+                "name": "Foundation",
+                "patterns": [
+                  "foundation(?:\\.min)?\\.(?:css|js)"
+                ],
+                "classNames": [
+                  "grid-x",
+                  "top-bar",
+                  "callout"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Ionic",
+            "confidence": "高",
+            "patterns": [
+              "@ionic",
+              "ionic"
+            ],
+            "selectors": [
+              "ion-app",
+              "ion-content",
+              "ion-button"
+            ]
+          },
+          {
+            "defaults": {
+              "confidence": "中"
+            },
+            "rules": [
+              {
+                "name": "Quasar",
+                "patterns": [
+                  "quasar"
+                ],
+                "globals": [
+                  "Quasar"
+                ],
+                "classPrefixes": [
+                  "q-"
+                ]
+              },
+              {
+                "name": "Prime UI",
+                "patterns": [
+                  "primevue",
+                  "primereact",
+                  "primeng"
+                ],
+                "classPrefixes": [
+                  "p-"
+                ],
+                "selectors": [
+                  ".p-component",
+                  ".p-button",
+                  ".p-dialog"
+                ]
+              },
+              {
+                "name": "Vant",
+                "patterns": [
+                  "vant(?:\\.min)?"
+                ],
+                "classPrefixes": [
+                  "van-"
+                ]
+              },
+              {
+                "name": "Arco Design",
+                "patterns": [
+                  "arco-design"
+                ],
+                "classPrefixes": [
+                  "arco-"
+                ]
+              },
+              {
+                "name": "TDesign",
+                "patterns": [
+                  "tdesign"
+                ],
+                "classPrefixes": [
+                  "tdesign-"
+                ]
+              },
+              {
+                "name": "Layui",
+                "patterns": [
+                  "layui"
+                ],
+                "classPrefixes": [
+                  "layui-"
+                ],
+                "classNames": [
+                  "layui-btn",
+                  "layui-form"
+                ]
+              }
+            ]
+          }
         ]
       },
       {

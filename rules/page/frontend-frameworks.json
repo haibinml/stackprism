@@ -1,268 +1,255 @@
 {
   "page": {
-    "frontendFrameworks": [
-      {
-        "category": "前端框架",
-        "name": "React",
-        "confidence": "高",
-        "patterns": [
-          "react(?:\\.production|\\.development)?(?:\\.min)?\\.js",
-          "react-dom"
-        ],
-        "globals": [
-          "React"
-        ]
+    "frontendFrameworks": {
+      "defaults": {
+        "category": "前端框架"
       },
-      {
-        "category": "前端框架",
-        "name": "Vue",
-        "confidence": "高",
-        "patterns": [
-          "vue(?:\\.runtime)?(?:\\.global)?(?:\\.prod)?(?:\\.min)?\\.js",
-          "vue-router",
-          "pinia"
-        ],
-        "globals": [
-          "Vue",
-          "__VUE_DEVTOOLS_GLOBAL_HOOK__"
-        ],
-        "selectors": [
-          "[data-v-app]",
-          "#app.__vue__"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Angular / AngularJS",
-        "confidence": "高",
-        "patterns": [
-          "angular(?:\\.min)?\\.js",
-          "@angular"
-        ],
-        "globals": [
-          "angular"
-        ],
-        "selectors": [
-          "[ng-version]",
-          "[ng-app]",
-          "[ng-controller]",
-          ".ng-scope"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Next.js",
-        "confidence": "高",
-        "patterns": [
-          "/_next/",
-          "next-static",
-          "nextjs"
-        ],
-        "globals": [
-          "__NEXT_DATA__"
-        ],
-        "selectors": [
-          "#__next"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Nuxt",
-        "confidence": "高",
-        "patterns": [
-          "/_nuxt/",
-          "nuxt"
-        ],
-        "globals": [
-          "__NUXT__"
-        ],
-        "selectors": [
-          "#__nuxt"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Gatsby",
-        "confidence": "高",
-        "patterns": [
-          "/page-data/",
-          "gatsby"
-        ],
-        "globals": [
-          "___gatsby"
-        ],
-        "selectors": [
-          "#___gatsby"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Remix",
-        "confidence": "中",
-        "patterns": [
-          "/_remix/",
-          "remix-manifest"
-        ],
-        "globals": [
-          "__remixContext"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Astro",
-        "confidence": "高",
-        "patterns": [
-          "/_astro/",
-          "astro\\."
-        ],
-        "selectors": [
-          "astro-island",
-          "astro-slot"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Ember.js",
-        "confidence": "中",
-        "patterns": [
-          "ember(?:\\.min)?\\.js"
-        ],
-        "globals": [
-          "Ember"
-        ],
-        "selectors": [
-          ".ember-application",
-          "[id^=\"ember\"]"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Backbone.js",
-        "confidence": "中",
-        "patterns": [
-          "backbone(?:\\.min)?\\.js"
-        ],
-        "globals": [
-          "Backbone"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "jQuery",
-        "confidence": "高",
-        "patterns": [
-          "jquery(?:-\\d|\\.)"
-        ],
-        "globals": [
-          "jQuery"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Alpine.js",
-        "confidence": "中",
-        "patterns": [
-          "alpinejs"
-        ],
-        "globals": [
-          "Alpine"
-        ],
-        "selectors": [
-          "[x-data]",
-          "[x-init]",
-          "[x-show]"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Stimulus",
-        "confidence": "中",
-        "patterns": [
-          "stimulus"
-        ],
-        "globals": [
-          "Stimulus"
-        ],
-        "selectors": [
-          "[data-controller]"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Lit",
-        "confidence": "中",
-        "patterns": [
-          "lit-html",
-          "lit-element",
-          "@lit/"
-        ],
-        "globals": [
-          "litHtmlVersions",
-          "litElementVersions"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Preact",
-        "confidence": "中",
-        "patterns": [
-          "preact"
-        ],
-        "globals": [
-          "preact"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "SolidJS",
-        "confidence": "中",
-        "patterns": [
-          "solid-js",
-          "solidjs"
-        ],
-        "globals": [
-          "Solid"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Mithril",
-        "confidence": "中",
-        "patterns": [
-          "mithril"
-        ],
-        "globals": [
-          "Mithril"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Polymer",
-        "confidence": "中",
-        "patterns": [
-          "polymer"
-        ],
-        "globals": [
-          "Polymer"
-        ],
-        "selectors": [
-          "dom-module"
-        ]
-      },
-      {
-        "category": "前端框架",
-        "name": "Svelte",
-        "confidence": "低",
-        "patterns": [
-          "svelte"
-        ],
-        "globals": [
-          "Svelte"
-        ],
-        "classPrefixes": [
-          "svelte-"
-        ]
-      }
-    ]
+      "rules": [
+        {
+          "defaults": {
+            "confidence": "高"
+          },
+          "rules": [
+            {
+              "name": "React",
+              "patterns": [
+                "react(?:\\.production|\\.development)?(?:\\.min)?\\.js",
+                "react-dom"
+              ],
+              "globals": [
+                "React"
+              ]
+            },
+            {
+              "name": "Vue",
+              "patterns": [
+                "vue(?:\\.runtime)?(?:\\.global)?(?:\\.prod)?(?:\\.min)?\\.js",
+                "vue-router",
+                "pinia"
+              ],
+              "globals": [
+                "Vue",
+                "__VUE_DEVTOOLS_GLOBAL_HOOK__"
+              ],
+              "selectors": [
+                "[data-v-app]",
+                "#app.__vue__"
+              ]
+            },
+            {
+              "name": "Angular / AngularJS",
+              "patterns": [
+                "angular(?:\\.min)?\\.js",
+                "@angular"
+              ],
+              "globals": [
+                "angular"
+              ],
+              "selectors": [
+                "[ng-version]",
+                "[ng-app]",
+                "[ng-controller]",
+                ".ng-scope"
+              ]
+            },
+            {
+              "name": "Next.js",
+              "patterns": [
+                "/_next/",
+                "next-static",
+                "nextjs"
+              ],
+              "globals": [
+                "__NEXT_DATA__"
+              ],
+              "selectors": [
+                "#__next"
+              ]
+            },
+            {
+              "name": "Nuxt",
+              "patterns": [
+                "/_nuxt/",
+                "nuxt"
+              ],
+              "globals": [
+                "__NUXT__"
+              ],
+              "selectors": [
+                "#__nuxt"
+              ]
+            },
+            {
+              "name": "Gatsby",
+              "patterns": [
+                "/page-data/",
+                "gatsby"
+              ],
+              "globals": [
+                "___gatsby"
+              ],
+              "selectors": [
+                "#___gatsby"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Remix",
+          "confidence": "中",
+          "patterns": [
+            "/_remix/",
+            "remix-manifest"
+          ],
+          "globals": [
+            "__remixContext"
+          ]
+        },
+        {
+          "name": "Astro",
+          "confidence": "高",
+          "patterns": [
+            "/_astro/",
+            "astro\\."
+          ],
+          "selectors": [
+            "astro-island",
+            "astro-slot"
+          ]
+        },
+        {
+          "name": "Ember.js",
+          "confidence": "中",
+          "patterns": [
+            "ember(?:\\.min)?\\.js"
+          ],
+          "globals": [
+            "Ember"
+          ],
+          "selectors": [
+            ".ember-application",
+            "[id^=\"ember\"]"
+          ]
+        },
+        {
+          "name": "Backbone.js",
+          "confidence": "中",
+          "patterns": [
+            "backbone(?:\\.min)?\\.js"
+          ],
+          "globals": [
+            "Backbone"
+          ]
+        },
+        {
+          "name": "jQuery",
+          "confidence": "高",
+          "patterns": [
+            "jquery(?:-\\d|\\.)"
+          ],
+          "globals": [
+            "jQuery"
+          ]
+        },
+        {
+          "defaults": {
+            "confidence": "中"
+          },
+          "rules": [
+            {
+              "name": "Alpine.js",
+              "patterns": [
+                "alpinejs"
+              ],
+              "globals": [
+                "Alpine"
+              ],
+              "selectors": [
+                "[x-data]",
+                "[x-init]",
+                "[x-show]"
+              ]
+            },
+            {
+              "name": "Stimulus",
+              "patterns": [
+                "stimulus"
+              ],
+              "globals": [
+                "Stimulus"
+              ],
+              "selectors": [
+                "[data-controller]"
+              ]
+            },
+            {
+              "name": "Lit",
+              "patterns": [
+                "lit-html",
+                "lit-element",
+                "@lit/"
+              ],
+              "globals": [
+                "litHtmlVersions",
+                "litElementVersions"
+              ]
+            },
+            {
+              "name": "Preact",
+              "patterns": [
+                "preact"
+              ],
+              "globals": [
+                "preact"
+              ]
+            },
+            {
+              "name": "SolidJS",
+              "patterns": [
+                "solid-js",
+                "solidjs"
+              ],
+              "globals": [
+                "Solid"
+              ]
+            },
+            {
+              "name": "Mithril",
+              "patterns": [
+                "mithril"
+              ],
+              "globals": [
+                "Mithril"
+              ]
+            },
+            {
+              "name": "Polymer",
+              "patterns": [
+                "polymer"
+              ],
+              "globals": [
+                "Polymer"
+              ],
+              "selectors": [
+                "dom-module"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Svelte",
+          "confidence": "低",
+          "patterns": [
+            "svelte"
+          ],
+          "globals": [
+            "Svelte"
+          ],
+          "classPrefixes": [
+            "svelte-"
+          ]
+        }
+      ]
+    }
   }
 }

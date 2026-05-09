@@ -2,325 +2,300 @@
   "headers": {
     "poweredByProducts": [
       {
-        "name": "Node.js",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "node\\.?js"
+        "defaults": {
+          "category": "后端 / 服务器框架"
+        },
+        "rules": [
+          {
+            "name": "Node.js",
+            "patterns": [
+              "node\\.?js"
+            ]
+          },
+          {
+            "name": "Express",
+            "patterns": [
+              "express"
+            ]
+          },
+          {
+            "name": "Koa",
+            "patterns": [
+              "\\bkoa\\b"
+            ]
+          },
+          {
+            "name": "Fastify",
+            "patterns": [
+              "fastify"
+            ]
+          },
+          {
+            "name": "Hapi",
+            "patterns": [
+              "\\bhapi\\b|@hapi"
+            ]
+          },
+          {
+            "name": "NestJS",
+            "patterns": [
+              "nestjs|nest\\.?js"
+            ]
+          },
+          {
+            "name": "Sails.js",
+            "patterns": [
+              "sails\\.?js"
+            ]
+          },
+          {
+            "name": "AdonisJS",
+            "patterns": [
+              "adonis"
+            ]
+          },
+          {
+            "name": "Meteor",
+            "patterns": [
+              "meteor"
+            ]
+          }
         ]
       },
       {
-        "name": "Express",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "express"
+        "defaults": {
+          "category": "前端框架"
+        },
+        "rules": [
+          {
+            "name": "Next.js",
+            "patterns": [
+              "next\\.?js"
+            ]
+          },
+          {
+            "name": "Nuxt",
+            "patterns": [
+              "nuxt"
+            ]
+          },
+          {
+            "name": "Remix",
+            "patterns": [
+              "remix"
+            ]
+          },
+          {
+            "name": "SvelteKit",
+            "patterns": [
+              "sveltekit"
+            ]
+          }
         ]
       },
       {
-        "name": "Koa",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "\\bkoa\\b"
-        ]
-      },
-      {
-        "name": "Fastify",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "fastify"
-        ]
-      },
-      {
-        "name": "Hapi",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "\\bhapi\\b|@hapi"
-        ]
-      },
-      {
-        "name": "NestJS",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "nestjs|nest\\.?js"
-        ]
-      },
-      {
-        "name": "Sails.js",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "sails\\.?js"
-        ]
-      },
-      {
-        "name": "AdonisJS",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "adonis"
-        ]
-      },
-      {
-        "name": "Meteor",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "meteor"
-        ]
-      },
-      {
-        "name": "Next.js",
-        "category": "前端框架",
-        "patterns": [
-          "next\\.?js"
-        ]
-      },
-      {
-        "name": "Nuxt",
-        "category": "前端框架",
-        "patterns": [
-          "nuxt"
-        ]
-      },
-      {
-        "name": "Remix",
-        "category": "前端框架",
-        "patterns": [
-          "remix"
-        ]
-      },
-      {
-        "name": "SvelteKit",
-        "category": "前端框架",
-        "patterns": [
-          "sveltekit"
-        ]
-      },
-      {
-        "name": "Deno",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "deno"
-        ]
-      },
-      {
-        "name": "Bun",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "\\bbun\\b"
-        ]
-      },
-      {
-        "name": "ASP.NET",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "asp\\.net"
-        ]
-      },
-      {
-        "name": "PHP",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "php"
-        ]
-      },
-      {
-        "name": "Laravel",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "laravel"
-        ]
-      },
-      {
-        "name": "Symfony",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "symfony"
-        ]
-      },
-      {
-        "name": "Yii",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "\\byii\\b"
-        ]
-      },
-      {
-        "name": "CodeIgniter",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "codeigniter"
-        ]
-      },
-      {
-        "name": "CakePHP",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "cakephp"
-        ]
-      },
-      {
-        "name": "Laminas / Zend Framework",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "laminas|zend framework|zend server"
-        ]
-      },
-      {
-        "name": "Django",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "django"
-        ]
-      },
-      {
-        "name": "Flask",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "flask"
-        ]
-      },
-      {
-        "name": "FastAPI",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "fastapi"
-        ]
-      },
-      {
-        "name": "Starlette",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "starlette"
-        ]
-      },
-      {
-        "name": "Tornado",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "tornado"
-        ]
-      },
-      {
-        "name": "Sanic",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "sanic"
-        ]
-      },
-      {
-        "name": "Bottle",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "bottle"
-        ]
-      },
-      {
-        "name": "CherryPy",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "cherrypy"
-        ]
-      },
-      {
-        "name": "Ruby on Rails",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "rails|phusion passenger"
-        ]
-      },
-      {
-        "name": "Sinatra",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "sinatra"
-        ]
-      },
-      {
-        "name": "Hanami",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "hanami"
-        ]
-      },
-      {
-        "name": "Spring Boot / Spring MVC",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "spring|springboot|spring boot"
-        ]
-      },
-      {
-        "name": "Play Framework",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "play framework|playframework"
-        ]
-      },
-      {
-        "name": "Vert.x",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "vert\\.x|vertx"
-        ]
-      },
-      {
-        "name": "Akka HTTP",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "akka"
-        ]
-      },
-      {
-        "name": "Phoenix",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "phoenix"
-        ]
-      },
-      {
-        "name": "Elixir / Plug",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "elixir|plug"
-        ]
-      },
-      {
-        "name": "Go",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "\\bgolang\\b|\\bgo\\b"
-        ]
-      },
-      {
-        "name": "Gin",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "\\bgin\\b"
-        ]
-      },
-      {
-        "name": "Fiber",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "\\bfiber\\b"
-        ]
-      },
-      {
-        "name": "Rust Actix",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "actix"
-        ]
-      },
-      {
-        "name": "Rust Rocket",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "rocket"
-        ]
-      },
-      {
-        "name": "Rust Axum",
-        "category": "后端 / 服务器框架",
-        "patterns": [
-          "axum"
+        "defaults": {
+          "category": "后端 / 服务器框架"
+        },
+        "rules": [
+          {
+            "name": "Deno",
+            "patterns": [
+              "deno"
+            ]
+          },
+          {
+            "name": "Bun",
+            "patterns": [
+              "\\bbun\\b"
+            ]
+          },
+          {
+            "name": "ASP.NET",
+            "patterns": [
+              "asp\\.net"
+            ]
+          },
+          {
+            "name": "PHP",
+            "patterns": [
+              "php"
+            ]
+          },
+          {
+            "name": "Laravel",
+            "patterns": [
+              "laravel"
+            ]
+          },
+          {
+            "name": "Symfony",
+            "patterns": [
+              "symfony"
+            ]
+          },
+          {
+            "name": "Yii",
+            "patterns": [
+              "\\byii\\b"
+            ]
+          },
+          {
+            "name": "CodeIgniter",
+            "patterns": [
+              "codeigniter"
+            ]
+          },
+          {
+            "name": "CakePHP",
+            "patterns": [
+              "cakephp"
+            ]
+          },
+          {
+            "name": "Laminas / Zend Framework",
+            "patterns": [
+              "laminas|zend framework|zend server"
+            ]
+          },
+          {
+            "name": "Django",
+            "patterns": [
+              "django"
+            ]
+          },
+          {
+            "name": "Flask",
+            "patterns": [
+              "flask"
+            ]
+          },
+          {
+            "name": "FastAPI",
+            "patterns": [
+              "fastapi"
+            ]
+          },
+          {
+            "name": "Starlette",
+            "patterns": [
+              "starlette"
+            ]
+          },
+          {
+            "name": "Tornado",
+            "patterns": [
+              "tornado"
+            ]
+          },
+          {
+            "name": "Sanic",
+            "patterns": [
+              "sanic"
+            ]
+          },
+          {
+            "name": "Bottle",
+            "patterns": [
+              "bottle"
+            ]
+          },
+          {
+            "name": "CherryPy",
+            "patterns": [
+              "cherrypy"
+            ]
+          },
+          {
+            "name": "Ruby on Rails",
+            "patterns": [
+              "rails|phusion passenger"
+            ]
+          },
+          {
+            "name": "Sinatra",
+            "patterns": [
+              "sinatra"
+            ]
+          },
+          {
+            "name": "Hanami",
+            "patterns": [
+              "hanami"
+            ]
+          },
+          {
+            "name": "Spring Boot / Spring MVC",
+            "patterns": [
+              "spring|springboot|spring boot"
+            ]
+          },
+          {
+            "name": "Play Framework",
+            "patterns": [
+              "play framework|playframework"
+            ]
+          },
+          {
+            "name": "Vert.x",
+            "patterns": [
+              "vert\\.x|vertx"
+            ]
+          },
+          {
+            "name": "Akka HTTP",
+            "patterns": [
+              "akka"
+            ]
+          },
+          {
+            "name": "Phoenix",
+            "patterns": [
+              "phoenix"
+            ]
+          },
+          {
+            "name": "Elixir / Plug",
+            "patterns": [
+              "elixir|plug"
+            ]
+          },
+          {
+            "name": "Go",
+            "patterns": [
+              "\\bgolang\\b|\\bgo\\b"
+            ]
+          },
+          {
+            "name": "Gin",
+            "patterns": [
+              "\\bgin\\b"
+            ]
+          },
+          {
+            "name": "Fiber",
+            "patterns": [
+              "\\bfiber\\b"
+            ]
+          },
+          {
+            "name": "Rust Actix",
+            "patterns": [
+              "actix"
+            ]
+          },
+          {
+            "name": "Rust Rocket",
+            "patterns": [
+              "rocket"
+            ]
+          },
+          {
+            "name": "Rust Axum",
+            "patterns": [
+              "axum"
+            ]
+          }
         ]
       }
     ]

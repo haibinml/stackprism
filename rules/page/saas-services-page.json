@@ -1,731 +1,631 @@
 {
   "page": {
-    "saasServices": [
-      {
+    "saasServices": {
+      "defaults": {
         "category": "SaaS / 第三方服务",
-        "name": "Stripe",
-        "kind": "支付",
-        "confidence": "高",
-        "patterns": [
-          "js\\.stripe\\.com|checkout\\.stripe\\.com|stripe\\.network"
-        ],
-        "globals": [
-          "Stripe"
-        ]
+        "confidence": "高"
       },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "PayPal",
-        "kind": "支付",
-        "confidence": "高",
-        "patterns": [
-          "paypal\\.com\\/sdk\\/js|paypalobjects\\.com|paypal\\.com\\/checkoutnow"
-        ],
-        "globals": [
-          "paypal"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Adyen",
-        "kind": "支付",
-        "confidence": "高",
-        "patterns": [
-          "checkoutshopper-live\\.adyen\\.com|adyencheckout|adyen\\.com\\/checkout"
-        ],
-        "globals": [
-          "AdyenCheckout"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Braintree",
-        "kind": "支付",
-        "confidence": "高",
-        "patterns": [
-          "js\\.braintreegateway\\.com|braintreegateway\\.com"
-        ],
-        "globals": [
-          "braintree"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Paddle",
-        "kind": "支付",
-        "confidence": "高",
-        "patterns": [
-          "cdn\\.paddle\\.com|paddle\\.com\\/paddle|paddle\\.js"
-        ],
-        "globals": [
-          "Paddle"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Razorpay",
-        "kind": "支付",
-        "confidence": "高",
-        "patterns": [
-          "checkout\\.razorpay\\.com|razorpay"
-        ],
-        "globals": [
-          "Razorpay"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Auth0",
-        "kind": "身份认证",
-        "confidence": "高",
-        "patterns": [
-          "cdn\\.auth0\\.com|auth0\\.com|auth0-spa-js|auth0-lock"
-        ],
-        "globals": [
-          "auth0"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Clerk",
-        "kind": "身份认证",
-        "confidence": "高",
-        "patterns": [
-          "js\\.clerk\\.com|clerk\\.accounts\\.dev|clerk\\.dev|@clerk\\/"
-        ],
-        "globals": [
-          "Clerk"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Okta",
-        "kind": "身份认证",
-        "confidence": "高",
-        "patterns": [
-          "okta\\.com|oktaauth|okta-signin-widget"
-        ],
-        "globals": [
-          "OktaAuth"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Amazon Cognito",
-        "kind": "身份认证",
-        "confidence": "高",
-        "patterns": [
-          "amazoncognito\\.com|cognito-idp|amazon-cognito-identity"
-        ],
-        "globals": [
-          "AmazonCognitoIdentity"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Stytch",
-        "kind": "身份认证",
-        "confidence": "高",
-        "patterns": [
-          "stytch\\.com|js\\.stytch\\.com"
-        ],
-        "globals": [
-          "Stytch"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Firebase",
-        "kind": "后端云 / 认证",
-        "confidence": "高",
-        "patterns": [
-          "gstatic\\.com\\/firebasejs|firebaseapp\\.com|firebaseio\\.com|firebasestorage\\.googleapis\\.com"
-        ],
-        "globals": [
-          "firebase"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Supabase",
-        "kind": "后端云 / 数据库",
-        "confidence": "高",
-        "patterns": [
-          "supabase\\.co|supabase-js|supabase\\.in"
-        ],
-        "globals": [
-          "supabase"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Intercom",
-        "kind": "客服聊天",
-        "confidence": "高",
-        "patterns": [
-          "widget\\.intercom\\.io|js\\.intercomcdn\\.com|intercomcdn\\.com"
-        ],
-        "globals": [
-          "Intercom",
-          "intercomSettings"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Zendesk",
-        "kind": "客服支持",
-        "confidence": "高",
-        "patterns": [
-          "static\\.zdassets\\.com|zendesk\\.com|zopim\\.com"
-        ],
-        "globals": [
-          "zE",
-          "Zendesk"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Crisp",
-        "kind": "客服聊天",
-        "confidence": "高",
-        "patterns": [
-          "client\\.crisp\\.chat|crisp\\.chat"
-        ],
-        "globals": [
-          "$crisp",
-          "CRISP_WEBSITE_ID"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Drift",
-        "kind": "客服聊天",
-        "confidence": "高",
-        "patterns": [
-          "js\\.driftt\\.com|drift\\.com\\/embed|drift\\.load"
-        ],
-        "globals": [
-          "drift"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Tawk.to",
-        "kind": "客服聊天",
-        "confidence": "高",
-        "patterns": [
-          "embed\\.tawk\\.to|tawk\\.to"
-        ],
-        "globals": [
-          "Tawk_API"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Freshchat",
-        "kind": "客服聊天",
-        "confidence": "高",
-        "patterns": [
-          "wchat\\.freshchat\\.com|freshchat"
-        ],
-        "globals": [
-          "fcWidget"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Help Scout Beacon",
-        "kind": "客服支持",
-        "confidence": "高",
-        "patterns": [
-          "beacon-v2\\.helpscout\\.net|helpscout\\.net\\/beacon"
-        ],
-        "globals": [
-          "Beacon"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "LiveChat",
-        "kind": "客服聊天",
-        "confidence": "高",
-        "patterns": [
-          "cdn\\.livechatinc\\.com|livechatinc\\.com"
-        ],
-        "globals": [
-          "LiveChatWidget"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Gorgias",
-        "kind": "客服支持",
-        "confidence": "高",
-        "patterns": [
-          "gorgias\\.chat|config\\.gorgias\\.chat|client-builds\\.gorgias\\.chat"
-        ],
-        "globals": [
-          "GorgiasChat"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "HubSpot",
-        "kind": "CRM / 营销自动化",
-        "confidence": "高",
-        "patterns": [
-          "js\\.hs-scripts\\.com|js\\.hsforms\\.net|hs-analytics\\.net|hubspot\\.com"
-        ],
-        "globals": [
-          "_hsq",
-          "hbspt"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Salesforce",
-        "kind": "CRM",
-        "confidence": "高",
-        "patterns": [
-          "salesforce\\.com|force\\.com|visualforce\\.com|lightning\\.force\\.com"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Marketo",
-        "kind": "营销自动化",
-        "confidence": "高",
-        "patterns": [
-          "munchkin\\.marketo\\.net|marketo\\.com"
-        ],
-        "globals": [
-          "Munchkin"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Mailchimp",
-        "kind": "邮件营销",
-        "confidence": "高",
-        "patterns": [
-          "chimpstatic\\.com|list-manage\\.com|mailchimp\\.com"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Klaviyo",
-        "kind": "营销自动化",
-        "confidence": "高",
-        "patterns": [
-          "static\\.klaviyo\\.com|klaviyo\\.com"
-        ],
-        "globals": [
-          "_learnq"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Braze",
-        "kind": "客户互动",
-        "confidence": "高",
-        "patterns": [
-          "js\\.appboycdn\\.com|braze\\.com|appboy"
-        ],
-        "globals": [
-          "appboy",
-          "braze"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Customer.io",
-        "kind": "客户互动",
-        "confidence": "高",
-        "patterns": [
-          "customer\\.io|track\\.customer\\.io|assets\\.customer\\.io"
-        ],
-        "globals": [
-          "_cio"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "OneSignal",
-        "kind": "消息推送",
-        "confidence": "高",
-        "patterns": [
-          "onesignal\\.com|onesignalcdn\\.com|onesignal-sdk"
-        ],
-        "globals": [
-          "OneSignal"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Sentry",
-        "kind": "错误监控",
-        "confidence": "高",
-        "patterns": [
-          "browser\\.sentry-cdn\\.com|sentry\\.io|sentry-cdn\\.com"
-        ],
-        "globals": [
-          "Sentry"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "LogRocket",
-        "kind": "会话回放 / 监控",
-        "confidence": "高",
-        "patterns": [
-          "cdn\\.lr-ingest\\.com|logrocket\\.io|logrocket"
-        ],
-        "globals": [
-          "LogRocket"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "FullStory",
-        "kind": "会话回放",
-        "confidence": "高",
-        "patterns": [
-          "fullstory\\.com|edge\\.fullstory\\.com|fs\\.js"
-        ],
-        "globals": [
-          "FS"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Datadog RUM",
-        "kind": "性能监控",
-        "confidence": "高",
-        "patterns": [
-          "datadoghq-browser-agent\\.com|datadoghq\\.com\\/rum|dd_rum"
-        ],
-        "globals": [
-          "DD_RUM",
-          "DD_LOGS"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "New Relic Browser",
-        "kind": "性能监控",
-        "confidence": "高",
-        "patterns": [
-          "js-agent\\.newrelic\\.com|bam\\.nr-data\\.net|newrelic"
-        ],
-        "globals": [
-          "NREUM",
-          "newrelic"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "PostHog",
-        "kind": "产品分析",
-        "confidence": "高",
-        "patterns": [
-          "posthog\\.com|app\\.posthog\\.com|posthog-js"
-        ],
-        "globals": [
-          "posthog"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Mixpanel",
-        "kind": "产品分析",
-        "confidence": "高",
-        "patterns": [
-          "cdn\\.mxpnl\\.com|mixpanel\\.com|mixpanel"
-        ],
-        "globals": [
-          "mixpanel"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Amplitude",
-        "kind": "产品分析",
-        "confidence": "高",
-        "patterns": [
-          "cdn\\.amplitude\\.com|amplitude\\.com|amplitude-js"
-        ],
-        "globals": [
-          "amplitude"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Algolia",
-        "kind": "站内搜索",
-        "confidence": "高",
-        "patterns": [
-          "algolia\\.net|algolianet\\.com|algolia\\.com|algoliasearch"
-        ],
-        "globals": [
-          "algoliasearch"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Typesense Cloud",
-        "kind": "站内搜索",
-        "confidence": "高",
-        "patterns": [
-          "typesense\\.net|typesense\\.org|typesense-js"
-        ],
-        "globals": [
-          "Typesense"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Cloudinary",
-        "kind": "媒体托管",
-        "confidence": "高",
-        "patterns": [
-          "res\\.cloudinary\\.com|cloudinary\\.com|cloudinary-core"
-        ],
-        "globals": [
-          "cloudinary",
-          "Cloudinary"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Imgix",
-        "kind": "图片处理",
-        "confidence": "高",
-        "patterns": [
-          "imgix\\.net|imgix\\.js|ixlib="
-        ],
-        "globals": [
-          "imgix"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Contentful",
-        "kind": "Headless CMS",
-        "confidence": "高",
-        "patterns": [
-          "contentful\\.com|ctfassets\\.net|contentful"
-        ],
-        "globals": [
-          "contentful"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Sanity",
-        "kind": "Headless CMS",
-        "confidence": "高",
-        "patterns": [
-          "cdn\\.sanity\\.io|sanity\\.io|sanity-client"
-        ],
-        "globals": [
-          "Sanity"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Prismic",
-        "kind": "Headless CMS",
-        "confidence": "高",
-        "patterns": [
-          "prismic\\.io|prismic\\.cdn|prismic-javascript"
-        ],
-        "globals": [
-          "Prismic"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Storyblok",
-        "kind": "Headless CMS",
-        "confidence": "高",
-        "patterns": [
-          "storyblok\\.com|a\\.storyblok\\.com|storyblok-js-client"
-        ],
-        "globals": [
-          "Storyblok"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Hygraph",
-        "kind": "Headless CMS",
-        "confidence": "高",
-        "patterns": [
-          "hygraph\\.com|graphcms\\.com|graphassets\\.com"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Google Maps Platform",
-        "kind": "地图服务",
-        "confidence": "高",
-        "patterns": [
-          "maps\\.googleapis\\.com|maps\\.gstatic\\.com\\/maps"
-        ],
-        "globals": [
-          "google.maps"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Mapbox",
-        "kind": "地图服务",
-        "confidence": "高",
-        "patterns": [
-          "api\\.mapbox\\.com|mapbox-gl|mapbox\\.com"
-        ],
-        "globals": [
-          "mapboxgl"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Google reCAPTCHA",
-        "kind": "验证码",
-        "confidence": "高",
-        "patterns": [
-          "google\\.com\\/recaptcha|gstatic\\.com\\/recaptcha"
-        ],
-        "globals": [
-          "grecaptcha"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "hCaptcha",
-        "kind": "验证码",
-        "confidence": "高",
-        "patterns": [
-          "hcaptcha\\.com|js\\.hcaptcha\\.com"
-        ],
-        "globals": [
-          "hcaptcha"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Cloudflare Turnstile",
-        "kind": "验证码",
-        "confidence": "高",
-        "patterns": [
-          "challenges\\.cloudflare\\.com\\/turnstile|turnstile"
-        ],
-        "globals": [
-          "turnstile"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Optimizely",
-        "kind": "A/B 测试",
-        "confidence": "高",
-        "patterns": [
-          "cdn\\.optimizely\\.com|optimizely\\.com"
-        ],
-        "globals": [
-          "optimizely"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "VWO",
-        "kind": "A/B 测试",
-        "confidence": "高",
-        "patterns": [
-          "dev\\.visualwebsiteoptimizer\\.com|visualwebsiteoptimizer\\.com|vwo"
-        ],
-        "globals": [
-          "_vwo_code"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "LaunchDarkly",
-        "kind": "Feature Flag",
-        "confidence": "高",
-        "patterns": [
-          "launchdarkly\\.com|clientstream\\.launchdarkly\\.com|ldclient"
-        ],
-        "globals": [
-          "LDClient"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Statsig",
-        "kind": "Feature Flag / 实验",
-        "confidence": "高",
-        "patterns": [
-          "statsigapi\\.net|statsig\\.com|statsig-js"
-        ],
-        "globals": [
-          "statsig"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "GrowthBook",
-        "kind": "Feature Flag / 实验",
-        "confidence": "高",
-        "patterns": [
-          "growthbook\\.io|growthbook-js"
-        ],
-        "globals": [
-          "growthbook"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Typeform",
-        "kind": "表单",
-        "confidence": "高",
-        "patterns": [
-          "embed\\.typeform\\.com|typeform\\.com"
-        ],
-        "globals": [
-          "typeformEmbed"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Calendly",
-        "kind": "预约排程",
-        "confidence": "高",
-        "patterns": [
-          "assets\\.calendly\\.com|calendly\\.com"
-        ],
-        "globals": [
-          "Calendly"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Airtable",
-        "kind": "表格 / 数据库",
-        "confidence": "高",
-        "patterns": [
-          "airtable\\.com\\/embed|airtable\\.com"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Notion",
-        "kind": "文档 / 站点",
-        "confidence": "高",
-        "patterns": [
-          "notion\\.so|notion-static\\.com|notion\\.site"
-        ]
-      }
-    ]
+      "rules": [
+        {
+          "defaults": {
+            "kind": "支付"
+          },
+          "rules": [
+            {
+              "name": "Stripe",
+              "patterns": [
+                "js\\.stripe\\.com|checkout\\.stripe\\.com|stripe\\.network"
+              ],
+              "globals": [
+                "Stripe"
+              ]
+            },
+            {
+              "name": "PayPal",
+              "patterns": [
+                "paypal\\.com\\/sdk\\/js|paypalobjects\\.com|paypal\\.com\\/checkoutnow"
+              ],
+              "globals": [
+                "paypal"
+              ]
+            },
+            {
+              "name": "Adyen",
+              "patterns": [
+                "checkoutshopper-live\\.adyen\\.com|adyencheckout|adyen\\.com\\/checkout"
+              ],
+              "globals": [
+                "AdyenCheckout"
+              ]
+            },
+            {
+              "name": "Braintree",
+              "patterns": [
+                "js\\.braintreegateway\\.com|braintreegateway\\.com"
+              ],
+              "globals": [
+                "braintree"
+              ]
+            },
+            {
+              "name": "Paddle",
+              "patterns": [
+                "cdn\\.paddle\\.com|paddle\\.com\\/paddle|paddle\\.js"
+              ],
+              "globals": [
+                "Paddle"
+              ]
+            },
+            {
+              "name": "Razorpay",
+              "patterns": [
+                "checkout\\.razorpay\\.com|razorpay"
+              ],
+              "globals": [
+                "Razorpay"
+              ]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "kind": "身份认证"
+          },
+          "rules": [
+            {
+              "name": "Auth0",
+              "patterns": [
+                "cdn\\.auth0\\.com|auth0\\.com|auth0-spa-js|auth0-lock"
+              ],
+              "globals": [
+                "auth0"
+              ]
+            },
+            {
+              "name": "Clerk",
+              "patterns": [
+                "js\\.clerk\\.com|clerk\\.accounts\\.dev|clerk\\.dev|@clerk\\/"
+              ],
+              "globals": [
+                "Clerk"
+              ]
+            },
+            {
+              "name": "Okta",
+              "patterns": [
+                "okta\\.com|oktaauth|okta-signin-widget"
+              ],
+              "globals": [
+                "OktaAuth"
+              ]
+            },
+            {
+              "name": "Amazon Cognito",
+              "patterns": [
+                "amazoncognito\\.com|cognito-idp|amazon-cognito-identity"
+              ],
+              "globals": [
+                "AmazonCognitoIdentity"
+              ]
+            },
+            {
+              "name": "Stytch",
+              "patterns": [
+                "stytch\\.com|js\\.stytch\\.com"
+              ],
+              "globals": [
+                "Stytch"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Firebase",
+          "kind": "后端云 / 认证",
+          "patterns": [
+            "gstatic\\.com\\/firebasejs|firebaseapp\\.com|firebaseio\\.com|firebasestorage\\.googleapis\\.com"
+          ],
+          "globals": [
+            "firebase"
+          ]
+        },
+        {
+          "name": "Supabase",
+          "kind": "后端云 / 数据库",
+          "patterns": [
+            "supabase\\.co|supabase-js|supabase\\.in"
+          ],
+          "globals": [
+            "supabase"
+          ]
+        },
+        {
+          "name": "Intercom",
+          "kind": "客服聊天",
+          "patterns": [
+            "widget\\.intercom\\.io|js\\.intercomcdn\\.com|intercomcdn\\.com"
+          ],
+          "globals": [
+            "Intercom",
+            "intercomSettings"
+          ]
+        },
+        {
+          "name": "Zendesk",
+          "kind": "客服支持",
+          "patterns": [
+            "static\\.zdassets\\.com|zendesk\\.com|zopim\\.com"
+          ],
+          "globals": [
+            "zE",
+            "Zendesk"
+          ]
+        },
+        {
+          "defaults": {
+            "kind": "客服聊天"
+          },
+          "rules": [
+            {
+              "name": "Crisp",
+              "patterns": [
+                "client\\.crisp\\.chat|crisp\\.chat"
+              ],
+              "globals": [
+                "$crisp",
+                "CRISP_WEBSITE_ID"
+              ]
+            },
+            {
+              "name": "Drift",
+              "patterns": [
+                "js\\.driftt\\.com|drift\\.com\\/embed|drift\\.load"
+              ],
+              "globals": [
+                "drift"
+              ]
+            },
+            {
+              "name": "Tawk.to",
+              "patterns": [
+                "embed\\.tawk\\.to|tawk\\.to"
+              ],
+              "globals": [
+                "Tawk_API"
+              ]
+            },
+            {
+              "name": "Freshchat",
+              "patterns": [
+                "wchat\\.freshchat\\.com|freshchat"
+              ],
+              "globals": [
+                "fcWidget"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Help Scout Beacon",
+          "kind": "客服支持",
+          "patterns": [
+            "beacon-v2\\.helpscout\\.net|helpscout\\.net\\/beacon"
+          ],
+          "globals": [
+            "Beacon"
+          ]
+        },
+        {
+          "name": "LiveChat",
+          "kind": "客服聊天",
+          "patterns": [
+            "cdn\\.livechatinc\\.com|livechatinc\\.com"
+          ],
+          "globals": [
+            "LiveChatWidget"
+          ]
+        },
+        {
+          "name": "Gorgias",
+          "kind": "客服支持",
+          "patterns": [
+            "gorgias\\.chat|config\\.gorgias\\.chat|client-builds\\.gorgias\\.chat"
+          ],
+          "globals": [
+            "GorgiasChat"
+          ]
+        },
+        {
+          "name": "HubSpot",
+          "kind": "CRM / 营销自动化",
+          "patterns": [
+            "js\\.hs-scripts\\.com|js\\.hsforms\\.net|hs-analytics\\.net|hubspot\\.com"
+          ],
+          "globals": [
+            "_hsq",
+            "hbspt"
+          ]
+        },
+        {
+          "name": "Salesforce",
+          "kind": "CRM",
+          "patterns": [
+            "salesforce\\.com|force\\.com|visualforce\\.com|lightning\\.force\\.com"
+          ]
+        },
+        {
+          "name": "Marketo",
+          "kind": "营销自动化",
+          "patterns": [
+            "munchkin\\.marketo\\.net|marketo\\.com"
+          ],
+          "globals": [
+            "Munchkin"
+          ]
+        },
+        {
+          "name": "Mailchimp",
+          "kind": "邮件营销",
+          "patterns": [
+            "chimpstatic\\.com|list-manage\\.com|mailchimp\\.com"
+          ]
+        },
+        {
+          "name": "Klaviyo",
+          "kind": "营销自动化",
+          "patterns": [
+            "static\\.klaviyo\\.com|klaviyo\\.com"
+          ],
+          "globals": [
+            "_learnq"
+          ]
+        },
+        {
+          "name": "Braze",
+          "kind": "客户互动",
+          "patterns": [
+            "js\\.appboycdn\\.com|braze\\.com|appboy"
+          ],
+          "globals": [
+            "appboy",
+            "braze"
+          ]
+        },
+        {
+          "name": "Customer.io",
+          "kind": "客户互动",
+          "patterns": [
+            "customer\\.io|track\\.customer\\.io|assets\\.customer\\.io"
+          ],
+          "globals": [
+            "_cio"
+          ]
+        },
+        {
+          "name": "OneSignal",
+          "kind": "消息推送",
+          "patterns": [
+            "onesignal\\.com|onesignalcdn\\.com|onesignal-sdk"
+          ],
+          "globals": [
+            "OneSignal"
+          ]
+        },
+        {
+          "name": "Sentry",
+          "kind": "错误监控",
+          "patterns": [
+            "browser\\.sentry-cdn\\.com|sentry\\.io|sentry-cdn\\.com"
+          ],
+          "globals": [
+            "Sentry"
+          ]
+        },
+        {
+          "name": "LogRocket",
+          "kind": "会话回放 / 监控",
+          "patterns": [
+            "cdn\\.lr-ingest\\.com|logrocket\\.io|logrocket"
+          ],
+          "globals": [
+            "LogRocket"
+          ]
+        },
+        {
+          "name": "FullStory",
+          "kind": "会话回放",
+          "patterns": [
+            "fullstory\\.com|edge\\.fullstory\\.com|fs\\.js"
+          ],
+          "globals": [
+            "FS"
+          ]
+        },
+        {
+          "name": "Datadog RUM",
+          "kind": "性能监控",
+          "patterns": [
+            "datadoghq-browser-agent\\.com|datadoghq\\.com\\/rum|dd_rum"
+          ],
+          "globals": [
+            "DD_RUM",
+            "DD_LOGS"
+          ]
+        },
+        {
+          "name": "New Relic Browser",
+          "kind": "性能监控",
+          "patterns": [
+            "js-agent\\.newrelic\\.com|bam\\.nr-data\\.net|newrelic"
+          ],
+          "globals": [
+            "NREUM",
+            "newrelic"
+          ]
+        },
+        {
+          "defaults": {
+            "kind": "产品分析"
+          },
+          "rules": [
+            {
+              "name": "PostHog",
+              "patterns": [
+                "posthog\\.com|app\\.posthog\\.com|posthog-js"
+              ],
+              "globals": [
+                "posthog"
+              ]
+            },
+            {
+              "name": "Mixpanel",
+              "patterns": [
+                "cdn\\.mxpnl\\.com|mixpanel\\.com|mixpanel"
+              ],
+              "globals": [
+                "mixpanel"
+              ]
+            },
+            {
+              "name": "Amplitude",
+              "patterns": [
+                "cdn\\.amplitude\\.com|amplitude\\.com|amplitude-js"
+              ],
+              "globals": [
+                "amplitude"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Algolia",
+          "kind": "站内搜索",
+          "patterns": [
+            "algolia\\.net|algolianet\\.com|algolia\\.com|algoliasearch"
+          ],
+          "globals": [
+            "algoliasearch"
+          ]
+        },
+        {
+          "name": "Typesense Cloud",
+          "kind": "站内搜索",
+          "patterns": [
+            "typesense\\.net|typesense\\.org|typesense-js"
+          ],
+          "globals": [
+            "Typesense"
+          ]
+        },
+        {
+          "name": "Cloudinary",
+          "kind": "媒体托管",
+          "patterns": [
+            "res\\.cloudinary\\.com|cloudinary\\.com|cloudinary-core"
+          ],
+          "globals": [
+            "cloudinary",
+            "Cloudinary"
+          ]
+        },
+        {
+          "name": "Imgix",
+          "kind": "图片处理",
+          "patterns": [
+            "imgix\\.net|imgix\\.js|ixlib="
+          ],
+          "globals": [
+            "imgix"
+          ]
+        },
+        {
+          "defaults": {
+            "kind": "Headless CMS"
+          },
+          "rules": [
+            {
+              "name": "Contentful",
+              "patterns": [
+                "contentful\\.com|ctfassets\\.net|contentful"
+              ],
+              "globals": [
+                "contentful"
+              ]
+            },
+            {
+              "name": "Sanity",
+              "patterns": [
+                "cdn\\.sanity\\.io|sanity\\.io|sanity-client"
+              ],
+              "globals": [
+                "Sanity"
+              ]
+            },
+            {
+              "name": "Prismic",
+              "patterns": [
+                "prismic\\.io|prismic\\.cdn|prismic-javascript"
+              ],
+              "globals": [
+                "Prismic"
+              ]
+            },
+            {
+              "name": "Storyblok",
+              "patterns": [
+                "storyblok\\.com|a\\.storyblok\\.com|storyblok-js-client"
+              ],
+              "globals": [
+                "Storyblok"
+              ]
+            },
+            {
+              "name": "Hygraph",
+              "patterns": [
+                "hygraph\\.com|graphcms\\.com|graphassets\\.com"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Google Maps Platform",
+          "kind": "地图服务",
+          "patterns": [
+            "maps\\.googleapis\\.com|maps\\.gstatic\\.com\\/maps"
+          ],
+          "globals": [
+            "google.maps"
+          ]
+        },
+        {
+          "name": "Mapbox",
+          "kind": "地图服务",
+          "patterns": [
+            "api\\.mapbox\\.com|mapbox-gl|mapbox\\.com"
+          ],
+          "globals": [
+            "mapboxgl"
+          ]
+        },
+        {
+          "defaults": {
+            "kind": "验证码"
+          },
+          "rules": [
+            {
+              "name": "Google reCAPTCHA",
+              "patterns": [
+                "google\\.com\\/recaptcha|gstatic\\.com\\/recaptcha"
+              ],
+              "globals": [
+                "grecaptcha"
+              ]
+            },
+            {
+              "name": "hCaptcha",
+              "patterns": [
+                "hcaptcha\\.com|js\\.hcaptcha\\.com"
+              ],
+              "globals": [
+                "hcaptcha"
+              ]
+            },
+            {
+              "name": "Cloudflare Turnstile",
+              "patterns": [
+                "challenges\\.cloudflare\\.com\\/turnstile|turnstile"
+              ],
+              "globals": [
+                "turnstile"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Optimizely",
+          "kind": "A/B 测试",
+          "patterns": [
+            "cdn\\.optimizely\\.com|optimizely\\.com"
+          ],
+          "globals": [
+            "optimizely"
+          ]
+        },
+        {
+          "name": "VWO",
+          "kind": "A/B 测试",
+          "patterns": [
+            "dev\\.visualwebsiteoptimizer\\.com|visualwebsiteoptimizer\\.com|vwo"
+          ],
+          "globals": [
+            "_vwo_code"
+          ]
+        },
+        {
+          "name": "LaunchDarkly",
+          "kind": "Feature Flag",
+          "patterns": [
+            "launchdarkly\\.com|clientstream\\.launchdarkly\\.com|ldclient"
+          ],
+          "globals": [
+            "LDClient"
+          ]
+        },
+        {
+          "name": "Statsig",
+          "kind": "Feature Flag / 实验",
+          "patterns": [
+            "statsigapi\\.net|statsig\\.com|statsig-js"
+          ],
+          "globals": [
+            "statsig"
+          ]
+        },
+        {
+          "name": "GrowthBook",
+          "kind": "Feature Flag / 实验",
+          "patterns": [
+            "growthbook\\.io|growthbook-js"
+          ],
+          "globals": [
+            "growthbook"
+          ]
+        },
+        {
+          "name": "Typeform",
+          "kind": "表单",
+          "patterns": [
+            "embed\\.typeform\\.com|typeform\\.com"
+          ],
+          "globals": [
+            "typeformEmbed"
+          ]
+        },
+        {
+          "name": "Calendly",
+          "kind": "预约排程",
+          "patterns": [
+            "assets\\.calendly\\.com|calendly\\.com"
+          ],
+          "globals": [
+            "Calendly"
+          ]
+        },
+        {
+          "name": "Airtable",
+          "kind": "表格 / 数据库",
+          "patterns": [
+            "airtable\\.com\\/embed|airtable\\.com"
+          ]
+        },
+        {
+          "name": "Notion",
+          "kind": "文档 / 站点",
+          "patterns": [
+            "notion\\.so|notion-static\\.com|notion\\.site"
+          ]
+        }
+      ]
+    }
   }
 }

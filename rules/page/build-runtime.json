@@ -1,98 +1,98 @@
 {
   "page": {
-    "buildRuntime": [
-      {
-        "category": "构建与运行时",
-        "name": "Webpack",
-        "confidence": "中",
-        "patterns": [
-          "webpack",
-          "__webpack_require__"
-        ],
-        "globals": [
-          "webpackChunk",
-          "webpackJsonp"
-        ]
+    "buildRuntime": {
+      "defaults": {
+        "category": "构建与运行时"
       },
-      {
-        "category": "构建与运行时",
-        "name": "Vite",
-        "confidence": "高",
-        "patterns": [
-          "/@vite/client",
-          "vite\\.svg",
-          "__vite",
-          "vite/client"
-        ]
-      },
-      {
-        "category": "构建与运行时",
-        "name": "Parcel",
-        "confidence": "中",
-        "patterns": [
-          "parcel",
-          "__parcel__"
-        ]
-      },
-      {
-        "category": "构建与运行时",
-        "name": "RequireJS / AMD",
-        "confidence": "中",
-        "patterns": [
-          "require(?:\\.min)?\\.js",
-          "requirejs"
-        ],
-        "globals": [
-          "requirejs"
-        ]
-      },
-      {
-        "category": "构建与运行时",
-        "name": "SystemJS",
-        "confidence": "中",
-        "patterns": [
-          "systemjs"
-        ],
-        "globals": [
-          "System"
-        ]
-      },
-      {
-        "category": "构建与运行时",
-        "name": "Babel Standalone",
-        "confidence": "高",
-        "globals": [
-          "Babel"
-        ],
-        "selectors": [
-          "script[type=\"text/babel\"]",
-          "script[type=\"text/jsx\"]"
-        ]
-      },
-      {
-        "category": "构建与运行时",
-        "name": "ES Modules",
-        "confidence": "中",
-        "selectors": [
-          "script[type=\"module\"]"
-        ]
-      },
-      {
-        "category": "构建与运行时",
-        "name": "PWA Manifest",
-        "confidence": "中",
-        "selectors": [
-          "link[rel=\"manifest\"]"
-        ]
-      },
-      {
-        "category": "构建与运行时",
-        "name": "Zone.js",
-        "confidence": "高",
-        "globals": [
-          "Zone"
-        ]
-      }
-    ]
+      "rules": [
+        {
+          "name": "Webpack",
+          "confidence": "中",
+          "patterns": [
+            "webpack",
+            "__webpack_require__"
+          ],
+          "globals": [
+            "webpackChunk",
+            "webpackJsonp"
+          ]
+        },
+        {
+          "name": "Vite",
+          "confidence": "高",
+          "patterns": [
+            "/@vite/client",
+            "vite\\.svg",
+            "__vite",
+            "vite/client"
+          ]
+        },
+        {
+          "defaults": {
+            "confidence": "中"
+          },
+          "rules": [
+            {
+              "name": "Parcel",
+              "patterns": [
+                "parcel",
+                "__parcel__"
+              ]
+            },
+            {
+              "name": "RequireJS / AMD",
+              "patterns": [
+                "require(?:\\.min)?\\.js",
+                "requirejs"
+              ],
+              "globals": [
+                "requirejs"
+              ]
+            },
+            {
+              "name": "SystemJS",
+              "patterns": [
+                "systemjs"
+              ],
+              "globals": [
+                "System"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Babel Standalone",
+          "confidence": "高",
+          "globals": [
+            "Babel"
+          ],
+          "selectors": [
+            "script[type=\"text/babel\"]",
+            "script[type=\"text/jsx\"]"
+          ]
+        },
+        {
+          "name": "ES Modules",
+          "confidence": "中",
+          "selectors": [
+            "script[type=\"module\"]"
+          ]
+        },
+        {
+          "name": "PWA Manifest",
+          "confidence": "中",
+          "selectors": [
+            "link[rel=\"manifest\"]"
+          ]
+        },
+        {
+          "name": "Zone.js",
+          "confidence": "高",
+          "globals": [
+            "Zone"
+          ]
+        }
+      ]
+    }
   }
 }

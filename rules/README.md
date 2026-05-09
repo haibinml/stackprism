@@ -11,6 +11,8 @@
 
 当同一个规则文件里的 `category`、`kind`、`confidence`、`matchType`、`resourceOnly`、`resourceHints` 等字段高度重复时，可以使用规则组写法，把公共字段放到 `defaults`，具体规则放到 `rules`。加载器会在运行时把默认值展开成完整规则，检测逻辑仍然按普通规则数组处理。
 
+规则组可以嵌套使用：外层放整个分类都相同的字段，例如 `matchType`、`resourceOnly`；内层再按连续规则段放相同的 `category`、`kind` 或 `confidence`。这样能减少人工维护时的重复字段，同时保持展开后的规则对象不变。
+
 ```json
 {
   "page": {

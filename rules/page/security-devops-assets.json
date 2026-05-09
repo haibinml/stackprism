@@ -1,885 +1,706 @@
 {
   "page": {
-    "thirdPartyLogins": [
-      {
+    "thirdPartyLogins": {
+      "defaults": {
         "category": "第三方登录 / OAuth",
-        "name": "Authentik",
-        "kind": "身份认证 / SSO",
-        "confidence": "高",
         "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "authentik"
-        ],
-        "patterns": [
-          "authentik[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
+        "resourceOnly": true
       },
-      {
-        "category": "第三方登录 / OAuth",
-        "name": "Authelia",
-        "kind": "身份认证 / SSO",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "authelia"
-        ],
-        "patterns": [
-          "authelia[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "第三方登录 / OAuth",
-        "name": "FusionAuth",
-        "kind": "身份认证 / SSO",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "fusionauth"
-        ],
-        "patterns": [
-          "fusionauth[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "第三方登录 / OAuth",
-        "name": "ZITADEL",
-        "kind": "身份认证 / SSO",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "zitadel"
-        ],
-        "patterns": [
-          "zitadel[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "第三方登录 / OAuth",
-        "name": "Logto",
-        "kind": "身份认证 / SSO",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "logto"
-        ],
-        "patterns": [
-          "logto[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "第三方登录 / OAuth",
-        "name": "Casdoor",
-        "kind": "身份认证 / SSO",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "casdoor"
-        ],
-        "patterns": [
-          "casdoor[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "第三方登录 / OAuth",
-        "name": "Ory Kratos",
-        "kind": "身份认证 / 用户系统",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "ory-kratos",
-          "kratos"
-        ],
-        "patterns": [
-          "ory-kratos[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
-          "kratos-selfservice[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "第三方登录 / OAuth",
-        "name": "Ory Hydra",
-        "kind": "OAuth2 / OpenID Connect",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "ory-hydra"
-        ],
-        "patterns": [
-          "ory-hydra[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "第三方登录 / OAuth",
-        "name": "Ory Oathkeeper",
-        "kind": "身份代理 / 访问控制",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "oathkeeper",
-          "ory-oathkeeper"
-        ],
-        "patterns": [
-          "(?:ory-)?oathkeeper[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "第三方登录 / OAuth",
-        "name": "SuperTokens",
-        "kind": "身份认证 / 会话管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "supertokens"
-        ],
-        "patterns": [
-          "supertokens[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "第三方登录 / OAuth",
-        "name": "Hanko",
-        "kind": "Passkey / 身份认证",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "hanko"
-        ],
-        "patterns": [
-          "hanko[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "第三方登录 / OAuth",
-        "name": "Dex",
-        "kind": "身份认证 / OIDC",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/dex/",
-          "dexidp"
-        ],
-        "patterns": [
-          "(?:^|/)dex/(?:static|theme)/(?:css|js|img)(?:/|[?#]|$)",
-          "dexidp[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      }
-    ],
-    "saasServices": [
-      {
+      "rules": [
+        {
+          "defaults": {
+            "kind": "身份认证 / SSO",
+            "confidence": "高"
+          },
+          "rules": [
+            {
+              "name": "Authentik",
+              "resourceHints": [
+                "authentik"
+              ],
+              "patterns": [
+                "authentik[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Authelia",
+              "resourceHints": [
+                "authelia"
+              ],
+              "patterns": [
+                "authelia[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "FusionAuth",
+              "resourceHints": [
+                "fusionauth"
+              ],
+              "patterns": [
+                "fusionauth[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "ZITADEL",
+              "resourceHints": [
+                "zitadel"
+              ],
+              "patterns": [
+                "zitadel[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Logto",
+              "resourceHints": [
+                "logto"
+              ],
+              "patterns": [
+                "logto[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Casdoor",
+              "resourceHints": [
+                "casdoor"
+              ],
+              "patterns": [
+                "casdoor[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "confidence": "高"
+          },
+          "rules": [
+            {
+              "name": "Ory Kratos",
+              "kind": "身份认证 / 用户系统",
+              "resourceHints": [
+                "ory-kratos",
+                "kratos"
+              ],
+              "patterns": [
+                "ory-kratos[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+                "kratos-selfservice[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Ory Hydra",
+              "kind": "OAuth2 / OpenID Connect",
+              "resourceHints": [
+                "ory-hydra"
+              ],
+              "patterns": [
+                "ory-hydra[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Ory Oathkeeper",
+              "kind": "身份代理 / 访问控制",
+              "resourceHints": [
+                "oathkeeper",
+                "ory-oathkeeper"
+              ],
+              "patterns": [
+                "(?:ory-)?oathkeeper[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "SuperTokens",
+              "kind": "身份认证 / 会话管理",
+              "resourceHints": [
+                "supertokens"
+              ],
+              "patterns": [
+                "supertokens[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Hanko",
+              "kind": "Passkey / 身份认证",
+              "resourceHints": [
+                "hanko"
+              ],
+              "patterns": [
+                "hanko[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Dex",
+          "kind": "身份认证 / OIDC",
+          "confidence": "中",
+          "resourceHints": [
+            "/dex/",
+            "dexidp"
+          ],
+          "patterns": [
+            "(?:^|/)dex/(?:static|theme)/(?:css|js|img)(?:/|[?#]|$)",
+            "dexidp[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        }
+      ]
+    },
+    "saasServices": {
+      "defaults": {
         "category": "SaaS / 第三方服务",
-        "name": "Vaultwarden",
-        "kind": "密码管理",
         "confidence": "高",
         "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "vaultwarden"
-        ],
-        "patterns": [
-          "vaultwarden[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
+        "resourceOnly": true
       },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Bitwarden",
-        "kind": "密码管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "bitwarden"
-        ],
-        "patterns": [
-          "bitwarden[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Passbolt",
-        "kind": "密码管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "passbolt"
-        ],
-        "patterns": [
-          "passbolt[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Psono",
-        "kind": "密码管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "psono"
-        ],
-        "patterns": [
-          "psono[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Padloc",
-        "kind": "密码管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "padloc"
-        ],
-        "patterns": [
-          "padloc[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "HashiCorp Vault",
-        "kind": "密钥管理 / 安全",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "vault-ui",
-          "hashicorp-vault"
-        ],
-        "patterns": [
-          "(?:vault-ui|hashicorp-vault)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "HashiCorp Boundary",
-        "kind": "零信任访问",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "boundary-ui",
-          "hashicorp-boundary"
-        ],
-        "patterns": [
-          "(?:boundary-ui|hashicorp-boundary)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Teleport",
-        "kind": "零信任访问 / 堡垒机",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "teleport"
-        ],
-        "patterns": [
-          "teleport[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Headscale",
-        "kind": "自托管 Tailscale 控制器",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "headscale"
-        ],
-        "patterns": [
-          "headscale[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Gophish",
-        "kind": "安全演练 / 钓鱼测试",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "gophish"
-        ],
-        "patterns": [
-          "gophish[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "DefectDojo",
-        "kind": "安全漏洞管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "defectdojo"
-        ],
-        "patterns": [
-          "defectdojo[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "MISP",
-        "kind": "威胁情报平台",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "misp"
-        ],
-        "patterns": [
-          "misp[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "OpenCTI",
-        "kind": "威胁情报平台",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "opencti"
-        ],
-        "patterns": [
-          "opencti[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "TheHive",
-        "kind": "安全事件响应",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "thehive"
-        ],
-        "patterns": [
-          "thehive[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Wazuh",
-        "kind": "安全监控 / SIEM",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "wazuh"
-        ],
-        "patterns": [
-          "wazuh[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Security Onion",
-        "kind": "安全监控 / 威胁检测",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "securityonion",
-          "security-onion"
-        ],
-        "patterns": [
-          "security(?:-)?onion[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      }
-    ],
-    "websitePrograms": [
-      {
+      "rules": [
+        {
+          "defaults": {
+            "kind": "密码管理"
+          },
+          "rules": [
+            {
+              "name": "Vaultwarden",
+              "resourceHints": [
+                "vaultwarden"
+              ],
+              "patterns": [
+                "vaultwarden[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Bitwarden",
+              "resourceHints": [
+                "bitwarden"
+              ],
+              "patterns": [
+                "bitwarden[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Passbolt",
+              "resourceHints": [
+                "passbolt"
+              ],
+              "patterns": [
+                "passbolt[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Psono",
+              "resourceHints": [
+                "psono"
+              ],
+              "patterns": [
+                "psono[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Padloc",
+              "resourceHints": [
+                "padloc"
+              ],
+              "patterns": [
+                "padloc[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "HashiCorp Vault",
+          "kind": "密钥管理 / 安全",
+          "resourceHints": [
+            "vault-ui",
+            "hashicorp-vault"
+          ],
+          "patterns": [
+            "(?:vault-ui|hashicorp-vault)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "HashiCorp Boundary",
+          "kind": "零信任访问",
+          "resourceHints": [
+            "boundary-ui",
+            "hashicorp-boundary"
+          ],
+          "patterns": [
+            "(?:boundary-ui|hashicorp-boundary)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "Teleport",
+          "kind": "零信任访问 / 堡垒机",
+          "resourceHints": [
+            "teleport"
+          ],
+          "patterns": [
+            "teleport[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "Headscale",
+          "kind": "自托管 Tailscale 控制器",
+          "resourceHints": [
+            "headscale"
+          ],
+          "patterns": [
+            "headscale[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "Gophish",
+          "kind": "安全演练 / 钓鱼测试",
+          "resourceHints": [
+            "gophish"
+          ],
+          "patterns": [
+            "gophish[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "DefectDojo",
+          "kind": "安全漏洞管理",
+          "resourceHints": [
+            "defectdojo"
+          ],
+          "patterns": [
+            "defectdojo[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "MISP",
+          "kind": "威胁情报平台",
+          "resourceHints": [
+            "misp"
+          ],
+          "patterns": [
+            "misp[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "OpenCTI",
+          "kind": "威胁情报平台",
+          "resourceHints": [
+            "opencti"
+          ],
+          "patterns": [
+            "opencti[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "TheHive",
+          "kind": "安全事件响应",
+          "resourceHints": [
+            "thehive"
+          ],
+          "patterns": [
+            "thehive[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "Wazuh",
+          "kind": "安全监控 / SIEM",
+          "resourceHints": [
+            "wazuh"
+          ],
+          "patterns": [
+            "wazuh[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "Security Onion",
+          "kind": "安全监控 / 威胁检测",
+          "resourceHints": [
+            "securityonion",
+            "security-onion"
+          ],
+          "patterns": [
+            "security(?:-)?onion[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        }
+      ]
+    },
+    "websitePrograms": {
+      "defaults": {
         "category": "网站程序",
-        "name": "Argo CD",
-        "kind": "Kubernetes / GitOps",
-        "confidence": "高",
         "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "argocd",
-          "argo-cd"
-        ],
-        "patterns": [
-          "(?:argo-?cd|argocd)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
+        "resourceOnly": true
       },
-      {
-        "category": "网站程序",
-        "name": "Argo Workflows",
-        "kind": "Kubernetes / 工作流",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "argo-workflows"
-        ],
-        "patterns": [
-          "argo-workflows[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Kubernetes Dashboard",
-        "kind": "Kubernetes 管理面板",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "kubernetes-dashboard"
-        ],
-        "patterns": [
-          "kubernetes-dashboard[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Rancher",
-        "kind": "Kubernetes 管理平台",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "rancher"
-        ],
-        "patterns": [
-          "rancher[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "KubeSphere",
-        "kind": "Kubernetes 管理平台",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "kubesphere"
-        ],
-        "patterns": [
-          "kubesphere[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Longhorn",
-        "kind": "Kubernetes 存储",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "longhorn"
-        ],
-        "patterns": [
-          "longhorn[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "OpenShift Console",
-        "kind": "Kubernetes / 容器平台",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "openshift-console",
-          "openshift"
-        ],
-        "patterns": [
-          "openshift-console[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
-          "openshift[^\\s\"'<>]*console[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Headlamp",
-        "kind": "Kubernetes 管理面板",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "headlamp"
-        ],
-        "patterns": [
-          "headlamp[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Kubeapps",
-        "kind": "Kubernetes 应用管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "kubeapps"
-        ],
-        "patterns": [
-          "kubeapps[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Kubecost",
-        "kind": "Kubernetes 成本分析",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "kubecost"
-        ],
-        "patterns": [
-          "kubecost[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Kiali",
-        "kind": "Service Mesh 管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "kiali"
-        ],
-        "patterns": [
-          "kiali[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Istio",
-        "kind": "Service Mesh",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "istio"
-        ],
-        "patterns": [
-          "istio[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "HashiCorp Consul",
-        "kind": "服务发现 / Service Mesh",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "consul-ui",
-          "hashicorp-consul"
-        ],
-        "patterns": [
-          "(?:consul-ui|hashicorp-consul)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "HashiCorp Nomad",
-        "kind": "调度 / 编排",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "nomad-ui",
-          "hashicorp-nomad"
-        ],
-        "patterns": [
-          "(?:nomad-ui|hashicorp-nomad)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Terraform Enterprise",
-        "kind": "IaC / Terraform 平台",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "terraform-enterprise",
-          "terraform-cloud"
-        ],
-        "patterns": [
-          "terraform-(?:enterprise|cloud)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Drone CI",
-        "kind": "CI / DevOps",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "drone-ci",
-          "drone-ui"
-        ],
-        "patterns": [
-          "(?:drone-ci|drone-ui)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Woodpecker CI",
-        "kind": "CI / DevOps",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "woodpecker"
-        ],
-        "patterns": [
-          "woodpecker[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Concourse CI",
-        "kind": "CI / DevOps",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "concourse"
-        ],
-        "patterns": [
-          "concourse[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Tekton Dashboard",
-        "kind": "CI / Kubernetes DevOps",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "tekton-dashboard"
-        ],
-        "patterns": [
-          "tekton-dashboard[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "TeamCity",
-        "kind": "CI / DevOps",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "teamcity"
-        ],
-        "patterns": [
-          "teamcity[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Atlassian Bamboo",
-        "kind": "CI / DevOps",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "atlassian-bamboo",
-          "bamboo-specs"
-        ],
-        "patterns": [
-          "(?:atlassian-bamboo|bamboo-specs)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "GoCD",
-        "kind": "CI / DevOps",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "gocd"
-        ],
-        "patterns": [
-          "gocd[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      }
-    ],
-    "probes": [
-      {
+      "rules": [
+        {
+          "defaults": {
+            "confidence": "高"
+          },
+          "rules": [
+            {
+              "name": "Argo CD",
+              "kind": "Kubernetes / GitOps",
+              "resourceHints": [
+                "argocd",
+                "argo-cd"
+              ],
+              "patterns": [
+                "(?:argo-?cd|argocd)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Argo Workflows",
+              "kind": "Kubernetes / 工作流",
+              "resourceHints": [
+                "argo-workflows"
+              ],
+              "patterns": [
+                "argo-workflows[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Kubernetes Dashboard",
+              "kind": "Kubernetes 管理面板",
+              "resourceHints": [
+                "kubernetes-dashboard"
+              ],
+              "patterns": [
+                "kubernetes-dashboard[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Rancher",
+              "kind": "Kubernetes 管理平台",
+              "resourceHints": [
+                "rancher"
+              ],
+              "patterns": [
+                "rancher[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "KubeSphere",
+              "kind": "Kubernetes 管理平台",
+              "resourceHints": [
+                "kubesphere"
+              ],
+              "patterns": [
+                "kubesphere[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Longhorn",
+              "kind": "Kubernetes 存储",
+              "resourceHints": [
+                "longhorn"
+              ],
+              "patterns": [
+                "longhorn[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "OpenShift Console",
+              "kind": "Kubernetes / 容器平台",
+              "resourceHints": [
+                "openshift-console",
+                "openshift"
+              ],
+              "patterns": [
+                "openshift-console[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+                "openshift[^\\s\"'<>]*console[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Headlamp",
+              "kind": "Kubernetes 管理面板",
+              "resourceHints": [
+                "headlamp"
+              ],
+              "patterns": [
+                "headlamp[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Kubeapps",
+              "kind": "Kubernetes 应用管理",
+              "resourceHints": [
+                "kubeapps"
+              ],
+              "patterns": [
+                "kubeapps[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Kubecost",
+              "kind": "Kubernetes 成本分析",
+              "resourceHints": [
+                "kubecost"
+              ],
+              "patterns": [
+                "kubecost[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Kiali",
+              "kind": "Service Mesh 管理",
+              "resourceHints": [
+                "kiali"
+              ],
+              "patterns": [
+                "kiali[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Istio",
+          "kind": "Service Mesh",
+          "confidence": "中",
+          "resourceHints": [
+            "istio"
+          ],
+          "patterns": [
+            "istio[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "defaults": {
+            "confidence": "高"
+          },
+          "rules": [
+            {
+              "name": "HashiCorp Consul",
+              "kind": "服务发现 / Service Mesh",
+              "resourceHints": [
+                "consul-ui",
+                "hashicorp-consul"
+              ],
+              "patterns": [
+                "(?:consul-ui|hashicorp-consul)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "HashiCorp Nomad",
+              "kind": "调度 / 编排",
+              "resourceHints": [
+                "nomad-ui",
+                "hashicorp-nomad"
+              ],
+              "patterns": [
+                "(?:nomad-ui|hashicorp-nomad)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Terraform Enterprise",
+              "kind": "IaC / Terraform 平台",
+              "resourceHints": [
+                "terraform-enterprise",
+                "terraform-cloud"
+              ],
+              "patterns": [
+                "terraform-(?:enterprise|cloud)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "defaults": {
+                "kind": "CI / DevOps"
+              },
+              "rules": [
+                {
+                  "name": "Drone CI",
+                  "resourceHints": [
+                    "drone-ci",
+                    "drone-ui"
+                  ],
+                  "patterns": [
+                    "(?:drone-ci|drone-ui)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Woodpecker CI",
+                  "resourceHints": [
+                    "woodpecker"
+                  ],
+                  "patterns": [
+                    "woodpecker[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Concourse CI",
+                  "resourceHints": [
+                    "concourse"
+                  ],
+                  "patterns": [
+                    "concourse[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Tekton Dashboard",
+              "kind": "CI / Kubernetes DevOps",
+              "resourceHints": [
+                "tekton-dashboard"
+              ],
+              "patterns": [
+                "tekton-dashboard[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "defaults": {
+                "kind": "CI / DevOps"
+              },
+              "rules": [
+                {
+                  "name": "TeamCity",
+                  "resourceHints": [
+                    "teamcity"
+                  ],
+                  "patterns": [
+                    "teamcity[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Atlassian Bamboo",
+                  "resourceHints": [
+                    "atlassian-bamboo",
+                    "bamboo-specs"
+                  ],
+                  "patterns": [
+                    "(?:atlassian-bamboo|bamboo-specs)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "GoCD",
+                  "resourceHints": [
+                    "gocd"
+                  ],
+                  "patterns": [
+                    "gocd[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "probes": {
+      "defaults": {
         "category": "探针 / 监控",
-        "name": "OpenWrt LuCI",
-        "kind": "路由器 / 网络管理",
         "confidence": "高",
         "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/luci-static/"
-        ],
-        "patterns": [
-          "(?:^|/)luci-static/(?:bootstrap|material|resources|openwrt2020)(?:/|[?#]|$)"
-        ]
+        "resourceOnly": true
       },
-      {
-        "category": "探针 / 监控",
-        "name": "pfSense",
-        "kind": "防火墙 / 网络管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "pfsense"
-        ],
-        "patterns": [
-          "pfsense[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "探针 / 监控",
-        "name": "OPNsense",
-        "kind": "防火墙 / 网络管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "opnsense"
-        ],
-        "patterns": [
-          "opnsense[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "探针 / 监控",
-        "name": "Proxmox VE",
-        "kind": "虚拟化平台",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "proxmox",
-          "pve2"
-        ],
-        "patterns": [
-          "(?:proxmox|pve2)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "探针 / 监控",
-        "name": "Proxmox Backup Server",
-        "kind": "备份平台",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "proxmox-backup",
-          "pbs"
-        ],
-        "patterns": [
-          "proxmox-backup[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
-          "(?:^|/)pbs[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "探针 / 监控",
-        "name": "TrueNAS",
-        "kind": "NAS / 存储管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "truenas"
-        ],
-        "patterns": [
-          "truenas[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "探针 / 监控",
-        "name": "OpenMediaVault",
-        "kind": "NAS / 存储管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "openmediavault"
-        ],
-        "patterns": [
-          "openmediavault[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "探针 / 监控",
-        "name": "Unraid",
-        "kind": "NAS / 服务器管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "unraid"
-        ],
-        "patterns": [
-          "unraid[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "探针 / 监控",
-        "name": "Home Assistant",
-        "kind": "智能家居平台",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "home-assistant"
-        ],
-        "patterns": [
-          "home-assistant[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "探针 / 监控",
-        "name": "Frigate NVR",
-        "kind": "视频监控 / NVR",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "frigate"
-        ],
-        "patterns": [
-          "frigate[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "探针 / 监控",
-        "name": "Traefik Dashboard",
-        "kind": "反向代理 / 网关面板",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "traefik"
-        ],
-        "patterns": [
-          "traefik[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      }
-    ]
+      "rules": [
+        {
+          "name": "OpenWrt LuCI",
+          "kind": "路由器 / 网络管理",
+          "resourceHints": [
+            "/luci-static/"
+          ],
+          "patterns": [
+            "(?:^|/)luci-static/(?:bootstrap|material|resources|openwrt2020)(?:/|[?#]|$)"
+          ]
+        },
+        {
+          "name": "pfSense",
+          "kind": "防火墙 / 网络管理",
+          "resourceHints": [
+            "pfsense"
+          ],
+          "patterns": [
+            "pfsense[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "OPNsense",
+          "kind": "防火墙 / 网络管理",
+          "resourceHints": [
+            "opnsense"
+          ],
+          "patterns": [
+            "opnsense[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "Proxmox VE",
+          "kind": "虚拟化平台",
+          "resourceHints": [
+            "proxmox",
+            "pve2"
+          ],
+          "patterns": [
+            "(?:proxmox|pve2)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "Proxmox Backup Server",
+          "kind": "备份平台",
+          "resourceHints": [
+            "proxmox-backup",
+            "pbs"
+          ],
+          "patterns": [
+            "proxmox-backup[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+            "(?:^|/)pbs[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "TrueNAS",
+          "kind": "NAS / 存储管理",
+          "resourceHints": [
+            "truenas"
+          ],
+          "patterns": [
+            "truenas[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "OpenMediaVault",
+          "kind": "NAS / 存储管理",
+          "resourceHints": [
+            "openmediavault"
+          ],
+          "patterns": [
+            "openmediavault[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "Unraid",
+          "kind": "NAS / 服务器管理",
+          "resourceHints": [
+            "unraid"
+          ],
+          "patterns": [
+            "unraid[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "Home Assistant",
+          "kind": "智能家居平台",
+          "resourceHints": [
+            "home-assistant"
+          ],
+          "patterns": [
+            "home-assistant[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "Frigate NVR",
+          "kind": "视频监控 / NVR",
+          "resourceHints": [
+            "frigate"
+          ],
+          "patterns": [
+            "frigate[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "Traefik Dashboard",
+          "kind": "反向代理 / 网关面板",
+          "resourceHints": [
+            "traefik"
+          ],
+          "patterns": [
+            "traefik[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        }
+      ]
+    }
   }
 }

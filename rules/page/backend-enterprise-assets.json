@@ -1,1210 +1,981 @@
 {
   "page": {
-    "backendHints": [
-      {
+    "backendHints": {
+      "defaults": {
         "category": "后端 / 服务器框架",
-        "name": "Vaadin Flow",
-        "confidence": "高",
         "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/VAADIN/",
-          "/frontend/generated/",
-          "flow-client"
-        ],
-        "patterns": [
-          "(?:^|/)VAADIN/(?:build|static|webjars|frontend)(?:/|[?#]|$)",
-          "(?:^|/)frontend/generated/(?:flow|jar-resources)(?:/|[?#]|$)",
-          "flow-client[^\\s\"'<>]*\\.js(?:\\?|$)"
-        ]
+        "resourceOnly": true
       },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "PrimeFaces",
+      "rules": [
+        {
+          "defaults": {
+            "confidence": "高"
+          },
+          "rules": [
+            {
+              "name": "Vaadin Flow",
+              "resourceHints": [
+                "/VAADIN/",
+                "/frontend/generated/",
+                "flow-client"
+              ],
+              "patterns": [
+                "(?:^|/)VAADIN/(?:build|static|webjars|frontend)(?:/|[?#]|$)",
+                "(?:^|/)frontend/generated/(?:flow|jar-resources)(?:/|[?#]|$)",
+                "flow-client[^\\s\"'<>]*\\.js(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "PrimeFaces",
+              "resourceHints": [
+                "javax.faces.resource",
+                "jakarta.faces.resource",
+                "primefaces"
+              ],
+              "patterns": [
+                "(?:javax|jakarta)\\.faces\\.resource/[^\\s\"'<>?]+\\?ln=primefaces(?:&|$)",
+                "(?:javax|jakarta)\\.faces\\.resource/primefaces[^\\s\"'<>]*",
+                "primefaces(?:\\.min)?\\.js(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "OmniFaces",
+              "resourceHints": [
+                "omnifaces",
+                "javax.faces.resource",
+                "jakarta.faces.resource"
+              ],
+              "patterns": [
+                "(?:javax|jakarta)\\.faces\\.resource/[^\\s\"'<>?]+\\?ln=omnifaces(?:&|$)",
+                "omnifaces[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "RichFaces",
+              "resourceHints": [
+                "org.richfaces",
+                "richfaces"
+              ],
+              "patterns": [
+                "org\\.richfaces\\.resources/[^\\s\"'<>]*",
+                "richfaces[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "ICEfaces",
+              "resourceHints": [
+                "icefaces",
+                "icepush"
+              ],
+              "patterns": [
+                "icefaces[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)",
+                "icepush[^\\s\"'<>]*\\.js(?:\\?|$)",
+                "(?:javax|jakarta)\\.faces\\.resource/[^\\s\"'<>?]+\\?ln=icefaces(?:&|$)"
+              ]
+            },
+            {
+              "name": "Apache Wicket",
+              "resourceHints": [
+                "/wicket/resource/",
+                "wicket-ajax"
+              ],
+              "patterns": [
+                "(?:^|/)wicket/resource/[^\\s\"'<>]+",
+                "wicket-ajax(?:-jquery)?[^\\s\"'<>]*\\.js(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Apache Tapestry",
+              "resourceHints": [
+                "/assets/tapestry/",
+                "tapestry"
+              ],
+              "patterns": [
+                "(?:^|/)assets/tapestry(?:/|[?#]|$)",
+                "tapestry[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "DWR",
+              "resourceHints": [
+                "/dwr/engine.js",
+                "/dwr/interface/"
+              ],
+              "patterns": [
+                "(?:^|/)dwr/(?:engine|util)\\.js(?:[?#]|$)",
+                "(?:^|/)dwr/interface/[a-z0-9_$-]+\\.js(?:[?#]|$)"
+              ]
+            },
+            {
+              "name": "Google Web Toolkit",
+              "resourceHints": [
+                ".nocache.js",
+                "gwt.codesvr"
+              ],
+              "patterns": [
+                "[a-z0-9_.$-]+\\.nocache\\.js(?:\\?|$)",
+                "gwt\\.codesvr=",
+                "(?:^|/)war/[a-z0-9_.-]+/[a-z0-9_.-]+\\.cache\\.(?:js|html)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Apache Struts 2",
+              "resourceHints": [
+                "/struts/",
+                "jquery.struts"
+              ],
+              "patterns": [
+                "(?:^|/)struts/(?:js|css|images)/(?:base|jquery|struts)[^\\s\"'<>]*",
+                "jquery\\.struts2?[^\\s\"'<>]*\\.js(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Spring Boot Admin",
+              "resourceHints": [
+                "spring-boot-admin",
+                "/assets/img/spring"
+              ],
+              "patterns": [
+                "spring-boot-admin[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+                "(?:^|/)assets/img/spring-boot-admin[^\\s\"'<>]*"
+              ]
+            },
+            {
+              "name": "Alibaba Druid Monitor",
+              "resourceHints": [
+                "/druid/js/",
+                "/druid/css/",
+                "/druid/index.html"
+              ],
+              "patterns": [
+                "(?:^|/)druid/(?:js|css|img)/(?:common|lang|detail|basic|druid)[^\\s\"'<>]*",
+                "(?:^|/)druid/index\\.html(?:[?#]|$)"
+              ]
+            },
+            {
+              "name": "Django Admin",
+              "resourceHints": [
+                "/static/admin/",
+                "django.jQuery"
+              ],
+              "patterns": [
+                "(?:^|/)static/admin/(?:css|js|img)/(?:base|core|actions|nav_sidebar|RelatedObjectLookups)[^\\s\"'<>]*",
+                "django\\.jquery[^\\s\"'<>]*\\.js(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Django Debug Toolbar",
+              "resourceHints": [
+                "/__debug__/",
+                "debug_toolbar"
+              ],
+              "patterns": [
+                "(?:^|/)__debug__/(?:m|render_panel|sql_select|template_source)(?:/|[?#]|$)",
+                "(?:^|/)static/debug_toolbar/(?:css|js)(?:/|[?#]|$)"
+              ]
+            },
+            {
+              "name": "Django REST framework",
+              "resourceHints": [
+                "/static/rest_framework/",
+                "rest_framework"
+              ],
+              "patterns": [
+                "(?:^|/)static/rest_framework/(?:css|js|img)/(?:bootstrap|default|prettify|ajax-form)[^\\s\"'<>]*",
+                "rest_framework[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Flask DebugToolbar",
+              "resourceHints": [
+                "/_debug_toolbar/",
+                "flask-debugtoolbar"
+              ],
+              "patterns": [
+                "(?:^|/)_debug_toolbar/(?:static|panels)(?:/|[?#]|$)",
+                "flask-debugtoolbar[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Plotly Dash",
+              "resourceHints": [
+                "/_dash-component-suites/",
+                "/_dash-layout",
+                "/_dash-dependencies"
+              ],
+              "patterns": [
+                "(?:^|/)_dash-component-suites/(?:dash|dash_core_components|dash_html_components|dash_table)[^\\s\"'<>]*",
+                "(?:^|/)_dash-(?:layout|dependencies|update-component)(?:[?#]|$)"
+              ]
+            },
+            {
+              "name": "Streamlit",
+              "resourceHints": [
+                "streamlit",
+                "/_stcore/"
+              ],
+              "patterns": [
+                "streamlit[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+                "(?:^|/)_stcore/(?:health|host-config|stream)(?:[?#]|$)"
+              ]
+            },
+            {
+              "name": "Jupyter Notebook",
+              "resourceHints": [
+                "/static/notebook/",
+                "jupyter"
+              ],
+              "patterns": [
+                "(?:^|/)static/notebook/(?:js|css|images)/(?:main|notebook|tree)[^\\s\"'<>]*",
+                "jupyter[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "JupyterLab",
+              "resourceHints": [
+                "/lab/static/",
+                "jupyterlab"
+              ],
+              "patterns": [
+                "(?:^|/)lab/static/(?:main|vendors|remoteEntry)[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)",
+                "jupyterlab[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Ruby on Rails Active Storage",
+              "resourceHints": [
+                "/rails/active_storage/",
+                "active_storage"
+              ],
+              "patterns": [
+                "(?:^|/)rails/active_storage/(?:blobs|representations|disk|direct_uploads)(?:/|[?#]|$)",
+                "active_storage[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Phoenix LiveDashboard",
+              "resourceHints": [
+                "/phoenix/live_dashboard/",
+                "live-dashboard"
+              ],
+              "patterns": [
+                "(?:^|/)phoenix/live_dashboard/(?:assets|css|js)(?:/|[?#]|$)",
+                "live-dashboard[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Swagger UI",
+              "resourceHints": [
+                "swagger-ui",
+                "/swagger-resources/"
+              ],
+              "patterns": [
+                "swagger-ui(?:-bundle|-standalone-preset)?[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)",
+                "(?:^|/)swagger-resources(?:/|[?#]|$)"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "RapiDoc",
+          "confidence": "中",
+          "resourceHints": [
+            "rapidoc",
+            "rapi-doc"
+          ],
+          "patterns": [
+            "rapidoc[^\\s\"'<>]*\\.js(?:\\?|$)",
+            "rapi-doc[^\\s\"'<>]*\\.js(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "Redoc",
+          "confidence": "高",
+          "resourceHints": [
+            "redoc",
+            "redocly"
+          ],
+          "patterns": [
+            "redoc(?:\\.standalone)?[^\\s\"'<>]*\\.js(?:\\?|$)",
+            "redocly[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+          ]
+        }
+      ]
+    },
+    "websitePrograms": {
+      "defaults": {
         "confidence": "高",
         "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "javax.faces.resource",
-          "jakarta.faces.resource",
-          "primefaces"
-        ],
-        "patterns": [
-          "(?:javax|jakarta)\\.faces\\.resource/[^\\s\"'<>?]+\\?ln=primefaces(?:&|$)",
-          "(?:javax|jakarta)\\.faces\\.resource/primefaces[^\\s\"'<>]*",
-          "primefaces(?:\\.min)?\\.js(?:\\?|$)"
-        ]
+        "resourceOnly": true
       },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "OmniFaces",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "omnifaces",
-          "javax.faces.resource",
-          "jakarta.faces.resource"
-        ],
-        "patterns": [
-          "(?:javax|jakarta)\\.faces\\.resource/[^\\s\"'<>?]+\\?ln=omnifaces(?:&|$)",
-          "omnifaces[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "RichFaces",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "org.richfaces",
-          "richfaces"
-        ],
-        "patterns": [
-          "org\\.richfaces\\.resources/[^\\s\"'<>]*",
-          "richfaces[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "ICEfaces",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "icefaces",
-          "icepush"
-        ],
-        "patterns": [
-          "icefaces[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)",
-          "icepush[^\\s\"'<>]*\\.js(?:\\?|$)",
-          "(?:javax|jakarta)\\.faces\\.resource/[^\\s\"'<>?]+\\?ln=icefaces(?:&|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Apache Wicket",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/wicket/resource/",
-          "wicket-ajax"
-        ],
-        "patterns": [
-          "(?:^|/)wicket/resource/[^\\s\"'<>]+",
-          "wicket-ajax(?:-jquery)?[^\\s\"'<>]*\\.js(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Apache Tapestry",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/assets/tapestry/",
-          "tapestry"
-        ],
-        "patterns": [
-          "(?:^|/)assets/tapestry(?:/|[?#]|$)",
-          "tapestry[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "DWR",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/dwr/engine.js",
-          "/dwr/interface/"
-        ],
-        "patterns": [
-          "(?:^|/)dwr/(?:engine|util)\\.js(?:[?#]|$)",
-          "(?:^|/)dwr/interface/[a-z0-9_$-]+\\.js(?:[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Google Web Toolkit",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          ".nocache.js",
-          "gwt.codesvr"
-        ],
-        "patterns": [
-          "[a-z0-9_.$-]+\\.nocache\\.js(?:\\?|$)",
-          "gwt\\.codesvr=",
-          "(?:^|/)war/[a-z0-9_.-]+/[a-z0-9_.-]+\\.cache\\.(?:js|html)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Apache Struts 2",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/struts/",
-          "jquery.struts"
-        ],
-        "patterns": [
-          "(?:^|/)struts/(?:js|css|images)/(?:base|jquery|struts)[^\\s\"'<>]*",
-          "jquery\\.struts2?[^\\s\"'<>]*\\.js(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Spring Boot Admin",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "spring-boot-admin",
-          "/assets/img/spring"
-        ],
-        "patterns": [
-          "spring-boot-admin[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
-          "(?:^|/)assets/img/spring-boot-admin[^\\s\"'<>]*"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Alibaba Druid Monitor",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/druid/js/",
-          "/druid/css/",
-          "/druid/index.html"
-        ],
-        "patterns": [
-          "(?:^|/)druid/(?:js|css|img)/(?:common|lang|detail|basic|druid)[^\\s\"'<>]*",
-          "(?:^|/)druid/index\\.html(?:[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Django Admin",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/static/admin/",
-          "django.jQuery"
-        ],
-        "patterns": [
-          "(?:^|/)static/admin/(?:css|js|img)/(?:base|core|actions|nav_sidebar|RelatedObjectLookups)[^\\s\"'<>]*",
-          "django\\.jquery[^\\s\"'<>]*\\.js(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Django Debug Toolbar",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/__debug__/",
-          "debug_toolbar"
-        ],
-        "patterns": [
-          "(?:^|/)__debug__/(?:m|render_panel|sql_select|template_source)(?:/|[?#]|$)",
-          "(?:^|/)static/debug_toolbar/(?:css|js)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Django REST framework",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/static/rest_framework/",
-          "rest_framework"
-        ],
-        "patterns": [
-          "(?:^|/)static/rest_framework/(?:css|js|img)/(?:bootstrap|default|prettify|ajax-form)[^\\s\"'<>]*",
-          "rest_framework[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Flask DebugToolbar",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/_debug_toolbar/",
-          "flask-debugtoolbar"
-        ],
-        "patterns": [
-          "(?:^|/)_debug_toolbar/(?:static|panels)(?:/|[?#]|$)",
-          "flask-debugtoolbar[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Plotly Dash",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/_dash-component-suites/",
-          "/_dash-layout",
-          "/_dash-dependencies"
-        ],
-        "patterns": [
-          "(?:^|/)_dash-component-suites/(?:dash|dash_core_components|dash_html_components|dash_table)[^\\s\"'<>]*",
-          "(?:^|/)_dash-(?:layout|dependencies|update-component)(?:[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Streamlit",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "streamlit",
-          "/_stcore/"
-        ],
-        "patterns": [
-          "streamlit[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
-          "(?:^|/)_stcore/(?:health|host-config|stream)(?:[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Jupyter Notebook",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/static/notebook/",
-          "jupyter"
-        ],
-        "patterns": [
-          "(?:^|/)static/notebook/(?:js|css|images)/(?:main|notebook|tree)[^\\s\"'<>]*",
-          "jupyter[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "JupyterLab",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/lab/static/",
-          "jupyterlab"
-        ],
-        "patterns": [
-          "(?:^|/)lab/static/(?:main|vendors|remoteEntry)[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)",
-          "jupyterlab[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Ruby on Rails Active Storage",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/rails/active_storage/",
-          "active_storage"
-        ],
-        "patterns": [
-          "(?:^|/)rails/active_storage/(?:blobs|representations|disk|direct_uploads)(?:/|[?#]|$)",
-          "active_storage[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Phoenix LiveDashboard",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/phoenix/live_dashboard/",
-          "live-dashboard"
-        ],
-        "patterns": [
-          "(?:^|/)phoenix/live_dashboard/(?:assets|css|js)(?:/|[?#]|$)",
-          "live-dashboard[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Swagger UI",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "swagger-ui",
-          "/swagger-resources/"
-        ],
-        "patterns": [
-          "swagger-ui(?:-bundle|-standalone-preset)?[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)",
-          "(?:^|/)swagger-resources(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "RapiDoc",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "rapidoc",
-          "rapi-doc"
-        ],
-        "patterns": [
-          "rapidoc[^\\s\"'<>]*\\.js(?:\\?|$)",
-          "rapi-doc[^\\s\"'<>]*\\.js(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Redoc",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "redoc",
-          "redocly"
-        ],
-        "patterns": [
-          "redoc(?:\\.standalone)?[^\\s\"'<>]*\\.js(?:\\?|$)",
-          "redocly[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      }
-    ],
-    "websitePrograms": [
-      {
-        "category": "CMS / 电商平台",
-        "name": "Liferay DXP",
-        "kind": "Java 门户 / CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/o/frontend-js-web/",
-          "/o/classic-theme/",
-          "/o/admin-theme/"
-        ],
-        "patterns": [
-          "(?:^|/)o/(?:frontend-js-web|frontend-css-web|frontend-theme-font-awesome-web)(?:/|[?#]|$)",
-          "(?:^|/)o/(?:classic-theme|admin-theme|commerce-theme)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Adobe Experience Manager",
-        "kind": "Java CMS / DXP",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/etc.clientlibs/",
-          "/libs/granite/",
-          "/libs/cq/"
-        ],
-        "patterns": [
-          "(?:^|/)etc\\.clientlibs/[^\\s\"'<>]+",
-          "(?:^|/)libs/(?:granite|cq|wcm|dam)/(?:clientlibs|core|foundation)[^\\s\"'<>]*",
-          "(?:^|/)system/console/status-slingsettings(?:[?#]|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Magnolia CMS",
-        "kind": "Java CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/.resources/",
-          "/magnoliaAuthor/",
-          "magnolia"
-        ],
-        "patterns": [
-          "(?:^|/)\\.resources/[^\\s\"'<>]+/(?:webresources|css|js)(?:/|[?#]|$)",
-          "(?:^|/)magnolia(?:Author|Public)(?:/|[?#]|$)",
-          "magnolia[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Jahia",
-        "kind": "Java CMS / DXP",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/modules/jahia",
-          "digital-factory",
-          "jahia"
-        ],
-        "patterns": [
-          "(?:^|/)modules/(?:jahia|dx|assets|default)[^\\s\"'<>]*",
-          "digital-factory[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)",
-          "jahia[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Bloomreach Experience Manager",
-        "kind": "Java CMS / DXP",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/binaries/content/",
-          "bloomreach",
-          "hippo"
-        ],
-        "patterns": [
-          "(?:^|/)binaries/content/assets/[^\\s\"'<>]+",
-          "bloomreach[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)",
-          "hippo(?:cms)?[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "dotCMS",
-        "kind": "Java CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/dotAdmin/",
-          "/html/js/dotcms",
-          "dotcms"
-        ],
-        "patterns": [
-          "(?:^|/)dotAdmin(?:/|[?#]|$)",
-          "(?:^|/)html/(?:js|css)/(?:dotcms|dot_admin)[^\\s\"'<>]*",
-          "dotcms[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "OpenCms",
-        "kind": "Java CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/opencms/",
-          "/system/workplace/",
-          "opencms"
-        ],
-        "patterns": [
-          "(?:^|/)opencms/(?:export|resources|system)(?:/|[?#]|$)",
-          "(?:^|/)system/workplace/(?:commons|resources|views)(?:/|[?#]|$)",
-          "opencms[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "CrafterCMS",
-        "kind": "Java CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/studio/static-assets/",
-          "craftercms",
-          "crafter-studio"
-        ],
-        "patterns": [
-          "(?:^|/)studio/static-assets/(?:css|js|images)(?:/|[?#]|$)",
-          "crafter(?:cms|-studio)?[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Alfresco Share",
-        "kind": "文档管理 / 协作",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/share/res/",
-          "/share/page/",
-          "alfresco"
-        ],
-        "patterns": [
-          "(?:^|/)share/res/(?:components|modules|js|themes)(?:/|[?#]|$)",
-          "(?:^|/)share/page/(?:site|user|repository|document-details)(?:/|[?#]|$)",
-          "alfresco[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Keycloak",
-        "kind": "身份认证 / SSO",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/resources/",
-          "/realms/",
-          "keycloak"
-        ],
-        "patterns": [
-          "(?:^|/)resources/[a-z0-9_.-]+/(?:login|admin)/keycloak(?:/|[?#]|$)",
-          "(?:^|/)realms/[^\\s\"'<>]+/protocol/openid-connect/(?:auth|3p-cookies)(?:[?#]|$)",
-          "keycloak[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Apereo CAS",
-        "kind": "身份认证 / SSO",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/cas/",
-          "/themes/cas/",
-          "apereo"
-        ],
-        "patterns": [
-          "(?:^|/)cas/(?:js|css|themes)/(?:cas|login)[^\\s\"'<>]*",
-          "(?:^|/)themes/cas/(?:css|js|images)(?:/|[?#]|$)",
-          "apereo[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Jenkins",
-        "kind": "CI / DevOps",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/adjuncts/",
-          "/static/",
-          "/plugin/"
-        ],
-        "patterns": [
-          "(?:^|/)adjuncts/[a-f0-9]+/(?:lib|org|jenkinsci|hudson)[^\\s\"'<>]*",
-          "(?:^|/)static/[a-f0-9]+/(?:scripts|css|images|plugin-manager-ui)(?:/|[?#]|$)",
-          "(?:^|/)plugin/(?:workflow|blueocean|credentials|git|matrix-auth)[^\\s\"'<>]*"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "SonarQube",
-        "kind": "代码质量平台",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "sonarqube",
-          "sonar"
-        ],
-        "patterns": [
-          "sonarqube[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
-          "sonar(?:-)?server[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Nexus Repository",
-        "kind": "制品仓库",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/static/rapture/",
-          "/service/rest/",
-          "nexus"
-        ],
-        "patterns": [
-          "(?:^|/)static/rapture/(?:resources|js|css)(?:/|[?#]|$)",
-          "(?:^|/)service/rest/(?:v1|internal)/(?:status|repositories|components)(?:/|[?#]|$)",
-          "nexus(?:-repository)?[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "JFrog Artifactory",
-        "kind": "制品仓库",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/ui/artifactory/",
-          "/artifactory/",
-          "artifactory"
-        ],
-        "patterns": [
-          "(?:^|/)ui/artifactory(?:/|[?#]|$)",
-          "(?:^|/)artifactory/(?:webapp|ui|api)(?:/|[?#]|$)",
-          "artifactory[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Atlassian Jira",
-        "kind": "项目管理 / DevOps",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "download/batch/com.atlassian.jira",
-          "jira.webresources"
-        ],
-        "patterns": [
-          "(?:^|/)s/[^\\s\"'<>]+/_/download/batch/com\\.atlassian\\.jira[^\\s\"'<>]*",
-          "jira\\.webresources[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Atlassian Confluence",
-        "kind": "知识库",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "download/resources/com.atlassian.confluence",
-          "confluence.web.resources"
-        ],
-        "patterns": [
-          "(?:^|/)s/[^\\s\"'<>]+/_/download/resources/com\\.atlassian\\.confluence[^\\s\"'<>]*",
-          "confluence\\.web\\.resources[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Atlassian Bitbucket Server",
-        "kind": "代码托管 / DevOps",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "download/resources/com.atlassian.bitbucket",
-          "bitbucket-webpack"
-        ],
-        "patterns": [
-          "(?:^|/)s/[^\\s\"'<>]+/_/download/resources/com\\.atlassian\\.bitbucket[^\\s\"'<>]*",
-          "bitbucket-webpack[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "GitLab",
-        "kind": "代码托管 / DevOps",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/assets/webpack/",
-          "gitlab"
-        ],
-        "patterns": [
-          "(?:^|/)assets/webpack/(?:runtime|main|commons|pages)[^\\s\"'<>]*",
-          "gitlab[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Gitea",
-        "kind": "代码托管",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/assets/js/index.js",
-          "gitea",
-          "/user/login"
-        ],
-        "patterns": [
-          "(?:^|/)assets/(?:js|css)/(?:index|theme-gitea|webcomponents)[^\\s\"'<>]*",
-          "gitea[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Forgejo",
-        "kind": "代码托管",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "forgejo",
-          "/assets/js/index.js"
-        ],
-        "patterns": [
-          "forgejo[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
-          "(?:^|/)assets/img/forgejo[^\\s\"'<>]*"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Gogs",
-        "kind": "代码托管",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "gogs",
-          "/img/gogs"
-        ],
-        "patterns": [
-          "gogs[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
-          "(?:^|/)(?:img|assets/img)/gogs[^\\s\"'<>]*"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Harbor",
-        "kind": "镜像仓库",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/static/harbor/",
-          "harbor"
-        ],
-        "patterns": [
-          "(?:^|/)static/harbor/(?:js|css|images)(?:/|[?#]|$)",
-          "harbor[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Rundeck",
-        "kind": "自动化运维",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/assets/rundeck/",
-          "/user-assets/",
-          "rundeck"
-        ],
-        "patterns": [
-          "(?:^|/)assets/rundeck(?:/|[?#]|$)",
-          "(?:^|/)user-assets/(?:css|js|images)(?:/|[?#]|$)",
-          "rundeck[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Redmine",
-        "kind": "项目管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/plugin_assets/",
-          "redmine"
-        ],
-        "patterns": [
-          "(?:^|/)plugin_assets/(?:redmine|redmine_)[^\\s\"'<>]*",
-          "redmine[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Sitecore",
-        "kind": ".NET CMS / DXP",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/sitecore/",
-          "/sitecore modules/",
-          "sitecore"
-        ],
-        "patterns": [
-          "(?:^|/)sitecore/(?:shell|modules|admin|service)(?:/|[?#]|$)",
-          "(?:^|/)sitecore%20modules/[^\\s\"'<>]+",
-          "sitecore[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Kentico Xperience",
-        "kind": ".NET CMS / DXP",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/CMSPages/",
-          "/CMSScripts/",
-          "/CMSPages/GetResource.ashx"
-        ],
-        "patterns": [
-          "(?:^|/)CMSPages/GetResource\\.ashx\\?scriptfile=",
-          "(?:^|/)CMSScripts/(?:jquery|bootstrap|CMS|Controls|Dialogs)(?:/|[?#]|$)",
-          "(?:^|/)CMSPages/(?:PortalTemplate|Dialogs|GetCSS|GetResource)\\.aspx(?:[?#]|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "DNN / DotNetNuke",
-        "kind": ".NET CMS / 门户",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/DesktopModules/",
-          "/Portals/_default/",
-          "dotnetnuke"
-        ],
-        "patterns": [
-          "(?:^|/)DesktopModules/(?:Admin|DDRMenu|DNN|HTML|Journal|AuthenticationServices)(?:/|[?#]|$)",
-          "(?:^|/)Portals/_default/(?:Skins|Containers|default\\.css)(?:/|[?#]|$)",
-          "dotnetnuke[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Orchard Core",
-        "kind": ".NET CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "OrchardCore",
-          "/TheAdmin/"
-        ],
-        "patterns": [
-          "(?:^|/)OrchardCore\\.[A-Za-z0-9_.-]+/(?:Scripts|Styles|Assets)(?:/|[?#]|$)",
-          "(?:^|/)TheAdmin/(?:Styles|Scripts|Assets)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Optimizely CMS / Episerver",
-        "kind": ".NET CMS / DXP",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/EPiServer/",
-          "/ClientResources/",
-          "episerver"
-        ],
-        "patterns": [
-          "(?:^|/)EPiServer/(?:Shell|CMS|Commerce|Find)(?:/|[?#]|$)",
-          "(?:^|/)ClientResources/(?:EPiServer|Shell|Scripts|Styles)(?:/|[?#]|$)",
-          "episerver[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Sitefinity",
-        "kind": ".NET CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/Sitefinity/",
-          "sitefinity"
-        ],
-        "patterns": [
-          "(?:^|/)Sitefinity/(?:WebsiteTemplates|Frontend|ResourcePackages|Services)(?:/|[?#]|$)",
-          "sitefinity[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "nopCommerce",
-        "kind": ".NET 电商系统",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "nopcommerce",
-          "/Plugins/Widgets.",
-          "/Plugins/Payments."
-        ],
-        "patterns": [
-          "(?:^|/)Plugins/(?:Widgets|Payments|Shipping|Tax|ExternalAuth)\\.[A-Za-z0-9_.-]+(?:/|[?#]|$)",
-          "nopcommerce[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "ABP Framework",
-        "kind": ".NET 应用框架",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/libs/abp/",
-          "/Abp/",
-          "abp."
-        ],
-        "patterns": [
-          "(?:^|/)libs/abp/(?:core|aspnetcore-mvc-ui|bootstrap|jquery)(?:/|[?#]|$)",
-          "(?:^|/)Abp/(?:ApplicationConfigurationScript|ServiceProxyScript)(?:[?#]|$)",
-          "abp\\.[a-z0-9_.-]+\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Piranha CMS",
-        "kind": ".NET CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "piranha",
-          "/manager/assets/piranha"
-        ],
-        "patterns": [
-          "piranha[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
-          "(?:^|/)manager/assets/piranha[^\\s\"'<>]*"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Smartstore",
-        "kind": ".NET 电商系统",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "smartstore",
-          "/Themes/Flex/"
-        ],
-        "patterns": [
-          "smartstore[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
-          "(?:^|/)Themes/Flex/(?:Content|Views|Scripts)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "NetBox",
-        "kind": "网络资产管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/static/netbox/",
-          "netbox"
-        ],
-        "patterns": [
-          "(?:^|/)static/netbox/(?:css|js|img|fonts)(?:/|[?#]|$)",
-          "netbox[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Nautobot",
-        "kind": "网络资产管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/static/nautobot/",
-          "nautobot"
-        ],
-        "patterns": [
-          "(?:^|/)static/nautobot/(?:css|js|img|fonts)(?:/|[?#]|$)",
-          "nautobot[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "CKAN",
-        "kind": "开放数据平台",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/base/javascript/ckan",
-          "ckan"
-        ],
-        "patterns": [
-          "(?:^|/)base/(?:javascript|css)/ckan[^\\s\"'<>]*",
-          "ckan[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      }
-    ],
-    "probes": [
-      {
+      "rules": [
+        {
+          "defaults": {
+            "category": "CMS / 电商平台"
+          },
+          "rules": [
+            {
+              "name": "Liferay DXP",
+              "kind": "Java 门户 / CMS",
+              "resourceHints": [
+                "/o/frontend-js-web/",
+                "/o/classic-theme/",
+                "/o/admin-theme/"
+              ],
+              "patterns": [
+                "(?:^|/)o/(?:frontend-js-web|frontend-css-web|frontend-theme-font-awesome-web)(?:/|[?#]|$)",
+                "(?:^|/)o/(?:classic-theme|admin-theme|commerce-theme)(?:/|[?#]|$)"
+              ]
+            },
+            {
+              "name": "Adobe Experience Manager",
+              "kind": "Java CMS / DXP",
+              "resourceHints": [
+                "/etc.clientlibs/",
+                "/libs/granite/",
+                "/libs/cq/"
+              ],
+              "patterns": [
+                "(?:^|/)etc\\.clientlibs/[^\\s\"'<>]+",
+                "(?:^|/)libs/(?:granite|cq|wcm|dam)/(?:clientlibs|core|foundation)[^\\s\"'<>]*",
+                "(?:^|/)system/console/status-slingsettings(?:[?#]|$)"
+              ]
+            },
+            {
+              "name": "Magnolia CMS",
+              "kind": "Java CMS",
+              "resourceHints": [
+                "/.resources/",
+                "/magnoliaAuthor/",
+                "magnolia"
+              ],
+              "patterns": [
+                "(?:^|/)\\.resources/[^\\s\"'<>]+/(?:webresources|css|js)(?:/|[?#]|$)",
+                "(?:^|/)magnolia(?:Author|Public)(?:/|[?#]|$)",
+                "magnolia[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Jahia",
+              "kind": "Java CMS / DXP",
+              "resourceHints": [
+                "/modules/jahia",
+                "digital-factory",
+                "jahia"
+              ],
+              "patterns": [
+                "(?:^|/)modules/(?:jahia|dx|assets|default)[^\\s\"'<>]*",
+                "digital-factory[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)",
+                "jahia[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Bloomreach Experience Manager",
+              "kind": "Java CMS / DXP",
+              "resourceHints": [
+                "/binaries/content/",
+                "bloomreach",
+                "hippo"
+              ],
+              "patterns": [
+                "(?:^|/)binaries/content/assets/[^\\s\"'<>]+",
+                "bloomreach[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)",
+                "hippo(?:cms)?[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "defaults": {
+                "kind": "Java CMS"
+              },
+              "rules": [
+                {
+                  "name": "dotCMS",
+                  "resourceHints": [
+                    "/dotAdmin/",
+                    "/html/js/dotcms",
+                    "dotcms"
+                  ],
+                  "patterns": [
+                    "(?:^|/)dotAdmin(?:/|[?#]|$)",
+                    "(?:^|/)html/(?:js|css)/(?:dotcms|dot_admin)[^\\s\"'<>]*",
+                    "dotcms[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "OpenCms",
+                  "resourceHints": [
+                    "/opencms/",
+                    "/system/workplace/",
+                    "opencms"
+                  ],
+                  "patterns": [
+                    "(?:^|/)opencms/(?:export|resources|system)(?:/|[?#]|$)",
+                    "(?:^|/)system/workplace/(?:commons|resources|views)(?:/|[?#]|$)",
+                    "opencms[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "CrafterCMS",
+                  "resourceHints": [
+                    "/studio/static-assets/",
+                    "craftercms",
+                    "crafter-studio"
+                  ],
+                  "patterns": [
+                    "(?:^|/)studio/static-assets/(?:css|js|images)(?:/|[?#]|$)",
+                    "crafter(?:cms|-studio)?[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "category": "网站程序"
+          },
+          "rules": [
+            {
+              "name": "Alfresco Share",
+              "kind": "文档管理 / 协作",
+              "resourceHints": [
+                "/share/res/",
+                "/share/page/",
+                "alfresco"
+              ],
+              "patterns": [
+                "(?:^|/)share/res/(?:components|modules|js|themes)(?:/|[?#]|$)",
+                "(?:^|/)share/page/(?:site|user|repository|document-details)(?:/|[?#]|$)",
+                "alfresco[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Keycloak",
+              "kind": "身份认证 / SSO",
+              "resourceHints": [
+                "/resources/",
+                "/realms/",
+                "keycloak"
+              ],
+              "patterns": [
+                "(?:^|/)resources/[a-z0-9_.-]+/(?:login|admin)/keycloak(?:/|[?#]|$)",
+                "(?:^|/)realms/[^\\s\"'<>]+/protocol/openid-connect/(?:auth|3p-cookies)(?:[?#]|$)",
+                "keycloak[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Apereo CAS",
+              "kind": "身份认证 / SSO",
+              "resourceHints": [
+                "/cas/",
+                "/themes/cas/",
+                "apereo"
+              ],
+              "patterns": [
+                "(?:^|/)cas/(?:js|css|themes)/(?:cas|login)[^\\s\"'<>]*",
+                "(?:^|/)themes/cas/(?:css|js|images)(?:/|[?#]|$)",
+                "apereo[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Jenkins",
+              "kind": "CI / DevOps",
+              "resourceHints": [
+                "/adjuncts/",
+                "/static/",
+                "/plugin/"
+              ],
+              "patterns": [
+                "(?:^|/)adjuncts/[a-f0-9]+/(?:lib|org|jenkinsci|hudson)[^\\s\"'<>]*",
+                "(?:^|/)static/[a-f0-9]+/(?:scripts|css|images|plugin-manager-ui)(?:/|[?#]|$)",
+                "(?:^|/)plugin/(?:workflow|blueocean|credentials|git|matrix-auth)[^\\s\"'<>]*"
+              ]
+            },
+            {
+              "name": "SonarQube",
+              "kind": "代码质量平台",
+              "resourceHints": [
+                "sonarqube",
+                "sonar"
+              ],
+              "patterns": [
+                "sonarqube[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+                "sonar(?:-)?server[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Nexus Repository",
+              "kind": "制品仓库",
+              "resourceHints": [
+                "/static/rapture/",
+                "/service/rest/",
+                "nexus"
+              ],
+              "patterns": [
+                "(?:^|/)static/rapture/(?:resources|js|css)(?:/|[?#]|$)",
+                "(?:^|/)service/rest/(?:v1|internal)/(?:status|repositories|components)(?:/|[?#]|$)",
+                "nexus(?:-repository)?[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "JFrog Artifactory",
+              "kind": "制品仓库",
+              "resourceHints": [
+                "/ui/artifactory/",
+                "/artifactory/",
+                "artifactory"
+              ],
+              "patterns": [
+                "(?:^|/)ui/artifactory(?:/|[?#]|$)",
+                "(?:^|/)artifactory/(?:webapp|ui|api)(?:/|[?#]|$)",
+                "artifactory[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Atlassian Jira",
+              "kind": "项目管理 / DevOps",
+              "resourceHints": [
+                "download/batch/com.atlassian.jira",
+                "jira.webresources"
+              ],
+              "patterns": [
+                "(?:^|/)s/[^\\s\"'<>]+/_/download/batch/com\\.atlassian\\.jira[^\\s\"'<>]*",
+                "jira\\.webresources[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Atlassian Confluence",
+              "kind": "知识库",
+              "resourceHints": [
+                "download/resources/com.atlassian.confluence",
+                "confluence.web.resources"
+              ],
+              "patterns": [
+                "(?:^|/)s/[^\\s\"'<>]+/_/download/resources/com\\.atlassian\\.confluence[^\\s\"'<>]*",
+                "confluence\\.web\\.resources[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Atlassian Bitbucket Server",
+              "kind": "代码托管 / DevOps",
+              "resourceHints": [
+                "download/resources/com.atlassian.bitbucket",
+                "bitbucket-webpack"
+              ],
+              "patterns": [
+                "(?:^|/)s/[^\\s\"'<>]+/_/download/resources/com\\.atlassian\\.bitbucket[^\\s\"'<>]*",
+                "bitbucket-webpack[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "GitLab",
+              "kind": "代码托管 / DevOps",
+              "resourceHints": [
+                "/assets/webpack/",
+                "gitlab"
+              ],
+              "patterns": [
+                "(?:^|/)assets/webpack/(?:runtime|main|commons|pages)[^\\s\"'<>]*",
+                "gitlab[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "defaults": {
+                "kind": "代码托管"
+              },
+              "rules": [
+                {
+                  "name": "Gitea",
+                  "resourceHints": [
+                    "/assets/js/index.js",
+                    "gitea",
+                    "/user/login"
+                  ],
+                  "patterns": [
+                    "(?:^|/)assets/(?:js|css)/(?:index|theme-gitea|webcomponents)[^\\s\"'<>]*",
+                    "gitea[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Forgejo",
+                  "resourceHints": [
+                    "forgejo",
+                    "/assets/js/index.js"
+                  ],
+                  "patterns": [
+                    "forgejo[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+                    "(?:^|/)assets/img/forgejo[^\\s\"'<>]*"
+                  ]
+                },
+                {
+                  "name": "Gogs",
+                  "resourceHints": [
+                    "gogs",
+                    "/img/gogs"
+                  ],
+                  "patterns": [
+                    "gogs[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+                    "(?:^|/)(?:img|assets/img)/gogs[^\\s\"'<>]*"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Harbor",
+              "kind": "镜像仓库",
+              "resourceHints": [
+                "/static/harbor/",
+                "harbor"
+              ],
+              "patterns": [
+                "(?:^|/)static/harbor/(?:js|css|images)(?:/|[?#]|$)",
+                "harbor[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Rundeck",
+              "kind": "自动化运维",
+              "resourceHints": [
+                "/assets/rundeck/",
+                "/user-assets/",
+                "rundeck"
+              ],
+              "patterns": [
+                "(?:^|/)assets/rundeck(?:/|[?#]|$)",
+                "(?:^|/)user-assets/(?:css|js|images)(?:/|[?#]|$)",
+                "rundeck[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Redmine",
+              "kind": "项目管理",
+              "resourceHints": [
+                "/plugin_assets/",
+                "redmine"
+              ],
+              "patterns": [
+                "(?:^|/)plugin_assets/(?:redmine|redmine_)[^\\s\"'<>]*",
+                "redmine[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "category": "CMS / 电商平台"
+          },
+          "rules": [
+            {
+              "name": "Sitecore",
+              "kind": ".NET CMS / DXP",
+              "resourceHints": [
+                "/sitecore/",
+                "/sitecore modules/",
+                "sitecore"
+              ],
+              "patterns": [
+                "(?:^|/)sitecore/(?:shell|modules|admin|service)(?:/|[?#]|$)",
+                "(?:^|/)sitecore%20modules/[^\\s\"'<>]+",
+                "sitecore[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Kentico Xperience",
+              "kind": ".NET CMS / DXP",
+              "resourceHints": [
+                "/CMSPages/",
+                "/CMSScripts/",
+                "/CMSPages/GetResource.ashx"
+              ],
+              "patterns": [
+                "(?:^|/)CMSPages/GetResource\\.ashx\\?scriptfile=",
+                "(?:^|/)CMSScripts/(?:jquery|bootstrap|CMS|Controls|Dialogs)(?:/|[?#]|$)",
+                "(?:^|/)CMSPages/(?:PortalTemplate|Dialogs|GetCSS|GetResource)\\.aspx(?:[?#]|$)"
+              ]
+            },
+            {
+              "name": "DNN / DotNetNuke",
+              "kind": ".NET CMS / 门户",
+              "resourceHints": [
+                "/DesktopModules/",
+                "/Portals/_default/",
+                "dotnetnuke"
+              ],
+              "patterns": [
+                "(?:^|/)DesktopModules/(?:Admin|DDRMenu|DNN|HTML|Journal|AuthenticationServices)(?:/|[?#]|$)",
+                "(?:^|/)Portals/_default/(?:Skins|Containers|default\\.css)(?:/|[?#]|$)",
+                "dotnetnuke[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Orchard Core",
+              "kind": ".NET CMS",
+              "resourceHints": [
+                "OrchardCore",
+                "/TheAdmin/"
+              ],
+              "patterns": [
+                "(?:^|/)OrchardCore\\.[A-Za-z0-9_.-]+/(?:Scripts|Styles|Assets)(?:/|[?#]|$)",
+                "(?:^|/)TheAdmin/(?:Styles|Scripts|Assets)(?:/|[?#]|$)"
+              ]
+            },
+            {
+              "name": "Optimizely CMS / Episerver",
+              "kind": ".NET CMS / DXP",
+              "resourceHints": [
+                "/EPiServer/",
+                "/ClientResources/",
+                "episerver"
+              ],
+              "patterns": [
+                "(?:^|/)EPiServer/(?:Shell|CMS|Commerce|Find)(?:/|[?#]|$)",
+                "(?:^|/)ClientResources/(?:EPiServer|Shell|Scripts|Styles)(?:/|[?#]|$)",
+                "episerver[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Sitefinity",
+              "kind": ".NET CMS",
+              "resourceHints": [
+                "/Sitefinity/",
+                "sitefinity"
+              ],
+              "patterns": [
+                "(?:^|/)Sitefinity/(?:WebsiteTemplates|Frontend|ResourcePackages|Services)(?:/|[?#]|$)",
+                "sitefinity[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "nopCommerce",
+              "kind": ".NET 电商系统",
+              "resourceHints": [
+                "nopcommerce",
+                "/Plugins/Widgets.",
+                "/Plugins/Payments."
+              ],
+              "patterns": [
+                "(?:^|/)Plugins/(?:Widgets|Payments|Shipping|Tax|ExternalAuth)\\.[A-Za-z0-9_.-]+(?:/|[?#]|$)",
+                "nopcommerce[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "ABP Framework",
+              "kind": ".NET 应用框架",
+              "resourceHints": [
+                "/libs/abp/",
+                "/Abp/",
+                "abp."
+              ],
+              "patterns": [
+                "(?:^|/)libs/abp/(?:core|aspnetcore-mvc-ui|bootstrap|jquery)(?:/|[?#]|$)",
+                "(?:^|/)Abp/(?:ApplicationConfigurationScript|ServiceProxyScript)(?:[?#]|$)",
+                "abp\\.[a-z0-9_.-]+\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Piranha CMS",
+              "kind": ".NET CMS",
+              "resourceHints": [
+                "piranha",
+                "/manager/assets/piranha"
+              ],
+              "patterns": [
+                "piranha[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+                "(?:^|/)manager/assets/piranha[^\\s\"'<>]*"
+              ]
+            },
+            {
+              "name": "Smartstore",
+              "kind": ".NET 电商系统",
+              "resourceHints": [
+                "smartstore",
+                "/Themes/Flex/"
+              ],
+              "patterns": [
+                "smartstore[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+                "(?:^|/)Themes/Flex/(?:Content|Views|Scripts)(?:/|[?#]|$)"
+              ]
+            }
+          ]
+        },
+        {
+          "category": "网站程序",
+          "name": "NetBox",
+          "kind": "网络资产管理",
+          "resourceHints": [
+            "/static/netbox/",
+            "netbox"
+          ],
+          "patterns": [
+            "(?:^|/)static/netbox/(?:css|js|img|fonts)(?:/|[?#]|$)",
+            "netbox[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "category": "网站程序",
+          "name": "Nautobot",
+          "kind": "网络资产管理",
+          "resourceHints": [
+            "/static/nautobot/",
+            "nautobot"
+          ],
+          "patterns": [
+            "(?:^|/)static/nautobot/(?:css|js|img|fonts)(?:/|[?#]|$)",
+            "nautobot[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "category": "CMS / 电商平台",
+          "name": "CKAN",
+          "kind": "开放数据平台",
+          "resourceHints": [
+            "/base/javascript/ckan",
+            "ckan"
+          ],
+          "patterns": [
+            "(?:^|/)base/(?:javascript|css)/ckan[^\\s\"'<>]*",
+            "ckan[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        }
+      ]
+    },
+    "probes": {
+      "defaults": {
         "category": "探针 / 监控",
-        "name": "Kibana",
-        "kind": "日志 / 可观测性",
         "confidence": "高",
         "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/built_assets/",
-          "/internal/security/",
-          "kibana"
-        ],
-        "patterns": [
-          "(?:^|/)built_assets/(?:dlls|js|css)(?:/|[?#]|$)",
-          "(?:^|/)internal/security/login(?:[?#]|$)",
-          "kibana[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
+        "resourceOnly": true
       },
-      {
-        "category": "探针 / 监控",
-        "name": "OpenSearch Dashboards",
-        "kind": "日志 / 可观测性",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "opensearch",
-          "/ui/favicons/"
-        ],
-        "patterns": [
-          "opensearch(?:-)?dashboards[^\\s\"'<>]*\\.(?:js|css|svg|png|ico)(?:\\?|$)",
-          "(?:^|/)ui/favicons/opensearch[^\\s\"'<>]*"
-        ]
-      },
-      {
-        "category": "探针 / 监控",
-        "name": "Graylog",
-        "kind": "日志 / 可观测性",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "graylog",
-          "/assets/plugin/org.graylog"
-        ],
-        "patterns": [
-          "(?:^|/)assets/plugin/org\\.graylog[^\\s\"'<>]*",
-          "graylog[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "探针 / 监控",
-        "name": "Metabase",
-        "kind": "BI / 数据分析",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "metabase"
-        ],
-        "patterns": [
-          "metabase[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "探针 / 监控",
-        "name": "Apache Superset",
-        "kind": "BI / 数据分析",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "superset",
-          "/static/assets/"
-        ],
-        "patterns": [
-          "superset[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
-          "(?:^|/)static/assets/(?:images/)?superset[^\\s\"'<>]*"
-        ]
-      },
-      {
-        "category": "探针 / 监控",
-        "name": "Apache Airflow",
-        "kind": "工作流调度",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "airflow"
-        ],
-        "patterns": [
-          "airflow[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "探针 / 监控",
-        "name": "Dagster",
-        "kind": "数据编排",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "dagster",
-          "/assets/dagster/"
-        ],
-        "patterns": [
-          "(?:^|/)assets/dagster(?:/|[?#]|$)",
-          "dagster[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "探针 / 监控",
-        "name": "MLflow",
-        "kind": "机器学习实验管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "mlflow"
-        ],
-        "patterns": [
-          "mlflow[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "探针 / 监控",
-        "name": "MinIO Console",
-        "kind": "对象存储管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "minio"
-        ],
-        "patterns": [
-          "minio[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "探针 / 监控",
-        "name": "pgAdmin",
-        "kind": "数据库管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "pgadmin",
-          "/static/js/generated/"
-        ],
-        "patterns": [
-          "(?:^|/)static/js/generated/(?:app|vendor|pgadmin)[^\\s\"'<>]*",
-          "pgadmin[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "探针 / 监控",
-        "name": "Hasura Console",
-        "kind": "GraphQL / 数据平台",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "hasura"
-        ],
-        "patterns": [
-          "hasura[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-        ]
-      }
-    ]
+      "rules": [
+        {
+          "defaults": {
+            "kind": "日志 / 可观测性"
+          },
+          "rules": [
+            {
+              "name": "Kibana",
+              "resourceHints": [
+                "/built_assets/",
+                "/internal/security/",
+                "kibana"
+              ],
+              "patterns": [
+                "(?:^|/)built_assets/(?:dlls|js|css)(?:/|[?#]|$)",
+                "(?:^|/)internal/security/login(?:[?#]|$)",
+                "kibana[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "OpenSearch Dashboards",
+              "resourceHints": [
+                "opensearch",
+                "/ui/favicons/"
+              ],
+              "patterns": [
+                "opensearch(?:-)?dashboards[^\\s\"'<>]*\\.(?:js|css|svg|png|ico)(?:\\?|$)",
+                "(?:^|/)ui/favicons/opensearch[^\\s\"'<>]*"
+              ]
+            },
+            {
+              "name": "Graylog",
+              "resourceHints": [
+                "graylog",
+                "/assets/plugin/org.graylog"
+              ],
+              "patterns": [
+                "(?:^|/)assets/plugin/org\\.graylog[^\\s\"'<>]*",
+                "graylog[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Metabase",
+          "kind": "BI / 数据分析",
+          "resourceHints": [
+            "metabase"
+          ],
+          "patterns": [
+            "metabase[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "Apache Superset",
+          "kind": "BI / 数据分析",
+          "resourceHints": [
+            "superset",
+            "/static/assets/"
+          ],
+          "patterns": [
+            "superset[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+            "(?:^|/)static/assets/(?:images/)?superset[^\\s\"'<>]*"
+          ]
+        },
+        {
+          "name": "Apache Airflow",
+          "kind": "工作流调度",
+          "resourceHints": [
+            "airflow"
+          ],
+          "patterns": [
+            "airflow[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "Dagster",
+          "kind": "数据编排",
+          "resourceHints": [
+            "dagster",
+            "/assets/dagster/"
+          ],
+          "patterns": [
+            "(?:^|/)assets/dagster(?:/|[?#]|$)",
+            "dagster[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "MLflow",
+          "kind": "机器学习实验管理",
+          "resourceHints": [
+            "mlflow"
+          ],
+          "patterns": [
+            "mlflow[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "MinIO Console",
+          "kind": "对象存储管理",
+          "resourceHints": [
+            "minio"
+          ],
+          "patterns": [
+            "minio[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "pgAdmin",
+          "kind": "数据库管理",
+          "resourceHints": [
+            "pgadmin",
+            "/static/js/generated/"
+          ],
+          "patterns": [
+            "(?:^|/)static/js/generated/(?:app|vendor|pgadmin)[^\\s\"'<>]*",
+            "pgadmin[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        },
+        {
+          "name": "Hasura Console",
+          "kind": "GraphQL / 数据平台",
+          "resourceHints": [
+            "hasura"
+          ],
+          "patterns": [
+            "hasura[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+          ]
+        }
+      ]
+    }
   }
 }

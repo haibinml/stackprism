@@ -33,41 +33,45 @@
         ]
       },
       {
-        "name": "PHP",
-        "kind": "后端语言",
-        "patterns": [
-          "\\.php(?:\\?|#|$)",
-          "index\\.php",
-          "phpsessid",
-          "PHPSESSID",
-          "wp-content",
-          "laravel",
-          "symfony",
-          "drupal",
-          "joomla",
-          "thinkphp",
-          "discuz"
-        ]
-      },
-      {
-        "name": "Python",
-        "kind": "后端语言",
-        "patterns": [
-          "django",
-          "flask",
-          "fastapi",
-          "csrfmiddlewaretoken",
-          "/static/admin/"
-        ]
-      },
-      {
-        "name": "Ruby",
-        "kind": "后端语言",
-        "patterns": [
-          "rails-ujs",
-          "authenticity_token",
-          "active_storage",
-          "turbo-rails"
+        "defaults": {
+          "kind": "后端语言"
+        },
+        "rules": [
+          {
+            "name": "PHP",
+            "patterns": [
+              "\\.php(?:\\?|#|$)",
+              "index\\.php",
+              "phpsessid",
+              "PHPSESSID",
+              "wp-content",
+              "laravel",
+              "symfony",
+              "drupal",
+              "joomla",
+              "thinkphp",
+              "discuz"
+            ]
+          },
+          {
+            "name": "Python",
+            "patterns": [
+              "django",
+              "flask",
+              "fastapi",
+              "csrfmiddlewaretoken",
+              "/static/admin/"
+            ]
+          },
+          {
+            "name": "Ruby",
+            "patterns": [
+              "rails-ujs",
+              "authenticity_token",
+              "active_storage",
+              "turbo-rails"
+            ]
+          }
         ]
       },
       {
@@ -120,35 +124,39 @@
         ]
       },
       {
-        "name": "Classic ASP / VBScript",
-        "kind": "后端脚本语言",
-        "patterns": [
-          "\\.asp(?:\\?|#|$)",
-          "ASPSESSIONID",
-          "VBScript",
-          "Active Server Pages"
-        ]
-      },
-      {
-        "name": "ColdFusion / CFML",
-        "kind": "后端脚本语言",
-        "patterns": [
-          "\\.cfm(?:\\?|#|$)",
-          "\\.cfml(?:\\?|#|$)",
-          "CFID=",
-          "CFTOKEN=",
-          "coldfusion"
-        ]
-      },
-      {
-        "name": "Perl / CGI",
-        "kind": "后端脚本语言",
-        "patterns": [
-          "/cgi-bin/",
-          "\\.cgi(?:\\?|#|$)",
-          "\\.pl(?:\\?|#|$)",
-          "mod_perl",
-          "perl"
+        "defaults": {
+          "kind": "后端脚本语言"
+        },
+        "rules": [
+          {
+            "name": "Classic ASP / VBScript",
+            "patterns": [
+              "\\.asp(?:\\?|#|$)",
+              "ASPSESSIONID",
+              "VBScript",
+              "Active Server Pages"
+            ]
+          },
+          {
+            "name": "ColdFusion / CFML",
+            "patterns": [
+              "\\.cfm(?:\\?|#|$)",
+              "\\.cfml(?:\\?|#|$)",
+              "CFID=",
+              "CFTOKEN=",
+              "coldfusion"
+            ]
+          },
+          {
+            "name": "Perl / CGI",
+            "patterns": [
+              "/cgi-bin/",
+              "\\.cgi(?:\\?|#|$)",
+              "\\.pl(?:\\?|#|$)",
+              "mod_perl",
+              "perl"
+            ]
+          }
         ]
       },
       {
@@ -162,32 +170,36 @@
         ]
       },
       {
-        "name": "Go",
-        "kind": "后端语言",
-        "patterns": [
-          "gorilla.csrf",
-          "go-http-client",
-          "gin-gonic",
-          "fiber"
-        ]
-      },
-      {
-        "name": "Rust",
-        "kind": "后端语言",
-        "patterns": [
-          "actix",
-          "rocket",
-          "axum",
-          "warp"
-        ]
-      },
-      {
-        "name": "Elixir",
-        "kind": "后端语言",
-        "patterns": [
-          "phoenix_live_view",
-          "phx-click",
-          "phoenix"
+        "defaults": {
+          "kind": "后端语言"
+        },
+        "rules": [
+          {
+            "name": "Go",
+            "patterns": [
+              "gorilla.csrf",
+              "go-http-client",
+              "gin-gonic",
+              "fiber"
+            ]
+          },
+          {
+            "name": "Rust",
+            "patterns": [
+              "actix",
+              "rocket",
+              "axum",
+              "warp"
+            ]
+          },
+          {
+            "name": "Elixir",
+            "patterns": [
+              "phoenix_live_view",
+              "phx-click",
+              "phoenix"
+            ]
+          }
         ]
       }
     ]

@@ -1,269 +1,253 @@
 {
   "page": {
-    "backendHints": [
-      {
-        "category": "后端 / 服务器框架",
-        "name": "ASP.NET Web Forms",
-        "confidence": "高",
-        "patterns": [
-          "__viewstate|__eventvalidation|webresource\\.axd|scriptresource\\.axd"
-        ]
+    "backendHints": {
+      "defaults": {
+        "category": "后端 / 服务器框架"
       },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "ASP.NET MVC / Core",
-        "confidence": "中",
-        "patterns": [
-          "aspnet|asp-action=|asp-controller=|\\.aspnetcore\\."
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Blazor",
-        "confidence": "高",
-        "patterns": [
-          "\\/_framework\\/blazor|blazor\\.webassembly\\.js|blazor\\.server\\.js"
-        ],
-        "globals": [
-          "Blazor"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Ruby on Rails",
-        "confidence": "中",
-        "patterns": [
-          "csrf-param[^>]+authenticity_token|rails-ujs|turbo-rails|active_storage|data-remote="
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Django",
-        "confidence": "中",
-        "patterns": [
-          "csrfmiddlewaretoken|django\\.jquery|\\/static\\/admin\\/(?:css|js)\\/"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Flask",
-        "confidence": "低",
-        "patterns": [
-          "flask(?:\\.min)?\\.js|csrf_token\\(\\)|\\/static\\/.*flask"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel",
-        "confidence": "低",
-        "patterns": [
-          "laravel-mix|\\/vendor\\/laravel|mix-manifest\\.json"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel Livewire",
-        "confidence": "高",
-        "patterns": [
-          "livewire(?:\\.js|\\/livewire\\.js)|wire:(?:click|model|submit|loading)|data-livewire"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Inertia.js",
-        "confidence": "高",
-        "patterns": [
-          "@inertiajs|data-page=\"[^\"]*component|inertia\\.js"
-        ],
-        "globals": [
-          "Inertia"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Symfony",
-        "confidence": "中",
-        "patterns": [
-          "\\/bundles\\/(?:framework|sensio|fos)|symfony_profiler|_wdt"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Yii",
-        "confidence": "中",
-        "patterns": [
-          "yii(?:\\.activeForm|\\.gridView)|yii\\.js"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "CakePHP",
-        "confidence": "低",
-        "patterns": [
-          "cakephp|csrfToken.*cake"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "CodeIgniter",
-        "confidence": "低",
-        "patterns": [
-          "codeigniter|ci_session"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Phoenix LiveView",
-        "confidence": "高",
-        "patterns": [
-          "phoenix_live_view|phx-(?:click|submit|change|hook|value)|live_socket"
-        ],
-        "globals": [
-          "LiveSocket"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Phoenix Framework",
-        "confidence": "中",
-        "patterns": [
-          "phoenix(?:\\.js|_html)|phoenix_live_reload"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Vaadin",
-        "confidence": "高",
-        "patterns": [
-          "vaadin-|\\/vaadin\\/|flow-client"
-        ],
-        "globals": [
-          "Vaadin"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "JavaServer Faces",
-        "confidence": "高",
-        "patterns": [
-          "javax\\.faces|jsf\\.js|jakarta\\.faces|mojarra"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Apache Wicket",
-        "confidence": "中",
-        "patterns": [
-          "wicket:id|wicket-ajax|wicket\\/ajax"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Spring Boot / Spring MVC",
-        "confidence": "低",
-        "patterns": [
-          "\\/actuator\\/|spring-security|_csrf|jsessionid"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Struts",
-        "confidence": "低",
-        "patterns": [
-          "struts|dojo\\/struts|\\.action(?:\\?|\")"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Grails",
-        "confidence": "低",
-        "patterns": [
-          "grails|g:javascript|\\/assets\\/grails"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Play Framework",
-        "confidence": "低",
-        "patterns": [
-          "play-framework|play\\.api|csrfToken.*play"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Meteor",
-        "confidence": "中",
-        "patterns": [
-          "meteor_runtime_config|__meteor_runtime_config__|\\/packages\\/meteor"
-        ],
-        "globals": [
-          "__meteor_runtime_config__"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Sails.js",
-        "confidence": "低",
-        "patterns": [
-          "sails\\.io\\.js|io\\.socket"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "FeathersJS",
-        "confidence": "低",
-        "patterns": [
-          "feathers-client|@feathersjs"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "NestJS",
-        "confidence": "低",
-        "patterns": [
-          "nestjs|@nestjs\\/"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "GraphQL",
-        "confidence": "中",
-        "patterns": [
-          "\\/graphql(?:\\?|\")|graphql-ws|apollo-client|relay-runtime"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "gRPC Web",
-        "confidence": "中",
-        "patterns": [
-          "grpc-web|application\\/grpc-web|grpcwebtext"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "tRPC",
-        "confidence": "中",
-        "patterns": [
-          "\\/trpc\\/|@trpc\\/|trpc\\."
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Socket.IO Server",
-        "confidence": "中",
-        "patterns": [
-          "\\/socket\\.io\\/\\?eio=|socket\\.io(?:\\.min)?\\.js"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Mercure",
-        "confidence": "低",
-        "patterns": [
-          "\\.well-known\\/mercure|mercure(?:\\.rocks|hub)"
-        ]
-      }
-    ]
+      "rules": [
+        {
+          "name": "ASP.NET Web Forms",
+          "confidence": "高",
+          "patterns": [
+            "__viewstate|__eventvalidation|webresource\\.axd|scriptresource\\.axd"
+          ]
+        },
+        {
+          "name": "ASP.NET MVC / Core",
+          "confidence": "中",
+          "patterns": [
+            "aspnet|asp-action=|asp-controller=|\\.aspnetcore\\."
+          ]
+        },
+        {
+          "name": "Blazor",
+          "confidence": "高",
+          "patterns": [
+            "\\/_framework\\/blazor|blazor\\.webassembly\\.js|blazor\\.server\\.js"
+          ],
+          "globals": [
+            "Blazor"
+          ]
+        },
+        {
+          "name": "Ruby on Rails",
+          "confidence": "中",
+          "patterns": [
+            "csrf-param[^>]+authenticity_token|rails-ujs|turbo-rails|active_storage|data-remote="
+          ]
+        },
+        {
+          "name": "Django",
+          "confidence": "中",
+          "patterns": [
+            "csrfmiddlewaretoken|django\\.jquery|\\/static\\/admin\\/(?:css|js)\\/"
+          ]
+        },
+        {
+          "name": "Flask",
+          "confidence": "低",
+          "patterns": [
+            "flask(?:\\.min)?\\.js|csrf_token\\(\\)|\\/static\\/.*flask"
+          ]
+        },
+        {
+          "name": "Laravel",
+          "confidence": "低",
+          "patterns": [
+            "laravel-mix|\\/vendor\\/laravel|mix-manifest\\.json"
+          ]
+        },
+        {
+          "name": "Laravel Livewire",
+          "confidence": "高",
+          "patterns": [
+            "livewire(?:\\.js|\\/livewire\\.js)|wire:(?:click|model|submit|loading)|data-livewire"
+          ]
+        },
+        {
+          "name": "Inertia.js",
+          "confidence": "高",
+          "patterns": [
+            "@inertiajs|data-page=\"[^\"]*component|inertia\\.js"
+          ],
+          "globals": [
+            "Inertia"
+          ]
+        },
+        {
+          "name": "Symfony",
+          "confidence": "中",
+          "patterns": [
+            "\\/bundles\\/(?:framework|sensio|fos)|symfony_profiler|_wdt"
+          ]
+        },
+        {
+          "name": "Yii",
+          "confidence": "中",
+          "patterns": [
+            "yii(?:\\.activeForm|\\.gridView)|yii\\.js"
+          ]
+        },
+        {
+          "name": "CakePHP",
+          "confidence": "低",
+          "patterns": [
+            "cakephp|csrfToken.*cake"
+          ]
+        },
+        {
+          "name": "CodeIgniter",
+          "confidence": "低",
+          "patterns": [
+            "codeigniter|ci_session"
+          ]
+        },
+        {
+          "name": "Phoenix LiveView",
+          "confidence": "高",
+          "patterns": [
+            "phoenix_live_view|phx-(?:click|submit|change|hook|value)|live_socket"
+          ],
+          "globals": [
+            "LiveSocket"
+          ]
+        },
+        {
+          "name": "Phoenix Framework",
+          "confidence": "中",
+          "patterns": [
+            "phoenix(?:\\.js|_html)|phoenix_live_reload"
+          ]
+        },
+        {
+          "name": "Vaadin",
+          "confidence": "高",
+          "patterns": [
+            "vaadin-|\\/vaadin\\/|flow-client"
+          ],
+          "globals": [
+            "Vaadin"
+          ]
+        },
+        {
+          "name": "JavaServer Faces",
+          "confidence": "高",
+          "patterns": [
+            "javax\\.faces|jsf\\.js|jakarta\\.faces|mojarra"
+          ]
+        },
+        {
+          "name": "Apache Wicket",
+          "confidence": "中",
+          "patterns": [
+            "wicket:id|wicket-ajax|wicket\\/ajax"
+          ]
+        },
+        {
+          "defaults": {
+            "confidence": "低"
+          },
+          "rules": [
+            {
+              "name": "Spring Boot / Spring MVC",
+              "patterns": [
+                "\\/actuator\\/|spring-security|_csrf|jsessionid"
+              ]
+            },
+            {
+              "name": "Struts",
+              "patterns": [
+                "struts|dojo\\/struts|\\.action(?:\\?|\")"
+              ]
+            },
+            {
+              "name": "Grails",
+              "patterns": [
+                "grails|g:javascript|\\/assets\\/grails"
+              ]
+            },
+            {
+              "name": "Play Framework",
+              "patterns": [
+                "play-framework|play\\.api|csrfToken.*play"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Meteor",
+          "confidence": "中",
+          "patterns": [
+            "meteor_runtime_config|__meteor_runtime_config__|\\/packages\\/meteor"
+          ],
+          "globals": [
+            "__meteor_runtime_config__"
+          ]
+        },
+        {
+          "defaults": {
+            "confidence": "低"
+          },
+          "rules": [
+            {
+              "name": "Sails.js",
+              "patterns": [
+                "sails\\.io\\.js|io\\.socket"
+              ]
+            },
+            {
+              "name": "FeathersJS",
+              "patterns": [
+                "feathers-client|@feathersjs"
+              ]
+            },
+            {
+              "name": "NestJS",
+              "patterns": [
+                "nestjs|@nestjs\\/"
+              ]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "confidence": "中"
+          },
+          "rules": [
+            {
+              "name": "GraphQL",
+              "patterns": [
+                "\\/graphql(?:\\?|\")|graphql-ws|apollo-client|relay-runtime"
+              ]
+            },
+            {
+              "name": "gRPC Web",
+              "patterns": [
+                "grpc-web|application\\/grpc-web|grpcwebtext"
+              ]
+            },
+            {
+              "name": "tRPC",
+              "patterns": [
+                "\\/trpc\\/|@trpc\\/|trpc\\."
+              ]
+            },
+            {
+              "name": "Socket.IO Server",
+              "patterns": [
+                "\\/socket\\.io\\/\\?eio=|socket\\.io(?:\\.min)?\\.js"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mercure",
+          "confidence": "低",
+          "patterns": [
+            "\\.well-known\\/mercure|mercure(?:\\.rocks|hub)"
+          ]
+        }
+      ]
+    }
   }
 }

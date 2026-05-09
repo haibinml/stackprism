@@ -2,40 +2,44 @@
   "page": {
     "thirdPartyLogins": [
       {
-        "name": "QQ 登录",
-        "kind": "国内社交登录",
-        "confidence": "高",
-        "patterns": [
-          "graph\\.qq\\.com/oauth2\\.0/authorize",
-          "connect\\.qq\\.com",
-          "QC\\.Login",
-          "QQ登录",
-          "qqlogin",
-          "qqConnect"
-        ]
-      },
-      {
-        "name": "微信登录",
-        "kind": "国内社交登录",
-        "confidence": "高",
-        "patterns": [
-          "open\\.weixin\\.qq\\.com/connect/qrconnect",
-          "snsapi_login",
-          "wxLogin",
-          "微信登录",
-          "wechat login",
-          "WeixinJSBridge"
-        ]
-      },
-      {
-        "name": "微博登录",
-        "kind": "国内社交登录",
-        "patterns": [
-          "api\\.weibo\\.com/oauth2/authorize",
-          "WB2\\.anyWhere",
-          "SinaWeibo",
-          "微博登录",
-          "weibo login"
+        "defaults": {
+          "kind": "国内社交登录"
+        },
+        "rules": [
+          {
+            "name": "QQ 登录",
+            "confidence": "高",
+            "patterns": [
+              "graph\\.qq\\.com/oauth2\\.0/authorize",
+              "connect\\.qq\\.com",
+              "QC\\.Login",
+              "QQ登录",
+              "qqlogin",
+              "qqConnect"
+            ]
+          },
+          {
+            "name": "微信登录",
+            "confidence": "高",
+            "patterns": [
+              "open\\.weixin\\.qq\\.com/connect/qrconnect",
+              "snsapi_login",
+              "wxLogin",
+              "微信登录",
+              "wechat login",
+              "WeixinJSBridge"
+            ]
+          },
+          {
+            "name": "微博登录",
+            "patterns": [
+              "api\\.weibo\\.com/oauth2/authorize",
+              "WB2\\.anyWhere",
+              "SinaWeibo",
+              "微博登录",
+              "weibo login"
+            ]
+          }
         ]
       },
       {
@@ -49,97 +53,108 @@
         ]
       },
       {
-        "name": "钉钉登录",
-        "kind": "企业登录",
-        "patterns": [
-          "oapi\\.dingtalk\\.com/connect/qrconnect",
-          "login\\.dingtalk\\.com",
-          "DingTalk",
-          "钉钉登录"
+        "defaults": {
+          "kind": "企业登录"
+        },
+        "rules": [
+          {
+            "name": "钉钉登录",
+            "patterns": [
+              "oapi\\.dingtalk\\.com/connect/qrconnect",
+              "login\\.dingtalk\\.com",
+              "DingTalk",
+              "钉钉登录"
+            ]
+          },
+          {
+            "name": "飞书 / Lark 登录",
+            "patterns": [
+              "open\\.feishu\\.cn/open-apis/authen",
+              "passport\\.feishu\\.cn",
+              "passport\\.larksuite\\.com",
+              "飞书登录",
+              "Lark login"
+            ]
+          },
+          {
+            "name": "企业微信登录",
+            "patterns": [
+              "open\\.work\\.weixin\\.qq\\.com",
+              "work.weixin.qq.com",
+              "企业微信登录",
+              "wecom"
+            ]
+          }
         ]
       },
       {
-        "name": "飞书 / Lark 登录",
-        "kind": "企业登录",
-        "patterns": [
-          "open\\.feishu\\.cn/open-apis/authen",
-          "passport\\.feishu\\.cn",
-          "passport\\.larksuite\\.com",
-          "飞书登录",
-          "Lark login"
+        "defaults": {
+          "kind": "国内账号登录"
+        },
+        "rules": [
+          {
+            "name": "华为帐号登录",
+            "patterns": [
+              "oauth-login\\.cloud\\.huawei\\.com",
+              "login\\.huawei\\.com/oauth2",
+              "Huawei ID",
+              "华为帐号登录"
+            ]
+          },
+          {
+            "name": "小米帐号登录",
+            "patterns": [
+              "account\\.xiaomi\\.com/oauth2",
+              "小米账号登录",
+              "mi account"
+            ]
+          },
+          {
+            "name": "百度帐号登录",
+            "patterns": [
+              "openapi\\.baidu\\.com/oauth/2\\.0/authorize",
+              "passport\\.baidu\\.com",
+              "百度登录"
+            ]
+          }
         ]
       },
       {
-        "name": "企业微信登录",
-        "kind": "企业登录",
-        "patterns": [
-          "open\\.work\\.weixin\\.qq\\.com",
-          "work.weixin.qq.com",
-          "企业微信登录",
-          "wecom"
-        ]
-      },
-      {
-        "name": "华为帐号登录",
-        "kind": "国内账号登录",
-        "patterns": [
-          "oauth-login\\.cloud\\.huawei\\.com",
-          "login\\.huawei\\.com/oauth2",
-          "Huawei ID",
-          "华为帐号登录"
-        ]
-      },
-      {
-        "name": "小米帐号登录",
-        "kind": "国内账号登录",
-        "patterns": [
-          "account\\.xiaomi\\.com/oauth2",
-          "小米账号登录",
-          "mi account"
-        ]
-      },
-      {
-        "name": "百度帐号登录",
-        "kind": "国内账号登录",
-        "patterns": [
-          "openapi\\.baidu\\.com/oauth/2\\.0/authorize",
-          "passport\\.baidu\\.com",
-          "百度登录"
-        ]
-      },
-      {
-        "name": "GitHub 登录",
-        "kind": "开发者 OAuth",
-        "patterns": [
-          "github\\.com/login/oauth/authorize",
-          "GitHub登录",
-          "sign in with github"
-        ]
-      },
-      {
-        "name": "Gitee 登录",
-        "kind": "开发者 OAuth",
-        "patterns": [
-          "gitee\\.com/oauth/authorize",
-          "Gitee登录",
-          "码云登录"
-        ]
-      },
-      {
-        "name": "GitLab 登录",
-        "kind": "开发者 OAuth",
-        "patterns": [
-          "gitlab\\.com/oauth/authorize",
-          "/oauth/authorize.*gitlab",
-          "GitLab登录"
-        ]
-      },
-      {
-        "name": "Bitbucket 登录",
-        "kind": "开发者 OAuth",
-        "patterns": [
-          "bitbucket\\.org/site/oauth2/authorize",
-          "Bitbucket login"
+        "defaults": {
+          "kind": "开发者 OAuth"
+        },
+        "rules": [
+          {
+            "name": "GitHub 登录",
+            "patterns": [
+              "github\\.com/login/oauth/authorize",
+              "GitHub登录",
+              "sign in with github"
+            ]
+          },
+          {
+            "name": "Gitee 登录",
+            "patterns": [
+              "gitee\\.com/oauth/authorize",
+              "Gitee登录",
+              "码云登录"
+            ]
+          },
+          {
+            "name": "GitLab 登录",
+            "patterns": [
+              "gitlab\\.com/oauth/authorize",
+              "/oauth/authorize.*gitlab",
+              "GitLab登录"
+            ]
+          },
+          {
+            "name": "Bitbucket 登录",
+            "patterns": [
+              "bitbucket\\.org/site/oauth2/authorize",
+              "Bitbucket login"
+            ]
+          }
         ]
       },
       {
@@ -176,31 +191,35 @@
         ]
       },
       {
-        "name": "Facebook 登录",
-        "kind": "国际社交登录",
-        "patterns": [
-          "connect\\.facebook\\.net/.*/sdk\\.js",
-          "facebook\\.com/.*/dialog/oauth",
-          "FB\\.login",
-          "Login with Facebook"
-        ]
-      },
-      {
-        "name": "Twitter / X 登录",
-        "kind": "国际社交登录",
-        "patterns": [
-          "twitter\\.com/i/oauth2/authorize",
-          "api\\.twitter\\.com/oauth",
-          "x.com/i/oauth2/authorize",
-          "Twitter登录"
-        ]
-      },
-      {
-        "name": "LinkedIn 登录",
-        "kind": "国际社交登录",
-        "patterns": [
-          "linkedin\\.com/oauth/v2/authorization",
-          "Sign in with LinkedIn"
+        "defaults": {
+          "kind": "国际社交登录"
+        },
+        "rules": [
+          {
+            "name": "Facebook 登录",
+            "patterns": [
+              "connect\\.facebook\\.net/.*/sdk\\.js",
+              "facebook\\.com/.*/dialog/oauth",
+              "FB\\.login",
+              "Login with Facebook"
+            ]
+          },
+          {
+            "name": "Twitter / X 登录",
+            "patterns": [
+              "twitter\\.com/i/oauth2/authorize",
+              "api\\.twitter\\.com/oauth",
+              "x.com/i/oauth2/authorize",
+              "Twitter登录"
+            ]
+          },
+          {
+            "name": "LinkedIn 登录",
+            "patterns": [
+              "linkedin\\.com/oauth/v2/authorization",
+              "Sign in with LinkedIn"
+            ]
+          }
         ]
       },
       {
@@ -222,37 +241,40 @@
         ]
       },
       {
-        "name": "Telegram 登录",
-        "kind": "社交登录",
-        "patterns": [
-          "oauth\\.telegram\\.org",
-          "telegram-login",
-          "TelegramLoginWidget"
-        ]
-      },
-      {
-        "name": "LINE 登录",
-        "kind": "社交登录",
-        "patterns": [
-          "access\\.line\\.me/oauth2/v2\\.1/authorize",
-          "LINE Login"
-        ]
-      },
-      {
-        "name": "Kakao 登录",
-        "kind": "社交登录",
-        "patterns": [
-          "kauth\\.kakao\\.com/oauth/authorize",
-          "Kakao.Auth",
-          "카카오 로그인"
-        ]
-      },
-      {
-        "name": "Naver 登录",
-        "kind": "社交登录",
-        "patterns": [
-          "nid\\.naver\\.com/oauth2\\.0/authorize",
-          "Naver Login"
+        "defaults": {
+          "kind": "社交登录"
+        },
+        "rules": [
+          {
+            "name": "Telegram 登录",
+            "patterns": [
+              "oauth\\.telegram\\.org",
+              "telegram-login",
+              "TelegramLoginWidget"
+            ]
+          },
+          {
+            "name": "LINE 登录",
+            "patterns": [
+              "access\\.line\\.me/oauth2/v2\\.1/authorize",
+              "LINE Login"
+            ]
+          },
+          {
+            "name": "Kakao 登录",
+            "patterns": [
+              "kauth\\.kakao\\.com/oauth/authorize",
+              "Kakao.Auth",
+              "카카오 로그인"
+            ]
+          },
+          {
+            "name": "Naver 登录",
+            "patterns": [
+              "nid\\.naver\\.com/oauth2\\.0/authorize",
+              "Naver Login"
+            ]
+          }
         ]
       },
       {

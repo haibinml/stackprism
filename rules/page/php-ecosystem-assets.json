@@ -1,1652 +1,1404 @@
 {
   "page": {
-    "backendHints": [
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel Livewire",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/livewire/",
-          "/vendor/livewire/"
-        ],
-        "patterns": [
-          "(?:^|/)livewire/livewire(?:\\.min)?\\.js(?:\\?[^\\s\"'<>]*)?$",
-          "(?:^|/)vendor/livewire/livewire(?:/|[?#]|$)",
-          "(?:^|/)livewire/(?:message|update|upload-file|preview-file)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Filament",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/filament/",
-          "/filament/assets/",
-          "/css/filament/",
-          "/js/filament/"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/filament/(?:filament|forms|tables|notifications|support|widgets)(?:/|[?#]|$)",
-          "(?:^|/)filament/assets/(?:app|theme|forms|tables)[^\\s\"'<>]*(?:\\.(?:js|css)|/|[?#]|$)",
-          "(?:^|/)(?:css|js)/filament/(?:filament|forms|tables|notifications)[^\\s\"'<>]*"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel Nova",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/nova/",
-          "/nova-api/",
-          "/nova-vendor/",
-          "/nova-assets/"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/nova(?:/|[?#]|$)",
-          "(?:^|/)nova-(?:api|vendor|assets)(?:/|[?#]|$)",
-          "(?:^|/)vendor/laravel/nova(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel Telescope",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/telescope/",
-          "/telescope/"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/telescope(?:/|[?#]|$)",
-          "(?:^|/)telescope/(?:app|telescope-api|requests|events|exceptions|queries)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel Horizon",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/horizon/",
-          "/horizon/"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/horizon(?:/|[?#]|$)",
-          "(?:^|/)horizon/(?:api|img|js|css)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel Pulse",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/pulse/",
-          "/pulse/"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/pulse(?:/|[?#]|$)",
-          "(?:^|/)pulse/(?:livewire|assets|api)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel Reverb",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/reverb/",
-          "/app/reverb/",
-          "/reverb/"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/(?:laravel/)?reverb(?:/|[?#]|$)",
-          "(?:^|/)(?:app/)?reverb(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel Echo",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "laravel-echo",
-          "/echo/"
-        ],
-        "patterns": [
-          "laravel-echo(?:\\.iife)?(?:\\.min)?\\.js(?:\\?|$)",
-          "(?:^|/)vendor/(?:laravel/)?echo(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel Sanctum",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/sanctum/",
-          "/vendor/sanctum/"
-        ],
-        "patterns": [
-          "(?:^|/)sanctum/csrf-cookie(?:[?#]|$)",
-          "(?:^|/)vendor/(?:laravel/)?sanctum(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel Passport",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/passport/",
-          "/oauth/"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/(?:laravel/)?passport(?:/|[?#]|$)",
-          "(?:^|/)oauth/(?:authorize|token|clients|personal-access-tokens)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel Spark",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/spark/",
-          "/spark/"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/(?:laravel/)?spark(?:/|[?#]|$)",
-          "(?:^|/)spark-(?:stripe|paddle)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel Vapor",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/vapor",
-          "/vapor-ui/"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/(?:laravel/)?vapor(?:-ui)?(?:/|[?#]|$)",
-          "(?:^|/)vapor-ui(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel Jetstream",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/jetstream/",
-          "jetstream"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/(?:laravel/)?jetstream(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel Breeze",
-        "confidence": "低",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/breeze/",
-          "breeze"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/(?:laravel/)?breeze(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel Octane",
-        "confidence": "低",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/octane/",
-          "/octane/"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/(?:laravel/)?octane(?:/|[?#]|$)",
-          "(?:^|/)octane(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel Debugbar",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/_debugbar/",
-          "phpdebugbar"
-        ],
-        "patterns": [
-          "(?:^|/)_debugbar/assets/(?:javascript|stylesheets|vendor)(?:/|[?#]|$)",
-          "phpdebugbar[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel Backpack",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/packages/backpack/",
-          "/vendor/backpack/"
-        ],
-        "patterns": [
-          "(?:^|/)packages/backpack/(?:crud|base|pro)(?:/|[?#]|$)",
-          "(?:^|/)vendor/backpack/(?:crud|base|pro)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Orchid Platform",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/orchid/",
-          "/orchid/"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/orchid/(?:platform|screen)(?:/|[?#]|$)",
-          "(?:^|/)orchid/(?:js|css|images|fonts)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Voyager",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/tcg/voyager/",
-          "/admin/voyager-assets/"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/tcg/voyager(?:/|[?#]|$)",
-          "(?:^|/)admin/voyager-assets(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel Admin",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/laravel-admin/"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/laravel-admin/(?:Admin|laravel-admin|extensions)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "MoonShine",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/moonshine/",
-          "/moonshine/"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/moonshine/(?:moonshine|assets)(?:/|[?#]|$)",
-          "(?:^|/)moonshine/(?:assets|js|css)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "Flux UI",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/livewire/flux/"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/livewire/flux(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "UI / CSS 框架",
-        "name": "TallStackUI",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/tallstackui/",
-          "tallstackui"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/tallstackui/(?:tallstackui|assets)(?:/|[?#]|$)",
-          "tallstackui[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Livewire PowerGrid",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/livewire-powergrid/",
-          "/vendor/power-components/"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/power-components/livewire-powergrid(?:/|[?#]|$)",
-          "(?:^|/)livewire-powergrid(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Laravel Livewire Tables",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/rappasoft/",
-          "livewire-tables"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/rappasoft/laravel-livewire-tables(?:/|[?#]|$)",
-          "livewire-tables[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Wire Elements",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/wire-elements/",
-          "wire-elements"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/wire-elements/(?:modal|spotlight|pro)(?:/|[?#]|$)",
-          "wire-elements[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Spatie Media Library Pro",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/media-library-pro/",
-          "/vendor/spatie/"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/spatie/laravel-medialibrary-pro(?:/|[?#]|$)",
-          "(?:^|/)media-library-pro(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Spatie Laravel Permission",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/spatie/",
-          "laravel-permission"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/spatie/laravel-permission(?:/|[?#]|$)",
-          "laravel-permission[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Spatie Laravel Ignition",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/_ignition/",
-          "/vendor/spatie/laravel-ignition/"
-        ],
-        "patterns": [
-          "(?:^|/)_ignition/(?:health-check|execute-solution|update-config)(?:[?#]|$)",
-          "(?:^|/)vendor/spatie/laravel-ignition(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Whoops",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/filp/whoops/",
-          "whoops"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/filp/whoops(?:/|[?#]|$)",
-          "whoops[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Clockwork",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/__clockwork/",
-          "/clockwork/"
-        ],
-        "patterns": [
-          "(?:^|/)__clockwork(?:/|[?#]|$)",
-          "(?:^|/)clockwork/(?:app|assets|styles|scripts)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Symfony WebProfilerBundle",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/_wdt/",
-          "/_profiler/",
-          "/bundles/webprofiler/"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/webprofiler(?:/|[?#]|$)",
-          "(?:^|/)_wdt/[a-z0-9]+(?:[?#]|$)",
-          "(?:^|/)_profiler/(?:[a-z0-9]+|phpinfo|router|exception)(?:[?#/]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Symfony AssetMapper",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/assets/vendor/",
-          "@symfony/ux-"
-        ],
-        "patterns": [
-          "(?:^|/)assets/vendor/@symfony/(?:asset-mapper|stimulus-bundle|ux-)[^\\s\"'<>]*",
-          "(?:^|/)assets/vendor/[^\\s\"'<>]+\\+[^\\s\"'<>]+\\.js(?:[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Symfony UX Turbo",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "@hotwired/turbo",
-          "/ux-turbo/",
-          "/bundles/turbo/"
-        ],
-        "patterns": [
-          "(?:^|/)assets/vendor/@hotwired/turbo(?:/|[?#]|$)",
-          "(?:^|/)assets/vendor/@symfony/ux-turbo(?:/|[?#]|$)",
-          "(?:^|/)bundles/turbo(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Symfony UX LiveComponent",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/ux-live-component/",
-          "live_component",
-          "/bundles/uxlivecomponent/"
-        ],
-        "patterns": [
-          "(?:^|/)assets/vendor/@symfony/ux-live-component(?:/|[?#]|$)",
-          "(?:^|/)bundles/uxlivecomponent(?:/|[?#]|$)",
-          "live_component[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Symfony StimulusBundle",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "@symfony/stimulus-bundle",
-          "/bundles/stimulus/"
-        ],
-        "patterns": [
-          "(?:^|/)assets/vendor/@symfony/stimulus-bundle(?:/|[?#]|$)",
-          "(?:^|/)bundles/stimulus(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Symfony EncoreBundle",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/build/entrypoints.json",
-          "/build/manifest.json",
-          "webpack-encore"
-        ],
-        "patterns": [
-          "(?:^|/)build/(?:entrypoints|manifest)\\.json(?:[?#]|$)",
-          "webpack-encore[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "EasyAdminBundle",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/easyadmin/",
-          "easyadmin"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/easyadmin(?:/|[?#]|$)",
-          "easyadmin[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "FOSJsRoutingBundle",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/fosjsrouting/",
-          "/js/routing"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/fosjsrouting/js/router\\.js(?:[?#]|$)",
-          "(?:^|/)js/routing(?:\\?callback=|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "BazingaJsTranslationBundle",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/bazingajstranslation/",
-          "bazinga"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/bazingajstranslation(?:/|[?#]|$)",
-          "bazinga(?:-)?js(?:-)?translation[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "SonataAdminBundle",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/sonataadmin/",
-          "/bundles/sonatacore/"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/sonataadmin(?:/|[?#]|$)",
-          "(?:^|/)bundles/sonatacore(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "API Platform",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/apiplatform/",
-          "api-platform",
-          "/docs.jsonld"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/apiplatform(?:/|[?#]|$)",
-          "(?:^|/)docs\\.jsonld(?:[?#]|$)",
-          "api-platform[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "NelmioApiDocBundle",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/nelmioapidoc/",
-          "nelmio"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/nelmioapidoc(?:/|[?#]|$)",
-          "nelmio(?:-)?api(?:-)?doc[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "LiipImagineBundle",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/liipimagine/",
-          "liipimagine"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/liipimagine(?:/|[?#]|$)",
-          "liipimagine[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "VichUploaderBundle",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/vichuploader/",
-          "vich"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/vichuploader(?:/|[?#]|$)",
-          "vich(?:-)?uploader[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "KnpMenuBundle",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/knpmenu/",
-          "knp-menu"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/knpmenu(?:/|[?#]|$)",
-          "knp(?:-)?menu[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "KnpPaginatorBundle",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/knppaginator/",
-          "knp-paginator"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/knppaginator(?:/|[?#]|$)",
-          "knp(?:-)?paginator[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "FOSCKEditorBundle",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/fosckeditor/",
-          "fosckeditor"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/fosckeditor(?:/|[?#]|$)",
-          "fosckeditor[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "JMS Serializer Bundle",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/jmsserializer/",
-          "jms-serializer"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/jmsserializer(?:/|[?#]|$)",
-          "jms(?:-)?serializer[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "后端 / 服务器框架",
-        "name": "Twig Components",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/twigcomponent/",
-          "/ux-twig-component/"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/twigcomponent(?:/|[?#]|$)",
-          "(?:^|/)assets/vendor/@symfony/ux-twig-component(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Sylius",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/sylius",
-          "/build/shop/",
-          "sylius"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/sylius(?:shop|admin|ui|theme)?(?:/|[?#]|$)",
-          "(?:^|/)build/(?:shop|admin)/(?:entry|app|runtime)[^\\s\"'<>]*",
-          "sylius[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "OroCommerce / OroPlatform",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/oro",
-          "oroui",
-          "orocommerce"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/oro(?:commerce|ui|platform|form|layout|navigation)[^\\s\"'<>]*",
-          "oroui[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)",
-          "orocommerce[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Pimcore",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/pimcore",
-          "/admin/pimcore",
-          "pimcore"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/pimcore(?:admin|core|ecommerce)?(?:/|[?#]|$)",
-          "(?:^|/)admin/pimcore(?:/|[?#]|$)",
-          "pimcore[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Ibexa DXP",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/ibexa",
-          "/bundles/ezplatform",
-          "ibexa"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/ibexa(?:adminui|content|designengine|fieldtype|systeminfo)?(?:/|[?#]|$)",
-          "(?:^|/)bundles/ezplatform(?:adminui|content|designengine)?(?:/|[?#]|$)",
-          "ibexa[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Sulu",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/sulu",
-          "sulu"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/sulu(?:admin|website|media|contact|content)(?:/|[?#]|$)",
-          "sulu[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      }
-    ],
-    "websitePrograms": [
-      {
-        "category": "CMS / 电商平台",
-        "name": "October CMS",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/modules/system/assets/",
-          "/modules/backend/assets/",
-          "/plugins/",
-          "october"
-        ],
-        "patterns": [
-          "(?:^|/)modules/(?:system|backend|cms)/assets(?:/|[?#]|$)",
-          "(?:^|/)plugins/[a-z0-9_-]+/[a-z0-9_-]+/assets(?:/|[?#]|$)",
-          "october(?:cms)?[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Winter CMS",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/modules/system/assets/",
-          "/modules/backend/assets/",
-          "wintercms",
-          "winter.cms",
-          "/modules/system/assets/js/winter"
-        ],
-        "patterns": [
-          "(?:^|/)modules/system/assets/js/winter[^\\s\"'<>]*\\.js(?:\\?|$)",
-          "winter(?:cms|\\.cms)[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Statamic",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/vendor/statamic/",
-          "/cp/assets/",
-          "statamic"
-        ],
-        "patterns": [
-          "(?:^|/)vendor/statamic/(?:cp|cms|assets)(?:/|[?#]|$)",
-          "(?:^|/)cp/assets/(?:css|js|img|fonts)(?:/|[?#]|$)",
-          "statamic[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "TYPO3",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/typo3conf/ext/",
-          "/typo3/sysext/",
-          "/typo3temp/assets/"
-        ],
-        "patterns": [
-          "(?:^|/)typo3conf/ext/[a-z0-9_]+(?:/|[?#]|$)",
-          "(?:^|/)typo3/sysext/[a-z0-9_]+(?:/|[?#]|$)",
-          "(?:^|/)typo3temp/(?:assets|compressor)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "主题 / 模板",
-        "name": "TYPO3 Bootstrap Package",
-        "kind": "TYPO3 主题 / 模板",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/typo3conf/ext/bootstrap_package/",
-          "bootstrap_package"
-        ],
-        "patterns": [
-          "(?:^|/)typo3conf/ext/bootstrap_package(?:/|[?#]|$)",
-          "(?:^|/)typo3conf/ext/bootstrap_package/Resources/Public/(?:Css|JavaScript|Images)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Contao",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/contao",
-          "/assets/contao/",
-          "/system/modules/"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/contao(?:core|calendar|comments|faq|listing|news|newsletter)?(?:/|[?#]|$)",
-          "(?:^|/)assets/contao(?:/|[?#]|$)",
-          "(?:^|/)system/modules/[a-z0-9_-]+(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "ProcessWire",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/site/templates/",
-          "/wire/modules/",
-          "/site/assets/"
-        ],
-        "patterns": [
-          "(?:^|/)site/templates/(?:styles|scripts|assets|[a-z0-9_-]+)(?:/|[?#]|$)",
-          "(?:^|/)wire/modules/(?:Inputfield|Jquery|Process|System|Fieldtype)[^\\s\"'<>]*",
-          "(?:^|/)site/assets/(?:files|cache|logs|sessions)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Kirby CMS",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/media/plugins/",
-          "/media/panel/",
-          "/assets/kirby/"
-        ],
-        "patterns": [
-          "(?:^|/)media/(?:plugins|panel|site)(?:/|[?#]|$)",
-          "(?:^|/)assets/kirby(?:/|[?#]|$)",
-          "(?:^|/)panel/dist/(?:css|js)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Craft CMS",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/cpresources/",
-          "/admin/resources/",
-          "craft"
-        ],
-        "patterns": [
-          "(?:^|/)cpresources/[a-f0-9]{8,}(?:/|[?#]|$)",
-          "(?:^|/)admin/resources/[a-f0-9]{8,}(?:/|[?#]|$)",
-          "craftcms[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Bolt CMS",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bolt-public/",
-          "/theme/bolt/",
-          "bolt"
-        ],
-        "patterns": [
-          "(?:^|/)bolt-public(?:/|[?#]|$)",
-          "(?:^|/)theme/bolt(?:/|[?#]|$)",
-          "bolt(?:cms)?[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Silverstripe CMS",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/resources/vendor/silverstripe/",
-          "/assets/_combinedfiles/",
-          "silverstripe"
-        ],
-        "patterns": [
-          "(?:^|/)resources/vendor/silverstripe/[a-z0-9_-]+(?:/|[?#]|$)",
-          "(?:^|/)assets/_combinedfiles/(?:css|js)(?:/|[?#]|$)",
-          "silverstripe[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Neos CMS",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/_Resources/Static/Packages/",
-          "neos"
-        ],
-        "patterns": [
-          "(?:^|/)_Resources/Static/Packages/(?:Neos|Flow|Sitegeist|[^/]+\\.[^/]+)(?:/|[?#]|$)",
-          "neos(?:cms)?[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Concrete CMS",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/concrete/js/",
-          "/concrete/css/",
-          "/concrete/themes/"
-        ],
-        "patterns": [
-          "(?:^|/)concrete/(?:js|css|images|themes|blocks|elements)(?:/|[?#]|$)",
-          "(?:^|/)packages/[a-z0-9_-]+/(?:blocks|themes|js|css)(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "ExpressionEngine",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/themes/ee/",
-          "/themes/user/",
-          "expressionengine"
-        ],
-        "patterns": [
-          "(?:^|/)themes/(?:ee|user)/(?:asset|css|js|fonts|images|third_party)(?:/|[?#]|$)",
-          "expressionengine[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "MODX",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/assets/components/",
-          "/manager/assets/",
-          "modx"
-        ],
-        "patterns": [
-          "(?:^|/)assets/components/[a-z0-9_-]+(?:/|[?#]|$)",
-          "(?:^|/)manager/assets/(?:modext|components|css|js)(?:/|[?#]|$)",
-          "modx[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Grav CMS",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/user/themes/",
-          "/user/plugins/",
-          "/system/assets/"
-        ],
-        "patterns": [
-          "(?:^|/)user/(?:themes|plugins|data|pages)/(?:[a-z0-9_-]+)(?:/|[?#]|$)",
-          "(?:^|/)system/assets/(?:jquery|js|css)(?:/|[?#]|$)",
-          "grav(?:cms)?[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Bludit",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bl-kernel/",
-          "/bl-themes/",
-          "/bl-plugins/"
-        ],
-        "patterns": [
-          "(?:^|/)bl-(?:kernel|themes|plugins|content)(?:/|[?#]|$)",
-          "bludit[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "WonderCMS",
-        "kind": "CMS",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/themes/wondercms/",
-          "/data/files/",
-          "wondercms"
-        ],
-        "patterns": [
-          "(?:^|/)themes/wondercms(?:/|[?#]|$)",
-          "wondercms[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Microweber",
-        "kind": "CMS / 电商",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/userfiles/modules/",
-          "microweber"
-        ],
-        "patterns": [
-          "(?:^|/)userfiles/modules/[a-z0-9_-]+(?:/|[?#]|$)",
-          "microweber[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Pagekit",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/packages/pagekit/",
-          "pagekit"
-        ],
-        "patterns": [
-          "(?:^|/)packages/pagekit/[a-z0-9_-]+(?:/|[?#]|$)",
-          "pagekit[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "CMS Made Simple",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "cmsms",
-          "made-simple"
-        ],
-        "patterns": [
-          "cmsms[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "SPIP",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/local/cache-css/",
-          "/local/cache-js/",
-          "spip"
-        ],
-        "patterns": [
-          "(?:^|/)local/cache-(?:css|js)/spip[^\\s\"'<>]*",
-          "spip[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Plone",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/++plone++",
-          "/++resource++",
-          "plone"
-        ],
-        "patterns": [
-          "(?:^|/)\\+\\+(?:plone|resource)\\+\\+[^\\s\"'<>]*",
-          "plone[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Wagtail",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/static/wagtailadmin/",
-          "wagtail"
-        ],
-        "patterns": [
-          "(?:^|/)static/wagtail(?:admin|docs|images|snippets)(?:/|[?#]|$)",
-          "wagtail[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "django CMS",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/static/cms/",
-          "/static/djangocms_",
-          "django-cms"
-        ],
-        "patterns": [
-          "(?:^|/)static/(?:cms|djangocms_[a-z0-9_]+)(?:/|[?#]|$)",
-          "django(?:-)?cms[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Mezzanine",
-        "kind": "CMS",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/static/mezzanine/",
-          "mezzanine"
-        ],
-        "patterns": [
-          "(?:^|/)static/mezzanine(?:/|[?#]|$)",
-          "mezzanine[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Saleor",
-        "kind": "电商系统",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "saleor"
-        ],
-        "patterns": [
-          "saleor[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Bagisto",
-        "kind": "电商系统",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/themes/shop/",
-          "/vendor/webkul/",
-          "bagisto"
-        ],
-        "patterns": [
-          "(?:^|/)themes/(?:shop|admin)/(?:default|velocity|assets)(?:/|[?#]|$)",
-          "(?:^|/)vendor/webkul/(?:admin|shop|ui|velocity|checkout)(?:/|[?#]|$)",
-          "bagisto[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Aimeos",
-        "kind": "电商系统",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/packages/aimeos/",
-          "/client/html/themes/",
-          "aimeos"
-        ],
-        "patterns": [
-          "(?:^|/)packages/aimeos(?:/|[?#]|$)",
-          "(?:^|/)client/html/themes/(?:common|default|[a-z0-9_-]+)(?:/|[?#]|$)",
-          "aimeos[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Thelia",
-        "kind": "电商系统",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/templates/frontOffice/",
-          "/templates/backOffice/",
-          "thelia"
-        ],
-        "patterns": [
-          "(?:^|/)templates/(?:frontOffice|backOffice)/(?:default|assets|[a-z0-9_-]+)(?:/|[?#]|$)",
-          "thelia[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "CMS / 电商平台",
-        "name": "Akeneo PIM",
-        "kind": "PIM / 电商数据",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/bundles/pimui/",
-          "/bundles/pimdatagrid/",
-          "akeneo"
-        ],
-        "patterns": [
-          "(?:^|/)bundles/pim(?:ui|datagrid|catalog|analytics|importexport)(?:/|[?#]|$)",
-          "akeneo[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "SaaS / 第三方服务",
-        "name": "Mautic",
-        "kind": "营销自动化 / 统计",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/media/js/mautic",
-          "/plugins/Mautic",
-          "mautic"
-        ],
-        "patterns": [
-          "(?:^|/)media/js/mautic(?:-form)?\\.js(?:[?#]|$)",
-          "(?:^|/)plugins/Mautic[A-Za-z]+Bundle(?:/|[?#]|$)",
-          "mautic[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Nextcloud / ownCloud",
-        "kind": "网盘 / 协作",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/core/js/",
-          "/apps/files/",
-          "/apps/theming/"
-        ],
-        "patterns": [
-          "(?:^|/)core/(?:js|css|img)/(?:oc|common|merged-template-prepend|main)[^\\s\"'<>]*",
-          "(?:^|/)apps/(?:files|theming|dashboard|spreed|settings)/(?:js|css|img)(?:/|[?#]|$)",
-          "(?:^|/)ocs/v[12]\\.php(?:/|[?#]|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "ownCloud",
-        "kind": "网盘 / 协作",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "owncloud"
-        ],
-        "patterns": [
-          "owncloud[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "统计 / 分析",
-        "name": "Matomo",
-        "kind": "开源统计",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/matomo.js",
-          "/piwik.js",
-          "matomo"
-        ],
-        "patterns": [
-          "(?:^|/)(?:matomo|piwik)\\.js(?:[?#]|$)",
-          "(?:^|/)(?:matomo|piwik)\\.php(?:[?#]|$)",
-          "matomo[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Piwigo",
-        "kind": "图库",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "piwigo"
-        ],
-        "patterns": [
-          "piwigo[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "LimeSurvey",
-        "kind": "问卷系统",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/assets/packages/",
-          "limesurvey"
-        ],
-        "patterns": [
-          "(?:^|/)assets/packages/(?:jquery-ui|bootstrap|fontawesome|limesurvey)(?:/|[?#]|$)",
-          "limesurvey[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "GLPI",
-        "kind": "ITSM / 资产管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/pics/fd_logo.png",
-          "glpi"
-        ],
-        "patterns": [
-          "(?:^|/)pics/(?:fd_logo|glpi|login_logo)[^\\s\"'<>]*",
-          "glpi[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "SuiteCRM",
-        "kind": "CRM",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/themes/SuiteP/",
-          "/cache/include/javascript/",
-          "suitecrm"
-        ],
-        "patterns": [
-          "(?:^|/)themes/(?:SuiteP|SuiteR|Sugar5)/(?:css|js|images)(?:/|[?#]|$)",
-          "(?:^|/)cache/include/javascript/(?:sugar_grp|suite)[^\\s\"'<>]*",
-          "suitecrm[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Dolibarr",
-        "kind": "ERP / CRM",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/theme/eldy/",
-          "dolibarr"
-        ],
-        "patterns": [
-          "(?:^|/)theme/(?:eldy|md|bureau2crea)/(?:style|img|font)(?:/|[?#]|$)",
-          "dolibarr[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Odoo",
-        "kind": "ERP / 电商",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/web/assets/",
-          "/web/static/",
-          "web.assets_"
-        ],
-        "patterns": [
-          "(?:^|/)web/assets/(?:debug/)?(?:[0-9a-f]+/)?web\\.assets_[a-z_]+[^\\s\"'<>]*",
-          "(?:^|/)web/static/src/(?:js|scss|xml|img)(?:/|[?#]|$)",
-          "web\\.assets_(?:frontend|backend|common)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Frappe Framework",
-        "kind": "应用框架 / ERP",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/assets/frappe/",
-          "frappe"
-        ],
-        "patterns": [
-          "(?:^|/)assets/frappe/(?:js|css|images|dist)(?:/|[?#]|$)",
-          "frappe[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "ERPNext",
-        "kind": "ERP",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/assets/erpnext/",
-          "erpnext"
-        ],
-        "patterns": [
-          "(?:^|/)assets/erpnext/(?:js|css|images|dist)(?:/|[?#]|$)",
-          "erpnext[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Roundcube",
-        "kind": "Webmail",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/program/js/",
-          "/skins/elastic/",
-          "roundcube"
-        ],
-        "patterns": [
-          "(?:^|/)program/(?:js|resources)/(?:app|common|jquery)[^\\s\"'<>]*",
-          "(?:^|/)skins/(?:elastic|larry|classic)/(?:styles|ui|images)(?:/|[?#]|$)",
-          "roundcube[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Horde Groupware",
-        "kind": "Webmail / 协作",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/horde/themes/",
-          "/horde/js/",
-          "horde"
-        ],
-        "patterns": [
-          "(?:^|/)horde/(?:themes|js|services)(?:/|[?#]|$)",
-          "horde[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "phpMyAdmin",
-        "kind": "数据库管理",
-        "confidence": "高",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "/phpmyadmin/",
-          "/themes/pmahomme/",
-          "pma_"
-        ],
-        "patterns": [
-          "(?:^|/)phpmyadmin/(?:themes|js|libraries)(?:/|[?#]|$)",
-          "(?:^|/)themes/(?:pmahomme|metro|original)/(?:css|img|jquery)(?:/|[?#]|$)",
-          "pma_(?:homme|navigation|common)[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      },
-      {
-        "category": "网站程序",
-        "name": "Adminer",
-        "kind": "数据库管理",
-        "confidence": "中",
-        "matchType": "regex",
-        "resourceOnly": true,
-        "resourceHints": [
-          "adminer.css",
-          "adminer.php",
-          "adminer"
-        ],
-        "patterns": [
-          "(?:^|/)adminer(?:-[0-9.]+)?\\.(?:php|css|js)(?:[?#]|$)",
-          "adminer[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-        ]
-      }
-    ]
+    "backendHints": {
+      "defaults": {
+        "matchType": "regex",
+        "resourceOnly": true
+      },
+      "rules": [
+        {
+          "defaults": {
+            "category": "后端 / 服务器框架"
+          },
+          "rules": [
+            {
+              "defaults": {
+                "confidence": "高"
+              },
+              "rules": [
+                {
+                  "name": "Laravel Livewire",
+                  "resourceHints": [
+                    "/livewire/",
+                    "/vendor/livewire/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)livewire/livewire(?:\\.min)?\\.js(?:\\?[^\\s\"'<>]*)?$",
+                    "(?:^|/)vendor/livewire/livewire(?:/|[?#]|$)",
+                    "(?:^|/)livewire/(?:message|update|upload-file|preview-file)(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "Filament",
+                  "resourceHints": [
+                    "/vendor/filament/",
+                    "/filament/assets/",
+                    "/css/filament/",
+                    "/js/filament/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)vendor/filament/(?:filament|forms|tables|notifications|support|widgets)(?:/|[?#]|$)",
+                    "(?:^|/)filament/assets/(?:app|theme|forms|tables)[^\\s\"'<>]*(?:\\.(?:js|css)|/|[?#]|$)",
+                    "(?:^|/)(?:css|js)/filament/(?:filament|forms|tables|notifications)[^\\s\"'<>]*"
+                  ]
+                },
+                {
+                  "name": "Laravel Nova",
+                  "resourceHints": [
+                    "/vendor/nova/",
+                    "/nova-api/",
+                    "/nova-vendor/",
+                    "/nova-assets/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)vendor/nova(?:/|[?#]|$)",
+                    "(?:^|/)nova-(?:api|vendor|assets)(?:/|[?#]|$)",
+                    "(?:^|/)vendor/laravel/nova(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "Laravel Telescope",
+                  "resourceHints": [
+                    "/vendor/telescope/",
+                    "/telescope/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)vendor/telescope(?:/|[?#]|$)",
+                    "(?:^|/)telescope/(?:app|telescope-api|requests|events|exceptions|queries)(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "Laravel Horizon",
+                  "resourceHints": [
+                    "/vendor/horizon/",
+                    "/horizon/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)vendor/horizon(?:/|[?#]|$)",
+                    "(?:^|/)horizon/(?:api|img|js|css)(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "Laravel Pulse",
+                  "resourceHints": [
+                    "/vendor/pulse/",
+                    "/pulse/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)vendor/pulse(?:/|[?#]|$)",
+                    "(?:^|/)pulse/(?:livewire|assets|api)(?:/|[?#]|$)"
+                  ]
+                }
+              ]
+            },
+            {
+              "defaults": {
+                "confidence": "中"
+              },
+              "rules": [
+                {
+                  "name": "Laravel Reverb",
+                  "resourceHints": [
+                    "/vendor/reverb/",
+                    "/app/reverb/",
+                    "/reverb/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)vendor/(?:laravel/)?reverb(?:/|[?#]|$)",
+                    "(?:^|/)(?:app/)?reverb(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "Laravel Echo",
+                  "resourceHints": [
+                    "laravel-echo",
+                    "/echo/"
+                  ],
+                  "patterns": [
+                    "laravel-echo(?:\\.iife)?(?:\\.min)?\\.js(?:\\?|$)",
+                    "(?:^|/)vendor/(?:laravel/)?echo(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "Laravel Sanctum",
+                  "resourceHints": [
+                    "/sanctum/",
+                    "/vendor/sanctum/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)sanctum/csrf-cookie(?:[?#]|$)",
+                    "(?:^|/)vendor/(?:laravel/)?sanctum(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "Laravel Passport",
+                  "resourceHints": [
+                    "/vendor/passport/",
+                    "/oauth/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)vendor/(?:laravel/)?passport(?:/|[?#]|$)",
+                    "(?:^|/)oauth/(?:authorize|token|clients|personal-access-tokens)(?:/|[?#]|$)"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Laravel Spark",
+              "confidence": "高",
+              "resourceHints": [
+                "/vendor/spark/",
+                "/spark/"
+              ],
+              "patterns": [
+                "(?:^|/)vendor/(?:laravel/)?spark(?:/|[?#]|$)",
+                "(?:^|/)spark-(?:stripe|paddle)(?:/|[?#]|$)"
+              ]
+            },
+            {
+              "name": "Laravel Vapor",
+              "confidence": "中",
+              "resourceHints": [
+                "/vendor/vapor",
+                "/vapor-ui/"
+              ],
+              "patterns": [
+                "(?:^|/)vendor/(?:laravel/)?vapor(?:-ui)?(?:/|[?#]|$)",
+                "(?:^|/)vapor-ui(?:/|[?#]|$)"
+              ]
+            },
+            {
+              "name": "Laravel Jetstream",
+              "confidence": "中",
+              "resourceHints": [
+                "/vendor/jetstream/",
+                "jetstream"
+              ],
+              "patterns": [
+                "(?:^|/)vendor/(?:laravel/)?jetstream(?:/|[?#]|$)"
+              ]
+            },
+            {
+              "name": "Laravel Breeze",
+              "confidence": "低",
+              "resourceHints": [
+                "/vendor/breeze/",
+                "breeze"
+              ],
+              "patterns": [
+                "(?:^|/)vendor/(?:laravel/)?breeze(?:/|[?#]|$)"
+              ]
+            },
+            {
+              "name": "Laravel Octane",
+              "confidence": "低",
+              "resourceHints": [
+                "/vendor/octane/",
+                "/octane/"
+              ],
+              "patterns": [
+                "(?:^|/)vendor/(?:laravel/)?octane(?:/|[?#]|$)",
+                "(?:^|/)octane(?:/|[?#]|$)"
+              ]
+            },
+            {
+              "defaults": {
+                "confidence": "高"
+              },
+              "rules": [
+                {
+                  "name": "Laravel Debugbar",
+                  "resourceHints": [
+                    "/_debugbar/",
+                    "phpdebugbar"
+                  ],
+                  "patterns": [
+                    "(?:^|/)_debugbar/assets/(?:javascript|stylesheets|vendor)(?:/|[?#]|$)",
+                    "phpdebugbar[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Laravel Backpack",
+                  "resourceHints": [
+                    "/packages/backpack/",
+                    "/vendor/backpack/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)packages/backpack/(?:crud|base|pro)(?:/|[?#]|$)",
+                    "(?:^|/)vendor/backpack/(?:crud|base|pro)(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "Orchid Platform",
+                  "resourceHints": [
+                    "/vendor/orchid/",
+                    "/orchid/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)vendor/orchid/(?:platform|screen)(?:/|[?#]|$)",
+                    "(?:^|/)orchid/(?:js|css|images|fonts)(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "Voyager",
+                  "resourceHints": [
+                    "/vendor/tcg/voyager/",
+                    "/admin/voyager-assets/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)vendor/tcg/voyager(?:/|[?#]|$)",
+                    "(?:^|/)admin/voyager-assets(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "Laravel Admin",
+                  "resourceHints": [
+                    "/vendor/laravel-admin/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)vendor/laravel-admin/(?:Admin|laravel-admin|extensions)(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "MoonShine",
+                  "resourceHints": [
+                    "/vendor/moonshine/",
+                    "/moonshine/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)vendor/moonshine/(?:moonshine|assets)(?:/|[?#]|$)",
+                    "(?:^|/)moonshine/(?:assets|js|css)(?:/|[?#]|$)"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "category": "UI / CSS 框架",
+          "name": "Flux UI",
+          "confidence": "中",
+          "resourceHints": [
+            "/vendor/livewire/flux/"
+          ],
+          "patterns": [
+            "(?:^|/)vendor/livewire/flux(?:/|[?#]|$)"
+          ]
+        },
+        {
+          "defaults": {
+            "confidence": "高"
+          },
+          "rules": [
+            {
+              "category": "UI / CSS 框架",
+              "name": "TallStackUI",
+              "resourceHints": [
+                "/vendor/tallstackui/",
+                "tallstackui"
+              ],
+              "patterns": [
+                "(?:^|/)vendor/tallstackui/(?:tallstackui|assets)(?:/|[?#]|$)",
+                "tallstackui[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "defaults": {
+                "category": "后端 / 服务器框架"
+              },
+              "rules": [
+                {
+                  "name": "Livewire PowerGrid",
+                  "resourceHints": [
+                    "/livewire-powergrid/",
+                    "/vendor/power-components/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)vendor/power-components/livewire-powergrid(?:/|[?#]|$)",
+                    "(?:^|/)livewire-powergrid(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "Laravel Livewire Tables",
+                  "resourceHints": [
+                    "/vendor/rappasoft/",
+                    "livewire-tables"
+                  ],
+                  "patterns": [
+                    "(?:^|/)vendor/rappasoft/laravel-livewire-tables(?:/|[?#]|$)",
+                    "livewire-tables[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Wire Elements",
+                  "resourceHints": [
+                    "/vendor/wire-elements/",
+                    "wire-elements"
+                  ],
+                  "patterns": [
+                    "(?:^|/)vendor/wire-elements/(?:modal|spotlight|pro)(?:/|[?#]|$)",
+                    "wire-elements[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Spatie Media Library Pro",
+                  "resourceHints": [
+                    "/media-library-pro/",
+                    "/vendor/spatie/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)vendor/spatie/laravel-medialibrary-pro(?:/|[?#]|$)",
+                    "(?:^|/)media-library-pro(?:/|[?#]|$)"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "category": "后端 / 服务器框架"
+          },
+          "rules": [
+            {
+              "name": "Spatie Laravel Permission",
+              "confidence": "中",
+              "resourceHints": [
+                "/vendor/spatie/",
+                "laravel-permission"
+              ],
+              "patterns": [
+                "(?:^|/)vendor/spatie/laravel-permission(?:/|[?#]|$)",
+                "laravel-permission[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Spatie Laravel Ignition",
+              "confidence": "高",
+              "resourceHints": [
+                "/_ignition/",
+                "/vendor/spatie/laravel-ignition/"
+              ],
+              "patterns": [
+                "(?:^|/)_ignition/(?:health-check|execute-solution|update-config)(?:[?#]|$)",
+                "(?:^|/)vendor/spatie/laravel-ignition(?:/|[?#]|$)"
+              ]
+            },
+            {
+              "name": "Whoops",
+              "confidence": "中",
+              "resourceHints": [
+                "/vendor/filp/whoops/",
+                "whoops"
+              ],
+              "patterns": [
+                "(?:^|/)vendor/filp/whoops(?:/|[?#]|$)",
+                "whoops[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "defaults": {
+                "confidence": "高"
+              },
+              "rules": [
+                {
+                  "name": "Clockwork",
+                  "resourceHints": [
+                    "/__clockwork/",
+                    "/clockwork/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)__clockwork(?:/|[?#]|$)",
+                    "(?:^|/)clockwork/(?:app|assets|styles|scripts)(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "Symfony WebProfilerBundle",
+                  "resourceHints": [
+                    "/_wdt/",
+                    "/_profiler/",
+                    "/bundles/webprofiler/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)bundles/webprofiler(?:/|[?#]|$)",
+                    "(?:^|/)_wdt/[a-z0-9]+(?:[?#]|$)",
+                    "(?:^|/)_profiler/(?:[a-z0-9]+|phpinfo|router|exception)(?:[?#/]|$)"
+                  ]
+                },
+                {
+                  "name": "Symfony AssetMapper",
+                  "resourceHints": [
+                    "/assets/vendor/",
+                    "@symfony/ux-"
+                  ],
+                  "patterns": [
+                    "(?:^|/)assets/vendor/@symfony/(?:asset-mapper|stimulus-bundle|ux-)[^\\s\"'<>]*",
+                    "(?:^|/)assets/vendor/[^\\s\"'<>]+\\+[^\\s\"'<>]+\\.js(?:[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "Symfony UX Turbo",
+                  "resourceHints": [
+                    "@hotwired/turbo",
+                    "/ux-turbo/",
+                    "/bundles/turbo/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)assets/vendor/@hotwired/turbo(?:/|[?#]|$)",
+                    "(?:^|/)assets/vendor/@symfony/ux-turbo(?:/|[?#]|$)",
+                    "(?:^|/)bundles/turbo(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "Symfony UX LiveComponent",
+                  "resourceHints": [
+                    "/ux-live-component/",
+                    "live_component",
+                    "/bundles/uxlivecomponent/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)assets/vendor/@symfony/ux-live-component(?:/|[?#]|$)",
+                    "(?:^|/)bundles/uxlivecomponent(?:/|[?#]|$)",
+                    "live_component[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Symfony StimulusBundle",
+                  "resourceHints": [
+                    "@symfony/stimulus-bundle",
+                    "/bundles/stimulus/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)assets/vendor/@symfony/stimulus-bundle(?:/|[?#]|$)",
+                    "(?:^|/)bundles/stimulus(?:/|[?#]|$)"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Symfony EncoreBundle",
+              "confidence": "中",
+              "resourceHints": [
+                "/build/entrypoints.json",
+                "/build/manifest.json",
+                "webpack-encore"
+              ],
+              "patterns": [
+                "(?:^|/)build/(?:entrypoints|manifest)\\.json(?:[?#]|$)",
+                "webpack-encore[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "defaults": {
+                "confidence": "高"
+              },
+              "rules": [
+                {
+                  "name": "EasyAdminBundle",
+                  "resourceHints": [
+                    "/bundles/easyadmin/",
+                    "easyadmin"
+                  ],
+                  "patterns": [
+                    "(?:^|/)bundles/easyadmin(?:/|[?#]|$)",
+                    "easyadmin[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "FOSJsRoutingBundle",
+                  "resourceHints": [
+                    "/bundles/fosjsrouting/",
+                    "/js/routing"
+                  ],
+                  "patterns": [
+                    "(?:^|/)bundles/fosjsrouting/js/router\\.js(?:[?#]|$)",
+                    "(?:^|/)js/routing(?:\\?callback=|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "BazingaJsTranslationBundle",
+                  "resourceHints": [
+                    "/bundles/bazingajstranslation/",
+                    "bazinga"
+                  ],
+                  "patterns": [
+                    "(?:^|/)bundles/bazingajstranslation(?:/|[?#]|$)",
+                    "bazinga(?:-)?js(?:-)?translation[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "SonataAdminBundle",
+                  "resourceHints": [
+                    "/bundles/sonataadmin/",
+                    "/bundles/sonatacore/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)bundles/sonataadmin(?:/|[?#]|$)",
+                    "(?:^|/)bundles/sonatacore(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "API Platform",
+                  "resourceHints": [
+                    "/bundles/apiplatform/",
+                    "api-platform",
+                    "/docs.jsonld"
+                  ],
+                  "patterns": [
+                    "(?:^|/)bundles/apiplatform(?:/|[?#]|$)",
+                    "(?:^|/)docs\\.jsonld(?:[?#]|$)",
+                    "api-platform[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "NelmioApiDocBundle",
+                  "resourceHints": [
+                    "/bundles/nelmioapidoc/",
+                    "nelmio"
+                  ],
+                  "patterns": [
+                    "(?:^|/)bundles/nelmioapidoc(?:/|[?#]|$)",
+                    "nelmio(?:-)?api(?:-)?doc[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "LiipImagineBundle",
+                  "resourceHints": [
+                    "/bundles/liipimagine/",
+                    "liipimagine"
+                  ],
+                  "patterns": [
+                    "(?:^|/)bundles/liipimagine(?:/|[?#]|$)",
+                    "liipimagine[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                }
+              ]
+            },
+            {
+              "defaults": {
+                "confidence": "中"
+              },
+              "rules": [
+                {
+                  "name": "VichUploaderBundle",
+                  "resourceHints": [
+                    "/bundles/vichuploader/",
+                    "vich"
+                  ],
+                  "patterns": [
+                    "(?:^|/)bundles/vichuploader(?:/|[?#]|$)",
+                    "vich(?:-)?uploader[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "KnpMenuBundle",
+                  "resourceHints": [
+                    "/bundles/knpmenu/",
+                    "knp-menu"
+                  ],
+                  "patterns": [
+                    "(?:^|/)bundles/knpmenu(?:/|[?#]|$)",
+                    "knp(?:-)?menu[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "KnpPaginatorBundle",
+                  "resourceHints": [
+                    "/bundles/knppaginator/",
+                    "knp-paginator"
+                  ],
+                  "patterns": [
+                    "(?:^|/)bundles/knppaginator(?:/|[?#]|$)",
+                    "knp(?:-)?paginator[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "FOSCKEditorBundle",
+              "confidence": "高",
+              "resourceHints": [
+                "/bundles/fosckeditor/",
+                "fosckeditor"
+              ],
+              "patterns": [
+                "(?:^|/)bundles/fosckeditor(?:/|[?#]|$)",
+                "fosckeditor[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "JMS Serializer Bundle",
+              "confidence": "中",
+              "resourceHints": [
+                "/bundles/jmsserializer/",
+                "jms-serializer"
+              ],
+              "patterns": [
+                "(?:^|/)bundles/jmsserializer(?:/|[?#]|$)",
+                "jms(?:-)?serializer[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Twig Components",
+              "confidence": "中",
+              "resourceHints": [
+                "/bundles/twigcomponent/",
+                "/ux-twig-component/"
+              ],
+              "patterns": [
+                "(?:^|/)bundles/twigcomponent(?:/|[?#]|$)",
+                "(?:^|/)assets/vendor/@symfony/ux-twig-component(?:/|[?#]|$)"
+              ]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "category": "CMS / 电商平台",
+            "confidence": "高"
+          },
+          "rules": [
+            {
+              "name": "Sylius",
+              "resourceHints": [
+                "/bundles/sylius",
+                "/build/shop/",
+                "sylius"
+              ],
+              "patterns": [
+                "(?:^|/)bundles/sylius(?:shop|admin|ui|theme)?(?:/|[?#]|$)",
+                "(?:^|/)build/(?:shop|admin)/(?:entry|app|runtime)[^\\s\"'<>]*",
+                "sylius[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "OroCommerce / OroPlatform",
+              "resourceHints": [
+                "/bundles/oro",
+                "oroui",
+                "orocommerce"
+              ],
+              "patterns": [
+                "(?:^|/)bundles/oro(?:commerce|ui|platform|form|layout|navigation)[^\\s\"'<>]*",
+                "oroui[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)",
+                "orocommerce[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Pimcore",
+              "resourceHints": [
+                "/bundles/pimcore",
+                "/admin/pimcore",
+                "pimcore"
+              ],
+              "patterns": [
+                "(?:^|/)bundles/pimcore(?:admin|core|ecommerce)?(?:/|[?#]|$)",
+                "(?:^|/)admin/pimcore(?:/|[?#]|$)",
+                "pimcore[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Ibexa DXP",
+              "resourceHints": [
+                "/bundles/ibexa",
+                "/bundles/ezplatform",
+                "ibexa"
+              ],
+              "patterns": [
+                "(?:^|/)bundles/ibexa(?:adminui|content|designengine|fieldtype|systeminfo)?(?:/|[?#]|$)",
+                "(?:^|/)bundles/ezplatform(?:adminui|content|designengine)?(?:/|[?#]|$)",
+                "ibexa[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Sulu",
+              "resourceHints": [
+                "/bundles/sulu",
+                "sulu"
+              ],
+              "patterns": [
+                "(?:^|/)bundles/sulu(?:admin|website|media|contact|content)(?:/|[?#]|$)",
+                "sulu[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "websitePrograms": {
+      "defaults": {
+        "matchType": "regex",
+        "resourceOnly": true
+      },
+      "rules": [
+        {
+          "defaults": {
+            "confidence": "高"
+          },
+          "rules": [
+            {
+              "defaults": {
+                "category": "CMS / 电商平台",
+                "kind": "CMS"
+              },
+              "rules": [
+                {
+                  "name": "October CMS",
+                  "resourceHints": [
+                    "/modules/system/assets/",
+                    "/modules/backend/assets/",
+                    "/plugins/",
+                    "october"
+                  ],
+                  "patterns": [
+                    "(?:^|/)modules/(?:system|backend|cms)/assets(?:/|[?#]|$)",
+                    "(?:^|/)plugins/[a-z0-9_-]+/[a-z0-9_-]+/assets(?:/|[?#]|$)",
+                    "october(?:cms)?[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Winter CMS",
+                  "resourceHints": [
+                    "/modules/system/assets/",
+                    "/modules/backend/assets/",
+                    "wintercms",
+                    "winter.cms",
+                    "/modules/system/assets/js/winter"
+                  ],
+                  "patterns": [
+                    "(?:^|/)modules/system/assets/js/winter[^\\s\"'<>]*\\.js(?:\\?|$)",
+                    "winter(?:cms|\\.cms)[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Statamic",
+                  "resourceHints": [
+                    "/vendor/statamic/",
+                    "/cp/assets/",
+                    "statamic"
+                  ],
+                  "patterns": [
+                    "(?:^|/)vendor/statamic/(?:cp|cms|assets)(?:/|[?#]|$)",
+                    "(?:^|/)cp/assets/(?:css|js|img|fonts)(?:/|[?#]|$)",
+                    "statamic[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "TYPO3",
+                  "resourceHints": [
+                    "/typo3conf/ext/",
+                    "/typo3/sysext/",
+                    "/typo3temp/assets/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)typo3conf/ext/[a-z0-9_]+(?:/|[?#]|$)",
+                    "(?:^|/)typo3/sysext/[a-z0-9_]+(?:/|[?#]|$)",
+                    "(?:^|/)typo3temp/(?:assets|compressor)(?:/|[?#]|$)"
+                  ]
+                }
+              ]
+            },
+            {
+              "category": "主题 / 模板",
+              "name": "TYPO3 Bootstrap Package",
+              "kind": "TYPO3 主题 / 模板",
+              "resourceHints": [
+                "/typo3conf/ext/bootstrap_package/",
+                "bootstrap_package"
+              ],
+              "patterns": [
+                "(?:^|/)typo3conf/ext/bootstrap_package(?:/|[?#]|$)",
+                "(?:^|/)typo3conf/ext/bootstrap_package/Resources/Public/(?:Css|JavaScript|Images)(?:/|[?#]|$)"
+              ]
+            },
+            {
+              "defaults": {
+                "category": "CMS / 电商平台",
+                "kind": "CMS"
+              },
+              "rules": [
+                {
+                  "name": "Contao",
+                  "resourceHints": [
+                    "/bundles/contao",
+                    "/assets/contao/",
+                    "/system/modules/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)bundles/contao(?:core|calendar|comments|faq|listing|news|newsletter)?(?:/|[?#]|$)",
+                    "(?:^|/)assets/contao(?:/|[?#]|$)",
+                    "(?:^|/)system/modules/[a-z0-9_-]+(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "ProcessWire",
+                  "resourceHints": [
+                    "/site/templates/",
+                    "/wire/modules/",
+                    "/site/assets/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)site/templates/(?:styles|scripts|assets|[a-z0-9_-]+)(?:/|[?#]|$)",
+                    "(?:^|/)wire/modules/(?:Inputfield|Jquery|Process|System|Fieldtype)[^\\s\"'<>]*",
+                    "(?:^|/)site/assets/(?:files|cache|logs|sessions)(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "Kirby CMS",
+                  "resourceHints": [
+                    "/media/plugins/",
+                    "/media/panel/",
+                    "/assets/kirby/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)media/(?:plugins|panel|site)(?:/|[?#]|$)",
+                    "(?:^|/)assets/kirby(?:/|[?#]|$)",
+                    "(?:^|/)panel/dist/(?:css|js)(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "Craft CMS",
+                  "resourceHints": [
+                    "/cpresources/",
+                    "/admin/resources/",
+                    "craft"
+                  ],
+                  "patterns": [
+                    "(?:^|/)cpresources/[a-f0-9]{8,}(?:/|[?#]|$)",
+                    "(?:^|/)admin/resources/[a-f0-9]{8,}(?:/|[?#]|$)",
+                    "craftcms[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Bolt CMS",
+                  "resourceHints": [
+                    "/bolt-public/",
+                    "/theme/bolt/",
+                    "bolt"
+                  ],
+                  "patterns": [
+                    "(?:^|/)bolt-public(?:/|[?#]|$)",
+                    "(?:^|/)theme/bolt(?:/|[?#]|$)",
+                    "bolt(?:cms)?[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Silverstripe CMS",
+                  "resourceHints": [
+                    "/resources/vendor/silverstripe/",
+                    "/assets/_combinedfiles/",
+                    "silverstripe"
+                  ],
+                  "patterns": [
+                    "(?:^|/)resources/vendor/silverstripe/[a-z0-9_-]+(?:/|[?#]|$)",
+                    "(?:^|/)assets/_combinedfiles/(?:css|js)(?:/|[?#]|$)",
+                    "silverstripe[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Neos CMS",
+                  "resourceHints": [
+                    "/_Resources/Static/Packages/",
+                    "neos"
+                  ],
+                  "patterns": [
+                    "(?:^|/)_Resources/Static/Packages/(?:Neos|Flow|Sitegeist|[^/]+\\.[^/]+)(?:/|[?#]|$)",
+                    "neos(?:cms)?[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Concrete CMS",
+                  "resourceHints": [
+                    "/concrete/js/",
+                    "/concrete/css/",
+                    "/concrete/themes/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)concrete/(?:js|css|images|themes|blocks|elements)(?:/|[?#]|$)",
+                    "(?:^|/)packages/[a-z0-9_-]+/(?:blocks|themes|js|css)(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "ExpressionEngine",
+                  "resourceHints": [
+                    "/themes/ee/",
+                    "/themes/user/",
+                    "expressionengine"
+                  ],
+                  "patterns": [
+                    "(?:^|/)themes/(?:ee|user)/(?:asset|css|js|fonts|images|third_party)(?:/|[?#]|$)",
+                    "expressionengine[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "MODX",
+                  "resourceHints": [
+                    "/assets/components/",
+                    "/manager/assets/",
+                    "modx"
+                  ],
+                  "patterns": [
+                    "(?:^|/)assets/components/[a-z0-9_-]+(?:/|[?#]|$)",
+                    "(?:^|/)manager/assets/(?:modext|components|css|js)(?:/|[?#]|$)",
+                    "modx[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Grav CMS",
+                  "resourceHints": [
+                    "/user/themes/",
+                    "/user/plugins/",
+                    "/system/assets/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)user/(?:themes|plugins|data|pages)/(?:[a-z0-9_-]+)(?:/|[?#]|$)",
+                    "(?:^|/)system/assets/(?:jquery|js|css)(?:/|[?#]|$)",
+                    "grav(?:cms)?[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Bludit",
+                  "resourceHints": [
+                    "/bl-kernel/",
+                    "/bl-themes/",
+                    "/bl-plugins/"
+                  ],
+                  "patterns": [
+                    "(?:^|/)bl-(?:kernel|themes|plugins|content)(?:/|[?#]|$)",
+                    "bludit[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "category": "CMS / 电商平台"
+          },
+          "rules": [
+            {
+              "name": "WonderCMS",
+              "kind": "CMS",
+              "confidence": "中",
+              "resourceHints": [
+                "/themes/wondercms/",
+                "/data/files/",
+                "wondercms"
+              ],
+              "patterns": [
+                "(?:^|/)themes/wondercms(?:/|[?#]|$)",
+                "wondercms[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "defaults": {
+                "confidence": "高"
+              },
+              "rules": [
+                {
+                  "name": "Microweber",
+                  "kind": "CMS / 电商",
+                  "resourceHints": [
+                    "/userfiles/modules/",
+                    "microweber"
+                  ],
+                  "patterns": [
+                    "(?:^|/)userfiles/modules/[a-z0-9_-]+(?:/|[?#]|$)",
+                    "microweber[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "defaults": {
+                    "kind": "CMS"
+                  },
+                  "rules": [
+                    {
+                      "name": "Pagekit",
+                      "resourceHints": [
+                        "/packages/pagekit/",
+                        "pagekit"
+                      ],
+                      "patterns": [
+                        "(?:^|/)packages/pagekit/[a-z0-9_-]+(?:/|[?#]|$)",
+                        "pagekit[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                      ]
+                    },
+                    {
+                      "name": "CMS Made Simple",
+                      "resourceHints": [
+                        "cmsms",
+                        "made-simple"
+                      ],
+                      "patterns": [
+                        "cmsms[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                      ]
+                    },
+                    {
+                      "name": "SPIP",
+                      "resourceHints": [
+                        "/local/cache-css/",
+                        "/local/cache-js/",
+                        "spip"
+                      ],
+                      "patterns": [
+                        "(?:^|/)local/cache-(?:css|js)/spip[^\\s\"'<>]*",
+                        "spip[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                      ]
+                    },
+                    {
+                      "name": "Plone",
+                      "resourceHints": [
+                        "/++plone++",
+                        "/++resource++",
+                        "plone"
+                      ],
+                      "patterns": [
+                        "(?:^|/)\\+\\+(?:plone|resource)\\+\\+[^\\s\"'<>]*",
+                        "plone[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                      ]
+                    },
+                    {
+                      "name": "Wagtail",
+                      "resourceHints": [
+                        "/static/wagtailadmin/",
+                        "wagtail"
+                      ],
+                      "patterns": [
+                        "(?:^|/)static/wagtail(?:admin|docs|images|snippets)(?:/|[?#]|$)",
+                        "wagtail[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                      ]
+                    },
+                    {
+                      "name": "django CMS",
+                      "resourceHints": [
+                        "/static/cms/",
+                        "/static/djangocms_",
+                        "django-cms"
+                      ],
+                      "patterns": [
+                        "(?:^|/)static/(?:cms|djangocms_[a-z0-9_]+)(?:/|[?#]|$)",
+                        "django(?:-)?cms[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                      ]
+                    },
+                    {
+                      "name": "Mezzanine",
+                      "resourceHints": [
+                        "/static/mezzanine/",
+                        "mezzanine"
+                      ],
+                      "patterns": [
+                        "(?:^|/)static/mezzanine(?:/|[?#]|$)",
+                        "mezzanine[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "defaults": {
+                "kind": "电商系统"
+              },
+              "rules": [
+                {
+                  "name": "Saleor",
+                  "confidence": "中",
+                  "resourceHints": [
+                    "saleor"
+                  ],
+                  "patterns": [
+                    "saleor[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "defaults": {
+                    "confidence": "高"
+                  },
+                  "rules": [
+                    {
+                      "name": "Bagisto",
+                      "resourceHints": [
+                        "/themes/shop/",
+                        "/vendor/webkul/",
+                        "bagisto"
+                      ],
+                      "patterns": [
+                        "(?:^|/)themes/(?:shop|admin)/(?:default|velocity|assets)(?:/|[?#]|$)",
+                        "(?:^|/)vendor/webkul/(?:admin|shop|ui|velocity|checkout)(?:/|[?#]|$)",
+                        "bagisto[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                      ]
+                    },
+                    {
+                      "name": "Aimeos",
+                      "resourceHints": [
+                        "/packages/aimeos/",
+                        "/client/html/themes/",
+                        "aimeos"
+                      ],
+                      "patterns": [
+                        "(?:^|/)packages/aimeos(?:/|[?#]|$)",
+                        "(?:^|/)client/html/themes/(?:common|default|[a-z0-9_-]+)(?:/|[?#]|$)",
+                        "aimeos[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                      ]
+                    },
+                    {
+                      "name": "Thelia",
+                      "resourceHints": [
+                        "/templates/frontOffice/",
+                        "/templates/backOffice/",
+                        "thelia"
+                      ],
+                      "patterns": [
+                        "(?:^|/)templates/(?:frontOffice|backOffice)/(?:default|assets|[a-z0-9_-]+)(?:/|[?#]|$)",
+                        "thelia[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Akeneo PIM",
+              "kind": "PIM / 电商数据",
+              "confidence": "高",
+              "resourceHints": [
+                "/bundles/pimui/",
+                "/bundles/pimdatagrid/",
+                "akeneo"
+              ],
+              "patterns": [
+                "(?:^|/)bundles/pim(?:ui|datagrid|catalog|analytics|importexport)(?:/|[?#]|$)",
+                "akeneo[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "confidence": "高"
+          },
+          "rules": [
+            {
+              "category": "SaaS / 第三方服务",
+              "name": "Mautic",
+              "kind": "营销自动化 / 统计",
+              "resourceHints": [
+                "/media/js/mautic",
+                "/plugins/Mautic",
+                "mautic"
+              ],
+              "patterns": [
+                "(?:^|/)media/js/mautic(?:-form)?\\.js(?:[?#]|$)",
+                "(?:^|/)plugins/Mautic[A-Za-z]+Bundle(?:/|[?#]|$)",
+                "mautic[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "category": "网站程序",
+              "name": "Nextcloud / ownCloud",
+              "kind": "网盘 / 协作",
+              "resourceHints": [
+                "/core/js/",
+                "/apps/files/",
+                "/apps/theming/"
+              ],
+              "patterns": [
+                "(?:^|/)core/(?:js|css|img)/(?:oc|common|merged-template-prepend|main)[^\\s\"'<>]*",
+                "(?:^|/)apps/(?:files|theming|dashboard|spreed|settings)/(?:js|css|img)(?:/|[?#]|$)",
+                "(?:^|/)ocs/v[12]\\.php(?:/|[?#]|$)"
+              ]
+            },
+            {
+              "category": "网站程序",
+              "name": "ownCloud",
+              "kind": "网盘 / 协作",
+              "resourceHints": [
+                "owncloud"
+              ],
+              "patterns": [
+                "owncloud[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "category": "统计 / 分析",
+              "name": "Matomo",
+              "kind": "开源统计",
+              "resourceHints": [
+                "/matomo.js",
+                "/piwik.js",
+                "matomo"
+              ],
+              "patterns": [
+                "(?:^|/)(?:matomo|piwik)\\.js(?:[?#]|$)",
+                "(?:^|/)(?:matomo|piwik)\\.php(?:[?#]|$)",
+                "matomo[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "defaults": {
+                "category": "网站程序"
+              },
+              "rules": [
+                {
+                  "name": "Piwigo",
+                  "kind": "图库",
+                  "resourceHints": [
+                    "piwigo"
+                  ],
+                  "patterns": [
+                    "piwigo[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "LimeSurvey",
+                  "kind": "问卷系统",
+                  "resourceHints": [
+                    "/assets/packages/",
+                    "limesurvey"
+                  ],
+                  "patterns": [
+                    "(?:^|/)assets/packages/(?:jquery-ui|bootstrap|fontawesome|limesurvey)(?:/|[?#]|$)",
+                    "limesurvey[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "GLPI",
+                  "kind": "ITSM / 资产管理",
+                  "resourceHints": [
+                    "/pics/fd_logo.png",
+                    "glpi"
+                  ],
+                  "patterns": [
+                    "(?:^|/)pics/(?:fd_logo|glpi|login_logo)[^\\s\"'<>]*",
+                    "glpi[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "SuiteCRM",
+                  "kind": "CRM",
+                  "resourceHints": [
+                    "/themes/SuiteP/",
+                    "/cache/include/javascript/",
+                    "suitecrm"
+                  ],
+                  "patterns": [
+                    "(?:^|/)themes/(?:SuiteP|SuiteR|Sugar5)/(?:css|js|images)(?:/|[?#]|$)",
+                    "(?:^|/)cache/include/javascript/(?:sugar_grp|suite)[^\\s\"'<>]*",
+                    "suitecrm[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Dolibarr",
+                  "kind": "ERP / CRM",
+                  "resourceHints": [
+                    "/theme/eldy/",
+                    "dolibarr"
+                  ],
+                  "patterns": [
+                    "(?:^|/)theme/(?:eldy|md|bureau2crea)/(?:style|img|font)(?:/|[?#]|$)",
+                    "dolibarr[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Odoo",
+                  "kind": "ERP / 电商",
+                  "resourceHints": [
+                    "/web/assets/",
+                    "/web/static/",
+                    "web.assets_"
+                  ],
+                  "patterns": [
+                    "(?:^|/)web/assets/(?:debug/)?(?:[0-9a-f]+/)?web\\.assets_[a-z_]+[^\\s\"'<>]*",
+                    "(?:^|/)web/static/src/(?:js|scss|xml|img)(?:/|[?#]|$)",
+                    "web\\.assets_(?:frontend|backend|common)"
+                  ]
+                },
+                {
+                  "name": "Frappe Framework",
+                  "kind": "应用框架 / ERP",
+                  "resourceHints": [
+                    "/assets/frappe/",
+                    "frappe"
+                  ],
+                  "patterns": [
+                    "(?:^|/)assets/frappe/(?:js|css|images|dist)(?:/|[?#]|$)",
+                    "frappe[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "ERPNext",
+                  "kind": "ERP",
+                  "resourceHints": [
+                    "/assets/erpnext/",
+                    "erpnext"
+                  ],
+                  "patterns": [
+                    "(?:^|/)assets/erpnext/(?:js|css|images|dist)(?:/|[?#]|$)",
+                    "erpnext[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Roundcube",
+                  "kind": "Webmail",
+                  "resourceHints": [
+                    "/program/js/",
+                    "/skins/elastic/",
+                    "roundcube"
+                  ],
+                  "patterns": [
+                    "(?:^|/)program/(?:js|resources)/(?:app|common|jquery)[^\\s\"'<>]*",
+                    "(?:^|/)skins/(?:elastic|larry|classic)/(?:styles|ui|images)(?:/|[?#]|$)",
+                    "roundcube[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Horde Groupware",
+                  "kind": "Webmail / 协作",
+                  "resourceHints": [
+                    "/horde/themes/",
+                    "/horde/js/",
+                    "horde"
+                  ],
+                  "patterns": [
+                    "(?:^|/)horde/(?:themes|js|services)(?:/|[?#]|$)",
+                    "horde[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "phpMyAdmin",
+                  "kind": "数据库管理",
+                  "resourceHints": [
+                    "/phpmyadmin/",
+                    "/themes/pmahomme/",
+                    "pma_"
+                  ],
+                  "patterns": [
+                    "(?:^|/)phpmyadmin/(?:themes|js|libraries)(?:/|[?#]|$)",
+                    "(?:^|/)themes/(?:pmahomme|metro|original)/(?:css|img|jquery)(?:/|[?#]|$)",
+                    "pma_(?:homme|navigation|common)[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "category": "网站程序",
+          "name": "Adminer",
+          "kind": "数据库管理",
+          "confidence": "中",
+          "resourceHints": [
+            "adminer.css",
+            "adminer.php",
+            "adminer"
+          ],
+          "patterns": [
+            "(?:^|/)adminer(?:-[0-9.]+)?\\.(?:php|css|js)(?:[?#]|$)",
+            "adminer[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+          ]
+        }
+      ]
+    }
   }
 }

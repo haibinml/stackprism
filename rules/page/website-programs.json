@@ -2,40 +2,44 @@
   "page": {
     "websitePrograms": [
       {
-        "name": "WordPress",
-        "kind": "CMS / 博客",
-        "confidence": "高",
-        "patterns": [
-          "/wp-content/",
-          "/wp-includes/",
-          "wp-emoji-release",
-          "wp-json"
-        ],
-        "globals": [
-          "wp"
-        ]
-      },
-      {
-        "name": "WooCommerce",
-        "kind": "电商插件",
-        "confidence": "高",
-        "patterns": [
-          "woocommerce",
-          "wc-cart-fragments",
-          "wp-content/plugins/woocommerce"
-        ]
-      },
-      {
-        "name": "Drupal",
-        "kind": "CMS",
-        "confidence": "高",
-        "patterns": [
-          "drupal-settings-json",
-          "/sites/default/files",
-          "drupal\\."
-        ],
-        "globals": [
-          "Drupal"
+        "defaults": {
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "WordPress",
+            "kind": "CMS / 博客",
+            "patterns": [
+              "/wp-content/",
+              "/wp-includes/",
+              "wp-emoji-release",
+              "wp-json"
+            ],
+            "globals": [
+              "wp"
+            ]
+          },
+          {
+            "name": "WooCommerce",
+            "kind": "电商插件",
+            "patterns": [
+              "woocommerce",
+              "wc-cart-fragments",
+              "wp-content/plugins/woocommerce"
+            ]
+          },
+          {
+            "name": "Drupal",
+            "kind": "CMS",
+            "patterns": [
+              "drupal-settings-json",
+              "/sites/default/files",
+              "drupal\\."
+            ],
+            "globals": [
+              "Drupal"
+            ]
+          }
         ]
       },
       {
@@ -74,30 +78,34 @@
         ]
       },
       {
-        "name": "OpenCart",
-        "kind": "电商系统",
-        "patterns": [
-          "catalog/view/theme",
-          "index.php\\?route=",
-          "opencart"
-        ]
-      },
-      {
-        "name": "PrestaShop",
-        "kind": "电商系统",
-        "patterns": [
-          "prestashop",
-          "/modules/ps_",
-          "var prestashop"
-        ]
-      },
-      {
-        "name": "Shopware",
-        "kind": "电商系统",
-        "patterns": [
-          "shopware",
-          "widgets/emotion",
-          "storefront/js"
+        "defaults": {
+          "kind": "电商系统"
+        },
+        "rules": [
+          {
+            "name": "OpenCart",
+            "patterns": [
+              "catalog/view/theme",
+              "index.php\\?route=",
+              "opencart"
+            ]
+          },
+          {
+            "name": "PrestaShop",
+            "patterns": [
+              "prestashop",
+              "/modules/ps_",
+              "var prestashop"
+            ]
+          },
+          {
+            "name": "Shopware",
+            "patterns": [
+              "shopware",
+              "widgets/emotion",
+              "storefront/js"
+            ]
+          }
         ]
       },
       {
@@ -119,49 +127,51 @@
         ]
       },
       {
-        "name": "Discuz!",
-        "kind": "论坛",
-        "patterns": [
-          "discuz",
-          "static/image/common",
-          "forum.php",
-          "portal.php"
-        ]
-      },
-      {
-        "name": "phpBB",
-        "kind": "论坛",
-        "patterns": [
-          "phpbb",
-          "styles/prosilver",
-          "viewtopic.php"
-        ]
-      },
-      {
-        "name": "vBulletin",
-        "kind": "论坛",
-        "patterns": [
-          "vbulletin",
-          "clientscript/vbulletin",
-          "showthread.php"
-        ]
-      },
-      {
-        "name": "XenForo",
-        "kind": "论坛",
-        "patterns": [
-          "xenforo",
-          "data-template=",
-          "js/xf/"
-        ]
-      },
-      {
-        "name": "Flarum",
-        "kind": "论坛",
-        "patterns": [
-          "flarum",
-          "flarum.core",
-          "assets/forum-"
+        "defaults": {
+          "kind": "论坛"
+        },
+        "rules": [
+          {
+            "name": "Discuz!",
+            "patterns": [
+              "discuz",
+              "static/image/common",
+              "forum.php",
+              "portal.php"
+            ]
+          },
+          {
+            "name": "phpBB",
+            "patterns": [
+              "phpbb",
+              "styles/prosilver",
+              "viewtopic.php"
+            ]
+          },
+          {
+            "name": "vBulletin",
+            "patterns": [
+              "vbulletin",
+              "clientscript/vbulletin",
+              "showthread.php"
+            ]
+          },
+          {
+            "name": "XenForo",
+            "patterns": [
+              "xenforo",
+              "data-template=",
+              "js/xf/"
+            ]
+          },
+          {
+            "name": "Flarum",
+            "patterns": [
+              "flarum",
+              "flarum.core",
+              "assets/forum-"
+            ]
+          }
         ]
       },
       {
@@ -207,66 +217,73 @@
         ]
       },
       {
-        "name": "Ghost",
-        "kind": "博客",
-        "patterns": [
-          "ghost",
-          "/ghost/api/",
-          "ghost-sdk"
+        "defaults": {
+          "kind": "博客"
+        },
+        "rules": [
+          {
+            "name": "Ghost",
+            "patterns": [
+              "ghost",
+              "/ghost/api/",
+              "ghost-sdk"
+            ]
+          },
+          {
+            "name": "Typecho",
+            "patterns": [
+              "typecho",
+              "usr/themes",
+              "usr/plugins"
+            ]
+          },
+          {
+            "name": "Z-BlogPHP",
+            "patterns": [
+              "zblogphp",
+              "zb_users",
+              "zb_system"
+            ]
+          }
         ]
       },
       {
-        "name": "Typecho",
-        "kind": "博客",
-        "patterns": [
-          "typecho",
-          "usr/themes",
-          "usr/plugins"
-        ]
-      },
-      {
-        "name": "Z-BlogPHP",
-        "kind": "博客",
-        "patterns": [
-          "zblogphp",
-          "zb_users",
-          "zb_system"
-        ]
-      },
-      {
-        "name": "DedeCMS",
-        "kind": "CMS",
-        "patterns": [
-          "dedecms",
-          "/templets/",
-          "/plus/"
-        ]
-      },
-      {
-        "name": "PHPCMS",
-        "kind": "CMS",
-        "patterns": [
-          "phpcms",
-          "/statics/js/",
-          "content=\"phpcms"
-        ]
-      },
-      {
-        "name": "EmpireCMS",
-        "kind": "CMS",
-        "patterns": [
-          "empirecms",
-          "/e/data/",
-          "/e/public/"
-        ]
-      },
-      {
-        "name": "Craft CMS",
-        "kind": "CMS",
-        "patterns": [
-          "craftcms",
-          "craft\\.csrfTokenName",
-          "CRAFT_CSRF_TOKEN"
+        "defaults": {
+          "kind": "CMS"
+        },
+        "rules": [
+          {
+            "name": "DedeCMS",
+            "patterns": [
+              "dedecms",
+              "/templets/",
+              "/plus/"
+            ]
+          },
+          {
+            "name": "PHPCMS",
+            "patterns": [
+              "phpcms",
+              "/statics/js/",
+              "content=\"phpcms"
+            ]
+          },
+          {
+            "name": "EmpireCMS",
+            "patterns": [
+              "empirecms",
+              "/e/data/",
+              "/e/public/"
+            ]
+          },
+          {
+            "name": "Craft CMS",
+            "patterns": [
+              "craftcms",
+              "craft\\.csrfTokenName",
+              "CRAFT_CSRF_TOKEN"
+            ]
+          }
         ]
       },
       {
@@ -322,114 +339,123 @@
         ]
       },
       {
-        "name": "Docusaurus",
-        "kind": "文档站点",
-        "patterns": [
-          "docusaurus",
-          "__docusaurus",
-          "/assets/js/webpack-runtime"
+        "defaults": {
+          "kind": "文档站点"
+        },
+        "rules": [
+          {
+            "name": "Docusaurus",
+            "patterns": [
+              "docusaurus",
+              "__docusaurus",
+              "/assets/js/webpack-runtime"
+            ]
+          },
+          {
+            "name": "VitePress",
+            "patterns": [
+              "vitepress",
+              "VPContent",
+              "/assets/chunks/"
+            ]
+          },
+          {
+            "name": "VuePress",
+            "patterns": [
+              "vuepress",
+              "__VUEPRESS__"
+            ]
+          },
+          {
+            "name": "Docsify",
+            "patterns": [
+              "docsify",
+              "window.$docsify"
+            ],
+            "globals": [
+              "$docsify"
+            ]
+          },
+          {
+            "name": "GitBook",
+            "patterns": [
+              "gitbook",
+              "gitbook.page.hasChanged"
+            ]
+          },
+          {
+            "name": "MkDocs",
+            "patterns": [
+              "mkdocs",
+              "mkdocs_page_name",
+              "material for mkdocs"
+            ]
+          }
         ]
       },
       {
-        "name": "VitePress",
-        "kind": "文档站点",
-        "patterns": [
-          "vitepress",
-          "VPContent",
-          "/assets/chunks/"
+        "defaults": {
+          "kind": "电商系统"
+        },
+        "rules": [
+          {
+            "name": "ECShop",
+            "patterns": [
+              "ecshop",
+              "themes/default/images/ecshop",
+              "flow.php\\?step=cart",
+              "ECSHOP"
+            ]
+          },
+          {
+            "name": "ShopXO",
+            "patterns": [
+              "shopxo",
+              "public/static/index",
+              "shopxo.net"
+            ]
+          },
+          {
+            "name": "Niushop",
+            "patterns": [
+              "niushop",
+              "niucloud",
+              "addon/shop",
+              "牛之云"
+            ]
+          }
         ]
       },
       {
-        "name": "VuePress",
-        "kind": "文档站点",
-        "patterns": [
-          "vuepress",
-          "__VUEPRESS__"
-        ]
-      },
-      {
-        "name": "Docsify",
-        "kind": "文档站点",
-        "patterns": [
-          "docsify",
-          "window.$docsify"
-        ],
-        "globals": [
-          "$docsify"
-        ]
-      },
-      {
-        "name": "GitBook",
-        "kind": "文档站点",
-        "patterns": [
-          "gitbook",
-          "gitbook.page.hasChanged"
-        ]
-      },
-      {
-        "name": "MkDocs",
-        "kind": "文档站点",
-        "patterns": [
-          "mkdocs",
-          "mkdocs_page_name",
-          "material for mkdocs"
-        ]
-      },
-      {
-        "name": "ECShop",
-        "kind": "电商系统",
-        "patterns": [
-          "ecshop",
-          "themes/default/images/ecshop",
-          "flow.php\\?step=cart",
-          "ECSHOP"
-        ]
-      },
-      {
-        "name": "ShopXO",
-        "kind": "电商系统",
-        "patterns": [
-          "shopxo",
-          "public/static/index",
-          "shopxo.net"
-        ]
-      },
-      {
-        "name": "Niushop",
-        "kind": "电商系统",
-        "patterns": [
-          "niushop",
-          "niucloud",
-          "addon/shop",
-          "牛之云"
-        ]
-      },
-      {
-        "name": "Youzan / 有赞",
-        "kind": "SaaS 电商",
-        "patterns": [
-          "youzan.com",
-          "koudaitong.com",
-          "b.yzcdn.cn",
-          "有赞"
-        ]
-      },
-      {
-        "name": "Weimob / 微盟",
-        "kind": "SaaS 电商",
-        "patterns": [
-          "weimob.com",
-          "weimobdc.com",
-          "微盟"
-        ]
-      },
-      {
-        "name": "WShop / 微店",
-        "kind": "SaaS 电商",
-        "patterns": [
-          "weidian.com",
-          "vdian.com",
-          "微店"
+        "defaults": {
+          "kind": "SaaS 电商"
+        },
+        "rules": [
+          {
+            "name": "Youzan / 有赞",
+            "patterns": [
+              "youzan.com",
+              "koudaitong.com",
+              "b.yzcdn.cn",
+              "有赞"
+            ]
+          },
+          {
+            "name": "Weimob / 微盟",
+            "patterns": [
+              "weimob.com",
+              "weimobdc.com",
+              "微盟"
+            ]
+          },
+          {
+            "name": "WShop / 微店",
+            "patterns": [
+              "weidian.com",
+              "vdian.com",
+              "微店"
+            ]
+          }
         ]
       },
       {

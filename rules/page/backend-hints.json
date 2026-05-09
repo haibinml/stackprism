@@ -2,32 +2,36 @@
   "page": {
     "backendHints": [
       {
-        "name": "Ruby on Rails",
-        "confidence": "中",
-        "patterns": [
-          "rails-ujs",
-          "authenticity_token",
-          "active_storage",
-          "data-turbo"
-        ]
-      },
-      {
-        "name": "Django",
-        "confidence": "中",
-        "patterns": [
-          "csrfmiddlewaretoken",
-          "/static/admin/",
-          "django.jQuery"
-        ]
-      },
-      {
-        "name": "Laravel",
-        "confidence": "中",
-        "patterns": [
-          "laravel-mix",
-          "livewire",
-          "wire:click",
-          "x-csrf-token"
+        "defaults": {
+          "confidence": "中"
+        },
+        "rules": [
+          {
+            "name": "Ruby on Rails",
+            "patterns": [
+              "rails-ujs",
+              "authenticity_token",
+              "active_storage",
+              "data-turbo"
+            ]
+          },
+          {
+            "name": "Django",
+            "patterns": [
+              "csrfmiddlewaretoken",
+              "/static/admin/",
+              "django.jQuery"
+            ]
+          },
+          {
+            "name": "Laravel",
+            "patterns": [
+              "laravel-mix",
+              "livewire",
+              "wire:click",
+              "x-csrf-token"
+            ]
+          }
         ]
       },
       {
