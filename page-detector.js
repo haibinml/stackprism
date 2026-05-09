@@ -662,6 +662,10 @@ ${html}`
       return cssVariableMatch
     }
 
+    if (!matchesResourceHints(rule, context.resources?.text || context.text || '')) {
+      return null
+    }
+
     const patterns = (rule.patterns || []).map(pattern => compileRulePattern(pattern, rule)).filter(Boolean)
     for (const pattern of patterns) {
       const resource = shouldMatchTarget(rule, 'resources') ? (context.resources?.all || []).find(url => pattern.test(url)) : null
@@ -694,6 +698,14 @@ ${html}`
       confidence: rule.confidence || '高',
       evidence: `CSS 变量匹配 ${preview}${suffix}`
     }
+  }
+
+  function matchesResourceHints(rule, text) {
+    if (!Array.isArray(rule.resourceHints) || !rule.resourceHints.length) {
+      return true
+    }
+    const value = String(text || '').toLowerCase()
+    return rule.resourceHints.some(hint => value.includes(String(hint || '').toLowerCase()))
   }
 
   function compileRulePattern(pattern, rule) {

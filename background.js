@@ -438,6 +438,7 @@ function detectFromDynamicSnapshot(snapshot, pageRules) {
   applyDynamicRuleList(add, pageRules.dynamicTechnologies, text, 'JSON 动态技术规则')
   applyDynamicRuleList(add, pageRules.frontendFrameworks, text, 'JSON 前端框架动态规则', '前端框架')
   applyDynamicRuleList(add, pageRules.uiFrameworks, text, 'JSON UI 框架动态规则', 'UI / CSS 框架')
+  applyDynamicRuleList(add, pageRules.frontendExtra, text, 'JSON 前端库动态规则', '前端库')
   applyDynamicRuleList(add, pageRules.buildRuntime, text, 'JSON 构建运行时动态规则', '构建与运行时')
   detectDynamicMinifiedScriptFallback(add, snapshot, technologies)
   applyDynamicRuleList(add, pageRules.cdnProviders, text, 'JSON CDN 动态规则', 'CDN / 托管')
@@ -701,6 +702,9 @@ function applyDynamicRuleList(add, rules, text, sourceLabel, defaultCategory, ev
   }
 
   for (const rule of rules) {
+    if (!matchesRuleTextHints(rule, text)) {
+      continue
+    }
     const matched = (rule.patterns || []).some(pattern => {
       try {
         return compileRulePattern(pattern, rule).test(text)
@@ -713,6 +717,14 @@ function applyDynamicRuleList(add, rules, text, sourceLabel, defaultCategory, ev
     }
     add(rule.category || defaultCategory || '其他库', rule.name, rule.confidence || '中', `${evidencePrefix(rule)}${sourceLabel} 匹配`)
   }
+}
+
+function matchesRuleTextHints(rule, text) {
+  if (!Array.isArray(rule.resourceHints) || !rule.resourceHints.length) {
+    return true
+  }
+  const value = String(text || '').toLowerCase()
+  return rule.resourceHints.some(hint => value.includes(String(hint || '').toLowerCase()))
 }
 
 function filterCustomRulesForTarget(rules, target) {
