@@ -16,3 +16,5 @@
 公共包 CDN 规则使用带包名边界的正则匹配，避免 `d3` 命中 `d3-array`、`react` 命中 `react-dom` 这类包名前缀误报。
 
 `page/frontend-regional-cdn-libraries.json` 是基于同一批前端库名称扩展出的区域公共静态库 CDN 规则，覆盖 BootCDN、Staticfile、Baomitu、Microsoft Ajax CDN、Google Hosted Libraries 等资源 URL。它只匹配资源 URL，并使用路径边界减少包名前缀误报。
+
+`page/frontend-github-cdn-libraries.json` 是根据 cdnjs 元数据中的 GitHub 仓库地址扩展出的仓库型 CDN 规则，覆盖 jsDelivr GitHub、RawGit、GitHack、GitCDN 等历史或常见资源 URL。它只匹配资源 URL，只保留一个仓库对应一个库名的规则，并使用 `owner/repo` 边界减少误报。
