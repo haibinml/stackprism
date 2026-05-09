@@ -260,16 +260,81 @@
           ]
         },
         {
-          "name": "Google Maps Platform",
-          "kind": "地图服务",
-          "patterns": ["maps\\.googleapis\\.com|maps\\.gstatic\\.com\\/maps"],
-          "globals": ["google.maps"]
-        },
-        {
-          "name": "Mapbox",
-          "kind": "地图服务",
-          "patterns": ["api\\.mapbox\\.com|mapbox-gl|mapbox\\.com"],
-          "globals": ["mapboxgl"]
+          "defaults": {
+            "kind": "地图服务",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Google Maps Platform",
+              "patterns": ["maps\\.googleapis\\.com|maps\\.gstatic\\.com\\/maps"],
+              "globals": ["google.maps"]
+            },
+            {
+              "name": "Mapbox",
+              "patterns": ["api\\.mapbox\\.com|events\\.mapbox\\.com|mapbox-gl|mapbox\\.com"],
+              "globals": ["mapboxgl"]
+            },
+            {
+              "name": "AMap / 高德地图",
+              "patterns": ["webapi\\.amap\\.com|restapi\\.amap\\.com|cache\\.amap\\.com"],
+              "globals": ["AMap", "AMapUI"]
+            },
+            {
+              "name": "Baidu Maps",
+              "patterns": ["api\\.map\\.baidu\\.com|maponline\\d*\\.bdimg\\.com"],
+              "globals": ["BMap", "BMapGL"]
+            },
+            {
+              "name": "Tencent Maps",
+              "patterns": ["map\\.qq\\.com/api/js|apis\\.map\\.qq\\.com|mapapi\\.qq\\.com|3gimg\\.qq\\.com/lightmap"],
+              "globals": ["qq.maps", "TMap"]
+            },
+            {
+              "name": "HERE Maps",
+              "patterns": ["js\\.api\\.here\\.com|maps\\.hereapi\\.com|here\\.com[^\\s\"'<>]*/maps-api"]
+            },
+            {
+              "name": "MapTiler",
+              "patterns": ["api\\.maptiler\\.com|maptiler\\.com[^\\s\"'<>]*(?:sdk|tiles|maps)|maptilersdk"],
+              "globals": ["maptilersdk"]
+            },
+            {
+              "name": "TomTom Maps",
+              "patterns": ["api\\.tomtom\\.com/(?:map|maps|search)|tomtom\\.com[^\\s\"'<>]*/maps-sdk"]
+            },
+            {
+              "name": "Azure Maps",
+              "patterns": ["atlas\\.microsoft\\.com|azure-maps-control|atlas\\.microsoft\\.com/sdk/javascript/mapcontrol"]
+            },
+            {
+              "name": "ArcGIS Maps SDK",
+              "patterns": ["js\\.arcgis\\.com|arcgis\\.com[^\\s\"'<>]*/(?:assets|sharing|maps)|arcgisonline\\.com"],
+              "globals": ["esri"]
+            },
+            {
+              "name": "MapQuest",
+              "patterns": ["api\\.mqcdn\\.com|mapquestapi\\.com|mapquest\\.com[^\\s\"'<>]*/sdk"],
+              "globals": ["MQA", "L.mapquest"]
+            },
+            {
+              "name": "CARTO",
+              "patterns": ["cartocdn\\.com|cartodb\\.com|carto\\.com[^\\s\"'<>]*/(?:js|api|assets)"],
+              "globals": ["carto", "cartodb"]
+            },
+            {
+              "name": "Thunderforest",
+              "patterns": ["tile\\.thunderforest\\.com|thunderforest\\.com[^\\s\"'<>]*/(?:maps|api)"]
+            },
+            {
+              "name": "Stadia Maps",
+              "patterns": ["tiles\\.stadiamaps\\.com|api\\.stadiamaps\\.com"]
+            },
+            {
+              "name": "OpenStreetMap Tiles",
+              "patterns": ["(?:[abc]\\.)?tile\\.openstreetmap\\.org"]
+            }
+          ]
         },
         {
           "defaults": {
