@@ -7,10 +7,6 @@
           <span v-if="version" class="version-badge">v{{ version }}</span>
         </h1>
         <p>控制识别分类，添加自定义规则，并覆盖弹窗样式。</p>
-        <p class="repo-line">
-          仓库：
-          <a :href="REPOSITORY_URL" target="_blank" rel="noreferrer" @click="openRepository">{{ REPOSITORY_URL }}</a>
-        </p>
       </div>
       <div class="header-actions">
         <button type="button" :title="`主题：${themeLabel(theme)}（点击切换）`" @click="toggleTheme">
@@ -22,6 +18,10 @@
         <button type="button" @click="openHelp">
           <BookOpen :size="14" :stroke-width="2" />
           <span>使用说明</span>
+        </button>
+        <button type="button" title="GitHub 仓库" @click="openRepository">
+          <ExternalLink :size="14" :stroke-width="2" />
+          <span>GitHub 仓库</span>
         </button>
         <button type="button" class="primary" @click="saveSettings">
           <Save :size="14" :stroke-width="2" />
@@ -176,7 +176,7 @@
 
 <script setup lang="ts">
   import { onMounted, reactive, ref, watch, computed } from 'vue'
-  import { BookOpen, Inbox, Monitor, Moon, Pencil, RotateCcw, Save, Sun, Trash2 } from 'lucide-vue-next'
+  import { BookOpen, ExternalLink, Inbox, Monitor, Moon, Pencil, RotateCcw, Save, Sun, Trash2 } from 'lucide-vue-next'
   import Select from '@/ui/components/Select.vue'
   import { CATEGORY_ORDER } from '@/utils/category-order'
   import { applyCustomCss } from '@/utils/apply-custom-css'
@@ -758,22 +758,6 @@
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.02em;
-  }
-
-  .repo-line {
-    color: var(--muted);
-    font-size: 12px;
-    margin-top: 8px;
-  }
-
-  .repo-line a {
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.15s ease;
-  }
-
-  .repo-line a:hover {
-    color: var(--accent);
   }
 
   h2 {

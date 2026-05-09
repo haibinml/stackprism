@@ -5,7 +5,10 @@ export default defineConfig({
   title: 'StackPrism',
   description: '网页技术栈检测扩展 · 使用文档',
   lastUpdated: true,
-  head: [['meta', { name: 'theme-color', content: '#0f766e' }]],
+  head: [
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' }],
+    ['meta', { name: 'theme-color', content: '#0f766e' }]
+  ],
   themeConfig: {
     logo: '/icon.svg',
     nav: [

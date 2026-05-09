@@ -9,13 +9,11 @@
         <p>这页专门讲怎么添加自己的识别规则。你可以把规则理解成一句话：看到什么字，就认为网页用了什么东西。</p>
       </div>
       <div class="header-actions">
-        <button type="button" class="primary" @click="openSettings">
-          <Settings2 :size="14" :stroke-width="2" />
-          <span>打开设置页</span>
+        <button type="button" class="icon-btn primary" title="打开设置页" @click="openSettings">
+          <Settings2 :size="16" :stroke-width="2" />
         </button>
-        <button type="button" @click="openRepo">
-          <ExternalLink :size="14" :stroke-width="2" />
-          <span>GitHub 仓库</span>
+        <button type="button" class="icon-btn" title="GitHub 仓库" @click="openRepo">
+          <ExternalLink :size="16" :stroke-width="2" />
         </button>
       </div>
     </div>
@@ -405,6 +403,13 @@ examplepay-sdk</pre
     flex-shrink: 0;
     flex-wrap: wrap;
     gap: 6px;
+  }
+
+  .header-actions .icon-btn {
+    height: 32px;
+    justify-content: center;
+    padding: 0;
+    width: 32px;
   }
 
   .header-actions button {
