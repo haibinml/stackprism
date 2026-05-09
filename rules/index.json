@@ -6,6 +6,7 @@
     "page/ui-frameworks.json",
     "page/build-runtime.json",
     "page/frontend-extra.json",
+    "page/frontend-local-libraries.json",
     "page/frontend-cdn-libraries.json",
     "page/frontend-package-cdn-libraries.json",
     "page/frontend-regional-cdn-libraries.json",

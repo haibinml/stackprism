@@ -224,6 +224,7 @@ function detectPageTechnologies(ruleConfig = {}) {
         /(?:[._-](?:min|prod|production|development|dev|bundle|bundled|umd|esm|cjs|iife|global|runtime|legacy|modern|browser|web|all|full))+$/gi,
         ''
       )
+      .replace(/(?:[._-]pkgd)$/i, '')
       .replace(/(?:[._-]v?\d+(?:\.\d+){1,4})$/i, '')
       .replace(/(?:[._-][a-f0-9]{7,})$/i, '')
       .replace(/^npm\./i, '')
@@ -249,6 +250,7 @@ function detectPageTechnologies(ruleConfig = {}) {
     const genericNames = new Set([
       'app',
       'application',
+      'message',
       'main',
       'index',
       'home',
@@ -322,6 +324,8 @@ function detectPageTechnologies(ruleConfig = {}) {
     return String(name || '')
       .toLowerCase()
       .replace(/^疑似前端库:\s*/, '')
+      .replace(/(?:[._-]pkgd)$/i, '')
+      .replace(/(?:\.js|js)$/i, '')
       .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '')
   }
 

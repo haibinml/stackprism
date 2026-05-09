@@ -1,0 +1,78 @@
+{
+  "page": {
+    "frontendExtra": [
+      {
+        "defaults": {
+          "category": "前端库",
+          "confidence": "中",
+          "resourceOnly": true
+        },
+        "rules": [
+          {
+            "name": "Autosize",
+            "patterns": [
+              "(?:^|/)autosize(?:\\.min)?\\.js(?:[?#].*)?$"
+            ]
+          },
+          {
+            "name": "clipboard.js",
+            "patterns": [
+              "(?:^|/)clipboard(?:\\.min)?\\.js(?:[?#].*)?$"
+            ]
+          },
+          {
+            "name": "Flickity",
+            "patterns": [
+              "(?:^|/)flickity(?:\\.pkgd)?(?:\\.min)?\\.js(?:[?#].*)?$"
+            ]
+          },
+          {
+            "name": "imagesLoaded",
+            "patterns": [
+              "(?:^|/)imagesloaded(?:\\.pkgd)?(?:\\.min)?\\.js(?:[?#].*)?$"
+            ]
+          },
+          {
+            "name": "Packery",
+            "patterns": [
+              "(?:^|/)packery(?:\\.pkgd)?(?:\\.min)?\\.js(?:[?#].*)?$"
+            ]
+          },
+          {
+            "name": "QRious",
+            "patterns": [
+              "(?:^|/)qrious(?:\\.min)?\\.js(?:[?#].*)?$"
+            ]
+          },
+          {
+            "name": "qs",
+            "patterns": [
+              "(?:^|/)qs(?:\\.min)?\\.js(?:[?#].*)?$"
+            ]
+          },
+          {
+            "name": "Sticky Sidebar",
+            "patterns": [
+              "(?:^|/)sticky-sidebar(?:\\.min)?\\.js(?:[?#].*)?$"
+            ]
+          },
+          {
+            "name": "Vuex",
+            "patterns": [
+              "(?:^|/)vuex(?:\\.(?:global|esm-browser|cjs|runtime))?(?:\\.prod)?(?:\\.min)?\\.js(?:[?#].*)?$"
+            ],
+            "globals": [
+              "Vuex"
+            ]
+          },
+          {
+            "name": "Zooming",
+            "patterns": [
+              "(?:^|/)zooming(?:\\.min)?\\.js(?:[?#].*)?$"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
