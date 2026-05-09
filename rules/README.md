@@ -34,3 +34,5 @@
 `page/backend-enterprise-assets.json` 是人工维护的后端与企业系统资源路径规则，覆盖 Java/.NET/Python/Ruby 生态框架、企业 CMS、SSO、DevOps、代码托管、制品仓库、数据平台和监控面板。该文件同样优先使用产品专属资源路径、`resourceOnly: true` 和 `resourceHints`，减少通用目录名造成的误报。
 
 `page/selfhosted-saas-assets.json` 是人工维护的自托管 SaaS、协作和数据产品资源路径规则，覆盖错误监控、会话回放、功能开关、客服工单、低代码、知识库、项目管理、团队通讯、联邦社交、文件协作和监控组件。规则优先匹配产品名静态资源或专属入口，避免只靠通用构建目录判断。
+
+`page/security-devops-assets.json` 是人工维护的身份认证、安全平台、Kubernetes/DevOps 面板、网络设备和家庭服务器资源路径规则。规则优先使用产品名资源、控制台专属路径和 `resourceHints`，避免把通用运维目录误判成具体产品。
