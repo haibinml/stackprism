@@ -122,6 +122,7 @@ export const buildHeaderRecord = (details: any, headerRules: any, settings: any)
     statusCode: details.statusCode,
     time: Date.now(),
     headers,
+    headerCount: Object.keys(normalizedHeaders).length,
     technologies: detectFromHeaders(normalizedHeaders, details.url, headerRules, settings)
   }
 }

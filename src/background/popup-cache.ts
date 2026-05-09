@@ -191,7 +191,9 @@ const buildDisplayTechnologies = (data: any, settings: any) => {
 const buildPopupResult = (data: any, settings: any, tab: any) => {
   const technologies = buildDisplayTechnologies(data, settings)
   const resources = mergeResourceSummary(data.page?.resources || {}, data.dynamic || {})
-  const headers = data.main?.headers || {}
+  const main = data.main || {}
+  const headerCount =
+    typeof main.headerCount === 'number' && main.headerCount >= 0 ? main.headerCount : Object.keys(main.headers || {}).length
   return {
     url: data.page?.url || data.dynamic?.url || tab?.url || '',
     title: data.page?.title || data.dynamic?.title || tab?.title || '',
@@ -201,7 +203,7 @@ const buildPopupResult = (data: any, settings: any, tab: any) => {
     counts: buildTechnologyCounts(technologies),
     categoryCounts: buildCategoryCounts(technologies),
     resources: { total: resources.total || 0 },
-    headerCount: Object.keys(headers).length
+    headerCount
   }
 }
 
