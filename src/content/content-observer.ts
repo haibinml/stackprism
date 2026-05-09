@@ -2,9 +2,12 @@
 ;(() => {
   const MAX_ITEMS = 300
   const MAX_DOM_MARKERS = 120
+  const MAX_MUTATION_COUNT = 5000
+  const MAX_RESOURCE_COUNT = 1500
   const SEND_DELAY = 900
   const CONTEXT_INVALIDATED_PATTERN = /extension context invalidated|context invalidated/i
   const OBSERVER_INSTANCE_KEY = '__stackPrismContentObserver__'
+  const SKIP_TAGS = new Set(['VIDEO', 'AUDIO', 'CANVAS', 'PICTURE', 'SOURCE', 'TRACK', 'SVG', 'IMG'])
   const state = {
     startedAt: Date.now(),
     updatedAt: Date.now(),
@@ -18,6 +21,12 @@
     domMarkers: [],
     mutationCount: 0,
     resourceCount: 0
+  }
+  const seenUrls = {
+    resources: new Set(),
+    scripts: new Set(),
+    stylesheets: new Set(),
+    iframes: new Set()
   }
   let sendTimer = 0
   let stopped = false
@@ -52,9 +61,16 @@
   const addUrl = (key, value) => {
     if (!value) return false
     const normalized = String(value)
-    if (!normalized || state[key].includes(normalized)) return false
+    if (!normalized) return false
+    const seen = seenUrls[key]
+    if (seen.has(normalized)) return false
+    seen.add(normalized)
     state[key].push(normalized)
-    trimList(state[key], MAX_ITEMS)
+    if (state[key].length > MAX_ITEMS) {
+      const overflow = state[key].length - MAX_ITEMS
+      const removed = state[key].splice(0, overflow)
+      for (let i = 0; i < removed.length; i++) seen.delete(removed[i])
+    }
     return true
   }
 
@@ -183,12 +199,15 @@
 
   const collectFromElement = element => {
     let changed = false
+    if (SKIP_TAGS.has(element.tagName)) return changed
     changed = collectElementIfRelevant(element) || changed
     if (!element.querySelectorAll || !element.childElementCount) return changed
     const matches = element.querySelectorAll(SUBTREE_SELECTOR)
     const limit = matches.length < SUBTREE_SCAN_LIMIT ? matches.length : SUBTREE_SCAN_LIMIT
     for (let i = 0; i < limit; i++) {
-      changed = collectElementIfRelevant(matches[i]) || changed
+      const target = matches[i]
+      if (SKIP_TAGS.has(target.tagName)) continue
+      changed = collectElementIfRelevant(target) || changed
     }
     return changed
   }
@@ -354,6 +373,10 @@
           addUrl('resources', entry.name)
           state.resourceCount += 1
         }
+        if (state.resourceCount >= MAX_RESOURCE_COUNT) {
+          observer.disconnect()
+          performanceObserver = null
+        }
         scheduleSend()
       })
       performanceObserver = observer
@@ -406,9 +429,14 @@
       for (const mutation of mutations) {
         for (const node of mutation.addedNodes) {
           if (node.nodeType !== Node.ELEMENT_NODE) continue
+          if (SKIP_TAGS.has(node.tagName)) continue
           state.mutationCount += 1
           pendingMutationNodes.push(node)
         }
+      }
+      if (state.mutationCount >= MAX_MUTATION_COUNT) {
+        observer.disconnect()
+        mutationObserver = null
       }
       if (pendingMutationNodes.length) scheduleMutationFlush()
     })
