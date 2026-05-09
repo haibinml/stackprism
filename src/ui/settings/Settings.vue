@@ -681,15 +681,18 @@
   .settings-shell {
     margin: 0 auto;
     max-width: 1120px;
-    padding: 24px;
+    padding: 32px 24px 48px;
   }
 
+  /* header：bottom hairline 划分 */
   .settings-header {
     align-items: flex-start;
+    border-bottom: 1px solid var(--line);
     display: flex;
-    gap: 16px;
+    gap: 24px;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
   }
 
   h1,
@@ -699,61 +702,103 @@
   }
 
   h1 {
-    align-items: center;
+    align-items: baseline;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    font-size: 24px;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
     line-height: 1.2;
+    margin-bottom: 6px;
   }
 
   .version-badge {
-    border: 1px solid var(--line);
-    border-radius: 999px;
     color: var(--muted);
     font-size: 12px;
-    font-weight: 600;
-    padding: 2px 7px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
   }
 
   .repo-line {
-    margin-top: 4px;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 8px;
   }
 
   .repo-line a {
-    color: var(--accent-dark);
+    color: var(--muted);
     text-decoration: none;
+    transition: color 0.15s ease;
   }
 
   .repo-line a:hover {
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    color: var(--accent);
   }
 
   h2 {
-    font-size: 16px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 
   .settings-header p,
   .hint {
     color: var(--muted);
+    font-size: 13px;
   }
 
-  .header-actions,
-  .inline-actions,
-  .form-actions {
+  .hint {
+    margin-bottom: 8px;
+  }
+
+  /* header-actions：透明 ghost + 一个 primary */
+  .header-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
   }
 
+  .header-actions button {
+    background: transparent;
+    border: 0;
+    border-radius: 6px;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 13px;
+    padding: 6px 12px;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .header-actions button:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+  .header-actions button.primary {
+    background: var(--accent);
+    color: #ffffff;
+    font-weight: 500;
+  }
+
+  .header-actions button.primary:hover {
+    background: var(--accent-dark);
+    color: #ffffff;
+  }
+
+  /* msg 浮动通知：保留浮起来的层级感（重要状态反馈） */
   .msg {
     background: var(--panel);
     border: 1px solid var(--line);
-    border-left: 4px solid var(--accent);
-    border-radius: 8px;
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
     box-shadow: var(--shadow);
     color: var(--text);
+    font-size: 13px;
     line-height: 1.5;
     max-height: min(48vh, 360px);
     max-width: min(560px, calc(100vw - 32px));
@@ -780,70 +825,116 @@
     color: var(--danger);
   }
 
+  /* panel：去 box-shadow，仅 hairline */
   .panel {
+    background: var(--panel);
     border: 1px solid var(--line);
     border-radius: 8px;
-    background: var(--panel);
-    box-shadow: var(--shadow);
-    margin-bottom: 14px;
-    padding: 16px;
+    margin-bottom: 16px;
+    padding: 20px 24px 24px;
   }
 
   .panel-head {
-    align-items: center;
+    align-items: baseline;
     display: flex;
-    justify-content: space-between;
     gap: 12px;
-    margin-bottom: 12px;
+    justify-content: space-between;
+    margin-bottom: 16px;
   }
 
+  .panel-head h2 {
+    margin: 0;
+  }
+
+  .inline-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .inline-actions button {
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 12px;
+    padding: 4px 10px;
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .inline-actions button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* category toggle 列表：去边框，紧凑 inline 风格 */
   .category-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 8px;
+    gap: 4px 16px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   }
 
   .toggle-item {
     align-items: center;
-    border: 1px solid var(--line);
-    border-radius: 6px;
+    color: var(--text);
+    cursor: pointer;
     display: flex;
+    font-size: 13px;
     gap: 8px;
-    padding: 8px 10px;
+    padding: 4px 0;
+    user-select: none;
   }
 
+  .toggle-item input[type='checkbox'] {
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+
+  /* two-column / rule-textareas */
   .two-column,
   .rule-textareas {
     display: grid;
+    gap: 16px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
   }
 
   .rule-textareas {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    margin-top: 12px;
+    margin-top: 16px;
   }
 
+  /* form labels：字重收紧 */
   label span {
+    color: var(--text);
     display: block;
-    font-weight: 700;
-    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    margin-bottom: 6px;
   }
 
   input[type='text'],
   input[type='url'],
   select,
   textarea {
+    background: var(--panel);
     border: 1px solid var(--line);
     border-radius: 6px;
     color: var(--text);
+    font-size: 13px;
     min-width: 0;
-    padding: 8px 10px;
+    padding: 7px 10px;
+    transition: border-color 0.15s ease;
     width: 100%;
   }
 
   textarea {
     font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', monospace;
+    font-size: 12px;
+    line-height: 1.5;
     resize: vertical;
   }
 
@@ -854,46 +945,102 @@
     outline: none;
   }
 
+  /* rule form */
   .rule-form {
     display: grid;
+    gap: 12px 16px;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
   }
 
+  /* match-targets：inline checkbox 列 */
   .match-targets {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 12px;
+    gap: 6px 16px;
+    margin-top: 16px;
   }
 
-  .match-targets label,
-  .toggle-item {
+  .match-targets label {
+    align-items: center;
     color: var(--muted);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 13px;
+    gap: 6px;
   }
 
+  .match-targets input[type='checkbox'] {
+    accent-color: var(--accent);
+  }
+
+  /* form-actions */
   .form-actions {
-    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
   }
 
+  .form-actions button {
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 13px;
+    padding: 6px 14px;
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .form-actions button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .form-actions button.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+    font-weight: 500;
+  }
+
+  .form-actions button.primary:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+    color: #ffffff;
+  }
+
+  /* rules list：去 row 边框，hairline 分隔行 + hover bg */
   .rules-list {
-    display: grid;
-    gap: 8px;
-    margin-top: 14px;
+    margin-top: 20px;
   }
 
   .rule-row {
     align-items: center;
-    border: 1px solid var(--line);
-    border-radius: 6px;
+    border-top: 1px solid var(--line);
     display: grid;
-    gap: 10px;
+    gap: 12px;
     grid-template-columns: 1fr auto;
-    padding: 10px 12px;
+    margin: 0 -8px;
+    padding: 10px 8px;
+    transition: background 0.15s ease;
+  }
+
+  .rule-row:hover {
+    background: var(--accent-soft);
+  }
+
+  .rules-list > .rule-meta {
+    color: var(--muted);
+    font-size: 13px;
+    padding: 12px 0;
   }
 
   .rule-title {
-    font-weight: 700;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
   }
 
   .rule-meta {
@@ -905,12 +1052,30 @@
 
   .rule-actions {
     display: flex;
-    gap: 8px;
+    gap: 4px;
+  }
+
+  .rule-actions button {
+    background: transparent;
+    border: 0;
+    border-radius: 4px;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 12px;
+    padding: 4px 10px;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .rule-actions button:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
   }
 
   @media (max-width: 760px) {
     .settings-shell {
-      padding: 14px;
+      padding: 16px;
     }
 
     .settings-header,

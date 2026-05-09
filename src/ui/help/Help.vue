@@ -363,22 +363,55 @@ examplepay-sdk</pre
 <style scoped>
   .help-shell {
     margin: 0 auto;
-    max-width: 1040px;
-    padding: 24px;
+    max-width: 720px;
+    padding: 48px 24px 80px;
   }
 
+  /* header：bottom hairline 划分 */
   .help-header {
     align-items: flex-start;
+    border-bottom: 1px solid var(--line);
     display: flex;
-    gap: 16px;
+    gap: 24px;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
   }
 
   .header-actions {
     display: flex;
+    flex-shrink: 0;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
+  }
+
+  .header-actions button {
+    background: transparent;
+    border: 0;
+    border-radius: 6px;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 13px;
+    padding: 6px 12px;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .header-actions button:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+  .header-actions button.primary {
+    background: var(--accent);
+    color: #ffffff;
+    font-weight: 500;
+  }
+
+  .header-actions button.primary:hover {
+    background: var(--accent-dark);
+    color: #ffffff;
   }
 
   h1,
@@ -389,22 +422,29 @@ examplepay-sdk</pre
   }
 
   h1 {
-    align-items: center;
+    align-items: baseline;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    font-size: 26px;
+    font-size: 24px;
+    font-weight: 600;
+    gap: 10px;
+    letter-spacing: -0.01em;
     line-height: 1.2;
     margin-bottom: 8px;
   }
 
   h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
+    color: var(--text);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    margin-bottom: 12px;
   }
 
   h3 {
-    font-size: 15px;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
     margin-bottom: 4px;
   }
 
@@ -413,33 +453,37 @@ examplepay-sdk</pre
   }
 
   .version-badge {
-    border: 1px solid var(--line);
-    border-radius: 999px;
     color: var(--muted);
     font-size: 12px;
-    font-weight: 600;
-    padding: 2px 7px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
   }
 
-  .help-header p,
+  .help-header > div:first-child > p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 60ch;
+  }
+
   .panel p,
   .plain-list,
   .steps {
     color: var(--muted);
   }
 
+  .panel p {
+    line-height: 1.65;
+  }
+
+  /* panel：去 box-shadow + border + 圆角，仅靠间距 + 标题层级划分（长篇阅读） */
   .panel {
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    background: var(--panel);
-    box-shadow: var(--shadow);
-    margin-bottom: 14px;
-    padding: 16px;
+    margin-bottom: 36px;
   }
 
   .steps,
   .plain-list {
-    padding-left: 22px;
+    padding-left: 20px;
   }
 
   .steps li,
@@ -447,55 +491,80 @@ examplepay-sdk</pre
     margin: 6px 0;
   }
 
+  /* field-grid：去单 box 边框，hairline 列分隔 */
   .field-grid {
     display: grid;
+    gap: 4px 32px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-  }
-
-  .field-grid > div {
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 12px;
+    margin-top: 12px;
   }
 
   .field-grid.compact {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .field-grid > div {
+    padding: 12px 0;
+  }
+
+  .field-grid > div + div {
+    border-top: 1px solid var(--line);
+  }
+
+  /* 在 grid 多列时只对同列相邻项加 border-top — 简化做法是统一用 hairline，过渡时用 padding 让条目间留白 */
+  .field-grid > div:nth-child(1),
+  .field-grid > div:nth-child(2) {
+    border-top: 0;
+  }
+
+  .field-grid.compact > div:nth-child(-n + 3) {
+    border-top: 0;
+  }
+
+  .field-grid > div p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.55;
+    margin-top: 4px;
+  }
+
+  /* 行内 code */
   code {
     background: var(--code-inline-bg);
     border-radius: 4px;
     color: var(--code-inline-text);
     font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', monospace;
-    font-size: 0.92em;
+    font-size: 0.88em;
     padding: 1px 5px;
   }
 
+  /* example：保留卡片视觉（教学示例需要明显的"代码块"感） */
   .example {
+    background: var(--panel);
     border: 1px solid var(--line);
-    border-radius: 8px;
-    margin-top: 10px;
+    border-radius: 6px;
+    margin-top: 12px;
     overflow: hidden;
   }
 
   dl {
     display: grid;
-    grid-template-columns: 150px minmax(0, 1fr);
+    grid-template-columns: 120px minmax(0, 1fr);
     margin: 0;
   }
 
   dt,
   dd {
     border-bottom: 1px solid var(--line);
+    font-size: 13px;
     margin: 0;
-    padding: 10px 12px;
+    padding: 8px 12px;
   }
 
   dt {
-    background: var(--dt-bg);
     color: var(--muted);
-    font-weight: 700;
+    font-weight: 500;
+    letter-spacing: 0.01em;
   }
 
   dd:last-child,
@@ -503,29 +572,42 @@ examplepay-sdk</pre
     border-bottom: 0;
   }
 
+  /* 代码块 pre */
   pre {
     background: var(--code-bg);
     border-radius: 6px;
     color: var(--code-text);
-    font-size: 13px;
+    font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', monospace;
+    font-size: 12px;
+    line-height: 1.55;
     margin: 0;
     overflow: auto;
-    padding: 10px;
+    padding: 10px 12px;
     white-space: pre-wrap;
     word-break: break-word;
   }
 
   @media (max-width: 760px) {
     .help-shell {
-      padding: 14px;
+      padding: 24px 16px 48px;
     }
 
-    .help-header,
+    .help-header {
+      flex-direction: column;
+    }
+
     .field-grid,
     .field-grid.compact,
     dl {
-      display: grid;
       grid-template-columns: 1fr;
+    }
+
+    .field-grid > div {
+      border-top: 1px solid var(--line);
+    }
+
+    .field-grid > div:first-child {
+      border-top: 0;
     }
 
     dt {
