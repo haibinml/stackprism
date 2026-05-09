@@ -1,7 +1,7 @@
 // @ts-nocheck
 /* eslint-disable */
 
-function detectPageTechnologies(ruleConfig: Record<string, unknown> = {}) {
+const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
   const technologies = []
   const resources = collectResources()
   const classTokens = collectClassTokens()
