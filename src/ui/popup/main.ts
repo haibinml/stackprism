@@ -1,4 +1,4 @@
-import '@/ui/shared/styles/tokens.css'
+import '@/ui/tokens.css'
 import { createApp } from 'vue'
 import Popup from './Popup.vue'
 
