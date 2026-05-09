@@ -513,9 +513,6 @@
               "fullstory\\.com",
               "edge\\.fullstory\\.com",
               "_fs_namespace"
-            ],
-            "globals": [
-              "FS"
             ]
           },
           {

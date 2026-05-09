@@ -274,10 +274,7 @@
           "name": "FullStory",
           "kind": "会话回放",
           "patterns": [
-            "fullstory\\.com|edge\\.fullstory\\.com|fs\\.js"
-          ],
-          "globals": [
-            "FS"
+            "fullstory\\.com|edge\\.fullstory\\.com|_fs_namespace"
           ]
         },
         {

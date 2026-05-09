@@ -19,6 +19,7 @@ function detectPageTechnologies(ruleConfig = {}) {
   detectCmsThemesAndSource(
     add,
     resources,
+    classTokens,
     documentHtmlSample,
     globalKeys,
     ruleConfig.cmsThemes || [],
@@ -417,7 +418,7 @@ function detectPageTechnologies(ruleConfig = {}) {
     })
   }
 
-  function detectCmsThemesAndSource(add, resources, html, globalKeys, externalRules, assetExtractors = []) {
+  function detectCmsThemesAndSource(add, resources, classes, html, globalKeys, externalRules, assetExtractors = []) {
     const text = `${location.href}
 ${resources.all.join('\n')}
 ${html}`
@@ -446,6 +447,7 @@ ${html}`
     detectJsonRuleList(add, externalRules, {
       defaultCategory: '主题 / 模板',
       resources,
+      classes,
       html,
       text,
       sourceLabel: 'JSON 主题模板规则',
