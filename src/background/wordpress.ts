@@ -216,9 +216,7 @@ export const detectWordPressThemeStylesFromPage = async (page: any) => {
     })
   )
 
-  return results
-    .filter((result: any) => result.status === 'fulfilled' && result.value)
-    .map((result: any) => result.value)
+  return results.filter((result: any) => result.status === 'fulfilled' && result.value).map((result: any) => result.value)
 }
 
 export const augmentPageWithWordPressThemeStyles = async (page: any) => {

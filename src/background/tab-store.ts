@@ -25,11 +25,7 @@ export const getPopupCache = async (tabId: number): Promise<any> => {
   }
 }
 
-export const writeTabData = async (
-  tabId: number,
-  tabData: Record<string, unknown>,
-  popupRecord: any
-): Promise<void> => {
+export const writeTabData = async (tabId: number, tabData: Record<string, unknown>, popupRecord: any): Promise<void> => {
   await chrome.storage.session.set({
     [storageKey(tabId)]: tabData,
     [popupStorageKey(tabId)]: popupRecord
@@ -40,9 +36,7 @@ export const clearTabSession = async (tabId: number): Promise<void> => {
   await chrome.storage.session.remove([storageKey(tabId), popupStorageKey(tabId)]).catch(() => {})
 }
 
-export const getTabSnapshot = async (
-  tabId: number
-): Promise<{ id: number; url: string; title: string }> => {
+export const getTabSnapshot = async (tabId: number): Promise<{ id: number; url: string; title: string }> => {
   try {
     const tab = await chrome.tabs.get(tabId)
     return {

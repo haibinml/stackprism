@@ -17,9 +17,7 @@ export const injectContentObserver = async (tabId: number): Promise<void> => {
 export const injectContentObserverIntoOpenTabs = async (): Promise<void> => {
   try {
     const tabs = await chrome.tabs.query({})
-    await Promise.allSettled(
-      tabs.filter(canInjectContentObserver).map(tab => injectContentObserver(tab.id!))
-    )
+    await Promise.allSettled(tabs.filter(canInjectContentObserver).map(tab => injectContentObserver(tab.id!)))
   } catch {
     return
   }

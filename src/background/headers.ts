@@ -66,13 +66,7 @@ const applyHeaderRuleList = (
   }
 }
 
-const applyHeaderValueRuleList = (
-  add: any,
-  rules: any[],
-  value: string,
-  rawValue: string,
-  headerName: string
-) => {
+const applyHeaderValueRuleList = (add: any, rules: any[], value: string, rawValue: string, headerName: string) => {
   if (!value || !Array.isArray(rules) || !rules.length) return
 
   for (const rule of rules) {
@@ -82,12 +76,7 @@ const applyHeaderValueRuleList = (
   }
 }
 
-const detectFromHeaders = (
-  headers: Record<string, string>,
-  url: string,
-  headerRules: any = {},
-  settings: any = {}
-) => {
+const detectFromHeaders = (headers: Record<string, string>, url: string, headerRules: any = {}, settings: any = {}) => {
   const technologies: any[] = []
   const add = createCollector(technologies, '响应头')
   const server = lower(headers.server)
@@ -102,10 +91,7 @@ const detectFromHeaders = (
   applyHeaderValueRuleList(add, headerRules.poweredByProducts, poweredBy, headers['x-powered-by'], 'x-powered-by')
   applyHeaderRuleList(add, headerRules.headerPatterns, '其他库', headerBlob, 'JSON 响应头规则')
 
-  if (
-    matchesHeaderPatterns(headerRules.unknownCdnPatterns, headerBlob) &&
-    !technologies.some(tech => tech.category === 'CDN / 托管')
-  ) {
+  if (matchesHeaderPatterns(headerRules.unknownCdnPatterns, headerBlob) && !technologies.some(tech => tech.category === 'CDN / 托管')) {
     add('CDN / 托管', '未知 / 自定义 CDN', '低', '响应头包含 CDN 或 Edge 缓存线索')
   }
 
@@ -114,13 +100,8 @@ const detectFromHeaders = (
   applyHeaderRuleList(add, headerRules.websitePrograms, '网站程序', headerBlob, 'JSON 网站程序响应头规则', rule =>
     rule.kind ? `${rule.kind}：` : ''
   )
-  applyHeaderRuleList(
-    add,
-    filterCustomRulesForTarget(settings.customRules, 'headers'),
-    '其他库',
-    headerBlob,
-    '自定义响应头规则',
-    rule => (rule.kind ? `${rule.kind}：` : '')
+  applyHeaderRuleList(add, filterCustomRulesForTarget(settings.customRules, 'headers'), '其他库', headerBlob, '自定义响应头规则', rule =>
+    rule.kind ? `${rule.kind}：` : ''
   )
 
   return technologies
@@ -148,9 +129,7 @@ const detectCustomHeaderRules = (record: any, customRules: any[]) => {
       .map(([name, value]) => `${name}: ${value}`)
       .join('\n') + `\nurl: ${record.url || ''}`
   )
-  applyHeaderRuleList(add, customRules, '其他库', headerBlob, '自定义响应头规则', rule =>
-    rule.kind ? `${rule.kind}：` : ''
-  )
+  applyHeaderRuleList(add, customRules, '其他库', headerBlob, '自定义响应头规则', rule => (rule.kind ? `${rule.kind}：` : ''))
   return technologies
 }
 

@@ -33,11 +33,7 @@ export const runActivePageDetection = async (tabId: number) => {
   if (typeof tabId !== 'number' || tabId < 0) return
 
   try {
-    const [data, rules, settings] = await Promise.all([
-      getTabData(tabId),
-      loadTechRules(),
-      loadDetectorSettings()
-    ])
+    const [data, rules, settings] = await Promise.all([getTabData(tabId), loadTechRules(), loadDetectorSettings()])
     const pageRules = buildEffectivePageRules(rules.page || {}, settings)
     await chrome.scripting.executeScript({
       target: { tabId },

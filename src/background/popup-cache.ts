@@ -17,9 +17,7 @@ export const POPUP_CACHE_STALE_MS = 2 * 60 * 1000
 const POPUP_CACHE_SCHEMA_VERSION = 1
 
 export const hasStoredDetection = (data: any) =>
-  Boolean(
-    data?.page || data?.main || data?.dynamic || (data?.apis || []).length || (data?.frames || []).length
-  )
+  Boolean(data?.page || data?.main || data?.dynamic || (data?.apis || []).length || (data?.frames || []).length)
 
 export const getStoredUpdatedAt = (data: any) =>
   Number(data?.updatedAt || data?.page?.time || data?.dynamic?.updatedAt || data?.main?.time || 0)
@@ -106,9 +104,7 @@ const addAllTechnologies = (target: any[], items: any[]) => {
 
 export const filterTechnologiesBySettings = (technologies: any[], settings: any) => {
   const disabledCategories = new Set(cleanStringArray(settings?.disabledCategories))
-  const disabledTechnologies = new Set(
-    cleanStringArray(settings?.disabledTechnologies).map(name => normalizeTechName(name))
-  )
+  const disabledTechnologies = new Set(cleanStringArray(settings?.disabledTechnologies).map(name => normalizeTechName(name)))
   return technologies.filter(tech => {
     if (disabledCategories.has(tech.category)) return false
     return !disabledTechnologies.has(normalizeTechName(tech.name))

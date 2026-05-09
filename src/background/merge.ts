@@ -11,8 +11,7 @@ export const cleanWordPressThemeSlug = (value: unknown): string => {
   return decoded
 }
 
-export const normalizeWordPressThemeSlug = (value: unknown): string =>
-  cleanWordPressThemeSlug(value).toLowerCase()
+export const normalizeWordPressThemeSlug = (value: unknown): string => cleanWordPressThemeSlug(value).toLowerCase()
 
 export const strongerConfidence = (a: string, b: string) => {
   const ranks: Record<string, number> = { 高: 3, 中: 2, 低: 1 }
@@ -36,12 +35,10 @@ export const normalizeDynamicFallbackTechName = (name: unknown): string =>
     .replace(/(?:[._-]pkgd)$/i, '')
     .replace(/[^a-z0-9一-龥]+/g, '')
 
-export const isFrontendFallback = (item: any) =>
-  item?.category === '前端库' && /^疑似前端库:/i.test(String(item?.name || '').trim())
+export const isFrontendFallback = (item: any) => item?.category === '前端库' && /^疑似前端库:/i.test(String(item?.name || '').trim())
 
 const isWordPressThemeDirectoryFallbackEvidence = (evidenceText: string) =>
-  /(?:资源或源码路径包含|动态资源路径包含)/i.test(evidenceText) &&
-  /\/wp-content\/themes\//i.test(evidenceText)
+  /(?:资源或源码路径包含|动态资源路径包含)/i.test(evidenceText) && /\/wp-content\/themes\//i.test(evidenceText)
 
 const extractWordPressStyleThemeSlug = (item: any) => {
   if (String(item?.category || '') !== '主题 / 模板') return ''
@@ -63,9 +60,7 @@ const extractWordPressDirectoryThemeSlug = (item: any) => {
   if (!isWordPressThemeDirectoryFallbackEvidence(evidenceText)) return ''
 
   const nameSlug = normalizeWordPressThemeSlug(nameMatch[1])
-  const evidenceSlug = normalizeWordPressThemeSlug(
-    evidenceText.match(/\/wp-content\/themes\/([^/?#"' <>)]+)/i)?.[1]
-  )
+  const evidenceSlug = normalizeWordPressThemeSlug(evidenceText.match(/\/wp-content\/themes\/([^/?#"' <>)]+)/i)?.[1])
   if (nameSlug && evidenceSlug && nameSlug !== evidenceSlug) return ''
   return evidenceSlug || nameSlug
 }
@@ -81,9 +76,7 @@ export const suppressFrontendFallbackDuplicates = (items: any[]) => {
   )
   if (!knownNames.size) return items
 
-  return items.filter(
-    item => !isFrontendFallback(item) || !knownNames.has(normalizeDynamicFallbackTechName(item.name))
-  )
+  return items.filter(item => !isFrontendFallback(item) || !knownNames.has(normalizeDynamicFallbackTechName(item.name)))
 }
 
 export const suppressDuplicateWebsiteProgramCategories = (items: any[]) => {
@@ -97,9 +90,7 @@ export const suppressDuplicateWebsiteProgramCategories = (items: any[]) => {
   )
   if (!websiteProgramNames.size) return items
 
-  return items.filter(
-    item => item?.category !== 'CMS / 电商平台' || !websiteProgramNames.has(normalizeTechName(item.name))
-  )
+  return items.filter(item => item?.category !== 'CMS / 电商平台' || !websiteProgramNames.has(normalizeTechName(item.name)))
 }
 
 export const suppressWordPressThemeDirectoryFallbacks = (items: any[]) => {

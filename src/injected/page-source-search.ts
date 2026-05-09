@@ -6,8 +6,7 @@ interface SearchOptions {
 }
 
 const searchPageSource = (options: SearchOptions) => {
-  const escapeRegExp = (value: string) =>
-    String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const escapeRegExp = (value: string) => String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
   const serializeDoctype = (doctype: DocumentType) => {
     const publicId = doctype.publicId ? ` PUBLIC "${doctype.publicId}"` : ''
@@ -22,9 +21,7 @@ const searchPageSource = (options: SearchOptions) => {
 
   const buildMatcher = (rawQuery: string, searchOptions: SearchOptions) => {
     const pattern = searchOptions.useRegex ? rawQuery : escapeRegExp(rawQuery)
-    const sourcePattern = searchOptions.wholeWord
-      ? `(?<![A-Za-z0-9_])(?:${pattern})(?![A-Za-z0-9_])`
-      : pattern
+    const sourcePattern = searchOptions.wholeWord ? `(?<![A-Za-z0-9_])(?:${pattern})(?![A-Za-z0-9_])` : pattern
     const flags = searchOptions.caseSensitive ? 'g' : 'gi'
     return new RegExp(sourcePattern, flags)
   }
@@ -63,13 +60,7 @@ const searchPageSource = (options: SearchOptions) => {
       .replace(/\t/g, '  ')
       .replace(/\n{3,}/g, '\n\n')
 
-  const createSnippet = (
-    text: string,
-    found: RegExpExecArray,
-    matchNumber: number,
-    starts: number[],
-    context: number
-  ) => {
+  const createSnippet = (text: string, found: RegExpExecArray, matchNumber: number, starts: number[], context: number) => {
     const start = found.index
     const end = start + found[0].length
     const position = findLineColumn(starts, start)

@@ -2,11 +2,9 @@ import type { RuleConfig } from '@/types/rules'
 
 const RULE_INDEX_PATH = 'rules/index.json'
 
-const isPlainObject = (value: unknown): boolean =>
-  Object.prototype.toString.call(value) === '[object Object]'
+const isPlainObject = (value: unknown): boolean => Object.prototype.toString.call(value) === '[object Object]'
 
-const isRuleGroup = (value: any): boolean =>
-  isPlainObject(value) && Array.isArray(value.rules)
+const isRuleGroup = (value: any): boolean => isPlainObject(value) && Array.isArray(value.rules)
 
 const normalizeRuleObject = (object: any) =>
   Object.fromEntries(Object.entries(object).map(([key, value]) => [key, normalizeRuleValue(value)]))
@@ -50,10 +48,7 @@ const mergeRulePartial = (target: any, source: any) => {
       continue
     }
     if (value && typeof value === 'object') {
-      const base =
-        target[key] && typeof target[key] === 'object' && !Array.isArray(target[key])
-          ? target[key]
-          : {}
+      const base = target[key] && typeof target[key] === 'object' && !Array.isArray(target[key]) ? target[key] : {}
       target[key] = mergeRulePartial(base, value)
       continue
     }
@@ -82,9 +77,7 @@ export const loadStackPrismRules = async (): Promise<RuleConfig> => {
   const index = await fetchRuleJson(RULE_INDEX_PATH)
   const files = Array.isArray(index.files) ? index.files : []
   const rules: RuleConfig = { schemaVersion: index.schemaVersion || 1 }
-  const partials = await Promise.all(
-    files.map((file: unknown) => fetchRuleJson(normalizeRulePath(String(file ?? ''))))
-  )
+  const partials = await Promise.all(files.map((file: unknown) => fetchRuleJson(normalizeRulePath(String(file ?? '')))))
 
   for (const partial of partials) {
     mergeRulePartial(rules, partial)

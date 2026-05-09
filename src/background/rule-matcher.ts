@@ -1,7 +1,6 @@
 const compiledRulePatternCache = new WeakMap<object, { source: unknown; compiled: RegExp[] }>()
 
-export const escapeRegExp = (value: unknown): string =>
-  String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+export const escapeRegExp = (value: unknown): string => String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
 export const compileRulePattern = (pattern: string, rule: any): RegExp => {
   if (rule?.matchType === 'keyword') {
@@ -73,8 +72,8 @@ export const matchesRuleTextHints = (rule: any, contextOrText: any): boolean => 
   return rule.resourceHints.some((hint: string) => value.includes(String(hint || '').toLowerCase()))
 }
 
-export const createCollector = (target: any[], defaultSource?: string) =>
-  (category: string, name: string, confidence: string, evidence?: string) => {
+export const createCollector =
+  (target: any[], defaultSource?: string) => (category: string, name: string, confidence: string, evidence?: string) => {
     target.push({
       category,
       name,

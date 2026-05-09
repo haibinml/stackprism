@@ -41,9 +41,7 @@ export const getTechnologyUrl = async (name: string, settings: any = {}): Promis
     return ''
   }
 
-  const customRule = (settings.customRules || []).find(
-    (rule: any) => normalizeTechName(rule.name) === normalizeTechName(name) && rule.url
-  )
+  const customRule = (settings.customRules || []).find((rule: any) => normalizeTechName(rule.name) === normalizeTechName(name) && rule.url)
   if (customRule) {
     return customRule.url
   }
