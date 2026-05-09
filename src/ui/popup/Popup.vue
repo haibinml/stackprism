@@ -567,16 +567,31 @@
     return parts.join(' / ')
   }
 
+  const onStorageChange = (changes: { [key: string]: chrome.storage.StorageChange }, area: string) => {
+    if (area !== 'session' || !state.currentTabId) return
+    const popupKey = `popup:${state.currentTabId}`
+    if (!(popupKey in changes)) return
+    const newPopup = changes[popupKey].newValue
+    if (!newPopup || typeof newPopup !== 'object') return
+    state.result = newPopup
+    state.rawResult = null
+    state.rawLoaded = false
+    rawOutputText.value = RAW_PLACEHOLDER
+    setStatus(formatCachedResultStatus(newPopup, { updatedAt: newPopup.sourceUpdatedAt }))
+  }
+
   onMounted(async () => {
     version.value = chrome.runtime.getManifest?.()?.version || ''
     theme.value = await getStoredTheme()
     state.settings = await loadSettings()
     applyCustomCss(state.settings.customCss)
+    chrome.storage.onChanged.addListener(onStorageChange)
     await loadCachedDetection()
   })
 
   onBeforeUnmount(() => {
     clearCacheRefreshTimer()
+    chrome.storage.onChanged.removeListener(onStorageChange)
   })
 </script>
 
@@ -596,7 +611,7 @@
 
   .topbar {
     align-items: flex-start;
-    background: rgba(246, 247, 249, 0.96);
+    background: var(--panel-translucent);
     border-bottom: 1px solid var(--line);
     box-shadow: 0 8px 20px rgba(20, 35, 50, 0.08);
     display: flex;
@@ -686,7 +701,7 @@
   }
 
   .status.error {
-    border-color: #f1b5ad;
+    border-color: var(--danger-soft);
     color: var(--danger);
   }
 
@@ -774,7 +789,7 @@
   }
 
   .tech + .tech {
-    border-top: 1px solid #edf0f3;
+    border-top: 1px solid var(--tech-divider);
   }
 
   .tech-head {
@@ -813,18 +828,18 @@
   }
 
   .confidence.high {
-    background: #e7f6f2;
-    color: #047857;
+    background: var(--confidence-high-bg);
+    color: var(--confidence-high-text);
   }
 
   .confidence.medium {
-    background: #fff4d6;
-    color: var(--warning);
+    background: var(--confidence-medium-bg);
+    color: var(--confidence-medium-text);
   }
 
   .confidence.low {
-    background: #eef2f7;
-    color: #52606d;
+    background: var(--confidence-low-bg);
+    color: var(--confidence-low-text);
   }
 
   .evidence {
@@ -839,7 +854,7 @@
   }
 
   .source {
-    color: #83909d;
+    color: var(--muted);
     font-size: 12px;
     margin-top: 5px;
   }
@@ -946,7 +961,7 @@
 
   .app-footer {
     align-items: center;
-    background: rgba(246, 247, 249, 0.96);
+    background: var(--panel-translucent);
     border-top: 1px solid var(--line);
     bottom: 0;
     color: var(--muted);
@@ -976,9 +991,9 @@
   }
 
   pre {
-    background: #111827;
+    background: var(--code-bg);
     border-radius: 6px;
-    color: #d1d5db;
+    color: var(--code-text);
     font-size: 11px;
     margin: 10px 0 0;
     max-height: 260px;

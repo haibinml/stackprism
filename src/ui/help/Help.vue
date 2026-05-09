@@ -464,9 +464,9 @@ examplepay-sdk</pre
   }
 
   code {
-    background: #eef2f7;
+    background: var(--code-inline-bg);
     border-radius: 4px;
-    color: #334155;
+    color: var(--code-inline-text);
     font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', monospace;
     font-size: 0.92em;
     padding: 1px 5px;
@@ -493,7 +493,7 @@ examplepay-sdk</pre
   }
 
   dt {
-    background: #f8fafc;
+    background: var(--dt-bg);
     color: var(--muted);
     font-weight: 700;
   }
