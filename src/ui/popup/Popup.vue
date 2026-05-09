@@ -11,8 +11,8 @@
       <div class="actions">
         <button type="button" :title="`主题：${themeLabel(theme)}（点击切换）`" @click="toggleTheme">{{ themeLabel(theme) }}</button>
         <button type="button" title="打开设置页" @click="openSettings">设置</button>
-        <button type="button" title="重新检测" @click="runDetection({ force: true })">刷新</button>
         <button type="button" title="复制检测 JSON" @click="copyResult">复制</button>
+        <button type="button" class="primary" title="重新检测" @click="runDetection({ force: true })">刷新</button>
       </div>
     </header>
 
@@ -605,22 +605,24 @@
 </style>
 
 <style scoped>
+  /* layout shell */
   .shell {
-    padding: calc(var(--popup-header-height) + 12px) 14px calc(var(--popup-footer-height) + 14px);
+    padding: calc(var(--popup-header-height) + 8px) 16px calc(var(--popup-footer-height) + 12px);
   }
 
+  /* topbar：左右两区，brand 与 actions 主次分明 */
   .topbar {
-    align-items: flex-start;
     background: var(--panel-translucent);
     border-bottom: 1px solid var(--line);
-    box-shadow: 0 8px 20px rgba(20, 35, 50, 0.08);
+    backdrop-filter: saturate(180%) blur(8px);
     display: flex;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 12px;
     height: var(--popup-header-height);
     left: 0;
     margin: 0;
-    padding: 12px 14px 10px;
+    padding: 12px 16px 8px;
     position: fixed;
     right: 0;
     top: 0;
@@ -629,8 +631,7 @@
   }
 
   .topbar > div:first-child {
-    flex: 0 1 210px;
-    max-width: 210px;
+    flex: 1 1 auto;
     min-width: 0;
   }
 
@@ -638,10 +639,12 @@
     align-items: center;
     display: flex;
     flex-wrap: nowrap;
-    gap: 6px;
-    font-size: 18px;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
     line-height: 1.2;
-    margin: 0 0 5px;
+    margin: 0 0 4px;
   }
 
   .app-title-link {
@@ -654,24 +657,20 @@
   }
 
   .app-title-link:hover {
-    color: var(--accent-dark);
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    color: var(--accent);
   }
 
   .version-badge {
-    border: 1px solid var(--line);
-    border-radius: 999px;
     color: var(--muted);
     font-size: 11px;
-    font-weight: 600;
-    padding: 1px 6px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
   }
 
   .url {
-    max-width: 190px;
-    margin: 0;
     color: var(--muted);
+    font-size: 12px;
+    margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -681,139 +680,206 @@
     align-items: center;
     display: flex;
     flex: 0 0 auto;
-    gap: 6px;
+    gap: 4px;
     white-space: nowrap;
   }
 
   .actions button {
+    background: transparent;
+    border: 0;
+    border-radius: 5px;
+    color: var(--muted);
+    font-size: 12px;
+    padding: 5px 8px;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
     white-space: nowrap;
-    padding: 7px 10px;
   }
 
+  .actions button:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+  .actions button.primary {
+    background: var(--accent);
+    color: #ffffff;
+    font-weight: 500;
+    padding: 5px 12px;
+  }
+
+  .actions button.primary:hover {
+    background: var(--accent-dark);
+  }
+
+  /* status：去 shadow，仅 hairline */
   .status {
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    background: var(--panel);
-    box-shadow: var(--shadow);
+    border-bottom: 1px solid var(--line);
     color: var(--muted);
-    margin-bottom: 12px;
-    padding: 10px 12px;
+    font-size: 12px;
+    margin: 0 -4px 12px;
+    padding: 0 4px 10px;
   }
 
   .status.error {
-    border-color: var(--danger-soft);
     color: var(--danger);
   }
 
+  /* summary：主指标加重，去三盒子，inline baseline 对齐 */
   .summary {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+    align-items: baseline;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    gap: 20px;
     margin-bottom: 12px;
+    padding: 4px 4px 14px;
   }
 
   .summary > div {
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    background: var(--panel);
-    padding: 10px;
+    align-items: baseline;
+    display: flex;
+    gap: 6px;
   }
 
   .summary span {
-    display: block;
-    font-size: 20px;
+    color: var(--text);
+    font-size: 16px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+  }
+
+  .summary > div:first-child span {
+    color: var(--accent);
+    font-size: 24px;
     font-weight: 700;
+    letter-spacing: -0.02em;
   }
 
   .summary label {
     color: var(--muted);
+    font-size: 12px;
   }
 
+  /* tabs：底部下划线 + accent 文字（替代药丸全填充）*/
   .tabs {
+    border-bottom: 1px solid var(--line);
     display: flex;
-    gap: 6px;
-    margin: 0 0 12px;
+    gap: 2px;
+    margin: 0 -4px 12px;
     overflow-x: auto;
-    padding-bottom: 2px;
+    padding: 0 4px;
+    scrollbar-width: none;
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
   }
 
   .tab {
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: var(--panel);
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
     color: var(--muted);
+    cursor: pointer;
     flex: 0 0 auto;
-    padding: 6px 10px;
+    font-size: 12px;
+    margin-bottom: -1px;
+    padding: 8px 10px;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
     white-space: nowrap;
   }
 
+  .tab:hover {
+    color: var(--text);
+  }
+
   .tab.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #ffffff;
+    border-bottom-color: var(--accent);
+    color: var(--accent);
+    font-weight: 600;
   }
 
   .tab-count {
-    opacity: 0.85;
+    color: var(--muted);
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+    margin-left: 4px;
   }
 
+  .tab.active .tab-count {
+    color: var(--accent);
+  }
+
+  /* sections：去 panel 化，标题 + 列表条目 */
   .sections {
     display: grid;
-    gap: 10px;
-  }
-
-  .category {
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    background: var(--panel);
-    overflow: hidden;
+    gap: 16px;
   }
 
   .category h2 {
-    align-items: center;
-    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+    color: var(--muted);
     display: flex;
-    font-size: 14px;
+    font-size: 11px;
+    font-weight: 600;
+    gap: 8px;
     justify-content: space-between;
-    margin: 0;
-    padding: 10px 12px;
+    letter-spacing: 0.06em;
+    margin: 0 0 4px;
+    padding: 0 4px;
+    text-transform: uppercase;
   }
 
   .count {
     color: var(--muted);
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
     font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
   }
 
+  /* tech 列表条目化：hairline 分隔，hover 整行高亮 */
   .tech {
-    padding: 10px 12px;
+    border-radius: 6px;
+    padding: 8px 10px;
+    transition: background 0.15s ease;
   }
 
   .tech + .tech {
     border-top: 1px solid var(--tech-divider);
   }
 
+  .tech:hover {
+    background: var(--accent-soft);
+  }
+
   .tech-head {
     align-items: center;
     display: flex;
-    justify-content: space-between;
     gap: 8px;
+    justify-content: space-between;
   }
 
   .tech-name {
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 600;
   }
 
   .tech-link {
-    border: 0;
-    border-radius: 4px;
     background: transparent;
-    color: var(--accent-dark);
+    border: 0;
+    color: var(--text);
     cursor: pointer;
+    font: inherit;
     padding: 0;
     text-align: left;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
+    text-decoration: none;
+    transition: color 0.15s ease;
   }
 
   .tech-link:hover {
@@ -821,9 +887,11 @@
   }
 
   .confidence {
-    border-radius: 999px;
-    font-size: 12px;
-    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 1px 6px;
     white-space: nowrap;
   }
 
@@ -844,31 +912,41 @@
 
   .evidence {
     color: var(--muted);
-    margin: 6px 0 0;
-    padding-left: 18px;
+    font-size: 12px;
+    margin: 4px 0 0;
+    padding-left: 16px;
   }
 
   .evidence li {
-    margin: 2px 0;
+    margin: 1px 0;
     overflow-wrap: anywhere;
   }
 
   .source {
     color: var(--muted);
-    font-size: 12px;
-    margin-top: 5px;
+    font-size: 11px;
+    margin-top: 4px;
   }
 
+  /* correction-link：默认低调，hover .tech 时显现 */
   .correction-link {
-    border: 0;
     background: transparent;
-    color: var(--accent-dark);
-    font-size: 12px;
-    margin-top: 5px;
+    border: 0;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 11px;
+    margin-top: 6px;
+    opacity: 0;
     padding: 0;
     text-align: left;
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    transition:
+      opacity 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .tech:hover .correction-link,
+  .correction-link:focus-visible {
+    opacity: 1;
   }
 
   .correction-link:hover {
@@ -877,36 +955,42 @@
 
   .empty {
     color: var(--muted);
-    padding: 18px 12px;
+    font-size: 13px;
+    padding: 24px 12px;
     text-align: center;
   }
 
-  .source-search {
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    background: var(--panel);
-    margin-top: 12px;
-    padding: 10px 12px;
+  /* 源代码搜索 + 原始线索：合并视觉，使用区段标题 */
+  .source-search,
+  .raw-panel {
+    border-top: 1px solid var(--line);
+    margin: 16px -4px 0;
+    padding: 12px 4px 0;
   }
 
   .panel-title {
-    font-weight: 700;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
     margin-bottom: 8px;
+    text-transform: uppercase;
   }
 
   .search-row {
     display: grid;
+    gap: 6px;
     grid-template-columns: 1fr auto;
-    gap: 8px;
   }
 
   .search-row input {
+    background: var(--panel);
     border: 1px solid var(--line);
     border-radius: 6px;
     color: var(--text);
-    font: inherit;
     min-width: 0;
-    padding: 7px 9px;
+    padding: 7px 10px;
+    transition: border-color 0.15s ease;
   }
 
   .search-row input:focus {
@@ -915,19 +999,35 @@
   }
 
   .search-row button {
-    padding: 7px 10px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--text);
+    cursor: pointer;
+    font: inherit;
+    padding: 7px 14px;
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .search-row button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
   }
 
   .search-options {
+    color: var(--muted);
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    font-size: 12px;
+    gap: 12px;
     margin-top: 8px;
   }
 
   .search-options label {
     align-items: center;
-    color: var(--muted);
+    cursor: pointer;
     display: inline-flex;
     gap: 5px;
   }
@@ -938,7 +1038,7 @@
 
   .search-meta {
     color: var(--muted);
-    font-size: 12px;
+    font-size: 11px;
     margin-top: 8px;
   }
 
@@ -946,19 +1046,31 @@
     display: none;
   }
 
-  .raw-panel {
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    background: var(--panel);
-    margin-top: 12px;
-    padding: 10px 12px;
-  }
-
   .raw-panel summary {
+    color: var(--muted);
     cursor: pointer;
-    font-weight: 700;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    list-style: none;
+    text-transform: uppercase;
+    transition: color 0.15s ease;
   }
 
+  .raw-panel summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .raw-panel summary:hover {
+    color: var(--text);
+  }
+
+  .raw-panel[open] summary {
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  /* footer：轻量化，去 shadow */
   .app-footer {
     align-items: center;
     background: var(--panel-translucent);
@@ -967,13 +1079,13 @@
     color: var(--muted);
     display: flex;
     flex-wrap: wrap;
-    font-size: 12px;
+    font-size: 11px;
     gap: 8px;
     justify-content: space-between;
     left: 0;
     margin: 0;
     min-height: var(--popup-footer-height);
-    padding: 10px 14px;
+    padding: 8px 16px;
     position: fixed;
     right: 0;
     width: var(--popup-width);
@@ -981,24 +1093,26 @@
   }
 
   .app-footer a {
-    color: var(--accent-dark);
+    color: var(--muted);
     text-decoration: none;
+    transition: color 0.15s ease;
   }
 
   .app-footer a:hover {
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    color: var(--accent);
   }
 
   pre {
     background: var(--code-bg);
     border-radius: 6px;
     color: var(--code-text);
+    font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', monospace;
     font-size: 11px;
-    margin: 10px 0 0;
+    line-height: 1.5;
+    margin: 8px 0 0;
     max-height: 260px;
     overflow: auto;
-    padding: 10px;
+    padding: 10px 12px;
     white-space: pre-wrap;
     word-break: break-word;
   }
