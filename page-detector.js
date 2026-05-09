@@ -39,7 +39,7 @@ function detectPageTechnologies(ruleConfig = {}) {
     url: location.href,
     title: document.title,
     generatedAt: new Date().toISOString(),
-    technologies,
+    technologies: suppressDuplicateWebsiteProgramCategories(technologies),
     resources: {
       total: resources.all.length,
       scripts: resources.scripts.slice(0, 120),
@@ -431,6 +431,24 @@ function detectPageTechnologies(ruleConfig = {}) {
       .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '')
   }
 
+  function suppressDuplicateWebsiteProgramCategories(items) {
+    if (!Array.isArray(items) || !items.length) {
+      return []
+    }
+
+    const websiteProgramNames = new Set(
+      items
+        .filter(item => item?.category === '网站程序')
+        .map(item => normalizeRuleName(item.name))
+        .filter(Boolean)
+    )
+    if (!websiteProgramNames.size) {
+      return items
+    }
+
+    return items.filter(item => item?.category !== 'CMS / 电商平台' || !websiteProgramNames.has(normalizeRuleName(item.name)))
+  }
+
   function detectCmsThemesAndSource(add, resources, classes, html, globalKeys, externalRules, assetExtractors = []) {
     const text = `${location.href}
 ${resources.all.join('\n')}
@@ -566,12 +584,11 @@ ${html}`
 
   function detectProbeTools(add, resources, html, globalKeys, externalRules) {
     const titleText = document.title ? `\n${document.title}` : ''
-    const bodyText = document.body?.innerText ? `\n${document.body.innerText.slice(0, 120000)}` : ''
     detectJsonRuleList(add, externalRules, {
       defaultCategory: '探针 / 监控',
       resources,
-      html,
-      text: `${resources.text}\n${html}${titleText}${bodyText}`,
+      html: '',
+      text: `${location.href}\n${resources.text}${titleText}`,
       sourceLabel: 'JSON 探针规则',
       evidencePrefix: rule => (rule.kind ? `${rule.kind}：` : '')
     })
