@@ -98,18 +98,11 @@
         </label>
         <label>
           <span>置信度</span>
-          <select v-model="form.confidence">
-            <option value="高">高</option>
-            <option value="中">中</option>
-            <option value="低">低</option>
-          </select>
+          <Select v-model="form.confidence" :options="confidenceOptions" />
         </label>
         <label>
           <span>匹配方式</span>
-          <select v-model="form.matchType">
-            <option value="regex">正则表达式</option>
-            <option value="keyword">关键词</option>
-          </select>
+          <Select v-model="form.matchType" :options="matchTypeOptions" />
         </label>
         <label>
           <span>官网 / 仓库 URL</span>
@@ -184,6 +177,7 @@
 <script setup lang="ts">
   import { onMounted, reactive, ref, watch, computed } from 'vue'
   import { BookOpen, Monitor, Moon, Pencil, RotateCcw, Save, Sun, Trash2 } from 'lucide-vue-next'
+  import Select from '@/ui/components/Select.vue'
   import { CATEGORY_ORDER } from '@/utils/category-order'
   import { applyCustomCss } from '@/utils/apply-custom-css'
   import { cleanCustomRules, cleanStringArray, defaultSettings, normalizeSettings } from '@/utils/normalize-settings'
@@ -198,6 +192,17 @@
     { value: 'html', label: 'DOM / 源码' },
     { value: 'headers', label: '响应头' },
     { value: 'dynamic', label: '动态资源' }
+  ]
+
+  const confidenceOptions = [
+    { value: '高', label: '高' },
+    { value: '中', label: '中' },
+    { value: '低', label: '低' }
+  ]
+
+  const matchTypeOptions = [
+    { value: 'regex', label: '正则表达式' },
+    { value: 'keyword', label: '关键词' }
   ]
 
   const state = reactive({
@@ -944,11 +949,6 @@
     min-width: 0;
     padding: 7px 10px;
     transition: border-color 0.15s ease;
-    width: 100%;
-  }
-
-  select {
-    font-size: 13px;
     width: 100%;
   }
 

@@ -226,38 +226,3 @@ input[type='checkbox']:focus-visible {
     transform: rotate(45deg) scale(1);
   }
 }
-
-select {
-  appearance: none;
-  -webkit-appearance: none;
-  background-color: var(--panel);
-  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
-  background-position:
-    calc(100% - 14px) calc(50% - 1px),
-    calc(100% - 9px) calc(50% - 1px);
-  background-repeat: no-repeat;
-  background-size:
-    5px 5px,
-    5px 5px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  color: var(--text);
-  cursor: pointer;
-  padding: 7px 32px 7px 10px;
-  transition: border-color 0.15s ease;
-}
-
-select:hover {
-  background-image: linear-gradient(45deg, transparent 50%, var(--accent) 50%), linear-gradient(135deg, var(--accent) 50%, transparent 50%);
-  border-color: var(--accent);
-}
-
-select:focus {
-  border-color: var(--accent);
-  outline: none;
-}
-
-select option {
-  background: var(--panel);
-  color: var(--text);
-}
