@@ -1,0 +1,183 @@
+{
+  "page": {
+    "saasServices": {
+      "defaults": {
+        "category": "AI / 大模型",
+        "confidence": "高",
+        "matchType": "regex"
+      },
+      "rules": [
+        {
+          "defaults": {
+            "kind": "LLM 应用 / 聊天界面"
+          },
+          "rules": [
+            {
+              "name": "Open WebUI",
+              "patterns": [
+                "<title>\\s*(?:Open WebUI|Ollama WebUI)(?:\\s*</title>|\\s+-)",
+                "(?:open-webui|ollama-webui)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "LibreChat",
+              "patterns": ["<title>\\s*LibreChat(?:\\s*</title>|\\s+-)", "librechat[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "AnythingLLM",
+              "patterns": ["<title>\\s*AnythingLLM(?:\\s*</title>|\\s+-)", "anythingllm[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "LobeChat",
+              "patterns": [
+                "<title>\\s*(?:LobeChat|Lobe Chat)(?:\\s*</title>|\\s+-)",
+                "(?:lobe-chat|lobechat)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "NextChat",
+              "patterns": [
+                "<title>\\s*(?:NextChat|ChatGPT Next Web)(?:\\s*</title>|\\s+-)",
+                "(?:chatgpt-next-web|nextchat)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Chatbot UI",
+              "patterns": ["<title>\\s*Chatbot UI(?:\\s*</title>|\\s+-)", "chatbot-ui[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "FastGPT",
+              "patterns": ["<title>\\s*FastGPT(?:\\s*</title>|\\s+-)", "fastgpt[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "RAGFlow",
+              "patterns": ["<title>\\s*RAGFlow(?:\\s*</title>|\\s+-)", "ragflow[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "MaxKB",
+              "patterns": ["<title>\\s*MaxKB(?:\\s*</title>|\\s+-)", "maxkb[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "kind": "LLM 应用开发 / 工作流"
+          },
+          "rules": [
+            {
+              "name": "Dify",
+              "patterns": [
+                "<title>\\s*Dify(?:\\s*</title>|\\s+-)",
+                "(?:^|[\\/._-])dify(?:[\\/._-]|[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$))"
+              ]
+            },
+            {
+              "name": "Flowise",
+              "patterns": ["<title>\\s*Flowise(?:\\s*</title>|\\s+-)", "flowise[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Langflow",
+              "patterns": ["<title>\\s*Langflow(?:\\s*</title>|\\s+-)", "langflow[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Langfuse",
+              "patterns": ["<title>\\s*Langfuse(?:\\s*</title>|\\s+-)", "langfuse[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Promptfoo",
+              "patterns": ["<title>\\s*Promptfoo(?:\\s*</title>|\\s+-)", "promptfoo[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Botpress",
+              "patterns": [
+                "<title>\\s*Botpress(?:\\s*</title>|\\s+-)",
+                "(?:cdn|webchat)\\.botpress\\.cloud",
+                "botpress[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Rasa",
+              "confidence": "中",
+              "patterns": ["(?:^|[\\/._-])rasa-webchat[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)", "(?:^|/)rasa(?:/|[?#]|$)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "kind": "AI Demo / 数据科学应用"
+          },
+          "rules": [
+            {
+              "name": "Gradio",
+              "patterns": ["<gradio-app(?:\\s|>)", "gradio_config", "gradio[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Chainlit",
+              "patterns": ["<title>\\s*Chainlit(?:\\s*</title>|\\s+-)", "chainlit[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "BentoML",
+              "patterns": ["<title>\\s*BentoML(?:\\s*</title>|\\s+-)", "bentoml[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Label Studio",
+              "patterns": ["<title>\\s*Label Studio(?:\\s*</title>|\\s+-)", "label-studio[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "ClearML",
+              "patterns": ["<title>\\s*ClearML(?:\\s*</title>|\\s+-)", "clearml[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "kind": "AI 图像生成 / 推理面板"
+          },
+          "rules": [
+            {
+              "name": "ComfyUI",
+              "patterns": ["<title>\\s*ComfyUI(?:\\s*</title>|\\s+-)", "comfyui[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Stable Diffusion WebUI",
+              "patterns": [
+                "<title>\\s*Stable Diffusion(?:\\s*</title>|\\s+-)",
+                "(?:stable-diffusion-webui|automatic1111)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "SD.Next",
+              "patterns": ["<title>\\s*SD\\.Next(?:\\s*</title>|\\s+-)", "sdnext[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "InvokeAI",
+              "patterns": ["<title>\\s*InvokeAI(?:\\s*</title>|\\s+-)", "invokeai[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Fooocus",
+              "patterns": ["<title>\\s*Fooocus(?:\\s*</title>|\\s+-)", "fooocus[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "SwarmUI",
+              "patterns": ["<title>\\s*SwarmUI(?:\\s*</title>|\\s+-)", "swarmui[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Text Generation WebUI",
+              "patterns": [
+                "<title>\\s*(?:Text Generation WebUI|oobabooga)(?:\\s*</title>|\\s+-)",
+                "(?:text-generation-webui|oobabooga)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Kohya SS GUI",
+              "patterns": [
+                "<title>\\s*(?:Kohya SS|Kohya_ss)(?:\\s*</title>|\\s+-)",
+                "(?:kohya-ss|kohya_ss)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

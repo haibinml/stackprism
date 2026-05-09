@@ -14,6 +14,7 @@ export const CATEGORY_ORDER: readonly string[] = [
   'CMS / 电商平台',
   'RSS / 订阅',
   'SaaS / 第三方服务',
+  'AI / 大模型',
   '第三方登录 / OAuth',
   '支付系统',
   '广告 / 营销',

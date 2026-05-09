@@ -1,6 +1,6 @@
 # 识别开关
 
-设置页第一个 panel，22 个 checkbox。每个 checkbox 对应一个分类，关掉后弹窗里不再显示该分类下的任何技术（包括内置规则与自定义规则）。
+设置页第一个 panel，23 个 checkbox。每个 checkbox 对应一个分类，关掉后弹窗里不再显示该分类下的任何技术（包括内置规则与自定义规则）。
 
 ## 全部分类
 
@@ -19,19 +19,20 @@
 | 支付系统          | Stripe、PayPal、支付宝、微信支付、银联                                    |
 | 广告营销          | Google Ads、Facebook Pixel、TikTok Pixel                                  |
 | SaaS 服务         | Sentry、Mixpanel、Intercom、Crisp、HubSpot                                |
+| AI / 大模型       | Open WebUI、Dify、Flowise、Gradio、ComfyUI                                |
 | 探针 / 监控       | New Relic、Datadog、Pingdom、Hotjar                                       |
 | RSS / 订阅        | RSS、Atom、JSON Feed                                                      |
 | WordPress 插件    | 4500+ 个具名插件                                                          |
 | Drupal 模块       | 4000+ 个具名模块                                                          |
 | 安全与协议        | HTTPS、CSP、Service Worker                                                |
 | 其他库            | 自定义规则默认归类、未明确分类的兜底                                      |
-| ... 等共 22 类    |
+| ... 等共 23 类    |
 
 完整列表：`src/utils/category-order.ts` 的 `CATEGORY_ORDER` 数组。
 
 ## 全开 / 全关快捷按钮
 
-panel-head 右上角有两个按钮：「全开」「全关」。一键勾上 / 取消所有 22 个 checkbox。
+panel-head 右上角有两个按钮：「全开」「全关」。一键勾上 / 取消所有 23 个 checkbox。
 
 ## 关闭分类的常见用途
 
