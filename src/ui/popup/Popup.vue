@@ -157,12 +157,12 @@
     </template>
 
     <Transition name="footer-panel">
-      <section v-if="footerPanel" class="footer-panel" :aria-label="footerPanel === 'search' ? '网页源代码搜索' : '原始线索'">
+      <section v-if="footerPanel" class="footer-panel" :aria-label="footerPanel === 'search' ? '网页源代码搜索' : rawPanelTitle">
         <header class="footer-panel-head">
           <span class="footer-panel-title">
-            {{ footerPanel === 'search' ? '网页源代码搜索' : '原始线索' }}
+            {{ footerPanel === 'search' ? '网页源代码搜索' : rawPanelTitle }}
           </span>
-          <button type="button" class="footer-panel-close" title="关闭面板" @click="footerPanel = null">
+          <button type="button" class="footer-panel-close" title="关闭面板" @click="closeFooterPanel">
             <X :size="14" :stroke-width="2" />
           </button>
         </header>
@@ -277,21 +277,36 @@
   const rawOutputText = ref(RAW_PLACEHOLDER)
   const theme = ref<ThemeMode>('auto')
   const footerPanel = ref<'search' | 'raw' | null>(null)
+  const rawSourceContext = ref<{ tech: any; source: string } | null>(null)
   const sectionsScroller = ref<HTMLElement | null>(null)
   const showScrollTop = ref(false)
 
+  const rawPanelTitle = computed(() => {
+    if (footerPanel.value !== 'raw') return ''
+    const ctx = rawSourceContext.value
+    if (!ctx) return '原始线索'
+    return `原始线索 · ${ctx.tech?.name || ''} · ${ctx.source}`
+  })
+
   const toggleFooterPanel = (name: 'search' | 'raw') => {
-    if (footerPanel.value === name) {
+    if (footerPanel.value === name && !rawSourceContext.value) {
       footerPanel.value = null
       return
     }
+    rawSourceContext.value = null
     footerPanel.value = name
     if (name === 'raw') {
       renderRawOutput().catch(() => {})
     }
   }
 
-  const openSourceRaw = (_tech: any, _source: string) => {
+  const closeFooterPanel = () => {
+    footerPanel.value = null
+    rawSourceContext.value = null
+  }
+
+  const openSourceRaw = (tech: any, source: string) => {
+    rawSourceContext.value = { tech, source }
     footerPanel.value = 'raw'
     renderRawOutput().catch(() => {})
   }
@@ -681,19 +696,75 @@
     return tab.id
   }
 
+  const buildScopedRawJson = (raw: any, tech: any, source: string) => {
+    const techName = String(tech?.name || '').toLowerCase()
+    const matchTech = (item: any) => String(item?.name || '').toLowerCase() === techName
+    const trimmed = String(source || '').trim()
+    const isHeaderApi = /·\s*api/i.test(trimmed)
+    const isHeaderFrame = /·\s*iframe/i.test(trimmed)
+    const isDynamic = trimmed.startsWith('动态监控')
+    const isHeader = !isHeaderApi && !isHeaderFrame && trimmed.startsWith('响应头')
+
+    const baseInfo = {
+      url: raw?.url || '',
+      title: raw?.title || '',
+      technology: tech?.name || '',
+      source: trimmed
+    }
+
+    if (isHeader) {
+      return {
+        ...baseInfo,
+        headers: raw?.headers || {},
+        technologies: (raw?.technologies || []).filter(matchTech)
+      }
+    }
+
+    if (isHeaderApi) {
+      const records = (raw?.apiObservations || [])
+        .map((rec: any) => ({ ...rec, technologies: (rec?.technologies || []).filter(matchTech) }))
+        .filter((rec: any) => rec.technologies.length)
+      return { ...baseInfo, apiObservations: records }
+    }
+
+    if (isHeaderFrame) {
+      const records = (raw?.frameObservations || [])
+        .map((rec: any) => ({ ...rec, technologies: (rec?.technologies || []).filter(matchTech) }))
+        .filter((rec: any) => rec.technologies.length)
+      return { ...baseInfo, frameObservations: records }
+    }
+
+    if (isDynamic) {
+      const dyn = raw?.dynamicObservations || {}
+      return {
+        ...baseInfo,
+        dynamicObservations: {
+          ...dyn,
+          technologies: (dyn?.technologies || []).filter(matchTech)
+        }
+      }
+    }
+
+    return {
+      ...baseInfo,
+      technologies: (raw?.technologies || []).filter(matchTech)
+    }
+  }
+
   const renderRawOutput = async () => {
     if (!state.result) {
       rawOutputText.value = '暂无原始线索。'
       return
     }
-    if (state.rawLoaded) {
-      rawOutputText.value = JSON.stringify(state.rawResult, null, 2)
-      return
-    }
     rawOutputText.value = RAW_LOADING_TEXT
     try {
       const raw = await getRawResult()
-      rawOutputText.value = JSON.stringify(raw, null, 2)
+      const ctx = rawSourceContext.value
+      if (ctx) {
+        rawOutputText.value = JSON.stringify(buildScopedRawJson(raw, ctx.tech, ctx.source), null, 2)
+      } else {
+        rawOutputText.value = JSON.stringify(raw, null, 2)
+      }
     } catch (error: any) {
       rawOutputText.value = `原始线索生成失败：${String(error?.message || error)}`
     }
