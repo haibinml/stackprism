@@ -163,8 +163,6 @@
 </template>
 
 <script setup lang="ts">
-  // @ts-nocheck
-  /* eslint-disable */
   import { onMounted, reactive, ref, watch, computed } from 'vue'
   import { CATEGORY_ORDER } from '@/utils/category-order'
   import { applyCustomCss } from '@/utils/apply-custom-css'

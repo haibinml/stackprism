@@ -118,8 +118,6 @@
 </template>
 
 <script setup lang="ts">
-  // @ts-nocheck
-  /* eslint-disable */
   import { onMounted, onBeforeUnmount, reactive, ref, computed } from 'vue'
   import { categoryIndex, confidenceClass, confidenceRank } from '@/utils/category-order'
   import { applyCustomCss } from '@/utils/apply-custom-css'

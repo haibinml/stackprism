@@ -1,6 +1,3 @@
-// @ts-nocheck
- 
-
 interface SearchOptions {
   query: string
   caseSensitive?: boolean
@@ -21,7 +18,7 @@ function searchPageSource(options: SearchOptions) {
   } catch (error) {
     return {
       ok: false,
-      error: `搜索表达式无效：${String(error?.message || error)}`
+      error: `搜索表达式无效：${String((error as Error)?.message || error)}`
     }
   }
 
@@ -71,24 +68,24 @@ function searchPageSource(options: SearchOptions) {
     return doctype + (document.documentElement?.outerHTML || '')
   }
 
-  function serializeDoctype(doctype) {
+  function serializeDoctype(doctype: DocumentType) {
     const publicId = doctype.publicId ? ` PUBLIC "${doctype.publicId}"` : ''
     const systemId = doctype.systemId ? ` "${doctype.systemId}"` : ''
     return `<!doctype ${doctype.name}${publicId}${systemId}>`
   }
 
-  function buildMatcher(rawQuery, searchOptions) {
+  function buildMatcher(rawQuery: string, searchOptions: SearchOptions) {
     const pattern = searchOptions.useRegex ? rawQuery : escapeRegExp(rawQuery)
     const sourcePattern = searchOptions.wholeWord ? `(?<![A-Za-z0-9_])(?:${pattern})(?![A-Za-z0-9_])` : pattern
     const flags = searchOptions.caseSensitive ? 'g' : 'gi'
     return new RegExp(sourcePattern, flags)
   }
 
-  function escapeRegExp(value) {
+  function escapeRegExp(value: string) {
     return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   }
 
-  function buildLineStarts(text) {
+  function buildLineStarts(text: string) {
     const starts = [0]
     for (let index = 0; index < text.length; index += 1) {
       if (text.charCodeAt(index) === 10) {
@@ -98,7 +95,7 @@ function searchPageSource(options: SearchOptions) {
     return starts
   }
 
-  function createSnippet(text, found, matchNumber, starts, context) {
+  function createSnippet(text: string, found: RegExpExecArray, matchNumber: number, starts: number[], context: number) {
     const start = found.index
     const end = start + found[0].length
     const position = findLineColumn(starts, start)
@@ -113,7 +110,7 @@ function searchPageSource(options: SearchOptions) {
     }
   }
 
-  function findLineColumn(starts, offset) {
+  function findLineColumn(starts: number[], offset: number) {
     let low = 0
     let high = starts.length - 1
     while (low <= high) {
@@ -131,7 +128,7 @@ function searchPageSource(options: SearchOptions) {
     }
   }
 
-  function normalizeSnippet(value) {
+  function normalizeSnippet(value: string) {
     return value
       .replace(/\r/g, '')
       .replace(/\t/g, '  ')
