@@ -409,13 +409,26 @@ function detectPageTechnologies(ruleConfig = {}) {
   function detectCmsAndCommerce(add, resources, html, externalRules) {
     const generator = (getMetaContent('generator') || '').toLowerCase()
     const text = [resources.text, html, 'generator: ' + generator].join('\n')
-    detectJsonRuleList(add, externalRules, {
+    detectJsonRuleList(add, filterCmsAndCommerceRules(externalRules), {
       defaultCategory: 'CMS / 电商平台',
       resources,
       html,
       text,
       sourceLabel: 'JSON CMS / 电商平台规则'
     })
+  }
+
+  function filterCmsAndCommerceRules(rules) {
+    if (!Array.isArray(rules)) {
+      return []
+    }
+    return rules.filter(rule => normalizeRuleName(rule.name) !== 'wordpress')
+  }
+
+  function normalizeRuleName(name) {
+    return String(name || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '')
   }
 
   function detectCmsThemesAndSource(add, resources, classes, html, globalKeys, externalRules, assetExtractors = []) {

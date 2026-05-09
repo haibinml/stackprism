@@ -566,7 +566,7 @@ function addAll(target, items) {
 
 function mergeTechnologies(items) {
   const map = new Map()
-  for (const item of suppressWordPressThemeDirectoryFallbacks(items)) {
+  for (const item of suppressDuplicateWebsiteProgramCategories(suppressWordPressThemeDirectoryFallbacks(items))) {
     const category = item.category || '其他库'
     const key = `${category}::${item.name}`.toLowerCase()
     const current = map.get(key) || {
@@ -609,6 +609,21 @@ function mergeTechnologies(items) {
       }
       return a.name.localeCompare(b.name)
     })
+}
+
+function suppressDuplicateWebsiteProgramCategories(items) {
+  if (!Array.isArray(items) || !items.length) {
+    return []
+  }
+
+  const websiteProgramNames = new Set(
+    items.filter(item => item?.category === '网站程序').map(item => normalizeTechName(item.name)).filter(Boolean)
+  )
+  if (!websiteProgramNames.size) {
+    return items
+  }
+
+  return items.filter(item => item?.category !== 'CMS / 电商平台' || !websiteProgramNames.has(normalizeTechName(item.name)))
 }
 
 function suppressWordPressThemeDirectoryFallbacks(items) {
