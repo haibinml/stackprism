@@ -9,4 +9,4 @@
 
 页面规则可使用 `patterns`、`globals`、`selectors`、`classPrefixes`、`classNames`、`cssVariables` 等字段。像 shadcn/ui 这类依赖全局 CSS 变量的技术，可以用 `cssVariables` 配合 `minCssVariableMatches` 做成组变量匹配，减少误报。
 
-`page/frontend-cdn-libraries.json` 是由 `tools/generate-cdnjs-rules.js` 根据 cdnjs 公开 API 生成的前端库规则。生成规则默认使用 `resourceOnly: true`，只匹配页面加载过的资源 URL，不扫描整页源码。刷新这类规则时请重新运行生成脚本，不要手工逐条改生成文件。
+`page/frontend-cdn-libraries.json` 是根据 cdnjs 公开 API 生成的前端库规则。生成规则默认使用 `resourceOnly: true`，只匹配页面加载过的资源 URL，不扫描整页源码。刷新这类规则时请用本地维护脚本重新生成，不要手工逐条改生成文件；本地工具脚本默认不提交到仓库。
