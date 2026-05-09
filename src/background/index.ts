@@ -2,19 +2,9 @@ import { injectContentObserverIntoOpenTabs } from './content-injector'
 import { clearBadge, clearTabSession } from './tab-store'
 import { clearDynamicSnapshotTimer, clearPendingDynamicSnapshot } from './dynamic-snapshot'
 import { buildHeaderRecord, dedupeApiRecords } from './headers'
-import {
-  clearActiveDetectionTimer,
-  refreshAllBadges,
-  saveTabDataAndBadge,
-  scheduleActivePageDetection
-} from './detection'
+import { clearActiveDetectionTimer, refreshAllBadges, saveTabDataAndBadge, scheduleActivePageDetection } from './detection'
 import { getTabData } from './tab-store'
-import {
-  SETTINGS_STORAGE_KEY,
-  applyDetectorSettingsUpdate,
-  loadDetectorSettings,
-  loadTechRules
-} from './detector-settings'
+import { SETTINGS_STORAGE_KEY, applyDetectorSettingsUpdate, loadDetectorSettings, loadTechRules } from './detector-settings'
 import { registerMessageRouter } from './message-router'
 
 registerMessageRouter()

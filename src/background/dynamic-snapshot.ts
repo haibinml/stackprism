@@ -1,23 +1,10 @@
 // @ts-nocheck
 import { safeDecodeURIComponent } from '@/utils/url'
-import {
-  mergeTechnologyRecords,
-  normalizeDynamicFallbackTechName,
-  shortHeaderUrl
-} from './merge'
-import {
-  createCollector,
-  filterCustomRulesForTarget,
-  matchesCompiledRulePatterns,
-  matchesRuleTextHints
-} from './rule-matcher'
+import { mergeTechnologyRecords, normalizeDynamicFallbackTechName, shortHeaderUrl } from './merge'
+import { createCollector, filterCustomRulesForTarget, matchesCompiledRulePatterns, matchesRuleTextHints } from './rule-matcher'
 import { getTabData } from './tab-store'
 import { saveTabDataAndBadge, scheduleActivePageDetection } from './detection'
-import {
-  buildEffectivePageRules,
-  loadDetectorSettings,
-  loadTechRules
-} from './detector-settings'
+import { buildEffectivePageRules, loadDetectorSettings, loadTechRules } from './detector-settings'
 
 const DYNAMIC_FAST_LOOKUP_RULE_MIN = 1000
 const DYNAMIC_SNAPSHOT_PROCESS_DELAY = 800

@@ -1,6 +1,4 @@
 // @ts-nocheck
- 
-
 ;(() => {
   const MAX_ITEMS = 300
   const MAX_DOM_MARKERS = 120
