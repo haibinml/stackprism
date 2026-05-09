@@ -76,6 +76,14 @@
             "globals": [
               "LA"
             ]
+          },
+          {
+            "name": "Cloudflare Web Analytics",
+            "kind": "商用 / 网站统计",
+            "patterns": [
+              "static\\.cloudflareinsights\\.com/beacon(?:\\.min)?\\.js",
+              "cloudflareinsights\\.com/beacon"
+            ]
           }
         ]
       },

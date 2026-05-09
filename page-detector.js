@@ -369,6 +369,9 @@ function detectPageTechnologies(ruleConfig = {}) {
         if (normalizedHost === pageHost) {
           continue
         }
+        if (isKnownThirdPartyServiceHost(normalizedHost)) {
+          continue
+        }
         if (
           /(^cdn\d*\.|\.cdn\d*\.|-cdn\d*\.|^static\d*\.|\.static\d*\.|^assets\d*\.|\.assets\d*\.|^edge\d*\.|\.edge\d*\.|^media\d*\.)/.test(
             host
@@ -381,6 +384,10 @@ function detectPageTechnologies(ruleConfig = {}) {
       }
     }
     return [...hosts].slice(0, 20)
+  }
+
+  function isKnownThirdPartyServiceHost(host) {
+    return /^(?:static\.cloudflareinsights\.com|challenges\.cloudflare\.com)$/i.test(host)
   }
 
   function detectBackendFrameworkHints(add, resources, html, externalRules) {

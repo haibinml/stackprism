@@ -223,10 +223,12 @@
         "rules": [
           {
             "name": "Ghost",
+            "category": "网站程序",
             "patterns": [
-              "ghost",
               "/ghost/api/",
-              "ghost-sdk"
+              "ghost-sdk",
+              "ghost/content/api",
+              "generator:\\s*ghost(?:\\s|$)"
             ]
           },
           {

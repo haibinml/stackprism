@@ -8,67 +8,6 @@
       "rules": [
         {
           "defaults": {
-            "kind": "支付"
-          },
-          "rules": [
-            {
-              "name": "Stripe",
-              "patterns": [
-                "js\\.stripe\\.com|checkout\\.stripe\\.com|stripe\\.network"
-              ],
-              "globals": [
-                "Stripe"
-              ]
-            },
-            {
-              "name": "PayPal",
-              "patterns": [
-                "paypal\\.com\\/sdk\\/js|paypalobjects\\.com|paypal\\.com\\/checkoutnow"
-              ],
-              "globals": [
-                "paypal"
-              ]
-            },
-            {
-              "name": "Adyen",
-              "patterns": [
-                "checkoutshopper-live\\.adyen\\.com|adyencheckout|adyen\\.com\\/checkout"
-              ],
-              "globals": [
-                "AdyenCheckout"
-              ]
-            },
-            {
-              "name": "Braintree",
-              "patterns": [
-                "js\\.braintreegateway\\.com|braintreegateway\\.com"
-              ],
-              "globals": [
-                "braintree"
-              ]
-            },
-            {
-              "name": "Paddle",
-              "patterns": [
-                "cdn\\.paddle\\.com|paddle\\.com\\/paddle|paddle\\.js"
-              ],
-              "globals": [
-                "Paddle"
-              ]
-            },
-            {
-              "name": "Razorpay",
-              "patterns": [
-                "checkout\\.razorpay\\.com|razorpay"
-              ],
-              "globals": [
-                "Razorpay"
-              ]
-            }
-          ]
-        },
-        {
-          "defaults": {
             "kind": "身份认证"
           },
           "rules": [
@@ -533,7 +472,12 @@
             {
               "name": "Cloudflare Turnstile",
               "patterns": [
-                "challenges\\.cloudflare\\.com\\/turnstile|turnstile"
+                "challenges\\.cloudflare\\.com/turnstile(?:/|[?#]|$)",
+                "challenges\\.cloudflare\\.com/cdn-cgi/challenge-platform/[^\\s\"'<>]*turnstile"
+              ],
+              "selectors": [
+                ".cf-turnstile",
+                "[data-sitekey].cf-turnstile"
               ],
               "globals": [
                 "turnstile"
