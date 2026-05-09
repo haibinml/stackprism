@@ -861,6 +861,7 @@ function extractDynamicMinifiedScriptLibrary(rawUrl) {
       /(?:[._-](?:min|prod|production|development|dev|bundle|bundled|umd|esm|cjs|iife|global|runtime|legacy|modern|browser|web|all|full))+$/gi,
       ''
     )
+    .replace(/(?:[._-]pkgd)$/i, '')
     .replace(/(?:[._-]v?\d+(?:\.\d+){1,4})$/i, '')
     .replace(/(?:[._-][a-f0-9]{7,})$/i, '')
     .replace(/^npm\./i, '')
@@ -886,6 +887,7 @@ function isLikelyDynamicLibraryFileName(name) {
   const genericNames = new Set([
     'app',
     'application',
+    'message',
     'main',
     'index',
     'home',
@@ -959,6 +961,8 @@ function normalizeDynamicFallbackTechName(name) {
   return String(name || '')
     .toLowerCase()
     .replace(/^疑似前端库:\s*/, '')
+    .replace(/(?:\.js|js)$/i, '')
+    .replace(/(?:[._-]pkgd)$/i, '')
     .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '')
 }
 
@@ -1096,7 +1100,9 @@ function filterCustomRulesForTarget(rules, target) {
 
 function mergeTechnologyRecords(items) {
   const map = new Map()
-  for (const item of suppressDuplicateWebsiteProgramCategories(suppressWordPressThemeDirectoryFallbacks(items))) {
+  for (const item of suppressDuplicateWebsiteProgramCategories(
+    suppressWordPressThemeDirectoryFallbacks(suppressFrontendFallbackDuplicates(items))
+  )) {
     const key = `${item.category}::${item.name}`.toLowerCase()
     const current = map.get(key) || { ...item, evidence: [] }
     if (!current.url && item.url) {
@@ -1113,13 +1119,38 @@ function mergeTechnologyRecords(items) {
   return [...map.values()]
 }
 
+function suppressFrontendFallbackDuplicates(items) {
+  if (!Array.isArray(items) || !items.length) {
+    return []
+  }
+
+  const knownNames = new Set(
+    items
+      .filter(item => item?.category === '前端库' && !isFrontendFallback(item))
+      .map(item => normalizeDynamicFallbackTechName(item.name))
+      .filter(Boolean)
+  )
+  if (!knownNames.size) {
+    return items
+  }
+
+  return items.filter(item => !isFrontendFallback(item) || !knownNames.has(normalizeDynamicFallbackTechName(item.name)))
+}
+
+function isFrontendFallback(item) {
+  return item?.category === '前端库' && /^疑似前端库:/i.test(String(item?.name || '').trim())
+}
+
 function suppressDuplicateWebsiteProgramCategories(items) {
   if (!Array.isArray(items) || !items.length) {
     return []
   }
 
   const websiteProgramNames = new Set(
-    items.filter(item => item?.category === '网站程序').map(item => normalizeTechName(item.name)).filter(Boolean)
+    items
+      .filter(item => item?.category === '网站程序')
+      .map(item => normalizeTechName(item.name))
+      .filter(Boolean)
   )
   if (!websiteProgramNames.size) {
     return items

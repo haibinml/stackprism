@@ -566,7 +566,9 @@ function addAll(target, items) {
 
 function mergeTechnologies(items) {
   const map = new Map()
-  for (const item of suppressDuplicateWebsiteProgramCategories(suppressWordPressThemeDirectoryFallbacks(items))) {
+  for (const item of suppressDuplicateWebsiteProgramCategories(
+    suppressWordPressThemeDirectoryFallbacks(suppressFrontendFallbackDuplicates(items))
+  )) {
     const category = item.category || '其他库'
     const key = `${category}::${item.name}`.toLowerCase()
     const current = map.get(key) || {
@@ -611,13 +613,47 @@ function mergeTechnologies(items) {
     })
 }
 
+function suppressFrontendFallbackDuplicates(items) {
+  if (!Array.isArray(items) || !items.length) {
+    return []
+  }
+
+  const knownNames = new Set(
+    items
+      .filter(item => item?.category === '前端库' && !isFrontendFallback(item))
+      .map(item => normalizeFrontendFallbackTechName(item.name))
+      .filter(Boolean)
+  )
+  if (!knownNames.size) {
+    return items
+  }
+
+  return items.filter(item => !isFrontendFallback(item) || !knownNames.has(normalizeFrontendFallbackTechName(item.name)))
+}
+
+function isFrontendFallback(item) {
+  return item?.category === '前端库' && /^疑似前端库:/i.test(String(item?.name || '').trim())
+}
+
+function normalizeFrontendFallbackTechName(name) {
+  return String(name || '')
+    .toLowerCase()
+    .replace(/^疑似前端库:\s*/, '')
+    .replace(/(?:\.js|js)$/i, '')
+    .replace(/(?:[._-]pkgd)$/i, '')
+    .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '')
+}
+
 function suppressDuplicateWebsiteProgramCategories(items) {
   if (!Array.isArray(items) || !items.length) {
     return []
   }
 
   const websiteProgramNames = new Set(
-    items.filter(item => item?.category === '网站程序').map(item => normalizeTechName(item.name)).filter(Boolean)
+    items
+      .filter(item => item?.category === '网站程序')
+      .map(item => normalizeTechName(item.name))
+      .filter(Boolean)
   )
   if (!websiteProgramNames.size) {
     return items
@@ -651,8 +687,7 @@ function extractWordPressStyleThemeSlug(item) {
     return ''
   }
   const slug =
-    evidenceText.match(/目录:\s*([^，,\s]+)/)?.[1] ||
-    evidenceText.match(/\/wp-content\/themes\/([^/?#"' <>)]+)\/style\.css/i)?.[1]
+    evidenceText.match(/目录:\s*([^，,\s]+)/)?.[1] || evidenceText.match(/\/wp-content\/themes\/([^/?#"' <>)]+)\/style\.css/i)?.[1]
   return normalizeWordPressThemeSlug(slug)
 }
 

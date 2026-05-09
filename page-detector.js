@@ -39,7 +39,7 @@ function detectPageTechnologies(ruleConfig = {}) {
     url: location.href,
     title: document.title,
     generatedAt: new Date().toISOString(),
-    technologies: suppressDuplicateWebsiteProgramCategories(technologies),
+    technologies: suppressDuplicateWebsiteProgramCategories(suppressFrontendFallbackDuplicates(technologies)),
     resources: {
       total: resources.all.length,
       scripts: resources.scripts.slice(0, 120),
@@ -325,9 +325,31 @@ function detectPageTechnologies(ruleConfig = {}) {
     return String(name || '')
       .toLowerCase()
       .replace(/^疑似前端库:\s*/, '')
-      .replace(/(?:[._-]pkgd)$/i, '')
       .replace(/(?:\.js|js)$/i, '')
+      .replace(/(?:[._-]pkgd)$/i, '')
       .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '')
+  }
+
+  function suppressFrontendFallbackDuplicates(items) {
+    if (!Array.isArray(items) || !items.length) {
+      return []
+    }
+
+    const knownNames = new Set(
+      items
+        .filter(item => item?.category === '前端库' && !isFrontendFallback(item))
+        .map(item => normalizeFallbackTechName(item.name))
+        .filter(Boolean)
+    )
+    if (!knownNames.size) {
+      return items
+    }
+
+    return items.filter(item => !isFrontendFallback(item) || !knownNames.has(normalizeFallbackTechName(item.name)))
+  }
+
+  function isFrontendFallback(item) {
+    return item?.category === '前端库' && /^疑似前端库:/i.test(String(item?.name || '').trim())
   }
 
   function detectBuildAndRuntime(add, resources, html, globalKeys, externalRules) {
