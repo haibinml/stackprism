@@ -27,6 +27,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true
   }
 
+  if (message.type === 'START_BACKGROUND_DETECTION') {
+    const tabId = Number(message.tabId)
+    if (!Number.isInteger(tabId) || tabId < 0) {
+      sendResponse({ ok: false, error: '缺少有效 tabId' })
+      return false
+    }
+    sendResponse({ ok: true })
+    runActivePageDetection(tabId).catch(() => {})
+    return false
+  }
+
   if (message.type === 'GET_WORDPRESS_THEME_DETAILS') {
     detectWordPressThemeStylesFromPage(message.page)
       .then(technologies => sendResponse({ ok: true, technologies: cleanTechnologyRecords(technologies) }))
@@ -277,8 +288,35 @@ function cleanPageDetectionRecord(page) {
     url: String(page?.url || '').slice(0, 1000),
     title: String(page?.title || '').slice(0, 300),
     time: Date.now(),
-    technologies: cleanTechnologyRecords(page?.technologies)
+    technologies: cleanTechnologyRecords(page?.technologies),
+    resources: cleanPageResources(page?.resources)
   }
+}
+
+function cleanPageResources(resources) {
+  return {
+    total: Number(resources?.total || 0),
+    scripts: cleanStringList(resources?.scripts, 160),
+    stylesheets: cleanStringList(resources?.stylesheets, 160),
+    themeAssetUrls: cleanStringList(resources?.themeAssetUrls, 100),
+    resourceDomains: cleanResourceDomains(resources?.resourceDomains),
+    cssVariableCount: Number(resources?.cssVariableCount || 0),
+    metaGenerator: String(resources?.metaGenerator || '').slice(0, 200),
+    manifest: String(resources?.manifest || '').slice(0, 1000) || null
+  }
+}
+
+function cleanResourceDomains(value) {
+  if (!Array.isArray(value)) {
+    return []
+  }
+  return value
+    .map(item => ({
+      domain: String(item?.domain || '').slice(0, 200),
+      count: Number(item?.count || 0)
+    }))
+    .filter(item => item.domain)
+    .slice(0, 40)
 }
 
 function cleanTechnologyRecords(items) {
@@ -375,9 +413,7 @@ async function detectWordPressThemeStylesFromPage(page) {
     })
   )
 
-  return results
-    .filter(result => result.status === 'fulfilled' && result.value)
-    .map(result => result.value)
+  return results.filter(result => result.status === 'fulfilled' && result.value).map(result => result.value)
 }
 
 function collectWordPressThemeStyleRequests(page) {
@@ -396,7 +432,17 @@ function collectWordPressThemeStyleRequests(page) {
 
   addUrl(baseUrl)
   const resources = page?.resources || {}
-  for (const key of ['scripts', 'stylesheets', 'themeAssetUrls', 'dynamicResources', 'resourceTiming', 'images', 'all', 'resources', 'iframes']) {
+  for (const key of [
+    'scripts',
+    'stylesheets',
+    'themeAssetUrls',
+    'dynamicResources',
+    'resourceTiming',
+    'images',
+    'all',
+    'resources',
+    'iframes'
+  ]) {
     addList(resources[key])
   }
   for (const key of ['scripts', 'stylesheets', 'resources', 'iframes']) {

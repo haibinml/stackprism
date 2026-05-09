@@ -26,6 +26,8 @@ const CATEGORY_ORDER = [
 const SETTINGS_STORAGE_KEY = 'stackPrismSettings'
 const REPOSITORY_URL = 'https://github.com/setube/stackprism'
 const DETECTION_CORRECTION_TEMPLATE = 'detection_correction.md'
+const CACHE_STALE_MS = 2 * 60 * 1000
+const CACHE_REFRESH_DELAYS = [1200, 2600, 5000]
 
 const state = {
   result: null,
@@ -33,7 +35,8 @@ const state = {
   rules: null,
   techLinks: null,
   normalizedTechLinks: null,
-  settings: null
+  settings: null,
+  cacheRefreshTimer: 0
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -41,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
   bindRepositoryLink('appTitleLink')
   bindRepositoryLink('popupRepoLink')
   document.getElementById('settingsBtn').addEventListener('click', openSettingsPage)
-  document.getElementById('refreshBtn').addEventListener('click', runDetection)
+  document.getElementById('refreshBtn').addEventListener('click', () => runDetection({ force: true }))
   document.getElementById('copyBtn').addEventListener('click', copyResult)
   document.getElementById('sourceSearchBtn').addEventListener('click', runSourceSearchFromPopup)
   document.getElementById('sourceQuery').addEventListener('keydown', event => {
@@ -54,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
       state.settings = settings
       applyCustomCss(settings.customCss)
     })
-    .finally(runDetection)
+    .finally(loadCachedDetection)
 })
 
 function renderExtensionMeta() {
@@ -200,9 +203,57 @@ function buildNormalizedTechLinks(links) {
   return normalized
 }
 
-async function runDetection() {
-  setStatus('正在收集页面运行时、资源和响应头线索。')
+async function loadCachedDetection() {
+  setStatus('正在读取后台缓存结果。')
   clearSections()
+  clearCacheRefreshTimer()
+
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+  if (!tab || !tab.id) {
+    showError('无法读取当前标签页。')
+    return
+  }
+
+  document.getElementById('pageUrl').textContent = tab.url || '当前标签页'
+
+  try {
+    state.settings = state.settings || (await loadSettings())
+    applyCustomCss(state.settings.customCss)
+    await loadTechLinks()
+    const headerData = await requestHeaderData(tab.id)
+    const pageData = cachedPageResult(tab, headerData)
+    const result = combineResults(tab, pageData, headerData)
+    const hasCache = hasCachedDetection(headerData)
+
+    state.result = result
+    state.activeCategory = '全部'
+    renderResult(result)
+
+    if (!hasCache) {
+      setStatus('还没有后台缓存，已请求后台检测；稍后会自动读取新结果，也可以点击“刷新”立即检测。')
+      requestBackgroundDetection(tab.id)
+      scheduleCachedResultRefresh(tab.id, headerData.updatedAt || 0, 0)
+      return
+    }
+
+    if (isCachedDetectionStale(headerData)) {
+      setStatus(`${formatCachedResultStatus(result, headerData)} 后台正在更新缓存，当前结果可先使用。`)
+      requestBackgroundDetection(tab.id)
+      scheduleCachedResultRefresh(tab.id, headerData.updatedAt || 0, 0)
+      return
+    }
+
+    setStatus(formatCachedResultStatus(result, headerData))
+  } catch (error) {
+    const message = String(error?.message || error)
+    showError(`读取后台缓存失败：${message}`)
+  }
+}
+
+async function runDetection({ force = false } = {}) {
+  setStatus(force ? '正在重新检测当前页面。' : '正在收集页面运行时、资源和响应头线索。')
+  clearSections()
+  clearCacheRefreshTimer()
 
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
   if (!tab || !tab.id) {
@@ -250,6 +301,96 @@ async function runDetection() {
   }
 }
 
+async function requestHeaderData(tabId) {
+  const response = await chrome.runtime.sendMessage({ type: 'GET_HEADER_DATA', tabId })
+  return response?.ok ? response.data || {} : {}
+}
+
+function cachedPageResult(tab, headerData) {
+  const page = headerData?.page || {}
+  return {
+    url: page.url || headerData?.dynamic?.url || tab.url || '',
+    title: page.title || headerData?.dynamic?.title || tab.title || '',
+    technologies: page.technologies || [],
+    resources: page.resources || emptyPageResult(tab.url).resources
+  }
+}
+
+function hasCachedDetection(headerData) {
+  if (!headerData || typeof headerData !== 'object') {
+    return false
+  }
+  return Boolean(
+    headerData.page || headerData.main || headerData.dynamic || (headerData.apis || []).length || (headerData.frames || []).length
+  )
+}
+
+function isCachedDetectionStale(headerData) {
+  const updatedAt = Number(headerData?.updatedAt || headerData?.page?.time || headerData?.dynamic?.updatedAt || 0)
+  return !updatedAt || Date.now() - updatedAt > CACHE_STALE_MS
+}
+
+function formatCachedResultStatus(result, headerData) {
+  const highCount = result.technologies.filter(tech => tech.confidence === '高').length
+  const updatedAt = Number(headerData?.updatedAt || headerData?.page?.time || headerData?.dynamic?.updatedAt || 0)
+  const age = updatedAt ? `，缓存更新于 ${formatAge(Date.now() - updatedAt)} 前` : ''
+  return `已显示后台缓存：发现 ${result.technologies.length} 项技术线索，其中 ${highCount} 项为高置信度${age}。点击“刷新”可重新检测。`
+}
+
+function formatAge(ms) {
+  const seconds = Math.max(0, Math.round(ms / 1000))
+  if (seconds < 60) {
+    return `${seconds} 秒`
+  }
+  const minutes = Math.round(seconds / 60)
+  if (minutes < 60) {
+    return `${minutes} 分钟`
+  }
+  return `${Math.round(minutes / 60)} 小时`
+}
+
+function requestBackgroundDetection(tabId) {
+  chrome.runtime.sendMessage({ type: 'START_BACKGROUND_DETECTION', tabId }).catch(() => {})
+}
+
+function scheduleCachedResultRefresh(tabId, previousUpdatedAt, attempt) {
+  clearCacheRefreshTimer()
+  if (attempt >= CACHE_REFRESH_DELAYS.length) {
+    return
+  }
+  state.cacheRefreshTimer = setTimeout(() => {
+    refreshCachedResultIfReady(tabId, previousUpdatedAt, attempt).catch(() => {})
+  }, CACHE_REFRESH_DELAYS[attempt])
+}
+
+async function refreshCachedResultIfReady(tabId, previousUpdatedAt, attempt) {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+  if (!tab || tab.id !== tabId) {
+    return
+  }
+
+  const headerData = await requestHeaderData(tabId)
+  const updatedAt = Number(headerData?.updatedAt || headerData?.page?.time || headerData?.dynamic?.updatedAt || 0)
+  if (hasCachedDetection(headerData) && updatedAt && updatedAt !== previousUpdatedAt) {
+    const pageData = cachedPageResult(tab, headerData)
+    const result = combineResults(tab, pageData, headerData)
+    state.result = result
+    state.activeCategory = '全部'
+    renderResult(result)
+    setStatus(formatCachedResultStatus(result, headerData))
+    return
+  }
+
+  scheduleCachedResultRefresh(tabId, previousUpdatedAt, attempt + 1)
+}
+
+function clearCacheRefreshTimer() {
+  if (state.cacheRefreshTimer) {
+    clearTimeout(state.cacheRefreshTimer)
+    state.cacheRefreshTimer = 0
+  }
+}
+
 async function requestWordPressThemeDetails(pageData) {
   try {
     const response = await chrome.runtime.sendMessage({
@@ -270,7 +411,8 @@ function reportPageDetectionToBackground(tabId, pageData) {
       page: {
         url: pageData.url || '',
         title: pageData.title || '',
-        technologies: pageData.technologies || []
+        technologies: pageData.technologies || [],
+        resources: pageData.resources || {}
       }
     })
     .catch(() => {})
