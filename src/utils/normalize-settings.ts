@@ -21,13 +21,11 @@ const cleanRuleUrl = (value: unknown): string => {
   return text.slice(0, CUSTOM_RULE_LIMITS.url)
 }
 
-const pickConfidence = (value: unknown): Confidence =>
-  ALLOWED_CONFIDENCES.includes(value as Confidence) ? (value as Confidence) : '中'
+const pickConfidence = (value: unknown): Confidence => (ALLOWED_CONFIDENCES.includes(value as Confidence) ? (value as Confidence) : '中')
 
 const pickMatchType = (value: unknown): MatchType => (value === 'keyword' ? 'keyword' : 'regex')
 
-const pickMatchTargets = (value: unknown): MatchTarget[] =>
-  cleanStringArray(value).slice(0, CUSTOM_RULE_LIMITS.matchIn) as MatchTarget[]
+const pickMatchTargets = (value: unknown): MatchTarget[] => cleanStringArray(value).slice(0, CUSTOM_RULE_LIMITS.matchIn) as MatchTarget[]
 
 export const cleanCustomRules = (value: unknown): CustomRule[] => {
   if (!Array.isArray(value)) return []
