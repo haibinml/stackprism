@@ -1,4 +1,7 @@
-function detectPageTechnologies(ruleConfig = {}) {
+// @ts-nocheck
+/* eslint-disable */
+
+function detectPageTechnologies(ruleConfig: Record<string, unknown> = {}) {
   const technologies = []
   const resources = collectResources()
   const classTokens = collectClassTokens()
@@ -989,3 +992,7 @@ ${html}`
     }
   }
 }
+
+const __spRules = (window as any).__SP_RULES__ ?? {}
+;(window as any).__SP_RULES__ = undefined
+export default detectPageTechnologies(__spRules)

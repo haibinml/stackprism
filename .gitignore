@@ -10,6 +10,7 @@ build/
 release/
 releases/
 artifacts/
+public/injected/
 *.zip
 *.crx
 *.pem
@@ -36,3 +37,4 @@ temp/
 Thumbs.db
 .idea/
 .vscode/
+.claude/

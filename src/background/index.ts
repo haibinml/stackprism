@@ -1,3 +1,21 @@
+// @ts-nocheck
+/* eslint-disable */
+
+import { loadStackPrismRules } from './rule-loader'
+import { attachTechnologyLinks, getTechnologyUrl } from './tech-links'
+import { injectContentObserverIntoOpenTabs } from './content-injector'
+import { augmentPageWithWordPressThemeStyles, detectWordPressThemeStylesFromPage } from './wordpress'
+import {
+  cleanWordPressThemeSlug,
+  isFrontendFallback,
+  mergeTechnologyRecords,
+  normalizeDynamicFallbackTechName,
+  shortHeaderUrl,
+  strongerConfidence
+} from './merge'
+import { normalizeTechName } from '@/utils/tech-name'
+import { cleanTechnologyUrl, normalizeHttpUrl, safeDecodeURIComponent } from '@/utils/url'
+
 const TAB_DATA_PREFIX = 'tab:'
 const POPUP_DATA_PREFIX = 'popup:'
 const MAX_API_RECORDS = 30
@@ -31,7 +49,6 @@ const CATEGORY_ORDER = [
   '其他库'
 ]
 let techRulesPromise = null
-let techLinksPromise = null
 let detectorSettingsPromise = null
 let detectorSettingsCache = null
 const compiledRulePatternCache = new WeakMap()
@@ -39,9 +56,6 @@ const dynamicFrontendRuleKeyCache = new WeakMap()
 const activeDetectionTimers = new Map()
 const pendingDynamicSnapshots = new Map()
 const dynamicSnapshotTimers = new Map()
-const themeStyleFetchCache = new Map()
-
-importScripts('rule-loader.js', 'page-detector.js')
 
 chrome.runtime.onInstalled.addListener(() => {
   injectContentObserverIntoOpenTabs()
@@ -201,30 +215,6 @@ chrome.webRequest.onHeadersReceived.addListener(
   { urls: ['<all_urls>'] },
   ['responseHeaders', 'extraHeaders']
 )
-
-async function injectContentObserverIntoOpenTabs() {
-  try {
-    const tabs = await chrome.tabs.query({})
-    await Promise.allSettled(tabs.filter(canInjectContentObserver).map(tab => injectContentObserver(tab.id)))
-  } catch {
-    return
-  }
-}
-
-function canInjectContentObserver(tab) {
-  return typeof tab?.id === 'number' && /^https?:\/\//i.test(String(tab.url || ''))
-}
-
-async function injectContentObserver(tabId) {
-  try {
-    await chrome.scripting.executeScript({
-      target: { tabId },
-      files: ['content-observer.js']
-    })
-  } catch {
-    return
-  }
-}
 
 async function loadTechRules() {
   if (!techRulesPromise) {
@@ -630,76 +620,6 @@ function getStoredUpdatedAt(data) {
   return Number(data?.updatedAt || data?.page?.time || data?.dynamic?.updatedAt || data?.main?.time || 0)
 }
 
-async function attachTechnologyLinks(technologies, settings) {
-  const linked = await Promise.all(
-    technologies.map(async tech => {
-      const url = tech.url || (await getTechnologyUrl(tech.name, settings).catch(() => ''))
-      return { ...tech, url }
-    })
-  )
-  return linked
-}
-
-async function getTechnologyUrl(name, settings = {}) {
-  if (/^疑似前端库:/i.test(String(name || '').trim())) {
-    return ''
-  }
-
-  const customRule = (settings.customRules || []).find(rule => normalizeTechName(rule.name) === normalizeTechName(name) && rule.url)
-  if (customRule) {
-    return customRule.url
-  }
-
-  const { links, normalizedLinks } = await loadTechLinks()
-  const direct = links[name]
-  if (direct) {
-    return direct
-  }
-
-  const normalized = normalizeTechName(name)
-  if (normalizedLinks.has(normalized)) {
-    return normalizedLinks.get(normalized)
-  }
-
-  const simplified = normalizeTechName(
-    String(name)
-      .replace(/\s+CDN$/i, '')
-      .replace(/\s+Cloud CDN$/i, '')
-      .replace(/\s*\/\s*.*$/, '')
-      .replace(/\s*\([^)]*\)/g, '')
-  )
-  return normalizedLinks.get(simplified) || ''
-}
-
-async function loadTechLinks() {
-  if (!techLinksPromise) {
-    techLinksPromise = fetch(chrome.runtime.getURL('tech-links.json'))
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`链接文件加载失败：${response.status}`)
-        }
-        return response.json()
-      })
-      .then(json => {
-        const links = json?.links || {}
-        return { links, normalizedLinks: buildNormalizedTechLinks(links) }
-      })
-      .catch(error => {
-        techLinksPromise = null
-        throw error
-      })
-  }
-  return techLinksPromise
-}
-
-function buildNormalizedTechLinks(links) {
-  const normalized = new Map()
-  for (const [name, url] of Object.entries(links || {})) {
-    normalized.set(normalizeTechName(name), url)
-  }
-  return normalized
-}
-
 function unique(items) {
   return [...new Set(items.filter(Boolean))]
 }
@@ -789,11 +709,18 @@ async function runActivePageDetection(tabId) {
   try {
     const [data, rules, settings] = await Promise.all([getTabData(tabId), loadTechRules(), loadDetectorSettings()])
     const pageRules = buildEffectivePageRules(rules.page || {}, settings)
+    await chrome.scripting.executeScript({
+      target: { tabId },
+      world: 'MAIN',
+      func: r => {
+        window.__SP_RULES__ = r
+      },
+      args: [pageRules]
+    })
     const injection = await chrome.scripting.executeScript({
       target: { tabId },
       world: 'MAIN',
-      func: detectPageTechnologies,
-      args: [pageRules]
+      files: ['injected/page-detector.iife.js']
     })
     const page = injection?.[0]?.result
     if (!page) {
@@ -806,303 +733,6 @@ async function runActivePageDetection(tabId) {
   } catch {
     return
   }
-}
-
-async function augmentPageWithWordPressThemeStyles(page) {
-  const technologies = await detectWordPressThemeStylesFromPage(page)
-  if (!technologies.length) {
-    return page
-  }
-
-  return {
-    ...page,
-    technologies: mergeTechnologyRecords([...(page?.technologies || []), ...technologies])
-  }
-}
-
-async function detectWordPressThemeStylesFromPage(page) {
-  const requests = collectWordPressThemeStyleRequests(page).slice(0, 5)
-  if (!requests.length) {
-    return []
-  }
-
-  const results = await Promise.allSettled(
-    requests.map(async request => {
-      const cssText = await fetchWordPressThemeStyle(request.styleUrl)
-      const info = parseWordPressThemeHeader(cssText)
-      return info ? buildWordPressThemeTechnology(info, request) : null
-    })
-  )
-
-  return results.filter(result => result.status === 'fulfilled' && result.value).map(result => result.value)
-}
-
-function collectWordPressThemeStyleRequests(page) {
-  const baseUrl = String(page?.url || '')
-  const rawUrls = []
-  const addUrl = value => {
-    if (typeof value === 'string' && value.trim()) {
-      rawUrls.push(value)
-    }
-  }
-  const addList = values => {
-    if (Array.isArray(values)) {
-      values.forEach(addUrl)
-    }
-  }
-
-  addUrl(baseUrl)
-  const resources = page?.resources || {}
-  for (const key of [
-    'scripts',
-    'stylesheets',
-    'themeAssetUrls',
-    'dynamicResources',
-    'resourceTiming',
-    'images',
-    'all',
-    'resources',
-    'iframes'
-  ]) {
-    addList(resources[key])
-  }
-  for (const key of ['scripts', 'stylesheets', 'resources', 'iframes']) {
-    addList(page?.[key])
-  }
-
-  const byStyleUrl = new Map()
-  for (const rawUrl of rawUrls) {
-    const request = extractWordPressThemeStyleRequest(rawUrl, baseUrl)
-    if (request && !byStyleUrl.has(request.styleUrl)) {
-      byStyleUrl.set(request.styleUrl, request)
-    }
-  }
-  return [...byStyleUrl.values()]
-}
-
-function extractWordPressThemeStyleRequest(rawUrl, baseUrl) {
-  const absoluteUrl = normalizeHttpUrl(rawUrl, baseUrl)
-  if (!absoluteUrl) {
-    return null
-  }
-
-  let parsed
-  try {
-    parsed = new URL(absoluteUrl)
-  } catch {
-    return null
-  }
-
-  const match = parsed.pathname.match(/\/wp-content\/themes\/([^/?#"' <>]+)(?:\/|$)/i)
-  if (!match) {
-    return null
-  }
-
-  const slug = cleanWordPressThemeSlug(match[1])
-  if (!slug) {
-    return null
-  }
-
-  const prefix = parsed.pathname.slice(0, match.index)
-  const styleUrl = new URL(`${prefix}/wp-content/themes/${match[1]}/style.css`, parsed.origin)
-  return { slug, styleUrl: styleUrl.toString() }
-}
-
-async function fetchWordPressThemeStyle(styleUrl) {
-  const cached = themeStyleFetchCache.get(styleUrl)
-  if (cached && cached.expiresAt > Date.now()) {
-    return cached.value
-  }
-
-  let value = ''
-  const controller = new AbortController()
-  const timer = setTimeout(() => controller.abort(), 3500)
-  try {
-    const response = await fetch(styleUrl, {
-      cache: 'force-cache',
-      credentials: 'omit',
-      redirect: 'follow',
-      signal: controller.signal
-    })
-    const contentType = response.headers.get('content-type') || ''
-    if (response.ok && isLikelyWordPressThemeStyleContentType(contentType)) {
-      value = await readResponseTextWithLimit(response, 65536)
-    }
-  } catch {
-    value = ''
-  } finally {
-    clearTimeout(timer)
-  }
-
-  rememberThemeStyleFetch(styleUrl, value)
-  return value
-}
-
-function rememberThemeStyleFetch(styleUrl, value) {
-  themeStyleFetchCache.set(styleUrl, {
-    expiresAt: Date.now() + 10 * 60 * 1000,
-    value
-  })
-  if (themeStyleFetchCache.size > 120) {
-    themeStyleFetchCache.delete(themeStyleFetchCache.keys().next().value)
-  }
-}
-
-function isLikelyWordPressThemeStyleContentType(contentType) {
-  if (!contentType) {
-    return true
-  }
-  return /(?:text\/css|text\/plain|application\/octet-stream|charset=)/i.test(contentType)
-}
-
-async function readResponseTextWithLimit(response, maxBytes) {
-  if (!response.body?.getReader) {
-    return (await response.text()).slice(0, maxBytes)
-  }
-
-  const reader = response.body.getReader()
-  const decoder = new TextDecoder()
-  let received = 0
-  let text = ''
-
-  try {
-    while (received < maxBytes) {
-      const { done, value } = await reader.read()
-      if (done) {
-        break
-      }
-      received += value.byteLength
-      text += decoder.decode(value, { stream: true })
-    }
-    text += decoder.decode()
-  } finally {
-    reader.cancel().catch(() => {})
-  }
-
-  return text.slice(0, maxBytes)
-}
-
-function parseWordPressThemeHeader(cssText) {
-  const sample = String(cssText || '').slice(0, 32768)
-  if (!sample) {
-    return null
-  }
-
-  const comment = sample.match(/\/\*[\s\S]*?\*\//)?.[0] || sample.slice(0, 8192)
-  const fields = {
-    'theme name': 'themeName',
-    'theme uri': 'themeUri',
-    author: 'author',
-    'author uri': 'authorUri',
-    description: 'description',
-    version: 'version',
-    template: 'template',
-    'text domain': 'textDomain',
-    tags: 'tags',
-    license: 'license',
-    'license uri': 'licenseUri',
-    'requires at least': 'requiresAtLeast',
-    'requires php': 'requiresPhp'
-  }
-  const info = {}
-
-  for (const rawLine of comment.split(/\r?\n/)) {
-    const line = rawLine
-      .replace(/^\s*\/\*+/, '')
-      .replace(/\*\/\s*$/, '')
-      .replace(/^\s*\*\s?/, '')
-      .trim()
-    const match = line.match(/^([A-Za-z][A-Za-z ]{1,40})\s*:\s*(.+)$/)
-    if (!match) {
-      continue
-    }
-    const key = fields[match[1].trim().toLowerCase()]
-    if (!key || info[key]) {
-      continue
-    }
-    const value = cleanWordPressThemeHeaderValue(match[2])
-    if (value) {
-      info[key] = value
-    }
-  }
-
-  return info.themeName ? info : null
-}
-
-function buildWordPressThemeTechnology(info, request) {
-  const evidence = [
-    `WordPress style.css 主题头：Theme Name: ${info.themeName}${info.version ? `，Version: ${info.version}` : ''}，目录: ${request.slug}`,
-    `样式表：${shortHeaderUrl(request.styleUrl)}`
-  ]
-  if (info.themeUri) {
-    evidence.push(`Theme URI: ${info.themeUri}`)
-  }
-  if (info.author) {
-    evidence.push(`Author: ${info.author}`)
-  }
-  if (info.template) {
-    evidence.push(`Template: ${info.template}`)
-  }
-  if (info.textDomain) {
-    evidence.push(`Text Domain: ${info.textDomain}`)
-  }
-
-  return {
-    category: '主题 / 模板',
-    name: `WordPress 主题: ${info.themeName}`.slice(0, 160),
-    confidence: '高',
-    evidence,
-    source: '主题样式表',
-    url: cleanTechnologyUrl(info.themeUri) || cleanTechnologyUrl(info.authorUri),
-    themeSlug: request.slug
-  }
-}
-
-function normalizeHttpUrl(rawUrl, baseUrl = '') {
-  let value = String(rawUrl || '').trim()
-  if (!value || /^(?:data|blob|javascript|about|chrome|chrome-extension):/i.test(value)) {
-    return ''
-  }
-  if (!baseUrl && /^\/\//.test(value)) {
-    value = `https:${value}`
-  }
-  if (!baseUrl && /^www\./i.test(value)) {
-    value = `https://${value}`
-  }
-  try {
-    const url = baseUrl ? new URL(value, baseUrl) : new URL(value)
-    if (!/^https?:$/i.test(url.protocol)) {
-      return ''
-    }
-    url.hash = ''
-    return url.toString()
-  } catch {
-    return ''
-  }
-}
-
-function cleanTechnologyUrl(value) {
-  const url = normalizeHttpUrl(value)
-  return url.slice(0, 1000)
-}
-
-function cleanWordPressThemeSlug(value) {
-  const decoded = safeDecodeURIComponent(String(value || ''))
-    .replace(/\\/g, '/')
-    .replace(/['")<>]/g, '')
-    .trim()
-  if (!decoded || decoded.includes('/') || decoded.length > 90) {
-    return ''
-  }
-  return decoded
-}
-
-function cleanWordPressThemeHeaderValue(value) {
-  return String(value || '')
-    .replace(/[\u0000-\u001f\u007f]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, 300)
 }
 
 function scheduleActivePageDetection(tabId, delay = 600) {
@@ -1158,14 +788,6 @@ async function processQueuedDynamicSnapshot(tabId) {
   data.updatedAt = Date.now()
   await saveTabDataAndBadge(tabId, data, settings)
   scheduleActivePageDetection(tabId, 900)
-}
-
-function normalizeTechName(name) {
-  return String(name || '')
-    .toLowerCase()
-    .replace(/&/g, 'and')
-    .replace(/\+/g, 'plus')
-    .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '')
 }
 
 function storageKey(tabId) {
@@ -1584,15 +1206,6 @@ function isLikelyDynamicLibraryFileName(name) {
   return !genericNames.has(name.toLowerCase())
 }
 
-function normalizeDynamicFallbackTechName(name) {
-  return String(name || '')
-    .toLowerCase()
-    .replace(/^疑似前端库:\s*/, '')
-    .replace(/(?:\.js|js)$/i, '')
-    .replace(/(?:[._-]pkgd)$/i, '')
-    .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '')
-}
-
 function detectDynamicCmsThemesAndSource(add, text, extractors) {
   for (const extractor of extractors) {
     collectDynamicAssetDirectoryMatches(add, text, extractor)
@@ -1666,14 +1279,6 @@ function cleanDynamicAssetSlug(value) {
     return ''
   }
   return decoded
-}
-
-function safeDecodeURIComponent(value) {
-  try {
-    return decodeURIComponent(value)
-  } catch {
-    return value
-  }
 }
 
 function applyDynamicRuleList(add, rules, contextOrText, sourceLabel, defaultCategory, evidencePrefix = () => '') {
@@ -1819,142 +1424,6 @@ function filterCustomRulesForTarget(rules, target) {
     }
     return rule.matchIn.includes(target)
   })
-}
-
-function mergeTechnologyRecords(items) {
-  const map = new Map()
-  for (const item of suppressDuplicateWebsiteProgramCategories(
-    suppressWordPressThemeDirectoryFallbacks(suppressFrontendFallbackDuplicates(items))
-  )) {
-    const key = `${item.category}::${item.name}`.toLowerCase()
-    const current = map.get(key) || { ...item, evidence: [] }
-    if (!current.url && item.url) {
-      current.url = item.url
-    }
-    for (const evidence of item.evidence || []) {
-      if (!current.evidence.includes(evidence)) {
-        current.evidence.push(evidence)
-      }
-    }
-    current.confidence = strongerConfidence(current.confidence, item.confidence)
-    map.set(key, current)
-  }
-  return [...map.values()]
-}
-
-function suppressFrontendFallbackDuplicates(items) {
-  if (!Array.isArray(items) || !items.length) {
-    return []
-  }
-
-  const knownNames = new Set(
-    items
-      .filter(item => item?.category === '前端库' && !isFrontendFallback(item))
-      .map(item => normalizeDynamicFallbackTechName(item.name))
-      .filter(Boolean)
-  )
-  if (!knownNames.size) {
-    return items
-  }
-
-  return items.filter(item => !isFrontendFallback(item) || !knownNames.has(normalizeDynamicFallbackTechName(item.name)))
-}
-
-function isFrontendFallback(item) {
-  return item?.category === '前端库' && /^疑似前端库:/i.test(String(item?.name || '').trim())
-}
-
-function suppressDuplicateWebsiteProgramCategories(items) {
-  if (!Array.isArray(items) || !items.length) {
-    return []
-  }
-
-  const websiteProgramNames = new Set(
-    items
-      .filter(item => item?.category === '网站程序')
-      .map(item => normalizeTechName(item.name))
-      .filter(Boolean)
-  )
-  if (!websiteProgramNames.size) {
-    return items
-  }
-
-  return items.filter(item => item?.category !== 'CMS / 电商平台' || !websiteProgramNames.has(normalizeTechName(item.name)))
-}
-
-function suppressWordPressThemeDirectoryFallbacks(items) {
-  if (!Array.isArray(items) || !items.length) {
-    return []
-  }
-
-  const styleHeaderSlugs = new Set(items.map(extractWordPressStyleThemeSlug).filter(Boolean))
-  if (!styleHeaderSlugs.size) {
-    return items
-  }
-
-  return items.filter(item => {
-    const directorySlug = extractWordPressDirectoryThemeSlug(item)
-    return !directorySlug || !styleHeaderSlugs.has(directorySlug)
-  })
-}
-
-function extractWordPressStyleThemeSlug(item) {
-  if (String(item?.category || '') !== '主题 / 模板') {
-    return ''
-  }
-  const evidenceText = cleanStringArray(item?.evidence).join('\n')
-  if (item?.source !== '主题样式表' && !/WordPress style\.css 主题头/i.test(evidenceText)) {
-    return ''
-  }
-  const slug =
-    item.themeSlug ||
-    evidenceText.match(/目录:\s*([^，,\s]+)/)?.[1] ||
-    evidenceText.match(/\/wp-content\/themes\/([^/?#"' <>)]+)\/style\.css/i)?.[1]
-  return normalizeWordPressThemeSlug(slug)
-}
-
-function extractWordPressDirectoryThemeSlug(item) {
-  if (String(item?.category || '') !== '主题 / 模板') {
-    return ''
-  }
-  const nameMatch = String(item?.name || '').match(/^WordPress 主题:\s*(.+)$/i)
-  if (!nameMatch) {
-    return ''
-  }
-
-  const evidenceText = cleanStringArray(item?.evidence).join('\n')
-  if (!isWordPressThemeDirectoryFallbackEvidence(evidenceText)) {
-    return ''
-  }
-
-  const nameSlug = normalizeWordPressThemeSlug(nameMatch[1])
-  const evidenceSlug = normalizeWordPressThemeSlug(evidenceText.match(/\/wp-content\/themes\/([^/?#"' <>)]+)/i)?.[1])
-  if (nameSlug && evidenceSlug && nameSlug !== evidenceSlug) {
-    return ''
-  }
-  return evidenceSlug || nameSlug
-}
-
-function isWordPressThemeDirectoryFallbackEvidence(evidenceText) {
-  return /(?:资源或源码路径包含|动态资源路径包含)/i.test(evidenceText) && /\/wp-content\/themes\//i.test(evidenceText)
-}
-
-function normalizeWordPressThemeSlug(value) {
-  return cleanWordPressThemeSlug(value).toLowerCase()
-}
-
-function strongerConfidence(a, b) {
-  const ranks = { 高: 3, 中: 2, 低: 1 }
-  return (ranks[b] || 1) > (ranks[a] || 1) ? b : a
-}
-
-function shortHeaderUrl(raw) {
-  try {
-    const url = new URL(raw)
-    return `${url.hostname}${url.pathname}`.slice(0, 120)
-  } catch {
-    return String(raw).slice(0, 120)
-  }
 }
 
 function buildHeaderRecord(details, headerRules, settings) {
