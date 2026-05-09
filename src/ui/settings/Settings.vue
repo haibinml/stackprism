@@ -13,6 +13,7 @@
         </p>
       </div>
       <div class="header-actions">
+        <button type="button" :title="`主题：${themeLabel(theme)}（点击切换）`" @click="toggleTheme">主题：{{ themeLabel(theme) }}</button>
         <button type="button" @click="openHelp">使用说明</button>
         <button type="button" class="primary" @click="saveSettings">保存设置</button>
         <button type="button" @click="resetSettings">恢复默认</button>
@@ -170,6 +171,7 @@
   import { buildRuleContributionUrl } from '@/utils/build-issue-url'
   import { REPOSITORY_URL, SETTINGS_STORAGE_KEY, STATUS_HIDE_DELAY } from '@/utils/constants'
   import { ALLOWED_CONFIDENCES, ALLOWED_MATCH_TARGETS, ALLOWED_MATCH_TYPES, CUSTOM_RULE_LIMITS } from '@/types/settings'
+  import { cycleTheme, getStoredTheme, setStoredTheme, themeLabel, type ThemeMode } from '@/utils/theme'
 
   const MATCH_TARGETS = [
     { value: 'url', label: '页面 URL' },
@@ -186,7 +188,14 @@
 
   const status = reactive({ message: '', type: '' as 'ok' | 'error' | '' })
   const version = ref('')
+  const theme = ref<ThemeMode>('auto')
   let statusTimer = 0
+
+  const toggleTheme = async () => {
+    const next = cycleTheme(theme.value)
+    theme.value = next
+    await setStoredTheme(next)
+  }
 
   const form = reactive({
     name: '',
@@ -654,6 +663,7 @@
 
   onMounted(async () => {
     version.value = chrome.runtime.getManifest?.()?.version || ''
+    theme.value = await getStoredTheme()
     state.settings = await loadSettings()
     syncFromSettings()
     applyCustomCss(state.settings.customCss)

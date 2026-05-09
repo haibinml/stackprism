@@ -9,6 +9,7 @@
         <p class="url">{{ pageUrl }}</p>
       </div>
       <div class="actions">
+        <button type="button" :title="`主题：${themeLabel(theme)}（点击切换）`" @click="toggleTheme">{{ themeLabel(theme) }}</button>
         <button type="button" title="打开设置页" @click="openSettings">设置</button>
         <button type="button" title="重新检测" @click="runDetection({ force: true })">刷新</button>
         <button type="button" title="复制检测 JSON" @click="copyResult">复制</button>
@@ -124,6 +125,7 @@
   import { normalizeSettings } from '@/utils/normalize-settings'
   import { buildCorrectionIssueUrl } from '@/utils/build-issue-url'
   import { CACHE_REFRESH_DELAYS, FOCUS_CATEGORY, REPOSITORY_URL, RAW_PLACEHOLDER, SETTINGS_STORAGE_KEY } from '@/utils/constants'
+  import { cycleTheme, getStoredTheme, setStoredTheme, themeLabel, type ThemeMode } from '@/utils/theme'
 
   const RAW_LOADING_TEXT = '正在请求原始线索...'
 
@@ -149,6 +151,13 @@
     output: ''
   })
   const rawOutputText = ref(RAW_PLACEHOLDER)
+  const theme = ref<ThemeMode>('auto')
+
+  const toggleTheme = async () => {
+    const next = cycleTheme(theme.value)
+    theme.value = next
+    await setStoredTheme(next)
+  }
 
   const setStatus = (message: string) => {
     status.text = message
@@ -560,6 +569,7 @@
 
   onMounted(async () => {
     version.value = chrome.runtime.getManifest?.()?.version || ''
+    theme.value = await getStoredTheme()
     state.settings = await loadSettings()
     applyCustomCss(state.settings.customCss)
     await loadCachedDetection()

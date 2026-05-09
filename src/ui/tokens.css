@@ -5,17 +5,89 @@
   --popup-footer-height: 42px;
   --bg: #f5f7f8;
   --panel: #ffffff;
+  --panel-translucent: rgba(246, 247, 249, 0.96);
   --text: #17202a;
   --muted: #65717f;
   --line: #dfe4ea;
+  --tech-divider: #edf0f3;
   --accent: #0f766e;
   --accent-dark: #115e59;
   --warning: #9a6700;
   --danger: #b42318;
+  --danger-soft: #f1b5ad;
   --ok: #047857;
+  --confidence-high-bg: #e7f6f2;
+  --confidence-high-text: #047857;
+  --confidence-medium-bg: #fff4d6;
+  --confidence-medium-text: var(--warning);
+  --confidence-low-bg: #eef2f7;
+  --confidence-low-text: #52606d;
   --code-bg: #111827;
   --code-text: #d1d5db;
+  --code-inline-bg: #eef2f7;
+  --code-inline-text: #334155;
+  --dt-bg: #f8fafc;
   --shadow: 0 12px 30px rgba(20, 35, 50, 0.09);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --bg: #0f1419;
+    --panel: #1a1f26;
+    --panel-translucent: rgba(15, 20, 25, 0.92);
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --line: #2a3038;
+    --tech-divider: #232830;
+    --accent: #2dd4bf;
+    --accent-dark: #14b8a6;
+    --warning: #facc15;
+    --danger: #f87171;
+    --danger-soft: #7f1d1d;
+    --ok: #4ade80;
+    --confidence-high-bg: #0f3a30;
+    --confidence-high-text: #4ade80;
+    --confidence-medium-bg: #3a2e0a;
+    --confidence-medium-text: var(--warning);
+    --confidence-low-bg: #1f2937;
+    --confidence-low-text: #94a3b8;
+    --code-bg: #0a0e13;
+    --code-text: #cbd5e1;
+    --code-inline-bg: #1f2937;
+    --code-inline-text: #cbd5e1;
+    --dt-bg: #1f2937;
+    --shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0f1419;
+  --panel: #1a1f26;
+  --panel-translucent: rgba(15, 20, 25, 0.92);
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --line: #2a3038;
+  --tech-divider: #232830;
+  --accent: #2dd4bf;
+  --accent-dark: #14b8a6;
+  --warning: #facc15;
+  --danger: #f87171;
+  --danger-soft: #7f1d1d;
+  --ok: #4ade80;
+  --confidence-high-bg: #0f3a30;
+  --confidence-high-text: #4ade80;
+  --confidence-medium-bg: #3a2e0a;
+  --confidence-medium-text: var(--warning);
+  --confidence-low-bg: #1f2937;
+  --confidence-low-text: #94a3b8;
+  --code-bg: #0a0e13;
+  --code-text: #cbd5e1;
+  --code-inline-bg: #1f2937;
+  --code-inline-text: #cbd5e1;
+  --dt-bg: #1f2937;
+  --shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
 * {
