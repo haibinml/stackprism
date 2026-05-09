@@ -6,7 +6,7 @@ hero:
   text: 看清网页的技术栈
   tagline: 在浏览器扩展弹窗里识别前端框架、UI 库、CDN、SaaS、统计、登录、支付与网站程序，离线规则、毫秒级响应。
   image:
-    src: /logo.svg
+    src: /icon.svg
     alt: StackPrism
   actions:
     - theme: brand

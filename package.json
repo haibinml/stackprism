@@ -1,7 +1,7 @@
 {
   "name": "stackprism",
   "private": true,
-  "version": "1.0.93",
+  "version": "1.0.94",
   "type": "module",
   "description": "StackPrism 用于检测网页前端、后端、CDN、SaaS、广告营销、统计、登录、支付、网站程序和主题模板线索。",
   "scripts": {
@@ -10,8 +10,9 @@
     "build:injected": "node build-scripts/build-injected.mjs",
     "build": "pnpm run build:injected && vite build",
     "dev": "pnpm run build:injected && vite",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
+    "docs:assets": "node build-scripts/sync-docs-assets.mjs",
+    "docs:dev": "pnpm run docs:assets && vitepress dev docs",
+    "docs:build": "pnpm run docs:assets && vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {

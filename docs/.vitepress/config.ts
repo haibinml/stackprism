@@ -8,7 +8,7 @@ export default defineConfig({
   lastUpdated: true,
   head: [['meta', { name: 'theme-color', content: '#0f766e' }]],
   themeConfig: {
-    logo: '/logo.svg',
+    logo: '/icon.svg',
     nav: [
       { text: '使用指南', link: '/guide/' },
       { text: '配置指南', link: '/config/' },
