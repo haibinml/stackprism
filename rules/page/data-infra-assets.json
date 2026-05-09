@@ -1,0 +1,737 @@
+{
+  "page": {
+    "websitePrograms": [
+      {
+        "category": "网站程序",
+        "name": "Apache Solr Admin",
+        "kind": "搜索引擎 / 管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "/solr/",
+          "solr"
+        ],
+        "patterns": [
+          "(?:^|/)solr/(?:css|js|img)/(?:angular|solr|cloud)[^\\s\"'<>]*",
+          "solr-admin[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Elasticvue",
+        "kind": "Elasticsearch 管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "elasticvue"
+        ],
+        "patterns": [
+          "elasticvue[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Dejavu",
+        "kind": "Elasticsearch 管理面板",
+        "confidence": "中",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "dejavu"
+        ],
+        "patterns": [
+          "dejavu[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Cerebro",
+        "kind": "Elasticsearch 管理面板",
+        "confidence": "中",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "cerebro"
+        ],
+        "patterns": [
+          "cerebro[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Meilisearch",
+        "kind": "搜索引擎",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "meilisearch"
+        ],
+        "patterns": [
+          "meilisearch[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Typesense",
+        "kind": "搜索引擎",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "typesense"
+        ],
+        "patterns": [
+          "typesense[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "ZincSearch",
+        "kind": "搜索引擎 / 日志搜索",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "zincsearch"
+        ],
+        "patterns": [
+          "zincsearch[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Qdrant",
+        "kind": "向量数据库",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "qdrant"
+        ],
+        "patterns": [
+          "qdrant[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Weaviate",
+        "kind": "向量数据库",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "weaviate"
+        ],
+        "patterns": [
+          "weaviate[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Milvus Attu",
+        "kind": "向量数据库管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "milvus",
+          "attu"
+        ],
+        "patterns": [
+          "(?:milvus|attu)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Chroma",
+        "kind": "向量数据库",
+        "confidence": "中",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "chroma"
+        ],
+        "patterns": [
+          "chroma[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "RedisInsight",
+        "kind": "Redis 管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "redisinsight"
+        ],
+        "patterns": [
+          "redisinsight[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Redis Commander",
+        "kind": "Redis 管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "redis-commander"
+        ],
+        "patterns": [
+          "redis-commander[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "phpRedisAdmin",
+        "kind": "Redis 管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "phpredisadmin"
+        ],
+        "patterns": [
+          "phpredisadmin[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Mongo Express",
+        "kind": "MongoDB 管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "mongo-express"
+        ],
+        "patterns": [
+          "mongo-express[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Mongoku",
+        "kind": "MongoDB 管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "mongoku"
+        ],
+        "patterns": [
+          "mongoku[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "CouchDB Fauxton",
+        "kind": "CouchDB 管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "/_utils/",
+          "fauxton"
+        ],
+        "patterns": [
+          "(?:^|/)_utils/(?:dashboard|fauxton|js|css)[^\\s\"'<>]*",
+          "fauxton[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "ArangoDB",
+        "kind": "多模型数据库管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "arangodb",
+          "/_db/_system/_admin/"
+        ],
+        "patterns": [
+          "(?:^|/)_db/_system/_admin/(?:aardvark|html|js|css)[^\\s\"'<>]*",
+          "arangodb[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Neo4j Browser",
+        "kind": "图数据库管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "neo4j-browser",
+          "neo4j"
+        ],
+        "patterns": [
+          "neo4j-browser[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+          "neo4j[^\\s\"'<>]*browser[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "OrientDB Studio",
+        "kind": "图数据库管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "orientdb",
+          "studio"
+        ],
+        "patterns": [
+          "orientdb[^\\s\"'<>]*studio[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "QuestDB Console",
+        "kind": "时序数据库管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "questdb"
+        ],
+        "patterns": [
+          "questdb[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "InfluxDB UI",
+        "kind": "时序数据库管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "influxdb"
+        ],
+        "patterns": [
+          "influxdb[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Chronograf",
+        "kind": "时序数据库管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "chronograf"
+        ],
+        "patterns": [
+          "chronograf[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "ClickHouse Tabix",
+        "kind": "ClickHouse 管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "tabix"
+        ],
+        "patterns": [
+          "tabix[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Bytebase",
+        "kind": "数据库变更管理",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "bytebase"
+        ],
+        "patterns": [
+          "bytebase[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "CloudBeaver",
+        "kind": "数据库管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "cloudbeaver"
+        ],
+        "patterns": [
+          "cloudbeaver[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "AdminMongo",
+        "kind": "MongoDB 管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "adminmongo"
+        ],
+        "patterns": [
+          "adminmongo[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "RabbitMQ Management",
+        "kind": "消息队列管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "/js/ejs-",
+          "rabbitmq"
+        ],
+        "patterns": [
+          "rabbitmq[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+          "(?:^|/)js/ejs-[^\\s\"'<>]*\\.js(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Kafka UI",
+        "kind": "Kafka 管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "kafka-ui"
+        ],
+        "patterns": [
+          "kafka-ui[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Redpanda Console",
+        "kind": "Kafka / Redpanda 管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "redpanda"
+        ],
+        "patterns": [
+          "redpanda[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "AKHQ",
+        "kind": "Kafka 管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "akhq"
+        ],
+        "patterns": [
+          "akhq[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Kafdrop",
+        "kind": "Kafka 管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "kafdrop"
+        ],
+        "patterns": [
+          "kafdrop[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "CMAK",
+        "kind": "Kafka 管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "cmak",
+          "kafka-manager"
+        ],
+        "patterns": [
+          "(?:cmak|kafka-manager)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Apache Pulsar Manager",
+        "kind": "Pulsar 管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "pulsar-manager"
+        ],
+        "patterns": [
+          "pulsar-manager[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "EMQX Dashboard",
+        "kind": "MQTT 管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "emqx"
+        ],
+        "patterns": [
+          "emqx[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "VerneMQ Dashboard",
+        "kind": "MQTT 管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "vernemq"
+        ],
+        "patterns": [
+          "vernemq[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "HiveMQ",
+        "kind": "MQTT 管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "hivemq"
+        ],
+        "patterns": [
+          "hivemq[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "NATS Surveyor",
+        "kind": "消息系统监控",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "nats-surveyor"
+        ],
+        "patterns": [
+          "nats-surveyor[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Airbyte",
+        "kind": "数据集成 / ELT",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "airbyte"
+        ],
+        "patterns": [
+          "airbyte[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Prefect",
+        "kind": "数据工作流",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "prefect"
+        ],
+        "patterns": [
+          "prefect[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Temporal",
+        "kind": "工作流编排",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "temporal"
+        ],
+        "patterns": [
+          "temporal[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Kestra",
+        "kind": "数据编排 / 工作流",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "kestra"
+        ],
+        "patterns": [
+          "kestra[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Apache NiFi",
+        "kind": "数据流处理",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "nifi"
+        ],
+        "patterns": [
+          "(?:^|/)nifi/(?:assets|css|js|images)(?:/|[?#]|$)",
+          "nifi[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Apache Flink Dashboard",
+        "kind": "流处理 / 任务面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "flink"
+        ],
+        "patterns": [
+          "flink[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Apache Spark UI",
+        "kind": "大数据 / 任务面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "spark-ui",
+          "spark"
+        ],
+        "patterns": [
+          "spark-ui[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+          "(?:^|/)static/spark[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Apache Hadoop YARN",
+        "kind": "大数据 / 资源管理",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "yarn"
+        ],
+        "patterns": [
+          "hadoop-yarn[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+          "yarn[^\\s\"'<>]*resource-manager[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Apache HBase UI",
+        "kind": "大数据 / 数据库面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "hbase"
+        ],
+        "patterns": [
+          "hbase[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Apache Druid",
+        "kind": "OLAP / 实时分析",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "druid-console"
+        ],
+        "patterns": [
+          "druid-console[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Apache Pinot",
+        "kind": "OLAP / 实时分析",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "pinot"
+        ],
+        "patterns": [
+          "pinot[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "Ceph Dashboard",
+        "kind": "分布式存储管理面板",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "ceph"
+        ],
+        "patterns": [
+          "ceph[^\\s\"'<>]*dashboard[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      },
+      {
+        "category": "网站程序",
+        "name": "SeaweedFS",
+        "kind": "分布式文件系统",
+        "confidence": "高",
+        "matchType": "regex",
+        "resourceOnly": true,
+        "resourceHints": [
+          "seaweedfs"
+        ],
+        "patterns": [
+          "seaweedfs[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+        ]
+      }
+    ]
+  }
+}
