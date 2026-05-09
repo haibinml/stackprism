@@ -339,6 +339,7 @@
 
   const headerCount = computed(() => {
     if (!state.result) return 0
+    if (typeof state.result.headerCount === 'number') return state.result.headerCount
     const headers = state.result.headers
     if (Array.isArray(headers)) return headers.length
     return Object.keys(headers || {}).length
