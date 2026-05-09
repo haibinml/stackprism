@@ -4,7 +4,7 @@
 
 StackPrism 同时跑三条管道并把结果合并：
 
-```
+```text
 ┌──────────────────────────────────────────────────────────┐
 │ 管道 A：响应头 (chrome.webRequest)                        │
 │   - background webRequest.onHeadersReceived              │
@@ -35,7 +35,7 @@ StackPrism 同时跑三条管道并把结果合并：
 
 ## 数据流：从触发到弹窗显示
 
-```
+```text
 用户点击扩展图标
   ↓
 弹窗 mount
@@ -63,7 +63,7 @@ bg 返回 PopupResult
   ↓
 弹窗 setState.result，展示
 
-⏰ 后续 background 还会持续接收 webRequest 响应头、动态快照等增量更新，
+注意：后续 background 还会持续接收 webRequest 响应头、动态快照等增量更新，
 每次更新都重新写 popup:{tabId} 缓存
   ↓
 chrome.storage.onChanged 触发 popup 端 onStorageChange
@@ -73,7 +73,7 @@ chrome.storage.onChanged 触发 popup 端 onStorageChange
 
 ## 主动检测时机
 
-弹窗里点「↻刷新」会触发 `START_BACKGROUND_DETECTION` 消息：
+弹窗里点「刷新」会触发 `START_BACKGROUND_DETECTION` 消息：
 
 ```ts
 // background/detection.ts
@@ -121,7 +121,7 @@ background 端 `dynamic-snapshot.ts`：
 
 每条 rule 在三个层面被使用：
 
-```
+```text
 detectFromXxx(snapshot, rules)
   for (const rule of rules):
     1. matchesRuleTextHints(rule, context)      ─ 业务侧 resourceHints 预过滤

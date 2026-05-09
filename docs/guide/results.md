@@ -16,7 +16,7 @@
 
 最多 4 行说明插件依据什么做出判断，比如：
 
-```
+```text
 - DOM 节点存在 React Fiber 标记
 - 资源 URL 匹配 unpkg.com/react@18.2.0/umd/react.production.min.js
 - 响应头 X-Powered-By: Next.js

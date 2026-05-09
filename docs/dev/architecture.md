@@ -2,7 +2,7 @@
 
 ## 目录结构
 
-```
+```text
 stackprism/
 ├─ src/
 │  ├─ manifest.config.ts        # @crxjs/vite-plugin 用的 MV3 manifest 定义
@@ -64,7 +64,7 @@ stackprism/
 
 Chrome 扩展有四种执行环境，StackPrism 全部用上：
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. Service Worker (ESM module)                              │
 │    src/background/*.ts                                       │

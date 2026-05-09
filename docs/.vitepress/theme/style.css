@@ -111,6 +111,16 @@
   box-shadow: 0 12px 32px rgba(45, 212, 191, 0.18);
 }
 
+/* feature icon 容器：图标走品牌色 + svg stroke 用 currentColor */
+.VPFeature .icon {
+  color: var(--vp-c-brand-1);
+}
+
+.VPFeature .icon svg {
+  width: 26px;
+  height: 26px;
+}
+
 /* 中文阅读：行高与字号微调 */
 :root {
   --vp-layout-max-width: 1440px;

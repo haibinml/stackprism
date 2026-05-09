@@ -6,7 +6,7 @@
 
 每行一个技术名称，名称大小写不敏感、首尾空格自动去除：
 
-```
+```text
 Google Analytics
 百度统计
 WordPress 插件: akismet
@@ -37,7 +37,7 @@ Cloudflare
 
 假设你只想看到非 Cloudflare 的 CDN，又想保留所有 CDN 分类下的检测。设置：
 
-```
+```text
 Cloudflare
 ```
 

@@ -28,18 +28,18 @@
 }
 ```
 
-| 字段         | 类型                     | 必填 | 说明                                                                    |
-| ------------ | ------------------------ | ---- | ----------------------------------------------------------------------- |
-| `name`       | string                   | ✅   | 弹窗显示名                                                              |
-| `category`   | string                   |      | 分类，默认 `其他库`                                                     |
-| `kind`       | string                   |      | 类型说明，默认 `自定义规则`                                             |
-| `confidence` | `"高"` / `"中"` / `"低"` |      | 默认 `中`                                                               |
-| `matchType`  | `"keyword"` / `"regex"`  |      | 默认 `regex`                                                            |
-| `patterns`   | string[]                 | ⚠    | 三选一（patterns / selectors / globals 至少有一个非空）                 |
-| `selectors`  | string[]                 | ⚠    | CSS 选择器列表                                                          |
-| `globals`    | string[]                 | ⚠    | 全局变量名列表（`window.x.y` 写成 `x.y`）                               |
-| `matchIn`    | string[]                 |      | `url` / `resources` / `html` / `headers` / `dynamic` 任意组合，默认全选 |
-| `url`        | string                   |      | 必须 `http(s)://`，可空                                                 |
+| 字段         | 类型                     | 必填   | 说明                                                                    |
+| ------------ | ------------------------ | ------ | ----------------------------------------------------------------------- |
+| `name`       | string                   | 是     | 弹窗显示名                                                              |
+| `category`   | string                   |        | 分类，默认 `其他库`                                                     |
+| `kind`       | string                   |        | 类型说明，默认 `自定义规则`                                             |
+| `confidence` | `"高"` / `"中"` / `"低"` |        | 默认 `中`                                                               |
+| `matchType`  | `"keyword"` / `"regex"`  |        | 默认 `regex`                                                            |
+| `patterns`   | string[]                 | 三选一 | 三选一（patterns / selectors / globals 至少有一个非空）                 |
+| `selectors`  | string[]                 | 三选一 | CSS 选择器列表                                                          |
+| `globals`    | string[]                 | 三选一 | 全局变量名列表（`window.x.y` 写成 `x.y`）                               |
+| `matchIn`    | string[]                 |        | `url` / `resources` / `html` / `headers` / `dynamic` 任意组合，默认全选 |
+| `url`        | string                   |        | 必须 `http(s)://`，可空                                                 |
 
 ## 操作按钮
 

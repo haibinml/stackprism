@@ -1,6 +1,6 @@
 # 配置指南
 
-设置页可以通过弹窗顶部的 ⚙ 图标打开，或者在 `chrome://extensions/` 找到 StackPrism 卡片点「详情 → 扩展程序选项」。
+设置页可以通过弹窗顶部的「设置」按钮打开，或者在 `chrome://extensions/` 找到 StackPrism 卡片点「详情 → 扩展程序选项」。
 
 设置页分四个 panel：
 
