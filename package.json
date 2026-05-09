@@ -8,7 +8,7 @@
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint src",
     "build:injected": "node build-scripts/build-injected.mjs",
-    "build": "pnpm run build:injected && vite build",
+    "build": "pnpm run build:injected && vite build && node build-scripts/minify-json.mjs",
     "dev": "pnpm run build:injected && vite"
   },
   "devDependencies": {
