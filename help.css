@@ -96,7 +96,7 @@ h3 {
   margin-bottom: 4px;
 }
 
-p + p {
+p+p {
   margin-top: 8px;
 }
 

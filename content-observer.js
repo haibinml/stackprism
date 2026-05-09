@@ -1,4 +1,4 @@
-(() => {
+;(() => {
   const MAX_ITEMS = 300
   const MAX_DOM_MARKERS = 120
   const SEND_DELAY = 900
@@ -192,7 +192,9 @@
   function collectFromElement(element) {
     let changed = false
     changed = collectElementIfRelevant(element) || changed
-    for (const node of element.querySelectorAll?.('script[src], link[href], iframe[src], [id], [class], [data-v-app], [ng-version], astro-island, astro-slot') || []) {
+    for (const node of element.querySelectorAll?.(
+      'script[src], link[href], iframe[src], [id], [class], [data-v-app], [ng-version], astro-island, astro-slot'
+    ) || []) {
       changed = collectElementIfRelevant(node) || changed
     }
     return changed

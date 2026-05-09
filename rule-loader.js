@@ -1,4 +1,4 @@
-(function (global) {
+;(function (global) {
   const RULE_INDEX_PATH = 'rules/index.json'
 
   async function loadStackPrismRules() {

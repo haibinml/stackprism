@@ -112,8 +112,10 @@
             <dt>匹配方式</dt>
             <dd>关键词</dd>
             <dt>匹配规则</dt>
-            <dd><pre>mycms
-X-Generator: MyCMS</pre></dd>
+            <dd>
+              <pre>mycms
+X-Generator: MyCMS</pre>
+            </dd>
           </dl>
         </div>
         <p>解释：以后网页里只要出现 <code>mycms</code> 这个字，插件就会显示 MyCMS。</p>
@@ -131,7 +133,9 @@ X-Generator: MyCMS</pre></dd>
             <dt>匹配方式</dt>
             <dd>关键词</dd>
             <dt>匹配规则</dt>
-            <dd><pre>/wp-content/themes/oceanwp/</pre></dd>
+            <dd>
+              <pre>/wp-content/themes/oceanwp/</pre>
+            </dd>
           </dl>
         </div>
         <p>解释：看到这个主题目录，就显示 <code>WordPress 主题: oceanwp</code>。</p>
@@ -151,8 +155,10 @@ X-Generator: MyCMS</pre></dd>
             <dt>匹配方式</dt>
             <dd>关键词</dd>
             <dt>匹配规则</dt>
-            <dd><pre>stats.example.com
-tracker.js</pre></dd>
+            <dd>
+              <pre>stats.example.com
+tracker.js</pre>
+            </dd>
           </dl>
         </div>
         <p>提醒：<code>tracker.js</code> 这个名字比较常见，可能误报。更稳的写法是只写 <code>stats.example.com</code>。</p>
@@ -172,8 +178,10 @@ tracker.js</pre></dd>
             <dt>匹配方式</dt>
             <dd>关键词</dd>
             <dt>匹配规则</dt>
-            <dd><pre>pay.example.com
-examplepay-sdk</pre></dd>
+            <dd>
+              <pre>pay.example.com
+examplepay-sdk</pre>
+            </dd>
           </dl>
         </div>
         <p>测试方法：保存规则后，刷新网页，再点一次网页里的支付按钮，然后重新打开插件看结果。</p>
@@ -187,7 +195,9 @@ examplepay-sdk</pre></dd>
             <dt>匹配方式</dt>
             <dd>正则表达式</dd>
             <dt>匹配规则</dt>
-            <dd><pre>examplecms-[0-9.]+\.js</pre></dd>
+            <dd>
+              <pre>examplecms-[0-9.]+\.js</pre>
+            </dd>
           </dl>
         </div>
         <p>大白话解释：<code>[0-9.]</code> 表示数字和点，<code>+</code> 表示前面的东西可以出现很多次。</p>

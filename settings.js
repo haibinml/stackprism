@@ -129,9 +129,15 @@ function cleanCustomRules(value) {
   }
   return value
     .map(rule => ({
-      name: String(rule?.name || '').trim().slice(0, 120),
-      category: String(rule?.category || '其他库').trim().slice(0, 80),
-      kind: String(rule?.kind || '自定义规则').trim().slice(0, 120),
+      name: String(rule?.name || '')
+        .trim()
+        .slice(0, 120),
+      category: String(rule?.category || '其他库')
+        .trim()
+        .slice(0, 80),
+      kind: String(rule?.kind || '自定义规则')
+        .trim()
+        .slice(0, 120),
       confidence: ALLOWED_CONFIDENCES.includes(rule?.confidence) ? rule.confidence : '中',
       matchType: rule?.matchType === 'keyword' ? 'keyword' : 'regex',
       patterns: cleanStringArray(rule?.patterns).slice(0, 60),
@@ -697,6 +703,7 @@ function showStatus(message, type = '') {
 
 function showValidationErrors(errors) {
   const visibleErrors = errors.slice(0, 6)
-  const more = errors.length > visibleErrors.length ? `\n还有 ${errors.length - visibleErrors.length} 个问题，请先修正上面的问题再保存。` : ''
+  const more =
+    errors.length > visibleErrors.length ? `\n还有 ${errors.length - visibleErrors.length} 个问题，请先修正上面的问题再保存。` : ''
   showStatus(`规则语法检查未通过：\n${visibleErrors.join('\n')}${more}`, 'error')
 }

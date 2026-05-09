@@ -107,7 +107,10 @@ function detectPageTechnologies(ruleConfig = {}) {
     return {
       names: orderedNames,
       values,
-      text: orderedNames.map(name => `${name}: ${values[name] || ''}`).join('\n').toLowerCase()
+      text: orderedNames
+        .map(name => `${name}: ${values[name] || ''}`)
+        .join('\n')
+        .toLowerCase()
     }
   }
 
@@ -640,7 +643,10 @@ ${html}`
       return { confidence: '高', evidence: `存在 window.${globalName}` }
     }
 
-    const selector = !ruleResourceOnly && shouldMatchTarget(rule, 'selectors') ? (rule.selectors || []).find(selectorText => hasSelector(selectorText)) : null
+    const selector =
+      !ruleResourceOnly && shouldMatchTarget(rule, 'selectors')
+        ? (rule.selectors || []).find(selectorText => hasSelector(selectorText))
+        : null
     if (selector) {
       return { confidence: '高', evidence: `DOM 匹配 ${selector}` }
     }

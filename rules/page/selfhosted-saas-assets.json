@@ -857,7 +857,7 @@
         "resourceHints": [
           "misskey"
         ],
- "patterns": [
+        "patterns": [
           "misskey[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
         ]
       },
