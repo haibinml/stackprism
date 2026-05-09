@@ -8,567 +8,379 @@
       "rules": [
         {
           "name": "Cloudflare CDN",
-          "patterns": [
-            "cdnjs\\.cloudflare\\.com|cloudflare\\.com\\/cdn-cgi|cloudflarestream\\.com"
-          ]
+          "patterns": ["cdnjs\\.cloudflare\\.com|cloudflare\\.com\\/cdn-cgi|cloudflarestream\\.com"]
         },
         {
           "name": "Cloudflare Pages",
-          "patterns": [
-            "pages\\.dev"
-          ]
+          "patterns": ["pages\\.dev"]
         },
         {
           "name": "jsDelivr",
-          "patterns": [
-            "cdn\\.jsdelivr\\.net|fastly\\.jsdelivr\\.net"
-          ]
+          "patterns": ["cdn\\.jsdelivr\\.net|fastly\\.jsdelivr\\.net"]
         },
         {
           "name": "UNPKG",
-          "patterns": [
-            "unpkg\\.com"
-          ]
+          "patterns": ["unpkg\\.com"]
         },
         {
           "name": "cdnjs",
-          "patterns": [
-            "cdnjs\\.cloudflare\\.com"
-          ]
+          "patterns": ["cdnjs\\.cloudflare\\.com"]
         },
         {
           "name": "Google Hosted Libraries / Fonts",
-          "patterns": [
-            "ajax\\.googleapis\\.com|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com"
-          ]
+          "patterns": ["ajax\\.googleapis\\.com|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com"]
         },
         {
           "name": "Google Cloud CDN / Storage",
-          "patterns": [
-            "storage\\.googleapis\\.com|googleusercontent\\.com|gvt1\\.com"
-          ]
+          "patterns": ["storage\\.googleapis\\.com|googleusercontent\\.com|gvt1\\.com"]
         },
         {
           "name": "Microsoft Ajax CDN",
-          "patterns": [
-            "ajax\\.aspnetcdn\\.com"
-          ]
+          "patterns": ["ajax\\.aspnetcdn\\.com"]
         },
         {
           "name": "jQuery CDN",
-          "patterns": [
-            "code\\.jquery\\.com"
-          ]
+          "patterns": ["code\\.jquery\\.com"]
         },
         {
           "name": "BootstrapCDN / StackPath",
-          "patterns": [
-            "stackpath\\.bootstrapcdn\\.com|maxcdn\\.bootstrapcdn\\.com|netdna-ssl\\.com"
-          ]
+          "patterns": ["stackpath\\.bootstrapcdn\\.com|maxcdn\\.bootstrapcdn\\.com|netdna-ssl\\.com"]
         },
         {
           "name": "Skypack",
-          "patterns": [
-            "cdn\\.skypack\\.dev"
-          ]
+          "patterns": ["cdn\\.skypack\\.dev"]
         },
         {
           "name": "esm.sh",
-          "patterns": [
-            "esm\\.sh"
-          ]
+          "patterns": ["esm\\.sh"]
         },
         {
           "name": "JSPM CDN",
-          "patterns": [
-            "ga\\.jspm\\.io|jspm\\.dev"
-          ]
+          "patterns": ["ga\\.jspm\\.io|jspm\\.dev"]
         },
         {
           "name": "Pika CDN",
-          "patterns": [
-            "cdn\\.pika\\.dev"
-          ]
+          "patterns": ["cdn\\.pika\\.dev"]
         },
         {
           "name": "AWS CloudFront",
-          "patterns": [
-            "cloudfront\\.net"
-          ]
+          "patterns": ["cloudfront\\.net"]
         },
         {
           "name": "AWS S3 / Static Hosting",
-          "patterns": [
-            "s3[.-][a-z0-9-]+\\.amazonaws\\.com|s3\\.amazonaws\\.com"
-          ]
+          "patterns": ["s3[.-][a-z0-9-]+\\.amazonaws\\.com|s3\\.amazonaws\\.com"]
         },
         {
           "name": "Akamai",
-          "patterns": [
-            "akamaihd\\.net|akamaiedge\\.net|edgesuite\\.net|akamai\\.net|akamaized\\.net"
-          ]
+          "patterns": ["akamaihd\\.net|akamaiedge\\.net|edgesuite\\.net|akamai\\.net|akamaized\\.net"]
         },
         {
           "name": "Fastly",
-          "patterns": [
-            "fastly\\.net|fastlylb\\.net|map\\.fastly\\.net"
-          ]
+          "patterns": ["fastly\\.net|fastlylb\\.net|map\\.fastly\\.net"]
         },
         {
           "name": "Azure CDN / Front Door",
-          "patterns": [
-            "azureedge\\.net|azurefd\\.net|afd\\.azureedge\\.net|z01\\.azurefd\\.net"
-          ]
+          "patterns": ["azureedge\\.net|azurefd\\.net|afd\\.azureedge\\.net|z01\\.azurefd\\.net"]
         },
         {
           "name": "Bunny CDN",
-          "patterns": [
-            "b-cdn\\.net|bunnycdn\\.com"
-          ]
+          "patterns": ["b-cdn\\.net|bunnycdn\\.com"]
         },
         {
           "name": "KeyCDN",
-          "patterns": [
-            "kxcdn\\.com|keycdn\\.com"
-          ]
+          "patterns": ["kxcdn\\.com|keycdn\\.com"]
         },
         {
           "name": "CDN77",
-          "patterns": [
-            "cdn77\\.org|cdn77\\.com|rsc\\.cdn77\\.org"
-          ]
+          "patterns": ["cdn77\\.org|cdn77\\.com|rsc\\.cdn77\\.org"]
         },
         {
           "name": "Gcore CDN",
-          "patterns": [
-            "gcorelabs\\.com|gcdn\\.co|gcore\\.com"
-          ]
+          "patterns": ["gcorelabs\\.com|gcdn\\.co|gcore\\.com"]
         },
         {
           "name": "Edgio / Limelight",
-          "patterns": [
-            "llnwd\\.net|limelight\\.com|edgio\\.net|edgecastcdn\\.net"
-          ]
+          "patterns": ["llnwd\\.net|limelight\\.com|edgio\\.net|edgecastcdn\\.net"]
         },
         {
           "name": "StackPath",
-          "patterns": [
-            "stackpathcdn\\.com|stackpathdns\\.com|stackpath\\.com"
-          ]
+          "patterns": ["stackpathcdn\\.com|stackpathdns\\.com|stackpath\\.com"]
         },
         {
           "name": "CacheFly",
-          "patterns": [
-            "cachefly\\.net"
-          ]
+          "patterns": ["cachefly\\.net"]
         },
         {
           "name": "Imperva / Incapsula",
-          "patterns": [
-            "incapsula\\.com|impervadns\\.net|imperva\\.com"
-          ]
+          "patterns": ["incapsula\\.com|impervadns\\.net|imperva\\.com"]
         },
         {
           "name": "Sucuri CDN",
-          "patterns": [
-            "sucuri\\.net|sucuricdn\\.com"
-          ]
+          "patterns": ["sucuri\\.net|sucuricdn\\.com"]
         },
         {
           "name": "BelugaCDN",
-          "patterns": [
-            "belugacdn\\.com"
-          ]
+          "patterns": ["belugacdn\\.com"]
         },
         {
           "name": "Medianova CDN",
-          "patterns": [
-            "mncdn\\.com|medianova\\.com"
-          ]
+          "patterns": ["mncdn\\.com|medianova\\.com"]
         },
         {
           "name": "NGENIX CDN",
-          "patterns": [
-            "ngenix\\.net"
-          ]
+          "patterns": ["ngenix\\.net"]
         },
         {
           "name": "CDNvideo",
-          "patterns": [
-            "cdnvideo\\.ru|cdnvideo\\.com"
-          ]
+          "patterns": ["cdnvideo\\.ru|cdnvideo\\.com"]
         },
         {
           "name": "Azion",
-          "patterns": [
-            "azioncdn\\.net|azionedge\\.net|azion\\.com"
-          ]
+          "patterns": ["azioncdn\\.net|azionedge\\.net|azion\\.com"]
         },
         {
           "name": "GoCache",
-          "patterns": [
-            "gocache\\.com\\.br|gocache\\.net"
-          ]
+          "patterns": ["gocache\\.com\\.br|gocache\\.net"]
         },
         {
           "name": "Section.io",
-          "patterns": [
-            "section\\.io|sectioncdn\\.com"
-          ]
+          "patterns": ["section\\.io|sectioncdn\\.com"]
         },
         {
           "name": "QUIC.cloud",
-          "patterns": [
-            "quic\\.cloud|quic\\.cloudns\\.net"
-          ]
+          "patterns": ["quic\\.cloud|quic\\.cloudns\\.net"]
         },
         {
           "name": "CDNsun",
-          "patterns": [
-            "cdnsun\\.com|cdnsun\\.net"
-          ]
+          "patterns": ["cdnsun\\.com|cdnsun\\.net"]
         },
         {
           "name": "Leaseweb CDN",
-          "patterns": [
-            "leasewebcdn\\.com|lswcdn\\.net"
-          ]
+          "patterns": ["leasewebcdn\\.com|lswcdn\\.net"]
         },
         {
           "name": "OVHcloud CDN",
-          "patterns": [
-            "ovhcdn\\.com|ovhstatic\\.com"
-          ]
+          "patterns": ["ovhcdn\\.com|ovhstatic\\.com"]
         },
         {
           "name": "Scaleway Object Storage / CDN",
-          "patterns": [
-            "scw\\.cloud|scaleway\\.com"
-          ]
+          "patterns": ["scw\\.cloud|scaleway\\.com"]
         },
         {
           "name": "Selectel CDN",
-          "patterns": [
-            "selectel\\.ru|selcdn\\.ru"
-          ]
+          "patterns": ["selectel\\.ru|selcdn\\.ru"]
         },
         {
           "name": "Yandex CDN",
-          "patterns": [
-            "yastatic\\.net|yandex\\.st"
-          ]
+          "patterns": ["yastatic\\.net|yandex\\.st"]
         },
         {
           "name": "VK CDN",
-          "patterns": [
-            "vk-cdn\\.net|userapi\\.com"
-          ]
+          "patterns": ["vk-cdn\\.net|userapi\\.com"]
         },
         {
           "name": "Naver Cloud CDN",
-          "patterns": [
-            "ncloud\\.com|ntruss\\.com|pstatic\\.net"
-          ]
+          "patterns": ["ncloud\\.com|ntruss\\.com|pstatic\\.net"]
         },
         {
           "name": "Kakao CDN",
-          "patterns": [
-            "kakaocdn\\.net"
-          ]
+          "patterns": ["kakaocdn\\.net"]
         },
         {
           "name": "FPT CDN",
-          "patterns": [
-            "fptcdn\\.net|fptcloud\\.com"
-          ]
+          "patterns": ["fptcdn\\.net|fptcloud\\.com"]
         },
         {
           "name": "Viettel CDN",
-          "patterns": [
-            "viettelcdn\\.vn|viettelidc\\.com\\.vn"
-          ]
+          "patterns": ["viettelcdn\\.vn|viettelidc\\.com\\.vn"]
         },
         {
           "name": "VNCDN",
-          "patterns": [
-            "vncdn\\.vn"
-          ]
+          "patterns": ["vncdn\\.vn"]
         },
         {
           "name": "BitGravity / Tata CDN",
-          "patterns": [
-            "bitgravity\\.com|bitgravity\\.net"
-          ]
+          "patterns": ["bitgravity\\.com|bitgravity\\.net"]
         },
         {
           "name": "Alibaba Cloud CDN",
-          "patterns": [
-            "alicdn\\.com|aliyuncs\\.com|alikunlun\\.com|taobaocdn\\.com|alicdn\\.cn"
-          ]
+          "patterns": ["alicdn\\.com|aliyuncs\\.com|alikunlun\\.com|taobaocdn\\.com|alicdn\\.cn"]
         },
         {
           "name": "Tencent Cloud CDN",
-          "patterns": [
-            "qcloudcdn\\.com|myqcloud\\.com|gtimg\\.com|tencent-cloud\\.net|tencentcs\\.com|tencentcdn\\.com"
-          ]
+          "patterns": ["qcloudcdn\\.com|myqcloud\\.com|gtimg\\.com|tencent-cloud\\.net|tencentcs\\.com|tencentcdn\\.com"]
         },
         {
           "name": "Baidu Cloud CDN",
-          "patterns": [
-            "bdstatic\\.com|baidustatic\\.com|bdimg\\.com|bcebos\\.com|yunjiasu-cdn\\.net"
-          ]
+          "patterns": ["bdstatic\\.com|baidustatic\\.com|bdimg\\.com|bcebos\\.com|yunjiasu-cdn\\.net"]
         },
         {
           "name": "Huawei Cloud CDN",
-          "patterns": [
-            "huaweicloud\\.com|huaweicloudcdn\\.com|cdnhwc\\d*\\.com|hwcdn\\.net"
-          ]
+          "patterns": ["huaweicloud\\.com|huaweicloudcdn\\.com|cdnhwc\\d*\\.com|hwcdn\\.net"]
         },
         {
           "name": "Kingsoft Cloud CDN",
-          "patterns": [
-            "ksyuncdn\\.com|ks-cdn\\.com|ksyun\\.com|ks-cdn\\d*\\.com"
-          ]
+          "patterns": ["ksyuncdn\\.com|ks-cdn\\.com|ksyun\\.com|ks-cdn\\d*\\.com"]
         },
         {
           "name": "Qiniu CDN",
-          "patterns": [
-            "qiniucdn\\.com|clouddn\\.com|qbox\\.me|qnssl\\.com|qiniu\\.com"
-          ]
+          "patterns": ["qiniucdn\\.com|clouddn\\.com|qbox\\.me|qnssl\\.com|qiniu\\.com"]
         },
         {
           "name": "UpYun",
-          "patterns": [
-            "upaiyun\\.com|upyun\\.com|upyunso\\.com"
-          ]
+          "patterns": ["upaiyun\\.com|upyun\\.com|upyunso\\.com"]
         },
         {
           "name": "ChinaCache",
-          "patterns": [
-            "chinacache\\.net|ccgslb\\.com\\.cn|ccgslb\\.net"
-          ]
+          "patterns": ["chinacache\\.net|ccgslb\\.com\\.cn|ccgslb\\.net"]
         },
         {
           "name": "Wangsu / CDNetworks",
-          "patterns": [
-            "cdnetworks\\.net|wangsu\\.com|wswebcdn\\.com|wscdns\\.com|panthercdn\\.com|qtlcdn\\.com|quantil\\.com"
-          ]
+          "patterns": ["cdnetworks\\.net|wangsu\\.com|wswebcdn\\.com|wscdns\\.com|panthercdn\\.com|qtlcdn\\.com|quantil\\.com"]
         },
         {
           "name": "BaishanCloud",
-          "patterns": [
-            "baishancloud\\.com|bsgslb\\.com|qingcdn\\.com"
-          ]
+          "patterns": ["baishancloud\\.com|bsgslb\\.com|qingcdn\\.com"]
         },
         {
           "name": "UCloud CDN",
-          "patterns": [
-            "ucloud\\.cn|ufileos\\.com|ucloudstack\\.com"
-          ]
+          "patterns": ["ucloud\\.cn|ufileos\\.com|ucloudstack\\.com"]
         },
         {
           "name": "JD Cloud CDN",
-          "patterns": [
-            "jcloudcs\\.com|jcloudedge\\.com|jdcloud-oss\\.com|jdcloud\\.com"
-          ]
+          "patterns": ["jcloudcs\\.com|jcloudedge\\.com|jdcloud-oss\\.com|jdcloud\\.com"]
         },
         {
           "name": "Volcengine / BytePlus CDN",
-          "patterns": [
-            "bytecdn\\.cn|byteimg\\.com|bytegoofy\\.com|volccdn\\.com|byteplus\\.com|volces\\.com"
-          ]
+          "patterns": ["bytecdn\\.cn|byteimg\\.com|bytegoofy\\.com|volccdn\\.com|byteplus\\.com|volces\\.com"]
         },
         {
           "name": "360 CDN / 奇舞团静态资源",
-          "patterns": [
-            "qhimg\\.com|qhres\\.com|baomitu\\.com|360tres\\.com"
-          ]
+          "patterns": ["qhimg\\.com|qhres\\.com|baomitu\\.com|360tres\\.com"]
         },
         {
           "name": "NetEase CDN",
-          "patterns": [
-            "nosdn\\.127\\.net|126\\.net|163cdn\\.com"
-          ]
+          "patterns": ["nosdn\\.127\\.net|126\\.net|163cdn\\.com"]
         },
         {
           "name": "Sina CDN",
-          "patterns": [
-            "sinaimg\\.cn|sinajs\\.cn|sina\\.com\\.cn\\/js"
-          ]
+          "patterns": ["sinaimg\\.cn|sinajs\\.cn|sina\\.com\\.cn\\/js"]
         },
         {
           "name": "BootCDN",
-          "patterns": [
-            "bootcdn\\.net|bootcss\\.com"
-          ]
+          "patterns": ["bootcdn\\.net|bootcss\\.com"]
         },
         {
           "name": "Staticfile CDN",
-          "patterns": [
-            "staticfile\\.org|staticfile\\.net"
-          ]
+          "patterns": ["staticfile\\.org|staticfile\\.net"]
         },
         {
           "name": "npmmirror CDN",
-          "patterns": [
-            "npmmirror\\.com|cdn\\.npmmirror\\.com"
-          ]
+          "patterns": ["npmmirror\\.com|cdn\\.npmmirror\\.com"]
         },
         {
           "name": "Vercel",
-          "patterns": [
-            "vercel\\.app|vercel-insights\\.com|_vercel"
-          ]
+          "patterns": ["vercel\\.app|vercel-insights\\.com|_vercel"]
         },
         {
           "name": "Netlify",
-          "patterns": [
-            "netlify\\.app|netlify\\.com"
-          ]
+          "patterns": ["netlify\\.app|netlify\\.com"]
         },
         {
           "name": "Firebase Hosting",
-          "patterns": [
-            "firebaseapp\\.com|web\\.app"
-          ]
+          "patterns": ["firebaseapp\\.com|web\\.app"]
         },
         {
           "name": "GitHub Pages / GitHub Assets",
-          "patterns": [
-            "github\\.io|githubusercontent\\.com|githubassets\\.com"
-          ]
+          "patterns": ["github\\.io|githubusercontent\\.com|githubassets\\.com"]
         },
         {
           "name": "GitLab Pages",
-          "patterns": [
-            "gitlab\\.io"
-          ]
+          "patterns": ["gitlab\\.io"]
         },
         {
           "name": "Render",
-          "patterns": [
-            "onrender\\.com"
-          ]
+          "patterns": ["onrender\\.com"]
         },
         {
           "name": "Fly.io",
-          "patterns": [
-            "fly\\.dev|fly\\.io"
-          ]
+          "patterns": ["fly\\.dev|fly\\.io"]
         },
         {
           "name": "Railway",
-          "patterns": [
-            "railway\\.app"
-          ]
+          "patterns": ["railway\\.app"]
         },
         {
           "name": "Heroku",
-          "patterns": [
-            "herokuapp\\.com|herokucdn\\.com"
-          ]
+          "patterns": ["herokuapp\\.com|herokucdn\\.com"]
         },
         {
           "name": "Deno Deploy",
-          "patterns": [
-            "deno\\.dev|deno\\.com"
-          ]
+          "patterns": ["deno\\.dev|deno\\.com"]
         },
         {
           "name": "Surge",
-          "patterns": [
-            "surge\\.sh"
-          ]
+          "patterns": ["surge\\.sh"]
         },
         {
           "name": "DigitalOcean App Platform / Spaces CDN",
-          "patterns": [
-            "ondigitalocean\\.app|cdn\\.digitaloceanspaces\\.com|digitaloceanspaces\\.com"
-          ]
+          "patterns": ["ondigitalocean\\.app|cdn\\.digitaloceanspaces\\.com|digitaloceanspaces\\.com"]
         },
         {
           "name": "Shopify CDN",
-          "patterns": [
-            "cdn\\.shopify\\.com|shopifycdn\\.net"
-          ]
+          "patterns": ["cdn\\.shopify\\.com|shopifycdn\\.net"]
         },
         {
           "name": "WordPress.com CDN",
-          "patterns": [
-            "wp\\.com|files\\.wordpress\\.com|i\\d\\.wp\\.com"
-          ]
+          "patterns": ["wp\\.com|files\\.wordpress\\.com|i\\d\\.wp\\.com"]
         },
         {
           "name": "Wix CDN",
-          "patterns": [
-            "wixstatic\\.com|parastorage\\.com"
-          ]
+          "patterns": ["wixstatic\\.com|parastorage\\.com"]
         },
         {
           "name": "Squarespace CDN",
-          "patterns": [
-            "static1\\.squarespace\\.com|squarespace-cdn\\.com"
-          ]
+          "patterns": ["static1\\.squarespace\\.com|squarespace-cdn\\.com"]
         },
         {
           "name": "Webflow CDN",
-          "patterns": [
-            "assets\\.website-files\\.com|global-uploads\\.webflow\\.com"
-          ]
+          "patterns": ["assets\\.website-files\\.com|global-uploads\\.webflow\\.com"]
         },
         {
           "name": "Cloudinary CDN",
-          "patterns": [
-            "res\\.cloudinary\\.com|cloudinary\\.com"
-          ]
+          "patterns": ["res\\.cloudinary\\.com|cloudinary\\.com"]
         },
         {
           "name": "Imgix",
-          "patterns": [
-            "imgix\\.net|ixlib="
-          ]
+          "patterns": ["imgix\\.net|ixlib="]
         },
         {
           "name": "ImageKit",
-          "patterns": [
-            "imagekit\\.io|ik\\.imagekit\\.io"
-          ]
+          "patterns": ["imagekit\\.io|ik\\.imagekit\\.io"]
         },
         {
           "name": "Sirv CDN",
-          "patterns": [
-            "sirv\\.com|sirvcdn\\.com"
-          ]
+          "patterns": ["sirv\\.com|sirvcdn\\.com"]
         },
         {
           "name": "Uploadcare CDN",
-          "patterns": [
-            "ucarecdn\\.com|uploadcare\\.com"
-          ]
+          "patterns": ["ucarecdn\\.com|uploadcare\\.com"]
         },
         {
           "name": "Contentful Assets CDN",
-          "patterns": [
-            "ctfassets\\.net|images\\.ctfassets\\.net"
-          ]
+          "patterns": ["ctfassets\\.net|images\\.ctfassets\\.net"]
         },
         {
           "name": "Sanity CDN",
-          "patterns": [
-            "cdn\\.sanity\\.io"
-          ]
+          "patterns": ["cdn\\.sanity\\.io"]
         },
         {
           "name": "Storyblok CDN",
-          "patterns": [
-            "a\\.storyblok\\.com|img2\\.storyblok\\.com"
-          ]
+          "patterns": ["a\\.storyblok\\.com|img2\\.storyblok\\.com"]
         },
         {
           "name": "Prismic CDN",
-          "patterns": [
-            "prismic\\.io|prismic\\.cdn"
-          ]
+          "patterns": ["prismic\\.io|prismic\\.cdn"]
         }
       ]
     }

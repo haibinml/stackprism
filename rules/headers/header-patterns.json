@@ -9,9 +9,7 @@
           {
             "name": "ASP.NET",
             "confidence": "高",
-            "patterns": [
-              "(?:^|\\n)x-aspnet(?:mvc)?-version:"
-            ],
+            "patterns": ["(?:^|\\n)x-aspnet(?:mvc)?-version:"],
             "evidence": "存在 x-aspnet-* 响应头"
           },
           {
@@ -21,128 +19,92 @@
             "rules": [
               {
                 "name": "Ruby on Rails",
-                "patterns": [
-                  "(?:^|\\n)x-runtime:"
-                ],
+                "patterns": ["(?:^|\\n)x-runtime:"],
                 "evidence": "存在 x-runtime 响应头"
               },
               {
                 "name": "ASP.NET",
-                "patterns": [
-                  "x-aspnet|asp\\.net|\\.aspx|\\.ashx"
-                ],
+                "patterns": ["x-aspnet|asp\\.net|\\.aspx|\\.ashx"],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
               {
                 "name": "Blazor",
-                "patterns": [
-                  "blazor"
-                ],
+                "patterns": ["blazor"],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
               {
                 "name": "Java Servlet",
-                "patterns": [
-                  "jsessionid|servlet|j2ee|jakarta"
-                ],
+                "patterns": ["jsessionid|servlet|j2ee|jakarta"],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
               {
                 "name": "Spring Boot / Spring MVC",
-                "patterns": [
-                  "spring|x-application-context"
-                ],
+                "patterns": ["spring|x-application-context"],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
               {
                 "name": "Ruby on Rails",
-                "patterns": [
-                  "rails|_rails|authenticity_token"
-                ],
+                "patterns": ["rails|_rails|authenticity_token"],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
               {
                 "name": "Django",
-                "patterns": [
-                  "django|csrftoken"
-                ],
+                "patterns": ["django|csrftoken"],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
               {
                 "name": "Flask",
-                "patterns": [
-                  "flask"
-                ],
+                "patterns": ["flask"],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
               {
                 "name": "FastAPI",
-                "patterns": [
-                  "fastapi|uvicorn|starlette"
-                ],
+                "patterns": ["fastapi|uvicorn|starlette"],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
               {
                 "name": "Laravel",
-                "patterns": [
-                  "laravel|laravel_session|xsrf-token"
-                ],
+                "patterns": ["laravel|laravel_session|xsrf-token"],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
               {
                 "name": "Symfony",
-                "patterns": [
-                  "symfony|sf_redirect|sf_cookie"
-                ],
+                "patterns": ["symfony|sf_redirect|sf_cookie"],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
               {
                 "name": "Yii",
-                "patterns": [
-                  "\\byii\\b|yii_csrf"
-                ],
+                "patterns": ["\\byii\\b|yii_csrf"],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
               {
                 "name": "CakePHP",
-                "patterns": [
-                  "cakephp|cakecsrf"
-                ],
+                "patterns": ["cakephp|cakecsrf"],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
               {
                 "name": "CodeIgniter",
-                "patterns": [
-                  "ci_session|codeigniter"
-                ],
+                "patterns": ["ci_session|codeigniter"],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
               {
                 "name": "Phoenix",
-                "patterns": [
-                  "phoenix|_csrf_token"
-                ],
+                "patterns": ["phoenix|_csrf_token"],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
               {
                 "name": "Go",
-                "patterns": [
-                  "gorilla\\.csrf|go-http-client|golang"
-                ],
+                "patterns": ["gorilla\\.csrf|go-http-client|golang"],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
               {
                 "name": "GraphQL",
-                "patterns": [
-                  "graphql"
-                ],
+                "patterns": ["graphql"],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
               {
                 "name": "gRPC",
-                "patterns": [
-                  "grpc"
-                ],
+                "patterns": ["grpc"],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               }
             ]
@@ -153,19 +115,14 @@
         "category": "CMS / 电商平台",
         "name": "Drupal",
         "confidence": "高",
-        "patterns": [
-          "(?:^|\\n)x-drupal-(?:cache|dynamic-cache):",
-          "x-generator:.*drupal"
-        ],
+        "patterns": ["(?:^|\\n)x-drupal-(?:cache|dynamic-cache):", "x-generator:.*drupal"],
         "evidence": "存在 Drupal 响应头或 x-generator 线索"
       },
       {
         "category": "CMS / 电商平台",
         "name": "WordPress",
         "confidence": "中",
-        "patterns": [
-          "(?:^|\\n)x-pingback:|x-generator:.*wordpress"
-        ],
+        "patterns": ["(?:^|\\n)x-pingback:|x-generator:.*wordpress"],
         "evidence": "存在 x-pingback 或 WordPress generator 响应头"
       },
       {
@@ -180,52 +137,32 @@
             "rules": [
               {
                 "name": "Cloudflare",
-                "patterns": [
-                  "(?:^|\\n)cf-(?:ray|cache-status|request-id|polished):",
-                  "server:.*cloudflare"
-                ],
+                "patterns": ["(?:^|\\n)cf-(?:ray|cache-status|request-id|polished):", "server:.*cloudflare"],
                 "evidence": "存在 Cloudflare 响应头"
               },
               {
                 "name": "Vercel",
-                "patterns": [
-                  "(?:^|\\n)x-vercel-id:",
-                  "(?:^|\\n)x-matched-path:",
-                  "server:.*vercel"
-                ],
+                "patterns": ["(?:^|\\n)x-vercel-id:", "(?:^|\\n)x-matched-path:", "server:.*vercel"],
                 "evidence": "存在 Vercel 响应头"
               },
               {
                 "name": "Netlify",
-                "patterns": [
-                  "(?:^|\\n)x-nf-request-id:"
-                ],
+                "patterns": ["(?:^|\\n)x-nf-request-id:"],
                 "evidence": "存在 x-nf-request-id 响应头"
               },
               {
                 "name": "AWS CloudFront",
-                "patterns": [
-                  "(?:^|\\n)x-amz-cf-(?:id|pop):",
-                  "x-cache:.*cloudfront",
-                  "via:.*cloudfront"
-                ],
+                "patterns": ["(?:^|\\n)x-amz-cf-(?:id|pop):", "x-cache:.*cloudfront", "via:.*cloudfront"],
                 "evidence": "存在 CloudFront 响应头"
               },
               {
                 "name": "Fastly",
-                "patterns": [
-                  "(?:^|\\n)x-fastly-request-id:",
-                  "x-served-by:.*fastly"
-                ],
+                "patterns": ["(?:^|\\n)x-fastly-request-id:", "x-served-by:.*fastly"],
                 "evidence": "存在 Fastly 响应头"
               },
               {
                 "name": "Akamai",
-                "patterns": [
-                  "(?:^|\\n)x-akamai-transformed:",
-                  "server:.*akamai",
-                  "via:.*akamai"
-                ],
+                "patterns": ["(?:^|\\n)x-akamai-transformed:", "server:.*akamai", "via:.*akamai"],
                 "evidence": "存在 Akamai 响应头"
               }
             ]
@@ -233,10 +170,7 @@
           {
             "name": "Varnish",
             "confidence": "中",
-            "patterns": [
-              "via:.*varnish",
-              "x-cache:.*varnish"
-            ],
+            "patterns": ["via:.*varnish", "x-cache:.*varnish"],
             "evidence": "via/x-cache 包含 Varnish"
           },
           {
@@ -246,233 +180,167 @@
             "rules": [
               {
                 "name": "Azure CDN / Front Door",
-                "patterns": [
-                  "x-azure-ref|x-msedge-ref|azureedge|azurefd|frontdoor"
-                ],
+                "patterns": ["x-azure-ref|x-msedge-ref|azureedge|azurefd|frontdoor"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Google Cloud CDN / Storage",
-                "patterns": [
-                  "x-goog-|google cloud cdn|storage\\.googleapis\\.com|googleusercontent"
-                ],
+                "patterns": ["x-goog-|google cloud cdn|storage\\.googleapis\\.com|googleusercontent"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Bunny CDN",
-                "patterns": [
-                  "bunnycdn|b-cdn\\.net|x-bunny"
-                ],
+                "patterns": ["bunnycdn|b-cdn\\.net|x-bunny"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "KeyCDN",
-                "patterns": [
-                  "keycdn|kxcdn"
-                ],
+                "patterns": ["keycdn|kxcdn"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "CDN77",
-                "patterns": [
-                  "cdn77"
-                ],
+                "patterns": ["cdn77"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Gcore CDN",
-                "patterns": [
-                  "gcore|gcdn\\.co"
-                ],
+                "patterns": ["gcore|gcdn\\.co"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Edgio / Limelight",
-                "patterns": [
-                  "edgio|limelight|llnwd|x-ec-|edgecast"
-                ],
+                "patterns": ["edgio|limelight|llnwd|x-ec-|edgecast"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "StackPath",
-                "patterns": [
-                  "stackpath"
-                ],
+                "patterns": ["stackpath"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "CacheFly",
-                "patterns": [
-                  "cachefly"
-                ],
+                "patterns": ["cachefly"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Imperva / Incapsula",
-                "patterns": [
-                  "x-iinfo|incapsula|imperva"
-                ],
+                "patterns": ["x-iinfo|incapsula|imperva"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Sucuri CDN",
-                "patterns": [
-                  "x-sucuri-|sucuri"
-                ],
+                "patterns": ["x-sucuri-|sucuri"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Alibaba Cloud CDN",
-                "patterns": [
-                  "x-oss-|aliyun|alicdn|alibaba|alikunlun"
-                ],
+                "patterns": ["x-oss-|aliyun|alicdn|alibaba|alikunlun"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Tencent Cloud CDN",
-                "patterns": [
-                  "x-cos-|x-tencent-|qcloud|tencent|myqcloud|gtimg"
-                ],
+                "patterns": ["x-cos-|x-tencent-|qcloud|tencent|myqcloud|gtimg"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Baidu Cloud CDN",
-                "patterns": [
-                  "x-bce-|baidu|bcebos|yunjiasu"
-                ],
+                "patterns": ["x-bce-|baidu|bcebos|yunjiasu"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Huawei Cloud CDN",
-                "patterns": [
-                  "x-hwcdn-|huaweicloud|hwcdn|cdnhwc"
-                ],
+                "patterns": ["x-hwcdn-|huaweicloud|hwcdn|cdnhwc"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Kingsoft Cloud CDN",
-                "patterns": [
-                  "ksyuncdn|ks-cdn|kingsoft"
-                ],
+                "patterns": ["ksyuncdn|ks-cdn|kingsoft"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Qiniu CDN",
-                "patterns": [
-                  "x-qiniu-|qiniu|qiniucdn|clouddn|qnssl"
-                ],
+                "patterns": ["x-qiniu-|qiniu|qiniucdn|clouddn|qnssl"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "UpYun",
-                "patterns": [
-                  "x-upyun-|upyun|upaiyun"
-                ],
+                "patterns": ["x-upyun-|upyun|upaiyun"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "ChinaCache",
-                "patterns": [
-                  "chinacache|ccgslb"
-                ],
+                "patterns": ["chinacache|ccgslb"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Wangsu / CDNetworks",
-                "patterns": [
-                  "cdnetworks|wangsu|wswebcdn|wscdns|quantil|qtlcdn"
-                ],
+                "patterns": ["cdnetworks|wangsu|wswebcdn|wscdns|quantil|qtlcdn"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "BaishanCloud",
-                "patterns": [
-                  "baishancloud|bsgslb|qingcdn"
-                ],
+                "patterns": ["baishancloud|bsgslb|qingcdn"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "UCloud CDN",
-                "patterns": [
-                  "ucloud|ufileos"
-                ],
+                "patterns": ["ucloud|ufileos"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "JD Cloud CDN",
-                "patterns": [
-                  "jcloud|jdcloud"
-                ],
+                "patterns": ["jcloud|jdcloud"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Volcengine / BytePlus CDN",
-                "patterns": [
-                  "bytecdn|byteimg|volccdn|volcengine|byteplus"
-                ],
+                "patterns": ["bytecdn|byteimg|volccdn|volcengine|byteplus"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Yandex CDN",
-                "patterns": [
-                  "yastatic|yandex\\.st"
-                ],
+                "patterns": ["yastatic|yandex\\.st"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Naver Cloud CDN",
-                "patterns": [
-                  "ncloud|ntruss|pstatic"
-                ],
+                "patterns": ["ncloud|ntruss|pstatic"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Kakao CDN",
-                "patterns": [
-                  "kakaocdn"
-                ],
+                "patterns": ["kakaocdn"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Azion",
-                "patterns": [
-                  "azion"
-                ],
+                "patterns": ["azion"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Medianova CDN",
-                "patterns": [
-                  "medianova|mncdn"
-                ],
+                "patterns": ["medianova|mncdn"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "QUIC.cloud",
-                "patterns": [
-                  "quic\\.cloud"
-                ],
+                "patterns": ["quic\\.cloud"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Cloudinary CDN",
-                "patterns": [
-                  "cloudinary"
-                ],
+                "patterns": ["cloudinary"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "Imgix",
-                "patterns": [
-                  "imgix"
-                ],
+                "patterns": ["imgix"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
                 "name": "ImageKit",
-                "patterns": [
-                  "imagekit"
-                ],
+                "patterns": ["imagekit"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               }
             ]
@@ -491,44 +359,32 @@
             "rules": [
               {
                 "name": "PHP",
-                "patterns": [
-                  "set-cookie:.*phpsessid"
-                ],
+                "patterns": ["set-cookie:.*phpsessid"],
                 "evidence": "Set-Cookie 包含 PHPSESSID"
               },
               {
                 "name": "Laravel",
-                "patterns": [
-                  "set-cookie:.*(?:laravel_session|xsrf-token)"
-                ],
+                "patterns": ["set-cookie:.*(?:laravel_session|xsrf-token)"],
                 "evidence": "Set-Cookie 包含 Laravel 会话特征"
               },
               {
                 "name": "Java Servlet",
-                "patterns": [
-                  "set-cookie:.*jsessionid"
-                ],
+                "patterns": ["set-cookie:.*jsessionid"],
                 "evidence": "Set-Cookie 包含 JSESSIONID"
               },
               {
                 "name": "ASP.NET",
-                "patterns": [
-                  "set-cookie:.*asp\\.net_sessionid"
-                ],
+                "patterns": ["set-cookie:.*asp\\.net_sessionid"],
                 "evidence": "Set-Cookie 包含 ASP.NET_SessionId"
               },
               {
                 "name": "Express Session",
-                "patterns": [
-                  "set-cookie:.*connect\\.sid"
-                ],
+                "patterns": ["set-cookie:.*connect\\.sid"],
                 "evidence": "Set-Cookie 包含 connect.sid"
               },
               {
                 "name": "Django",
-                "patterns": [
-                  "set-cookie:.*(?:django|csrftoken)"
-                ],
+                "patterns": ["set-cookie:.*(?:django|csrftoken)"],
                 "evidence": "Set-Cookie 包含 Django/csrftoken 特征"
               }
             ]
@@ -536,9 +392,7 @@
           {
             "name": "Ruby on Rails",
             "confidence": "低",
-            "patterns": [
-              "set-cookie:.*(?:^|,\\s*)_[a-z0-9_]*_session|set-cookie:.*_session_id"
-            ],
+            "patterns": ["set-cookie:.*(?:^|,\\s*)_[a-z0-9_]*_session|set-cookie:.*_session_id"],
             "evidence": "Set-Cookie 包含 Rails 风格会话 Cookie 名称"
           },
           {
@@ -548,23 +402,17 @@
             "rules": [
               {
                 "name": "Symfony",
-                "patterns": [
-                  "set-cookie:.*(?:symfony|sf_redirect|sf_cookie)"
-                ],
+                "patterns": ["set-cookie:.*(?:symfony|sf_redirect|sf_cookie)"],
                 "evidence": "Set-Cookie 包含 Symfony 特征"
               },
               {
                 "name": "CakePHP",
-                "patterns": [
-                  "set-cookie:.*(?:cakephp|cakecsrf)"
-                ],
+                "patterns": ["set-cookie:.*(?:cakephp|cakecsrf)"],
                 "evidence": "Set-Cookie 包含 CakePHP 特征"
               },
               {
                 "name": "CodeIgniter",
-                "patterns": [
-                  "set-cookie:.*ci_session"
-                ],
+                "patterns": ["set-cookie:.*ci_session"],
                 "evidence": "Set-Cookie 包含 ci_session"
               }
             ]
@@ -572,17 +420,13 @@
           {
             "name": "Yii / CSRF-based Framework",
             "confidence": "低",
-            "patterns": [
-              "set-cookie:.*(?:yii_csrf|_csrf)"
-            ],
+            "patterns": ["set-cookie:.*(?:yii_csrf|_csrf)"],
             "evidence": "Set-Cookie 包含 CSRF 框架线索"
           },
           {
             "name": "Phoenix",
             "confidence": "低",
-            "patterns": [
-              "set-cookie:.*(?:phoenix|_csrf_token)"
-            ],
+            "patterns": ["set-cookie:.*(?:phoenix|_csrf_token)"],
             "evidence": "Set-Cookie 包含 Phoenix/CSRF 线索"
           }
         ]
@@ -591,9 +435,7 @@
         "category": "CMS / 电商平台",
         "name": "Shopify",
         "confidence": "中",
-        "patterns": [
-          "url:.*(?:\\.myshopify\\.com|cdn\\.shopify\\.com)"
-        ],
+        "patterns": ["url:.*(?:\\.myshopify\\.com|cdn\\.shopify\\.com)"],
         "evidence": "URL 包含 Shopify 域名"
       }
     ]

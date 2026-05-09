@@ -8,30 +8,18 @@
         {
           "name": "Wix",
           "confidence": "中",
-          "patterns": [
-            "wixstatic\\.com",
-            "wix-code",
-            "x-wix"
-          ]
+          "patterns": ["wixstatic\\.com", "wix-code", "x-wix"]
         },
         {
           "name": "Squarespace",
           "confidence": "中",
-          "patterns": [
-            "squarespace\\.com",
-            "static1\\.squarespace\\.com"
-          ]
+          "patterns": ["squarespace\\.com", "static1\\.squarespace\\.com"]
         },
         {
           "name": "Webflow",
           "confidence": "高",
-          "patterns": [
-            "webflow\\.js",
-            "webflow\\.com"
-          ],
-          "selectors": [
-            "html[data-wf-page]"
-          ]
+          "patterns": ["webflow\\.js", "webflow\\.com"],
+          "selectors": ["html[data-wf-page]"]
         }
       ]
     }

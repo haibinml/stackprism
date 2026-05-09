@@ -17,115 +17,56 @@
               "(?:^|[^a-z0-9])UA-\\d+-\\d+(?:[^a-z0-9]|$)",
               "(?:^|[^a-z0-9])G-[A-Z0-9]{6,}(?:[^a-z0-9]|$)"
             ],
-            "globals": [
-              "gtag",
-              "ga",
-              "GoogleAnalyticsObject"
-            ]
+            "globals": ["gtag", "ga", "GoogleAnalyticsObject"]
           },
           {
             "name": "Google Tag Manager",
             "kind": "商用 / 标签管理",
-            "patterns": [
-              "googletagmanager\\.com/gtm\\.js",
-              "GTM-[A-Z0-9]+",
-              "dataLayer"
-            ],
-            "globals": [
-              "dataLayer"
-            ]
+            "patterns": ["googletagmanager\\.com/gtm\\.js", "GTM-[A-Z0-9]+", "dataLayer"],
+            "globals": ["dataLayer"]
           },
           {
             "name": "Baidu Tongji / 百度统计",
             "kind": "商用 / 国内知名统计",
-            "patterns": [
-              "hm\\.baidu\\.com/hm\\.js",
-              "hm\\.baidu\\.com/hm\\.gif",
-              "hm\\.src",
-              "_hmt",
-              "baidu\\.com/hm"
-            ],
-            "globals": [
-              "_hmt"
-            ]
+            "patterns": ["hm\\.baidu\\.com/hm\\.js", "hm\\.baidu\\.com/hm\\.gif", "hm\\.src", "_hmt", "baidu\\.com/hm"],
+            "globals": ["_hmt"]
           },
           {
             "name": "CNZZ / Umeng Analytics",
             "kind": "商用 / 国内知名统计",
-            "patterns": [
-              "cnzz\\.com",
-              "s\\d+\\.cnzz\\.com/z_stat\\.php",
-              "z_stat\\.php",
-              "umeng\\.com",
-              "umtrack",
-              "_czc"
-            ],
-            "globals": [
-              "_czc"
-            ]
+            "patterns": ["cnzz\\.com", "s\\d+\\.cnzz\\.com/z_stat\\.php", "z_stat\\.php", "umeng\\.com", "umtrack", "_czc"],
+            "globals": ["_czc"]
           },
           {
             "name": "51.LA",
             "kind": "商用 / 国内统计",
-            "patterns": [
-              "51\\.la",
-              "js\\.users\\.51\\.la",
-              "sdk\\.51\\.la",
-              "LA.init"
-            ],
-            "globals": [
-              "LA"
-            ]
+            "patterns": ["51\\.la", "js\\.users\\.51\\.la", "sdk\\.51\\.la", "LA.init"],
+            "globals": ["LA"]
           },
           {
             "name": "Cloudflare Web Analytics",
             "kind": "商用 / 网站统计",
-            "patterns": [
-              "static\\.cloudflareinsights\\.com/beacon(?:\\.min)?\\.js",
-              "cloudflareinsights\\.com/beacon"
-            ]
+            "patterns": ["static\\.cloudflareinsights\\.com/beacon(?:\\.min)?\\.js", "cloudflareinsights\\.com/beacon"]
           }
         ]
       },
       {
         "name": "Tencent MTA / 腾讯统计",
         "kind": "商用 / 国内统计",
-        "patterns": [
-          "pingjs\\.qq\\.com",
-          "tajs\\.qq\\.com",
-          "mta\\.qq\\.com",
-          "TencentMTA",
-          "MtaH5"
-        ],
-        "globals": [
-          "MtaH5"
-        ]
+        "patterns": ["pingjs\\.qq\\.com", "tajs\\.qq\\.com", "mta\\.qq\\.com", "TencentMTA", "MtaH5"],
+        "globals": ["MtaH5"]
       },
       {
         "name": "GrowingIO",
         "kind": "商用 / 增长分析",
-        "patterns": [
-          "growingio\\.com",
-          "gio\\.js",
-          "assets\\.growingio\\.com"
-        ],
-        "globals": [
-          "gio"
-        ]
+        "patterns": ["growingio\\.com", "gio\\.js", "assets\\.growingio\\.com"],
+        "globals": ["gio"]
       },
       {
         "name": "Sensors Data / 神策分析",
         "kind": "商用 / 产品分析",
-        "patterns": [
-          "sensorsdata",
-          "sensorsdata\\.min\\.js",
-          "sa-sdk",
-          "sensorsAnalytics"
-        ],
-        "globals": [
-          "sensors",
-          "sensorsDataAnalytic201505"
-        ]
+        "patterns": ["sensorsdata", "sensorsdata\\.min\\.js", "sa-sdk", "sensorsAnalytics"],
+        "globals": ["sensors", "sensorsDataAnalytic201505"]
       },
       {
         "defaults": {
@@ -134,79 +75,37 @@
         "rules": [
           {
             "name": "TalkingData",
-            "patterns": [
-              "talkingdata\\.com",
-              "tdsdk",
-              "TalkingData"
-            ],
-            "globals": [
-              "TalkingData"
-            ]
+            "patterns": ["talkingdata\\.com", "tdsdk", "TalkingData"],
+            "globals": ["TalkingData"]
           },
           {
             "name": "Youmeng+ / 友盟+",
-            "patterns": [
-              "umeng\\.com",
-              "cnzz\\.com",
-              "umtrack",
-              "aplus\\.js"
-            ]
+            "patterns": ["umeng\\.com", "cnzz\\.com", "umtrack", "aplus\\.js"]
           },
           {
             "name": "Alibaba Aplus / 阿里统计",
-            "patterns": [
-              "g\\.alicdn\\.com/alilog",
-              "aplus\\.js",
-              "log\\.mmstat\\.com",
-              "arms-retcode",
-              "__bl"
-            ],
-            "globals": [
-              "goldlog",
-              "__bl"
-            ]
+            "patterns": ["g\\.alicdn\\.com/alilog", "aplus\\.js", "log\\.mmstat\\.com", "arms-retcode", "__bl"],
+            "globals": ["goldlog", "__bl"]
           }
         ]
       },
       {
         "name": "Yandex Metrica",
         "kind": "商用 / 知名统计",
-        "patterns": [
-          "mc\\.yandex\\.ru/metrika",
-          "yandex\\.ru/metrika",
-          "ym\\(",
-          "Ya\\.Metrika"
-        ],
-        "globals": [
-          "ym",
-          "Ya"
-        ]
+        "patterns": ["mc\\.yandex\\.ru/metrika", "yandex\\.ru/metrika", "ym\\(", "Ya\\.Metrika"],
+        "globals": ["ym", "Ya"]
       },
       {
         "name": "Adobe Analytics",
         "kind": "商用 / 企业统计",
-        "patterns": [
-          "adobedtm\\.com",
-          "assets\\.adobedtm\\.com",
-          "omniture",
-          "s_code",
-          "AppMeasurement"
-        ],
-        "globals": [
-          "s",
-          "AppMeasurement"
-        ]
+        "patterns": ["adobedtm\\.com", "assets\\.adobedtm\\.com", "omniture", "s_code", "AppMeasurement"],
+        "globals": ["s", "AppMeasurement"]
       },
       {
         "name": "Adobe Launch",
         "kind": "商用 / 标签管理",
-        "patterns": [
-          "assets\\.adobedtm\\.com",
-          "_satellite"
-        ],
-        "globals": [
-          "_satellite"
-        ]
+        "patterns": ["assets\\.adobedtm\\.com", "_satellite"],
+        "globals": ["_satellite"]
       },
       {
         "defaults": {
@@ -220,106 +119,49 @@
             "rules": [
               {
                 "name": "Matomo / Piwik",
-                "patterns": [
-                  "matomo\\.js",
-                  "piwik\\.js",
-                  "matomo\\.php",
-                  "piwik\\.php",
-                  "_paq"
-                ],
-                "globals": [
-                  "_paq",
-                  "Matomo",
-                  "Piwik"
-                ]
+                "patterns": ["matomo\\.js", "piwik\\.js", "matomo\\.php", "piwik\\.php", "_paq"],
+                "globals": ["_paq", "Matomo", "Piwik"]
               },
               {
                 "name": "Plausible",
-                "patterns": [
-                  "plausible\\.io/js",
-                  "plausible\\.js",
-                  "data-domain=.*plausible",
-                  "plausible-tracker"
-                ],
-                "globals": [
-                  "plausible"
-                ]
+                "patterns": ["plausible\\.io/js", "plausible\\.js", "data-domain=.*plausible", "plausible-tracker"],
+                "globals": ["plausible"]
               },
               {
                 "name": "Umami",
-                "patterns": [
-                  "umami\\.js",
-                  "data-website-id",
-                  "umami\\.is",
-                  "analytics.umami"
-                ],
-                "globals": [
-                  "umami"
-                ]
+                "patterns": ["umami\\.js", "data-website-id", "umami\\.is", "analytics.umami"],
+                "globals": ["umami"]
               }
             ]
           },
           {
             "name": "GoatCounter",
-            "patterns": [
-              "gc\\.ziggoat\\.com/count\\.js",
-              "goatcounter\\.com/count",
-              "goatcounter"
-            ],
-            "globals": [
-              "goatcounter"
-            ]
+            "patterns": ["gc\\.ziggoat\\.com/count\\.js", "goatcounter\\.com/count", "goatcounter"],
+            "globals": ["goatcounter"]
           },
           {
             "name": "Open Web Analytics",
-            "patterns": [
-              "owa\\.tracker",
-              "OpenWebAnalytics",
-              "owa_cmds",
-              "owa.tracker"
-            ],
-            "globals": [
-              "OWA",
-              "owa_cmds"
-            ]
+            "patterns": ["owa\\.tracker", "OpenWebAnalytics", "owa_cmds", "owa.tracker"],
+            "globals": ["OWA", "owa_cmds"]
           },
           {
             "name": "Ackee",
-            "patterns": [
-              "ackee-tracker",
-              "ackee\\.js",
-              "ackee\\.domainId"
-            ],
-            "globals": [
-              "ackeeTracker"
-            ]
+            "patterns": ["ackee-tracker", "ackee\\.js", "ackee\\.domainId"],
+            "globals": ["ackeeTracker"]
           }
         ]
       },
       {
         "name": "Countly",
         "kind": "开源 / 商用产品分析",
-        "patterns": [
-          "countly\\.js",
-          "cdn\\.count\\.ly",
-          "Countly"
-        ],
-        "globals": [
-          "Countly"
-        ]
+        "patterns": ["countly\\.js", "cdn\\.count\\.ly", "Countly"],
+        "globals": ["Countly"]
       },
       {
         "name": "PostHog",
         "kind": "开源 / 商用产品分析",
-        "patterns": [
-          "posthog-js",
-          "app\\.posthog\\.com",
-          "us\\.i\\.posthog\\.com",
-          "posthog\\.capture"
-        ],
-        "globals": [
-          "posthog"
-        ]
+        "patterns": ["posthog-js", "app\\.posthog\\.com", "us\\.i\\.posthog\\.com", "posthog\\.capture"],
+        "globals": ["posthog"]
       },
       {
         "defaults": {
@@ -328,65 +170,35 @@
         "rules": [
           {
             "name": "Fathom Analytics",
-            "patterns": [
-              "cdn\\.usefathom\\.com",
-              "usefathom\\.com/script",
-              "fathom\\.js"
-            ],
-            "globals": [
-              "fathom"
-            ]
+            "patterns": ["cdn\\.usefathom\\.com", "usefathom\\.com/script", "fathom\\.js"],
+            "globals": ["fathom"]
           },
           {
             "name": "Pirsch",
-            "patterns": [
-              "api\\.pirsch\\.io",
-              "pirsch\\.io/pirsch",
-              "pirsch\\.js"
-            ]
+            "patterns": ["api\\.pirsch\\.io", "pirsch\\.io/pirsch", "pirsch\\.js"]
           },
           {
             "name": "Simple Analytics",
-            "patterns": [
-              "scripts\\.simpleanalyticscdn\\.com",
-              "simpleanalytics\\.com/latest\\.js",
-              "queue\\.simpleanalyticscdn\\.com"
-            ]
+            "patterns": ["scripts\\.simpleanalyticscdn\\.com", "simpleanalytics\\.com/latest\\.js", "queue\\.simpleanalyticscdn\\.com"]
           }
         ]
       },
       {
         "name": "Clicky",
         "kind": "商用 / 统计",
-        "patterns": [
-          "static\\.getclicky\\.com",
-          "in\\.getclicky\\.com",
-          "clicky\\.js"
-        ],
-        "globals": [
-          "clicky"
-        ]
+        "patterns": ["static\\.getclicky\\.com", "in\\.getclicky\\.com", "clicky\\.js"],
+        "globals": ["clicky"]
       },
       {
         "name": "Statcounter",
         "kind": "商用 / 统计",
-        "patterns": [
-          "statcounter\\.com/counter",
-          "c\\.statcounter\\.com",
-          "sc_project",
-          "statcounter\\.js"
-        ]
+        "patterns": ["statcounter\\.com/counter", "c\\.statcounter\\.com", "sc_project", "statcounter\\.js"]
       },
       {
         "name": "Woopra",
         "kind": "商用 / 客户旅程分析",
-        "patterns": [
-          "woopra\\.com",
-          "static\\.woopra\\.com/js/w\\.js"
-        ],
-        "globals": [
-          "woopra"
-        ]
+        "patterns": ["woopra\\.com", "static\\.woopra\\.com/js/w\\.js"],
+        "globals": ["woopra"]
       },
       {
         "defaults": {
@@ -395,102 +207,53 @@
         "rules": [
           {
             "name": "Heap",
-            "patterns": [
-              "heapanalytics\\.com",
-              "heap\\.load",
-              "cdn\\.heapanalytics\\.com"
-            ],
-            "globals": [
-              "heap"
-            ]
+            "patterns": ["heapanalytics\\.com", "heap\\.load", "cdn\\.heapanalytics\\.com"],
+            "globals": ["heap"]
           },
           {
             "name": "Mixpanel",
-            "patterns": [
-              "cdn\\.mxpnl\\.com",
-              "mixpanel\\.com",
-              "mixpanel\\.track"
-            ],
-            "globals": [
-              "mixpanel"
-            ]
+            "patterns": ["cdn\\.mxpnl\\.com", "mixpanel\\.com", "mixpanel\\.track"],
+            "globals": ["mixpanel"]
           },
           {
             "name": "Amplitude",
-            "patterns": [
-              "cdn\\.amplitude\\.com",
-              "api2\\.amplitude\\.com",
-              "amplitude-js"
-            ],
-            "globals": [
-              "amplitude"
-            ]
+            "patterns": ["cdn\\.amplitude\\.com", "api2\\.amplitude\\.com", "amplitude-js"],
+            "globals": ["amplitude"]
           },
           {
             "name": "Kissmetrics",
-            "patterns": [
-              "kissmetrics\\.io",
-              "i\\.kissmetrics\\.io",
-              "scripts\\.kissmetrics\\.io"
-            ],
-            "globals": [
-              "_kmq"
-            ]
+            "patterns": ["kissmetrics\\.io", "i\\.kissmetrics\\.io", "scripts\\.kissmetrics\\.io"],
+            "globals": ["_kmq"]
           }
         ]
       },
       {
         "name": "Segment",
         "kind": "商用 / CDP",
-        "patterns": [
-          "cdn\\.segment\\.com/analytics\\.js",
-          "segment\\.com/analytics\\.js",
-          "analytics\\.load"
-        ],
-        "globals": [
-          "analytics"
-        ]
+        "patterns": ["cdn\\.segment\\.com/analytics\\.js", "segment\\.com/analytics\\.js", "analytics\\.load"],
+        "globals": ["analytics"]
       },
       {
         "name": "Microsoft Clarity",
         "kind": "免费 / 知名统计",
-        "patterns": [
-          "clarity\\.ms/tag",
-          "clarity\\.ms/collect",
-          "clarity\\("
-        ],
-        "globals": [
-          "clarity"
-        ]
+        "patterns": ["clarity\\.ms/tag", "clarity\\.ms/collect", "clarity\\("],
+        "globals": ["clarity"]
       },
       {
         "name": "Hotjar",
         "kind": "商用 / 热力图与行为分析",
-        "patterns": [
-          "static\\.hotjar\\.com",
-          "script\\.hotjar\\.com",
-          "hotjar\\.com",
-          "hj\\("
-        ],
-        "globals": [
-          "hj"
-        ]
+        "patterns": ["static\\.hotjar\\.com", "script\\.hotjar\\.com", "hotjar\\.com", "hj\\("],
+        "globals": ["hj"]
       },
       {
         "name": "Crazy Egg",
         "kind": "商用 / 热力图",
-        "patterns": [
-          "script\\.crazyegg\\.com",
-          "crazyegg\\.com/pages/scripts"
-        ]
+        "patterns": ["script\\.crazyegg\\.com", "crazyegg\\.com/pages/scripts"]
       },
       {
         "name": "Lucky Orange",
         "kind": "商用 / 热力图",
-        "patterns": [
-          "luckyorange\\.com",
-          "tools\\.luckyorange\\.com"
-        ]
+        "patterns": ["luckyorange\\.com", "tools\\.luckyorange\\.com"]
       },
       {
         "defaults": {
@@ -499,42 +262,22 @@
         "rules": [
           {
             "name": "Mouseflow",
-            "patterns": [
-              "mouseflow\\.com",
-              "cdn\\.mouseflow\\.com"
-            ],
-            "globals": [
-              "mouseflow"
-            ]
+            "patterns": ["mouseflow\\.com", "cdn\\.mouseflow\\.com"],
+            "globals": ["mouseflow"]
           },
           {
             "name": "FullStory",
-            "patterns": [
-              "fullstory\\.com",
-              "edge\\.fullstory\\.com",
-              "_fs_namespace"
-            ]
+            "patterns": ["fullstory\\.com", "edge\\.fullstory\\.com", "_fs_namespace"]
           },
           {
             "name": "LogRocket",
-            "patterns": [
-              "logrocket\\.io",
-              "cdn\\.lr-ingest\\.com",
-              "LogRocket"
-            ],
-            "globals": [
-              "LogRocket"
-            ]
+            "patterns": ["logrocket\\.io", "cdn\\.lr-ingest\\.com", "LogRocket"],
+            "globals": ["LogRocket"]
           },
           {
             "name": "Smartlook",
-            "patterns": [
-              "smartlook\\.com",
-              "web-sdk\\.smartlook\\.com"
-            ],
-            "globals": [
-              "smartlook"
-            ]
+            "patterns": ["smartlook\\.com", "web-sdk\\.smartlook\\.com"],
+            "globals": ["smartlook"]
           }
         ]
       },
@@ -545,64 +288,32 @@
         "rules": [
           {
             "name": "Meta Pixel",
-            "patterns": [
-              "connect\\.facebook\\.net/.*/fbevents\\.js",
-              "facebook\\.com/tr",
-              "fbq\\("
-            ],
-            "globals": [
-              "fbq"
-            ]
+            "patterns": ["connect\\.facebook\\.net/.*/fbevents\\.js", "facebook\\.com/tr", "fbq\\("],
+            "globals": ["fbq"]
           },
           {
             "name": "TikTok Pixel",
-            "patterns": [
-              "analytics\\.tiktok\\.com/i18n/pixel",
-              "ttq\\.load",
-              "tiktok pixel"
-            ],
-            "globals": [
-              "ttq"
-            ]
+            "patterns": ["analytics\\.tiktok\\.com/i18n/pixel", "ttq\\.load", "tiktok pixel"],
+            "globals": ["ttq"]
           },
           {
             "name": "LinkedIn Insight Tag",
-            "patterns": [
-              "snap\\.licdn\\.com/li\\.lms-analytics",
-              "linkedin_data_partner_id",
-              "px\\.ads\\.linkedin\\.com"
-            ]
+            "patterns": ["snap\\.licdn\\.com/li\\.lms-analytics", "linkedin_data_partner_id", "px\\.ads\\.linkedin\\.com"]
           },
           {
             "name": "Pinterest Tag",
-            "patterns": [
-              "ct\\.pinterest\\.com",
-              "pintrk",
-              "s\\.pinimg\\.com/ct/core\\.js"
-            ],
-            "globals": [
-              "pintrk"
-            ]
+            "patterns": ["ct\\.pinterest\\.com", "pintrk", "s\\.pinimg\\.com/ct/core\\.js"],
+            "globals": ["pintrk"]
           },
           {
             "name": "Twitter / X Pixel",
-            "patterns": [
-              "static\\.ads-twitter\\.com/uwt\\.js",
-              "twq\\("
-            ],
-            "globals": [
-              "twq"
-            ]
+            "patterns": ["static\\.ads-twitter\\.com/uwt\\.js", "twq\\("],
+            "globals": ["twq"]
           },
           {
             "name": "Microsoft Advertising UET",
-            "patterns": [
-              "bat\\.bing\\.com/bat\\.js",
-              "uetq"
-            ],
-            "globals": [
-              "uetq"
-            ]
+            "patterns": ["bat\\.bing\\.com/bat\\.js", "uetq"],
+            "globals": ["uetq"]
           }
         ]
       },
@@ -633,9 +344,7 @@
               "google_ad_client",
               "data-ad-client"
             ],
-            "globals": [
-              "adsbygoogle"
-            ]
+            "globals": ["adsbygoogle"]
           },
           {
             "name": "Google Publisher Tag",
@@ -646,9 +355,7 @@
               "googletag\\.pubads",
               "googletag\\.defineSlot"
             ],
-            "globals": [
-              "googletag"
-            ]
+            "globals": ["googletag"]
           },
           {
             "name": "Google Ad Manager / DoubleClick",
@@ -676,91 +383,45 @@
           {
             "name": "Amazon Ads",
             "kind": "广告联盟 / 广告投放",
-            "patterns": [
-              "amazon-adsystem\\.com",
-              "aax\\.amazon-adsystem\\.com",
-              "c\\.amazon-adsystem\\.com",
-              "apstag",
-              "amzn_assoc"
-            ],
-            "globals": [
-              "apstag"
-            ]
+            "patterns": ["amazon-adsystem\\.com", "aax\\.amazon-adsystem\\.com", "c\\.amazon-adsystem\\.com", "apstag", "amzn_assoc"],
+            "globals": ["apstag"]
           },
           {
             "name": "Prebid.js",
             "kind": "Header Bidding / 广告竞价",
             "confidence": "高",
-            "patterns": [
-              "prebid(?:\\.min)?\\.js",
-              "prebid\\.org",
-              "pbjs\\.que",
-              "pbjs\\.requestBids"
-            ],
-            "globals": [
-              "pbjs"
-            ]
+            "patterns": ["prebid(?:\\.min)?\\.js", "prebid\\.org", "pbjs\\.que", "pbjs\\.requestBids"],
+            "globals": ["pbjs"]
           },
           {
             "name": "OpenX",
             "kind": "广告联盟 / 广告交易",
-            "patterns": [
-              "openx\\.net",
-              "servedbyopenx",
-              "ox-d\\.openx\\.net",
-              "u\\.openx\\.net"
-            ]
+            "patterns": ["openx\\.net", "servedbyopenx", "ox-d\\.openx\\.net", "u\\.openx\\.net"]
           },
           {
             "name": "PubMatic",
             "kind": "广告联盟 / SSP",
-            "patterns": [
-              "pubmatic\\.com",
-              "ads\\.pubmatic\\.com",
-              "image2\\.pubmatic\\.com",
-              "pwt\\.js",
-              "PubMatic"
-            ]
+            "patterns": ["pubmatic\\.com", "ads\\.pubmatic\\.com", "image2\\.pubmatic\\.com", "pwt\\.js", "PubMatic"]
           },
           {
             "name": "Magnite / Rubicon Project",
             "kind": "广告联盟 / SSP",
-            "patterns": [
-              "rubiconproject\\.com",
-              "fastlane\\.rubiconproject\\.com",
-              "magnite\\.com",
-              "rubicon"
-            ]
+            "patterns": ["rubiconproject\\.com", "fastlane\\.rubiconproject\\.com", "magnite\\.com", "rubicon"]
           },
           {
             "name": "Index Exchange",
             "kind": "广告联盟 / 广告交易",
-            "patterns": [
-              "indexww\\.com",
-              "js-sec\\.indexww\\.com",
-              "casalemedia\\.com",
-              "htlb\\.cdn\\.indexww\\.com"
-            ]
+            "patterns": ["indexww\\.com", "js-sec\\.indexww\\.com", "casalemedia\\.com", "htlb\\.cdn\\.indexww\\.com"]
           },
           {
             "name": "Xandr / AppNexus",
             "kind": "广告联盟 / 广告交易",
-            "patterns": [
-              "adnxs\\.com",
-              "ib\\.adnxs\\.com",
-              "secure\\.adnxs\\.com",
-              "appnexus"
-            ]
+            "patterns": ["adnxs\\.com", "ib\\.adnxs\\.com", "secure\\.adnxs\\.com", "appnexus"]
           },
           {
             "name": "Criteo",
             "kind": "广告重定向 / 广告联盟",
-            "patterns": [
-              "criteo\\.com",
-              "criteo\\.net",
-              "static\\.criteo\\.net/js/ld/ld\\.js",
-              "cto_bundle"
-            ]
+            "patterns": ["criteo\\.com", "criteo\\.net", "static\\.criteo\\.net/js/ld/ld\\.js", "cto_bundle"]
           },
           {
             "defaults": {
@@ -769,152 +430,79 @@
             "rules": [
               {
                 "name": "Taboola",
-                "patterns": [
-                  "taboola\\.com",
-                  "trc\\.taboola\\.com",
-                  "cdn\\.taboola\\.com",
-                  "_taboola"
-                ],
-                "globals": [
-                  "_taboola"
-                ]
+                "patterns": ["taboola\\.com", "trc\\.taboola\\.com", "cdn\\.taboola\\.com", "_taboola"],
+                "globals": ["_taboola"]
               },
               {
                 "name": "Outbrain",
-                "patterns": [
-                  "outbrain\\.com",
-                  "widgets\\.outbrain\\.com",
-                  "amplify\\.outbrain\\.com",
-                  "OB_ADV_ID",
-                  "outbrain_widget"
-                ]
+                "patterns": ["outbrain\\.com", "widgets\\.outbrain\\.com", "amplify\\.outbrain\\.com", "OB_ADV_ID", "outbrain_widget"]
               },
               {
                 "name": "MGID",
-                "patterns": [
-                  "mgid\\.com",
-                  "jsc\\.mgid\\.com",
-                  "servicer\\.mgid\\.com"
-                ]
+                "patterns": ["mgid\\.com", "jsc\\.mgid\\.com", "servicer\\.mgid\\.com"]
               }
             ]
           },
           {
             "name": "Media.net",
             "kind": "广告联盟 / 上下文广告",
-            "patterns": [
-              "media\\.net",
-              "contextual\\.media\\.net",
-              "static\\.media\\.net"
-            ]
+            "patterns": ["media\\.net", "contextual\\.media\\.net", "static\\.media\\.net"]
           },
           {
             "name": "Adform",
             "kind": "广告服务器 / 转化跟踪",
-            "patterns": [
-              "adform\\.net",
-              "track\\.adform\\.net",
-              "s1\\.adform\\.net",
-              "adftrack"
-            ]
+            "patterns": ["adform\\.net", "track\\.adform\\.net", "s1\\.adform\\.net", "adftrack"]
           },
           {
             "name": "Teads",
             "kind": "视频广告联盟",
-            "patterns": [
-              "teads\\.tv",
-              "a\\.teads\\.tv",
-              "cdn\\.teads\\.tv"
-            ]
+            "patterns": ["teads\\.tv", "a\\.teads\\.tv", "cdn\\.teads\\.tv"]
           },
           {
             "name": "Equativ / Smart AdServer",
             "kind": "广告服务器 / SSP",
-            "patterns": [
-              "smartadserver\\.com",
-              "equativ\\.com",
-              "sas\\.cmd",
-              "sas\\.call"
-            ]
+            "patterns": ["smartadserver\\.com", "equativ\\.com", "sas\\.cmd", "sas\\.call"]
           },
           {
             "name": "Sovrn",
             "kind": "广告联盟 / SSP",
-            "patterns": [
-              "sovrn\\.com",
-              "lijit\\.com",
-              "ap\\.lijit\\.com",
-              "sovrn"
-            ]
+            "patterns": ["sovrn\\.com", "lijit\\.com", "ap\\.lijit\\.com", "sovrn"]
           },
           {
             "name": "Sharethrough",
             "kind": "原生广告联盟",
-            "patterns": [
-              "sharethrough\\.com",
-              "nativeads\\.sharethrough\\.com",
-              "sfp\\.js"
-            ]
+            "patterns": ["sharethrough\\.com", "nativeads\\.sharethrough\\.com", "sfp\\.js"]
           },
           {
             "name": "TripleLift",
             "kind": "广告联盟 / 原生广告",
-            "patterns": [
-              "3lift\\.com",
-              "tlx\\.3lift\\.com",
-              "triplelift"
-            ]
+            "patterns": ["3lift\\.com", "tlx\\.3lift\\.com", "triplelift"]
           },
           {
             "name": "Kevel / Adzerk",
             "kind": "广告服务器",
-            "patterns": [
-              "adzerk\\.net",
-              "kevel\\.co",
-              "e-\\d+\\.adzerk\\.net",
-              "engine\\.adzerk\\.net"
-            ]
+            "patterns": ["adzerk\\.net", "kevel\\.co", "e-\\d+\\.adzerk\\.net", "engine\\.adzerk\\.net"]
           },
           {
             "name": "AdRoll / NextRoll",
             "kind": "广告重定向 / 营销",
-            "patterns": [
-              "adroll\\.com",
-              "d\\.adroll\\.com",
-              "s\\.adroll\\.com",
-              "nextroll\\.com",
-              "adroll_adv_id"
-            ]
+            "patterns": ["adroll\\.com", "d\\.adroll\\.com", "s\\.adroll\\.com", "nextroll\\.com", "adroll_adv_id"]
           },
           {
             "name": "The Trade Desk",
             "kind": "广告投放 / DSP",
-            "patterns": [
-              "adsrvr\\.org",
-              "thetradedesk\\.com",
-              "insight\\.adsrvr\\.org",
-              "ttdUniversalPixelApi"
-            ]
+            "patterns": ["adsrvr\\.org", "thetradedesk\\.com", "insight\\.adsrvr\\.org", "ttdUniversalPixelApi"]
           },
           {
             "name": "Quantcast",
             "kind": "受众分析 / 广告衡量",
-            "patterns": [
-              "quantserve\\.com",
-              "quantcast\\.com",
-              "quantcount\\.com",
-              "_qevents"
-            ],
-            "globals": [
-              "_qevents"
-            ]
+            "patterns": ["quantserve\\.com", "quantcast\\.com", "quantcount\\.com", "_qevents"],
+            "globals": ["_qevents"]
           },
           {
             "name": "UTM Campaign Parameters",
             "kind": "流量来源 / 营销归因",
-            "patterns": [
-              "(?:\\?|&)(?:utm_source|utm_medium|utm_campaign|utm_term|utm_content)="
-            ]
+            "patterns": ["(?:\\?|&)(?:utm_source|utm_medium|utm_campaign|utm_term|utm_content)="]
           },
           {
             "defaults": {
@@ -923,39 +511,27 @@
             "rules": [
               {
                 "name": "Google Ads Click IDs",
-                "patterns": [
-                  "(?:\\?|&)(?:gclid|gbraid|wbraid|dclid)="
-                ]
+                "patterns": ["(?:\\?|&)(?:gclid|gbraid|wbraid|dclid)="]
               },
               {
                 "name": "Meta Click ID",
-                "patterns": [
-                  "(?:\\?|&)fbclid="
-                ]
+                "patterns": ["(?:\\?|&)fbclid="]
               },
               {
                 "name": "Microsoft Ads Click ID",
-                "patterns": [
-                  "(?:\\?|&)msclkid="
-                ]
+                "patterns": ["(?:\\?|&)msclkid="]
               },
               {
                 "name": "TikTok Click ID",
-                "patterns": [
-                  "(?:\\?|&)ttclid="
-                ]
+                "patterns": ["(?:\\?|&)ttclid="]
               },
               {
                 "name": "LinkedIn Click ID",
-                "patterns": [
-                  "(?:\\?|&)li_fat_id="
-                ]
+                "patterns": ["(?:\\?|&)li_fat_id="]
               },
               {
                 "name": "Yandex Click ID",
-                "patterns": [
-                  "(?:\\?|&)yclid="
-                ]
+                "patterns": ["(?:\\?|&)yclid="]
               }
             ]
           },
@@ -966,63 +542,31 @@
             "rules": [
               {
                 "name": "Voluum",
-                "patterns": [
-                  "voluum\\.com",
-                  "voluumtrk\\.com",
-                  "voluum_dsp",
-                  "trk\\.voluum"
-                ]
+                "patterns": ["voluum\\.com", "voluumtrk\\.com", "voluum_dsp", "trk\\.voluum"]
               },
               {
                 "name": "RedTrack",
-                "patterns": [
-                  "redtrack\\.io",
-                  "rdrtr\\.com",
-                  "redtrack\\.js"
-                ]
+                "patterns": ["redtrack\\.io", "rdrtr\\.com", "redtrack\\.js"]
               },
               {
                 "name": "Binom",
-                "patterns": [
-                  "binom\\.org",
-                  "click\\.php\\?lp=",
-                  "click\\.php\\?cnv_id=",
-                  "lander\\?lp_key="
-                ]
+                "patterns": ["binom\\.org", "click\\.php\\?lp=", "click\\.php\\?cnv_id=", "lander\\?lp_key="]
               },
               {
                 "name": "BeMob",
-                "patterns": [
-                  "bemob\\.com",
-                  "bemobtrk\\.com",
-                  "bemob\\."
-                ]
+                "patterns": ["bemob\\.com", "bemobtrk\\.com", "bemob\\."]
               },
               {
                 "name": "AdsBridge",
-                "patterns": [
-                  "adsbridge\\.com",
-                  "trk\\.adsbridge\\.com",
-                  "adsbridge"
-                ]
+                "patterns": ["adsbridge\\.com", "trk\\.adsbridge\\.com", "adsbridge"]
               },
               {
                 "name": "Keitaro",
-                "patterns": [
-                  "keitaro\\.io",
-                  "kclient\\.js",
-                  "sub_id_\\d+",
-                  "campaign_id=.*creative_id"
-                ]
+                "patterns": ["keitaro\\.io", "kclient\\.js", "sub_id_\\d+", "campaign_id=.*creative_id"]
               },
               {
                 "name": "CPV Lab",
-                "patterns": [
-                  "cpvlab\\.pro",
-                  "cpvlab",
-                  "base2\\.php",
-                  "adclick\\.php"
-                ]
+                "patterns": ["cpvlab\\.pro", "cpvlab", "base2\\.php", "adclick\\.php"]
               }
             ]
           },
@@ -1033,108 +577,57 @@
             "rules": [
               {
                 "name": "CJ Affiliate",
-                "patterns": [
-                  "cj\\.com",
-                  "commission-junction\\.com",
-                  "anrdoezrs\\.net",
-                  "jdoqocy\\.com",
-                  "kqzyfj\\.com",
-                  "qksrv\\.net"
-                ]
+                "patterns": ["cj\\.com", "commission-junction\\.com", "anrdoezrs\\.net", "jdoqocy\\.com", "kqzyfj\\.com", "qksrv\\.net"]
               },
               {
                 "name": "Awin",
-                "patterns": [
-                  "awin1\\.com",
-                  "awin\\.com",
-                  "zanox\\.com",
-                  "awstrack\\.me"
-                ]
+                "patterns": ["awin1\\.com", "awin\\.com", "zanox\\.com", "awstrack\\.me"]
               },
               {
                 "name": "Rakuten Advertising",
-                "patterns": [
-                  "rakutenadvertising\\.com",
-                  "linksynergy\\.com",
-                  "linkshare\\.com",
-                  "rakutenmarketing\\.com"
-                ]
+                "patterns": ["rakutenadvertising\\.com", "linksynergy\\.com", "linkshare\\.com", "rakutenmarketing\\.com"]
               }
             ]
           },
           {
             "name": "Impact",
             "kind": "广告联盟 / Partnership",
-            "patterns": [
-              "impact\\.com",
-              "impactradius-event\\.com",
-              "impactradius\\.com",
-              "ir\\.api"
-            ]
+            "patterns": ["impact\\.com", "impactradius-event\\.com", "impactradius\\.com", "ir\\.api"]
           },
           {
             "name": "TradeDoubler",
             "kind": "广告联盟 / Affiliate",
-            "patterns": [
-              "tradedoubler\\.com",
-              "clk\\.tradedoubler\\.com",
-              "tbs\\.tradedoubler\\.com"
-            ]
+            "patterns": ["tradedoubler\\.com", "clk\\.tradedoubler\\.com", "tbs\\.tradedoubler\\.com"]
           },
           {
             "name": "ShareASale",
             "kind": "广告联盟 / Affiliate",
-            "patterns": [
-              "shareasale\\.com",
-              "shareasale-analytics\\.com",
-              "shareasale\\.js"
-            ]
+            "patterns": ["shareasale\\.com", "shareasale-analytics\\.com", "shareasale\\.js"]
           },
           {
             "name": "Skimlinks",
             "kind": "广告联盟 / 内容变现",
-            "patterns": [
-              "skimlinks\\.com",
-              "skimresources\\.com",
-              "s\\.skimresources\\.com/js/"
-            ]
+            "patterns": ["skimlinks\\.com", "skimresources\\.com", "s\\.skimresources\\.com/js/"]
           },
           {
             "name": "Sovrn Commerce / VigLink",
             "kind": "广告联盟 / 内容变现",
-            "patterns": [
-              "viglink\\.com",
-              "sovrncommerce\\.com",
-              "vglnk\\.com"
-            ]
+            "patterns": ["viglink\\.com", "sovrncommerce\\.com", "vglnk\\.com"]
           },
           {
             "name": "Partnerize",
             "kind": "广告联盟 / Partnership",
-            "patterns": [
-              "partnerize\\.com",
-              "prf\\.hn",
-              "performancehorizon\\.com"
-            ]
+            "patterns": ["partnerize\\.com", "prf\\.hn", "performancehorizon\\.com"]
           },
           {
             "name": "Admitad",
             "kind": "广告联盟 / Affiliate",
-            "patterns": [
-              "admitad\\.com",
-              "admitad\\.ru",
-              "ad\\.admitad\\.com"
-            ]
+            "patterns": ["admitad\\.com", "admitad\\.ru", "ad\\.admitad\\.com"]
           },
           {
             "name": "TUNE / HasOffers",
             "kind": "广告联盟 / Affiliate 平台",
-            "patterns": [
-              "hasoffers\\.com",
-              "tune\\.com",
-              "offer18\\.com",
-              "tracking\\.hasoffers"
-            ]
+            "patterns": ["hasoffers\\.com", "tune\\.com", "offer18\\.com", "tracking\\.hasoffers"]
           },
           {
             "defaults": {
@@ -1154,25 +647,11 @@
               },
               {
                 "name": "Tencent Ads / 广点通",
-                "patterns": [
-                  "gdt\\.qq\\.com",
-                  "e\\.qq\\.com",
-                  "qzs\\.gdtimg\\.com",
-                  "mi\\.gdt\\.qq\\.com",
-                  "gdt_tracker",
-                  "TencentGDT"
-                ]
+                "patterns": ["gdt\\.qq\\.com", "e\\.qq\\.com", "qzs\\.gdtimg\\.com", "mi\\.gdt\\.qq\\.com", "gdt_tracker", "TencentGDT"]
               },
               {
                 "name": "Alibaba Alimama / TANX",
-                "patterns": [
-                  "alimama\\.com",
-                  "tanx\\.com",
-                  "tanx\\.com/ex",
-                  "g\\.alicdn\\.com/tanx",
-                  "p\\.tanx\\.com",
-                  "alimama"
-                ]
+                "patterns": ["alimama\\.com", "tanx\\.com", "tanx\\.com/ex", "g\\.alicdn\\.com/tanx", "p\\.tanx\\.com", "alimama"]
               }
             ]
           },
@@ -1191,13 +670,7 @@
           {
             "name": "Kuaishou Ads / 磁力引擎",
             "kind": "广告投放 / 国内广告",
-            "patterns": [
-              "e\\.kuaishou\\.com",
-              "ad\\.kuaishou\\.com",
-              "ad\\.partner\\.gifshow\\.com",
-              "磁力引擎",
-              "kuaishou.*ad"
-            ]
+            "patterns": ["e\\.kuaishou\\.com", "ad\\.kuaishou\\.com", "ad\\.partner\\.gifshow\\.com", "磁力引擎", "kuaishou.*ad"]
           },
           {
             "defaults": {
@@ -1206,39 +679,19 @@
             "rules": [
               {
                 "name": "Qihoo 360 Union / 360广告联盟",
-                "patterns": [
-                  "lianmeng\\.360\\.cn",
-                  "s\\.lianmeng\\.360\\.cn",
-                  "union\\.360\\.cn",
-                  "360广告联盟"
-                ]
+                "patterns": ["lianmeng\\.360\\.cn", "s\\.lianmeng\\.360\\.cn", "union\\.360\\.cn", "360广告联盟"]
               },
               {
                 "name": "MediaV 聚效广告",
-                "patterns": [
-                  "mediav\\.com",
-                  "max-l\\.mediav\\.com",
-                  "material\\.mediav\\.com",
-                  "show\\.mediav\\.com"
-                ]
+                "patterns": ["mediav\\.com", "max-l\\.mediav\\.com", "material\\.mediav\\.com", "show\\.mediav\\.com"]
               },
               {
                 "name": "Sogou Union / 搜狗联盟",
-                "patterns": [
-                  "union\\.sogou\\.com",
-                  "theta\\.sogoucdn\\.com",
-                  "sogou.*union",
-                  "搜狗联盟"
-                ]
+                "patterns": ["union\\.sogou\\.com", "theta\\.sogoucdn\\.com", "sogou.*union", "搜狗联盟"]
               },
               {
                 "name": "iFlytek Ads / 讯飞广告",
-                "patterns": [
-                  "iflyad\\.cn",
-                  "iflytek.*ad",
-                  "讯飞广告",
-                  "mmp\\.iflytek\\.com"
-                ]
+                "patterns": ["iflyad\\.cn", "iflytek.*ad", "讯飞广告", "mmp\\.iflytek\\.com"]
               }
             ]
           },

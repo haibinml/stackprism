@@ -1,11 +1,10 @@
 <!doctype html>
 <html lang="zh-CN">
-
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>StackPrism 栈棱镜</title>
-    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="popup.css" />
   </head>
 
   <body>
@@ -13,7 +12,9 @@
       <header class="topbar">
         <div>
           <h1>
-            <a id="appTitleLink" class="app-title-link" href="https://github.com/setube/stackprism" target="_blank" rel="noreferrer">栈棱镜</a>
+            <a id="appTitleLink" class="app-title-link" href="https://github.com/setube/stackprism" target="_blank" rel="noreferrer">
+              栈棱镜
+            </a>
             <span id="appVersion" class="version-badge"></span>
           </h1>
           <p id="pageUrl" class="url">正在检测当前标签页...</p>
@@ -49,13 +50,22 @@
       <section class="source-search" aria-label="网页源代码搜索">
         <div class="panel-title">网页源代码搜索</div>
         <div class="search-row">
-          <input id="sourceQuery" type="search" placeholder="输入关键词或正则表达式">
+          <input id="sourceQuery" type="search" placeholder="输入关键词或正则表达式" />
           <button id="sourceSearchBtn" type="button">搜索</button>
         </div>
         <div class="search-options">
-          <label><input id="caseSensitive" type="checkbox"> 区分大小写</label>
-          <label><input id="wholeWord" type="checkbox"> 全字匹配</label>
-          <label><input id="useRegex" type="checkbox"> 正则表达式</label>
+          <label>
+            <input id="caseSensitive" type="checkbox" />
+            区分大小写
+          </label>
+          <label>
+            <input id="wholeWord" type="checkbox" />
+            全字匹配
+          </label>
+          <label>
+            <input id="useRegex" type="checkbox" />
+            正则表达式
+          </label>
         </div>
         <div id="searchMeta" class="search-meta">搜索当前页面 DOM 源码快照。</div>
         <pre id="sourceSearchOutput" class="search-output"></pre>
@@ -75,5 +85,4 @@
     <script src="page-detector.js"></script>
     <script src="popup.js"></script>
   </body>
-
 </html>

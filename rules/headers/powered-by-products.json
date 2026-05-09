@@ -8,57 +8,39 @@
         "rules": [
           {
             "name": "Node.js",
-            "patterns": [
-              "node\\.?js"
-            ]
+            "patterns": ["node\\.?js"]
           },
           {
             "name": "Express",
-            "patterns": [
-              "express"
-            ]
+            "patterns": ["express"]
           },
           {
             "name": "Koa",
-            "patterns": [
-              "\\bkoa\\b"
-            ]
+            "patterns": ["\\bkoa\\b"]
           },
           {
             "name": "Fastify",
-            "patterns": [
-              "fastify"
-            ]
+            "patterns": ["fastify"]
           },
           {
             "name": "Hapi",
-            "patterns": [
-              "\\bhapi\\b|@hapi"
-            ]
+            "patterns": ["\\bhapi\\b|@hapi"]
           },
           {
             "name": "NestJS",
-            "patterns": [
-              "nestjs|nest\\.?js"
-            ]
+            "patterns": ["nestjs|nest\\.?js"]
           },
           {
             "name": "Sails.js",
-            "patterns": [
-              "sails\\.?js"
-            ]
+            "patterns": ["sails\\.?js"]
           },
           {
             "name": "AdonisJS",
-            "patterns": [
-              "adonis"
-            ]
+            "patterns": ["adonis"]
           },
           {
             "name": "Meteor",
-            "patterns": [
-              "meteor"
-            ]
+            "patterns": ["meteor"]
           }
         ]
       },
@@ -69,27 +51,19 @@
         "rules": [
           {
             "name": "Next.js",
-            "patterns": [
-              "next\\.?js"
-            ]
+            "patterns": ["next\\.?js"]
           },
           {
             "name": "Nuxt",
-            "patterns": [
-              "nuxt"
-            ]
+            "patterns": ["nuxt"]
           },
           {
             "name": "Remix",
-            "patterns": [
-              "remix"
-            ]
+            "patterns": ["remix"]
           },
           {
             "name": "SvelteKit",
-            "patterns": [
-              "sveltekit"
-            ]
+            "patterns": ["sveltekit"]
           }
         ]
       },
@@ -100,201 +74,135 @@
         "rules": [
           {
             "name": "Deno",
-            "patterns": [
-              "deno"
-            ]
+            "patterns": ["deno"]
           },
           {
             "name": "Bun",
-            "patterns": [
-              "\\bbun\\b"
-            ]
+            "patterns": ["\\bbun\\b"]
           },
           {
             "name": "ASP.NET",
-            "patterns": [
-              "asp\\.net"
-            ]
+            "patterns": ["asp\\.net"]
           },
           {
             "name": "PHP",
-            "patterns": [
-              "php"
-            ]
+            "patterns": ["php"]
           },
           {
             "name": "Laravel",
-            "patterns": [
-              "laravel"
-            ]
+            "patterns": ["laravel"]
           },
           {
             "name": "Symfony",
-            "patterns": [
-              "symfony"
-            ]
+            "patterns": ["symfony"]
           },
           {
             "name": "Yii",
-            "patterns": [
-              "\\byii\\b"
-            ]
+            "patterns": ["\\byii\\b"]
           },
           {
             "name": "CodeIgniter",
-            "patterns": [
-              "codeigniter"
-            ]
+            "patterns": ["codeigniter"]
           },
           {
             "name": "CakePHP",
-            "patterns": [
-              "cakephp"
-            ]
+            "patterns": ["cakephp"]
           },
           {
             "name": "Laminas / Zend Framework",
-            "patterns": [
-              "laminas|zend framework|zend server"
-            ]
+            "patterns": ["laminas|zend framework|zend server"]
           },
           {
             "name": "Django",
-            "patterns": [
-              "django"
-            ]
+            "patterns": ["django"]
           },
           {
             "name": "Flask",
-            "patterns": [
-              "flask"
-            ]
+            "patterns": ["flask"]
           },
           {
             "name": "FastAPI",
-            "patterns": [
-              "fastapi"
-            ]
+            "patterns": ["fastapi"]
           },
           {
             "name": "Starlette",
-            "patterns": [
-              "starlette"
-            ]
+            "patterns": ["starlette"]
           },
           {
             "name": "Tornado",
-            "patterns": [
-              "tornado"
-            ]
+            "patterns": ["tornado"]
           },
           {
             "name": "Sanic",
-            "patterns": [
-              "sanic"
-            ]
+            "patterns": ["sanic"]
           },
           {
             "name": "Bottle",
-            "patterns": [
-              "bottle"
-            ]
+            "patterns": ["bottle"]
           },
           {
             "name": "CherryPy",
-            "patterns": [
-              "cherrypy"
-            ]
+            "patterns": ["cherrypy"]
           },
           {
             "name": "Ruby on Rails",
-            "patterns": [
-              "rails|phusion passenger"
-            ]
+            "patterns": ["rails|phusion passenger"]
           },
           {
             "name": "Sinatra",
-            "patterns": [
-              "sinatra"
-            ]
+            "patterns": ["sinatra"]
           },
           {
             "name": "Hanami",
-            "patterns": [
-              "hanami"
-            ]
+            "patterns": ["hanami"]
           },
           {
             "name": "Spring Boot / Spring MVC",
-            "patterns": [
-              "spring|springboot|spring boot"
-            ]
+            "patterns": ["spring|springboot|spring boot"]
           },
           {
             "name": "Play Framework",
-            "patterns": [
-              "play framework|playframework"
-            ]
+            "patterns": ["play framework|playframework"]
           },
           {
             "name": "Vert.x",
-            "patterns": [
-              "vert\\.x|vertx"
-            ]
+            "patterns": ["vert\\.x|vertx"]
           },
           {
             "name": "Akka HTTP",
-            "patterns": [
-              "akka"
-            ]
+            "patterns": ["akka"]
           },
           {
             "name": "Phoenix",
-            "patterns": [
-              "phoenix"
-            ]
+            "patterns": ["phoenix"]
           },
           {
             "name": "Elixir / Plug",
-            "patterns": [
-              "elixir|plug"
-            ]
+            "patterns": ["elixir|plug"]
           },
           {
             "name": "Go",
-            "patterns": [
-              "\\bgolang\\b|\\bgo\\b"
-            ]
+            "patterns": ["\\bgolang\\b|\\bgo\\b"]
           },
           {
             "name": "Gin",
-            "patterns": [
-              "\\bgin\\b"
-            ]
+            "patterns": ["\\bgin\\b"]
           },
           {
             "name": "Fiber",
-            "patterns": [
-              "\\bfiber\\b"
-            ]
+            "patterns": ["\\bfiber\\b"]
           },
           {
             "name": "Rust Actix",
-            "patterns": [
-              "actix"
-            ]
+            "patterns": ["actix"]
           },
           {
             "name": "Rust Rocket",
-            "patterns": [
-              "rocket"
-            ]
+            "patterns": ["rocket"]
           },
           {
             "name": "Rust Axum",
-            "patterns": [
-              "axum"
-            ]
+            "patterns": ["axum"]
           }
         ]
       }

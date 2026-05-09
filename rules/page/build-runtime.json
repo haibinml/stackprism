@@ -8,24 +8,13 @@
         {
           "name": "Webpack",
           "confidence": "中",
-          "patterns": [
-            "webpack",
-            "__webpack_require__"
-          ],
-          "globals": [
-            "webpackChunk",
-            "webpackJsonp"
-          ]
+          "patterns": ["webpack", "__webpack_require__"],
+          "globals": ["webpackChunk", "webpackJsonp"]
         },
         {
           "name": "Vite",
           "confidence": "高",
-          "patterns": [
-            "/@vite/client",
-            "vite\\.svg",
-            "__vite",
-            "vite/client"
-          ]
+          "patterns": ["/@vite/client", "vite\\.svg", "__vite", "vite/client"]
         },
         {
           "defaults": {
@@ -34,63 +23,40 @@
           "rules": [
             {
               "name": "Parcel",
-              "patterns": [
-                "parcel",
-                "__parcel__"
-              ]
+              "patterns": ["parcel", "__parcel__"]
             },
             {
               "name": "RequireJS / AMD",
-              "patterns": [
-                "require(?:\\.min)?\\.js",
-                "requirejs"
-              ],
-              "globals": [
-                "requirejs"
-              ]
+              "patterns": ["require(?:\\.min)?\\.js", "requirejs"],
+              "globals": ["requirejs"]
             },
             {
               "name": "SystemJS",
-              "patterns": [
-                "systemjs"
-              ],
-              "globals": [
-                "System"
-              ]
+              "patterns": ["systemjs"],
+              "globals": ["System"]
             }
           ]
         },
         {
           "name": "Babel Standalone",
           "confidence": "高",
-          "globals": [
-            "Babel"
-          ],
-          "selectors": [
-            "script[type=\"text/babel\"]",
-            "script[type=\"text/jsx\"]"
-          ]
+          "globals": ["Babel"],
+          "selectors": ["script[type=\"text/babel\"]", "script[type=\"text/jsx\"]"]
         },
         {
           "name": "ES Modules",
           "confidence": "中",
-          "selectors": [
-            "script[type=\"module\"]"
-          ]
+          "selectors": ["script[type=\"module\"]"]
         },
         {
           "name": "PWA Manifest",
           "confidence": "中",
-          "selectors": [
-            "link[rel=\"manifest\"]"
-          ]
+          "selectors": ["link[rel=\"manifest\"]"]
         },
         {
           "name": "Zone.js",
           "confidence": "高",
-          "globals": [
-            "Zone"
-          ]
+          "globals": ["Zone"]
         }
       ]
     }

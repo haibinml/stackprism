@@ -19,63 +19,38 @@
                 {
                   "name": "GlitchTip",
                   "kind": "错误监控 / Sentry 兼容",
-                  "resourceHints": [
-                    "glitchtip"
-                  ],
-                  "patterns": [
-                    "glitchtip[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["glitchtip"],
+                  "patterns": ["glitchtip[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "name": "OpenReplay",
                   "kind": "会话回放 / 用户行为分析",
-                  "resourceHints": [
-                    "openreplay"
-                  ],
-                  "patterns": [
-                    "openreplay[^\\s\"'<>]*\\.(?:js|css|svg|png|wasm)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["openreplay"],
+                  "patterns": ["openreplay[^\\s\"'<>]*\\.(?:js|css|svg|png|wasm)(?:\\?|$)"]
                 },
                 {
                   "name": "Highlight.io",
                   "kind": "会话回放 / 错误监控",
-                  "resourceHints": [
-                    "highlight.io",
-                    "highlight-run"
-                  ],
-                  "patterns": [
-                    "highlight(?:\\.io|-run)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["highlight.io", "highlight-run"],
+                  "patterns": ["highlight(?:\\.io|-run)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "name": "SigNoz",
                   "kind": "可观测性 / APM",
-                  "resourceHints": [
-                    "signoz"
-                  ],
-                  "patterns": [
-                    "signoz[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["signoz"],
+                  "patterns": ["signoz[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "name": "Flagsmith",
                   "kind": "功能开关",
-                  "resourceHints": [
-                    "flagsmith"
-                  ],
-                  "patterns": [
-                    "flagsmith[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["flagsmith"],
+                  "patterns": ["flagsmith[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "name": "Unleash",
                   "kind": "功能开关",
-                  "resourceHints": [
-                    "unleash"
-                  ],
-                  "patterns": [
-                    "unleash[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["unleash"],
+                  "patterns": ["unleash[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 }
               ]
             },
@@ -83,12 +58,8 @@
               "name": "Flagr",
               "kind": "功能开关 / 实验平台",
               "confidence": "中",
-              "resourceHints": [
-                "flagr"
-              ],
-              "patterns": [
-                "flagr[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["flagr"],
+              "patterns": ["flagr[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "defaults": {
@@ -98,24 +69,14 @@
                 {
                   "name": "GrowthBook",
                   "kind": "功能开关 / A/B 测试",
-                  "resourceHints": [
-                    "growthbook"
-                  ],
-                  "patterns": [
-                    "growthbook[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["growthbook"],
+                  "patterns": ["growthbook[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "name": "Chatwoot",
                   "kind": "客服 / 在线聊天",
-                  "resourceHints": [
-                    "chatwoot",
-                    "/packs/js/sdk"
-                  ],
-                  "patterns": [
-                    "(?:^|/)packs/js/sdk[^\\s\"'<>]*\\.js(?:\\?|$)",
-                    "chatwoot[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["chatwoot", "/packs/js/sdk"],
+                  "patterns": ["(?:^|/)packs/js/sdk[^\\s\"'<>]*\\.js(?:\\?|$)", "chatwoot[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "defaults": {
@@ -124,103 +85,62 @@
                   "rules": [
                     {
                       "name": "Zammad",
-                      "resourceHints": [
-                        "zammad"
-                      ],
-                      "patterns": [
-                        "zammad[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                      ]
+                      "resourceHints": ["zammad"],
+                      "patterns": ["zammad[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                     },
                     {
                       "name": "FreeScout",
-                      "resourceHints": [
-                        "freescout"
-                      ],
-                      "patterns": [
-                        "freescout[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                      ]
+                      "resourceHints": ["freescout"],
+                      "patterns": ["freescout[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                     },
                     {
                       "name": "UVdesk",
-                      "resourceHints": [
-                        "uvdesk"
-                      ],
-                      "patterns": [
-                        "uvdesk[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                      ]
+                      "resourceHints": ["uvdesk"],
+                      "patterns": ["uvdesk[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                     }
                   ]
                 },
                 {
                   "name": "Papercups",
                   "kind": "客服 / 在线聊天",
-                  "resourceHints": [
-                    "papercups"
-                  ],
-                  "patterns": [
-                    "papercups[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["papercups"],
+                  "patterns": ["papercups[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "name": "Erxes",
                   "kind": "客服 / 营销 CRM",
-                  "resourceHints": [
-                    "erxes"
-                  ],
-                  "patterns": [
-                    "erxes[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["erxes"],
+                  "patterns": ["erxes[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "name": "Fider",
                   "kind": "用户反馈",
-                  "resourceHints": [
-                    "fider"
-                  ],
-                  "patterns": [
-                    "fider[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["fider"],
+                  "patterns": ["fider[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "name": "Formbricks",
                   "kind": "问卷 / 用户反馈",
-                  "resourceHints": [
-                    "formbricks"
-                  ],
-                  "patterns": [
-                    "formbricks[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["formbricks"],
+                  "patterns": ["formbricks[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "name": "Cal.com",
                   "kind": "预约排期",
-                  "resourceHints": [
-                    "cal.com",
-                    "calcom"
-                  ],
-                  "patterns": [
-                    "(?:cal\\.com|calcom)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["cal.com", "calcom"],
+                  "patterns": ["(?:cal\\.com|calcom)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "name": "Listmonk",
                   "kind": "邮件营销 / 通讯列表",
-                  "resourceHints": [
-                    "listmonk"
-                  ],
-                  "patterns": [
-                    "listmonk[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["listmonk"],
+                  "patterns": ["listmonk[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "name": "Keila",
                   "kind": "邮件营销 / 通讯列表",
-                  "resourceHints": [
-                    "keila"
-                  ],
-                  "patterns": [
-                    "keila[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["keila"],
+                  "patterns": ["keila[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 }
               ]
             }
@@ -235,42 +155,26 @@
             {
               "name": "Shynet",
               "kind": "开源统计",
-              "resourceHints": [
-                "shynet"
-              ],
-              "patterns": [
-                "shynet[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["shynet"],
+              "patterns": ["shynet[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "OpenPanel",
               "kind": "开源统计",
-              "resourceHints": [
-                "openpanel"
-              ],
-              "patterns": [
-                "openpanel[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["openpanel"],
+              "patterns": ["openpanel[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "GoAccess",
               "kind": "日志统计",
-              "resourceHints": [
-                "goaccess"
-              ],
-              "patterns": [
-                "goaccess[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["goaccess"],
+              "patterns": ["goaccess[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Swetrix",
               "kind": "隐私友好统计",
-              "resourceHints": [
-                "swetrix"
-              ],
-              "patterns": [
-                "swetrix[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["swetrix"],
+              "patterns": ["swetrix[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             }
           ]
         }
@@ -287,22 +191,14 @@
         {
           "name": "NocoDB",
           "kind": "低代码 / 数据库界面",
-          "resourceHints": [
-            "nocodb"
-          ],
-          "patterns": [
-            "nocodb[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["nocodb"],
+          "patterns": ["nocodb[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "Baserow",
           "kind": "低代码 / 数据库界面",
-          "resourceHints": [
-            "baserow"
-          ],
-          "patterns": [
-            "baserow[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["baserow"],
+          "patterns": ["baserow[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "defaults": {
@@ -311,209 +207,122 @@
           "rules": [
             {
               "name": "Appsmith",
-              "resourceHints": [
-                "appsmith"
-              ],
-              "patterns": [
-                "appsmith[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["appsmith"],
+              "patterns": ["appsmith[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "ToolJet",
-              "resourceHints": [
-                "tooljet"
-              ],
-              "patterns": [
-                "tooljet[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["tooljet"],
+              "patterns": ["tooljet[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Budibase",
-              "resourceHints": [
-                "budibase"
-              ],
-              "patterns": [
-                "budibase[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["budibase"],
+              "patterns": ["budibase[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             }
           ]
         },
         {
           "name": "n8n",
           "kind": "自动化工作流",
-          "resourceHints": [
-            "n8n"
-          ],
-          "patterns": [
-            "(?:^|/)n8n[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
-            "n8n-editor-ui[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-          ]
+          "resourceHints": ["n8n"],
+          "patterns": ["(?:^|/)n8n[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)", "n8n-editor-ui[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"]
         },
         {
           "name": "Node-RED",
           "kind": "自动化工作流 / IoT",
-          "resourceHints": [
-            "node-red"
-          ],
-          "patterns": [
-            "node-red[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["node-red"],
+          "patterns": ["node-red[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "Huginn",
           "kind": "自动化工作流",
-          "resourceHints": [
-            "huginn"
-          ],
-          "patterns": [
-            "huginn[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["huginn"],
+          "patterns": ["huginn[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "Outline Wiki",
           "kind": "知识库 / 文档",
-          "resourceHints": [
-            "outline"
-          ],
-          "patterns": [
-            "outline[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["outline"],
+          "patterns": ["outline[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "Wiki.js",
           "kind": "知识库 / Wiki",
-          "resourceHints": [
-            "wiki.js",
-            "wikijs"
-          ],
-          "patterns": [
-            "(?:wiki\\.js|wikijs)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["wiki.js", "wikijs"],
+          "patterns": ["(?:wiki\\.js|wikijs)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "BookStack",
           "kind": "知识库 / 文档",
-          "resourceHints": [
-            "bookstack"
-          ],
-          "patterns": [
-            "bookstack[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["bookstack"],
+          "patterns": ["bookstack[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "HedgeDoc",
           "kind": "协作文档",
-          "resourceHints": [
-            "hedgedoc"
-          ],
-          "patterns": [
-            "hedgedoc[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["hedgedoc"],
+          "patterns": ["hedgedoc[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "CodiMD",
           "kind": "协作文档",
-          "resourceHints": [
-            "codimd"
-          ],
-          "patterns": [
-            "codimd[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["codimd"],
+          "patterns": ["codimd[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "Memos",
           "kind": "笔记 / 轻量知识库",
-          "resourceHints": [
-            "memos"
-          ],
-          "patterns": [
-            "memos[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["memos"],
+          "patterns": ["memos[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "AFFiNE",
           "kind": "知识库 / 白板",
-          "resourceHints": [
-            "affine"
-          ],
-          "patterns": [
-            "affine[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["affine"],
+          "patterns": ["affine[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "Documize",
           "kind": "知识库 / 文档",
-          "resourceHints": [
-            "documize"
-          ],
-          "patterns": [
-            "documize[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["documize"],
+          "patterns": ["documize[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "DokuWiki",
           "kind": "Wiki",
-          "resourceHints": [
-            "/lib/exe/",
-            "dokuwiki"
-          ],
-          "patterns": [
-            "(?:^|/)lib/exe/(?:js|css)\\.php\\?[^\\s\"'<>]*",
-            "dokuwiki[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["/lib/exe/", "dokuwiki"],
+          "patterns": ["(?:^|/)lib/exe/(?:js|css)\\.php\\?[^\\s\"'<>]*", "dokuwiki[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "XWiki",
           "kind": "Wiki",
-          "resourceHints": [
-            "xwiki"
-          ],
-          "patterns": [
-            "xwiki[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["xwiki"],
+          "patterns": ["xwiki[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "MediaWiki VisualEditor",
           "kind": "Wiki 编辑器",
-          "resourceHints": [
-            "ext.visualEditor",
-            "visualeditor"
-          ],
-          "patterns": [
-            "(?:ext\\.visualEditor|visualeditor)[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-          ]
+          "resourceHints": ["ext.visualEditor", "visualeditor"],
+          "patterns": ["(?:ext\\.visualEditor|visualeditor)[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"]
         },
         {
           "name": "Excalidraw",
           "kind": "白板 / 绘图",
-          "resourceHints": [
-            "excalidraw"
-          ],
-          "patterns": [
-            "excalidraw[^\\s\"'<>]*\\.(?:js|css|svg|png|wasm)(?:\\?|$)"
-          ]
+          "resourceHints": ["excalidraw"],
+          "patterns": ["excalidraw[^\\s\"'<>]*\\.(?:js|css|svg|png|wasm)(?:\\?|$)"]
         },
         {
           "name": "Penpot",
           "kind": "设计协作",
-          "resourceHints": [
-            "penpot"
-          ],
-          "patterns": [
-            "penpot[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["penpot"],
+          "patterns": ["penpot[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "Draw.io / diagrams.net",
           "kind": "绘图 / 流程图",
-          "resourceHints": [
-            "diagrams.net",
-            "draw.io",
-            "drawio"
-          ],
-          "patterns": [
-            "(?:diagrams\\.net|draw\\.io|drawio)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["diagrams.net", "draw.io", "drawio"],
+          "patterns": ["(?:diagrams\\.net|draw\\.io|drawio)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "defaults": {
@@ -522,61 +331,37 @@
           "rules": [
             {
               "name": "Plane",
-              "resourceHints": [
-                "plane"
-              ],
-              "patterns": [
-                "plane[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["plane"],
+              "patterns": ["plane[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "OpenProject",
-              "resourceHints": [
-                "openproject"
-              ],
-              "patterns": [
-                "openproject[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["openproject"],
+              "patterns": ["openproject[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Taiga",
-              "resourceHints": [
-                "taiga"
-              ],
-              "patterns": [
-                "taiga[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["taiga"],
+              "patterns": ["taiga[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Leantime",
-              "resourceHints": [
-                "leantime"
-              ],
-              "patterns": [
-                "leantime[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["leantime"],
+              "patterns": ["leantime[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             }
           ]
         },
         {
           "name": "Kanboard",
           "kind": "项目管理 / 看板",
-          "resourceHints": [
-            "kanboard"
-          ],
-          "patterns": [
-            "kanboard[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["kanboard"],
+          "patterns": ["kanboard[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "Wekan",
           "kind": "项目管理 / 看板",
-          "resourceHints": [
-            "wekan"
-          ],
-          "patterns": [
-            "wekan[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["wekan"],
+          "patterns": ["wekan[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "defaults": {
@@ -585,65 +370,37 @@
           "rules": [
             {
               "name": "Mattermost",
-              "resourceHints": [
-                "mattermost"
-              ],
-              "patterns": [
-                "mattermost[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["mattermost"],
+              "patterns": ["mattermost[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Rocket.Chat",
-              "resourceHints": [
-                "rocket.chat",
-                "rocketchat"
-              ],
-              "patterns": [
-                "(?:rocket\\.chat|rocketchat)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["rocket.chat", "rocketchat"],
+              "patterns": ["(?:rocket\\.chat|rocketchat)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Zulip",
-              "resourceHints": [
-                "zulip"
-              ],
-              "patterns": [
-                "zulip[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["zulip"],
+              "patterns": ["zulip[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             }
           ]
         },
         {
           "name": "Matrix Element Web",
           "kind": "团队通讯 / Matrix 客户端",
-          "resourceHints": [
-            "element-web",
-            "matrix"
-          ],
-          "patterns": [
-            "element-web[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
-            "matrix-react-sdk[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
-          ]
+          "resourceHints": ["element-web", "matrix"],
+          "patterns": ["element-web[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)", "matrix-react-sdk[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"]
         },
         {
           "name": "Jitsi Meet",
           "kind": "视频会议",
-          "resourceHints": [
-            "lib-jitsi-meet",
-            "jitsi"
-          ],
-          "patterns": [
-            "lib-jitsi-meet[^\\s\"'<>]*\\.js(?:\\?|$)",
-            "jitsi[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["lib-jitsi-meet", "jitsi"],
+          "patterns": ["lib-jitsi-meet[^\\s\"'<>]*\\.js(?:\\?|$)", "jitsi[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "BigBlueButton",
           "kind": "视频会议 / 在线课堂",
-          "resourceHints": [
-            "bigbluebutton",
-            "/html5client/"
-          ],
+          "resourceHints": ["bigbluebutton", "/html5client/"],
           "patterns": [
             "(?:^|/)html5client/(?:locale|fonts|resources)(?:/|[?#]|$)",
             "bigbluebutton[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
@@ -656,102 +413,62 @@
           "rules": [
             {
               "name": "Mastodon",
-              "resourceHints": [
-                "mastodon"
-              ],
-              "patterns": [
-                "mastodon[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["mastodon"],
+              "patterns": ["mastodon[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Pleroma",
-              "resourceHints": [
-                "pleroma"
-              ],
-              "patterns": [
-                "pleroma[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["pleroma"],
+              "patterns": ["pleroma[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Misskey",
-              "resourceHints": [
-                "misskey"
-              ],
-              "patterns": [
-                "misskey[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["misskey"],
+              "patterns": ["misskey[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             }
           ]
         },
         {
           "name": "Lemmy",
           "kind": "联邦社区",
-          "resourceHints": [
-            "lemmy"
-          ],
-          "patterns": [
-            "lemmy[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["lemmy"],
+          "patterns": ["lemmy[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "PeerTube",
           "kind": "联邦视频平台",
-          "resourceHints": [
-            "peertube"
-          ],
-          "patterns": [
-            "peertube[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["peertube"],
+          "patterns": ["peertube[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "Pixelfed",
           "kind": "联邦图片社区",
-          "resourceHints": [
-            "pixelfed"
-          ],
-          "patterns": [
-            "pixelfed[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["pixelfed"],
+          "patterns": ["pixelfed[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "Seafile",
           "kind": "网盘 / 文件协作",
-          "resourceHints": [
-            "seafile"
-          ],
-          "patterns": [
-            "seafile[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["seafile"],
+          "patterns": ["seafile[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "Pydio Cells",
           "kind": "网盘 / 文件协作",
-          "resourceHints": [
-            "pydio"
-          ],
-          "patterns": [
-            "pydio[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["pydio"],
+          "patterns": ["pydio[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "Syncthing",
           "kind": "文件同步",
-          "resourceHints": [
-            "syncthing"
-          ],
-          "patterns": [
-            "syncthing[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["syncthing"],
+          "patterns": ["syncthing[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "FileRun",
           "kind": "网盘 / 文件管理",
-          "resourceHints": [
-            "filerun"
-          ],
-          "patterns": [
-            "filerun[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["filerun"],
+          "patterns": ["filerun[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         }
       ]
     },
@@ -766,45 +483,29 @@
           "name": "VictoriaMetrics",
           "kind": "监控 / 时序数据库",
           "confidence": "高",
-          "resourceHints": [
-            "victoriametrics"
-          ],
-          "patterns": [
-            "victoriametrics[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["victoriametrics"],
+          "patterns": ["victoriametrics[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "Thanos",
           "kind": "监控 / Prometheus 长期存储",
           "confidence": "高",
-          "resourceHints": [
-            "thanos"
-          ],
-          "patterns": [
-            "thanos[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["thanos"],
+          "patterns": ["thanos[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "Cortex",
           "kind": "监控 / 指标平台",
           "confidence": "中",
-          "resourceHints": [
-            "cortex"
-          ],
-          "patterns": [
-            "cortex[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["cortex"],
+          "patterns": ["cortex[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "name": "Loki",
           "kind": "日志平台",
           "confidence": "中",
-          "resourceHints": [
-            "loki"
-          ],
-          "patterns": [
-            "loki[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["loki"],
+          "patterns": ["loki[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "defaults": {
@@ -814,32 +515,20 @@
             {
               "name": "Jaeger",
               "confidence": "高",
-              "resourceHints": [
-                "jaeger"
-              ],
-              "patterns": [
-                "jaeger[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["jaeger"],
+              "patterns": ["jaeger[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Zipkin",
               "confidence": "高",
-              "resourceHints": [
-                "zipkin"
-              ],
-              "patterns": [
-                "zipkin[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["zipkin"],
+              "patterns": ["zipkin[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Tempo",
               "confidence": "中",
-              "resourceHints": [
-                "tempo"
-              ],
-              "patterns": [
-                "tempo[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["tempo"],
+              "patterns": ["tempo[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             }
           ]
         }

@@ -5,42 +5,23 @@
         "name": "雅黑 PHP 探针",
         "kind": "PHP 探针",
         "confidence": "高",
-        "patterns": [
-          "雅黑\\s*PHP\\s*探针",
-          "yahei\\s*php\\s*probe",
-          "YaHei.*PHP.*Probe",
-          "雅黑探针"
-        ]
+        "patterns": ["雅黑\\s*PHP\\s*探针", "yahei\\s*php\\s*probe", "YaHei.*PHP.*Probe", "雅黑探针"]
       },
       {
         "name": "X-Prober",
         "kind": "PHP 探针",
         "confidence": "高",
-        "patterns": [
-          "X-Prober",
-          "xprober",
-          "X\\s*Prober",
-          "for\\s+X-Prober"
-        ]
+        "patterns": ["X-Prober", "xprober", "X\\s*Prober", "for\\s+X-Prober"]
       },
       {
         "name": "LemonBench",
         "kind": "服务器性能测试 / 探针",
-        "patterns": [
-          "LemonBench",
-          "LemonBenchIntl",
-          "LemonBench Server Test"
-        ]
+        "patterns": ["LemonBench", "LemonBenchIntl", "LemonBench Server Test"]
       },
       {
         "name": "Bench.sh",
         "kind": "服务器性能测试",
-        "patterns": [
-          "bench\\.sh",
-          "teddysun",
-          "UnixBench",
-          "I/O Speed"
-        ]
+        "patterns": ["bench\\.sh", "teddysun", "UnixBench", "I/O Speed"]
       },
       {
         "defaults": {
@@ -50,31 +31,15 @@
           {
             "name": "ServerStatus",
             "confidence": "高",
-            "patterns": [
-              "ServerStatus",
-              "server-status",
-              "serverstatus",
-              "月流量",
-              "在线率",
-              "负载",
-              "Mem Used"
-            ]
+            "patterns": ["ServerStatus", "server-status", "serverstatus", "月流量", "在线率", "负载", "Mem Used"]
           },
           {
             "name": "ServerStatus-Hotaru",
-            "patterns": [
-              "ServerStatus-Hotaru",
-              "hotaru_theme",
-              "hotaru"
-            ]
+            "patterns": ["ServerStatus-Hotaru", "hotaru_theme", "hotaru"]
           },
           {
             "name": "ServerStatus-Rust",
-            "patterns": [
-              "ServerStatus-Rust",
-              "status-rust",
-              "sergate"
-            ]
+            "patterns": ["ServerStatus-Rust", "status-rust", "sergate"]
           }
         ]
       },
@@ -99,54 +64,29 @@
           {
             "name": "Uptime Kuma",
             "kind": "可用性监控",
-            "patterns": [
-              "Uptime Kuma",
-              "uptime-kuma",
-              "kuma",
-              "status-page"
-            ]
+            "patterns": ["Uptime Kuma", "uptime-kuma", "kuma", "status-page"]
           },
           {
             "name": "Netdata",
             "kind": "实时性能监控",
-            "patterns": [
-              "Netdata",
-              "netdata",
-              "dashboard\\.js\\?v=",
-              "registry.my-netdata.io"
-            ]
+            "patterns": ["Netdata", "netdata", "dashboard\\.js\\?v=", "registry.my-netdata.io"]
           },
           {
             "name": "phpSysInfo",
             "kind": "服务器信息探针",
-            "patterns": [
-              "phpSysInfo",
-              "phpsysinfo",
-              "templates/phpsysinfo",
-              "xml.php\\?plugin="
-            ]
+            "patterns": ["phpSysInfo", "phpsysinfo", "templates/phpsysinfo", "xml.php\\?plugin="]
           }
         ]
       },
       {
         "name": "Linux Dash",
         "kind": "服务器信息探针",
-        "patterns": [
-          "linux-dash",
-          "Linux Dash",
-          "linux_dash",
-          "server-info"
-        ]
+        "patterns": ["linux-dash", "Linux Dash", "linux_dash", "server-info"]
       },
       {
         "name": "Glances",
         "kind": "服务器监控",
-        "patterns": [
-          "Glances",
-          "glances",
-          "glances-web",
-          "/api/3/"
-        ]
+        "patterns": ["Glances", "glances", "glances-web", "/api/3/"]
       },
       {
         "defaults": {
@@ -155,21 +95,11 @@
         "rules": [
           {
             "name": "Cockpit",
-            "patterns": [
-              "Cockpit",
-              "cockpit/static",
-              "cockpit-ws",
-              "org.cockpit-project"
-            ]
+            "patterns": ["Cockpit", "cockpit/static", "cockpit-ws", "org.cockpit-project"]
           },
           {
             "name": "Webmin",
-            "patterns": [
-              "Webmin",
-              "webmin",
-              "session_login.cgi",
-              "unauthenticated/css"
-            ]
+            "patterns": ["Webmin", "webmin", "session_login.cgi", "unauthenticated/css"]
           },
           {
             "name": "aaPanel / 宝塔面板",
@@ -194,11 +124,7 @@
       {
         "name": "CasaOS",
         "kind": "家庭服务器面板",
-        "patterns": [
-          "CasaOS",
-          "casaos",
-          "IceWhale"
-        ]
+        "patterns": ["CasaOS", "casaos", "IceWhale"]
       },
       {
         "defaults": {
@@ -207,36 +133,19 @@
         "rules": [
           {
             "name": "Dashy",
-            "patterns": [
-              "Dashy",
-              "dashy",
-              "lissy93"
-            ]
+            "patterns": ["Dashy", "dashy", "lissy93"]
           },
           {
             "name": "Heimdall",
-            "patterns": [
-              "Heimdall",
-              "heimdall",
-              "laravel-heimdall"
-            ]
+            "patterns": ["Heimdall", "heimdall", "laravel-heimdall"]
           },
           {
             "name": "Homer Dashboard",
-            "patterns": [
-              "Homer Dashboard",
-              "homer.css",
-              "homer-theme",
-              "bastienwirtz/homer"
-            ]
+            "patterns": ["Homer Dashboard", "homer.css", "homer-theme", "bastienwirtz/homer"]
           },
           {
             "name": "Homarr",
-            "patterns": [
-              "Homarr",
-              "homarr",
-              "manage your apps"
-            ]
+            "patterns": ["Homarr", "homarr", "manage your apps"]
           }
         ]
       },
@@ -244,31 +153,17 @@
         "name": "Grafana",
         "kind": "监控可视化",
         "confidence": "高",
-        "patterns": [
-          "Grafana",
-          "grafana-app",
-          "public/build/grafana",
-          "grafanaBootData"
-        ]
+        "patterns": ["Grafana", "grafana-app", "public/build/grafana", "grafanaBootData"]
       },
       {
         "name": "Prometheus",
         "kind": "监控系统",
-        "patterns": [
-          "Prometheus",
-          "prometheus",
-          "graph\\?g0",
-          "prometheus_target_interval_length_seconds"
-        ]
+        "patterns": ["Prometheus", "prometheus", "graph\\?g0", "prometheus_target_interval_length_seconds"]
       },
       {
         "name": "Alertmanager",
         "kind": "告警系统",
-        "patterns": [
-          "Alertmanager",
-          "alertmanager",
-          "/api/v2/alerts"
-        ]
+        "patterns": ["Alertmanager", "alertmanager", "/api/v2/alerts"]
       },
       {
         "defaults": {
@@ -278,30 +173,15 @@
           {
             "name": "Zabbix",
             "confidence": "高",
-            "patterns": [
-              "Zabbix",
-              "zabbix",
-              "zbx_session",
-              "jsLoader.php\\?ver="
-            ]
+            "patterns": ["Zabbix", "zabbix", "zbx_session", "jsLoader.php\\?ver="]
           },
           {
             "name": "Nagios",
-            "patterns": [
-              "Nagios",
-              "nagios",
-              "nagiosxi",
-              "status.cgi\\?host="
-            ]
+            "patterns": ["Nagios", "nagios", "nagiosxi", "status.cgi\\?host="]
           },
           {
             "name": "Icinga",
-            "patterns": [
-              "Icinga",
-              "icinga",
-              "icingaweb2",
-              "icingaweb"
-            ]
+            "patterns": ["Icinga", "icinga", "icingaweb2", "icingaweb"]
           }
         ]
       },
@@ -312,112 +192,200 @@
         "rules": [
           {
             "name": "Cacti",
-            "patterns": [
-              "Cacti",
-              "cacti",
-              "graph_view.php",
-              "cacti_web"
-            ]
+            "patterns": ["Cacti", "cacti", "graph_view.php", "cacti_web"]
           },
           {
             "name": "LibreNMS",
-            "patterns": [
-              "LibreNMS",
-              "librenms",
-              "ajax_table.php"
-            ]
+            "patterns": ["LibreNMS", "librenms", "ajax_table.php"]
           },
           {
             "name": "Observium",
-            "patterns": [
-              "Observium",
-              "observium",
-              "graphs/to=now"
-            ]
+            "patterns": ["Observium", "observium", "graphs/to=now"]
           }
         ]
       },
       {
         "name": "Munin",
         "kind": "资源监控",
-        "patterns": [
-          "Munin",
-          "munin",
-          "munin-cgi",
-          "munin-graph"
-        ]
+        "patterns": ["Munin", "munin", "munin-cgi", "munin-graph"]
       },
       {
         "name": "Smokeping",
         "kind": "网络延迟监控",
-        "patterns": [
-          "SmokePing",
-          "smokeping",
-          "cropper/smokeping",
-          "smokeping.cgi"
-        ]
+        "patterns": ["SmokePing", "smokeping", "cropper/smokeping", "smokeping.cgi"]
       },
       {
         "name": "Ward",
         "kind": "服务器仪表盘",
-        "patterns": [
-          "ward-dashboard",
-          "B-Software/Ward",
-          "<title>\\s*Ward\\s*</title>"
-        ]
+        "patterns": ["ward-dashboard", "B-Software/Ward", "<title>\\s*Ward\\s*</title>"]
       },
       {
         "name": "Statping / Statping-ng",
         "kind": "状态页 / 可用性监控",
-        "patterns": [
-          "Statping",
-          "statping",
-          "statping-ng",
-          "statping_dashboard"
-        ]
+        "patterns": ["Statping", "statping", "statping-ng", "statping_dashboard"]
       },
       {
         "name": "Cachet",
         "kind": "状态页",
-        "patterns": [
-          "Cachet",
-          "cachet",
-          "cachethq"
-        ]
+        "patterns": ["Cachet", "cachet", "cachethq"]
       },
       {
         "name": "Healthchecks",
         "kind": "任务健康检查",
-        "patterns": [
-          "Healthchecks",
-          "healthchecks.io",
-          "hc-ping.com"
-        ]
+        "patterns": ["Healthchecks", "healthchecks.io", "hc-ping.com"]
       },
       {
         "name": "Monitoror",
         "kind": "状态墙",
-        "patterns": [
-          "Monitoror",
-          "monitoror"
-        ]
+        "patterns": ["Monitoror", "monitoror"]
       },
       {
         "name": "PhpVirtualBox",
         "kind": "虚拟化管理面板",
-        "patterns": [
-          "phpVirtualBox",
-          "phpvirtualbox",
-          "vboxwebsrv"
-        ]
+        "patterns": ["phpVirtualBox", "phpvirtualbox", "vboxwebsrv"]
       },
       {
         "name": "Portainer",
         "kind": "容器管理面板",
-        "patterns": [
-          "Portainer",
-          "portainer",
-          "portainer.updatePassword"
+        "patterns": ["Portainer", "portainer", "portainer.updatePassword"]
+      },
+      {
+        "defaults": {
+          "kind": "服务器监控面板",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Beszel",
+            "patterns": [
+              "<title>\\s*Beszel(?:\\s*</title>|\\s+-)",
+              "beszel-hub",
+              "beszel-agent",
+              "(?:^|/)api/(?:systems|system-stats)(?:[?#\\s]|$)"
+            ]
+          },
+          {
+            "name": "Scrutiny",
+            "kind": "磁盘健康监控",
+            "patterns": [
+              "<title>\\s*Scrutiny(?:\\s*</title>|\\s+-)",
+              "scrutiny-collector",
+              "(?:^|/)api/(?:device|summary|settings)(?:[?#\\s]|$).*scrutiny"
+            ]
+          },
+          {
+            "name": "NetAlertX",
+            "kind": "网络资产监控",
+            "patterns": ["NetAlertX", "netalertx", "Pi.Alert", "pialert"]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "kind": "容器 / 服务管理面板",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Dozzle",
+            "patterns": ["<title>\\s*Dozzle(?:\\s*</title>|\\s+-)", "dozzle", "(?:^|/)api/events/stream(?:[?#\\s]|$)"]
+          },
+          {
+            "name": "Dockge",
+            "patterns": ["<title>\\s*Dockge(?:\\s*</title>|\\s+-)", "dockge", "(?:^|/)api/(?:stacks|docker)(?:[?#\\s/]|$)"]
+          },
+          {
+            "name": "Komodo",
+            "patterns": ["<title>\\s*Komodo(?:\\s*</title>|\\s+-)", "komodo-core", "komodo-periphery", "komo\\.do"]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "kind": "网络 / DNS 管理面板",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Pi-hole",
+            "patterns": ["Pi-hole", "pihole", "(?:^|/)admin/scripts/pi-hole/", "(?:^|/)admin/api\\.php(?:[?#\\s]|$)"]
+          },
+          {
+            "name": "AdGuard Home",
+            "patterns": ["AdGuard Home", "AdGuardHome", "(?:^|/)control/(?:status|querylog|clients)(?:[?#\\s]|$)"]
+          },
+          {
+            "name": "Nginx Proxy Manager",
+            "patterns": [
+              "Nginx Proxy Manager",
+              "nginxproxymanager",
+              "(?:^|/)api/nginx/(?:proxy-hosts|redirection-hosts|dead-hosts)(?:[?#\\s]|$)"
+            ]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "kind": "状态页 / 可用性监控",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Gatus",
+            "patterns": ["<title>\\s*Gatus(?:\\s*</title>|\\s+-)", "gatus", "(?:^|/)api/v1/endpoints/statuses(?:[?#\\s]|$)"]
+          },
+          {
+            "name": "Upptime",
+            "patterns": ["Upptime", "upptime", "upptime\\.js\\.org", "powered by Upptime"]
+          },
+          {
+            "name": "Vigil",
+            "patterns": ["<title>\\s*Vigil(?:\\s*</title>|\\s+-)", "Vigil Status Page", "vigil-status", "(?:^|/)status/text(?:[?#\\s]|$)"]
+          },
+          {
+            "name": "cState",
+            "patterns": ["cState", "cstate", "powered by cState"]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "kind": "企业监控系统",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Checkmk",
+            "patterns": ["Checkmk", "check_mk", "(?:^|/)check_mk/", "(?:^|/)cmk/(?:login|check_mk)(?:[?#\\s/]|$)"]
+          },
+          {
+            "name": "OpenNMS",
+            "patterns": ["OpenNMS", "opennms", "(?:^|/)opennms/(?:login|index\\.jsp)(?:[?#\\s]|$)"]
+          },
+          {
+            "name": "Centreon",
+            "patterns": ["Centreon", "centreon", "(?:^|/)centreon/(?:index\\.php|api)(?:[?#\\s/]|$)"]
+          },
+          {
+            "name": "Sensu",
+            "patterns": ["Sensu", "sensu", "(?:^|/)api/core/v2/(?:namespaces|events)(?:[?#\\s/]|$)"]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "kind": "日志 / 可观测性",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Grafana Mimir",
+            "patterns": ["Grafana Mimir", "grafana-mimir", "(?:^|/)mimir/(?:api|ready)(?:[?#\\s/]|$)"]
+          },
+          {
+            "name": "OpenObserve",
+            "patterns": ["OpenObserve", "openobserve", "(?:^|/)api/(?:default/|_meta/)?(?:logs|traces|metrics)(?:[?#\\s/]|$).*openobserve"]
+          }
         ]
       }
     ]

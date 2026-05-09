@@ -10,66 +10,44 @@
         "rules": [
           {
             "name": "Autosize",
-            "patterns": [
-              "(?:^|/)autosize(?:\\.min)?\\.js(?:[?#].*)?$"
-            ]
+            "patterns": ["(?:^|/)autosize(?:\\.min)?\\.js(?:[?#].*)?$"]
           },
           {
             "name": "clipboard.js",
-            "patterns": [
-              "(?:^|/)clipboard(?:\\.min)?\\.js(?:[?#].*)?$"
-            ]
+            "patterns": ["(?:^|/)clipboard(?:\\.min)?\\.js(?:[?#].*)?$"]
           },
           {
             "name": "Flickity",
-            "patterns": [
-              "(?:^|/)flickity(?:\\.pkgd)?(?:\\.min)?\\.js(?:[?#].*)?$"
-            ]
+            "patterns": ["(?:^|/)flickity(?:\\.pkgd)?(?:\\.min)?\\.js(?:[?#].*)?$"]
           },
           {
             "name": "imagesLoaded",
-            "patterns": [
-              "(?:^|/)imagesloaded(?:\\.pkgd)?(?:\\.min)?\\.js(?:[?#].*)?$"
-            ]
+            "patterns": ["(?:^|/)imagesloaded(?:\\.pkgd)?(?:\\.min)?\\.js(?:[?#].*)?$"]
           },
           {
             "name": "Packery",
-            "patterns": [
-              "(?:^|/)packery(?:\\.pkgd)?(?:\\.min)?\\.js(?:[?#].*)?$"
-            ]
+            "patterns": ["(?:^|/)packery(?:\\.pkgd)?(?:\\.min)?\\.js(?:[?#].*)?$"]
           },
           {
             "name": "QRious",
-            "patterns": [
-              "(?:^|/)qrious(?:\\.min)?\\.js(?:[?#].*)?$"
-            ]
+            "patterns": ["(?:^|/)qrious(?:\\.min)?\\.js(?:[?#].*)?$"]
           },
           {
             "name": "qs",
-            "patterns": [
-              "(?:^|/)qs(?:\\.min)?\\.js(?:[?#].*)?$"
-            ]
+            "patterns": ["(?:^|/)qs(?:\\.min)?\\.js(?:[?#].*)?$"]
           },
           {
             "name": "Sticky Sidebar",
-            "patterns": [
-              "(?:^|/)sticky-sidebar(?:\\.min)?\\.js(?:[?#].*)?$"
-            ]
+            "patterns": ["(?:^|/)sticky-sidebar(?:\\.min)?\\.js(?:[?#].*)?$"]
           },
           {
             "name": "Vuex",
-            "patterns": [
-              "(?:^|/)vuex(?:\\.(?:global|esm-browser|cjs|runtime))?(?:\\.prod)?(?:\\.min)?\\.js(?:[?#].*)?$"
-            ],
-            "globals": [
-              "Vuex"
-            ]
+            "patterns": ["(?:^|/)vuex(?:\\.(?:global|esm-browser|cjs|runtime))?(?:\\.prod)?(?:\\.min)?\\.js(?:[?#].*)?$"],
+            "globals": ["Vuex"]
           },
           {
             "name": "Zooming",
-            "patterns": [
-              "(?:^|/)zooming(?:\\.min)?\\.js(?:[?#].*)?$"
-            ]
+            "patterns": ["(?:^|/)zooming(?:\\.min)?\\.js(?:[?#].*)?$"]
           }
         ]
       }

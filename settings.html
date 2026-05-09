@@ -1,11 +1,10 @@
 <!doctype html>
 <html lang="zh-CN">
-
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>StackPrism 设置</title>
-    <link rel="stylesheet" href="settings.css">
+    <link rel="stylesheet" href="settings.css" />
   </head>
 
   <body>
@@ -17,7 +16,12 @@
             <span id="settingsVersion" class="version-badge"></span>
           </h1>
           <p>控制识别分类，添加自定义规则，并覆盖弹窗样式。</p>
-          <p class="repo-line">仓库：<a id="settingsRepoLink" href="https://github.com/setube/stackprism" target="_blank" rel="noreferrer">https://github.com/setube/stackprism</a></p>
+          <p class="repo-line">
+            仓库：
+            <a id="settingsRepoLink" href="https://github.com/setube/stackprism" target="_blank" rel="noreferrer">
+              https://github.com/setube/stackprism
+            </a>
+          </p>
         </div>
         <div class="header-actions">
           <button id="helpBtn" type="button">使用说明</button>
@@ -43,7 +47,12 @@
         <div>
           <h2>禁用指定技术</h2>
           <p class="hint">每行一个技术名称。名称匹配后不会在结果里显示。</p>
-          <textarea id="disabledTechnologies" rows="9" spellcheck="false" placeholder="例如：&#10;Google Analytics&#10;WordPress 插件: akismet"></textarea>
+          <textarea
+            id="disabledTechnologies"
+            rows="9"
+            spellcheck="false"
+            placeholder="例如：&#10;Google Analytics&#10;WordPress 插件: akismet"
+          ></textarea>
         </div>
         <div>
           <h2>自定义样式 CSS</h2>
@@ -66,15 +75,15 @@
         <div class="rule-form">
           <label>
             <span>技术名称</span>
-            <input id="ruleName" type="text" placeholder="例如：MyCMS">
+            <input id="ruleName" type="text" placeholder="例如：MyCMS" />
           </label>
           <label>
             <span>分类</span>
-            <input id="ruleCategory" type="text" list="categoryList" placeholder="例如：网站程序">
+            <input id="ruleCategory" type="text" list="categoryList" placeholder="例如：网站程序" />
           </label>
           <label>
             <span>类型说明</span>
-            <input id="ruleKind" type="text" placeholder="例如：自定义 CMS">
+            <input id="ruleKind" type="text" placeholder="例如：自定义 CMS" />
           </label>
           <label>
             <span>置信度</span>
@@ -93,22 +102,42 @@
           </label>
           <label>
             <span>官网 / 仓库 URL</span>
-            <input id="ruleUrl" type="url" placeholder="https://example.com">
+            <input id="ruleUrl" type="url" placeholder="https://example.com" />
           </label>
         </div>
 
         <div class="match-targets" aria-label="匹配范围">
-          <label><input type="checkbox" name="matchIn" value="url" checked> 页面 URL</label>
-          <label><input type="checkbox" name="matchIn" value="resources" checked> 资源 URL</label>
-          <label><input type="checkbox" name="matchIn" value="html" checked> DOM / 源码</label>
-          <label><input type="checkbox" name="matchIn" value="headers" checked> 响应头</label>
-          <label><input type="checkbox" name="matchIn" value="dynamic" checked> 动态资源</label>
+          <label>
+            <input type="checkbox" name="matchIn" value="url" checked />
+            页面 URL
+          </label>
+          <label>
+            <input type="checkbox" name="matchIn" value="resources" checked />
+            资源 URL
+          </label>
+          <label>
+            <input type="checkbox" name="matchIn" value="html" checked />
+            DOM / 源码
+          </label>
+          <label>
+            <input type="checkbox" name="matchIn" value="headers" checked />
+            响应头
+          </label>
+          <label>
+            <input type="checkbox" name="matchIn" value="dynamic" checked />
+            动态资源
+          </label>
         </div>
 
         <div class="rule-textareas">
           <label>
             <span>匹配规则，每行一个</span>
-            <textarea id="rulePatterns" rows="7" spellcheck="false" placeholder="wp-content/themes/my-theme&#10;X-Generator: MyCMS"></textarea>
+            <textarea
+              id="rulePatterns"
+              rows="7"
+              spellcheck="false"
+              placeholder="wp-content/themes/my-theme&#10;X-Generator: MyCMS"
+            ></textarea>
           </label>
           <label>
             <span>CSS 选择器，每行一个</span>
@@ -142,5 +171,4 @@
 
     <script src="settings.js"></script>
   </body>
-
 </html>

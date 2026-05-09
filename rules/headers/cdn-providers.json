@@ -3,45 +3,27 @@
     "cdnProviders": [
       {
         "name": "Tencent EdgeOne",
-        "patterns": [
-          "edgeone",
-          "eo-cache-status",
-          "tencentedgeone"
-        ]
+        "patterns": ["edgeone", "eo-cache-status", "tencentedgeone"]
       },
       {
         "name": "Oracle Cloud CDN",
-        "patterns": [
-          "oraclecloud",
-          "oci-cdn"
-        ]
+        "patterns": ["oraclecloud", "oci-cdn"]
       },
       {
         "name": "IBM Cloud CDN",
-        "patterns": [
-          "appdomain.cloud",
-          "ibmcloud"
-        ]
+        "patterns": ["appdomain.cloud", "ibmcloud"]
       },
       {
         "name": "AWS Global Accelerator",
-        "patterns": [
-          "awsglobalaccelerator"
-        ]
+        "patterns": ["awsglobalaccelerator"]
       },
       {
         "name": "Backblaze B2",
-        "patterns": [
-          "backblazeb2",
-          "x-bz-"
-        ]
+        "patterns": ["backblazeb2", "x-bz-"]
       },
       {
         "name": "Wasabi Storage",
-        "patterns": [
-          "wasabisys",
-          "x-amz-request-id"
-        ]
+        "patterns": ["wasabisys", "x-amz-request-id"]
       }
     ]
   }

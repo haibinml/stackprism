@@ -11,10 +11,7 @@
           "name": "Apache Solr Admin",
           "kind": "搜索引擎 / 管理面板",
           "confidence": "高",
-          "resourceHints": [
-            "/solr/",
-            "solr"
-          ],
+          "resourceHints": ["/solr/", "solr"],
           "patterns": [
             "(?:^|/)solr/(?:css|js|img)/(?:angular|solr|cloud)[^\\s\"'<>]*",
             "solr-admin[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
@@ -28,32 +25,20 @@
             {
               "name": "Elasticvue",
               "confidence": "高",
-              "resourceHints": [
-                "elasticvue"
-              ],
-              "patterns": [
-                "elasticvue[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["elasticvue"],
+              "patterns": ["elasticvue[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Dejavu",
               "confidence": "中",
-              "resourceHints": [
-                "dejavu"
-              ],
-              "patterns": [
-                "dejavu[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["dejavu"],
+              "patterns": ["dejavu[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Cerebro",
               "confidence": "中",
-              "resourceHints": [
-                "cerebro"
-              ],
-              "patterns": [
-                "cerebro[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["cerebro"],
+              "patterns": ["cerebro[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             }
           ]
         },
@@ -65,63 +50,38 @@
             {
               "name": "Meilisearch",
               "kind": "搜索引擎",
-              "resourceHints": [
-                "meilisearch"
-              ],
-              "patterns": [
-                "meilisearch[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["meilisearch"],
+              "patterns": ["meilisearch[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Typesense",
               "kind": "搜索引擎",
-              "resourceHints": [
-                "typesense"
-              ],
-              "patterns": [
-                "typesense[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["typesense"],
+              "patterns": ["typesense[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "ZincSearch",
               "kind": "搜索引擎 / 日志搜索",
-              "resourceHints": [
-                "zincsearch"
-              ],
-              "patterns": [
-                "zincsearch[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["zincsearch"],
+              "patterns": ["zincsearch[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Qdrant",
               "kind": "向量数据库",
-              "resourceHints": [
-                "qdrant"
-              ],
-              "patterns": [
-                "qdrant[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["qdrant"],
+              "patterns": ["qdrant[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Weaviate",
               "kind": "向量数据库",
-              "resourceHints": [
-                "weaviate"
-              ],
-              "patterns": [
-                "weaviate[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["weaviate"],
+              "patterns": ["weaviate[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Milvus Attu",
               "kind": "向量数据库管理面板",
-              "resourceHints": [
-                "milvus",
-                "attu"
-              ],
-              "patterns": [
-                "(?:milvus|attu)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["milvus", "attu"],
+              "patterns": ["(?:milvus|attu)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             }
           ]
         },
@@ -129,12 +89,8 @@
           "name": "Chroma",
           "kind": "向量数据库",
           "confidence": "中",
-          "resourceHints": [
-            "chroma"
-          ],
-          "patterns": [
-            "chroma[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-          ]
+          "resourceHints": ["chroma"],
+          "patterns": ["chroma[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
         },
         {
           "defaults": {
@@ -148,72 +104,43 @@
               "rules": [
                 {
                   "name": "RedisInsight",
-                  "resourceHints": [
-                    "redisinsight"
-                  ],
-                  "patterns": [
-                    "redisinsight[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["redisinsight"],
+                  "patterns": ["redisinsight[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "name": "Redis Commander",
-                  "resourceHints": [
-                    "redis-commander"
-                  ],
-                  "patterns": [
-                    "redis-commander[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["redis-commander"],
+                  "patterns": ["redis-commander[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "name": "phpRedisAdmin",
-                  "resourceHints": [
-                    "phpredisadmin"
-                  ],
-                  "patterns": [
-                    "phpredisadmin[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["phpredisadmin"],
+                  "patterns": ["phpredisadmin[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 }
               ]
             },
             {
               "name": "Mongo Express",
               "kind": "MongoDB 管理面板",
-              "resourceHints": [
-                "mongo-express"
-              ],
-              "patterns": [
-                "mongo-express[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["mongo-express"],
+              "patterns": ["mongo-express[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Mongoku",
               "kind": "MongoDB 管理面板",
-              "resourceHints": [
-                "mongoku"
-              ],
-              "patterns": [
-                "mongoku[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["mongoku"],
+              "patterns": ["mongoku[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "CouchDB Fauxton",
               "kind": "CouchDB 管理面板",
-              "resourceHints": [
-                "/_utils/",
-                "fauxton"
-              ],
-              "patterns": [
-                "(?:^|/)_utils/(?:dashboard|fauxton|js|css)[^\\s\"'<>]*",
-                "fauxton[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["/_utils/", "fauxton"],
+              "patterns": ["(?:^|/)_utils/(?:dashboard|fauxton|js|css)[^\\s\"'<>]*", "fauxton[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "ArangoDB",
               "kind": "多模型数据库管理面板",
-              "resourceHints": [
-                "arangodb",
-                "/_db/_system/_admin/"
-              ],
+              "resourceHints": ["arangodb", "/_db/_system/_admin/"],
               "patterns": [
                 "(?:^|/)_db/_system/_admin/(?:aardvark|html|js|css)[^\\s\"'<>]*",
                 "arangodb[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
@@ -222,10 +149,7 @@
             {
               "name": "Neo4j Browser",
               "kind": "图数据库管理面板",
-              "resourceHints": [
-                "neo4j-browser",
-                "neo4j"
-              ],
+              "resourceHints": ["neo4j-browser", "neo4j"],
               "patterns": [
                 "neo4j-browser[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
                 "neo4j[^\\s\"'<>]*browser[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
@@ -234,13 +158,8 @@
             {
               "name": "OrientDB Studio",
               "kind": "图数据库管理面板",
-              "resourceHints": [
-                "orientdb",
-                "studio"
-              ],
-              "patterns": [
-                "orientdb[^\\s\"'<>]*studio[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["orientdb", "studio"],
+              "patterns": ["orientdb[^\\s\"'<>]*studio[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "defaults": {
@@ -249,104 +168,62 @@
               "rules": [
                 {
                   "name": "QuestDB Console",
-                  "resourceHints": [
-                    "questdb"
-                  ],
-                  "patterns": [
-                    "questdb[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["questdb"],
+                  "patterns": ["questdb[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "name": "InfluxDB UI",
-                  "resourceHints": [
-                    "influxdb"
-                  ],
-                  "patterns": [
-                    "influxdb[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["influxdb"],
+                  "patterns": ["influxdb[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "name": "Chronograf",
-                  "resourceHints": [
-                    "chronograf"
-                  ],
-                  "patterns": [
-                    "chronograf[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["chronograf"],
+                  "patterns": ["chronograf[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 }
               ]
             },
             {
               "name": "ClickHouse Tabix",
               "kind": "ClickHouse 管理面板",
-              "resourceHints": [
-                "tabix"
-              ],
-              "patterns": [
-                "tabix[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["tabix"],
+              "patterns": ["tabix[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Bytebase",
               "kind": "数据库变更管理",
-              "resourceHints": [
-                "bytebase"
-              ],
-              "patterns": [
-                "bytebase[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["bytebase"],
+              "patterns": ["bytebase[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "CloudBeaver",
               "kind": "数据库管理面板",
-              "resourceHints": [
-                "cloudbeaver"
-              ],
-              "patterns": [
-                "cloudbeaver[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["cloudbeaver"],
+              "patterns": ["cloudbeaver[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "AdminMongo",
               "kind": "MongoDB 管理面板",
-              "resourceHints": [
-                "adminmongo"
-              ],
-              "patterns": [
-                "adminmongo[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["adminmongo"],
+              "patterns": ["adminmongo[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "RabbitMQ Management",
               "kind": "消息队列管理面板",
-              "resourceHints": [
-                "/js/ejs-",
-                "rabbitmq"
-              ],
-              "patterns": [
-                "rabbitmq[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
-                "(?:^|/)js/ejs-[^\\s\"'<>]*\\.js(?:\\?|$)"
-              ]
+              "resourceHints": ["/js/ejs-", "rabbitmq"],
+              "patterns": ["rabbitmq[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)", "(?:^|/)js/ejs-[^\\s\"'<>]*\\.js(?:\\?|$)"]
             },
             {
               "name": "Kafka UI",
               "kind": "Kafka 管理面板",
-              "resourceHints": [
-                "kafka-ui"
-              ],
-              "patterns": [
-                "kafka-ui[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["kafka-ui"],
+              "patterns": ["kafka-ui[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Redpanda Console",
               "kind": "Kafka / Redpanda 管理面板",
-              "resourceHints": [
-                "redpanda"
-              ],
-              "patterns": [
-                "redpanda[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["redpanda"],
+              "patterns": ["redpanda[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "defaults": {
@@ -355,43 +232,26 @@
               "rules": [
                 {
                   "name": "AKHQ",
-                  "resourceHints": [
-                    "akhq"
-                  ],
-                  "patterns": [
-                    "akhq[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["akhq"],
+                  "patterns": ["akhq[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "name": "Kafdrop",
-                  "resourceHints": [
-                    "kafdrop"
-                  ],
-                  "patterns": [
-                    "kafdrop[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["kafdrop"],
+                  "patterns": ["kafdrop[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "name": "CMAK",
-                  "resourceHints": [
-                    "cmak",
-                    "kafka-manager"
-                  ],
-                  "patterns": [
-                    "(?:cmak|kafka-manager)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["cmak", "kafka-manager"],
+                  "patterns": ["(?:cmak|kafka-manager)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 }
               ]
             },
             {
               "name": "Apache Pulsar Manager",
               "kind": "Pulsar 管理面板",
-              "resourceHints": [
-                "pulsar-manager"
-              ],
-              "patterns": [
-                "pulsar-manager[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["pulsar-manager"],
+              "patterns": ["pulsar-manager[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "defaults": {
@@ -400,111 +260,67 @@
               "rules": [
                 {
                   "name": "EMQX Dashboard",
-                  "resourceHints": [
-                    "emqx"
-                  ],
-                  "patterns": [
-                    "emqx[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["emqx"],
+                  "patterns": ["emqx[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "name": "VerneMQ Dashboard",
-                  "resourceHints": [
-                    "vernemq"
-                  ],
-                  "patterns": [
-                    "vernemq[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["vernemq"],
+                  "patterns": ["vernemq[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 },
                 {
                   "name": "HiveMQ",
-                  "resourceHints": [
-                    "hivemq"
-                  ],
-                  "patterns": [
-                    "hivemq[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-                  ]
+                  "resourceHints": ["hivemq"],
+                  "patterns": ["hivemq[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
                 }
               ]
             },
             {
               "name": "NATS Surveyor",
               "kind": "消息系统监控",
-              "resourceHints": [
-                "nats-surveyor"
-              ],
-              "patterns": [
-                "nats-surveyor[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["nats-surveyor"],
+              "patterns": ["nats-surveyor[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Airbyte",
               "kind": "数据集成 / ELT",
-              "resourceHints": [
-                "airbyte"
-              ],
-              "patterns": [
-                "airbyte[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["airbyte"],
+              "patterns": ["airbyte[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Prefect",
               "kind": "数据工作流",
-              "resourceHints": [
-                "prefect"
-              ],
-              "patterns": [
-                "prefect[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["prefect"],
+              "patterns": ["prefect[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Temporal",
               "kind": "工作流编排",
-              "resourceHints": [
-                "temporal"
-              ],
-              "patterns": [
-                "temporal[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["temporal"],
+              "patterns": ["temporal[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Kestra",
               "kind": "数据编排 / 工作流",
-              "resourceHints": [
-                "kestra"
-              ],
-              "patterns": [
-                "kestra[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["kestra"],
+              "patterns": ["kestra[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Apache NiFi",
               "kind": "数据流处理",
-              "resourceHints": [
-                "nifi"
-              ],
-              "patterns": [
-                "(?:^|/)nifi/(?:assets|css|js|images)(?:/|[?#]|$)",
-                "nifi[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["nifi"],
+              "patterns": ["(?:^|/)nifi/(?:assets|css|js|images)(?:/|[?#]|$)", "nifi[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Apache Flink Dashboard",
               "kind": "流处理 / 任务面板",
-              "resourceHints": [
-                "flink"
-              ],
-              "patterns": [
-                "flink[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["flink"],
+              "patterns": ["flink[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Apache Spark UI",
               "kind": "大数据 / 任务面板",
-              "resourceHints": [
-                "spark-ui",
-                "spark"
-              ],
+              "resourceHints": ["spark-ui", "spark"],
               "patterns": [
                 "spark-ui[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
                 "(?:^|/)static/spark[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
@@ -513,9 +329,7 @@
             {
               "name": "Apache Hadoop YARN",
               "kind": "大数据 / 资源管理",
-              "resourceHints": [
-                "yarn"
-              ],
+              "resourceHints": ["yarn"],
               "patterns": [
                 "hadoop-yarn[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
                 "yarn[^\\s\"'<>]*resource-manager[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
@@ -524,52 +338,32 @@
             {
               "name": "Apache HBase UI",
               "kind": "大数据 / 数据库面板",
-              "resourceHints": [
-                "hbase"
-              ],
-              "patterns": [
-                "hbase[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["hbase"],
+              "patterns": ["hbase[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Apache Druid",
               "kind": "OLAP / 实时分析",
-              "resourceHints": [
-                "druid-console"
-              ],
-              "patterns": [
-                "druid-console[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["druid-console"],
+              "patterns": ["druid-console[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Apache Pinot",
               "kind": "OLAP / 实时分析",
-              "resourceHints": [
-                "pinot"
-              ],
-              "patterns": [
-                "pinot[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["pinot"],
+              "patterns": ["pinot[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "Ceph Dashboard",
               "kind": "分布式存储管理面板",
-              "resourceHints": [
-                "ceph"
-              ],
-              "patterns": [
-                "ceph[^\\s\"'<>]*dashboard[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["ceph"],
+              "patterns": ["ceph[^\\s\"'<>]*dashboard[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
               "name": "SeaweedFS",
               "kind": "分布式文件系统",
-              "resourceHints": [
-                "seaweedfs"
-              ],
-              "patterns": [
-                "seaweedfs[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
-              ]
+              "resourceHints": ["seaweedfs"],
+              "patterns": ["seaweedfs[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             }
           ]
         }

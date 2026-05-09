@@ -8,167 +8,93 @@
         "rules": [
           {
             "name": "Qwik",
-            "patterns": [
-              "qwikloader|\\/q-[\\w-]+\\.js|@builder\\.io\\/qwik|q:container"
-            ],
-            "globals": [
-              "qwikLoader"
-            ]
+            "patterns": ["qwikloader|\\/q-[\\w-]+\\.js|@builder\\.io\\/qwik|q:container"],
+            "globals": ["qwikLoader"]
           },
           {
             "name": "Marko",
-            "patterns": [
-              "marko(?:\\.min)?\\.js|@marko\\/"
-            ],
-            "globals": [
-              "Marko"
-            ]
+            "patterns": ["marko(?:\\.min)?\\.js|@marko\\/"],
+            "globals": ["Marko"]
           },
           {
             "name": "Stencil",
-            "patterns": [
-              "@stencil|stencil(?:\\.min)?\\.js|stencil-hydrate|class=\"[^\"]*hydrated"
-            ],
-            "globals": [
-              "Stencil"
-            ]
+            "patterns": ["@stencil|stencil(?:\\.min)?\\.js|stencil-hydrate|class=\"[^\"]*hydrated"],
+            "globals": ["Stencil"]
           },
           {
             "name": "Aurelia",
-            "patterns": [
-              "aurelia(?:\\.min)?\\.js|aurelia-framework|au-target-id"
-            ],
-            "globals": [
-              "aurelia"
-            ]
+            "patterns": ["aurelia(?:\\.min)?\\.js|aurelia-framework|au-target-id"],
+            "globals": ["aurelia"]
           },
           {
             "name": "Riot.js",
-            "patterns": [
-              "riot(?:\\+compiler)?(?:\\.min)?\\.js|riotjs"
-            ],
-            "globals": [
-              "riot"
-            ]
+            "patterns": ["riot(?:\\+compiler)?(?:\\.min)?\\.js|riotjs"],
+            "globals": ["riot"]
           },
           {
             "name": "Knockout.js",
-            "patterns": [
-              "knockout(?:\\.min)?\\.js|data-bind="
-            ],
-            "globals": [
-              "ko"
-            ]
+            "patterns": ["knockout(?:\\.min)?\\.js|data-bind="],
+            "globals": ["ko"]
           },
           {
             "name": "Dojo Toolkit",
-            "patterns": [
-              "dojo(?:\\.min)?\\.js|dojo\\/dojo|dijit\\/"
-            ],
-            "globals": [
-              "dojo",
-              "dijit"
-            ]
+            "patterns": ["dojo(?:\\.min)?\\.js|dojo\\/dojo|dijit\\/"],
+            "globals": ["dojo", "dijit"]
           },
           {
             "name": "Ext JS / Sencha",
-            "patterns": [
-              "ext-all(?:\\.min)?\\.js|sencha|extjs"
-            ],
-            "globals": [
-              "Ext"
-            ]
+            "patterns": ["ext-all(?:\\.min)?\\.js|sencha|extjs"],
+            "globals": ["Ext"]
           },
           {
             "name": "Ractive.js",
-            "patterns": [
-              "ractive(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "Ractive"
-            ]
+            "patterns": ["ractive(?:\\.min)?\\.js"],
+            "globals": ["Ractive"]
           },
           {
             "name": "CanJS",
-            "patterns": [
-              "canjs|can(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "can"
-            ]
+            "patterns": ["canjs|can(?:\\.min)?\\.js"],
+            "globals": ["can"]
           },
           {
             "name": "Inferno",
-            "patterns": [
-              "inferno(?:\\.min)?\\.js|inferno-dom"
-            ],
-            "globals": [
-              "Inferno"
-            ]
+            "patterns": ["inferno(?:\\.min)?\\.js|inferno-dom"],
+            "globals": ["Inferno"]
           },
           {
             "name": "Hyperapp",
-            "patterns": [
-              "hyperapp(?:\\.min)?\\.js|@hyperapp\\/"
-            ],
-            "globals": [
-              "hyperapp"
-            ]
+            "patterns": ["hyperapp(?:\\.min)?\\.js|@hyperapp\\/"],
+            "globals": ["hyperapp"]
           },
           {
             "name": "MooTools",
-            "patterns": [
-              "mootools(?:-core)?(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "MooTools"
-            ]
+            "patterns": ["mootools(?:-core)?(?:\\.min)?\\.js"],
+            "globals": ["MooTools"]
           },
           {
             "name": "Prototype.js",
-            "patterns": [
-              "prototype(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "Prototype"
-            ]
+            "patterns": ["prototype(?:\\.min)?\\.js"],
+            "globals": ["Prototype"]
           },
           {
             "name": "YUI",
-            "patterns": [
-              "yui(?:-min)?\\.js|yahoo-dom-event|yuilibrary"
-            ],
-            "globals": [
-              "YUI",
-              "YAHOO"
-            ]
+            "patterns": ["yui(?:-min)?\\.js|yahoo-dom-event|yuilibrary"],
+            "globals": ["YUI", "YAHOO"]
           },
           {
             "name": "htmx",
-            "patterns": [
-              "htmx(?:\\.min)?\\.js|hx-(?:get|post|put|delete|trigger|swap)="
-            ],
-            "globals": [
-              "htmx"
-            ]
+            "patterns": ["htmx(?:\\.min)?\\.js|hx-(?:get|post|put|delete|trigger|swap)="],
+            "globals": ["htmx"]
           },
           {
             "name": "Hotwire Turbo",
-            "patterns": [
-              "turbo(?:\\.min)?\\.js|turbo-rails|<turbo-frame|data-turbo"
-            ],
-            "globals": [
-              "Turbo"
-            ]
+            "patterns": ["turbo(?:\\.min)?\\.js|turbo-rails|<turbo-frame|data-turbo"],
+            "globals": ["Turbo"]
           },
           {
             "name": "Unpoly",
-            "patterns": [
-              "unpoly(?:\\.min)?\\.js|up-target=|up-follow"
-            ],
-            "globals": [
-              "up"
-            ]
+            "patterns": ["unpoly(?:\\.min)?\\.js|up-target=|up-follow"],
+            "globals": ["up"]
           }
         ]
       },
@@ -179,268 +105,150 @@
         "rules": [
           {
             "name": "Mantine",
-            "patterns": [
-              "@mantine\\/|mantine-"
-            ],
-            "classPrefixes": [
-              "mantine-"
-            ]
+            "patterns": ["@mantine\\/|mantine-"],
+            "classPrefixes": ["mantine-"]
           },
           {
             "name": "HeroUI / NextUI",
-            "patterns": [
-              "nextui|heroui|@nextui-org|@heroui\\/"
-            ],
-            "classPrefixes": [
-              "nextui-",
-              "heroui-"
-            ]
+            "patterns": ["nextui|heroui|@nextui-org|@heroui\\/"],
+            "classPrefixes": ["nextui-", "heroui-"]
           },
           {
             "name": "Radix UI",
-            "patterns": [
-              "@radix-ui|data-radix|radix-"
-            ]
+            "patterns": ["@radix-ui|data-radix|radix-"]
           },
           {
             "name": "Headless UI",
-            "patterns": [
-              "headlessui|data-headlessui-state"
-            ]
+            "patterns": ["headlessui|data-headlessui-state"]
           },
           {
             "name": "daisyUI",
-            "patterns": [
-              "daisyui|data-theme=\"(?:light|dark|cupcake|bumblebee|emerald|corporate|synthwave|retro|cyberpunk)"
-            ]
+            "patterns": ["daisyui|data-theme=\"(?:light|dark|cupcake|bumblebee|emerald|corporate|synthwave|retro|cyberpunk)"]
           },
           {
             "name": "Fluent UI / Fabric",
-            "patterns": [
-              "@fluentui|office-ui-fabric|ms-Fabric|ms-Button"
-            ],
-            "classPrefixes": [
-              "ms-"
-            ]
+            "patterns": ["@fluentui|office-ui-fabric|ms-Fabric|ms-Button"],
+            "classPrefixes": ["ms-"]
           },
           {
             "name": "Blueprint",
-            "patterns": [
-              "@blueprintjs|blueprintjs|bp5-|bp4-|bp3-"
-            ],
-            "classPrefixes": [
-              "bp5-",
-              "bp4-",
-              "bp3-"
-            ]
+            "patterns": ["@blueprintjs|blueprintjs|bp5-|bp4-|bp3-"],
+            "classPrefixes": ["bp5-", "bp4-", "bp3-"]
           },
           {
             "name": "Carbon Design System",
-            "patterns": [
-              "@carbon\\/|carbon-components|cds--|bx--"
-            ],
-            "classPrefixes": [
-              "cds--",
-              "bx--"
-            ]
+            "patterns": ["@carbon\\/|carbon-components|cds--|bx--"],
+            "classPrefixes": ["cds--", "bx--"]
           },
           {
             "name": "Clarity Design",
-            "patterns": [
-              "clarity-ui|@clr\\/|clr-"
-            ],
-            "classPrefixes": [
-              "clr-"
-            ]
+            "patterns": ["clarity-ui|@clr\\/|clr-"],
+            "classPrefixes": ["clr-"]
           },
           {
             "name": "Shoelace",
-            "patterns": [
-              "shoelace\\.style|@shoelace-style|<sl-[a-z-]+"
-            ],
-            "classPrefixes": [
-              "sl-"
-            ]
+            "patterns": ["shoelace\\.style|@shoelace-style|<sl-[a-z-]+"],
+            "classPrefixes": ["sl-"]
           },
           {
             "name": "FAST",
-            "patterns": [
-              "@microsoft\\/fast|<fast-[a-z-]+"
-            ]
+            "patterns": ["@microsoft\\/fast|<fast-[a-z-]+"]
           },
           {
             "name": "Kendo UI",
-            "patterns": [
-              "kendo(?:\\.min)?\\.js|kendo-ui|kendo\\."
-            ],
-            "globals": [
-              "kendo"
-            ],
-            "classPrefixes": [
-              "k-"
-            ]
+            "patterns": ["kendo(?:\\.min)?\\.js|kendo-ui|kendo\\."],
+            "globals": ["kendo"],
+            "classPrefixes": ["k-"]
           },
           {
             "name": "DevExtreme",
-            "patterns": [
-              "devextreme|dx\\.all|dx-"
-            ],
-            "globals": [
-              "DevExpress"
-            ],
-            "classPrefixes": [
-              "dx-"
-            ]
+            "patterns": ["devextreme|dx\\.all|dx-"],
+            "globals": ["DevExpress"],
+            "classPrefixes": ["dx-"]
           },
           {
             "name": "Syncfusion Essential JS",
-            "patterns": [
-              "syncfusion|ej2-|ejs-"
-            ],
-            "globals": [
-              "ej"
-            ]
+            "patterns": ["syncfusion|ej2-|ejs-"],
+            "globals": ["ej"]
           },
           {
             "name": "Wijmo",
-            "patterns": [
-              "wijmo|wj-"
-            ],
-            "globals": [
-              "wijmo"
-            ],
-            "classPrefixes": [
-              "wj-"
-            ]
+            "patterns": ["wijmo|wj-"],
+            "globals": ["wijmo"],
+            "classPrefixes": ["wj-"]
           },
           {
             "name": "Webix",
-            "patterns": [
-              "webix(?:\\.min)?\\.js|webix\\.css"
-            ],
-            "globals": [
-              "webix"
-            ]
+            "patterns": ["webix(?:\\.min)?\\.js|webix\\.css"],
+            "globals": ["webix"]
           },
           {
             "name": "UIkit",
-            "patterns": [
-              "uikit(?:\\.min)?\\.(?:js|css)|uk-"
-            ],
-            "globals": [
-              "UIkit"
-            ],
-            "classPrefixes": [
-              "uk-"
-            ]
+            "patterns": ["uikit(?:\\.min)?\\.(?:js|css)|uk-"],
+            "globals": ["UIkit"],
+            "classPrefixes": ["uk-"]
           },
           {
             "name": "Materialize CSS",
-            "patterns": [
-              "materialize(?:\\.min)?\\.(?:js|css)"
-            ]
+            "patterns": ["materialize(?:\\.min)?\\.(?:js|css)"]
           },
           {
             "name": "Pure.css",
-            "patterns": [
-              "pure(?:-min)?\\.css|pure-g|pure-u-"
-            ],
-            "classPrefixes": [
-              "pure-"
-            ]
+            "patterns": ["pure(?:-min)?\\.css|pure-g|pure-u-"],
+            "classPrefixes": ["pure-"]
           },
           {
             "name": "Skeleton CSS",
-            "patterns": [
-              "skeleton(?:\\.min)?\\.css|skeleton-css"
-            ]
+            "patterns": ["skeleton(?:\\.min)?\\.css|skeleton-css"]
           },
           {
             "name": "Milligram",
-            "patterns": [
-              "milligram(?:\\.min)?\\.css"
-            ]
+            "patterns": ["milligram(?:\\.min)?\\.css"]
           },
           {
             "name": "Metro UI",
-            "patterns": [
-              "metro4|metro-ui|mif-"
-            ],
-            "globals": [
-              "Metro"
-            ],
-            "classPrefixes": [
-              "mif-"
-            ]
+            "patterns": ["metro4|metro-ui|mif-"],
+            "globals": ["Metro"],
+            "classPrefixes": ["mif-"]
           },
           {
             "name": "Framework7",
-            "patterns": [
-              "framework7(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)|f7-"
-            ],
-            "globals": [
-              "Framework7"
-            ],
-            "classPrefixes": [
-              "f7-"
-            ]
+            "patterns": ["framework7(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)|f7-"],
+            "globals": ["Framework7"],
+            "classPrefixes": ["f7-"]
           },
           {
             "name": "Onsen UI",
-            "patterns": [
-              "onsenui|onsen-ui|<ons-[a-z-]+"
-            ],
-            "globals": [
-              "ons"
-            ]
+            "patterns": ["onsenui|onsen-ui|<ons-[a-z-]+"],
+            "globals": ["ons"]
           },
           {
             "name": "WeUI",
-            "patterns": [
-              "weui(?:\\.min)?\\.css|weui-"
-            ],
-            "classPrefixes": [
-              "weui-"
-            ]
+            "patterns": ["weui(?:\\.min)?\\.css|weui-"],
+            "classPrefixes": ["weui-"]
           },
           {
             "name": "Naive UI",
-            "patterns": [
-              "naive-ui|n-config-provider|n-message-provider"
-            ]
+            "patterns": ["naive-ui|n-config-provider|n-message-provider"]
           },
           {
             "name": "NutUI",
-            "patterns": [
-              "nutui|@nutui\\/|nut-"
-            ],
-            "classPrefixes": [
-              "nut-"
-            ]
+            "patterns": ["nutui|@nutui\\/|nut-"],
+            "classPrefixes": ["nut-"]
           },
           {
             "name": "Varlet",
-            "patterns": [
-              "varlet|@varlet\\/|var-"
-            ]
+            "patterns": ["varlet|@varlet\\/|var-"]
           },
           {
             "name": "Semi Design",
-            "patterns": [
-              "semi-design|@douyinfe\\/semi|semi-"
-            ],
-            "classPrefixes": [
-              "semi-"
-            ]
+            "patterns": ["semi-design|@douyinfe\\/semi|semi-"],
+            "classPrefixes": ["semi-"]
           },
           {
             "name": "View UI / iView",
-            "patterns": [
-              "view-design|iview|ivu-"
-            ],
-            "classPrefixes": [
-              "ivu-"
-            ]
+            "patterns": ["view-design|iview|ivu-"],
+            "classPrefixes": ["ivu-"]
           }
         ]
       },
@@ -451,520 +259,298 @@
         "rules": [
           {
             "name": "Lodash",
-            "patterns": [
-              "lodash(?:\\.min)?\\.js|lodash-es"
-            ]
+            "patterns": ["lodash(?:\\.min)?\\.js|lodash-es"]
           },
           {
             "name": "Underscore.js",
-            "patterns": [
-              "underscore(?:\\.min)?\\.js"
-            ]
+            "patterns": ["underscore(?:\\.min)?\\.js"]
           },
           {
             "name": "Axios",
-            "patterns": [
-              "axios(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "axios"
-            ]
+            "patterns": ["axios(?:\\.min)?\\.js"],
+            "globals": ["axios"]
           },
           {
             "name": "Moment.js",
-            "patterns": [
-              "moment(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "moment"
-            ]
+            "patterns": ["moment(?:\\.min)?\\.js"],
+            "globals": ["moment"]
           },
           {
             "name": "Day.js",
-            "patterns": [
-              "dayjs(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "dayjs"
-            ]
+            "patterns": ["dayjs(?:\\.min)?\\.js"],
+            "globals": ["dayjs"]
           },
           {
             "name": "date-fns",
-            "patterns": [
-              "date-fns|date_fns"
-            ],
-            "globals": [
-              "dateFns"
-            ]
+            "patterns": ["date-fns|date_fns"],
+            "globals": ["dateFns"]
           },
           {
             "name": "RxJS",
-            "patterns": [
-              "rxjs(?:\\.umd)?(?:\\.min)?\\.js|@rxjs\\/"
-            ],
-            "globals": [
-              "rxjs"
-            ]
+            "patterns": ["rxjs(?:\\.umd)?(?:\\.min)?\\.js|@rxjs\\/"],
+            "globals": ["rxjs"]
           },
           {
             "name": "Redux",
-            "patterns": [
-              "redux(?:\\.min)?\\.js|@reduxjs"
-            ],
-            "globals": [
-              "Redux"
-            ]
+            "patterns": ["redux(?:\\.min)?\\.js|@reduxjs"],
+            "globals": ["Redux"]
           },
           {
             "name": "MobX",
-            "patterns": [
-              "mobx(?:\\.umd)?(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "mobx"
-            ]
+            "patterns": ["mobx(?:\\.umd)?(?:\\.min)?\\.js"],
+            "globals": ["mobx"]
           },
           {
             "name": "Zustand",
-            "patterns": [
-              "zustand(?:\\.min)?\\.js|zustand\\/"
-            ]
+            "patterns": ["zustand(?:\\.min)?\\.js|zustand\\/"]
           },
           {
             "name": "Jotai",
-            "patterns": [
-              "jotai(?:\\/|\\.)|@jotai\\/"
-            ]
+            "patterns": ["jotai(?:\\/|\\.)|@jotai\\/"]
           },
           {
             "name": "Valtio",
-            "patterns": [
-              "valtio(?:\\/|\\.)|@valtio\\/"
-            ]
+            "patterns": ["valtio(?:\\/|\\.)|@valtio\\/"]
           },
           {
             "name": "TanStack Query",
-            "patterns": [
-              "@tanstack\\/react-query|@tanstack\\/query-core|react-query"
-            ]
+            "patterns": ["@tanstack\\/react-query|@tanstack\\/query-core|react-query"]
           },
           {
             "name": "tRPC",
-            "patterns": [
-              "@trpc\\/client|@trpc\\/react-query|trpc\\."
-            ]
+            "patterns": ["@trpc\\/client|@trpc\\/react-query|trpc\\."]
           },
           {
             "name": "React Hook Form",
-            "patterns": [
-              "react-hook-form|useFormContext|useController"
-            ]
+            "patterns": ["react-hook-form|useFormContext|useController"]
           },
           {
             "name": "Zod",
-            "patterns": [
-              "zod(?:\\/|\\.)|zod-error|ZodError"
-            ]
+            "patterns": ["zod(?:\\/|\\.)|zod-error|ZodError"]
           },
           {
             "name": "Pinia",
-            "patterns": [
-              "pinia(?:\\.iife)?(?:\\.prod)?\\.js|\\/pinia\\/"
-            ],
-            "globals": [
-              "Pinia"
-            ]
+            "patterns": ["pinia(?:\\.iife)?(?:\\.prod)?\\.js|\\/pinia\\/"],
+            "globals": ["Pinia"]
           },
           {
             "name": "Apollo Client",
-            "patterns": [
-              "apollo-client|@apollo\\/client|apollo\\.client"
-            ],
-            "globals": [
-              "ApolloClient"
-            ]
+            "patterns": ["apollo-client|@apollo\\/client|apollo\\.client"],
+            "globals": ["ApolloClient"]
           },
           {
             "name": "Relay",
-            "patterns": [
-              "relay-runtime|react-relay"
-            ]
+            "patterns": ["relay-runtime|react-relay"]
           },
           {
             "name": "urql",
-            "patterns": [
-              "\\/urql\\/|@urql\\/"
-            ]
+            "patterns": ["\\/urql\\/|@urql\\/"]
           },
           {
             "name": "D3.js",
-            "patterns": [
-              "d3(?:\\.v\\d+)?(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "d3"
-            ]
+            "patterns": ["d3(?:\\.v\\d+)?(?:\\.min)?\\.js"],
+            "globals": ["d3"]
           },
           {
             "name": "ECharts",
-            "patterns": [
-              "echarts(?:\\.min)?\\.js|echarts-for-react"
-            ],
-            "globals": [
-              "echarts"
-            ]
+            "patterns": ["echarts(?:\\.min)?\\.js|echarts-for-react"],
+            "globals": ["echarts"]
           },
           {
             "name": "Chart.js",
-            "patterns": [
-              "chart(?:\\.umd)?(?:\\.min)?\\.js|chartjs"
-            ],
-            "globals": [
-              "Chart"
-            ]
+            "patterns": ["chart(?:\\.umd)?(?:\\.min)?\\.js|chartjs"],
+            "globals": ["Chart"]
           },
           {
             "name": "Highcharts",
-            "patterns": [
-              "highcharts(?:\\.js|\\/)|code\\.highcharts\\.com"
-            ],
-            "globals": [
-              "Highcharts"
-            ]
+            "patterns": ["highcharts(?:\\.js|\\/)|code\\.highcharts\\.com"],
+            "globals": ["Highcharts"]
           },
           {
             "name": "ApexCharts",
-            "patterns": [
-              "apexcharts(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "ApexCharts"
-            ]
+            "patterns": ["apexcharts(?:\\.min)?\\.js"],
+            "globals": ["ApexCharts"]
           },
           {
             "name": "Plotly.js",
-            "patterns": [
-              "plotly(?:\\.min)?\\.js|cdn\\.plot\\.ly"
-            ],
-            "globals": [
-              "Plotly"
-            ]
+            "patterns": ["plotly(?:\\.min)?\\.js|cdn\\.plot\\.ly"],
+            "globals": ["Plotly"]
           },
           {
             "name": "Three.js",
-            "patterns": [
-              "three(?:\\.module)?(?:\\.min)?\\.js|threejs|@react-three\\/fiber"
-            ],
-            "globals": [
-              "THREE"
-            ]
+            "patterns": ["three(?:\\.module)?(?:\\.min)?\\.js|threejs|@react-three\\/fiber"],
+            "globals": ["THREE"]
           },
           {
             "name": "Babylon.js",
-            "patterns": [
-              "babylon(?:\\.max)?(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "BABYLON"
-            ]
+            "patterns": ["babylon(?:\\.max)?(?:\\.min)?\\.js"],
+            "globals": ["BABYLON"]
           },
           {
             "name": "PixiJS",
-            "patterns": [
-              "pixi(?:\\.min)?\\.js|pixijs"
-            ],
-            "globals": [
-              "PIXI"
-            ]
+            "patterns": ["pixi(?:\\.min)?\\.js|pixijs"],
+            "globals": ["PIXI"]
           },
           {
             "name": "Phaser",
-            "patterns": [
-              "phaser(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "Phaser"
-            ]
+            "patterns": ["phaser(?:\\.min)?\\.js"],
+            "globals": ["Phaser"]
           },
           {
             "name": "Matter.js",
-            "patterns": [
-              "matter(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "Matter"
-            ]
+            "patterns": ["matter(?:\\.min)?\\.js"],
+            "globals": ["Matter"]
           },
           {
             "name": "GSAP",
-            "patterns": [
-              "gsap(?:\\.min)?\\.js|greensock"
-            ],
-            "globals": [
-              "gsap",
-              "TweenMax"
-            ]
+            "patterns": ["gsap(?:\\.min)?\\.js|greensock"],
+            "globals": ["gsap", "TweenMax"]
           },
           {
             "name": "Anime.js",
-            "patterns": [
-              "anime(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "anime"
-            ]
+            "patterns": ["anime(?:\\.min)?\\.js"],
+            "globals": ["anime"]
           },
           {
             "name": "Lottie",
-            "patterns": [
-              "lottie(?:\\.min)?\\.js|bodymovin"
-            ],
-            "globals": [
-              "lottie",
-              "bodymovin"
-            ]
+            "patterns": ["lottie(?:\\.min)?\\.js|bodymovin"],
+            "globals": ["lottie", "bodymovin"]
           },
           {
             "name": "Framer Motion",
-            "patterns": [
-              "framer-motion|motion\\.dev"
-            ]
+            "patterns": ["framer-motion|motion\\.dev"]
           },
           {
             "name": "Swiper",
-            "patterns": [
-              "swiper(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)"
-            ],
-            "globals": [
-              "Swiper"
-            ]
+            "patterns": ["swiper(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)"],
+            "globals": ["Swiper"]
           },
           {
             "name": "Slick Carousel",
-            "patterns": [
-              "slick(?:\\.min)?\\.js|slick-carousel"
-            ]
+            "patterns": ["slick(?:\\.min)?\\.js|slick-carousel"]
           },
           {
             "name": "Splide",
-            "patterns": [
-              "splide(?:\\.min)?\\.js|@splidejs"
-            ],
-            "globals": [
-              "Splide"
-            ]
+            "patterns": ["splide(?:\\.min)?\\.js|@splidejs"],
+            "globals": ["Splide"]
           },
           {
             "name": "Flickity",
-            "patterns": [
-              "flickity(?:\\.pkgd)?(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "Flickity"
-            ]
+            "patterns": ["flickity(?:\\.pkgd)?(?:\\.min)?\\.js"],
+            "globals": ["Flickity"]
           },
           {
             "name": "Video.js",
-            "patterns": [
-              "video(?:\\.min)?\\.js|videojs"
-            ],
-            "globals": [
-              "videojs"
-            ]
+            "patterns": ["video(?:\\.min)?\\.js|videojs"],
+            "globals": ["videojs"]
           },
           {
             "name": "Plyr",
-            "patterns": [
-              "plyr(?:\\.polyfilled)?(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "Plyr"
-            ]
+            "patterns": ["plyr(?:\\.polyfilled)?(?:\\.min)?\\.js"],
+            "globals": ["Plyr"]
           },
           {
             "name": "Hls.js",
-            "patterns": [
-              "hls(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "Hls"
-            ]
+            "patterns": ["hls(?:\\.min)?\\.js"],
+            "globals": ["Hls"]
           },
           {
             "name": "Shaka Player",
-            "patterns": [
-              "shaka-player|shaka(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "shaka"
-            ]
+            "patterns": ["shaka-player|shaka(?:\\.min)?\\.js"],
+            "globals": ["shaka"]
           },
           {
             "name": "JW Player",
-            "patterns": [
-              "jwplayer(?:\\.js)?|cdn\\.jwplayer\\.com"
-            ],
-            "globals": [
-              "jwplayer"
-            ]
+            "patterns": ["jwplayer(?:\\.js)?|cdn\\.jwplayer\\.com"],
+            "globals": ["jwplayer"]
           },
           {
             "name": "Monaco Editor",
-            "patterns": [
-              "monaco-editor|vs\\/editor\\/editor\\.main"
-            ],
-            "globals": [
-              "monaco"
-            ]
+            "patterns": ["monaco-editor|vs\\/editor\\/editor\\.main"],
+            "globals": ["monaco"]
           },
           {
             "name": "CodeMirror",
-            "patterns": [
-              "codemirror(?:\\.min)?\\.js|@codemirror\\/"
-            ],
-            "globals": [
-              "CodeMirror"
-            ]
+            "patterns": ["codemirror(?:\\.min)?\\.js|@codemirror\\/"],
+            "globals": ["CodeMirror"]
           },
           {
             "name": "Ace Editor",
-            "patterns": [
-              "ace(?:\\.js|\\/ace)|ace-builds"
-            ],
-            "globals": [
-              "ace"
-            ]
+            "patterns": ["ace(?:\\.js|\\/ace)|ace-builds"],
+            "globals": ["ace"]
           },
           {
             "name": "TinyMCE",
-            "patterns": [
-              "tinymce(?:\\.min)?\\.js|tiny\\.cloud"
-            ],
-            "globals": [
-              "tinymce"
-            ]
+            "patterns": ["tinymce(?:\\.min)?\\.js|tiny\\.cloud"],
+            "globals": ["tinymce"]
           },
           {
             "name": "CKEditor",
-            "patterns": [
-              "ckeditor(?:\\.js|5)|cdn\\.ckeditor\\.com"
-            ],
-            "globals": [
-              "CKEDITOR",
-              "ClassicEditor"
-            ]
+            "patterns": ["ckeditor(?:\\.js|5)|cdn\\.ckeditor\\.com"],
+            "globals": ["CKEDITOR", "ClassicEditor"]
           },
           {
             "name": "Quill",
-            "patterns": [
-              "quill(?:\\.min)?\\.js|quill\\.snow\\.css"
-            ],
-            "globals": [
-              "Quill"
-            ]
+            "patterns": ["quill(?:\\.min)?\\.js|quill\\.snow\\.css"],
+            "globals": ["Quill"]
           },
           {
             "name": "Froala Editor",
-            "patterns": [
-              "froala_editor|froala\\.com\\/wysiwyg-editor"
-            ],
-            "globals": [
-              "FroalaEditor"
-            ]
+            "patterns": ["froala_editor|froala\\.com\\/wysiwyg-editor"],
+            "globals": ["FroalaEditor"]
           },
           {
             "name": "Mermaid",
-            "patterns": [
-              "mermaid(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "mermaid"
-            ]
+            "patterns": ["mermaid(?:\\.min)?\\.js"],
+            "globals": ["mermaid"]
           },
           {
             "name": "MathJax",
-            "patterns": [
-              "mathjax"
-            ],
-            "globals": [
-              "MathJax"
-            ]
+            "patterns": ["mathjax"],
+            "globals": ["MathJax"]
           },
           {
             "name": "KaTeX",
-            "patterns": [
-              "katex(?:\\.min)?\\.(?:js|css)"
-            ],
-            "globals": [
-              "katex"
-            ]
+            "patterns": ["katex(?:\\.min)?\\.(?:js|css)"],
+            "globals": ["katex"]
           },
           {
             "name": "Leaflet",
-            "patterns": [
-              "leaflet(?:\\.min)?\\.(?:js|css)"
-            ]
+            "patterns": ["leaflet(?:\\.min)?\\.(?:js|css)"]
           },
           {
             "name": "OpenLayers",
-            "patterns": [
-              "(?:^|/)ol(?:\\.min)?\\.(?:js|css)(?:[?#].*)?$",
-              "(?:^|/)openlayers(?:[./_-]|$)"
-            ],
-            "globals": [
-              "ol"
-            ]
+            "patterns": ["(?:^|/)ol(?:\\.min)?\\.(?:js|css)(?:[?#].*)?$", "(?:^|/)openlayers(?:[./_-]|$)"],
+            "globals": ["ol"]
           },
           {
             "name": "MapLibre GL",
-            "patterns": [
-              "maplibre-gl"
-            ],
-            "globals": [
-              "maplibregl"
-            ]
+            "patterns": ["maplibre-gl"],
+            "globals": ["maplibregl"]
           },
           {
             "name": "Socket.IO",
-            "patterns": [
-              "socket\\.io(?:\\.min)?\\.js|\\/socket\\.io\\/"
-            ]
+            "patterns": ["socket\\.io(?:\\.min)?\\.js|\\/socket\\.io\\/"]
           },
           {
             "name": "SockJS",
-            "patterns": [
-              "sockjs(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "SockJS"
-            ]
+            "patterns": ["sockjs(?:\\.min)?\\.js"],
+            "globals": ["SockJS"]
           },
           {
             "name": "SignalR",
-            "patterns": [
-              "signalr(?:\\.min)?\\.js|@microsoft\\/signalr"
-            ],
-            "globals": [
-              "signalR"
-            ]
+            "patterns": ["signalr(?:\\.min)?\\.js|@microsoft\\/signalr"],
+            "globals": ["signalR"]
           },
           {
             "name": "Pusher JS",
-            "patterns": [
-              "js\\.pusher\\.com|pusher(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "Pusher"
-            ]
+            "patterns": ["js\\.pusher\\.com|pusher(?:\\.min)?\\.js"],
+            "globals": ["Pusher"]
           },
           {
             "name": "Ably JS",
-            "patterns": [
-              "cdn\\.ably\\.com|ably(?:\\.min)?\\.js"
-            ],
-            "globals": [
-              "Ably"
-            ]
+            "patterns": ["cdn\\.ably\\.com|ably(?:\\.min)?\\.js"],
+            "globals": ["Ably"]
           }
         ]
       },
@@ -975,51 +561,33 @@
         "rules": [
           {
             "name": "Workbox",
-            "patterns": [
-              "workbox-(?:sw|routing|strategies)|workbox\\.googleapis\\.com"
-            ],
-            "globals": [
-              "workbox"
-            ]
+            "patterns": ["workbox-(?:sw|routing|strategies)|workbox\\.googleapis\\.com"],
+            "globals": ["workbox"]
           },
           {
             "name": "Turborepo / Turbopack",
-            "patterns": [
-              "turbopack|__turbopack"
-            ],
-            "globals": [
-              "__turbopack_load__"
-            ]
+            "patterns": ["turbopack|__turbopack"],
+            "globals": ["__turbopack_load__"]
           },
           {
             "name": "Rspack",
-            "patterns": [
-              "rspack|__rspack_require__"
-            ]
+            "patterns": ["rspack|__rspack_require__"]
           },
           {
             "name": "Rollup",
-            "patterns": [
-              "rollup(?:\\.config)?|\\/rollup\\/"
-            ]
+            "patterns": ["rollup(?:\\.config)?|\\/rollup\\/"]
           },
           {
             "name": "esbuild",
-            "patterns": [
-              "esbuild|\\/esbuild\\/"
-            ]
+            "patterns": ["esbuild|\\/esbuild\\/"]
           },
           {
             "name": "SWC",
-            "patterns": [
-              "swc-loader|@swc\\/"
-            ]
+            "patterns": ["swc-loader|@swc\\/"]
           },
           {
             "name": "Snowpack",
-            "patterns": [
-              "snowpack|\\/_snowpack\\/"
-            ]
+            "patterns": ["snowpack|\\/_snowpack\\/"]
           }
         ]
       }

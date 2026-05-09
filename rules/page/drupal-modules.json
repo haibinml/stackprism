@@ -7,10 +7,7 @@
         "confidence": "高",
         "matchType": "regex",
         "resourceOnly": true,
-        "resourceHints": [
-          "/modules/",
-          "/libraries/"
-        ]
+        "resourceHints": ["/modules/", "/libraries/"]
       },
       "rules": [
         {

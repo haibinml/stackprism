@@ -7,9 +7,7 @@
         "confidence": "高",
         "matchType": "regex",
         "resourceOnly": true,
-        "resourceHints": [
-          "/themes/"
-        ]
+        "resourceHints": ["/themes/"]
       },
       "rules": [
         {
@@ -322,10 +320,7 @@
         },
         {
           "name": "K2",
-          "patterns": [
-            "(?:^|/)themes/(?:contrib|custom)/k2(?:/|[?#]|$)",
-            "(?:^|/)sites/[^?#\\s]+/themes/(?:contrib|custom)/k2(?:/|[?#]|$)"
-          ]
+          "patterns": ["(?:^|/)themes/(?:contrib|custom)/k2(?:/|[?#]|$)", "(?:^|/)sites/[^?#\\s]+/themes/(?:contrib|custom)/k2(?:/|[?#]|$)"]
         },
         {
           "name": "Meta Theme",
@@ -385,10 +380,7 @@
         },
         {
           "name": "B7",
-          "patterns": [
-            "(?:^|/)themes/(?:contrib|custom)/b7(?:/|[?#]|$)",
-            "(?:^|/)sites/[^?#\\s]+/themes/(?:contrib|custom)/b7(?:/|[?#]|$)"
-          ]
+          "patterns": ["(?:^|/)themes/(?:contrib|custom)/b7(?:/|[?#]|$)", "(?:^|/)sites/[^?#\\s]+/themes/(?:contrib|custom)/b7(?:/|[?#]|$)"]
         },
         {
           "name": "Blue Bars",
@@ -5516,10 +5508,7 @@
         },
         {
           "name": "MM - Minimalist Theme",
-          "patterns": [
-            "(?:^|/)themes/(?:contrib|custom)/mm(?:/|[?#]|$)",
-            "(?:^|/)sites/[^?#\\s]+/themes/(?:contrib|custom)/mm(?:/|[?#]|$)"
-          ]
+          "patterns": ["(?:^|/)themes/(?:contrib|custom)/mm(?:/|[?#]|$)", "(?:^|/)sites/[^?#\\s]+/themes/(?:contrib|custom)/mm(?:/|[?#]|$)"]
         },
         {
           "name": "Jackson",
@@ -5726,10 +5715,7 @@
         },
         {
           "name": "OM 2 HTML5",
-          "patterns": [
-            "(?:^|/)themes/(?:contrib|custom)/om(?:/|[?#]|$)",
-            "(?:^|/)sites/[^?#\\s]+/themes/(?:contrib|custom)/om(?:/|[?#]|$)"
-          ]
+          "patterns": ["(?:^|/)themes/(?:contrib|custom)/om(?:/|[?#]|$)", "(?:^|/)sites/[^?#\\s]+/themes/(?:contrib|custom)/om(?:/|[?#]|$)"]
         },
         {
           "name": "Entrainment - Fluid Grid Layout",

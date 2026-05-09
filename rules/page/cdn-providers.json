@@ -3,58 +3,35 @@
     "cdnProviders": [
       {
         "name": "Tencent EdgeOne",
-        "patterns": [
-          "edgeone\\.ai",
-          "edgeone\\.app",
-          "tencentedgeone"
-        ]
+        "patterns": ["edgeone\\.ai", "edgeone\\.app", "tencentedgeone"]
       },
       {
         "name": "AWS Global Accelerator",
-        "patterns": [
-          "awsglobalaccelerator\\.com"
-        ]
+        "patterns": ["awsglobalaccelerator\\.com"]
       },
       {
         "name": "Oracle Cloud CDN",
-        "patterns": [
-          "oraclecloud\\.com",
-          "oci-cdn"
-        ]
+        "patterns": ["oraclecloud\\.com", "oci-cdn"]
       },
       {
         "name": "IBM Cloud CDN",
-        "patterns": [
-          "cdn\\.appdomain\\.cloud",
-          "ibmcloud"
-        ]
+        "patterns": ["cdn\\.appdomain\\.cloud", "ibmcloud"]
       },
       {
         "name": "Linode / Akamai Object Storage",
-        "patterns": [
-          "linodeobjects\\.com",
-          "linodeusercontent\\.com"
-        ]
+        "patterns": ["linodeobjects\\.com", "linodeusercontent\\.com"]
       },
       {
         "name": "OVHcloud Object Storage",
-        "patterns": [
-          "storage\\.ovh\\.net",
-          "ovhcloud"
-        ]
+        "patterns": ["storage\\.ovh\\.net", "ovhcloud"]
       },
       {
         "name": "Wasabi Storage",
-        "patterns": [
-          "wasabisys\\.com"
-        ]
+        "patterns": ["wasabisys\\.com"]
       },
       {
         "name": "Backblaze B2",
-        "patterns": [
-          "backblazeb2\\.com",
-          "b2\\.backblazeb2\\.com"
-        ]
+        "patterns": ["backblazeb2\\.com", "b2\\.backblazeb2\\.com"]
       }
     ]
   }

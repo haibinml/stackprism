@@ -4,26 +4,17 @@
       {
         "name": "RSSHub",
         "kind": "RSS 服务",
-        "patterns": [
-          "rsshub",
-          "rsshub.app"
-        ]
+        "patterns": ["rsshub", "rsshub.app"]
       },
       {
         "name": "Substack",
         "kind": "内容订阅平台",
-        "patterns": [
-          "substackcdn.com",
-          "substack.com"
-        ]
+        "patterns": ["substackcdn.com", "substack.com"]
       },
       {
         "name": "Beehiiv",
         "kind": "内容订阅平台",
-        "patterns": [
-          "beehiiv.com",
-          "beehiiv.net"
-        ]
+        "patterns": ["beehiiv.com", "beehiiv.net"]
       }
     ]
   }

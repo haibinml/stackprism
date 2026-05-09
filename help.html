@@ -1,11 +1,10 @@
 <!doctype html>
 <html lang="zh-CN">
-
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>StackPrism 使用说明</title>
-    <link rel="stylesheet" href="help.css">
+    <link rel="stylesheet" href="help.css" />
   </head>
 
   <body>
@@ -26,7 +25,13 @@
 
       <section class="panel">
         <h2>先知道它在做什么</h2>
-        <p>插件会看网页里出现的线索。比如网页代码里有 <code>wp-content</code>，大概率就是 WordPress；网页加载了 <code>hm.baidu.com</code>，大概率用了百度统计。</p>
+        <p>
+          插件会看网页里出现的线索。比如网页代码里有
+          <code>wp-content</code>
+          ，大概率就是 WordPress；网页加载了
+          <code>hm.baidu.com</code>
+          ，大概率用了百度统计。
+        </p>
         <p>你添加规则，就是告诉插件：“以后看到这个字、这个网址、这个标签，就显示我指定的技术名称”。</p>
       </section>
 
@@ -34,9 +39,21 @@
         <h2>最快上手：五步添加一条规则</h2>
         <ol class="steps">
           <li>打开设置页，找到“自定义规则”。</li>
-          <li>在“技术名称”里写你想显示的名字，比如 <code>MyCMS</code>。</li>
-          <li>在“分类”里选一个大类，比如 <code>网站程序</code>。</li>
-          <li>在“匹配规则”里写网页里会出现的字，一行写一个，比如 <code>mycms</code>。</li>
+          <li>
+            在“技术名称”里写你想显示的名字，比如
+            <code>MyCMS</code>
+            。
+          </li>
+          <li>
+            在“分类”里选一个大类，比如
+            <code>网站程序</code>
+            。
+          </li>
+          <li>
+            在“匹配规则”里写网页里会出现的字，一行写一个，比如
+            <code>mycms</code>
+            。
+          </li>
           <li>点“添加规则”，再点页面右上角“保存设置”。回到目标网页刷新一下，就能测试。</li>
         </ol>
       </section>
@@ -46,7 +63,15 @@
         <div class="field-grid">
           <div>
             <h3>技术名称</h3>
-            <p>最终显示在插件里的名字。比如 <code>ExampleCMS</code>、<code>某某统计</code>、<code>某某支付</code>。</p>
+            <p>
+              最终显示在插件里的名字。比如
+              <code>ExampleCMS</code>
+              、
+              <code>某某统计</code>
+              、
+              <code>某某支付</code>
+              。
+            </p>
           </div>
           <div>
             <h3>分类</h3>
@@ -54,7 +79,15 @@
           </div>
           <div>
             <h3>类型说明</h3>
-            <p>给自己看的补充说明。比如 <code>CMS</code>、<code>第三方支付</code>、<code>开源统计</code>。</p>
+            <p>
+              给自己看的补充说明。比如
+              <code>CMS</code>
+              、
+              <code>第三方支付</code>
+              、
+              <code>开源统计</code>
+              。
+            </p>
           </div>
           <div>
             <h3>置信度</h3>
@@ -77,19 +110,35 @@
         <div class="field-grid compact">
           <div>
             <h3>页面 URL</h3>
-            <p>看当前网页地址。比如地址里出现 <code>/shop/</code>。</p>
+            <p>
+              看当前网页地址。比如地址里出现
+              <code>/shop/</code>
+              。
+            </p>
           </div>
           <div>
             <h3>资源 URL</h3>
-            <p>看网页加载的脚本、图片、样式地址。比如 <code>cdn.example.com/sdk.js</code>。</p>
+            <p>
+              看网页加载的脚本、图片、样式地址。比如
+              <code>cdn.example.com/sdk.js</code>
+              。
+            </p>
           </div>
           <div>
             <h3>DOM / 源码</h3>
-            <p>看网页最终显示出来的代码。适合找 <code>data-xxx</code>、隐藏标签、页面里的特殊字。</p>
+            <p>
+              看网页最终显示出来的代码。适合找
+              <code>data-xxx</code>
+              、隐藏标签、页面里的特殊字。
+            </p>
           </div>
           <div>
             <h3>响应头</h3>
-            <p>看服务器返回的信息。比如 <code>X-Generator: WordPress</code>。</p>
+            <p>
+              看服务器返回的信息。比如
+              <code>X-Generator: WordPress</code>
+              。
+            </p>
           </div>
           <div>
             <h3>动态资源</h3>
@@ -100,7 +149,13 @@
 
       <section class="panel">
         <h2>示例 1：识别一个网站程序</h2>
-        <p>假设你发现某个网站程序叫 MyCMS，它的网页里经常出现 <code>mycms</code> 或 <code>X-Generator: MyCMS</code>。</p>
+        <p>
+          假设你发现某个网站程序叫 MyCMS，它的网页里经常出现
+          <code>mycms</code>
+          或
+          <code>X-Generator: MyCMS</code>
+          。
+        </p>
         <div class="example">
           <dl>
             <dt>技术名称</dt>
@@ -113,17 +168,27 @@
             <dd>关键词</dd>
             <dt>匹配规则</dt>
             <dd>
-              <pre>mycms
-X-Generator: MyCMS</pre>
+              <pre>
+mycms
+X-Generator: MyCMS</pre
+              >
             </dd>
           </dl>
         </div>
-        <p>解释：以后网页里只要出现 <code>mycms</code> 这个字，插件就会显示 MyCMS。</p>
+        <p>
+          解释：以后网页里只要出现
+          <code>mycms</code>
+          这个字，插件就会显示 MyCMS。
+        </p>
       </section>
 
       <section class="panel">
         <h2>示例 2：识别 WordPress 主题</h2>
-        <p>很多 WordPress 主题的地址长这样：<code>/wp-content/themes/主题名/</code>。如果你只想识别某个主题，可以这样写。</p>
+        <p>
+          很多 WordPress 主题的地址长这样：
+          <code>/wp-content/themes/主题名/</code>
+          。如果你只想识别某个主题，可以这样写。
+        </p>
         <div class="example">
           <dl>
             <dt>技术名称</dt>
@@ -138,12 +203,20 @@ X-Generator: MyCMS</pre>
             </dd>
           </dl>
         </div>
-        <p>解释：看到这个主题目录，就显示 <code>WordPress 主题: oceanwp</code>。</p>
+        <p>
+          解释：看到这个主题目录，就显示
+          <code>WordPress 主题: oceanwp</code>
+          。
+        </p>
       </section>
 
       <section class="panel">
         <h2>示例 3：识别统计脚本</h2>
-        <p>如果某个统计服务会加载 <code>stats.example.com/tracker.js</code>，可以用加载地址来识别。</p>
+        <p>
+          如果某个统计服务会加载
+          <code>stats.example.com/tracker.js</code>
+          ，可以用加载地址来识别。
+        </p>
         <div class="example">
           <dl>
             <dt>技术名称</dt>
@@ -156,12 +229,20 @@ X-Generator: MyCMS</pre>
             <dd>关键词</dd>
             <dt>匹配规则</dt>
             <dd>
-              <pre>stats.example.com
-tracker.js</pre>
+              <pre>
+stats.example.com
+tracker.js</pre
+              >
             </dd>
           </dl>
         </div>
-        <p>提醒：<code>tracker.js</code> 这个名字比较常见，可能误报。更稳的写法是只写 <code>stats.example.com</code>。</p>
+        <p>
+          提醒：
+          <code>tracker.js</code>
+          这个名字比较常见，可能误报。更稳的写法是只写
+          <code>stats.example.com</code>
+          。
+        </p>
       </section>
 
       <section class="panel">
@@ -179,8 +260,10 @@ tracker.js</pre>
             <dd>关键词</dd>
             <dt>匹配规则</dt>
             <dd>
-              <pre>pay.example.com
-examplepay-sdk</pre>
+              <pre>
+pay.example.com
+examplepay-sdk</pre
+              >
             </dd>
           </dl>
         </div>
@@ -189,7 +272,13 @@ examplepay-sdk</pre>
 
       <section class="panel">
         <h2>示例 5：用正则写更灵活的规则</h2>
-        <p>正则可以理解成“带通配的关键词”。比如有些文件名会带版本号：<code>examplecms-1.2.3.js</code>、<code>examplecms-2.0.0.js</code>。</p>
+        <p>
+          正则可以理解成“带通配的关键词”。比如有些文件名会带版本号：
+          <code>examplecms-1.2.3.js</code>
+          、
+          <code>examplecms-2.0.0.js</code>
+          。
+        </p>
         <div class="example">
           <dl>
             <dt>匹配方式</dt>
@@ -200,15 +289,41 @@ examplepay-sdk</pre>
             </dd>
           </dl>
         </div>
-        <p>大白话解释：<code>[0-9.]</code> 表示数字和点，<code>+</code> 表示前面的东西可以出现很多次。</p>
+        <p>
+          大白话解释：
+          <code>[0-9.]</code>
+          表示数字和点，
+          <code>+</code>
+          表示前面的东西可以出现很多次。
+        </p>
       </section>
 
       <section class="panel">
         <h2>怎么减少误报</h2>
         <ul class="plain-list">
-          <li>不要只写太普通的词，比如 <code>app</code>、<code>main</code>、<code>login</code>，这些很多网站都有。</li>
-          <li>优先写完整域名，比如 <code>pay.example.com</code> 比 <code>pay</code> 稳很多。</li>
-          <li>优先写特殊目录，比如 <code>/wp-content/themes/oceanwp/</code> 比 <code>oceanwp</code> 稳。</li>
+          <li>
+            不要只写太普通的词，比如
+            <code>app</code>
+            、
+            <code>main</code>
+            、
+            <code>login</code>
+            ，这些很多网站都有。
+          </li>
+          <li>
+            优先写完整域名，比如
+            <code>pay.example.com</code>
+            比
+            <code>pay</code>
+            稳很多。
+          </li>
+          <li>
+            优先写特殊目录，比如
+            <code>/wp-content/themes/oceanwp/</code>
+            比
+            <code>oceanwp</code>
+            稳。
+          </li>
           <li>不确定就把置信度设为“低”，这样看结果时会知道它只是猜测。</li>
           <li>规则保存后一定要刷新目标网页，再打开插件看结果。</li>
         </ul>
@@ -217,12 +332,19 @@ examplepay-sdk</pre>
       <section class="panel">
         <h2>想把规则贡献给项目</h2>
         <p>如果你的规则比较通用，可以回到设置页点击“提交规则贡献”。它会打开 GitHub 表单，你把技术名称、分类、匹配规则和证据填进去就行。</p>
-        <p>如果你会改仓库文件，内置规则放在 <code>rules/</code> 目录。页面里能看到的字、脚本地址、主题目录这些，通常放到 <code>rules/page/</code>；响应头、Cookie、Server 这些，通常放到 <code>rules/headers/</code>。</p>
+        <p>
+          如果你会改仓库文件，内置规则放在
+          <code>rules/</code>
+          目录。页面里能看到的字、脚本地址、主题目录这些，通常放到
+          <code>rules/page/</code>
+          ；响应头、Cookie、Server 这些，通常放到
+          <code>rules/headers/</code>
+          。
+        </p>
         <p>证据可以是官网说明、测试网页、脚本地址、响应头截图或源码片段。敏感网址可以打码。</p>
       </section>
     </main>
 
     <script src="help.js"></script>
   </body>
-
 </html>

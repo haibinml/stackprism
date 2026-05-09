@@ -13,47 +13,27 @@
             "rules": [
               {
                 "name": "React",
-                "patterns": [
-                  "react(?:\\.production|\\.development)?(?:\\.min)?\\.js",
-                  "react-dom",
-                  "__react"
-                ]
+                "patterns": ["react(?:\\.production|\\.development)?(?:\\.min)?\\.js", "react-dom", "__react"]
               },
               {
                 "name": "Vue",
-                "patterns": [
-                  "vue(?:\\.runtime)?(?:\\.global)?(?:\\.prod)?(?:\\.min)?\\.js",
-                  "vue-router",
-                  "pinia",
-                  "data-v-app"
-                ]
+                "patterns": ["vue(?:\\.runtime)?(?:\\.global)?(?:\\.prod)?(?:\\.min)?\\.js", "vue-router", "pinia", "data-v-app"]
               },
               {
                 "name": "Angular / AngularJS",
-                "patterns": [
-                  "angular(?:\\.min)?\\.js",
-                  "@angular",
-                  "ng-version",
-                  "ng-app"
-                ]
+                "patterns": ["angular(?:\\.min)?\\.js", "@angular", "ng-version", "ng-app"]
               }
             ]
           },
           {
             "name": "Next.js",
             "confidence": "高",
-            "patterns": [
-              "/_next/",
-              "__next"
-            ]
+            "patterns": ["/_next/", "__next"]
           },
           {
             "name": "Nuxt",
             "confidence": "高",
-            "patterns": [
-              "/_nuxt/",
-              "__nuxt"
-            ]
+            "patterns": ["/_nuxt/", "__nuxt"]
           },
           {
             "defaults": {
@@ -62,40 +42,23 @@
             "rules": [
               {
                 "name": "Svelte",
-                "patterns": [
-                  "svelte",
-                  "svelte-"
-                ]
+                "patterns": ["svelte", "svelte-"]
               },
               {
                 "name": "Astro",
-                "patterns": [
-                  "/_astro/",
-                  "astro-island",
-                  "astro-slot"
-                ]
+                "patterns": ["/_astro/", "astro-island", "astro-slot"]
               },
               {
                 "name": "jQuery",
-                "patterns": [
-                  "jquery(?:-\\d|\\.)"
-                ]
+                "patterns": ["jquery(?:-\\d|\\.)"]
               },
               {
                 "name": "Alpine.js",
-                "patterns": [
-                  "alpinejs",
-                  "x-data",
-                  "x-init"
-                ]
+                "patterns": ["alpinejs", "x-data", "x-init"]
               },
               {
                 "name": "htmx",
-                "patterns": [
-                  "htmx(?:\\.min)?\\.js",
-                  "hx-get",
-                  "hx-post"
-                ]
+                "patterns": ["htmx(?:\\.min)?\\.js", "hx-get", "hx-post"]
               }
             ]
           }
@@ -113,61 +76,35 @@
             "rules": [
               {
                 "name": "Bootstrap",
-                "patterns": [
-                  "bootstrap(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)"
-                ]
+                "patterns": ["bootstrap(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)"]
               },
               {
                 "name": "Tailwind CSS",
-                "patterns": [
-                  "cdn\\.tailwindcss\\.com",
-                  "tailwind(?:\\.min)?\\.css",
-                  "tailwind\\.config"
-                ]
+                "patterns": ["cdn\\.tailwindcss\\.com", "tailwind(?:\\.min)?\\.css", "tailwind\\.config"]
               },
               {
                 "name": "Ant Design",
-                "patterns": [
-                  "antd",
-                  "ant-design",
-                  "\\.ant-"
-                ]
+                "patterns": ["antd", "ant-design", "\\.ant-"]
               },
               {
                 "name": "Material UI",
-                "patterns": [
-                  "@mui",
-                  "material-ui",
-                  "mui-"
-                ]
+                "patterns": ["@mui", "material-ui", "mui-"]
               },
               {
                 "name": "Element UI / Element Plus",
-                "patterns": [
-                  "element-plus",
-                  "element-ui",
-                  "\\.el-"
-                ]
+                "patterns": ["element-plus", "element-ui", "\\.el-"]
               }
             ]
           },
           {
             "category": "构建与运行时",
             "name": "Webpack",
-            "patterns": [
-              "webpack",
-              "webpackchunk",
-              "webpackjsonp"
-            ]
+            "patterns": ["webpack", "webpackchunk", "webpackjsonp"]
           },
           {
             "category": "构建与运行时",
             "name": "Vite",
-            "patterns": [
-              "/@vite/client",
-              "__vite",
-              "vite/client"
-            ]
+            "patterns": ["/@vite/client", "__vite", "vite/client"]
           },
           {
             "defaults": {
@@ -176,35 +113,23 @@
             "rules": [
               {
                 "name": "Axios",
-                "patterns": [
-                  "axios(?:\\.min)?\\.js"
-                ]
+                "patterns": ["axios(?:\\.min)?\\.js"]
               },
               {
                 "name": "ECharts",
-                "patterns": [
-                  "echarts(?:\\.min)?\\.js"
-                ]
+                "patterns": ["echarts(?:\\.min)?\\.js"]
               },
               {
                 "name": "Chart.js",
-                "patterns": [
-                  "chart(?:\\.umd)?(?:\\.min)?\\.js",
-                  "chartjs"
-                ]
+                "patterns": ["chart(?:\\.umd)?(?:\\.min)?\\.js", "chartjs"]
               },
               {
                 "name": "Three.js",
-                "patterns": [
-                  "three(?:\\.module)?(?:\\.min)?\\.js",
-                  "threejs"
-                ]
+                "patterns": ["three(?:\\.module)?(?:\\.min)?\\.js", "threejs"]
               },
               {
                 "name": "Swiper",
-                "patterns": [
-                  "swiper(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)"
-                ]
+                "patterns": ["swiper(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)"]
               }
             ]
           }

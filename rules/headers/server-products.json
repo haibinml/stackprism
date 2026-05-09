@@ -8,159 +8,107 @@
         "rules": [
           {
             "name": "Nginx",
-            "patterns": [
-              "nginx"
-            ]
+            "patterns": ["nginx"]
           },
           {
             "name": "OpenResty",
-            "patterns": [
-              "openresty"
-            ]
+            "patterns": ["openresty"]
           },
           {
             "name": "Tengine",
-            "patterns": [
-              "tengine"
-            ]
+            "patterns": ["tengine"]
           },
           {
             "name": "Apache HTTP Server",
-            "patterns": [
-              "apache"
-            ]
+            "patterns": ["apache"]
           },
           {
             "name": "Microsoft IIS",
-            "patterns": [
-              "microsoft-iis|iis"
-            ]
+            "patterns": ["microsoft-iis|iis"]
           },
           {
             "name": "LiteSpeed",
-            "patterns": [
-              "litespeed"
-            ]
+            "patterns": ["litespeed"]
           },
           {
             "name": "Caddy",
-            "patterns": [
-              "caddy"
-            ]
+            "patterns": ["caddy"]
           },
           {
             "name": "Envoy",
-            "patterns": [
-              "envoy"
-            ]
+            "patterns": ["envoy"]
           },
           {
             "name": "Traefik",
-            "patterns": [
-              "traefik"
-            ]
+            "patterns": ["traefik"]
           },
           {
             "name": "HAProxy",
-            "patterns": [
-              "haproxy"
-            ]
+            "patterns": ["haproxy"]
           },
           {
             "name": "Varnish",
-            "patterns": [
-              "varnish"
-            ]
+            "patterns": ["varnish"]
           },
           {
             "name": "Apache Traffic Server",
-            "patterns": [
-              "trafficserver|ats"
-            ]
+            "patterns": ["trafficserver|ats"]
           },
           {
             "name": "Jetty",
-            "patterns": [
-              "jetty"
-            ]
+            "patterns": ["jetty"]
           },
           {
             "name": "Tomcat",
-            "patterns": [
-              "tomcat"
-            ]
+            "patterns": ["tomcat"]
           },
           {
             "name": "Undertow",
-            "patterns": [
-              "undertow"
-            ]
+            "patterns": ["undertow"]
           },
           {
             "name": "WildFly",
-            "patterns": [
-              "wildfly"
-            ]
+            "patterns": ["wildfly"]
           },
           {
             "name": "GlassFish",
-            "patterns": [
-              "glassfish"
-            ]
+            "patterns": ["glassfish"]
           },
           {
             "name": "WebSphere",
-            "patterns": [
-              "websphere"
-            ]
+            "patterns": ["websphere"]
           },
           {
             "name": "WebLogic",
-            "patterns": [
-              "weblogic"
-            ]
+            "patterns": ["weblogic"]
           },
           {
             "name": "Kestrel",
-            "patterns": [
-              "kestrel"
-            ]
+            "patterns": ["kestrel"]
           },
           {
             "name": "Cowboy",
-            "patterns": [
-              "cowboy"
-            ]
+            "patterns": ["cowboy"]
           },
           {
             "name": "Puma",
-            "patterns": [
-              "puma"
-            ]
+            "patterns": ["puma"]
           },
           {
             "name": "Unicorn",
-            "patterns": [
-              "unicorn"
-            ]
+            "patterns": ["unicorn"]
           },
           {
             "name": "uWSGI",
-            "patterns": [
-              "uwsgi"
-            ]
+            "patterns": ["uwsgi"]
           },
           {
             "name": "Gunicorn",
-            "patterns": [
-              "gunicorn"
-            ]
+            "patterns": ["gunicorn"]
           },
           {
             "name": "Werkzeug",
-            "patterns": [
-              "werkzeug"
-            ]
+            "patterns": ["werkzeug"]
           }
         ]
       },
@@ -171,21 +119,15 @@
         "rules": [
           {
             "name": "Node.js",
-            "patterns": [
-              "node\\.?js"
-            ]
+            "patterns": ["node\\.?js"]
           },
           {
             "name": "Deno",
-            "patterns": [
-              "deno"
-            ]
+            "patterns": ["deno"]
           },
           {
             "name": "Bun",
-            "patterns": [
-              "\\bbun\\b"
-            ]
+            "patterns": ["\\bbun\\b"]
           }
         ]
       },
@@ -196,69 +138,47 @@
         "rules": [
           {
             "name": "Vercel",
-            "patterns": [
-              "vercel"
-            ]
+            "patterns": ["vercel"]
           },
           {
             "name": "Cloudflare",
-            "patterns": [
-              "cloudflare"
-            ]
+            "patterns": ["cloudflare"]
           },
           {
             "name": "AmazonS3",
-            "patterns": [
-              "amazons3|amazon s3|s3"
-            ]
+            "patterns": ["amazons3|amazon s3|s3"]
           },
           {
             "name": "Akamai",
-            "patterns": [
-              "akamai|ghost"
-            ]
+            "patterns": ["akamai|ghost"]
           },
           {
             "name": "Fastly",
-            "patterns": [
-              "fastly"
-            ]
+            "patterns": ["fastly"]
           },
           {
             "name": "Bunny CDN",
-            "patterns": [
-              "bunnycdn|bunny"
-            ]
+            "patterns": ["bunnycdn|bunny"]
           },
           {
             "name": "Gcore CDN",
-            "patterns": [
-              "gcore"
-            ]
+            "patterns": ["gcore"]
           },
           {
             "name": "Tencent Cloud CDN",
-            "patterns": [
-              "tencent|qcloud"
-            ]
+            "patterns": ["tencent|qcloud"]
           },
           {
             "name": "Alibaba Cloud CDN",
-            "patterns": [
-              "aliyun|alibaba|tengine"
-            ]
+            "patterns": ["aliyun|alibaba|tengine"]
           },
           {
             "name": "Huawei Cloud CDN",
-            "patterns": [
-              "huawei|hwcdn"
-            ]
+            "patterns": ["huawei|hwcdn"]
           },
           {
             "name": "Baidu Cloud CDN",
-            "patterns": [
-              "baidu|bce"
-            ]
+            "patterns": ["baidu|bce"]
           }
         ]
       }

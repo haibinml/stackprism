@@ -4,36 +4,22 @@
       {
         "name": "WordPress",
         "kind": "CMS / 博客",
-        "patterns": [
-          "x-pingback",
-          "x-generator:.*wordpress",
-          "link:.*wp-json"
-        ]
+        "patterns": ["x-pingback", "x-generator:.*wordpress", "link:.*wp-json"]
       },
       {
         "name": "Drupal",
         "kind": "CMS",
-        "patterns": [
-          "x-drupal-cache",
-          "x-generator:.*drupal"
-        ]
+        "patterns": ["x-drupal-cache", "x-generator:.*drupal"]
       },
       {
         "name": "Shopify",
         "kind": "SaaS 电商",
-        "patterns": [
-          "myshopify.com",
-          "cdn.shopify.com",
-          "x-shopid"
-        ]
+        "patterns": ["myshopify.com", "cdn.shopify.com", "x-shopid"]
       },
       {
         "name": "Magento / Adobe Commerce",
         "kind": "电商系统",
-        "patterns": [
-          "x-magento",
-          "magento"
-        ]
+        "patterns": ["x-magento", "magento"]
       }
     ]
   }

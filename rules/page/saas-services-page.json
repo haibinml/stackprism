@@ -13,92 +13,54 @@
           "rules": [
             {
               "name": "Auth0",
-              "patterns": [
-                "cdn\\.auth0\\.com|auth0\\.com|auth0-spa-js|auth0-lock"
-              ],
-              "globals": [
-                "auth0"
-              ]
+              "patterns": ["cdn\\.auth0\\.com|auth0\\.com|auth0-spa-js|auth0-lock"],
+              "globals": ["auth0"]
             },
             {
               "name": "Clerk",
-              "patterns": [
-                "js\\.clerk\\.com|clerk\\.accounts\\.dev|clerk\\.dev|@clerk\\/"
-              ],
-              "globals": [
-                "Clerk"
-              ]
+              "patterns": ["js\\.clerk\\.com|clerk\\.accounts\\.dev|clerk\\.dev|@clerk\\/"],
+              "globals": ["Clerk"]
             },
             {
               "name": "Okta",
-              "patterns": [
-                "okta\\.com|oktaauth|okta-signin-widget"
-              ],
-              "globals": [
-                "OktaAuth"
-              ]
+              "patterns": ["okta\\.com|oktaauth|okta-signin-widget"],
+              "globals": ["OktaAuth"]
             },
             {
               "name": "Amazon Cognito",
-              "patterns": [
-                "amazoncognito\\.com|cognito-idp|amazon-cognito-identity"
-              ],
-              "globals": [
-                "AmazonCognitoIdentity"
-              ]
+              "patterns": ["amazoncognito\\.com|cognito-idp|amazon-cognito-identity"],
+              "globals": ["AmazonCognitoIdentity"]
             },
             {
               "name": "Stytch",
-              "patterns": [
-                "stytch\\.com|js\\.stytch\\.com"
-              ],
-              "globals": [
-                "Stytch"
-              ]
+              "patterns": ["stytch\\.com|js\\.stytch\\.com"],
+              "globals": ["Stytch"]
             }
           ]
         },
         {
           "name": "Firebase",
           "kind": "后端云 / 认证",
-          "patterns": [
-            "gstatic\\.com\\/firebasejs|firebaseapp\\.com|firebaseio\\.com|firebasestorage\\.googleapis\\.com"
-          ],
-          "globals": [
-            "firebase"
-          ]
+          "patterns": ["gstatic\\.com\\/firebasejs|firebaseapp\\.com|firebaseio\\.com|firebasestorage\\.googleapis\\.com"],
+          "globals": ["firebase"]
         },
         {
           "name": "Supabase",
           "kind": "后端云 / 数据库",
-          "patterns": [
-            "supabase\\.co|supabase-js|supabase\\.in"
-          ],
-          "globals": [
-            "supabase"
-          ]
+          "patterns": ["supabase\\.co|supabase-js|supabase\\.in"],
+          "globals": ["supabase"]
         },
         {
           "name": "Intercom",
           "kind": "客服聊天",
-          "patterns": [
-            "widget\\.intercom\\.io|js\\.intercomcdn\\.com|intercomcdn\\.com"
-          ],
-          "globals": [
-            "Intercom",
-            "intercomSettings"
-          ]
+          "patterns": ["widget\\.intercom\\.io|js\\.intercomcdn\\.com|intercomcdn\\.com"],
+          "globals": ["Intercom", "intercomSettings"]
         },
         {
           "name": "Zendesk",
           "kind": "客服支持",
-          "patterns": [
-            "static\\.zdassets\\.com|zendesk\\.com|zopim\\.com"
-          ],
-          "globals": [
-            "zE",
-            "Zendesk"
-          ]
+          "patterns": ["static\\.zdassets\\.com|zendesk\\.com|zopim\\.com"],
+          "globals": ["zE", "Zendesk"]
         },
         {
           "defaults": {
@@ -107,197 +69,118 @@
           "rules": [
             {
               "name": "Crisp",
-              "patterns": [
-                "client\\.crisp\\.chat|crisp\\.chat"
-              ],
-              "globals": [
-                "$crisp",
-                "CRISP_WEBSITE_ID"
-              ]
+              "patterns": ["client\\.crisp\\.chat|crisp\\.chat"],
+              "globals": ["$crisp", "CRISP_WEBSITE_ID"]
             },
             {
               "name": "Drift",
-              "patterns": [
-                "js\\.driftt\\.com|drift\\.com\\/embed|drift\\.load"
-              ],
-              "globals": [
-                "drift"
-              ]
+              "patterns": ["js\\.driftt\\.com|drift\\.com\\/embed|drift\\.load"],
+              "globals": ["drift"]
             },
             {
               "name": "Tawk.to",
-              "patterns": [
-                "embed\\.tawk\\.to|tawk\\.to"
-              ],
-              "globals": [
-                "Tawk_API"
-              ]
+              "patterns": ["embed\\.tawk\\.to|tawk\\.to"],
+              "globals": ["Tawk_API"]
             },
             {
               "name": "Freshchat",
-              "patterns": [
-                "wchat\\.freshchat\\.com|freshchat"
-              ],
-              "globals": [
-                "fcWidget"
-              ]
+              "patterns": ["wchat\\.freshchat\\.com|freshchat"],
+              "globals": ["fcWidget"]
             }
           ]
         },
         {
           "name": "Help Scout Beacon",
           "kind": "客服支持",
-          "patterns": [
-            "beacon-v2\\.helpscout\\.net|helpscout\\.net\\/beacon"
-          ],
-          "globals": [
-            "Beacon"
-          ]
+          "patterns": ["beacon-v2\\.helpscout\\.net|helpscout\\.net\\/beacon"],
+          "globals": ["Beacon"]
         },
         {
           "name": "LiveChat",
           "kind": "客服聊天",
-          "patterns": [
-            "cdn\\.livechatinc\\.com|livechatinc\\.com"
-          ],
-          "globals": [
-            "LiveChatWidget"
-          ]
+          "patterns": ["cdn\\.livechatinc\\.com|livechatinc\\.com"],
+          "globals": ["LiveChatWidget"]
         },
         {
           "name": "Gorgias",
           "kind": "客服支持",
-          "patterns": [
-            "gorgias\\.chat|config\\.gorgias\\.chat|client-builds\\.gorgias\\.chat"
-          ],
-          "globals": [
-            "GorgiasChat"
-          ]
+          "patterns": ["gorgias\\.chat|config\\.gorgias\\.chat|client-builds\\.gorgias\\.chat"],
+          "globals": ["GorgiasChat"]
         },
         {
           "name": "HubSpot",
           "kind": "CRM / 营销自动化",
-          "patterns": [
-            "js\\.hs-scripts\\.com|js\\.hsforms\\.net|hs-analytics\\.net|hubspot\\.com"
-          ],
-          "globals": [
-            "_hsq",
-            "hbspt"
-          ]
+          "patterns": ["js\\.hs-scripts\\.com|js\\.hsforms\\.net|hs-analytics\\.net|hubspot\\.com"],
+          "globals": ["_hsq", "hbspt"]
         },
         {
           "name": "Salesforce",
           "kind": "CRM",
-          "patterns": [
-            "salesforce\\.com|force\\.com|visualforce\\.com|lightning\\.force\\.com"
-          ]
+          "patterns": ["salesforce\\.com|force\\.com|visualforce\\.com|lightning\\.force\\.com"]
         },
         {
           "name": "Marketo",
           "kind": "营销自动化",
-          "patterns": [
-            "munchkin\\.marketo\\.net|marketo\\.com"
-          ],
-          "globals": [
-            "Munchkin"
-          ]
+          "patterns": ["munchkin\\.marketo\\.net|marketo\\.com"],
+          "globals": ["Munchkin"]
         },
         {
           "name": "Mailchimp",
           "kind": "邮件营销",
-          "patterns": [
-            "chimpstatic\\.com|list-manage\\.com|mailchimp\\.com"
-          ]
+          "patterns": ["chimpstatic\\.com|list-manage\\.com|mailchimp\\.com"]
         },
         {
           "name": "Klaviyo",
           "kind": "营销自动化",
-          "patterns": [
-            "static\\.klaviyo\\.com|klaviyo\\.com"
-          ],
-          "globals": [
-            "_learnq"
-          ]
+          "patterns": ["static\\.klaviyo\\.com|klaviyo\\.com"],
+          "globals": ["_learnq"]
         },
         {
           "name": "Braze",
           "kind": "客户互动",
-          "patterns": [
-            "js\\.appboycdn\\.com|braze\\.com|appboy"
-          ],
-          "globals": [
-            "appboy",
-            "braze"
-          ]
+          "patterns": ["js\\.appboycdn\\.com|braze\\.com|appboy"],
+          "globals": ["appboy", "braze"]
         },
         {
           "name": "Customer.io",
           "kind": "客户互动",
-          "patterns": [
-            "customer\\.io|track\\.customer\\.io|assets\\.customer\\.io"
-          ],
-          "globals": [
-            "_cio"
-          ]
+          "patterns": ["customer\\.io|track\\.customer\\.io|assets\\.customer\\.io"],
+          "globals": ["_cio"]
         },
         {
           "name": "OneSignal",
           "kind": "消息推送",
-          "patterns": [
-            "onesignal\\.com|onesignalcdn\\.com|onesignal-sdk"
-          ],
-          "globals": [
-            "OneSignal"
-          ]
+          "patterns": ["onesignal\\.com|onesignalcdn\\.com|onesignal-sdk"],
+          "globals": ["OneSignal"]
         },
         {
           "name": "Sentry",
           "kind": "错误监控",
-          "patterns": [
-            "browser\\.sentry-cdn\\.com|sentry\\.io|sentry-cdn\\.com"
-          ],
-          "globals": [
-            "Sentry"
-          ]
+          "patterns": ["browser\\.sentry-cdn\\.com|sentry\\.io|sentry-cdn\\.com"],
+          "globals": ["Sentry"]
         },
         {
           "name": "LogRocket",
           "kind": "会话回放 / 监控",
-          "patterns": [
-            "cdn\\.lr-ingest\\.com|logrocket\\.io|logrocket"
-          ],
-          "globals": [
-            "LogRocket"
-          ]
+          "patterns": ["cdn\\.lr-ingest\\.com|logrocket\\.io|logrocket"],
+          "globals": ["LogRocket"]
         },
         {
           "name": "FullStory",
           "kind": "会话回放",
-          "patterns": [
-            "fullstory\\.com|edge\\.fullstory\\.com|_fs_namespace"
-          ]
+          "patterns": ["fullstory\\.com|edge\\.fullstory\\.com|_fs_namespace"]
         },
         {
           "name": "Datadog RUM",
           "kind": "性能监控",
-          "patterns": [
-            "datadoghq-browser-agent\\.com|datadoghq\\.com\\/rum|dd_rum"
-          ],
-          "globals": [
-            "DD_RUM",
-            "DD_LOGS"
-          ]
+          "patterns": ["datadoghq-browser-agent\\.com|datadoghq\\.com\\/rum|dd_rum"],
+          "globals": ["DD_RUM", "DD_LOGS"]
         },
         {
           "name": "New Relic Browser",
           "kind": "性能监控",
-          "patterns": [
-            "js-agent\\.newrelic\\.com|bam\\.nr-data\\.net|newrelic"
-          ],
-          "globals": [
-            "NREUM",
-            "newrelic"
-          ]
+          "patterns": ["js-agent\\.newrelic\\.com|bam\\.nr-data\\.net|newrelic"],
+          "globals": ["NREUM", "newrelic"]
         },
         {
           "defaults": {
@@ -306,73 +189,44 @@
           "rules": [
             {
               "name": "PostHog",
-              "patterns": [
-                "posthog\\.com|app\\.posthog\\.com|posthog-js"
-              ],
-              "globals": [
-                "posthog"
-              ]
+              "patterns": ["posthog\\.com|app\\.posthog\\.com|posthog-js"],
+              "globals": ["posthog"]
             },
             {
               "name": "Mixpanel",
-              "patterns": [
-                "cdn\\.mxpnl\\.com|mixpanel\\.com|mixpanel"
-              ],
-              "globals": [
-                "mixpanel"
-              ]
+              "patterns": ["cdn\\.mxpnl\\.com|mixpanel\\.com|mixpanel"],
+              "globals": ["mixpanel"]
             },
             {
               "name": "Amplitude",
-              "patterns": [
-                "cdn\\.amplitude\\.com|amplitude\\.com|amplitude-js"
-              ],
-              "globals": [
-                "amplitude"
-              ]
+              "patterns": ["cdn\\.amplitude\\.com|amplitude\\.com|amplitude-js"],
+              "globals": ["amplitude"]
             }
           ]
         },
         {
           "name": "Algolia",
           "kind": "站内搜索",
-          "patterns": [
-            "algolia\\.net|algolianet\\.com|algolia\\.com|algoliasearch"
-          ],
-          "globals": [
-            "algoliasearch"
-          ]
+          "patterns": ["algolia\\.net|algolianet\\.com|algolia\\.com|algoliasearch"],
+          "globals": ["algoliasearch"]
         },
         {
           "name": "Typesense Cloud",
           "kind": "站内搜索",
-          "patterns": [
-            "typesense\\.net|typesense\\.org|typesense-js"
-          ],
-          "globals": [
-            "Typesense"
-          ]
+          "patterns": ["typesense\\.net|typesense\\.org|typesense-js"],
+          "globals": ["Typesense"]
         },
         {
           "name": "Cloudinary",
           "kind": "媒体托管",
-          "patterns": [
-            "res\\.cloudinary\\.com|cloudinary\\.com|cloudinary-core"
-          ],
-          "globals": [
-            "cloudinary",
-            "Cloudinary"
-          ]
+          "patterns": ["res\\.cloudinary\\.com|cloudinary\\.com|cloudinary-core"],
+          "globals": ["cloudinary", "Cloudinary"]
         },
         {
           "name": "Imgix",
           "kind": "图片处理",
-          "patterns": [
-            "imgix\\.net|imgix\\.js|ixlib="
-          ],
-          "globals": [
-            "imgix"
-          ]
+          "patterns": ["imgix\\.net|imgix\\.js|ixlib="],
+          "globals": ["imgix"]
         },
         {
           "defaults": {
@@ -381,67 +235,41 @@
           "rules": [
             {
               "name": "Contentful",
-              "patterns": [
-                "contentful\\.com|ctfassets\\.net|contentful"
-              ],
-              "globals": [
-                "contentful"
-              ]
+              "patterns": ["contentful\\.com|ctfassets\\.net|contentful"],
+              "globals": ["contentful"]
             },
             {
               "name": "Sanity",
-              "patterns": [
-                "cdn\\.sanity\\.io|sanity\\.io|sanity-client"
-              ],
-              "globals": [
-                "Sanity"
-              ]
+              "patterns": ["cdn\\.sanity\\.io|sanity\\.io|sanity-client"],
+              "globals": ["Sanity"]
             },
             {
               "name": "Prismic",
-              "patterns": [
-                "prismic\\.io|prismic\\.cdn|prismic-javascript"
-              ],
-              "globals": [
-                "Prismic"
-              ]
+              "patterns": ["prismic\\.io|prismic\\.cdn|prismic-javascript"],
+              "globals": ["Prismic"]
             },
             {
               "name": "Storyblok",
-              "patterns": [
-                "storyblok\\.com|a\\.storyblok\\.com|storyblok-js-client"
-              ],
-              "globals": [
-                "Storyblok"
-              ]
+              "patterns": ["storyblok\\.com|a\\.storyblok\\.com|storyblok-js-client"],
+              "globals": ["Storyblok"]
             },
             {
               "name": "Hygraph",
-              "patterns": [
-                "hygraph\\.com|graphcms\\.com|graphassets\\.com"
-              ]
+              "patterns": ["hygraph\\.com|graphcms\\.com|graphassets\\.com"]
             }
           ]
         },
         {
           "name": "Google Maps Platform",
           "kind": "地图服务",
-          "patterns": [
-            "maps\\.googleapis\\.com|maps\\.gstatic\\.com\\/maps"
-          ],
-          "globals": [
-            "google.maps"
-          ]
+          "patterns": ["maps\\.googleapis\\.com|maps\\.gstatic\\.com\\/maps"],
+          "globals": ["google.maps"]
         },
         {
           "name": "Mapbox",
           "kind": "地图服务",
-          "patterns": [
-            "api\\.mapbox\\.com|mapbox-gl|mapbox\\.com"
-          ],
-          "globals": [
-            "mapboxgl"
-          ]
+          "patterns": ["api\\.mapbox\\.com|mapbox-gl|mapbox\\.com"],
+          "globals": ["mapboxgl"]
         },
         {
           "defaults": {
@@ -450,21 +278,13 @@
           "rules": [
             {
               "name": "Google reCAPTCHA",
-              "patterns": [
-                "google\\.com\\/recaptcha|gstatic\\.com\\/recaptcha"
-              ],
-              "globals": [
-                "grecaptcha"
-              ]
+              "patterns": ["google\\.com\\/recaptcha|gstatic\\.com\\/recaptcha"],
+              "globals": ["grecaptcha"]
             },
             {
               "name": "hCaptcha",
-              "patterns": [
-                "hcaptcha\\.com|js\\.hcaptcha\\.com"
-              ],
-              "globals": [
-                "hcaptcha"
-              ]
+              "patterns": ["hcaptcha\\.com|js\\.hcaptcha\\.com"],
+              "globals": ["hcaptcha"]
             },
             {
               "name": "Cloudflare Turnstile",
@@ -472,99 +292,62 @@
                 "challenges\\.cloudflare\\.com/turnstile(?:/|[?#]|$)",
                 "challenges\\.cloudflare\\.com/cdn-cgi/challenge-platform/[^\\s\"'<>]*turnstile"
               ],
-              "selectors": [
-                ".cf-turnstile",
-                "[data-sitekey].cf-turnstile"
-              ],
-              "globals": [
-                "turnstile"
-              ]
+              "selectors": [".cf-turnstile", "[data-sitekey].cf-turnstile"],
+              "globals": ["turnstile"]
             }
           ]
         },
         {
           "name": "Optimizely",
           "kind": "A/B 测试",
-          "patterns": [
-            "cdn\\.optimizely\\.com|optimizely\\.com"
-          ],
-          "globals": [
-            "optimizely"
-          ]
+          "patterns": ["cdn\\.optimizely\\.com|optimizely\\.com"],
+          "globals": ["optimizely"]
         },
         {
           "name": "VWO",
           "kind": "A/B 测试",
-          "patterns": [
-            "dev\\.visualwebsiteoptimizer\\.com|visualwebsiteoptimizer\\.com|vwo"
-          ],
-          "globals": [
-            "_vwo_code"
-          ]
+          "patterns": ["dev\\.visualwebsiteoptimizer\\.com|visualwebsiteoptimizer\\.com|vwo"],
+          "globals": ["_vwo_code"]
         },
         {
           "name": "LaunchDarkly",
           "kind": "Feature Flag",
-          "patterns": [
-            "launchdarkly\\.com|clientstream\\.launchdarkly\\.com|ldclient"
-          ],
-          "globals": [
-            "LDClient"
-          ]
+          "patterns": ["launchdarkly\\.com|clientstream\\.launchdarkly\\.com|ldclient"],
+          "globals": ["LDClient"]
         },
         {
           "name": "Statsig",
           "kind": "Feature Flag / 实验",
-          "patterns": [
-            "statsigapi\\.net|statsig\\.com|statsig-js"
-          ],
-          "globals": [
-            "statsig"
-          ]
+          "patterns": ["statsigapi\\.net|statsig\\.com|statsig-js"],
+          "globals": ["statsig"]
         },
         {
           "name": "GrowthBook",
           "kind": "Feature Flag / 实验",
-          "patterns": [
-            "growthbook\\.io|growthbook-js"
-          ],
-          "globals": [
-            "growthbook"
-          ]
+          "patterns": ["growthbook\\.io|growthbook-js"],
+          "globals": ["growthbook"]
         },
         {
           "name": "Typeform",
           "kind": "表单",
-          "patterns": [
-            "embed\\.typeform\\.com|typeform\\.com"
-          ],
-          "globals": [
-            "typeformEmbed"
-          ]
+          "patterns": ["embed\\.typeform\\.com|typeform\\.com"],
+          "globals": ["typeformEmbed"]
         },
         {
           "name": "Calendly",
           "kind": "预约排程",
-          "patterns": [
-            "assets\\.calendly\\.com|calendly\\.com"
-          ],
-          "globals": [
-            "Calendly"
-          ]
+          "patterns": ["assets\\.calendly\\.com|calendly\\.com"],
+          "globals": ["Calendly"]
         },
         {
           "name": "Airtable",
           "kind": "表格 / 数据库",
-          "patterns": [
-            "airtable\\.com\\/embed|airtable\\.com"
-          ]
+          "patterns": ["airtable\\.com\\/embed|airtable\\.com"]
         },
         {
           "name": "Notion",
           "kind": "文档 / 站点",
-          "patterns": [
-            "notion\\.so|notion-static\\.com|notion\\.site"
-          ]
+          "patterns": ["notion\\.so|notion-static\\.com|notion\\.site"]
         }
       ]
     }

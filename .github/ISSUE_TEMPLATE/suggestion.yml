@@ -1,14 +1,14 @@
 name: 建议
 description: 提出新功能、交互优化或维护方式建议。
-title: "feat: "
-labels: ["enhancement"]
+title: 'feat: '
+labels: ['enhancement']
 body:
   - type: textarea
     id: suggestion
     attributes:
       label: 建议内容
       description: 说明你希望增加或调整什么。
-      placeholder: "希望支持 ..."
+      placeholder: '希望支持 ...'
     validations:
       required: true
   - type: textarea

@@ -8,140 +8,96 @@
         {
           "name": "ASP.NET Web Forms",
           "confidence": "高",
-          "patterns": [
-            "__viewstate|__eventvalidation|webresource\\.axd|scriptresource\\.axd"
-          ]
+          "patterns": ["__viewstate|__eventvalidation|webresource\\.axd|scriptresource\\.axd"]
         },
         {
           "name": "ASP.NET MVC / Core",
           "confidence": "中",
-          "patterns": [
-            "aspnet|asp-action=|asp-controller=|\\.aspnetcore\\."
-          ]
+          "patterns": ["aspnet|asp-action=|asp-controller=|\\.aspnetcore\\."]
         },
         {
           "name": "Blazor",
           "confidence": "高",
-          "patterns": [
-            "\\/_framework\\/blazor|blazor\\.webassembly\\.js|blazor\\.server\\.js"
-          ],
-          "globals": [
-            "Blazor"
-          ]
+          "patterns": ["\\/_framework\\/blazor|blazor\\.webassembly\\.js|blazor\\.server\\.js"],
+          "globals": ["Blazor"]
         },
         {
           "name": "Ruby on Rails",
           "confidence": "中",
-          "patterns": [
-            "csrf-param[^>]+authenticity_token|rails-ujs|turbo-rails|active_storage|data-remote="
-          ]
+          "patterns": ["csrf-param[^>]+authenticity_token|rails-ujs|turbo-rails|active_storage|data-remote="]
         },
         {
           "name": "Django",
           "confidence": "中",
-          "patterns": [
-            "csrfmiddlewaretoken|django\\.jquery|\\/static\\/admin\\/(?:css|js)\\/"
-          ]
+          "patterns": ["csrfmiddlewaretoken|django\\.jquery|\\/static\\/admin\\/(?:css|js)\\/"]
         },
         {
           "name": "Flask",
           "confidence": "低",
-          "patterns": [
-            "flask(?:\\.min)?\\.js|csrf_token\\(\\)|\\/static\\/.*flask"
-          ]
+          "patterns": ["flask(?:\\.min)?\\.js|csrf_token\\(\\)|\\/static\\/.*flask"]
         },
         {
           "name": "Laravel",
           "confidence": "低",
-          "patterns": [
-            "laravel-mix|\\/vendor\\/laravel|mix-manifest\\.json"
-          ]
+          "patterns": ["laravel-mix|\\/vendor\\/laravel|mix-manifest\\.json"]
         },
         {
           "name": "Laravel Livewire",
           "confidence": "高",
-          "patterns": [
-            "livewire(?:\\.js|\\/livewire\\.js)|wire:(?:click|model|submit|loading)|data-livewire"
-          ]
+          "patterns": ["livewire(?:\\.js|\\/livewire\\.js)|wire:(?:click|model|submit|loading)|data-livewire"]
         },
         {
           "name": "Inertia.js",
           "confidence": "高",
-          "patterns": [
-            "@inertiajs|data-page=\"[^\"]*component|inertia\\.js"
-          ],
-          "globals": [
-            "Inertia"
-          ]
+          "patterns": ["@inertiajs|data-page=\"[^\"]*component|inertia\\.js"],
+          "globals": ["Inertia"]
         },
         {
           "name": "Symfony",
           "confidence": "中",
-          "patterns": [
-            "\\/bundles\\/(?:framework|sensio|fos)|symfony_profiler|_wdt"
-          ]
+          "patterns": ["\\/bundles\\/(?:framework|sensio|fos)|symfony_profiler|_wdt"]
         },
         {
           "name": "Yii",
           "confidence": "中",
-          "patterns": [
-            "yii(?:\\.activeForm|\\.gridView)|yii\\.js"
-          ]
+          "patterns": ["yii(?:\\.activeForm|\\.gridView)|yii\\.js"]
         },
         {
           "name": "CakePHP",
           "confidence": "低",
-          "patterns": [
-            "cakephp|csrfToken.*cake"
-          ]
+          "patterns": ["cakephp|csrfToken.*cake"]
         },
         {
           "name": "CodeIgniter",
           "confidence": "低",
-          "patterns": [
-            "codeigniter|ci_session"
-          ]
+          "patterns": ["codeigniter|ci_session"]
         },
         {
           "name": "Phoenix LiveView",
           "confidence": "高",
-          "patterns": [
-            "phoenix_live_view|phx-(?:click|submit|change|hook|value)|live_socket"
-          ],
-          "globals": [
-            "LiveSocket"
-          ]
+          "patterns": ["phoenix_live_view|phx-(?:click|submit|change|hook|value)|live_socket"],
+          "globals": ["LiveSocket"]
         },
         {
           "name": "Phoenix Framework",
           "confidence": "中",
-          "patterns": [
-            "phoenix(?:\\.js|_html)|phoenix_live_reload"
-          ]
+          "patterns": ["phoenix(?:\\.js|_html)|phoenix_live_reload"]
         },
         {
           "name": "Vaadin",
           "confidence": "高",
-          "patterns": [
-            "vaadin-|\\/vaadin\\/|flow-client"
-          ],
-          "globals": [
-            "Vaadin"
-          ]
+          "patterns": ["vaadin-|\\/vaadin\\/|flow-client"],
+          "globals": ["Vaadin"]
         },
         {
           "name": "JavaServer Faces",
           "confidence": "高",
-          "patterns": [
-            "javax\\.faces|jsf\\.js|jakarta\\.faces|mojarra"
-          ]
+          "patterns": ["javax\\.faces|jsf\\.js|jakarta\\.faces|mojarra"]
         },
         {
           "name": "Apache Wicket",
           "confidence": "中",
-          "patterns": [
-            "wicket:id|wicket-ajax|wicket\\/ajax"
-          ]
+          "patterns": ["wicket:id|wicket-ajax|wicket\\/ajax"]
         },
         {
           "defaults": {
@@ -150,39 +106,27 @@
           "rules": [
             {
               "name": "Spring Boot / Spring MVC",
-              "patterns": [
-                "\\/actuator\\/|spring-security|_csrf|jsessionid"
-              ]
+              "patterns": ["\\/actuator\\/|spring-security|_csrf|jsessionid"]
             },
             {
               "name": "Struts",
-              "patterns": [
-                "struts|dojo\\/struts|\\.action(?:\\?|\")"
-              ]
+              "patterns": ["struts|dojo\\/struts|\\.action(?:\\?|\")"]
             },
             {
               "name": "Grails",
-              "patterns": [
-                "grails|g:javascript|\\/assets\\/grails"
-              ]
+              "patterns": ["grails|g:javascript|\\/assets\\/grails"]
             },
             {
               "name": "Play Framework",
-              "patterns": [
-                "play-framework|play\\.api|csrfToken.*play"
-              ]
+              "patterns": ["play-framework|play\\.api|csrfToken.*play"]
             }
           ]
         },
         {
           "name": "Meteor",
           "confidence": "中",
-          "patterns": [
-            "meteor_runtime_config|__meteor_runtime_config__|\\/packages\\/meteor"
-          ],
-          "globals": [
-            "__meteor_runtime_config__"
-          ]
+          "patterns": ["meteor_runtime_config|__meteor_runtime_config__|\\/packages\\/meteor"],
+          "globals": ["__meteor_runtime_config__"]
         },
         {
           "defaults": {
@@ -191,21 +135,15 @@
           "rules": [
             {
               "name": "Sails.js",
-              "patterns": [
-                "sails\\.io\\.js|io\\.socket"
-              ]
+              "patterns": ["sails\\.io\\.js|io\\.socket"]
             },
             {
               "name": "FeathersJS",
-              "patterns": [
-                "feathers-client|@feathersjs"
-              ]
+              "patterns": ["feathers-client|@feathersjs"]
             },
             {
               "name": "NestJS",
-              "patterns": [
-                "nestjs|@nestjs\\/"
-              ]
+              "patterns": ["nestjs|@nestjs\\/"]
             }
           ]
         },
@@ -216,36 +154,26 @@
           "rules": [
             {
               "name": "GraphQL",
-              "patterns": [
-                "\\/graphql(?:\\?|\")|graphql-ws|apollo-client|relay-runtime"
-              ]
+              "patterns": ["\\/graphql(?:\\?|\")|graphql-ws|apollo-client|relay-runtime"]
             },
             {
               "name": "gRPC Web",
-              "patterns": [
-                "grpc-web|application\\/grpc-web|grpcwebtext"
-              ]
+              "patterns": ["grpc-web|application\\/grpc-web|grpcwebtext"]
             },
             {
               "name": "tRPC",
-              "patterns": [
-                "\\/trpc\\/|@trpc\\/|trpc\\."
-              ]
+              "patterns": ["\\/trpc\\/|@trpc\\/|trpc\\."]
             },
             {
               "name": "Socket.IO Server",
-              "patterns": [
-                "\\/socket\\.io\\/\\?eio=|socket\\.io(?:\\.min)?\\.js"
-              ]
+              "patterns": ["\\/socket\\.io\\/\\?eio=|socket\\.io(?:\\.min)?\\.js"]
             }
           ]
         },
         {
           "name": "Mercure",
           "confidence": "低",
-          "patterns": [
-            "\\.well-known\\/mercure|mercure(?:\\.rocks|hub)"
-          ]
+          "patterns": ["\\.well-known\\/mercure|mercure(?:\\.rocks|hub)"]
         }
       ]
     }

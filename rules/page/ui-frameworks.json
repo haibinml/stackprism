@@ -13,36 +13,17 @@
             "rules": [
               {
                 "name": "Bootstrap",
-                "patterns": [
-                  "bootstrap(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)"
-                ],
-                "globals": [
-                  "bootstrap"
-                ],
-                "classNames": [
-                  "container",
-                  "row",
-                  "navbar",
-                  "modal",
-                  "dropdown-menu"
-                ]
+                "patterns": ["bootstrap(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)"],
+                "globals": ["bootstrap"],
+                "classNames": ["container", "row", "navbar", "modal", "dropdown-menu"]
               },
               {
                 "name": "Tailwind CSS",
-                "patterns": [
-                  "cdn\\.tailwindcss\\.com",
-                  "tailwind(?:\\.min)?\\.css",
-                  "tailwind\\.config"
-                ]
+                "patterns": ["cdn\\.tailwindcss\\.com", "tailwind(?:\\.min)?\\.css", "tailwind\\.config"]
               },
               {
                 "name": "shadcn/ui",
-                "patterns": [
-                  "shadcn",
-                  "@shadcn\\/ui",
-                  "components\\/ui",
-                  "class-variance-authority"
-                ],
+                "patterns": ["shadcn", "@shadcn\\/ui", "components\\/ui", "class-variance-authority"],
                 "cssVariables": [
                   "--background",
                   "--foreground",
@@ -76,47 +57,26 @@
             "rules": [
               {
                 "name": "Material UI",
-                "patterns": [
-                  "@mui",
-                  "material-ui",
-                  "mui-",
-                  "data-emotion=\"css"
-                ],
-                "classPrefixes": [
-                  "Mui"
-                ]
+                "patterns": ["@mui", "material-ui", "mui-", "data-emotion=\"css"],
+                "classPrefixes": ["Mui"]
               },
               {
                 "name": "Ant Design",
-                "patterns": [
-                  "antd",
-                  "ant-design"
-                ],
-                "classPrefixes": [
-                  "ant-"
-                ]
+                "patterns": ["antd", "ant-design"],
+                "classPrefixes": ["ant-"]
               },
               {
                 "name": "Element UI / Element Plus",
-                "patterns": [
-                  "element-plus",
-                  "element-ui"
-                ],
-                "classPrefixes": [
-                  "el-"
-                ]
+                "patterns": ["element-plus", "element-ui"],
+                "classPrefixes": ["el-"]
               }
             ]
           },
           {
             "name": "Vuetify",
             "confidence": "高",
-            "patterns": [
-              "vuetify"
-            ],
-            "selectors": [
-              ".v-application"
-            ]
+            "patterns": ["vuetify"],
+            "selectors": [".v-application"]
           },
           {
             "defaults": {
@@ -125,66 +85,32 @@
             "rules": [
               {
                 "name": "Chakra UI",
-                "patterns": [
-                  "@chakra-ui",
-                  "chakra-ui"
-                ],
-                "classPrefixes": [
-                  "chakra-"
-                ],
-                "selectors": [
-                  "[data-theme][style*=\"--chakra\"]"
-                ]
+                "patterns": ["@chakra-ui", "chakra-ui"],
+                "classPrefixes": ["chakra-"],
+                "selectors": ["[data-theme][style*=\"--chakra\"]"]
               },
               {
                 "name": "Bulma",
-                "patterns": [
-                  "bulma(?:\\.min)?\\.css"
-                ],
-                "classNames": [
-                  "columns",
-                  "column",
-                  "is-primary",
-                  "navbar-menu"
-                ]
+                "patterns": ["bulma(?:\\.min)?\\.css"],
+                "classNames": ["columns", "column", "is-primary", "navbar-menu"]
               },
               {
                 "name": "Semantic UI / Fomantic UI",
-                "patterns": [
-                  "semantic(?:\\.min)?\\.(?:css|js)",
-                  "fomantic"
-                ],
-                "selectors": [
-                  ".ui.button",
-                  ".ui.menu",
-                  ".ui.dropdown"
-                ]
+                "patterns": ["semantic(?:\\.min)?\\.(?:css|js)", "fomantic"],
+                "selectors": [".ui.button", ".ui.menu", ".ui.dropdown"]
               },
               {
                 "name": "Foundation",
-                "patterns": [
-                  "foundation(?:\\.min)?\\.(?:css|js)"
-                ],
-                "classNames": [
-                  "grid-x",
-                  "top-bar",
-                  "callout"
-                ]
+                "patterns": ["foundation(?:\\.min)?\\.(?:css|js)"],
+                "classNames": ["grid-x", "top-bar", "callout"]
               }
             ]
           },
           {
             "name": "Ionic",
             "confidence": "高",
-            "patterns": [
-              "@ionic",
-              "ionic"
-            ],
-            "selectors": [
-              "ion-app",
-              "ion-content",
-              "ion-button"
-            ]
+            "patterns": ["@ionic", "ionic"],
+            "selectors": ["ion-app", "ion-content", "ion-button"]
           },
           {
             "defaults": {
@@ -193,71 +119,36 @@
             "rules": [
               {
                 "name": "Quasar",
-                "patterns": [
-                  "quasar"
-                ],
-                "globals": [
-                  "Quasar"
-                ],
-                "classPrefixes": [
-                  "q-"
-                ]
+                "patterns": ["quasar"],
+                "globals": ["Quasar"],
+                "classPrefixes": ["q-"]
               },
               {
                 "name": "Prime UI",
-                "patterns": [
-                  "primevue",
-                  "primereact",
-                  "primeng"
-                ],
-                "classPrefixes": [
-                  "p-"
-                ],
-                "selectors": [
-                  ".p-component",
-                  ".p-button",
-                  ".p-dialog"
-                ]
+                "patterns": ["primevue", "primereact", "primeng"],
+                "classPrefixes": ["p-"],
+                "selectors": [".p-component", ".p-button", ".p-dialog"]
               },
               {
                 "name": "Vant",
-                "patterns": [
-                  "vant(?:\\.min)?"
-                ],
-                "classPrefixes": [
-                  "van-"
-                ]
+                "patterns": ["vant(?:\\.min)?"],
+                "classPrefixes": ["van-"]
               },
               {
                 "name": "Arco Design",
-                "patterns": [
-                  "arco-design"
-                ],
-                "classPrefixes": [
-                  "arco-"
-                ]
+                "patterns": ["arco-design"],
+                "classPrefixes": ["arco-"]
               },
               {
                 "name": "TDesign",
-                "patterns": [
-                  "tdesign"
-                ],
-                "classPrefixes": [
-                  "tdesign-"
-                ]
+                "patterns": ["tdesign"],
+                "classPrefixes": ["tdesign-"]
               },
               {
                 "name": "Layui",
-                "patterns": [
-                  "layui"
-                ],
-                "classPrefixes": [
-                  "layui-"
-                ],
-                "classNames": [
-                  "layui-btn",
-                  "layui-form"
-                ]
+                "patterns": ["layui"],
+                "classPrefixes": ["layui-"],
+                "classNames": ["layui-btn", "layui-form"]
               }
             ]
           }
@@ -267,24 +158,15 @@
         "category": "构建与运行时",
         "name": "Emotion",
         "confidence": "中",
-        "patterns": [
-          "data-emotion="
-        ],
-        "selectors": [
-          "style[data-emotion]",
-          "style[data-s]"
-        ]
+        "patterns": ["data-emotion="],
+        "selectors": ["style[data-emotion]", "style[data-s]"]
       },
       {
         "category": "构建与运行时",
         "name": "styled-components",
         "confidence": "高",
-        "patterns": [
-          "data-styled="
-        ],
-        "selectors": [
-          "style[data-styled]"
-        ]
+        "patterns": ["data-styled="],
+        "selectors": ["style[data-styled]"]
       }
     ]
   }

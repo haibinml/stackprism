@@ -9,14 +9,7 @@
           {
             "name": "QQ 登录",
             "confidence": "高",
-            "patterns": [
-              "graph\\.qq\\.com/oauth2\\.0/authorize",
-              "connect\\.qq\\.com",
-              "QC\\.Login",
-              "QQ登录",
-              "qqlogin",
-              "qqConnect"
-            ]
+            "patterns": ["graph\\.qq\\.com/oauth2\\.0/authorize", "connect\\.qq\\.com", "QC\\.Login", "QQ登录", "qqlogin", "qqConnect"]
           },
           {
             "name": "微信登录",
@@ -32,25 +25,14 @@
           },
           {
             "name": "微博登录",
-            "patterns": [
-              "api\\.weibo\\.com/oauth2/authorize",
-              "WB2\\.anyWhere",
-              "SinaWeibo",
-              "微博登录",
-              "weibo login"
-            ]
+            "patterns": ["api\\.weibo\\.com/oauth2/authorize", "WB2\\.anyWhere", "SinaWeibo", "微博登录", "weibo login"]
           }
         ]
       },
       {
         "name": "支付宝登录",
         "kind": "国内账号登录",
-        "patterns": [
-          "openauth\\.alipay\\.com",
-          "auth\\.alipay\\.com",
-          "alipay.*oauth",
-          "支付宝登录"
-        ]
+        "patterns": ["openauth\\.alipay\\.com", "auth\\.alipay\\.com", "alipay.*oauth", "支付宝登录"]
       },
       {
         "defaults": {
@@ -59,12 +41,7 @@
         "rules": [
           {
             "name": "钉钉登录",
-            "patterns": [
-              "oapi\\.dingtalk\\.com/connect/qrconnect",
-              "login\\.dingtalk\\.com",
-              "DingTalk",
-              "钉钉登录"
-            ]
+            "patterns": ["oapi\\.dingtalk\\.com/connect/qrconnect", "login\\.dingtalk\\.com", "DingTalk", "钉钉登录"]
           },
           {
             "name": "飞书 / Lark 登录",
@@ -78,12 +55,7 @@
           },
           {
             "name": "企业微信登录",
-            "patterns": [
-              "open\\.work\\.weixin\\.qq\\.com",
-              "work.weixin.qq.com",
-              "企业微信登录",
-              "wecom"
-            ]
+            "patterns": ["open\\.work\\.weixin\\.qq\\.com", "work.weixin.qq.com", "企业微信登录", "wecom"]
           }
         ]
       },
@@ -94,28 +66,15 @@
         "rules": [
           {
             "name": "华为帐号登录",
-            "patterns": [
-              "oauth-login\\.cloud\\.huawei\\.com",
-              "login\\.huawei\\.com/oauth2",
-              "Huawei ID",
-              "华为帐号登录"
-            ]
+            "patterns": ["oauth-login\\.cloud\\.huawei\\.com", "login\\.huawei\\.com/oauth2", "Huawei ID", "华为帐号登录"]
           },
           {
             "name": "小米帐号登录",
-            "patterns": [
-              "account\\.xiaomi\\.com/oauth2",
-              "小米账号登录",
-              "mi account"
-            ]
+            "patterns": ["account\\.xiaomi\\.com/oauth2", "小米账号登录", "mi account"]
           },
           {
             "name": "百度帐号登录",
-            "patterns": [
-              "openapi\\.baidu\\.com/oauth/2\\.0/authorize",
-              "passport\\.baidu\\.com",
-              "百度登录"
-            ]
+            "patterns": ["openapi\\.baidu\\.com/oauth/2\\.0/authorize", "passport\\.baidu\\.com", "百度登录"]
           }
         ]
       },
@@ -126,34 +85,19 @@
         "rules": [
           {
             "name": "GitHub 登录",
-            "patterns": [
-              "github\\.com/login/oauth/authorize",
-              "GitHub登录",
-              "sign in with github"
-            ]
+            "patterns": ["github\\.com/login/oauth/authorize", "GitHub登录", "sign in with github"]
           },
           {
             "name": "Gitee 登录",
-            "patterns": [
-              "gitee\\.com/oauth/authorize",
-              "Gitee登录",
-              "码云登录"
-            ]
+            "patterns": ["gitee\\.com/oauth/authorize", "Gitee登录", "码云登录"]
           },
           {
             "name": "GitLab 登录",
-            "patterns": [
-              "gitlab\\.com/oauth/authorize",
-              "/oauth/authorize.*gitlab",
-              "GitLab登录"
-            ]
+            "patterns": ["gitlab\\.com/oauth/authorize", "/oauth/authorize.*gitlab", "GitLab登录"]
           },
           {
             "name": "Bitbucket 登录",
-            "patterns": [
-              "bitbucket\\.org/site/oauth2/authorize",
-              "Bitbucket login"
-            ]
+            "patterns": ["bitbucket\\.org/site/oauth2/authorize", "Bitbucket login"]
           }
         ]
       },
@@ -173,22 +117,12 @@
         "name": "Apple 登录",
         "kind": "国际账号登录",
         "confidence": "高",
-        "patterns": [
-          "appleid\\.apple\\.com/auth/authorize",
-          "appleid\\.auth\\.js",
-          "Sign in with Apple",
-          "AppleID\\.auth"
-        ]
+        "patterns": ["appleid\\.apple\\.com/auth/authorize", "appleid\\.auth\\.js", "Sign in with Apple", "AppleID\\.auth"]
       },
       {
         "name": "Microsoft 登录",
         "kind": "企业 / 国际账号登录",
-        "patterns": [
-          "login\\.microsoftonline\\.com",
-          "login\\.live\\.com/oauth20_authorize",
-          "msal",
-          "Microsoft登录"
-        ]
+        "patterns": ["login\\.microsoftonline\\.com", "login\\.live\\.com/oauth20_authorize", "msal", "Microsoft登录"]
       },
       {
         "defaults": {
@@ -197,48 +131,27 @@
         "rules": [
           {
             "name": "Facebook 登录",
-            "patterns": [
-              "connect\\.facebook\\.net/.*/sdk\\.js",
-              "facebook\\.com/.*/dialog/oauth",
-              "FB\\.login",
-              "Login with Facebook"
-            ]
+            "patterns": ["connect\\.facebook\\.net/.*/sdk\\.js", "facebook\\.com/.*/dialog/oauth", "FB\\.login", "Login with Facebook"]
           },
           {
             "name": "Twitter / X 登录",
-            "patterns": [
-              "twitter\\.com/i/oauth2/authorize",
-              "api\\.twitter\\.com/oauth",
-              "x.com/i/oauth2/authorize",
-              "Twitter登录"
-            ]
+            "patterns": ["twitter\\.com/i/oauth2/authorize", "api\\.twitter\\.com/oauth", "x.com/i/oauth2/authorize", "Twitter登录"]
           },
           {
             "name": "LinkedIn 登录",
-            "patterns": [
-              "linkedin\\.com/oauth/v2/authorization",
-              "Sign in with LinkedIn"
-            ]
+            "patterns": ["linkedin\\.com/oauth/v2/authorization", "Sign in with LinkedIn"]
           }
         ]
       },
       {
         "name": "Slack 登录",
         "kind": "团队协作登录",
-        "patterns": [
-          "slack\\.com/oauth/v2/authorize",
-          "slack\\.com/openid/connect/authorize",
-          "Sign in with Slack"
-        ]
+        "patterns": ["slack\\.com/oauth/v2/authorize", "slack\\.com/openid/connect/authorize", "Sign in with Slack"]
       },
       {
         "name": "Discord 登录",
         "kind": "社区账号登录",
-        "patterns": [
-          "discord\\.com/oauth2/authorize",
-          "discordapp\\.com/oauth2/authorize",
-          "Discord登录"
-        ]
+        "patterns": ["discord\\.com/oauth2/authorize", "discordapp\\.com/oauth2/authorize", "Discord登录"]
       },
       {
         "defaults": {
@@ -247,93 +160,51 @@
         "rules": [
           {
             "name": "Telegram 登录",
-            "patterns": [
-              "oauth\\.telegram\\.org",
-              "telegram-login",
-              "TelegramLoginWidget"
-            ]
+            "patterns": ["oauth\\.telegram\\.org", "telegram-login", "TelegramLoginWidget"]
           },
           {
             "name": "LINE 登录",
-            "patterns": [
-              "access\\.line\\.me/oauth2/v2\\.1/authorize",
-              "LINE Login"
-            ]
+            "patterns": ["access\\.line\\.me/oauth2/v2\\.1/authorize", "LINE Login"]
           },
           {
             "name": "Kakao 登录",
-            "patterns": [
-              "kauth\\.kakao\\.com/oauth/authorize",
-              "Kakao.Auth",
-              "카카오 로그인"
-            ]
+            "patterns": ["kauth\\.kakao\\.com/oauth/authorize", "Kakao.Auth", "카카오 로그인"]
           },
           {
             "name": "Naver 登录",
-            "patterns": [
-              "nid\\.naver\\.com/oauth2\\.0/authorize",
-              "Naver Login"
-            ]
+            "patterns": ["nid\\.naver\\.com/oauth2\\.0/authorize", "Naver Login"]
           }
         ]
       },
       {
         "name": "Auth0 Universal Login",
         "kind": "身份服务",
-        "patterns": [
-          "auth0\\.com/authorize",
-          "auth0\\.com/u/login",
-          "auth0-spa-js",
-          "Auth0Lock"
-        ]
+        "patterns": ["auth0\\.com/authorize", "auth0\\.com/u/login", "auth0-spa-js", "Auth0Lock"]
       },
       {
         "name": "Okta 登录",
         "kind": "身份服务",
-        "patterns": [
-          "okta\\.com/oauth2",
-          "okta-signin-widget",
-          "OktaAuth"
-        ]
+        "patterns": ["okta\\.com/oauth2", "okta-signin-widget", "OktaAuth"]
       },
       {
         "name": "Keycloak 登录",
         "kind": "开源身份服务",
-        "patterns": [
-          "keycloak",
-          "/realms/.*/protocol/openid-connect/auth",
-          "kc-form-login",
-          "Keycloak"
-        ]
+        "patterns": ["keycloak", "/realms/.*/protocol/openid-connect/auth", "kc-form-login", "Keycloak"]
       },
       {
         "name": "CAS 单点登录",
         "kind": "SSO 协议",
-        "patterns": [
-          "/cas/login",
-          "service=.*cas",
-          "Central Authentication Service"
-        ]
+        "patterns": ["/cas/login", "service=.*cas", "Central Authentication Service"]
       },
       {
         "name": "SAML 登录",
         "kind": "SSO 协议",
-        "patterns": [
-          "SAMLRequest",
-          "SAMLResponse",
-          "saml2",
-          "saml/login"
-        ]
+        "patterns": ["SAMLRequest", "SAMLResponse", "saml2", "saml/login"]
       },
       {
         "name": "OpenID Connect / OAuth2",
         "kind": "身份协议",
-        "patterns": [
-          "openid-connect/auth",
-          "oauth2/authorize",
-          "response_type=code",
-          "client_id=.*redirect_uri"
-        ]
+        "patterns": ["openid-connect/auth", "oauth2/authorize", "response_type=code", "client_id=.*redirect_uri"]
       }
     ]
   }
