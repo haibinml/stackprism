@@ -29,7 +29,6 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
     clearActiveDetectionTimer(tabId)
     clearDynamicSnapshotTimer(tabId)
     clearPendingDynamicSnapshot(tabId)
-    clearTabSession(tabId)
     clearBadge(tabId)
     return
   }
@@ -56,6 +55,9 @@ chrome.webRequest.onHeadersReceived.addListener(
         if (details.type === 'main_frame') {
           data.main = record
           data.apis = []
+          data.frames = []
+          delete data.page
+          delete data.dynamic
         } else if (details.type === 'xmlhttprequest' || (details.type as string) === 'fetch') {
           data.apis = dedupeApiRecords([record, ...(data.apis || [])])
         } else if (details.type === 'sub_frame') {
