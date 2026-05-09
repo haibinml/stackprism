@@ -116,64 +116,118 @@
                   </button>
                   <span :class="['confidence', confidenceClass(tech.confidence)]">{{ tech.confidence }}置信度</span>
                 </div>
-                <ul v-if="tech.evidence?.length" class="evidence">
-                  <li v-for="(ev, i) in tech.evidence.slice(0, 4)" :key="i">{{ ev }}</li>
-                </ul>
-                <div v-if="tech.sources?.length" class="source">来源：{{ tech.sources.join('、') }}</div>
-                <button
-                  type="button"
-                  class="correction-link"
-                  title="打开 GitHub 议题并自动填写这条识别结果"
-                  @click="openCorrectionIssue(tech)"
-                >
-                  识别不准确，点击纠正
-                </button>
+                <details v-if="tech.evidence?.length || tech.sources?.length" class="tech-disclosure">
+                  <summary class="source-row">
+                    <ChevronRight class="source-chevron" :size="11" :stroke-width="2.4" />
+                    <span v-if="tech.sources?.length" class="source-chips">
+                      <span v-for="src in tech.sources" :key="src" class="source-chip">{{ src }}</span>
+                    </span>
+                    <span v-else class="source-empty">查看证据</span>
+                  </summary>
+                  <ul v-if="tech.evidence?.length" class="evidence">
+                    <li v-for="(ev, i) in tech.evidence" :key="i">{{ ev }}</li>
+                  </ul>
+                  <button
+                    type="button"
+                    class="correction-link"
+                    title="打开 GitHub 议题并自动填写这条识别结果"
+                    @click="openCorrectionIssue(tech)"
+                  >
+                    <Flag :size="11" :stroke-width="2" />
+                    <span>识别不准确，点击纠正</span>
+                  </button>
+                </details>
               </article>
             </section>
           </section>
         </Transition>
       </template>
-
-      <section class="source-search" aria-label="网页源代码搜索">
-        <div class="panel-title">网页源代码搜索</div>
-        <div class="search-row">
-          <input v-model="search.query" type="search" placeholder="输入关键词或正则表达式" @keydown.enter="searchPageSourceFromPopup" />
-          <button type="button" @click="searchPageSourceFromPopup">搜索</button>
-        </div>
-        <div class="search-options">
-          <label>
-            <input v-model="search.caseSensitive" type="checkbox" />
-            区分大小写
-          </label>
-          <label>
-            <input v-model="search.wholeWord" type="checkbox" />
-            全字匹配
-          </label>
-          <label>
-            <input v-model="search.useRegex" type="checkbox" />
-            正则表达式
-          </label>
-        </div>
-        <div class="search-meta">{{ search.meta }}</div>
-        <pre class="search-output">{{ search.output }}</pre>
-      </section>
-
-      <details class="raw-panel" @toggle="onRawPanelToggle">
-        <summary>原始线索</summary>
-        <pre>{{ rawOutputText }}</pre>
-      </details>
     </template>
 
+    <Transition name="footer-panel">
+      <section v-if="footerPanel" class="footer-panel" :aria-label="footerPanel === 'search' ? '网页源代码搜索' : '原始线索'">
+        <header class="footer-panel-head">
+          <span class="footer-panel-title">
+            {{ footerPanel === 'search' ? '网页源代码搜索' : '原始线索' }}
+          </span>
+          <button type="button" class="footer-panel-close" title="关闭面板" @click="footerPanel = null">
+            <X :size="14" :stroke-width="2" />
+          </button>
+        </header>
+        <div v-if="footerPanel === 'search'" class="footer-panel-body">
+          <div class="search-row">
+            <input v-model="search.query" type="search" placeholder="输入关键词或正则表达式" @keydown.enter="searchPageSourceFromPopup" />
+            <button type="button" @click="searchPageSourceFromPopup">搜索</button>
+          </div>
+          <div class="search-options">
+            <label>
+              <input v-model="search.caseSensitive" type="checkbox" />
+              区分大小写
+            </label>
+            <label>
+              <input v-model="search.wholeWord" type="checkbox" />
+              全字匹配
+            </label>
+            <label>
+              <input v-model="search.useRegex" type="checkbox" />
+              正则表达式
+            </label>
+          </div>
+          <div class="search-meta">{{ search.meta }}</div>
+          <pre v-if="search.output" class="search-output">{{ search.output }}</pre>
+        </div>
+        <div v-else-if="footerPanel === 'raw'" class="footer-panel-body">
+          <pre>{{ rawOutputText }}</pre>
+        </div>
+      </section>
+    </Transition>
+
     <footer class="app-footer">
-      <span>Copyright © 2026 StackPrism</span>
-      <a :href="REPOSITORY_URL" target="_blank" rel="noreferrer" @click="openRepository">GitHub 仓库</a>
+      <div class="footer-tools">
+        <button
+          type="button"
+          :class="['footer-tool-btn', { active: footerPanel === 'search' }]"
+          title="网页源代码搜索"
+          @click="toggleFooterPanel('search')"
+        >
+          <Search :size="13" :stroke-width="2" />
+          <span>搜索</span>
+        </button>
+        <button
+          type="button"
+          :class="['footer-tool-btn', { active: footerPanel === 'raw' }]"
+          title="查看原始线索"
+          @click="toggleFooterPanel('raw')"
+        >
+          <FileCode :size="13" :stroke-width="2" />
+          <span>原始线索</span>
+        </button>
+      </div>
+      <a class="footer-repo" :href="REPOSITORY_URL" target="_blank" rel="noreferrer" @click="openRepository">GitHub</a>
     </footer>
   </main>
 </template>
 
 <script setup lang="ts">
   import { onMounted, onBeforeUnmount, reactive, ref, computed, watch, type Ref } from 'vue'
-  import { Ban, Copy, ExternalLink, Inbox, Loader2, Monitor, Moon, RefreshCw, SearchX, Settings2, Sun } from 'lucide-vue-next'
+  import {
+    Ban,
+    ChevronRight,
+    Copy,
+    ExternalLink,
+    FileCode,
+    Flag,
+    Inbox,
+    Loader2,
+    Monitor,
+    Moon,
+    RefreshCw,
+    Search,
+    SearchX,
+    Settings2,
+    Sun,
+    X
+  } from 'lucide-vue-next'
   import Select from '@/ui/components/Select.vue'
   import { categoryIndex, confidenceClass, confidenceRank } from '@/utils/category-order'
   import { applyCustomCss } from '@/utils/apply-custom-css'
@@ -210,6 +264,18 @@
   })
   const rawOutputText = ref(RAW_PLACEHOLDER)
   const theme = ref<ThemeMode>('auto')
+  const footerPanel = ref<'search' | 'raw' | null>(null)
+
+  const toggleFooterPanel = (name: 'search' | 'raw') => {
+    if (footerPanel.value === name) {
+      footerPanel.value = null
+      return
+    }
+    footerPanel.value = name
+    if (name === 'raw') {
+      renderRawOutput().catch(() => {})
+    }
+  }
 
   const toggleTheme = async () => {
     const next = cycleTheme(theme.value)
@@ -585,13 +651,6 @@
     if (!tab || !tab.id) throw new Error('无法读取当前标签页。')
     state.currentTabId = tab.id
     return tab.id
-  }
-
-  const onRawPanelToggle = async (event: Event) => {
-    const details = event.target as HTMLDetailsElement
-    if (details.open) {
-      await renderRawOutput()
-    }
   }
 
   const renderRawOutput = async () => {
@@ -1129,43 +1188,88 @@
     color: var(--confidence-low-text);
   }
 
+  /* tech-disclosure：来源 chips 折叠面板，点击 summary 展开证据 + 纠正按钮 */
+  .tech-disclosure {
+    margin-top: 6px;
+  }
+
+  .tech-disclosure > summary {
+    align-items: center;
+    color: var(--muted);
+    cursor: pointer;
+    display: inline-flex;
+    flex-wrap: wrap;
+    font-size: 11px;
+    gap: 6px;
+    list-style: none;
+    padding: 2px 0;
+    user-select: none;
+  }
+
+  .tech-disclosure > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .source-chevron {
+    color: var(--muted);
+    flex-shrink: 0;
+    transition: transform 0.15s ease;
+  }
+
+  .tech-disclosure[open] .source-chevron {
+    transform: rotate(90deg);
+  }
+
+  .source-chips {
+    align-items: center;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .source-chip {
+    background: var(--accent-soft);
+    border-radius: 3px;
+    color: var(--muted);
+    font-size: 11px;
+    padding: 1px 6px;
+    transition: color 0.15s ease;
+  }
+
+  .tech-disclosure > summary:hover .source-chip {
+    color: var(--accent);
+  }
+
+  .source-empty {
+    color: var(--muted);
+  }
+
   .evidence {
     color: var(--muted);
     font-size: 12px;
-    margin: 4px 0 0;
-    padding-left: 16px;
+    margin: 6px 0 0;
+    padding-left: 18px;
   }
 
   .evidence li {
-    margin: 1px 0;
+    margin: 2px 0;
     overflow-wrap: anywhere;
   }
 
-  .source {
-    color: var(--muted);
-    font-size: 11px;
-    margin-top: 4px;
-  }
-
-  /* correction-link：默认低调，hover .tech 时显现 */
+  /* correction-link：折叠面板里固定显示，整体克制 */
   .correction-link {
+    align-items: center;
     background: transparent;
     border: 0;
     color: var(--muted);
     cursor: pointer;
+    display: inline-flex;
     font-size: 11px;
+    gap: 4px;
     margin-top: 6px;
-    opacity: 0;
     padding: 0;
     text-align: left;
-    transition:
-      opacity 0.15s ease,
-      color 0.15s ease;
-  }
-
-  .tech:hover .correction-link,
-  .correction-link:focus-visible {
-    opacity: 1;
+    transition: color 0.15s ease;
   }
 
   .correction-link:hover {
@@ -1232,23 +1336,145 @@
     opacity: 0.75;
   }
 
-  /* 源代码搜索 + 原始线索：合并视觉，使用区段标题 */
-  .source-search,
-  .raw-panel {
+  /* footer：toolbar 风格，左侧两个工具按钮 + 右侧 GitHub */
+  .app-footer {
+    align-items: center;
+    background: var(--panel-translucent);
+    backdrop-filter: saturate(180%) blur(8px);
     border-top: 1px solid var(--line);
-    margin: 16px -4px 0;
-    padding: 12px 4px 0;
+    bottom: 0;
+    color: var(--muted);
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+    left: 0;
+    margin: 0;
+    min-height: var(--popup-footer-height);
+    padding: 6px 12px;
+    position: fixed;
+    right: 0;
+    width: var(--popup-width);
+    z-index: 20;
   }
 
-  .panel-title {
+  .footer-tools {
+    display: flex;
+    gap: 4px;
+  }
+
+  .footer-tool-btn {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: 5px;
+    color: var(--muted);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 12px;
+    gap: 5px;
+    padding: 5px 10px;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .footer-tool-btn:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+  .footer-tool-btn.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .footer-repo {
+    color: var(--muted);
+    font-size: 11px;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .footer-repo:hover {
+    color: var(--accent);
+  }
+
+  /* footer-panel：从底部抽屉式滑出，固定在 footer 上方 */
+  .footer-panel {
+    background: var(--panel);
+    border-top: 1px solid var(--line);
+    bottom: var(--popup-footer-height);
+    box-shadow: 0 -8px 24px rgba(20, 35, 50, 0.06);
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    max-height: 60vh;
+    position: fixed;
+    right: 0;
+    width: var(--popup-width);
+    z-index: 19;
+  }
+
+  .footer-panel-head {
+    align-items: center;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-shrink: 0;
+    justify-content: space-between;
+    padding: 8px 12px;
+  }
+
+  .footer-panel-title {
     color: var(--muted);
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.06em;
-    margin-bottom: 8px;
     text-transform: uppercase;
   }
 
+  .footer-panel-close {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: 4px;
+    color: var(--muted);
+    cursor: pointer;
+    display: inline-flex;
+    height: 22px;
+    justify-content: center;
+    padding: 0;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
+    width: 22px;
+  }
+
+  .footer-panel-close:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+  .footer-panel-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 12px;
+  }
+
+  .footer-panel-enter-active,
+  .footer-panel-leave-active {
+    transition:
+      opacity 0.18s ease,
+      transform 0.2s ease;
+  }
+
+  .footer-panel-enter-from,
+  .footer-panel-leave-to {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  /* 搜索 UI（footer-panel 内） */
   .search-row {
     display: grid;
     gap: 6px;
@@ -1304,74 +1530,14 @@
     gap: 5px;
   }
 
-  .search-options input {
-    margin: 0;
-  }
-
   .search-meta {
     color: var(--muted);
     font-size: 11px;
     margin-top: 8px;
   }
 
-  .search-output:empty {
-    display: none;
-  }
-
-  .raw-panel summary {
-    color: var(--muted);
-    cursor: pointer;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    list-style: none;
-    text-transform: uppercase;
-    transition: color 0.15s ease;
-  }
-
-  .raw-panel summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .raw-panel summary:hover {
-    color: var(--text);
-  }
-
-  .raw-panel[open] summary {
-    color: var(--text);
-    margin-bottom: 8px;
-  }
-
-  /* footer：轻量化，去 shadow */
-  .app-footer {
-    align-items: center;
-    background: var(--panel-translucent);
-    border-top: 1px solid var(--line);
-    bottom: 0;
-    color: var(--muted);
-    display: flex;
-    flex-wrap: wrap;
-    font-size: 11px;
-    gap: 8px;
-    justify-content: space-between;
-    left: 0;
-    margin: 0;
-    min-height: var(--popup-footer-height);
-    padding: 8px 16px;
-    position: fixed;
-    right: 0;
-    width: var(--popup-width);
-    z-index: 20;
-  }
-
-  .app-footer a {
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.15s ease;
-  }
-
-  .app-footer a:hover {
-    color: var(--accent);
+  .search-output {
+    margin-top: 8px;
   }
 
   pre {
