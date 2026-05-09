@@ -87,7 +87,7 @@
 
         <div ref="sectionsScroller" class="sections-scroller" @scroll="onSectionsScroll">
           <Transition name="sections-fade" mode="out-in">
-            <section :key="state.activeCategory" class="sections">
+            <section :key="`${state.activeCategory}|${filteredSections.length ? 'd' : 'e'}`" class="sections">
               <div v-if="!state.result?.technologies?.length" class="empty">
                 <SearchX class="empty-icon" :size="32" :stroke-width="1.5" />
                 <p>未检测到明确技术线索</p>
@@ -859,15 +859,26 @@
     return parts.join(' / ')
   }
 
+  const popupCacheSignature = (popup: any): string => {
+    if (!popup || typeof popup !== 'object') return ''
+    const counts = popup.counts || {}
+    const resources = popup.resources || {}
+    return [
+      Number(popup.sourceUpdatedAt || popup.updatedAt || 0),
+      Number(counts.total || popup.technologies?.length || 0),
+      Number(counts.high || 0),
+      Number(resources.total || 0),
+      Number(popup.headerCount || 0)
+    ].join('|')
+  }
+
   const onStorageChange = (changes: { [key: string]: chrome.storage.StorageChange }, area: string) => {
     if (area !== 'session' || !state.currentTabId) return
     const popupKey = `popup:${state.currentTabId}`
     if (!(popupKey in changes)) return
     const newPopup = changes[popupKey].newValue
     if (!newPopup || typeof newPopup !== 'object') return
-    const incomingUpdatedAt = Number(newPopup.sourceUpdatedAt || newPopup.updatedAt || 0)
-    const currentUpdatedAt = Number(state.result?.updatedAt || 0)
-    if (incomingUpdatedAt && currentUpdatedAt && incomingUpdatedAt === currentUpdatedAt) return
+    if (popupCacheSignature(newPopup) === popupCacheSignature(state.result)) return
     state.result = newPopup
     state.rawResult = null
     state.rawLoaded = false
