@@ -13,10 +13,24 @@
         </p>
       </div>
       <div class="header-actions">
-        <button type="button" :title="`主题：${themeLabel(theme)}（点击切换）`" @click="toggleTheme">主题：{{ themeLabel(theme) }}</button>
-        <button type="button" @click="openHelp">使用说明</button>
-        <button type="button" class="primary" @click="saveSettings">保存设置</button>
-        <button type="button" @click="resetSettings">恢复默认</button>
+        <button type="button" :title="`主题：${themeLabel(theme)}（点击切换）`" @click="toggleTheme">
+          <Sun v-if="theme === 'light'" :size="14" :stroke-width="2" />
+          <Moon v-else-if="theme === 'dark'" :size="14" :stroke-width="2" />
+          <Monitor v-else :size="14" :stroke-width="2" />
+          <span>主题：{{ themeLabel(theme) }}</span>
+        </button>
+        <button type="button" @click="openHelp">
+          <BookOpen :size="14" :stroke-width="2" />
+          <span>使用说明</span>
+        </button>
+        <button type="button" class="primary" @click="saveSettings">
+          <Save :size="14" :stroke-width="2" />
+          <span>保存设置</span>
+        </button>
+        <button type="button" @click="resetSettings">
+          <RotateCcw :size="14" :stroke-width="2" />
+          <span>恢复默认</span>
+        </button>
       </div>
     </header>
 
@@ -143,8 +157,12 @@
             <div class="rule-meta">{{ ruleListLines[index] }}</div>
           </div>
           <div class="rule-actions">
-            <button type="button" @click="fillRuleForm(rule, index)">编辑</button>
-            <button type="button" @click="deleteRule(index)">删除</button>
+            <button type="button" class="icon-btn" title="编辑此规则" @click="fillRuleForm(rule, index)">
+              <Pencil :size="14" :stroke-width="2" />
+            </button>
+            <button type="button" class="icon-btn danger" title="删除此规则" @click="deleteRule(index)">
+              <Trash2 :size="14" :stroke-width="2" />
+            </button>
           </div>
         </div>
       </div>
@@ -165,6 +183,7 @@
 
 <script setup lang="ts">
   import { onMounted, reactive, ref, watch, computed } from 'vue'
+  import { BookOpen, Monitor, Moon, Pencil, RotateCcw, Save, Sun, Trash2 } from 'lucide-vue-next'
   import { CATEGORY_ORDER } from '@/utils/category-order'
   import { applyCustomCss } from '@/utils/apply-custom-css'
   import { cleanCustomRules, cleanStringArray, defaultSettings, normalizeSettings } from '@/utils/normalize-settings'
@@ -762,12 +781,15 @@
   }
 
   .header-actions button {
+    align-items: center;
     background: transparent;
     border: 0;
     border-radius: 6px;
     color: var(--muted);
     cursor: pointer;
+    display: inline-flex;
     font-size: 13px;
+    gap: 6px;
     padding: 6px 12px;
     transition:
       background 0.15s ease,
@@ -1049,22 +1071,31 @@
     gap: 4px;
   }
 
-  .rule-actions button {
+  .rule-actions .icon-btn {
+    align-items: center;
     background: transparent;
     border: 0;
-    border-radius: 4px;
+    border-radius: 5px;
     color: var(--muted);
     cursor: pointer;
-    font-size: 12px;
-    padding: 4px 10px;
+    display: inline-flex;
+    height: 26px;
+    justify-content: center;
+    padding: 0;
     transition:
       background 0.15s ease,
       color 0.15s ease;
+    width: 26px;
   }
 
-  .rule-actions button:hover {
+  .rule-actions .icon-btn:hover {
     background: var(--accent-soft);
     color: var(--accent);
+  }
+
+  .rule-actions .icon-btn.danger:hover {
+    background: var(--danger-soft);
+    color: var(--danger);
   }
 
   @media (max-width: 760px) {

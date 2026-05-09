@@ -9,10 +9,20 @@
         <p class="url">{{ pageUrl }}</p>
       </div>
       <div class="actions">
-        <button type="button" :title="`主题：${themeLabel(theme)}（点击切换）`" @click="toggleTheme">{{ themeLabel(theme) }}</button>
-        <button type="button" title="打开设置页" @click="openSettings">设置</button>
-        <button type="button" title="复制检测 JSON" @click="copyResult">复制</button>
-        <button type="button" class="primary" title="重新检测" @click="runDetection({ force: true })">刷新</button>
+        <button type="button" class="icon-btn" :title="`主题：${themeLabel(theme)}（点击切换）`" @click="toggleTheme">
+          <Sun v-if="theme === 'light'" :size="16" :stroke-width="2" />
+          <Moon v-else-if="theme === 'dark'" :size="16" :stroke-width="2" />
+          <Monitor v-else :size="16" :stroke-width="2" />
+        </button>
+        <button type="button" class="icon-btn" title="打开设置页" @click="openSettings">
+          <Settings2 :size="16" :stroke-width="2" />
+        </button>
+        <button type="button" class="icon-btn" title="复制检测 JSON" @click="copyResult">
+          <Copy :size="16" :stroke-width="2" />
+        </button>
+        <button type="button" class="icon-btn primary" title="重新检测" @click="runDetection({ force: true })">
+          <RefreshCw :size="16" :stroke-width="2" />
+        </button>
       </div>
     </header>
 
@@ -74,7 +84,8 @@
                 :title="`打开 ${tech.name} 官网或仓库`"
                 @click="openTechnologyLink(tech)"
               >
-                {{ tech.name }}
+                <span>{{ tech.name }}</span>
+                <ExternalLink class="tech-link-icon" :size="12" :stroke-width="2" />
               </button>
               <span :class="['confidence', confidenceClass(tech.confidence)]">{{ tech.confidence }}置信度</span>
             </div>
@@ -128,6 +139,7 @@
 
 <script setup lang="ts">
   import { onMounted, onBeforeUnmount, reactive, ref, computed } from 'vue'
+  import { Copy, ExternalLink, Monitor, Moon, RefreshCw, Settings2, Sun } from 'lucide-vue-next'
   import { categoryIndex, confidenceClass, confidenceRank } from '@/utils/category-order'
   import { applyCustomCss } from '@/utils/apply-custom-css'
   import { normalizeSettings } from '@/utils/normalize-settings'
@@ -734,15 +746,24 @@
     color: var(--accent);
   }
 
+  .icon-btn {
+    align-items: center;
+    display: inline-flex;
+    height: 28px;
+    justify-content: center;
+    padding: 0 !important;
+    width: 28px;
+  }
+
   .actions button.primary {
     background: var(--accent);
     color: #ffffff;
     font-weight: 500;
-    padding: 5px 12px;
   }
 
   .actions button.primary:hover {
     background: var(--accent-dark);
+    color: #ffffff;
   }
 
   /* status：去 shadow，仅 hairline */
@@ -903,11 +924,14 @@
   }
 
   .tech-link {
+    align-items: center;
     background: transparent;
     border: 0;
     color: var(--text);
     cursor: pointer;
+    display: inline-flex;
     font: inherit;
+    gap: 4px;
     padding: 0;
     text-align: left;
     text-decoration: none;
@@ -915,6 +939,23 @@
   }
 
   .tech-link:hover {
+    color: var(--accent);
+  }
+
+  .tech-link-icon {
+    color: var(--muted);
+    opacity: 0;
+    transition:
+      color 0.15s ease,
+      opacity 0.15s ease;
+  }
+
+  .tech:hover .tech-link-icon,
+  .tech-link:focus-visible .tech-link-icon {
+    opacity: 1;
+  }
+
+  .tech-link:hover .tech-link-icon {
     color: var(--accent);
   }
 
