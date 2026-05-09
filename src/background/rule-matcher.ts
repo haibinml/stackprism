@@ -1,4 +1,6 @@
 const compiledRulePatternCache = new WeakMap<object, { source: unknown; compiled: RegExp[] }>()
+const compiledCombinedPatternCache = new WeakMap<object, { source: unknown; compiled: RegExp | null }>()
+const autoHintCache = new WeakMap<object, string[]>()
 
 export const escapeRegExp = (value: unknown): string => String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
@@ -37,11 +39,100 @@ export const getCompiledRulePatterns = (rule: any, patterns: unknown): RegExp[] 
   return compiled
 }
 
+const buildCombinedKeywordPattern = (patterns: any[]): RegExp | null => {
+  const segments = patterns
+    .map(pattern => String(pattern || '').trim())
+    .filter(Boolean)
+    .map(escapeRegExp)
+  if (!segments.length) return null
+  try {
+    return new RegExp(segments.join('|'), 'i')
+  } catch {
+    return null
+  }
+}
+
+export const getCompiledCombinedPattern = (rule: any, patterns: unknown): RegExp | null => {
+  const sourcePatterns: any[] = Array.isArray(patterns) ? patterns : []
+  if (!rule || typeof rule !== 'object') {
+    return rule?.matchType === 'keyword' ? buildCombinedKeywordPattern(sourcePatterns) : null
+  }
+
+  const cached = compiledCombinedPatternCache.get(rule)
+  if (cached && cached.source === sourcePatterns) {
+    return cached.compiled
+  }
+
+  const compiled = rule.matchType === 'keyword' ? buildCombinedKeywordPattern(sourcePatterns) : null
+  compiledCombinedPatternCache.set(rule, { source: sourcePatterns, compiled })
+  return compiled
+}
+
+const HINT_MIN_LEN = 4
+const HINT_MAX_COUNT = 3
+const REGEX_LITERAL_SPLIT = /[\\^$.|?*+()[\]{}]/
+
+const extractHintCandidates = (rule: any): string[] => {
+  const patterns = Array.isArray(rule?.patterns) ? rule.patterns : []
+  if (!patterns.length) return []
+  const isKeyword = rule.matchType === 'keyword'
+  const candidates: string[] = []
+
+  for (const pattern of patterns) {
+    const text = String(pattern || '')
+    if (!text) continue
+    if (isKeyword) {
+      const lower = text.toLowerCase().trim()
+      if (lower.length >= HINT_MIN_LEN) candidates.push(lower)
+      continue
+    }
+    let longest = ''
+    for (const segment of text.split(REGEX_LITERAL_SPLIT)) {
+      const lower = segment.toLowerCase()
+      if (lower.length > longest.length) longest = lower
+    }
+    if (longest.length >= HINT_MIN_LEN) candidates.push(longest)
+  }
+  return candidates
+}
+
+export const getRuleAutoHints = (rule: any): string[] => {
+  if (!rule || typeof rule !== 'object') return []
+  const cached = autoHintCache.get(rule)
+  if (cached) return cached
+  const candidates = extractHintCandidates(rule)
+  if (!candidates.length) {
+    autoHintCache.set(rule, [])
+    return []
+  }
+  const unique = [...new Set(candidates)].sort((a, b) => b.length - a.length).slice(0, HINT_MAX_COUNT)
+  autoHintCache.set(rule, unique)
+  return unique
+}
+
+export const passesRulePrefilter = (rule: any, ...lowerTexts: string[]): boolean => {
+  if (!rule) return true
+  if (Array.isArray(rule.resourceHints) && rule.resourceHints.length) return true
+  const hints = getRuleAutoHints(rule)
+  if (!hints.length) return true
+  for (const hint of hints) {
+    for (const text of lowerTexts) {
+      if (text && text.includes(hint)) return true
+    }
+  }
+  return false
+}
+
 export const matchesCompiledRulePatterns = (rule: any, text: string): boolean => {
   if (!rule || !Array.isArray(rule.patterns) || !rule.patterns.length) {
     return false
   }
   if (rule.matchType === 'keyword') {
+    const combined = getCompiledCombinedPattern(rule, rule.patterns)
+    if (combined) {
+      combined.lastIndex = 0
+      return combined.test(text)
+    }
     const value = String(text || '').toLowerCase()
     return rule.patterns.some((pattern: string) => value.includes(String(pattern || '').toLowerCase()))
   }

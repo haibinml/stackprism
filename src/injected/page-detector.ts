@@ -3,6 +3,9 @@
 
 const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
   const technologies = []
+  const ruleRegexCache = new WeakMap()
+  const ruleCombinedCache = new WeakMap()
+  const ruleHintCache = new WeakMap()
   const resources = collectResources()
   const classTokens = collectClassTokens()
   const cssVariables = collectCssVariables()
@@ -757,17 +760,62 @@ ${html}`
       return null
     }
 
-    const patterns = (rule.patterns || []).map(pattern => compileRulePattern(pattern, rule)).filter(Boolean)
-    for (const pattern of patterns) {
-      const resource = shouldMatchTarget(rule, 'resources') ? (context.resources?.all || []).find(url => pattern.test(url)) : null
-      if (resource) {
-        return {
-          confidence: rule.confidence || context.resourceConfidence || '高',
-          evidence: `资源 URL 匹配 ${shortUrl(resource)}`
+    const lowerResources = context.resources?.text || ''
+    if (context._lowerHtml === undefined) {
+      context._lowerHtml = (context.text || '').toLowerCase()
+    }
+    const lowerHtml = context._lowerHtml
+    if (!passesRulePrefilter(rule, lowerResources, lowerHtml)) {
+      return null
+    }
+
+    const matchResource = shouldMatchTarget(rule, 'resources')
+    const matchHtml = !ruleResourceOnly && !context.resourceOnly && shouldMatchTarget(rule, 'html')
+    const allResources = context.resources?.all || []
+    const htmlText = context.text || ''
+
+    const combined = getCompiledCombinedPattern(rule)
+    if (combined) {
+      if (matchResource) {
+        const resource = allResources.find(url => {
+          combined.lastIndex = 0
+          return combined.test(url)
+        })
+        if (resource) {
+          return {
+            confidence: rule.confidence || context.resourceConfidence || '高',
+            evidence: `资源 URL 匹配 ${shortUrl(resource)}`
+          }
         }
       }
-      if (!ruleResourceOnly && !context.resourceOnly && shouldMatchTarget(rule, 'html') && pattern.test(context.text || '')) {
-        return { confidence: rule.confidence || '中', evidence: '页面源码或资源索引包含规则特征' }
+      if (matchHtml) {
+        combined.lastIndex = 0
+        if (combined.test(htmlText)) {
+          return { confidence: rule.confidence || '中', evidence: '页面源码或资源索引包含规则特征' }
+        }
+      }
+      return null
+    }
+
+    const patterns = getCompiledRulePatterns(rule)
+    for (const pattern of patterns) {
+      if (matchResource) {
+        const resource = allResources.find(url => {
+          pattern.lastIndex = 0
+          return pattern.test(url)
+        })
+        if (resource) {
+          return {
+            confidence: rule.confidence || context.resourceConfidence || '高',
+            evidence: `资源 URL 匹配 ${shortUrl(resource)}`
+          }
+        }
+      }
+      if (matchHtml) {
+        pattern.lastIndex = 0
+        if (pattern.test(htmlText)) {
+          return { confidence: rule.confidence || '中', evidence: '页面源码或资源索引包含规则特征' }
+        }
       }
     }
 
@@ -811,6 +859,75 @@ ${html}`
     } catch {
       return null
     }
+  }
+
+  function getCompiledRulePatterns(rule) {
+    if (!rule || typeof rule !== 'object') return []
+    const patterns = rule.patterns || []
+    const cached = ruleRegexCache.get(rule)
+    if (cached && cached.source === patterns) return cached.compiled
+    const compiled = patterns.map(pattern => compileRulePattern(pattern, rule)).filter(Boolean)
+    ruleRegexCache.set(rule, { source: patterns, compiled })
+    return compiled
+  }
+
+  function getCompiledCombinedPattern(rule) {
+    if (!rule || rule.matchType !== 'keyword') return null
+    const patterns = rule.patterns || []
+    if (!patterns.length) return null
+    const cached = ruleCombinedCache.get(rule)
+    if (cached && cached.source === patterns) return cached.compiled
+    let compiled = null
+    try {
+      const segments = patterns
+        .map(pattern => String(pattern || '').trim())
+        .filter(Boolean)
+        .map(escapeRegExp)
+      if (segments.length) compiled = new RegExp(segments.join('|'), 'i')
+    } catch {
+      compiled = null
+    }
+    ruleCombinedCache.set(rule, { source: patterns, compiled })
+    return compiled
+  }
+
+  function getRuleAutoHints(rule) {
+    if (!rule || typeof rule !== 'object') return []
+    const cached = ruleHintCache.get(rule)
+    if (cached) return cached
+    const patterns = rule.patterns || []
+    const isKeyword = rule.matchType === 'keyword'
+    const candidates = []
+    for (const pattern of patterns) {
+      const text = String(pattern || '')
+      if (!text) continue
+      if (isKeyword) {
+        const lower = text.toLowerCase().trim()
+        if (lower.length >= 4) candidates.push(lower)
+        continue
+      }
+      let longest = ''
+      for (const segment of text.split(/[\\^$.|?*+()[\]{}]/)) {
+        const lowerSeg = segment.toLowerCase()
+        if (lowerSeg.length > longest.length) longest = lowerSeg
+      }
+      if (longest.length >= 4) candidates.push(longest)
+    }
+    const unique = [...new Set(candidates)].sort((a, b) => b.length - a.length).slice(0, 3)
+    ruleHintCache.set(rule, unique)
+    return unique
+  }
+
+  function passesRulePrefilter(rule, lowerResources, lowerHtml) {
+    if (!rule) return true
+    if (Array.isArray(rule.resourceHints) && rule.resourceHints.length) return true
+    const hints = getRuleAutoHints(rule)
+    if (!hints.length) return true
+    for (const hint of hints) {
+      if (lowerResources && lowerResources.includes(hint)) return true
+      if (lowerHtml && lowerHtml.includes(hint)) return true
+    }
+    return false
   }
 
   function shouldMatchTarget(rule, target) {

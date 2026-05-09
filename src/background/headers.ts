@@ -1,5 +1,12 @@
 import { mergeTechnologyRecords } from './merge'
-import { compileRulePattern, createCollector, filterCustomRulesForTarget, lower, matchesHeaderPatterns } from './rule-matcher'
+import {
+  createCollector,
+  filterCustomRulesForTarget,
+  getCompiledRulePatterns,
+  lower,
+  matchesHeaderPatterns,
+  passesRulePrefilter
+} from './rule-matcher'
 
 const MAX_API_RECORDS = 30
 
@@ -52,12 +59,10 @@ const applyHeaderRuleList = (
   if (!Array.isArray(rules) || !rules.length) return
 
   for (const rule of rules) {
-    const matched = (rule.patterns || []).some((pattern: string) => {
-      try {
-        return compileRulePattern(pattern, rule).test(headerBlob)
-      } catch {
-        return false
-      }
+    if (!passesRulePrefilter(rule, headerBlob)) continue
+    const matched = getCompiledRulePatterns(rule, rule.patterns).some(pattern => {
+      pattern.lastIndex = 0
+      return pattern.test(headerBlob)
     })
     if (matched) {
       const evidence = rule.evidence || `${sourceLabel} 匹配`

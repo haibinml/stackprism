@@ -1,7 +1,13 @@
 // @ts-nocheck
 import { safeDecodeURIComponent } from '@/utils/url'
 import { mergeTechnologyRecords, normalizeDynamicFallbackTechName, shortHeaderUrl } from './merge'
-import { createCollector, filterCustomRulesForTarget, matchesCompiledRulePatterns, matchesRuleTextHints } from './rule-matcher'
+import {
+  createCollector,
+  filterCustomRulesForTarget,
+  matchesCompiledRulePatterns,
+  matchesRuleTextHints,
+  passesRulePrefilter
+} from './rule-matcher'
 import { getTabData } from './tab-store'
 import { saveTabDataAndBadge, scheduleActivePageDetection } from './detection'
 import { buildEffectivePageRules, loadDetectorSettings, loadTechRules } from './detector-settings'
@@ -511,6 +517,9 @@ const applyDynamicRuleList = (add, rules, contextOrText, sourceLabel, defaultCat
     }
     const matchText =
       rule?.resourceOnly === true ? context.resourceText || context.lowerText || '' : context.lowerText || context.text || ''
+    if (!passesRulePrefilter(rule, matchText)) {
+      continue
+    }
     const matched = matchesCompiledRulePatterns(rule, matchText)
     if (!matched) {
       continue
