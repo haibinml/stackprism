@@ -10,8 +10,8 @@
           "google-analytics\\.com/(?:analytics|ga)\\.js",
           "analytics\\.google\\.com",
           "gtag\\(",
-          "UA-\\d+-\\d+",
-          "G-[A-Z0-9]{6,}"
+          "(?:^|[^a-z0-9])UA-\\d+-\\d+(?:[^a-z0-9]|$)",
+          "(?:^|[^a-z0-9])G-[A-Z0-9]{6,}(?:[^a-z0-9]|$)"
         ],
         "globals": [
           "gtag",

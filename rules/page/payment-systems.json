@@ -50,7 +50,7 @@
         "patterns": [
           "unionpay",
           "95516\\.com",
-          "upop",
+          "(?:^|[/?#&_.=-])upop(?:[/?#&_.=-]|pay|sdk|gateway|$)",
           "银联在线",
           "ChinaPay"
         ]
