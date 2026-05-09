@@ -1,6 +1,6 @@
 <template>
-  <main class="help-shell">
-    <header class="help-header">
+  <header class="help-header">
+    <div class="help-header-inner">
       <div>
         <h1>
           StackPrism 使用说明
@@ -18,8 +18,9 @@
           <span>GitHub 仓库</span>
         </button>
       </div>
-    </header>
-
+    </div>
+  </header>
+  <main class="help-shell">
     <section class="panel">
       <h2>先知道它在做什么</h2>
       <p>
@@ -364,6 +365,7 @@ examplepay-sdk</pre
   body {
     font-size: 15px;
     line-height: 1.65;
+    padding-top: 132px;
   }
 </style>
 
@@ -371,18 +373,31 @@ examplepay-sdk</pre
   .help-shell {
     margin: 0 auto;
     max-width: 720px;
-    padding: 48px 24px 80px;
+    padding: 24px 24px 80px;
   }
 
-  /* header：bottom hairline 划分 */
+  /* header：fixed 顶部，背景毛玻璃，内容靠 inner 居中 */
   .help-header {
-    align-items: flex-start;
+    background: var(--panel-translucent);
+    backdrop-filter: saturate(180%) blur(8px);
     border-bottom: 1px solid var(--line);
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 30;
+  }
+
+  .help-header-inner {
+    align-items: flex-start;
     display: flex;
     gap: 24px;
     justify-content: space-between;
-    margin-bottom: 32px;
-    padding-bottom: 24px;
+    margin: 0 auto;
+    max-width: 720px;
+    padding: 16px 24px;
   }
 
   .header-actions {
@@ -599,11 +614,12 @@ examplepay-sdk</pre
 
   @media (max-width: 760px) {
     .help-shell {
-      padding: 24px 16px 48px;
+      padding: 16px 16px 48px;
     }
 
-    .help-header {
+    .help-header-inner {
       flex-direction: column;
+      padding: 12px 16px;
     }
 
     .field-grid,

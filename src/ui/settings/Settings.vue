@@ -1,6 +1,6 @@
 <template>
-  <main class="settings-shell">
-    <header class="settings-header">
+  <header class="settings-header">
+    <div class="settings-header-inner">
       <div>
         <h1>
           StackPrism 设置
@@ -32,8 +32,9 @@
           <span>恢复默认</span>
         </button>
       </div>
-    </header>
-
+    </div>
+  </header>
+  <main class="settings-shell">
     <div v-if="status.message" class="msg" :class="status.type" role="status" aria-live="polite">{{ status.message }}</div>
 
     <section class="panel">
@@ -699,6 +700,7 @@
   body {
     font-size: 14px;
     line-height: 1.5;
+    padding-top: 152px;
   }
 </style>
 
@@ -706,18 +708,31 @@
   .settings-shell {
     margin: 0 auto;
     max-width: 1120px;
-    padding: 32px 24px 48px;
+    padding: 24px 24px 48px;
   }
 
-  /* header：bottom hairline 划分 */
+  /* header：fixed 顶部，背景毛玻璃，内容靠 inner 居中 */
   .settings-header {
-    align-items: flex-start;
+    background: var(--panel-translucent);
+    backdrop-filter: saturate(180%) blur(8px);
     border-bottom: 1px solid var(--line);
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 30;
+  }
+
+  .settings-header-inner {
+    align-items: flex-start;
     display: flex;
     gap: 24px;
     justify-content: space-between;
-    margin-bottom: 24px;
-    padding-bottom: 20px;
+    margin: 0 auto;
+    max-width: 1120px;
+    padding: 16px 24px;
   }
 
   h1,
@@ -1113,7 +1128,6 @@
       padding: 16px;
     }
 
-    .settings-header,
     .two-column,
     .rule-textareas,
     .rule-form,
@@ -1121,8 +1135,9 @@
       grid-template-columns: 1fr;
     }
 
-    .settings-header {
-      display: grid;
+    .settings-header-inner {
+      flex-direction: column;
+      padding: 12px 16px;
     }
 
     .msg {

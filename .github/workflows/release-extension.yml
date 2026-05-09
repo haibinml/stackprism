@@ -23,6 +23,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build extension
+        run: pnpm run build
+
       - name: Read and validate version
         id: meta
         shell: bash
@@ -32,7 +49,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          version="$(node -p "require('./manifest.json').version")"
+          version="$(node -p "require('./dist/manifest.json').version")"
           tag="${EVENT_TAG:-${INPUT_TAG:-}}"
 
           if [ -z "$tag" ]; then
@@ -41,36 +58,43 @@ jobs:
 
           normalized_tag="${tag#v}"
           if [ "$normalized_tag" != "$version" ]; then
-            echo "::error::Release tag $tag does not match manifest.json version $version."
+            echo "::error::Release tag $tag does not match dist/manifest.json version $version."
             exit 1
           fi
 
           echo "version=$version" >> "$GITHUB_OUTPUT"
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
           echo "zip_name=stackprism-v${version}.zip" >> "$GITHUB_OUTPUT"
+          echo "crx_name=stackprism-v${version}.crx" >> "$GITHUB_OUTPUT"
 
-      - name: Build extension zip
+      - name: Pack zip
         shell: bash
         run: |
           set -euo pipefail
-
-          rm -rf dist package
-          mkdir -p dist package
-
-          cp manifest.json package/
-          cp background.js content-observer.js page-detector.js rule-loader.js tech-links.json package/
-          cp popup.html popup.css popup.js package/
-          cp settings.html settings.css settings.js package/
-          cp help.html help.css help.js package/
-          cp LICENSE package/
-          cp -R icons rules package/
-
+          mkdir -p release
           (
-            cd package
-            zip -r "../dist/${{ steps.meta.outputs.zip_name }}" .
+            cd dist
+            zip -r "../release/${{ steps.meta.outputs.zip_name }}" .
           )
+          sha256sum "release/${{ steps.meta.outputs.zip_name }}" > "release/${{ steps.meta.outputs.zip_name }}.sha256"
 
-          sha256sum "dist/${{ steps.meta.outputs.zip_name }}" > "dist/${{ steps.meta.outputs.zip_name }}.sha256"
+      - name: Pack crx
+        id: crx
+        shell: bash
+        env:
+          EXTENSION_PRIVATE_KEY: ${{ secrets.EXTENSION_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${EXTENSION_PRIVATE_KEY:-}" ]; then
+            echo "::warning::secrets.EXTENSION_PRIVATE_KEY 未配置，跳过 crx 生成。zip 仍会上传。"
+            echo "skipped=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          printf '%s' "$EXTENSION_PRIVATE_KEY" > extension.pem
+          npx --yes crx3 --keyPath extension.pem --crxPath "release/${{ steps.meta.outputs.crx_name }}" dist
+          sha256sum "release/${{ steps.meta.outputs.crx_name }}" > "release/${{ steps.meta.outputs.crx_name }}.sha256"
+          rm -f extension.pem
+          echo "skipped=false" >> "$GITHUB_OUTPUT"
 
       - name: Upload package to release
         shell: bash
@@ -78,14 +102,20 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-
-          gh release upload "${{ steps.meta.outputs.tag }}" \
-            "dist/${{ steps.meta.outputs.zip_name }}" \
-            "dist/${{ steps.meta.outputs.zip_name }}.sha256" \
-            --clobber
+          assets=(
+            "release/${{ steps.meta.outputs.zip_name }}"
+            "release/${{ steps.meta.outputs.zip_name }}.sha256"
+          )
+          if [ -f "release/${{ steps.meta.outputs.crx_name }}" ]; then
+            assets+=(
+              "release/${{ steps.meta.outputs.crx_name }}"
+              "release/${{ steps.meta.outputs.crx_name }}.sha256"
+            )
+          fi
+          gh release upload "${{ steps.meta.outputs.tag }}" "${assets[@]}" --clobber
 
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4
         with:
           name: stackprism-v${{ steps.meta.outputs.version }}
-          path: dist/
+          path: release/
