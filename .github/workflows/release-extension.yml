@@ -1,4 +1,4 @@
-name: Build Extension Release
+name: 构建扩展并发布
 
 on:
   release:
