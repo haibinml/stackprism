@@ -51,15 +51,17 @@ function detectPageTechnologies(ruleConfig = {}) {
   }
 
   function collectResources() {
-    const scripts = [...document.scripts].map(script => script.src).filter(Boolean)
-    const stylesheets = [...document.querySelectorAll("link[rel~='stylesheet'], link[as='style']")].map(link => link.href).filter(Boolean)
+    const scripts = [...document.scripts].map(script => script.src).filter(isInspectableResourceUrl)
+    const stylesheets = [...document.querySelectorAll("link[rel~='stylesheet'], link[as='style']")]
+      .map(link => link.href)
+      .filter(isInspectableResourceUrl)
     const resourceTiming = performance
       .getEntriesByType('resource')
       .map(entry => entry.name)
-      .filter(Boolean)
+      .filter(isInspectableResourceUrl)
     const images = [...document.images]
       .map(image => image.currentSrc || image.src)
-      .filter(Boolean)
+      .filter(isInspectableResourceUrl)
       .slice(0, 200)
     const all = unique([...scripts, ...stylesheets, ...resourceTiming, ...images])
     return { scripts, stylesheets, resourceTiming, images, all, text: all.join('\n').toLowerCase() }
@@ -116,7 +118,16 @@ function detectPageTechnologies(ruleConfig = {}) {
 
   function getHtmlSample() {
     const html = document.documentElement?.outerHTML || ''
-    return html.slice(0, 500000).toLowerCase()
+    return stripInlineDataUrls(html).slice(0, 500000).toLowerCase()
+  }
+
+  function isInspectableResourceUrl(value) {
+    const url = String(value || '').trim()
+    return Boolean(url) && !/^(?:data|blob|javascript|about):/i.test(url)
+  }
+
+  function stripInlineDataUrls(value) {
+    return String(value || '').replace(/data:[^"'()<>\s]+/gi, '[inline-data-url]')
   }
 
   function safeGlobalKeys() {

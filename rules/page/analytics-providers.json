@@ -1262,8 +1262,9 @@
         "patterns": [
           "jzt\\.jd\\.com",
           "union\\.jd\\.com",
-          "京准通",
-          "jd.*ad"
+          "jzt\\.jd\\.com/(?:gw|external|ad|material|placement)",
+          "union\\.jd\\.com/(?:api|proManager|spread|recommend)",
+          "京准通"
         ]
       }
     ]
