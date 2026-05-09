@@ -1,7 +1,33 @@
 const TAB_DATA_PREFIX = 'tab:'
 const MAX_API_RECORDS = 30
 const SETTINGS_STORAGE_KEY = 'stackPrismSettings'
+const POPUP_CACHE_STALE_MS = 2 * 60 * 1000
+const CATEGORY_ORDER = [
+  '前端框架',
+  'UI / CSS 框架',
+  '前端库',
+  '构建与运行时',
+  'CDN / 托管',
+  'Web 服务器',
+  '后端 / 服务器框架',
+  '开发语言 / 运行时',
+  '网站程序',
+  '主题 / 模板',
+  '网站源码线索',
+  '探针 / 监控',
+  'CMS / 电商平台',
+  'RSS / 订阅',
+  'SaaS / 第三方服务',
+  '第三方登录 / OAuth',
+  '支付系统',
+  '广告 / 营销',
+  '统计 / 分析',
+  '分析与标签',
+  '安全与协议',
+  '其他库'
+]
 let techRulesPromise = null
+let techLinksPromise = null
 const activeDetectionTimers = new Map()
 const themeStyleFetchCache = new Map()
 
@@ -24,6 +50,49 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     Promise.all([getTabData(message.tabId), loadDetectorSettings()])
       .then(([data, settings]) => sendResponse({ ok: true, data: addStoredCustomHeaderRules(data, settings) }))
       .catch(error => sendResponse({ ok: false, error: String(error) }))
+    return true
+  }
+
+  if (message.type === 'GET_POPUP_RESULT') {
+    const tabId = Number(message.tabId)
+    if (!Number.isInteger(tabId) || tabId < 0) {
+      sendResponse({ ok: false, error: '缺少有效 tabId' })
+      return false
+    }
+    Promise.all([getTabData(tabId), loadDetectorSettings(), getTabSnapshot(tabId)])
+      .then(([data, settings, tab]) => {
+        const hydrated = addStoredCustomHeaderRules(data, settings)
+        const updatedAt = getStoredUpdatedAt(hydrated)
+        sendResponse({
+          ok: true,
+          data: buildPopupResult(hydrated, settings, tab),
+          hasCache: hasStoredDetection(hydrated),
+          stale: !updatedAt || Date.now() - updatedAt > POPUP_CACHE_STALE_MS,
+          updatedAt
+        })
+      })
+      .catch(error => sendResponse({ ok: false, error: String(error) }))
+    return true
+  }
+
+  if (message.type === 'GET_POPUP_RAW_RESULT') {
+    const tabId = Number(message.tabId)
+    if (!Number.isInteger(tabId) || tabId < 0) {
+      sendResponse({ ok: false, error: '缺少有效 tabId' })
+      return false
+    }
+    Promise.all([getTabData(tabId), loadDetectorSettings(), getTabSnapshot(tabId)])
+      .then(([data, settings, tab]) => buildPopupRawResult(addStoredCustomHeaderRules(data, settings), settings, tab))
+      .then(data => sendResponse({ ok: true, data }))
+      .catch(error => sendResponse({ ok: false, error: String(error) }))
+    return true
+  }
+
+  if (message.type === 'GET_TECH_LINK') {
+    loadDetectorSettings()
+      .then(settings => getTechnologyUrl(message.name, settings))
+      .then(url => sendResponse({ ok: true, url }))
+      .catch(error => sendResponse({ ok: false, error: String(error), url: '' }))
     return true
   }
 
@@ -212,7 +281,8 @@ function cleanCustomRules(value) {
       patterns: cleanStringArray(rule?.patterns).slice(0, 60),
       selectors: cleanStringArray(rule?.selectors).slice(0, 30),
       globals: cleanStringArray(rule?.globals).slice(0, 30),
-      matchIn: cleanStringArray(rule?.matchIn).slice(0, 10)
+      matchIn: cleanStringArray(rule?.matchIn).slice(0, 10),
+      url: cleanTechnologyUrl(rule?.url)
     }))
     .filter(rule => rule.name && (rule.patterns.length || rule.selectors.length || rule.globals.length))
     .slice(0, 200)
@@ -281,6 +351,280 @@ function formatBadgeCount(count) {
     return ''
   }
   return count > 99 ? '99+' : String(count)
+}
+
+async function getTabSnapshot(tabId) {
+  try {
+    const tab = await chrome.tabs.get(tabId)
+    return {
+      id: tab.id,
+      url: tab.url || '',
+      title: tab.title || ''
+    }
+  } catch {
+    return { id: tabId, url: '', title: '' }
+  }
+}
+
+function buildPopupResult(data, settings, tab) {
+  const technologies = buildDisplayTechnologies(data, settings)
+  const resources = mergeResourceSummary(data.page?.resources || {}, data.dynamic || {})
+  const headers = data.main?.headers || {}
+  return {
+    url: data.page?.url || data.dynamic?.url || tab?.url || '',
+    title: data.page?.title || data.dynamic?.title || tab?.title || '',
+    generatedAt: new Date().toISOString(),
+    updatedAt: getStoredUpdatedAt(data),
+    technologies: technologies.map(cleanPopupTechnology),
+    counts: buildTechnologyCounts(technologies),
+    categoryCounts: buildCategoryCounts(technologies),
+    resources: { total: resources.total || 0 },
+    headerCount: Object.keys(headers).length
+  }
+}
+
+async function buildPopupRawResult(data, settings, tab) {
+  const technologies = await attachTechnologyLinks(buildDisplayTechnologies(data, settings), settings)
+  const resources = mergeResourceSummary(data.page?.resources || {}, data.dynamic || {})
+  const headers = data.main?.headers || {}
+  return {
+    url: data.page?.url || data.dynamic?.url || tab?.url || '',
+    title: data.page?.title || data.dynamic?.title || tab?.title || '',
+    generatedAt: new Date().toISOString(),
+    technologies,
+    resources,
+    headers,
+    apiObservations: data.apis || [],
+    frameObservations: data.frames || [],
+    dynamicObservations: data.dynamic || null,
+    notes: [
+      '前端框架和 UI 框架主要通过页面运行时、DOM、资源 URL 和样式类名判断。',
+      'Web 服务器、CDN 和后端框架主要依赖响应头与 Cookie 命名线索；如果站点隐藏响应头，结果会保守显示。',
+      '动态监控会累计页面交互后新增的脚本、样式、iframe、feed 链接和资源加载，再与当前扫描结果合并。'
+    ]
+  }
+}
+
+function buildDisplayTechnologies(data, settings) {
+  const all = []
+  addAllTechnologies(all, data.page?.technologies)
+  addAllTechnologies(all, data.main?.technologies)
+  for (const api of data.apis || []) {
+    addAllTechnologies(
+      all,
+      (api.technologies || []).map(tech => ({
+        ...tech,
+        source: `${tech.source || '响应头'} · API`
+      }))
+    )
+  }
+  for (const frame of data.frames || []) {
+    addAllTechnologies(
+      all,
+      (frame.technologies || []).map(tech => ({
+        ...tech,
+        source: `${tech.source || '响应头'} · iframe`
+      }))
+    )
+  }
+  addAllTechnologies(
+    all,
+    (data.dynamic?.technologies || []).map(tech => ({
+      ...tech,
+      source: `${tech.source || '动态监控'} · 页面交互后`
+    }))
+  )
+  return filterTechnologiesBySettings(mergeDisplayTechnologyRecords(all), settings)
+}
+
+function mergeDisplayTechnologyRecords(items) {
+  const map = new Map()
+  for (const item of suppressDuplicateWebsiteProgramCategories(
+    suppressWordPressThemeDirectoryFallbacks(suppressFrontendFallbackDuplicates(items))
+  )) {
+    if (!item?.name) {
+      continue
+    }
+    const category = item.category || '其他库'
+    const key = `${category}::${item.name}`.toLowerCase()
+    const current = map.get(key) || {
+      category,
+      name: item.name,
+      confidence: item.confidence || '低',
+      evidence: [],
+      sources: new Set(),
+      url: item.url || ''
+    }
+    if (!current.url && item.url) {
+      current.url = item.url
+    }
+    current.confidence = strongerConfidence(current.confidence, item.confidence || '低')
+    for (const evidence of item.evidence || []) {
+      if (evidence && !current.evidence.includes(evidence)) {
+        current.evidence.push(evidence)
+      }
+    }
+    if (item.source) {
+      current.sources.add(item.source)
+    }
+    map.set(key, current)
+  }
+
+  return [...map.values()]
+    .map(item => ({
+      ...item,
+      evidence: item.evidence.slice(0, 8),
+      sources: [...item.sources]
+    }))
+    .sort(compareDisplayTechnologies)
+}
+
+function compareDisplayTechnologies(a, b) {
+  const categoryDelta = categoryIndex(a.category) - categoryIndex(b.category)
+  if (categoryDelta !== 0) {
+    return categoryDelta
+  }
+  const confidenceDelta = confidenceRank(b.confidence) - confidenceRank(a.confidence)
+  if (confidenceDelta !== 0) {
+    return confidenceDelta
+  }
+  return a.name.localeCompare(b.name)
+}
+
+function categoryIndex(category) {
+  const index = CATEGORY_ORDER.indexOf(category)
+  return index === -1 ? CATEGORY_ORDER.length : index
+}
+
+function confidenceRank(value) {
+  return { 高: 3, 中: 2, 低: 1 }[value] || 1
+}
+
+function cleanPopupTechnology(tech) {
+  return {
+    category: String(tech?.category || '其他库').slice(0, 80),
+    name: String(tech?.name || '').slice(0, 160),
+    confidence: ['高', '中', '低'].includes(tech?.confidence) ? tech.confidence : '中',
+    evidence: cleanStringArray(tech?.evidence).slice(0, 8),
+    sources: cleanStringArray(tech?.sources).slice(0, 8),
+    url: cleanTechnologyUrl(tech?.url)
+  }
+}
+
+function buildTechnologyCounts(technologies) {
+  return {
+    total: technologies.length,
+    high: technologies.filter(tech => tech.confidence === '高').length,
+    medium: technologies.filter(tech => tech.confidence === '中').length,
+    low: technologies.filter(tech => tech.confidence === '低').length
+  }
+}
+
+function buildCategoryCounts(technologies) {
+  return technologies.reduce((acc, tech) => {
+    acc[tech.category] = (acc[tech.category] || 0) + 1
+    return acc
+  }, {})
+}
+
+function mergeResourceSummary(pageResources, dynamic) {
+  const scripts = unique([...(pageResources.scripts || []), ...(dynamic.scripts || [])])
+  const stylesheets = unique([...(pageResources.stylesheets || []), ...(dynamic.stylesheets || [])])
+  const dynamicResources = unique([...(dynamic.resources || []), ...(dynamic.iframes || [])])
+  const all = unique([...scripts, ...stylesheets, ...dynamicResources])
+  return {
+    ...pageResources,
+    total: Math.max(pageResources.total || 0, all.length),
+    scripts: scripts.slice(0, 180),
+    stylesheets: stylesheets.slice(0, 180),
+    dynamicResources: dynamicResources.slice(0, 220),
+    dynamicFeedLinks: dynamic.feedLinks || [],
+    dynamicDomMarkers: dynamic.domMarkers || [],
+    dynamicMutationCount: dynamic.mutationCount || 0,
+    dynamicUpdatedAt: dynamic.updatedAt || null
+  }
+}
+
+function hasStoredDetection(data) {
+  return Boolean(data?.page || data?.main || data?.dynamic || (data?.apis || []).length || (data?.frames || []).length)
+}
+
+function getStoredUpdatedAt(data) {
+  return Number(data?.updatedAt || data?.page?.time || data?.dynamic?.updatedAt || data?.main?.time || 0)
+}
+
+async function attachTechnologyLinks(technologies, settings) {
+  const linked = await Promise.all(
+    technologies.map(async tech => {
+      const url = tech.url || (await getTechnologyUrl(tech.name, settings).catch(() => ''))
+      return { ...tech, url }
+    })
+  )
+  return linked
+}
+
+async function getTechnologyUrl(name, settings = {}) {
+  if (/^疑似前端库:/i.test(String(name || '').trim())) {
+    return ''
+  }
+
+  const customRule = (settings.customRules || []).find(rule => normalizeTechName(rule.name) === normalizeTechName(name) && rule.url)
+  if (customRule) {
+    return customRule.url
+  }
+
+  const { links, normalizedLinks } = await loadTechLinks()
+  const direct = links[name]
+  if (direct) {
+    return direct
+  }
+
+  const normalized = normalizeTechName(name)
+  if (normalizedLinks.has(normalized)) {
+    return normalizedLinks.get(normalized)
+  }
+
+  const simplified = normalizeTechName(
+    String(name)
+      .replace(/\s+CDN$/i, '')
+      .replace(/\s+Cloud CDN$/i, '')
+      .replace(/\s*\/\s*.*$/, '')
+      .replace(/\s*\([^)]*\)/g, '')
+  )
+  return normalizedLinks.get(simplified) || ''
+}
+
+async function loadTechLinks() {
+  if (!techLinksPromise) {
+    techLinksPromise = fetch(chrome.runtime.getURL('tech-links.json'))
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`链接文件加载失败：${response.status}`)
+        }
+        return response.json()
+      })
+      .then(json => {
+        const links = json?.links || {}
+        return { links, normalizedLinks: buildNormalizedTechLinks(links) }
+      })
+      .catch(error => {
+        techLinksPromise = null
+        throw error
+      })
+  }
+  return techLinksPromise
+}
+
+function buildNormalizedTechLinks(links) {
+  const normalized = new Map()
+  for (const [name, url] of Object.entries(links || {})) {
+    normalized.set(normalizeTechName(name), url)
+  }
+  return normalized
+}
+
+function unique(items) {
+  return [...new Set(items.filter(Boolean))]
 }
 
 function cleanPageDetectionRecord(page) {

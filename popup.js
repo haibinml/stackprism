@@ -26,15 +26,17 @@ const CATEGORY_ORDER = [
 const SETTINGS_STORAGE_KEY = 'stackPrismSettings'
 const REPOSITORY_URL = 'https://github.com/setube/stackprism'
 const DETECTION_CORRECTION_TEMPLATE = 'detection_correction.md'
-const CACHE_STALE_MS = 2 * 60 * 1000
 const CACHE_REFRESH_DELAYS = [1200, 2600, 5000]
+const FOCUS_CATEGORY = '重点'
+const RAW_PLACEHOLDER = '展开后生成原始线索。'
+const RAW_LOADING_TEXT = '正在生成原始线索...'
 
 const state = {
   result: null,
-  activeCategory: '全部',
-  rules: null,
-  techLinks: null,
-  normalizedTechLinks: null,
+  rawResult: null,
+  rawLoaded: false,
+  activeCategory: FOCUS_CATEGORY,
+  currentTabId: 0,
   settings: null,
   cacheRefreshTimer: 0
 }
@@ -47,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('refreshBtn').addEventListener('click', () => runDetection({ force: true }))
   document.getElementById('copyBtn').addEventListener('click', copyResult)
   document.getElementById('sourceSearchBtn').addEventListener('click', runSourceSearchFromPopup)
+  bindRawPanel()
   document.getElementById('sourceQuery').addEventListener('keydown', event => {
     if (event.key === 'Enter') {
       runSourceSearchFromPopup()
@@ -83,6 +86,20 @@ function openSettingsPage() {
   const url = chrome.runtime.getURL('settings.html')
   chrome.tabs.create({ url }, () => {
     chrome.runtime.lastError
+  })
+}
+
+function bindRawPanel() {
+  const panel = document.getElementById('rawPanel')
+  if (!panel) {
+    return
+  }
+  panel.addEventListener('toggle', () => {
+    if (panel.open) {
+      renderRawOutput().catch(error => {
+        document.getElementById('rawOutput').textContent = `原始线索生成失败：${String(error?.message || error)}`
+      })
+    }
   })
 }
 
@@ -164,45 +181,6 @@ function applyCustomCss(css) {
   style.textContent = String(css || '')
 }
 
-async function loadTechRules() {
-  if (state.rules) {
-    return state.rules
-  }
-
-  try {
-    state.rules = await loadStackPrismRules()
-  } catch {
-    state.rules = { page: {}, headers: {} }
-  }
-  return state.rules
-}
-
-async function loadTechLinks() {
-  if (state.techLinks) {
-    return state.techLinks
-  }
-
-  try {
-    const response = await fetch(chrome.runtime.getURL('tech-links.json'))
-    if (!response.ok) {
-      throw new Error(`链接文件加载失败：${response.status}`)
-    }
-    state.techLinks = await response.json()
-  } catch {
-    state.techLinks = { links: {} }
-  }
-  state.normalizedTechLinks = buildNormalizedTechLinks(state.techLinks.links || {})
-  return state.techLinks
-}
-
-function buildNormalizedTechLinks(links) {
-  const normalized = new Map()
-  for (const [name, url] of Object.entries(links)) {
-    normalized.set(normalizeTechName(name), url)
-  }
-  return normalized
-}
-
 async function loadCachedDetection() {
   setStatus('正在读取后台缓存结果。')
   clearSections()
@@ -215,35 +193,33 @@ async function loadCachedDetection() {
   }
 
   document.getElementById('pageUrl').textContent = tab.url || '当前标签页'
+  state.currentTabId = tab.id
 
   try {
     state.settings = state.settings || (await loadSettings())
     applyCustomCss(state.settings.customCss)
-    await loadTechLinks()
-    const headerData = await requestHeaderData(tab.id)
-    const pageData = cachedPageResult(tab, headerData)
-    const result = combineResults(tab, pageData, headerData)
-    const hasCache = hasCachedDetection(headerData)
+    const response = await requestPopupResult(tab.id)
+    const result = response.data || emptyPopupResult(tab)
 
     state.result = result
-    state.activeCategory = '全部'
+    state.activeCategory = FOCUS_CATEGORY
     renderResult(result)
 
-    if (!hasCache) {
+    if (!response.hasCache) {
       setStatus('还没有后台缓存，已请求后台检测；稍后会自动读取新结果，也可以点击“刷新”立即检测。')
       requestBackgroundDetection(tab.id)
-      scheduleCachedResultRefresh(tab.id, headerData.updatedAt || 0, 0)
+      scheduleCachedResultRefresh(tab.id, response.updatedAt || 0, 0)
       return
     }
 
-    if (isCachedDetectionStale(headerData)) {
-      setStatus(`${formatCachedResultStatus(result, headerData)} 后台正在更新缓存，当前结果可先使用。`)
+    if (response.stale) {
+      setStatus(`${formatCachedResultStatus(result, response)} 后台正在更新缓存，当前结果可先使用。`)
       requestBackgroundDetection(tab.id)
-      scheduleCachedResultRefresh(tab.id, headerData.updatedAt || 0, 0)
+      scheduleCachedResultRefresh(tab.id, response.updatedAt || 0, 0)
       return
     }
 
-    setStatus(formatCachedResultStatus(result, headerData))
+    setStatus(formatCachedResultStatus(result, response))
   } catch (error) {
     const message = String(error?.message || error)
     showError(`读取后台缓存失败：${message}`)
@@ -251,8 +227,7 @@ async function loadCachedDetection() {
 }
 
 async function runDetection({ force = false } = {}) {
-  setStatus(force ? '正在重新检测当前页面。' : '正在收集页面运行时、资源和响应头线索。')
-  clearSections()
+  setStatus(force ? '已请求后台重新检测，当前结果可先使用。' : '已请求后台检测。')
   clearCacheRefreshTimer()
 
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
@@ -262,77 +237,35 @@ async function runDetection({ force = false } = {}) {
   }
 
   document.getElementById('pageUrl').textContent = tab.url || '当前标签页'
+  state.currentTabId = tab.id
 
-  try {
-    state.settings = await loadSettings()
-    applyCustomCss(state.settings.customCss)
-    const [rules] = await Promise.all([loadTechRules(), loadTechLinks()])
-    const pageRules = buildEffectivePageRules(rules.page || {}, state.settings)
-    const [pageInjection, headerResponse] = await Promise.all([
-      chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        world: 'MAIN',
-        func: detectPageTechnologies,
-        args: [pageRules]
-      }),
-      chrome.runtime.sendMessage({ type: 'GET_HEADER_DATA', tabId: tab.id })
-    ])
-
-    const pageData = pageInjection?.[0]?.result || emptyPageResult(tab.url)
-    const themeTechnologies = await requestWordPressThemeDetails(pageData)
-    if (themeTechnologies.length) {
-      pageData.technologies = [...(pageData.technologies || []), ...themeTechnologies]
-    }
-    const headerData = headerResponse?.ok ? headerResponse.data || {} : {}
-    const result = combineResults(tab, pageData, headerData)
-    state.result = result
-    state.activeCategory = '全部'
-    renderResult(result)
-    reportPageDetectionToBackground(tab.id, pageData)
-  } catch (error) {
-    const message = String(error?.message || error)
-    showError(`检测失败：${message}`)
-    state.result = {
-      error: message,
-      tab: { url: tab.url, title: tab.title },
-      generatedAt: new Date().toISOString()
-    }
-    document.getElementById('rawOutput').textContent = JSON.stringify(state.result, null, 2)
+  if (!state.result) {
+    clearSections()
   }
+  const previousUpdatedAt = Number(state.result?.updatedAt || 0)
+  requestBackgroundDetection(tab.id)
+  scheduleCachedResultRefresh(tab.id, previousUpdatedAt, 0)
 }
 
-async function requestHeaderData(tabId) {
-  const response = await chrome.runtime.sendMessage({ type: 'GET_HEADER_DATA', tabId })
-  return response?.ok ? response.data || {} : {}
-}
-
-function cachedPageResult(tab, headerData) {
-  const page = headerData?.page || {}
-  return {
-    url: page.url || headerData?.dynamic?.url || tab.url || '',
-    title: page.title || headerData?.dynamic?.title || tab.title || '',
-    technologies: page.technologies || [],
-    resources: page.resources || emptyPageResult(tab.url).resources
+async function requestPopupResult(tabId) {
+  const response = await chrome.runtime.sendMessage({ type: 'GET_POPUP_RESULT', tabId })
+  if (!response?.ok) {
+    throw new Error(response?.error || '后台没有返回结果')
   }
+  return response
 }
 
-function hasCachedDetection(headerData) {
-  if (!headerData || typeof headerData !== 'object') {
-    return false
+async function requestPopupRawResult(tabId) {
+  const response = await chrome.runtime.sendMessage({ type: 'GET_POPUP_RAW_RESULT', tabId })
+  if (!response?.ok) {
+    throw new Error(response?.error || '后台没有返回原始线索')
   }
-  return Boolean(
-    headerData.page || headerData.main || headerData.dynamic || (headerData.apis || []).length || (headerData.frames || []).length
-  )
+  return response.data || {}
 }
 
-function isCachedDetectionStale(headerData) {
-  const updatedAt = Number(headerData?.updatedAt || headerData?.page?.time || headerData?.dynamic?.updatedAt || 0)
-  return !updatedAt || Date.now() - updatedAt > CACHE_STALE_MS
-}
-
-function formatCachedResultStatus(result, headerData) {
-  const highCount = result.technologies.filter(tech => tech.confidence === '高').length
-  const updatedAt = Number(headerData?.updatedAt || headerData?.page?.time || headerData?.dynamic?.updatedAt || 0)
+function formatCachedResultStatus(result, response) {
+  const highCount = result.counts?.high ?? result.technologies.filter(tech => tech.confidence === '高').length
+  const updatedAt = Number(response?.updatedAt || result.updatedAt || 0)
   const age = updatedAt ? `，缓存更新于 ${formatAge(Date.now() - updatedAt)} 前` : ''
   return `已显示后台缓存：发现 ${result.technologies.length} 项技术线索，其中 ${highCount} 项为高置信度${age}。点击“刷新”可重新检测。`
 }
@@ -369,15 +302,14 @@ async function refreshCachedResultIfReady(tabId, previousUpdatedAt, attempt) {
     return
   }
 
-  const headerData = await requestHeaderData(tabId)
-  const updatedAt = Number(headerData?.updatedAt || headerData?.page?.time || headerData?.dynamic?.updatedAt || 0)
-  if (hasCachedDetection(headerData) && updatedAt && updatedAt !== previousUpdatedAt) {
-    const pageData = cachedPageResult(tab, headerData)
-    const result = combineResults(tab, pageData, headerData)
+  const response = await requestPopupResult(tabId)
+  const updatedAt = Number(response.updatedAt || response.data?.updatedAt || 0)
+  if (response.hasCache && updatedAt && updatedAt !== previousUpdatedAt) {
+    const result = response.data || emptyPopupResult(tab)
     state.result = result
-    state.activeCategory = '全部'
+    state.activeCategory = FOCUS_CATEGORY
     renderResult(result)
-    setStatus(formatCachedResultStatus(result, headerData))
+    setStatus(formatCachedResultStatus(result, response))
     return
   }
 
@@ -391,353 +323,8 @@ function clearCacheRefreshTimer() {
   }
 }
 
-async function requestWordPressThemeDetails(pageData) {
-  try {
-    const response = await chrome.runtime.sendMessage({
-      type: 'GET_WORDPRESS_THEME_DETAILS',
-      page: pageData
-    })
-    return response?.ok && Array.isArray(response.technologies) ? response.technologies : []
-  } catch {
-    return []
-  }
-}
-
-function reportPageDetectionToBackground(tabId, pageData) {
-  chrome.runtime
-    .sendMessage({
-      type: 'PAGE_DETECTION_RESULT',
-      tabId,
-      page: {
-        url: pageData.url || '',
-        title: pageData.title || '',
-        technologies: pageData.technologies || [],
-        resources: pageData.resources || {}
-      }
-    })
-    .catch(() => {})
-}
-
-function buildEffectivePageRules(pageRules, settings) {
-  return {
-    ...pageRules,
-    customRules: settings?.customRules || []
-  }
-}
-
-function combineResults(tab, pageData, headerData) {
-  const all = []
-  addAll(all, pageData.technologies || [])
-  addAll(all, headerData.main?.technologies || [])
-  for (const api of headerData.apis || []) {
-    addAll(
-      all,
-      (api.technologies || []).map(tech => ({
-        ...tech,
-        source: `${tech.source || '响应头'} · API`
-      }))
-    )
-  }
-  for (const frame of headerData.frames || []) {
-    addAll(
-      all,
-      (frame.technologies || []).map(tech => ({
-        ...tech,
-        source: `${tech.source || '响应头'} · iframe`
-      }))
-    )
-  }
-  addAll(
-    all,
-    (headerData.dynamic?.technologies || []).map(tech => ({
-      ...tech,
-      source: `${tech.source || '动态监控'} · 页面交互后`
-    }))
-  )
-
-  const merged = filterTechnologiesBySettings(mergeTechnologies(all), state.settings)
-  const linked = attachTechnologyLinks(merged)
-  const headers = headerData.main?.headers || {}
-  return {
-    url: pageData.url || tab.url,
-    title: pageData.title || tab.title,
-    generatedAt: new Date().toISOString(),
-    technologies: linked,
-    resources: mergeResourceSummary(pageData.resources || {}, headerData.dynamic || {}),
-    headers,
-    apiObservations: headerData.apis || [],
-    frameObservations: headerData.frames || [],
-    dynamicObservations: headerData.dynamic || null,
-    notes: [
-      '前端框架和 UI 框架主要通过页面运行时、DOM、资源 URL 和样式类名判断。',
-      'Web 服务器、CDN 和后端框架主要依赖响应头与 Cookie 命名线索；如果站点隐藏响应头，结果会保守显示。',
-      '动态监控会累计页面交互后新增的脚本、样式、iframe、feed 链接和资源加载，再与当前扫描结果合并。'
-    ]
-  }
-}
-
-function filterTechnologiesBySettings(technologies, settings) {
-  const disabledCategories = new Set(cleanStringArray(settings?.disabledCategories))
-  const disabledTechnologies = new Set(cleanStringArray(settings?.disabledTechnologies).map(name => normalizeTechName(name)))
-  return technologies.filter(tech => {
-    if (disabledCategories.has(tech.category)) {
-      return false
-    }
-    return !disabledTechnologies.has(normalizeTechName(tech.name))
-  })
-}
-
-function attachTechnologyLinks(technologies) {
-  return technologies.map(tech => ({
-    ...tech,
-    url: tech.url || getTechnologyUrl(tech.name)
-  }))
-}
-
-function getTechnologyUrl(name) {
-  if (/^疑似前端库:/i.test(String(name || '').trim())) {
-    return ''
-  }
-
-  const customRule = (state.settings?.customRules || []).find(rule => normalizeTechName(rule.name) === normalizeTechName(name) && rule.url)
-  if (customRule) {
-    return customRule.url
-  }
-
-  const links = state.techLinks?.links || {}
-  const direct = links[name]
-  if (direct) {
-    return direct
-  }
-
-  const normalizedLinks = state.normalizedTechLinks || buildNormalizedTechLinks(links)
-  const normalized = normalizeTechName(name)
-  if (normalizedLinks.has(normalized)) {
-    return normalizedLinks.get(normalized)
-  }
-
-  const simplified = normalizeTechName(
-    String(name)
-      .replace(/\s+CDN$/i, '')
-      .replace(/\s+Cloud CDN$/i, '')
-      .replace(/\s*\/\s*.*$/, '')
-      .replace(/\s*\([^)]*\)/g, '')
-  )
-  return normalizedLinks.get(simplified) || ''
-}
-
-function normalizeTechName(name) {
-  return String(name || '')
-    .toLowerCase()
-    .replace(/&/g, 'and')
-    .replace(/\+/g, 'plus')
-    .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '')
-}
-
-function mergeResourceSummary(pageResources, dynamic) {
-  const scripts = unique([...(pageResources.scripts || []), ...(dynamic.scripts || [])])
-  const stylesheets = unique([...(pageResources.stylesheets || []), ...(dynamic.stylesheets || [])])
-  const dynamicResources = unique([...(dynamic.resources || []), ...(dynamic.iframes || [])])
-  const all = unique([...scripts, ...stylesheets, ...dynamicResources])
-  return {
-    ...pageResources,
-    total: Math.max(pageResources.total || 0, all.length),
-    scripts: scripts.slice(0, 180),
-    stylesheets: stylesheets.slice(0, 180),
-    dynamicResources: dynamicResources.slice(0, 220),
-    dynamicFeedLinks: dynamic.feedLinks || [],
-    dynamicDomMarkers: dynamic.domMarkers || [],
-    dynamicMutationCount: dynamic.mutationCount || 0,
-    dynamicUpdatedAt: dynamic.updatedAt || null
-  }
-}
-
-function unique(items) {
-  return [...new Set(items.filter(Boolean))]
-}
-
-function addAll(target, items) {
-  for (const item of items) {
-    if (item && item.name && item.category) {
-      target.push(item)
-    }
-  }
-}
-
-function mergeTechnologies(items) {
-  const map = new Map()
-  for (const item of suppressDuplicateWebsiteProgramCategories(
-    suppressWordPressThemeDirectoryFallbacks(suppressFrontendFallbackDuplicates(items))
-  )) {
-    const category = item.category || '其他库'
-    const key = `${category}::${item.name}`.toLowerCase()
-    const current = map.get(key) || {
-      category,
-      name: item.name,
-      confidence: item.confidence || '低',
-      evidence: [],
-      sources: new Set(),
-      url: item.url || ''
-    }
-    if (!current.url && item.url) {
-      current.url = item.url
-    }
-    current.confidence = strongerConfidence(current.confidence, item.confidence || '低')
-    for (const evidence of item.evidence || []) {
-      if (evidence && !current.evidence.includes(evidence)) {
-        current.evidence.push(evidence)
-      }
-    }
-    if (item.source) {
-      current.sources.add(item.source)
-    }
-    map.set(key, current)
-  }
-
-  return [...map.values()]
-    .map(item => ({
-      ...item,
-      evidence: item.evidence.slice(0, 8),
-      sources: [...item.sources]
-    }))
-    .sort((a, b) => {
-      const categoryDelta = categoryIndex(a.category) - categoryIndex(b.category)
-      if (categoryDelta !== 0) {
-        return categoryDelta
-      }
-      const confidenceDelta = confidenceRank(b.confidence) - confidenceRank(a.confidence)
-      if (confidenceDelta !== 0) {
-        return confidenceDelta
-      }
-      return a.name.localeCompare(b.name)
-    })
-}
-
-function suppressFrontendFallbackDuplicates(items) {
-  if (!Array.isArray(items) || !items.length) {
-    return []
-  }
-
-  const knownNames = new Set(
-    items
-      .filter(item => item?.category === '前端库' && !isFrontendFallback(item))
-      .map(item => normalizeFrontendFallbackTechName(item.name))
-      .filter(Boolean)
-  )
-  if (!knownNames.size) {
-    return items
-  }
-
-  return items.filter(item => !isFrontendFallback(item) || !knownNames.has(normalizeFrontendFallbackTechName(item.name)))
-}
-
 function isFrontendFallback(item) {
   return item?.category === '前端库' && /^疑似前端库:/i.test(String(item?.name || '').trim())
-}
-
-function normalizeFrontendFallbackTechName(name) {
-  return String(name || '')
-    .toLowerCase()
-    .replace(/^疑似前端库:\s*/, '')
-    .replace(/(?:\.js|js)$/i, '')
-    .replace(/(?:[._-]pkgd)$/i, '')
-    .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '')
-}
-
-function suppressDuplicateWebsiteProgramCategories(items) {
-  if (!Array.isArray(items) || !items.length) {
-    return []
-  }
-
-  const websiteProgramNames = new Set(
-    items
-      .filter(item => item?.category === '网站程序')
-      .map(item => normalizeTechName(item.name))
-      .filter(Boolean)
-  )
-  if (!websiteProgramNames.size) {
-    return items
-  }
-
-  return items.filter(item => item?.category !== 'CMS / 电商平台' || !websiteProgramNames.has(normalizeTechName(item.name)))
-}
-
-function suppressWordPressThemeDirectoryFallbacks(items) {
-  if (!Array.isArray(items) || !items.length) {
-    return []
-  }
-
-  const styleHeaderSlugs = new Set(items.map(extractWordPressStyleThemeSlug).filter(Boolean))
-  if (!styleHeaderSlugs.size) {
-    return items
-  }
-
-  return items.filter(item => {
-    const directorySlug = extractWordPressDirectoryThemeSlug(item)
-    return !directorySlug || !styleHeaderSlugs.has(directorySlug)
-  })
-}
-
-function extractWordPressStyleThemeSlug(item) {
-  if (String(item?.category || '') !== '主题 / 模板') {
-    return ''
-  }
-  const evidenceText = cleanStringArray(item?.evidence).join('\n')
-  if (item?.source !== '主题样式表' && !/WordPress style\.css 主题头/i.test(evidenceText)) {
-    return ''
-  }
-  const slug =
-    evidenceText.match(/目录:\s*([^，,\s]+)/)?.[1] || evidenceText.match(/\/wp-content\/themes\/([^/?#"' <>)]+)\/style\.css/i)?.[1]
-  return normalizeWordPressThemeSlug(slug)
-}
-
-function extractWordPressDirectoryThemeSlug(item) {
-  if (String(item?.category || '') !== '主题 / 模板') {
-    return ''
-  }
-  const nameMatch = String(item?.name || '').match(/^WordPress 主题:\s*(.+)$/i)
-  if (!nameMatch) {
-    return ''
-  }
-
-  const evidenceText = cleanStringArray(item?.evidence).join('\n')
-  if (!isWordPressThemeDirectoryFallbackEvidence(evidenceText)) {
-    return ''
-  }
-
-  const nameSlug = normalizeWordPressThemeSlug(nameMatch[1])
-  const evidenceSlug = normalizeWordPressThemeSlug(evidenceText.match(/\/wp-content\/themes\/([^/?#"' <>)]+)/i)?.[1])
-  if (nameSlug && evidenceSlug && nameSlug !== evidenceSlug) {
-    return ''
-  }
-  return evidenceSlug || nameSlug
-}
-
-function isWordPressThemeDirectoryFallbackEvidence(evidenceText) {
-  return /(?:资源或源码路径包含|动态资源路径包含)/i.test(evidenceText) && /\/wp-content\/themes\//i.test(evidenceText)
-}
-
-function normalizeWordPressThemeSlug(value) {
-  const decoded = safeDecodeURIComponent(String(value || ''))
-    .replace(/\\/g, '/')
-    .replace(/['")<>]/g, '')
-    .trim()
-  if (!decoded || decoded.includes('/') || decoded.length > 90) {
-    return ''
-  }
-  return decoded.toLowerCase()
-}
-
-function safeDecodeURIComponent(value) {
-  try {
-    return decodeURIComponent(value)
-  } catch {
-    return value
-  }
-}
-
-function strongerConfidence(a, b) {
-  return confidenceRank(b) > confidenceRank(a) ? b : a
 }
 
 function confidenceRank(value) {
@@ -752,8 +339,8 @@ function categoryIndex(category) {
 function renderResult(result) {
   document.getElementById('totalCount').textContent = String(result.technologies.length)
   document.getElementById('resourceCount').textContent = String(result.resources?.total || 0)
-  document.getElementById('headerCount').textContent = String(Object.keys(result.headers || {}).length)
-  document.getElementById('rawOutput').textContent = JSON.stringify(result, null, 2)
+  document.getElementById('headerCount').textContent = String(result.headerCount || Object.keys(result.headers || {}).length)
+  resetRawOutput()
   renderCategoryTabs(result)
   renderFilteredSections(result)
 
@@ -768,8 +355,7 @@ function renderResult(result) {
 
 function renderFilteredSections(result) {
   const sections = document.getElementById('sections')
-  const filtered =
-    state.activeCategory === '全部' ? result.technologies : result.technologies.filter(tech => tech.category === state.activeCategory)
+  const filtered = getFilteredTechnologies(result)
   const grouped = groupByCategory(filtered)
   sections.innerHTML = ''
 
@@ -801,7 +387,9 @@ function renderCategoryTabs(result) {
   const tabs = document.getElementById('categoryTabs')
   const grouped = groupByCategory(result.technologies)
   const categories = Object.keys(grouped).sort((a, b) => categoryIndex(a) - categoryIndex(b))
+  const focusCount = getFocusTechnologies(result.technologies).length
   const tabItems = [
+    { category: FOCUS_CATEGORY, count: focusCount },
     { category: '全部', count: result.technologies.length },
     ...categories.map(category => ({ category, count: grouped[category].length }))
   ]
@@ -821,6 +409,24 @@ function renderCategoryTabs(result) {
     })
     tabs.append(button)
   }
+}
+
+function getFilteredTechnologies(result) {
+  if (state.activeCategory === FOCUS_CATEGORY) {
+    return getFocusTechnologies(result.technologies)
+  }
+  if (state.activeCategory === '全部') {
+    return result.technologies
+  }
+  return result.technologies.filter(tech => tech.category === state.activeCategory)
+}
+
+function getFocusTechnologies(technologies) {
+  const high = technologies.filter(tech => tech.confidence === '高')
+  if (high.length) {
+    return high.slice(0, 60)
+  }
+  return [...technologies].sort((a, b) => confidenceRank(b.confidence) - confidenceRank(a.confidence)).slice(0, 30)
 }
 
 function renderTech(tech) {
@@ -847,7 +453,7 @@ function renderTech(tech) {
 }
 
 function renderTechName(tech) {
-  if (!tech.url) {
+  if (!tech.url && isFrontendFallback(tech)) {
     return el('span', 'tech-name', tech.name)
   }
 
@@ -856,9 +462,32 @@ function renderTechName(tech) {
   button.title = `打开 ${tech.name} 官网或仓库`
   button.addEventListener('click', event => {
     event.preventDefault()
-    chrome.tabs.create({ url: tech.url })
+    openTechnologyLink(tech, button).catch(error => {
+      setStatus(`技术链接打开失败：${String(error?.message || error)}`)
+    })
   })
   return button
+}
+
+async function openTechnologyLink(tech, button) {
+  if (tech.url) {
+    chrome.tabs.create({ url: tech.url })
+    return
+  }
+
+  button.disabled = true
+  try {
+    const response = await chrome.runtime.sendMessage({ type: 'GET_TECH_LINK', name: tech.name })
+    const url = response?.ok ? response.url || '' : ''
+    if (!url) {
+      setStatus(`暂无 ${tech.name} 的官网或仓库链接。`)
+      return
+    }
+    tech.url = url
+    chrome.tabs.create({ url })
+  } finally {
+    button.disabled = false
+  }
 }
 
 function renderCorrectionLink(tech) {
@@ -936,9 +565,21 @@ function clearSections() {
   document.getElementById('totalCount').textContent = '0'
   document.getElementById('resourceCount').textContent = '0'
   document.getElementById('headerCount').textContent = '0'
-  document.getElementById('rawOutput').textContent = ''
+  resetRawOutput()
   document.getElementById('sourceSearchOutput').textContent = ''
   document.getElementById('searchMeta').textContent = '搜索当前页面 DOM 源码快照。'
+}
+
+function resetRawOutput() {
+  state.rawResult = null
+  state.rawLoaded = false
+  document.getElementById('rawOutput').textContent = RAW_PLACEHOLDER
+  const panel = document.getElementById('rawPanel')
+  if (panel?.open && state.result) {
+    renderRawOutput().catch(error => {
+      document.getElementById('rawOutput').textContent = `原始线索生成失败：${String(error?.message || error)}`
+    })
+  }
 }
 
 function setStatus(message) {
@@ -958,8 +599,43 @@ async function copyResult() {
   if (!state.result) {
     return
   }
-  await navigator.clipboard.writeText(JSON.stringify(state.result, null, 2))
+  const raw = await getRawResult()
+  await navigator.clipboard.writeText(JSON.stringify(raw, null, 2))
   setStatus('已复制检测 JSON。')
+}
+
+async function renderRawOutput() {
+  if (!state.result) {
+    document.getElementById('rawOutput').textContent = '暂无原始线索。'
+    return
+  }
+  if (state.rawLoaded) {
+    document.getElementById('rawOutput').textContent = JSON.stringify(state.rawResult, null, 2)
+    return
+  }
+  document.getElementById('rawOutput').textContent = RAW_LOADING_TEXT
+  const raw = await getRawResult()
+  document.getElementById('rawOutput').textContent = JSON.stringify(raw, null, 2)
+}
+
+async function getRawResult() {
+  if (state.rawLoaded) {
+    return state.rawResult
+  }
+  const tabId = state.currentTabId || (await getActiveTabId())
+  const raw = await requestPopupRawResult(tabId)
+  state.rawResult = raw
+  state.rawLoaded = true
+  return raw
+}
+
+async function getActiveTabId() {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+  if (!tab || !tab.id) {
+    throw new Error('无法读取当前标签页。')
+  }
+  state.currentTabId = tab.id
+  return tab.id
 }
 
 async function searchPageSourceFromPopup() {
@@ -1063,12 +739,17 @@ function el(tagName, className, text) {
   return node
 }
 
-function emptyPageResult(url) {
+function emptyPopupResult(tab = {}) {
   return {
-    url,
-    title: '',
+    url: tab.url || '',
+    title: tab.title || '',
+    generatedAt: new Date().toISOString(),
+    updatedAt: 0,
     technologies: [],
-    resources: { total: 0 }
+    counts: { total: 0, high: 0, medium: 0, low: 0 },
+    categoryCounts: {},
+    resources: { total: 0 },
+    headerCount: 0
   }
 }
 
