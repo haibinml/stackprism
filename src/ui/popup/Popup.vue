@@ -27,6 +27,7 @@
     </header>
 
     <div v-if="!state.pageSupported" class="unsupported">
+      <Ban class="empty-icon" :size="36" :stroke-width="1.5" />
       <h2>当前页面不支持检测</h2>
       <p>{{ unsupportedReason }}</p>
       <p class="unsupported-hint">在普通网页（http:// 或 https://）上重新打开扩展即可。</p>
@@ -66,9 +67,14 @@
 
       <section class="sections">
         <div v-if="!state.result?.technologies?.length" class="empty">
-          未检测到明确技术线索。可以刷新页面后再打开插件，以便捕获主文档响应头。
+          <SearchX class="empty-icon" :size="32" :stroke-width="1.5" />
+          <p>未检测到明确技术线索</p>
+          <p class="empty-hint">刷新页面后重新打开插件，以便捕获主文档响应头。</p>
         </div>
-        <div v-else-if="!filteredSections.length" class="empty">当前分类没有检测结果。</div>
+        <div v-else-if="!filteredSections.length" class="empty">
+          <Inbox class="empty-icon" :size="28" :stroke-width="1.5" />
+          <p>当前分类没有检测结果</p>
+        </div>
         <section v-for="group in filteredSections" :key="group.category" class="category">
           <h2>
             <span>{{ group.category }}</span>
@@ -139,7 +145,7 @@
 
 <script setup lang="ts">
   import { onMounted, onBeforeUnmount, reactive, ref, computed } from 'vue'
-  import { Copy, ExternalLink, Monitor, Moon, RefreshCw, Settings2, Sun } from 'lucide-vue-next'
+  import { Ban, Copy, ExternalLink, Inbox, Monitor, Moon, RefreshCw, SearchX, Settings2, Sun } from 'lucide-vue-next'
   import { categoryIndex, confidenceClass, confidenceRank } from '@/utils/category-order'
   import { applyCustomCss } from '@/utils/apply-custom-css'
   import { normalizeSettings } from '@/utils/normalize-settings'
@@ -1027,15 +1033,38 @@
   }
 
   .empty {
+    align-items: center;
     color: var(--muted);
+    display: flex;
+    flex-direction: column;
     font-size: 13px;
-    padding: 24px 12px;
+    gap: 4px;
+    padding: 32px 12px 24px;
     text-align: center;
+  }
+
+  .empty p {
+    margin: 0;
+  }
+
+  .empty-hint {
+    font-size: 12px;
+    opacity: 0.75;
+  }
+
+  /* 通用空状态图标：所有空 / 不支持页面共用 */
+  .empty-icon {
+    color: var(--muted);
+    margin-bottom: 8px;
+    opacity: 0.55;
   }
 
   /* unsupported：当前页面（chrome:// / 扩展页 / about:）无法注入检测脚本 */
   .unsupported {
-    padding: 48px 24px 24px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 56px 24px 32px;
     text-align: center;
   }
 
@@ -1053,6 +1082,7 @@
     font-size: 12px;
     line-height: 1.55;
     margin: 0;
+    max-width: 28ch;
   }
 
   .unsupported-hint {

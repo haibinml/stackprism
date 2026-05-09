@@ -9,8 +9,14 @@
         <p>这页专门讲怎么添加自己的识别规则。你可以把规则理解成一句话：看到什么字，就认为网页用了什么东西。</p>
       </div>
       <div class="header-actions">
-        <button type="button" class="primary" @click="openSettings">打开设置页</button>
-        <button type="button" @click="openRepo">GitHub 仓库</button>
+        <button type="button" class="primary" @click="openSettings">
+          <Settings2 :size="14" :stroke-width="2" />
+          <span>打开设置页</span>
+        </button>
+        <button type="button" @click="openRepo">
+          <ExternalLink :size="14" :stroke-width="2" />
+          <span>GitHub 仓库</span>
+        </button>
       </div>
     </header>
 
@@ -335,6 +341,7 @@ examplepay-sdk</pre
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue'
+  import { ExternalLink, Settings2 } from 'lucide-vue-next'
   import { REPOSITORY_URL } from '@/utils/constants'
 
   const version = ref('')
@@ -386,12 +393,15 @@ examplepay-sdk</pre
   }
 
   .header-actions button {
+    align-items: center;
     background: transparent;
     border: 0;
     border-radius: 6px;
     color: var(--muted);
     cursor: pointer;
+    display: inline-flex;
     font-size: 13px;
+    gap: 6px;
     padding: 6px 12px;
     transition:
       background 0.15s ease,

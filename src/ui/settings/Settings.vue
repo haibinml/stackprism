@@ -139,7 +139,10 @@
       </div>
 
       <div class="rules-list">
-        <div v-if="!state.settings.customRules.length" class="rule-meta">暂无自定义规则。</div>
+        <div v-if="!state.settings.customRules.length" class="rules-empty">
+          <Inbox class="rules-empty-icon" :size="28" :stroke-width="1.5" />
+          <span>暂无自定义规则</span>
+        </div>
         <div v-for="(rule, index) in state.settings.customRules" :key="`${rule.name}|${index}`" class="rule-row">
           <div>
             <div class="rule-title">{{ rule.name }}</div>
@@ -172,7 +175,7 @@
 
 <script setup lang="ts">
   import { onMounted, reactive, ref, watch, computed } from 'vue'
-  import { BookOpen, Monitor, Moon, Pencil, RotateCcw, Save, Sun, Trash2 } from 'lucide-vue-next'
+  import { BookOpen, Inbox, Monitor, Moon, Pencil, RotateCcw, Save, Sun, Trash2 } from 'lucide-vue-next'
   import Select from '@/ui/components/Select.vue'
   import { CATEGORY_ORDER } from '@/utils/category-order'
   import { applyCustomCss } from '@/utils/apply-custom-css'
@@ -1045,10 +1048,19 @@
     background: var(--accent-soft);
   }
 
-  .rules-list > .rule-meta {
+  .rules-empty {
+    align-items: center;
     color: var(--muted);
+    display: flex;
+    flex-direction: column;
     font-size: 13px;
-    padding: 12px 0;
+    gap: 8px;
+    padding: 32px 0 24px;
+  }
+
+  .rules-empty-icon {
+    color: var(--muted);
+    opacity: 0.5;
   }
 
   .rule-title {
