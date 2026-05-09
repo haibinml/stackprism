@@ -19,6 +19,7 @@
     "page/wordpress-plugins.json",
     "page/website-programs-page.json",
     "page/cms-themes.json",
+    "page/wordpress-themes.json",
     "page/probes.json",
     "page/languages.json",
     "page/cdn-providers.json",
