@@ -632,7 +632,8 @@ function buildWordPressThemeTechnology(info, request) {
     confidence: '高',
     evidence,
     source: '主题样式表',
-    url: cleanTechnologyUrl(info.themeUri) || cleanTechnologyUrl(info.authorUri)
+    url: cleanTechnologyUrl(info.themeUri) || cleanTechnologyUrl(info.authorUri),
+    themeSlug: request.slug
   }
 }
 
@@ -1092,7 +1093,7 @@ function filterCustomRulesForTarget(rules, target) {
 
 function mergeTechnologyRecords(items) {
   const map = new Map()
-  for (const item of items) {
+  for (const item of suppressWordPressThemeDirectoryFallbacks(items)) {
     const key = `${item.category}::${item.name}`.toLowerCase()
     const current = map.get(key) || { ...item, evidence: [] }
     if (!current.url && item.url) {
@@ -1107,6 +1108,63 @@ function mergeTechnologyRecords(items) {
     map.set(key, current)
   }
   return [...map.values()]
+}
+
+function suppressWordPressThemeDirectoryFallbacks(items) {
+  if (!Array.isArray(items) || !items.length) {
+    return []
+  }
+
+  const styleHeaderSlugs = new Set(items.map(extractWordPressStyleThemeSlug).filter(Boolean))
+  if (!styleHeaderSlugs.size) {
+    return items
+  }
+
+  return items.filter(item => {
+    const directorySlug = extractWordPressDirectoryThemeSlug(item)
+    return !directorySlug || !styleHeaderSlugs.has(directorySlug)
+  })
+}
+
+function extractWordPressStyleThemeSlug(item) {
+  if (String(item?.category || '') !== '主题 / 模板') {
+    return ''
+  }
+  const evidenceText = cleanStringArray(item?.evidence).join('\n')
+  if (item?.source !== '主题样式表' && !/WordPress style\.css 主题头/i.test(evidenceText)) {
+    return ''
+  }
+  const slug =
+    item.themeSlug ||
+    evidenceText.match(/目录:\s*([^，,\s]+)/)?.[1] ||
+    evidenceText.match(/\/wp-content\/themes\/([^/?#"' <>)]+)\/style\.css/i)?.[1]
+  return normalizeWordPressThemeSlug(slug)
+}
+
+function extractWordPressDirectoryThemeSlug(item) {
+  if (String(item?.category || '') !== '主题 / 模板') {
+    return ''
+  }
+  const nameMatch = String(item?.name || '').match(/^WordPress 主题:\s*(.+)$/i)
+  if (!nameMatch) {
+    return ''
+  }
+
+  const evidenceText = cleanStringArray(item?.evidence).join('\n')
+  if (!/资源或源码路径包含/i.test(evidenceText) || !/\/wp-content\/themes\//i.test(evidenceText)) {
+    return ''
+  }
+
+  const nameSlug = normalizeWordPressThemeSlug(nameMatch[1])
+  const evidenceSlug = normalizeWordPressThemeSlug(evidenceText.match(/\/wp-content\/themes\/([^/?#"' <>)]+)/i)?.[1])
+  if (nameSlug && evidenceSlug && nameSlug !== evidenceSlug) {
+    return ''
+  }
+  return evidenceSlug || nameSlug
+}
+
+function normalizeWordPressThemeSlug(value) {
+  return cleanWordPressThemeSlug(value).toLowerCase()
 }
 
 function strongerConfidence(a, b) {

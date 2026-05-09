@@ -566,7 +566,7 @@ function addAll(target, items) {
 
 function mergeTechnologies(items) {
   const map = new Map()
-  for (const item of items) {
+  for (const item of suppressWordPressThemeDirectoryFallbacks(items)) {
     const category = item.category || '其他库'
     const key = `${category}::${item.name}`.toLowerCase()
     const current = map.get(key) || {
@@ -609,6 +609,77 @@ function mergeTechnologies(items) {
       }
       return a.name.localeCompare(b.name)
     })
+}
+
+function suppressWordPressThemeDirectoryFallbacks(items) {
+  if (!Array.isArray(items) || !items.length) {
+    return []
+  }
+
+  const styleHeaderSlugs = new Set(items.map(extractWordPressStyleThemeSlug).filter(Boolean))
+  if (!styleHeaderSlugs.size) {
+    return items
+  }
+
+  return items.filter(item => {
+    const directorySlug = extractWordPressDirectoryThemeSlug(item)
+    return !directorySlug || !styleHeaderSlugs.has(directorySlug)
+  })
+}
+
+function extractWordPressStyleThemeSlug(item) {
+  if (String(item?.category || '') !== '主题 / 模板') {
+    return ''
+  }
+  const evidenceText = cleanStringArray(item?.evidence).join('\n')
+  if (item?.source !== '主题样式表' && !/WordPress style\.css 主题头/i.test(evidenceText)) {
+    return ''
+  }
+  const slug =
+    evidenceText.match(/目录:\s*([^，,\s]+)/)?.[1] ||
+    evidenceText.match(/\/wp-content\/themes\/([^/?#"' <>)]+)\/style\.css/i)?.[1]
+  return normalizeWordPressThemeSlug(slug)
+}
+
+function extractWordPressDirectoryThemeSlug(item) {
+  if (String(item?.category || '') !== '主题 / 模板') {
+    return ''
+  }
+  const nameMatch = String(item?.name || '').match(/^WordPress 主题:\s*(.+)$/i)
+  if (!nameMatch) {
+    return ''
+  }
+
+  const evidenceText = cleanStringArray(item?.evidence).join('\n')
+  if (!/资源或源码路径包含/i.test(evidenceText) || !/\/wp-content\/themes\//i.test(evidenceText)) {
+    return ''
+  }
+
+  const nameSlug = normalizeWordPressThemeSlug(nameMatch[1])
+  const evidenceSlug = normalizeWordPressThemeSlug(evidenceText.match(/\/wp-content\/themes\/([^/?#"' <>)]+)/i)?.[1])
+  if (nameSlug && evidenceSlug && nameSlug !== evidenceSlug) {
+    return ''
+  }
+  return evidenceSlug || nameSlug
+}
+
+function normalizeWordPressThemeSlug(value) {
+  const decoded = safeDecodeURIComponent(String(value || ''))
+    .replace(/\\/g, '/')
+    .replace(/['")<>]/g, '')
+    .trim()
+  if (!decoded || decoded.includes('/') || decoded.length > 90) {
+    return ''
+  }
+  return decoded.toLowerCase()
+}
+
+function safeDecodeURIComponent(value) {
+  try {
+    return decodeURIComponent(value)
+  } catch {
+    return value
+  }
 }
 
 function strongerConfidence(a, b) {
