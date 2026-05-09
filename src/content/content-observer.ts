@@ -5,9 +5,25 @@
   const MAX_MUTATION_COUNT = 5000
   const MAX_RESOURCE_COUNT = 1500
   const SEND_DELAY = 900
+  const MUTATION_BURST_WINDOW_MS = 1000
+  const MUTATION_BURST_THRESHOLD = 300
+  const MUTATION_COOLDOWN_MS = 5000
   const CONTEXT_INVALIDATED_PATTERN = /extension context invalidated|context invalidated/i
   const OBSERVER_INSTANCE_KEY = '__stackPrismContentObserver__'
   const SKIP_TAGS = new Set(['VIDEO', 'AUDIO', 'CANVAS', 'PICTURE', 'SOURCE', 'TRACK', 'SVG', 'IMG'])
+  const SKIP_INITIATOR_TYPES = new Set(['img', 'video', 'audio', 'beacon', 'track', 'object', 'embed', 'css'])
+  const SKIP_RESOURCE_EXT = /\.(ts|m4s|mp4|webm|mov|m3u8|mpd|jpg|jpeg|png|gif|webp|avif|ico|woff2?|ttf|otf|eot)(\?.*)?$/i
+  const SKIP_CONTAINER_NAMES = [
+    /danmaku/i,
+    /bullet[\s_-]*(comment|screen|chat)/i,
+    /barrage/i,
+    /(^|[\s._#-])chat([\s._#-]|$)/i,
+    /chat-?(panel|area|list|box|room|stream|window)/i,
+    /live-?chat/i,
+    /comment-?(stream|live|list)/i,
+    /(^|[\s._-])feed([\s._-]|$)/i,
+    /webcast/i
+  ]
   const state = {
     startedAt: Date.now(),
     updatedAt: Date.now(),
@@ -39,6 +55,9 @@
   let wrappedReplaceState = null
   let pendingMutationNodes = []
   let pendingMutationFrame = 0
+  let mutationBurstWindowStart = Date.now()
+  let mutationBurstCount = 0
+  let mutationCooldownUntil = 0
 
   // ----- 底层 helper -----
 
@@ -197,9 +216,25 @@
   const SUBTREE_SCAN_LIMIT = 200
   const SUBTREE_SELECTOR = 'script[src], link[href], iframe[src], [id], [class], [data-v-app], [ng-version], astro-island, astro-slot'
 
+  const matchesSkipContainer = element => {
+    const tokens = []
+    const id = element.id
+    if (id) tokens.push(id)
+    const className = typeof element.className === 'string' ? element.className : element.getAttribute?.('class') || ''
+    if (className) {
+      for (const piece of className.split(/\s+/)) if (piece) tokens.push(piece)
+    }
+    if (!tokens.length) return false
+    for (const re of SKIP_CONTAINER_NAMES) {
+      for (const token of tokens) if (re.test(token)) return true
+    }
+    return false
+  }
+
   const collectFromElement = element => {
     let changed = false
     if (SKIP_TAGS.has(element.tagName)) return changed
+    if (matchesSkipContainer(element)) return changed
     changed = collectElementIfRelevant(element) || changed
     if (!element.querySelectorAll || !element.childElementCount) return changed
     const matches = element.querySelectorAll(SUBTREE_SELECTOR)
@@ -369,15 +404,18 @@
     try {
       const observer = new PerformanceObserver(list => {
         if (stopped) return
+        let added = 0
         for (const entry of list.getEntries()) {
-          addUrl('resources', entry.name)
+          if (SKIP_INITIATOR_TYPES.has(entry.initiatorType)) continue
+          if (SKIP_RESOURCE_EXT.test(entry.name)) continue
+          if (addUrl('resources', entry.name)) added += 1
           state.resourceCount += 1
         }
         if (state.resourceCount >= MAX_RESOURCE_COUNT) {
           observer.disconnect()
           performanceObserver = null
         }
-        scheduleSend()
+        if (added) scheduleSend()
       })
       performanceObserver = observer
       observer.observe({ type: 'resource', buffered: true })
@@ -426,13 +464,31 @@
     const root = document.documentElement || document
     const observer = new MutationObserver(mutations => {
       if (stopped) return
+      const now = Date.now()
+      if (now < mutationCooldownUntil) return
+      if (now - mutationBurstWindowStart > MUTATION_BURST_WINDOW_MS) {
+        mutationBurstWindowStart = now
+        mutationBurstCount = 0
+      }
       for (const mutation of mutations) {
         for (const node of mutation.addedNodes) {
           if (node.nodeType !== Node.ELEMENT_NODE) continue
           if (SKIP_TAGS.has(node.tagName)) continue
+          if (matchesSkipContainer(node)) continue
           state.mutationCount += 1
+          mutationBurstCount += 1
           pendingMutationNodes.push(node)
         }
+      }
+      if (mutationBurstCount >= MUTATION_BURST_THRESHOLD) {
+        mutationCooldownUntil = now + MUTATION_COOLDOWN_MS
+        pendingMutationNodes = []
+        if (pendingMutationFrame) {
+          if (typeof cancelAnimationFrame === 'function') cancelAnimationFrame(pendingMutationFrame)
+          else clearTimeout(pendingMutationFrame)
+          pendingMutationFrame = 0
+        }
+        return
       }
       if (state.mutationCount >= MAX_MUTATION_COUNT) {
         observer.disconnect()
