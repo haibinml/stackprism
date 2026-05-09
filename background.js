@@ -2,6 +2,7 @@ const TAB_DATA_PREFIX = 'tab:'
 const MAX_API_RECORDS = 30
 const SETTINGS_STORAGE_KEY = 'stackPrismSettings'
 const POPUP_CACHE_STALE_MS = 2 * 60 * 1000
+const POPUP_CACHE_SCHEMA_VERSION = 1
 const CATEGORY_ORDER = [
   '前端框架',
   'UI / CSS 框架',
@@ -28,6 +29,8 @@ const CATEGORY_ORDER = [
 ]
 let techRulesPromise = null
 let techLinksPromise = null
+let detectorSettingsPromise = null
+let detectorSettingsCache = null
 const activeDetectionTimers = new Map()
 const themeStyleFetchCache = new Map()
 
@@ -59,18 +62,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       sendResponse({ ok: false, error: '缺少有效 tabId' })
       return false
     }
-    Promise.all([getTabData(tabId), loadDetectorSettings(), getTabSnapshot(tabId)])
-      .then(([data, settings, tab]) => {
-        const hydrated = addStoredCustomHeaderRules(data, settings)
-        const updatedAt = getStoredUpdatedAt(hydrated)
-        sendResponse({
-          ok: true,
-          data: buildPopupResult(hydrated, settings, tab),
-          hasCache: hasStoredDetection(hydrated),
-          stale: !updatedAt || Date.now() - updatedAt > POPUP_CACHE_STALE_MS,
-          updatedAt
-        })
-      })
+    getPopupResultResponse(tabId)
+      .then(response => sendResponse(response))
       .catch(error => sendResponse({ ok: false, error: String(error) }))
     return true
   }
@@ -173,6 +166,8 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
 
 chrome.storage.onChanged.addListener((changes, areaName) => {
   if (areaName === 'sync' && changes[SETTINGS_STORAGE_KEY]) {
+    detectorSettingsCache = normalizeDetectorSettings(changes[SETTINGS_STORAGE_KEY].newValue)
+    detectorSettingsPromise = Promise.resolve(detectorSettingsCache)
     refreshAllBadges()
   }
 })
@@ -238,12 +233,23 @@ async function loadTechRules() {
 }
 
 async function loadDetectorSettings() {
-  try {
-    const stored = await chrome.storage.sync.get(SETTINGS_STORAGE_KEY)
-    return normalizeDetectorSettings(stored[SETTINGS_STORAGE_KEY])
-  } catch {
-    return normalizeDetectorSettings()
+  if (detectorSettingsCache) {
+    return detectorSettingsCache
   }
+
+  if (!detectorSettingsPromise) {
+    detectorSettingsPromise = chrome.storage.sync
+      .get(SETTINGS_STORAGE_KEY)
+      .then(stored => {
+        detectorSettingsCache = normalizeDetectorSettings(stored[SETTINGS_STORAGE_KEY])
+        return detectorSettingsCache
+      })
+      .catch(() => {
+        detectorSettingsCache = normalizeDetectorSettings()
+        return detectorSettingsCache
+      })
+  }
+  return detectorSettingsPromise
 }
 
 function normalizeDetectorSettings(value = {}) {
@@ -296,12 +302,16 @@ function buildEffectivePageRules(pageRules, settings) {
 }
 
 async function saveTabDataAndBadge(tabId, data, settings) {
+  data.popup = buildPopupCacheRecord(data, settings, await getTabSnapshot(tabId))
   await chrome.storage.session.set({ [storageKey(tabId)]: data })
   await updateBadgeForTab(tabId, data, settings)
 }
 
 async function updateBadgeForTab(tabId, data, settings) {
-  const count = countBadgeTechnologies(addStoredCustomHeaderRules(data || {}, settings), settings)
+  const cachedPopup = getCachedPopupResult(data, settings)
+  const count = cachedPopup
+    ? cachedPopup.counts?.total || 0
+    : countBadgeTechnologies(addStoredCustomHeaderRules(data || {}, settings), settings)
   const text = formatBadgeCount(count)
   try {
     await chrome.action.setBadgeBackgroundColor({ tabId, color: '#0f766e' })
@@ -364,6 +374,71 @@ async function getTabSnapshot(tabId) {
   } catch {
     return { id: tabId, url: '', title: '' }
   }
+}
+
+async function getPopupResultResponse(tabId) {
+  const [data, settings] = await Promise.all([getTabData(tabId), loadDetectorSettings()])
+  let popup = getCachedPopupResult(data, settings)
+  if (!popup) {
+    popup = buildPopupCacheRecord(data, settings, await getTabSnapshot(tabId))
+    if (hasStoredDetection(data)) {
+      chrome.storage.session.set({ [storageKey(tabId)]: { ...data, popup } }).catch(() => {})
+    }
+  }
+
+  const updatedAt = getStoredUpdatedAt(data)
+  return {
+    ok: true,
+    data: popup,
+    hasCache: hasStoredDetection(data),
+    stale: !updatedAt || Date.now() - updatedAt > POPUP_CACHE_STALE_MS,
+    updatedAt
+  }
+}
+
+function buildPopupCacheRecord(data, settings, tab) {
+  const hydrated = addStoredCustomHeaderRules(data || {}, settings)
+  const sourceUpdatedAt = getStoredUpdatedAt(hydrated)
+  return {
+    ...buildPopupResult(hydrated, settings, tab),
+    cacheVersion: POPUP_CACHE_SCHEMA_VERSION,
+    settingsKey: buildSettingsCacheKey(settings),
+    sourceUpdatedAt,
+    builtAt: Date.now()
+  }
+}
+
+function getCachedPopupResult(data, settings) {
+  const popup = data?.popup
+  if (!popup || popup.cacheVersion !== POPUP_CACHE_SCHEMA_VERSION) {
+    return null
+  }
+  if (popup.settingsKey !== buildSettingsCacheKey(settings)) {
+    return null
+  }
+  if (Number(popup.sourceUpdatedAt || 0) !== getStoredUpdatedAt(data || {})) {
+    return null
+  }
+  return popup
+}
+
+function buildSettingsCacheKey(settings = {}) {
+  return JSON.stringify({
+    disabledCategories: cleanStringArray(settings.disabledCategories),
+    disabledTechnologies: cleanStringArray(settings.disabledTechnologies),
+    customRules: (settings.customRules || []).map(rule => ({
+      name: rule.name,
+      category: rule.category,
+      kind: rule.kind,
+      confidence: rule.confidence,
+      matchType: rule.matchType,
+      patterns: rule.patterns || [],
+      selectors: rule.selectors || [],
+      globals: rule.globals || [],
+      matchIn: rule.matchIn || [],
+      url: rule.url || ''
+    }))
+  })
 }
 
 function buildPopupResult(data, settings, tab) {
@@ -694,7 +769,7 @@ async function refreshAllBadges() {
       }
       const data = await getTabData(tab.id)
       if (data && Object.keys(data).length) {
-        await updateBadgeForTab(tab.id, data, settings)
+        await saveTabDataAndBadge(tab.id, data, settings)
       } else {
         clearBadge(tab.id)
       }
