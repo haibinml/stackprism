@@ -17,6 +17,8 @@
     "page/dynamic-technologies.json",
     "page/dynamic-asset-extractors.json",
     "page/website-programs.json",
+    "page/website-programs-extra.json",
+    "page/powered-by-fallback.json",
     "page/wordpress-plugins.json",
     "page/drupal-modules.json",
     "page/website-programs-page.json",

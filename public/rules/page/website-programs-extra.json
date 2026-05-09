@@ -1,0 +1,250 @@
+{
+  "page": {
+    "websitePrograms": {
+      "defaults": { "category": "网站程序" },
+      "rules": [
+        {
+          "defaults": { "confidence": "高", "kind": "博客平台" },
+          "rules": [
+            {
+              "name": "Tumblr",
+              "url": "https://www.tumblr.com",
+              "matchType": "regex",
+              "patterns": ["(?:^|\\.)tumblr\\.com/", "assets\\.tumblr\\.com", "static\\.tumblr\\.com", "px\\.srvcs\\.tumblr\\.com"],
+              "matchIn": ["url", "resources"]
+            },
+            {
+              "name": "Blogger",
+              "url": "https://www.blogger.com",
+              "matchType": "regex",
+              "patterns": [
+                "(?:^|\\.)blogspot\\.(?:com|co\\.|tw|hk|jp|sg|in|de|fr|kr)/",
+                "blogger\\.googleusercontent\\.com",
+                "resources\\.blogblog\\.com",
+                "www\\.blogger\\.com/static",
+                "<meta[^>]+name=['\"]?generator['\"]?[^>]+blogger"
+              ],
+              "matchIn": ["url", "resources", "html"]
+            },
+            {
+              "name": "Substack",
+              "url": "https://substack.com",
+              "matchType": "regex",
+              "patterns": ["(?:^|\\.)substack\\.com/", "substackcdn\\.com", "substackapi\\.com"],
+              "matchIn": ["url", "resources"]
+            },
+            {
+              "name": "Movable Type",
+              "url": "https://www.movabletype.org",
+              "matchType": "regex",
+              "patterns": [
+                "<meta[^>]+name=['\"]?generator['\"]?[^>]+(?:Movable Type|MovableType)",
+                "/mt-static/",
+                "mt-search\\.cgi",
+                "/mt\\.cgi",
+                "/mt-comments\\.cgi"
+              ],
+              "matchIn": ["html", "resources", "url"]
+            },
+            {
+              "name": "Halo",
+              "kind": "Java 博客",
+              "url": "https://halo.run",
+              "matchType": "regex",
+              "patterns": ["<meta[^>]+name=['\"]?generator['\"]?[^>]+Halo\\b", "/console/halo/", "/themes/halo-theme-", "halo-content"],
+              "matchIn": ["html", "resources", "url"]
+            },
+            {
+              "name": "Solo",
+              "kind": "Java 博客",
+              "url": "https://b3log.org/solo",
+              "matchType": "regex",
+              "patterns": ["<meta[^>]+name=['\"]?generator['\"]?[^>]+(?:Solo|B3log Solo)", "/skins/solo/"],
+              "matchIn": ["html", "resources"]
+            },
+            {
+              "name": "Emlog",
+              "kind": "PHP 博客",
+              "url": "https://www.emlog.net",
+              "matchType": "regex",
+              "patterns": ["<meta[^>]+name=['\"]?generator['\"]?[^>]+emlog", "/content/templates/", "/include/lib/checkrewrite\\.php"],
+              "matchIn": ["html", "resources"]
+            }
+          ]
+        },
+        {
+          "defaults": { "confidence": "中", "kind": "博客平台" },
+          "rules": [
+            {
+              "name": "Bear Blog",
+              "url": "https://bearblog.dev",
+              "matchType": "regex",
+              "patterns": ["(?:^|\\.)bearblog\\.dev/", "/static/bear/"],
+              "matchIn": ["url", "resources"]
+            },
+            {
+              "name": "Mataroa",
+              "url": "https://mataroa.blog",
+              "matchType": "regex",
+              "patterns": ["(?:^|\\.)mataroa\\.blog/", "<meta[^>]+name=['\"]?generator['\"]?[^>]+mataroa"],
+              "matchIn": ["url", "html"]
+            },
+            {
+              "name": "Pelican",
+              "kind": "Python 静态博客",
+              "url": "https://getpelican.com",
+              "matchType": "regex",
+              "patterns": ["<meta[^>]+name=['\"]?generator['\"]?[^>]+Pelican"],
+              "matchIn": ["html"]
+            },
+            {
+              "name": "Nikola",
+              "kind": "Python 静态博客",
+              "url": "https://getnikola.com",
+              "matchType": "regex",
+              "patterns": ["<meta[^>]+name=['\"]?generator['\"]?[^>]+Nikola"],
+              "matchIn": ["html"]
+            },
+            {
+              "name": "Octopress",
+              "url": "http://octopress.org",
+              "matchType": "regex",
+              "patterns": ["<meta[^>]+name=['\"]?generator['\"]?[^>]+Octopress"],
+              "matchIn": ["html"]
+            },
+            {
+              "name": "TextPattern CMS",
+              "url": "https://textpattern.com",
+              "matchType": "regex",
+              "patterns": ["<meta[^>]+name=['\"]?generator['\"]?[^>]+Textpattern", "/textpattern/", "/rpc/index\\.php"],
+              "matchIn": ["html", "url"]
+            }
+          ]
+        },
+        {
+          "defaults": { "confidence": "高", "kind": "论坛系统" },
+          "rules": [
+            {
+              "name": "Simple Machines Forum",
+              "url": "https://www.simplemachines.org",
+              "matchType": "regex",
+              "patterns": [
+                "<meta[^>]+name=['\"]?generator['\"]?[^>]+(?:SMF|Simple Machines)",
+                "/Themes/default/",
+                "index\\.php\\?action=",
+                "Sources/Subs\\.php"
+              ],
+              "matchIn": ["html", "resources", "url"]
+            },
+            {
+              "name": "MyBB",
+              "url": "https://mybb.com",
+              "matchType": "regex",
+              "patterns": [
+                "<meta[^>]+name=['\"]?generator['\"]?[^>]+MyBB",
+                "/jscripts/general\\.js",
+                "/jscripts/post\\.js",
+                "mybb_lastvisit",
+                "mybb_lastactive",
+                "/inc/mybb_group_logo\\.php"
+              ],
+              "matchIn": ["html", "resources", "url", "headers"]
+            },
+            {
+              "name": "NodeBB",
+              "url": "https://nodebb.org",
+              "matchType": "regex",
+              "patterns": ["nodebb-plugin-", "nodebb-theme-", "/assets/src/modules/translator", "data-template-name", "data-fa-i2svg"],
+              "matchIn": ["html", "resources"]
+            },
+            {
+              "name": "Vanilla Forums",
+              "url": "https://vanillaforums.com",
+              "matchType": "regex",
+              "patterns": [
+                "<meta[^>]+name=['\"]?generator['\"]?[^>]+Vanilla",
+                "vanilla\\.gardens",
+                "/applications/vanilla/",
+                "vanillaforums\\.com"
+              ],
+              "matchIn": ["html", "resources", "url"]
+            },
+            {
+              "name": "Invision Community",
+              "kind": "IPB",
+              "url": "https://invisioncommunity.com",
+              "matchType": "regex",
+              "patterns": [
+                "<meta[^>]+name=['\"]?generator['\"]?[^>]+(?:IPB|Invision)",
+                "/uploads/monthly_",
+                "ips_localKey",
+                "ipsKeyboardShortcuts",
+                "data-controller=['\"]core\\."
+              ],
+              "matchIn": ["html", "resources"]
+            },
+            {
+              "name": "FluxBB",
+              "url": "https://fluxbb.org",
+              "matchType": "regex",
+              "patterns": ["<meta[^>]+name=['\"]?generator['\"]?[^>]+FluxBB", "/style/imports/base"],
+              "matchIn": ["html", "resources"]
+            },
+            {
+              "name": "PunBB",
+              "url": "https://punbb.informer.com",
+              "matchType": "regex",
+              "patterns": ["<meta[^>]+name=['\"]?generator['\"]?[^>]+PunBB", "/include/js/punbb_common\\.js"],
+              "matchIn": ["html", "resources"]
+            },
+            {
+              "name": "bbPress",
+              "kind": "WordPress 论坛插件",
+              "url": "https://bbpress.org",
+              "matchType": "regex",
+              "patterns": ["bbp-(?:forum|topic|reply|user)-", "/plugins/bbpress/", "/bbpress\\.css", "data-bbp-"],
+              "matchIn": ["html", "resources"]
+            }
+          ]
+        },
+        {
+          "defaults": { "confidence": "高", "kind": "国内论坛系统" },
+          "rules": [
+            {
+              "name": "PHPWind",
+              "url": "http://www.phpwind.com",
+              "matchType": "regex",
+              "patterns": ["<meta[^>]+name=['\"]?generator['\"]?[^>]+(?:PHPWind|phpwind)", "/res/style/", "/cache/imageGlobal\\.js"],
+              "matchIn": ["html", "resources"]
+            },
+            {
+              "name": "HDWiki",
+              "url": "https://kuaipan.hudong.com",
+              "matchType": "regex",
+              "patterns": [
+                "<meta[^>]+name=['\"]?generator['\"]?[^>]+HDWiki",
+                "/view/default/script/jquery/",
+                "doc_(?:view|edit|history)\\.php"
+              ],
+              "matchIn": ["html", "url", "resources"]
+            },
+            {
+              "name": "BBSXP",
+              "url": "https://www.bbsxp.com",
+              "matchType": "regex",
+              "patterns": ["<meta[^>]+name=['\"]?generator['\"]?[^>]+BBSXP", "bbsxp", "/skins/default/"],
+              "matchIn": ["html"]
+            },
+            {
+              "name": "Pu!mdHd",
+              "url": "https://spring-plus.net",
+              "matchType": "regex",
+              "patterns": ["spring-plus\\.net", "Pu!mdHd"],
+              "matchIn": ["url", "html"]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
