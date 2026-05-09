@@ -457,6 +457,98 @@
         },
         {
           "defaults": {
+            "kind": "错误监控 / 前端 RUM",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Bugsnag",
+              "patterns": ["d2wy8f7a9ursnm\\.cloudfront\\.net/[^\\s\"'<>]*bugsnag|browser-notify\\.bugsnag\\.com|sessions\\.bugsnag\\.com"]
+            },
+            {
+              "name": "Rollbar",
+              "patterns": ["cdn\\.rollbar\\.com/rollbarjs|api\\.rollbar\\.com/api/1/(?:item|log)|rollbar\\.com/[^\\s\"'<>]*rollbar"]
+            },
+            {
+              "name": "Raygun",
+              "patterns": ["cdn\\.raygun\\.io/raygun4js|api\\.raygun\\.io|raygun\\.com/[^\\s\"'<>]*(?:raygun4js|monitoring)"]
+            },
+            {
+              "name": "Honeybadger",
+              "patterns": ["js\\.honeybadger\\.io|api\\.honeybadger\\.io/v1/(?:notices|metrics)|honeybadger\\.io/[^\\s\"'<>]*honeybadger"]
+            },
+            {
+              "name": "TrackJS",
+              "patterns": ["cdn\\.trackjs\\.com|capture\\.trackjs\\.com|trackjs\\.com/[^\\s\"'<>]*(?:tracker|agent)"]
+            },
+            {
+              "name": "Airbrake",
+              "patterns": [
+                "api\\.airbrake\\.io/api/v[0-9]/projects|notifier-configs\\.airbrake\\.io|airbrake\\.io/[^\\s\"'<>]*(?:js|notifier)"
+              ]
+            },
+            {
+              "name": "AppSignal",
+              "patterns": ["js\\.appsignal\\.com|errors\\.appsignal\\.com|appsignal\\.com/[^\\s\"'<>]*(?:javascript|front-end|rum)"]
+            },
+            {
+              "name": "Elastic APM RUM",
+              "patterns": ["elastic-apm-rum|elastic\\.co/[^\\s\"'<>]*(?:apm-rum|rum-agent)|/intake/v[0-9]/rum/events"]
+            },
+            {
+              "name": "Grafana Faro",
+              "patterns": ["faro-web-sdk|faro-collector-[a-z0-9-]+\\.grafana\\.net|grafana\\.com/[^\\s\"'<>]*faro"]
+            },
+            {
+              "name": "Dynatrace RUM",
+              "patterns": ["js-cdn\\.dynatrace\\.com|ruxitagentjs|dynatrace\\.com/[^\\s\"'<>]*(?:js-cdn|rum)"]
+            },
+            {
+              "name": "Splunk RUM",
+              "patterns": ["cdn\\.signalfx\\.com/o11y-gdi-rum|rum-ingest\\.[a-z0-9.-]+\\.signalfx\\.com|splunk-otel-web|splunkrum"]
+            },
+            {
+              "name": "Akamai mPulse",
+              "patterns": ["c\\.go-mpulse\\.net/boomerang|mpulse\\.soasta\\.com|akamai\\.com/[^\\s\"'<>]*mpulse"]
+            },
+            {
+              "name": "SpeedCurve LUX",
+              "patterns": ["cdn\\.speedcurve\\.com/js/lux|lux\\.speedcurve\\.com|speedcurve\\.com/[^\\s\"'<>]*(?:lux|rum)"]
+            },
+            {
+              "name": "Request Metrics",
+              "patterns": ["requestmetrics\\.com/agent|api\\.requestmetrics\\.com|requestmetrics\\.com/[^\\s\"'<>]*(?:rum|agent)"]
+            },
+            {
+              "name": "DebugBear RUM",
+              "patterns": ["cdn\\.debugbear\\.com|rum\\.debugbear\\.com|debugbear\\.com/[^\\s\"'<>]*(?:rum|sdk)"]
+            },
+            {
+              "name": "Pingdom RUM",
+              "patterns": ["rum-static\\.pingdom\\.net|rum-collector\\.pingdom\\.net|pingdom\\.net/[^\\s\"'<>]*rum"]
+            },
+            {
+              "name": "Sematext Experience",
+              "patterns": ["cdn\\.sematext\\.com/experience|rum-receiver\\.sematext\\.com|sematext\\.com/[^\\s\"'<>]*(?:experience|rum)"]
+            },
+            {
+              "name": "Instana EUM",
+              "patterns": ["eum\\.instana\\.io|instana\\.io/[^\\s\"'<>]*(?:eum|website-monitoring)|instana-eum"]
+            },
+            {
+              "name": "Atatus",
+              "patterns": ["dmc1acwvwny3\\.cloudfront\\.net/atatus|api\\.atatus\\.com|atatus\\.com/[^\\s\"'<>]*(?:rum|apm|browser)"]
+            },
+            {
+              "name": "Azure Application Insights",
+              "patterns": [
+                "js\\.monitor\\.azure\\.com/scripts/|az416426\\.vo\\.msecnd\\.net/scripts/|dc\\.services\\.visualstudio\\.com/v2/track"
+              ]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "产品分析"
           },
           "rules": [
