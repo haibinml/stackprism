@@ -908,7 +908,8 @@
           {
             "name": "OpenLayers",
             "patterns": [
-              "ol(?:\\.js|\\.css)|openlayers"
+              "(?:^|/)ol(?:\\.min)?\\.(?:js|css)(?:[?#].*)?$",
+              "(?:^|/)openlayers(?:[./_-]|$)"
             ],
             "globals": [
               "ol"
