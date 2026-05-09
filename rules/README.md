@@ -22,3 +22,5 @@
 `page/frontend-npm-cdn-libraries.json` 是根据公开 npm 搜索数据补充的前端相关包 CDN 规则，重点覆盖 cdnjs 未收录的 npm 包和 scoped 包。它覆盖 jsDelivr、UNPKG、esm.sh、esm.run、Skypack、JSPM 等资源 URL，并使用包名边界减少误报。
 
 `page/frontend-npm-alt-cdn-libraries.json` 是同一批 npm 包的补充 CDN 变体规则，覆盖 bundle.run、cdn.pika.dev、jsDelivr combine、esm.sh 版本化路径和 JSPM npm 前缀等资源 URL。这类规则带 `resourceHints`，页面或动态资源里没有对应 CDN 线索时会被快速跳过。
+
+`page/wordpress-plugins.json` 是根据 WordPress.org 公开插件目录补充的热门插件规则，识别 `/wp-content/plugins/{slug}/` 资源路径。规则分类为“网站源码线索”，只匹配资源 URL，并使用 `resourceHints` 快速跳过非 WordPress 插件资源。
