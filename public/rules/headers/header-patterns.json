@@ -625,6 +625,126 @@
       },
       {
         "defaults": {
+          "category": "SaaS / 第三方服务",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Google reCAPTCHA",
+            "patterns": [
+              "url: https?://www\\.google\\.com/recaptcha/",
+              "url: https?://www\\.recaptcha\\.net/recaptcha/",
+              "url: https?://www\\.gstatic\\.com/recaptcha/"
+            ],
+            "evidence": "响应 URL 指向 Google reCAPTCHA"
+          },
+          {
+            "name": "hCaptcha",
+            "patterns": ["url: https?://(?:js\\.)?hcaptcha\\.com/", "url: https?://newassets\\.hcaptcha\\.com/"],
+            "evidence": "响应 URL 指向 hCaptcha"
+          },
+          {
+            "name": "Cloudflare Turnstile",
+            "patterns": [
+              "url: https?://challenges\\.cloudflare\\.com/turnstile/",
+              "url: https?://challenges\\.cloudflare\\.com/cdn-cgi/challenge-platform/[^\\s]+turnstile"
+            ],
+            "evidence": "响应 URL 指向 Cloudflare Turnstile"
+          },
+          {
+            "name": "Cloudflare Managed Challenge",
+            "patterns": ["url: https?://challenges\\.cloudflare\\.com/cdn-cgi/challenge-platform/"],
+            "evidence": "响应 URL 指向 Cloudflare Challenge Platform"
+          },
+          {
+            "name": "Arkose Labs",
+            "patterns": ["url: https?://client-api\\.arkoselabs\\.com/", "url: https?://iframe\\.arkoselabs\\.com/"],
+            "evidence": "响应 URL 指向 Arkose Labs"
+          },
+          {
+            "name": "DataDome",
+            "patterns": ["url: https?://js\\.datadome\\.co/", "url: https?://api\\.datadome\\.co/"],
+            "evidence": "响应 URL 指向 DataDome"
+          },
+          {
+            "name": "Fingerprint Pro",
+            "patterns": [
+              "url: https?://fpjscdn\\.net/",
+              "url: https?://metrics\\.fingerprint\\.com/",
+              "url: https?://api\\.fingerprint\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Fingerprint Pro"
+          },
+          {
+            "name": "HUMAN Bot Defender",
+            "patterns": [
+              "url: https?://client\\.perimeterx\\.net/",
+              "url: https?://[^\\s/]+\\.px-cloud\\.net/",
+              "url: https?://[^\\s/]+\\.perimeterx\\.net/"
+            ],
+            "evidence": "响应 URL 指向 HUMAN / PerimeterX Bot Defender"
+          },
+          {
+            "name": "GeeTest",
+            "patterns": [
+              "url: https?://static\\.geetest\\.com/",
+              "url: https?://api\\.geetest\\.com/",
+              "url: https?://gcaptcha4\\.geetest\\.com/"
+            ],
+            "evidence": "响应 URL 指向 GeeTest"
+          },
+          {
+            "name": "Friendly Captcha",
+            "patterns": ["url: https?://cdn\\.friendlycaptcha\\.com/", "url: https?://api\\.friendlycaptcha\\.com/"],
+            "evidence": "响应 URL 指向 Friendly Captcha"
+          },
+          {
+            "name": "MTCaptcha",
+            "patterns": ["url: https?://service\\.mtcaptcha\\.com/", "url: https?://api\\.mtcaptcha\\.com/"],
+            "evidence": "响应 URL 指向 MTCaptcha"
+          },
+          {
+            "name": "Yandex SmartCaptcha",
+            "patterns": ["url: https?://smartcaptcha\\.yandexcloud\\.net/", "url: https?://captcha-api\\.yandex\\.ru/"],
+            "evidence": "响应 URL 指向 Yandex SmartCaptcha"
+          },
+          {
+            "name": "NetEase Yidun CAPTCHA",
+            "patterns": [
+              "url: https?://cstaticdun\\.126\\.net/",
+              "url: https?://cstaticdun\\.163\\.com/",
+              "url: https?://acstatic-dun\\.126\\.net/"
+            ],
+            "evidence": "响应 URL 指向网易易盾验证码"
+          },
+          {
+            "name": "Tencent CAPTCHA",
+            "patterns": ["url: https?://turing\\.captcha\\.qcloud\\.com/", "url: https?://ssl\\.captcha\\.qq\\.com/"],
+            "evidence": "响应 URL 指向腾讯验证码"
+          },
+          {
+            "name": "Alibaba Cloud CAPTCHA",
+            "patterns": [
+              "url: https?://captcha\\.aliyuncs\\.com/",
+              "url: https?://g\\.alicdn\\.com/AWSC/",
+              "url: https?://g\\.alicdn\\.com/sd/ncpc/"
+            ],
+            "evidence": "响应 URL 指向阿里云验证码"
+          },
+          {
+            "name": "Kasada",
+            "patterns": ["url: https?://[^\\s/]+\\.kasada\\.io/"],
+            "evidence": "响应 URL 指向 Kasada"
+          },
+          {
+            "name": "CHEQ",
+            "patterns": ["url: https?://ob\\.cheqzone\\.com/", "url: https?://[^\\s/]+\\.cheqzone\\.com/"],
+            "evidence": "响应 URL 指向 CHEQ"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "AI / 大模型",
           "confidence": "高"
         },
