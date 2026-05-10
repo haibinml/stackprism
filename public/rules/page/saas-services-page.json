@@ -498,6 +498,96 @@
           ]
         },
         {
+          "defaults": {
+            "kind": "AI 客服 / 文档问答",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Kapa.ai",
+              "patterns": ["widget\\.kapa\\.ai|kapa\\.ai/[^\\s\"'<>]*(?:widget|embed|chat|search)"]
+            },
+            {
+              "name": "Inkeep",
+              "patterns": [
+                "cdn\\.inkeep\\.com|api\\.inkeep\\.com|unpkg\\.com/@inkeep|cdn\\.jsdelivr\\.net/npm/@inkeep|inkeep\\.com/[^\\s\"'<>]*(?:widget|chat|search|embed)"
+              ]
+            },
+            {
+              "name": "Mendable",
+              "patterns": ["cdn\\.mendable\\.ai|api\\.mendable\\.ai|mendable\\.ai/[^\\s\"'<>]*(?:embed|widget|chat|search)"]
+            },
+            {
+              "name": "Wonderchat",
+              "patterns": ["app\\.wonderchat\\.io|cdn\\.wonderchat\\.io|wonderchat\\.io/[^\\s\"'<>]*(?:widget|chatbot|embed)"]
+            },
+            {
+              "name": "Cody AI",
+              "patterns": ["embed\\.meetcody\\.ai|meetcody\\.ai/[^\\s\"'<>]*(?:embed|widget|chatbot)"]
+            },
+            {
+              "name": "Dante AI",
+              "patterns": ["api\\.dante-ai\\.com|cdn\\.dante-ai\\.com|dante-ai\\.com/[^\\s\"'<>]*(?:embed|widget|chatbot)"]
+            },
+            {
+              "name": "MyAskAI",
+              "patterns": ["widget\\.myaskai\\.com|myaskai\\.com/[^\\s\"'<>]*(?:embed|widget|chatbot|chat)"]
+            },
+            {
+              "name": "Fini AI",
+              "patterns": ["app\\.usefini\\.com|cdn\\.usefini\\.com|usefini\\.com/[^\\s\"'<>]*(?:widget|chat|embed)"]
+            },
+            {
+              "name": "ChatNode",
+              "patterns": ["embed\\.chatnode\\.ai|chatnode\\.ai/[^\\s\"'<>]*(?:embed|widget|chatbot)"]
+            },
+            {
+              "name": "ChatThing",
+              "patterns": ["app\\.chatthing\\.ai|chatthing\\.ai/[^\\s\"'<>]*(?:embed|widget|chatbot)"]
+            },
+            {
+              "name": "Watermelon AI",
+              "patterns": ["wmchat\\.watermelon\\.co|watermelon\\.co/[^\\s\"'<>]*(?:chat|widget|bot|assistant)"]
+            },
+            {
+              "name": "Zowie",
+              "patterns": ["web-sdk\\.zowie\\.ai|chatbotize\\.com|zowie\\.ai/[^\\s\"'<>]*(?:web-sdk|chat|widget|bot)"]
+            },
+            {
+              "name": "Cognigy Webchat",
+              "patterns": ["webchat\\.cognigy\\.com|cognigy\\.ai/[^\\s\"'<>]*(?:webchat|widget|chat)"]
+            },
+            {
+              "name": "Kore.ai XO",
+              "patterns": ["bots\\.kore\\.ai|websdk\\.kore\\.ai|kore\\.ai/[^\\s\"'<>]*(?:websdk|chatbot|botkit|assistant)"]
+            },
+            {
+              "name": "Boost.ai",
+              "patterns": ["chat\\.boost\\.ai|boost\\.ai/[^\\s\"'<>]*(?:chat|webchat|widget|bot)"]
+            },
+            {
+              "name": "Certainly",
+              "patterns": ["app\\.certainly\\.io|cdn\\.certainly\\.io|certainly\\.io/[^\\s\"'<>]*(?:widget|chatbot|chat)"]
+            },
+            {
+              "name": "Decagon",
+              "patterns": ["api\\.decagon\\.ai|decagon\\.ai/[^\\s\"'<>]*(?:chat|widget|agent)"]
+            },
+            {
+              "name": "Sierra AI Agent",
+              "patterns": ["api\\.sierra\\.ai|sierra\\.ai/[^\\s\"'<>]*(?:agent|chat|assistant)"]
+            },
+            {
+              "name": "eesel AI",
+              "patterns": ["cdn\\.eesel\\.ai|eesel\\.ai/[^\\s\"'<>]*(?:chat|widget|bot|assistant)"]
+            },
+            {
+              "name": "Orimon",
+              "patterns": ["widget\\.orimon\\.ai|orimon\\.ai/[^\\s\"'<>]*(?:widget|chatbot|chat)"]
+            }
+          ]
+        },
+        {
           "name": "HubSpot",
           "kind": "CRM / 营销自动化",
           "patterns": ["js\\.hs-scripts\\.com|js\\.hsforms\\.net|hs-analytics\\.net|hubspot\\.com"],
