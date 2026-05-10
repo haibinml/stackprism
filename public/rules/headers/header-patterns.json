@@ -3900,6 +3900,129 @@
       },
       {
         "defaults": {
+          "category": "天气 / 气象数据",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "WeatherWidget.io",
+            "patterns": ["url: https?://weatherwidget\\.io/js/widget\\.min\\.js"],
+            "evidence": "响应 URL 指向 WeatherWidget.io"
+          },
+          {
+            "name": "OpenWeather Widgets",
+            "patterns": [
+              "url: https?://api\\.openweathermap\\.org/data/",
+              "url: https?://openweathermap\\.org/img/",
+              "url: https?://openweathermap\\.org/themes/[^\\s]*(?:widgets?|weather-widget)"
+            ],
+            "evidence": "响应 URL 指向 OpenWeather API 或组件资源"
+          },
+          {
+            "name": "Windy.com Embed",
+            "patterns": [
+              "url: https?://embed\\.windy\\.com/",
+              "url: https?://(?:www\\.)?windy\\.com/embed",
+              "url: https?://windy\\.app/widget/"
+            ],
+            "evidence": "响应 URL 指向 Windy.com 嵌入组件"
+          },
+          {
+            "name": "Meteoblue",
+            "patterns": [
+              "url: https?://static\\.meteoblue\\.com/",
+              "url: https?://my\\.meteoblue\\.com/visimage",
+              "url: https?://(?:www\\.)?meteoblue\\.com/[^\\s]*(?:widget|weather-map|embed)"
+            ],
+            "evidence": "响应 URL 指向 Meteoblue 天气组件"
+          },
+          {
+            "name": "AccuWeather Widget",
+            "patterns": ["url: https?://api\\.accuweather\\.com/", "url: https?://widgets\\.accuweather\\.com/"],
+            "evidence": "响应 URL 指向 AccuWeather API 或组件"
+          },
+          {
+            "name": "Weather Underground Widget",
+            "patterns": [
+              "url: https?://(?:www\\.)?weatherunderground\\.com/[^\\s]*(?:weatherstation|widget|dashboard)",
+              "url: https?://(?:www\\.)?wunderground\\.com/[^\\s]*(?:weatherstation|widget|dashboard)"
+            ],
+            "evidence": "响应 URL 指向 Weather Underground 组件"
+          },
+          {
+            "name": "Tomorrow.io Weather",
+            "patterns": ["url: https?://api\\.tomorrow\\.io/", "url: https?://app\\.tomorrow\\.io/"],
+            "evidence": "响应 URL 指向 Tomorrow.io Weather"
+          },
+          {
+            "name": "WeatherAPI.com",
+            "patterns": ["url: https?://api\\.weatherapi\\.com/"],
+            "evidence": "响应 URL 指向 WeatherAPI.com"
+          },
+          {
+            "name": "Weatherstack",
+            "patterns": ["url: https?://api\\.weatherstack\\.com/"],
+            "evidence": "响应 URL 指向 Weatherstack"
+          },
+          {
+            "name": "AerisWeather",
+            "patterns": ["url: https?://cdn\\.aerisapi\\.com/", "url: https?://api\\.aerisapi\\.com/", "url: https?://maps\\.aerisapi\\.com/"],
+            "evidence": "响应 URL 指向 AerisWeather"
+          },
+          {
+            "name": "Visual Crossing Weather",
+            "patterns": ["url: https?://weather\\.visualcrossing\\.com/VisualCrossingWebServices/"],
+            "evidence": "响应 URL 指向 Visual Crossing Weather API"
+          },
+          {
+            "name": "RainViewer",
+            "patterns": ["url: https?://tilecache\\.rainviewer\\.com/", "url: https?://api\\.rainviewer\\.com/"],
+            "evidence": "响应 URL 指向 RainViewer"
+          },
+          {
+            "name": "Foreca Weather",
+            "patterns": ["url: https?://pfa\\.foreca\\.com/"],
+            "evidence": "响应 URL 指向 Foreca Weather"
+          },
+          {
+            "name": "Yr.no Weather",
+            "patterns": ["url: https?://api\\.met\\.no/weatherapi/"],
+            "evidence": "响应 URL 指向 Yr.no / MET Norway Weather API"
+          },
+          {
+            "name": "World Weather Online",
+            "patterns": ["url: https?://api\\.worldweatheronline\\.com/"],
+            "evidence": "响应 URL 指向 World Weather Online"
+          },
+          {
+            "name": "Open-Meteo",
+            "patterns": ["url: https?://api\\.open-meteo\\.com/"],
+            "evidence": "响应 URL 指向 Open-Meteo"
+          },
+          {
+            "name": "Meteostat",
+            "patterns": ["url: https?://api\\.meteostat\\.net/"],
+            "evidence": "响应 URL 指向 Meteostat"
+          },
+          {
+            "name": "Ventusky",
+            "patterns": ["url: https?://(?:www\\.)?ventusky\\.com/[^\\s]*(?:embed|widget)"],
+            "evidence": "响应 URL 指向 Ventusky 嵌入组件"
+          },
+          {
+            "name": "Windfinder",
+            "patterns": ["url: https?://(?:www\\.)?windfinder\\.com/widget/"],
+            "evidence": "响应 URL 指向 Windfinder 组件"
+          },
+          {
+            "name": "Windguru",
+            "patterns": ["url: https?://(?:www\\.)?windguru\\.cz/[^\\s]*(?:int/iapi|widget)", "url: https?://(?:www\\.)?windguru\\.net/[^\\s]*widget"],
+            "evidence": "响应 URL 指向 Windguru 组件"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "SaaS / 第三方服务",
           "confidence": "高"
         },
