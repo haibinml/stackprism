@@ -196,6 +196,98 @@
         },
         {
           "defaults": {
+            "kind": "AI SDK / 浏览器推理",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Vercel AI SDK",
+              "patterns": ["(?:^|[\\/])@ai-sdk(?:[\\/._-]|%2f)|%40ai-sdk%2f|(?:cdn\\.jsdelivr\\.net|unpkg\\.com)/(?:npm/)?@ai-sdk/"]
+            },
+            {
+              "name": "LangChain.js",
+              "patterns": ["(?:^|[\\/])@langchain(?:[\\/._-]|%2f)|%40langchain%2f|langchain[^\\s\"'<>]*\\.(?:m?js|css|wasm)(?:\\?|$)"]
+            },
+            {
+              "name": "LlamaIndex.TS",
+              "patterns": ["(?:^|[\\/])@llamaindex(?:[\\/._-]|%2f)|%40llamaindex%2f|llamaindex[^\\s\"'<>]*\\.(?:m?js|css|wasm)(?:\\?|$)"]
+            },
+            {
+              "name": "Semantic Kernel JS",
+              "patterns": ["@microsoft/semantic-kernel|%40microsoft%2fsemantic-kernel|semantic-kernel[^\\s\"'<>]*\\.(?:m?js|css)(?:\\?|$)"]
+            },
+            {
+              "name": "Genkit",
+              "patterns": ["(?:^|[\\/])@genkit-ai(?:[\\/._-]|%2f)|%40genkit-ai%2f|genkit[^\\s\"'<>]*\\.(?:m?js|css)(?:\\?|$)"]
+            },
+            {
+              "name": "Mastra",
+              "patterns": ["(?:^|[\\/])@mastra(?:[\\/._-]|%2f)|%40mastra%2f|mastra[^\\s\"'<>]*\\.(?:m?js|css)(?:\\?|$)"]
+            },
+            {
+              "name": "CopilotKit",
+              "patterns": ["(?:^|[\\/])@copilotkit(?:[\\/._-]|%2f)|%40copilotkit%2f|copilotkit[^\\s\"'<>]*\\.(?:m?js|css)(?:\\?|$)"]
+            },
+            {
+              "name": "assistant-ui",
+              "patterns": ["(?:^|[\\/])@assistant-ui(?:[\\/._-]|%2f)|%40assistant-ui%2f|assistant-ui[^\\s\"'<>]*\\.(?:m?js|css)(?:\\?|$)"]
+            },
+            {
+              "name": "NLUX",
+              "patterns": ["(?:^|[\\/])@nlux(?:[\\/._-]|%2f)|%40nlux%2f|nlux[^\\s\"'<>]*\\.(?:m?js|css)(?:\\?|$)"]
+            },
+            {
+              "name": "OpenAI JavaScript SDK",
+              "patterns": ["(?:^|[\\/])@openai(?:[\\/._-]|%2f)|%40openai%2f|(?:cdn\\.jsdelivr\\.net|unpkg\\.com)/(?:npm/)?openai@"]
+            },
+            {
+              "name": "Anthropic JS SDK",
+              "patterns": ["@anthropic-ai/sdk|%40anthropic-ai%2fsdk|anthropic-sdk-typescript"]
+            },
+            {
+              "name": "Google GenAI JS SDK",
+              "patterns": [
+                "@google/(?:genai|generative-ai)|%40google%2f(?:genai|generative-ai)|google-genai[^\\s\"'<>]*\\.(?:m?js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Transformers.js",
+              "patterns": [
+                "@xenova/transformers|@huggingface/transformers|%40xenova%2ftransformers|%40huggingface%2ftransformers|transformers\\.min\\.js"
+              ]
+            },
+            {
+              "name": "ONNX Runtime Web",
+              "patterns": ["onnxruntime-web|onnxruntime[^\\s\"'<>]*\\.(?:m?js|wasm)(?:\\?|$)|ort-(?:wasm|webgpu)[^\\s\"'<>]*\\.wasm"]
+            },
+            {
+              "name": "TensorFlow.js",
+              "patterns": ["@tensorflow/tfjs|%40tensorflow%2ftfjs|tfjs[^\\s\"'<>]*\\.(?:m?js|wasm)(?:\\?|$)|tensorflowjs"]
+            },
+            {
+              "name": "MediaPipe",
+              "patterns": ["@mediapipe/|%40mediapipe%2f|mediapipe[^\\s\"'<>]*\\.(?:m?js|wasm|binarypb)(?:\\?|$)"]
+            },
+            {
+              "name": "WebLLM",
+              "patterns": ["@mlc-ai/web-llm|%40mlc-ai%2fweb-llm|web-llm[^\\s\"'<>]*\\.(?:m?js|wasm)(?:\\?|$)|mlc-ai\\.github\\.io/web-llm"]
+            },
+            {
+              "name": "ML5.js",
+              "patterns": ["(?:cdn\\.jsdelivr\\.net|unpkg\\.com)/(?:npm/)?ml5@|(?:^|[\\/])ml5(?:\\.min)?\\.js(?:\\?|$)"]
+            },
+            {
+              "name": "Tesseract.js",
+              "patterns": ["tesseract\\.js|tesseract\\.min\\.js|(?:cdn\\.jsdelivr\\.net|unpkg\\.com)/(?:npm/)?tesseract\\.js@"]
+            },
+            {
+              "name": "face-api.js",
+              "patterns": ["face-api\\.js|face-api\\.min\\.js|@vladmandic/face-api|%40vladmandic%2fface-api"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "大模型 API / 推理平台",
             "matchIn": ["resources"]
           },
