@@ -282,6 +282,62 @@
         },
         {
           "defaults": {
+            "kind": "API 网关 / 服务治理控制台"
+          },
+          "rules": [
+            {
+              "name": "Kong Manager",
+              "patterns": ["<title>\\s*Kong Manager(?:\\s*</title>|\\s+-)", "kong-manager[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Apache APISIX Dashboard",
+              "patterns": [
+                "<title>\\s*(?:Apache\\s+)?APISIX Dashboard(?:\\s*</title>|\\s+-)",
+                "apisix-dashboard[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Tyk Dashboard",
+              "patterns": ["<title>\\s*Tyk Dashboard(?:\\s*</title>|\\s+-)", "tyk-dashboard[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Nacos Console",
+              "patterns": [
+                "<title>\\s*Nacos(?:\\s+Console)?(?:\\s*</title>|\\s+-)",
+                "(?:^|/)nacos/(?:index\\.html|v1/console)(?:[?#\\s/]|$)",
+                "nacos[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "HashiCorp Consul",
+              "patterns": [
+                "<title>\\s*(?:HashiCorp Consul|Consul\\s+(?:by|\\|)\\s+HashiCorp)(?:\\s*</title>|\\s+-)",
+                "consul-ui[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "HashiCorp Nomad",
+              "patterns": [
+                "<title>\\s*(?:HashiCorp Nomad|Nomad\\s+(?:by|\\|)\\s+HashiCorp)(?:\\s*</title>|\\s+-)",
+                "nomad-ui[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "HashiCorp Vault",
+              "kind": "密钥管理控制台",
+              "patterns": [
+                "<title>\\s*(?:HashiCorp Vault|Vault\\s+(?:by|\\|)\\s+HashiCorp)(?:\\s*</title>|\\s+-)",
+                "vault-ui[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "ZooNavigator",
+              "patterns": ["<title>\\s*ZooNavigator(?:\\s*</title>|\\s+-)", "zoonavigator[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "自托管应用"
           },
           "rules": [

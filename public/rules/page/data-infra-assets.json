@@ -208,6 +208,42 @@
               "patterns": ["adminmongo[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             },
             {
+              "defaults": {
+                "kind": "API 网关 / 服务治理控制台"
+              },
+              "rules": [
+                {
+                  "name": "Kong Manager",
+                  "resourceHints": ["kong-manager"],
+                  "patterns": ["kong-manager[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+                },
+                {
+                  "name": "Apache APISIX Dashboard",
+                  "resourceHints": ["apisix-dashboard"],
+                  "patterns": ["apisix-dashboard[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+                },
+                {
+                  "name": "Tyk Dashboard",
+                  "resourceHints": ["tyk-dashboard"],
+                  "patterns": ["tyk-dashboard[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+                },
+                {
+                  "name": "Nacos Console",
+                  "resourceHints": ["/nacos/", "nacos"],
+                  "patterns": [
+                    "(?:^|/)nacos/(?:index\\.html|v1/console)(?:[?#\\s/]|$)",
+                    "nacos[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "ZooNavigator",
+                  "kind": "ZooKeeper 管理面板",
+                  "resourceHints": ["zoonavigator"],
+                  "patterns": ["zoonavigator[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+                }
+              ]
+            },
+            {
               "name": "RabbitMQ Management",
               "kind": "消息队列管理面板",
               "resourceHints": ["/js/ejs-", "rabbitmq"],
