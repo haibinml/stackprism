@@ -4469,6 +4469,114 @@
       },
       {
         "defaults": {
+          "category": "文档生成 / 截图 API",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "PDFShift",
+            "patterns": ["url: https?://api\\.pdfshift\\.io/v[0-9]+/convert/pdf"],
+            "evidence": "响应 URL 指向 PDFShift API"
+          },
+          {
+            "name": "PDF.co",
+            "patterns": ["url: https?://api\\.pdf\\.co/v[0-9]+/pdf/"],
+            "evidence": "响应 URL 指向 PDF.co API"
+          },
+          {
+            "name": "PDFMonkey",
+            "patterns": ["url: https?://api\\.pdfmonkey\\.io/api/v[0-9]+/documents"],
+            "evidence": "响应 URL 指向 PDFMonkey API"
+          },
+          {
+            "name": "DocSpring",
+            "patterns": ["url: https?://api\\.docspring\\.com/api/v[0-9]+/"],
+            "evidence": "响应 URL 指向 DocSpring API"
+          },
+          {
+            "name": "Cloudmersive Convert API",
+            "patterns": ["url: https?://api\\.cloudmersive\\.com/convert/"],
+            "evidence": "响应 URL 指向 Cloudmersive Convert API"
+          },
+          {
+            "name": "ConvertAPI",
+            "patterns": ["url: https?://v[0-9]+\\.convertapi\\.com/convert/"],
+            "evidence": "响应 URL 指向 ConvertAPI"
+          },
+          {
+            "name": "PDFCrowd",
+            "patterns": ["url: https?://api\\.pdfcrowd\\.com/convert/"],
+            "evidence": "响应 URL 指向 PDFCrowd API"
+          },
+          {
+            "name": "APITemplate.io",
+            "patterns": ["url: https?://api\\.apitemplate\\.io/v[0-9]+/(?:create|create-pdf|create-image)"],
+            "evidence": "响应 URL 指向 APITemplate.io API"
+          },
+          {
+            "name": "CraftMyPDF",
+            "patterns": ["url: https?://api\\.craftmypdf\\.com/v[0-9]+/(?:create|generate|render)"],
+            "evidence": "响应 URL 指向 CraftMyPDF API"
+          },
+          {
+            "name": "PDF Generator API",
+            "patterns": ["url: https?://(?:api|us1|eu1)\\.pdfgeneratorapi\\.com/api/v[0-9]+/"],
+            "evidence": "响应 URL 指向 PDF Generator API"
+          },
+          {
+            "name": "Carbone Cloud",
+            "patterns": ["url: https?://api\\.carbone\\.io/(?:render|template|status)"],
+            "evidence": "响应 URL 指向 Carbone Cloud API"
+          },
+          {
+            "name": "Restpack HTML to PDF",
+            "patterns": ["url: https?://restpack\\.io/api/html2pdf/v[0-9]+/"],
+            "evidence": "响应 URL 指向 Restpack HTML to PDF API"
+          },
+          {
+            "name": "PDFLayer",
+            "patterns": ["url: https?://api\\.pdflayer\\.com/api/convert"],
+            "evidence": "响应 URL 指向 PDFLayer API"
+          },
+          {
+            "name": "Browserless",
+            "patterns": ["url: https?://chrome\\.browserless\\.io/(?:pdf|screenshot|content)", "url: https?://production-[a-z0-9-]+\\.browserless\\.io/(?:pdf|screenshot|content)"],
+            "evidence": "响应 URL 指向 Browserless API"
+          },
+          {
+            "name": "Urlbox",
+            "patterns": ["url: https?://api\\.urlbox\\.io/v[0-9]+/[^\\s/]+/(?:png|jpg|jpeg|webp|pdf)"],
+            "evidence": "响应 URL 指向 Urlbox API"
+          },
+          {
+            "name": "ScreenshotOne",
+            "patterns": ["url: https?://api\\.screenshotone\\.com/take"],
+            "evidence": "响应 URL 指向 ScreenshotOne API"
+          },
+          {
+            "name": "ApiFlash",
+            "patterns": ["url: https?://api\\.apiflash\\.com/v[0-9]+/urltoimage"],
+            "evidence": "响应 URL 指向 ApiFlash API"
+          },
+          {
+            "name": "HTML/CSS to Image",
+            "patterns": ["url: https?://hcti\\.io/v[0-9]+/(?:image|pdf)"],
+            "evidence": "响应 URL 指向 HTML/CSS to Image API"
+          },
+          {
+            "name": "ScreenshotLayer",
+            "patterns": ["url: https?://api\\.screenshotlayer\\.com/api/capture"],
+            "evidence": "响应 URL 指向 ScreenshotLayer API"
+          },
+          {
+            "name": "ScreenshotMachine",
+            "patterns": ["url: https?://api\\.screenshotmachine\\.com/"],
+            "evidence": "响应 URL 指向 ScreenshotMachine API"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "SaaS / 第三方服务",
           "confidence": "高"
         },
