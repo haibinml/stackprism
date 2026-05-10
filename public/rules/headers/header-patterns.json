@@ -3734,6 +3734,121 @@
       },
       {
         "defaults": {
+          "category": "代码示例 / 在线 IDE 嵌入",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "StackBlitz",
+            "patterns": [
+              "url: https?://sdk\\.stackblitz\\.com/",
+              "url: https?://stackblitz\\.com/(?:edit|fork|github|embed)/"
+            ],
+            "evidence": "响应 URL 指向 StackBlitz 在线 IDE 或嵌入"
+          },
+          {
+            "name": "CodeSandbox",
+            "patterns": [
+              "url: https?://codesandbox\\.io/(?:embed|s|p/sandbox|api/v1/sandboxes)/",
+              "url: https?://codesandbox\\.io/static/js/embed"
+            ],
+            "evidence": "响应 URL 指向 CodeSandbox 在线 IDE 或嵌入"
+          },
+          {
+            "name": "CodePen",
+            "patterns": [
+              "url: https?://cpwebassets\\.codepen\\.io/assets/embed",
+              "url: https?://codepen\\.io/[^\\s]+/(?:embed|pen|details)/",
+              "url: https?://codepen\\.io/pen/define"
+            ],
+            "evidence": "响应 URL 指向 CodePen 代码示例嵌入"
+          },
+          {
+            "name": "JSFiddle",
+            "patterns": [
+              "url: https?://jsfiddle\\.net/[^\\s]+/embedded/",
+              "url: https?://fiddle\\.jshell\\.net/",
+              "url: https?://jsfiddle\\.net/js/embed"
+            ],
+            "evidence": "响应 URL 指向 JSFiddle 代码示例嵌入"
+          },
+          {
+            "name": "Observable",
+            "patterns": [
+              "url: https?://observablehq\\.com/embed/",
+              "url: https?://api\\.observablehq\\.com/",
+              "url: https?://static\\.observableusercontent\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Observable notebook 嵌入"
+          },
+          {
+            "name": "RunKit",
+            "patterns": ["url: https?://embed\\.runkit\\.com(?:/|$)", "url: https?://runkit\\.com/(?:e|embed)/"],
+            "evidence": "响应 URL 指向 RunKit 代码示例嵌入"
+          },
+          {
+            "name": "GitHub Gist",
+            "patterns": ["url: https?://gist\\.github\\.com/[^\\s]+\\.js(?:\\?|$)"],
+            "evidence": "响应 URL 指向 GitHub Gist 嵌入脚本"
+          },
+          {
+            "name": "Replit",
+            "patterns": [
+              "url: https?://replit\\.com/embed/",
+              "url: https?://replit\\.com/@[^\\s]+/[^\\s?]+\\?(?:embed|lite)=",
+              "url: https?://repl\\.it/@[^\\s]+/[^\\s?]+\\?(?:embed|lite)="
+            ],
+            "evidence": "响应 URL 指向 Replit 在线 IDE 或嵌入"
+          },
+          {
+            "name": "Glitch",
+            "patterns": ["url: https?://glitch\\.com/embed/", "url: https?://glitch\\.com/edit/#!/embed/"],
+            "evidence": "响应 URL 指向 Glitch 项目嵌入"
+          },
+          {
+            "name": "Val Town",
+            "patterns": ["url: https?://esm\\.town/v/", "url: https?://val\\.town/(?:embed|v)/", "url: https?://api\\.val\\.town/v[0-9]+/"],
+            "evidence": "响应 URL 指向 Val Town 代码服务"
+          },
+          {
+            "name": "Wokwi",
+            "patterns": ["url: https?://wokwi\\.com/(?:projects|embed)/[0-9]+"],
+            "evidence": "响应 URL 指向 Wokwi 模拟器嵌入"
+          },
+          {
+            "name": "DartPad",
+            "patterns": ["url: https?://dartpad\\.dev/(?:embed|iframe)", "url: https?://dartpad\\.dartlang\\.org/(?:embed|iframe)"],
+            "evidence": "响应 URL 指向 DartPad 嵌入"
+          },
+          {
+            "name": "Expo Snack",
+            "patterns": ["url: https?://snack\\.expo\\.dev/(?:embedded|@[^\\s]+/[^\\s?]+\\?(?:platform|preview|embed))"],
+            "evidence": "响应 URL 指向 Expo Snack 嵌入"
+          },
+          {
+            "name": "Plunker",
+            "patterns": ["url: https?://embed\\.plnkr\\.co/", "url: https?://plnkr\\.co/(?:edit|embed)/", "url: https?://run\\.plnkr\\.co/"],
+            "evidence": "响应 URL 指向 Plunker 代码示例嵌入"
+          },
+          {
+            "name": "Codeply",
+            "patterns": ["url: https?://(?:www\\.)?codeply\\.com/(?:embed|p)/"],
+            "evidence": "响应 URL 指向 Codeply 代码示例嵌入"
+          },
+          {
+            "name": "PlayCode",
+            "patterns": ["url: https?://playcode\\.io/(?:embed|new)", "url: https?://playcode\\.io/[^\\s]*\\?embed="],
+            "evidence": "响应 URL 指向 PlayCode 在线编辑器"
+          },
+          {
+            "name": "Gitpod",
+            "patterns": ["url: https?://gitpod\\.io/button/open-in-gitpod\\.svg", "url: https?://gitpod\\.io/#https?://"],
+            "evidence": "响应 URL 指向 Gitpod 在线开发环境"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "Headless CMS",
           "confidence": "高"
         },

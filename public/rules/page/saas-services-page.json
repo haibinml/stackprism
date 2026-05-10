@@ -6891,6 +6891,84 @@
               "patterns": ["cdn\\.scalar\\.com|scalar\\.com/[^\\s\"'<>]*(?:api-reference|docs|embed)|cdn\\.jsdelivr\\.net/npm/@scalar/"]
             }
           ]
+        },
+        {
+          "defaults": {
+            "kind": "代码示例 / 在线 IDE 嵌入",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "StackBlitz",
+              "patterns": ["sdk\\.stackblitz\\.com|stackblitz\\.com/(?:edit|fork|github|embed)/"]
+            },
+            {
+              "name": "CodeSandbox",
+              "patterns": ["codesandbox\\.io/(?:embed|s|p/sandbox|api/v1/sandboxes)/|codesandbox\\.io/static/js/embed"]
+            },
+            {
+              "name": "CodePen",
+              "patterns": ["cpwebassets\\.codepen\\.io/assets/embed|codepen\\.io/[^\\s\"'<>]+/(?:embed|pen|details)/|codepen\\.io/pen/define"]
+            },
+            {
+              "name": "JSFiddle",
+              "patterns": ["jsfiddle\\.net/[^\\s\"'<>]+/embedded/|fiddle\\.jshell\\.net/|jsfiddle\\.net/js/embed"]
+            },
+            {
+              "name": "Observable",
+              "patterns": ["observablehq\\.com/embed/|api\\.observablehq\\.com/|static\\.observableusercontent\\.com/"]
+            },
+            {
+              "name": "RunKit",
+              "patterns": ["embed\\.runkit\\.com|runkit\\.com/(?:e|embed)/"]
+            },
+            {
+              "name": "GitHub Gist",
+              "patterns": ["gist\\.github\\.com/[^\\s\"'<>]+\\.js(?:\\?|$)"]
+            },
+            {
+              "name": "Replit",
+              "patterns": [
+                "replit\\.com/embed/|replit\\.com/@[^\\s\"'<>]+/[^\\s\"'<>?]+\\?(?:embed|lite)=|repl\\.it/@[^\\s\"'<>]+/[^\\s\"'<>?]+\\?(?:embed|lite)="
+              ]
+            },
+            {
+              "name": "Glitch",
+              "patterns": ["glitch\\.com/embed/|glitch\\.com/edit/#!/embed/"]
+            },
+            {
+              "name": "Val Town",
+              "patterns": ["esm\\.town/v/|val\\.town/(?:embed|v)/|api\\.val\\.town/v[0-9]+/"]
+            },
+            {
+              "name": "Wokwi",
+              "patterns": ["wokwi\\.com/(?:projects|embed)/[0-9]+"]
+            },
+            {
+              "name": "DartPad",
+              "patterns": ["dartpad\\.dev/(?:embed|iframe)|dartpad\\.dartlang\\.org/(?:embed|iframe)"]
+            },
+            {
+              "name": "Expo Snack",
+              "patterns": ["snack\\.expo\\.dev/(?:embedded|@[^\\s\"'<>]+/[^\\s\"'<>?]+\\?(?:platform|preview|embed))"]
+            },
+            {
+              "name": "Plunker",
+              "patterns": ["embed\\.plnkr\\.co|plnkr\\.co/(?:edit|embed)/|run\\.plnkr\\.co/"]
+            },
+            {
+              "name": "Codeply",
+              "patterns": ["codeply\\.com/(?:embed|p)/"]
+            },
+            {
+              "name": "PlayCode",
+              "patterns": ["playcode\\.io/(?:embed|new)|playcode\\.io/[^\\s\"'<>]*\\?embed="]
+            },
+            {
+              "name": "Gitpod",
+              "patterns": ["gitpod\\.io/button/open-in-gitpod\\.svg|gitpod\\.io/#https?://"]
+            }
+          ]
         }
       ]
     }
