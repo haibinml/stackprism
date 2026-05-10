@@ -1939,6 +1939,102 @@
         },
         {
           "defaults": {
+            "kind": "通话追踪 / 来电归因",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "CallRail Tracking",
+              "patterns": ["cdn\\.callrail\\.com|scripts\\.callrail\\.com|callrail\\.com/[^\\s\"'<>]*(?:companies|swap|tracking)"]
+            },
+            {
+              "name": "CallTrackingMetrics",
+              "patterns": [
+                "scripts\\.calltrackingmetrics\\.com|cdn\\.calltrackingmetrics\\.com|calltrackingmetrics\\.com/[^\\s\"'<>]*(?:ctm|tracker|swap|scripts)"
+              ]
+            },
+            {
+              "name": "Invoca Call Tracking",
+              "patterns": ["solutions\\.invocacdn\\.com|pnapi\\.invoca\\.net|invoca\\.net/[^\\s\"'<>]*(?:tag|js|tracking)"]
+            },
+            {
+              "name": "DialogTech",
+              "patterns": [
+                "js\\.dialogtech\\.com|dtkwidgets\\.dialogtech\\.com|secure\\.ifbyphone\\.com/[^\\s\"'<>]*(?:js|ibp_clickto|dtk)"
+              ]
+            },
+            {
+              "name": "WhatConverts Tracking",
+              "patterns": ["scripts\\.whatconverts\\.com|whatconverts\\.com/[^\\s\"'<>]*(?:js|tracking|analytics)"]
+            },
+            {
+              "name": "Ringba",
+              "patterns": ["js\\.ringba\\.com|ringba\\.com/[^\\s\"'<>]*(?:js|scripts|tracking|numbers)"]
+            },
+            {
+              "name": "Marchex Call Analytics",
+              "patterns": ["rw\\d*\\.marchex\\.io|static\\.marchex\\.io|marchex\\.com/[^\\s\"'<>]*(?:call-analytics|number|tracking)"]
+            },
+            {
+              "name": "Infinity Call Tracking",
+              "patterns": [
+                "cdn\\.infinity\\.co|tag\\.infinity\\.co|webservices\\.infinity-tracking\\.com|infinity-tracking\\.com/[^\\s\"'<>]*(?:js|tracking|number)"
+              ]
+            },
+            {
+              "name": "ResponseTap",
+              "patterns": ["static\\.responsetap\\.com|responsetap\\.com/[^\\s\"'<>]*(?:static|tracking|number|script)"]
+            },
+            {
+              "name": "Nimbata",
+              "patterns": ["cdn\\.nimbata\\.com|app\\.nimbata\\.com|nimbata\\.com/[^\\s\"'<>]*(?:tracking|script|widget)"]
+            },
+            {
+              "name": "Ruler Analytics",
+              "patterns": ["analytics\\.ruleranalytics\\.com|ruleranalytics\\.com/[^\\s\"'<>]*(?:lib|tracking|call|analytics)"]
+            },
+            {
+              "name": "Mediahawk",
+              "patterns": ["hawk\\.mediahawk\\.co\\.uk|mediahawk\\.co\\.uk/[^\\s\"'<>]*(?:js|tracking|number|swap)"]
+            },
+            {
+              "name": "Phonexa",
+              "patterns": ["cdn\\.phonexa\\.com|js\\.phonexa\\.com|phonexa\\.com/[^\\s\"'<>]*(?:call|tracking|scripts)"]
+            },
+            {
+              "name": "Convirza",
+              "patterns": [
+                "cdn\\.convirza\\.com|scripts\\.convirza\\.com|convirza\\.com/[^\\s\"'<>]*(?:call-tracking|tracking|scripts)|logmycalls\\.com/[^\\s\"'<>]*(?:js|tracking)"
+              ]
+            },
+            {
+              "name": "Callcap",
+              "patterns": ["cdn\\.callcap\\.com|callcap\\.com/[^\\s\"'<>]*(?:tracking|call-tracking|number|script)"]
+            },
+            {
+              "name": "PhoneWagon",
+              "patterns": ["cdn\\.phonewagon\\.com|phonewagon\\.com/[^\\s\"'<>]*(?:tracking|call-tracking|script|numbers)"]
+            },
+            {
+              "name": "Retreaver",
+              "patterns": ["retreaver\\.com/[^\\s\"'<>]*(?:track|tracking|number|script)|cdn\\.retreaver\\.com"]
+            },
+            {
+              "name": "CallSource",
+              "patterns": ["callsource\\.com/[^\\s\"'<>]*(?:tracking|analytics|number|script)|cdn\\.callsource\\.com"]
+            },
+            {
+              "name": "CallScaler",
+              "patterns": ["callscaler\\.com/[^\\s\"'<>]*(?:tracking|numbers|script|widget)|cdn\\.callscaler\\.com"]
+            },
+            {
+              "name": "CallTrackingPro",
+              "patterns": ["calltrackingpro\\.com/[^\\s\"'<>]*(?:tracking|number|script|widget)|cdn\\.calltrackingpro\\.com"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "产品分析"
           },
           "rules": [
