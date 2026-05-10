@@ -523,6 +523,134 @@
       },
       {
         "defaults": {
+          "category": "状态页 / 可用性监控",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Atlassian Statuspage",
+            "patterns": [
+              "url: https?://cdn\\.statuspage\\.io/",
+              "url: https?://[^\\s/]+\\.statuspage\\.io/api/v2/(?:components|incidents|scheduled-maintenances|summary)\\.json"
+            ],
+            "evidence": "响应 URL 指向 Atlassian Statuspage"
+          },
+          {
+            "name": "Better Stack Status Page",
+            "patterns": [
+              "url: https?://uptime\\.betterstack\\.com/status-badges/",
+              "url: https?://betteruptime\\.com/api/v2/status-pages/",
+              "url: https?://[^\\s/]+\\.betteruptime\\.com/status-pages/"
+            ],
+            "evidence": "响应 URL 指向 Better Stack 状态页"
+          },
+          {
+            "name": "Instatus",
+            "patterns": ["url: https?://status\\.instatus\\.com/", "url: https?://[^\\s/]+\\.instatus\\.com/(?:embed|widget|api)/"],
+            "evidence": "响应 URL 指向 Instatus"
+          },
+          {
+            "name": "Status.io",
+            "patterns": ["url: https?://cdn\\.status\\.io/", "url: https?://api\\.status\\.io/", "url: https?://status\\.io/(?:pages|assets)/"],
+            "evidence": "响应 URL 指向 Status.io"
+          },
+          {
+            "name": "Freshstatus",
+            "patterns": ["url: https?://public\\.freshstatus\\.io/", "url: https?://freshstatus\\.io/[^\\s]*(?:widget|assets|api)"],
+            "evidence": "响应 URL 指向 Freshstatus"
+          },
+          {
+            "name": "StatusCast",
+            "patterns": ["url: https?://cdn\\.statuscast\\.com/", "url: https?://statuscast\\.com/[^\\s]*(?:embed|widget|assets|api)"],
+            "evidence": "响应 URL 指向 StatusCast"
+          },
+          {
+            "name": "Statuspal",
+            "patterns": [
+              "url: https?://statuspal\\.io/[^\\s]*(?:embed|widget|assets|api)",
+              "url: https?://statuspal\\.eu/[^\\s]*(?:embed|widget|assets|api)"
+            ],
+            "evidence": "响应 URL 指向 Statuspal"
+          },
+          {
+            "name": "Hund Status",
+            "patterns": ["url: https?://cdn\\.hund\\.io/", "url: https?://hund\\.io/[^\\s]*(?:widget|embed|assets|api)"],
+            "evidence": "响应 URL 指向 Hund 状态页"
+          },
+          {
+            "name": "Sorry App Status Page",
+            "patterns": ["url: https?://status\\.sorryapp\\.com/", "url: https?://sorryapp\\.com/[^\\s]*(?:widget|embed|assets|api)"],
+            "evidence": "响应 URL 指向 Sorry App 状态页"
+          },
+          {
+            "name": "incident.io Status Page",
+            "patterns": ["url: https?://status\\.incident\\.io/", "url: https?://assets\\.incident\\.io/", "url: https?://incident\\.io/[^\\s]*(?:status-page|status_pages)"],
+            "evidence": "响应 URL 指向 incident.io 状态页"
+          },
+          {
+            "name": "FireHydrant Status Page",
+            "patterns": ["url: https?://status\\.firehydrant\\.io/", "url: https?://cdn\\.firehydrant\\.io/", "url: https?://firehydrant\\.io/[^\\s]*(?:status-page|status_pages)"],
+            "evidence": "响应 URL 指向 FireHydrant 状态页"
+          },
+          {
+            "name": "Rootly Status Page",
+            "patterns": ["url: https?://status\\.rootly\\.com/", "url: https?://cdn\\.rootly\\.com/", "url: https?://rootly\\.com/[^\\s]*(?:status-page|status_pages)"],
+            "evidence": "响应 URL 指向 Rootly 状态页"
+          },
+          {
+            "name": "Squadcast Status Page",
+            "patterns": ["url: https?://status\\.squadcast\\.com/", "url: https?://squadcast\\.com/[^\\s]*(?:status-page|status_pages)"],
+            "evidence": "响应 URL 指向 Squadcast 状态页"
+          },
+          {
+            "name": "UptimeRobot Status Page",
+            "patterns": ["url: https?://stats\\.uptimerobot\\.com/", "url: https?://uptimerobot\\.com/[^\\s]*(?:status-page|status_pages)"],
+            "evidence": "响应 URL 指向 UptimeRobot 状态页"
+          },
+          {
+            "name": "Hyperping Status Page",
+            "patterns": ["url: https?://status\\.hyperping\\.io/", "url: https?://cdn\\.hyperping\\.io/", "url: https?://hyperping\\.io/[^\\s]*(?:widget|embed|status-page)"],
+            "evidence": "响应 URL 指向 Hyperping 状态页"
+          },
+          {
+            "name": "StatusCake Pages",
+            "patterns": ["url: https?://uptime\\.statuscake\\.com/", "url: https?://statuscake\\.com/[^\\s]*(?:status-page|public-status)"],
+            "evidence": "响应 URL 指向 StatusCake Pages"
+          },
+          {
+            "name": "Pingdom Status Page",
+            "patterns": ["url: https?://stats\\.pingdom\\.com/", "url: https?://pingdom\\.com/[^\\s]*(?:status-page|public-status)"],
+            "evidence": "响应 URL 指向 Pingdom 状态页"
+          },
+          {
+            "name": "Cronitor Status Page",
+            "patterns": ["url: https?://status\\.cronitor\\.io/", "url: https?://cronitorstatus\\.com/", "url: https?://cronitor\\.io/[^\\s]*(?:status-page|status_pages)"],
+            "evidence": "响应 URL 指向 Cronitor 状态页"
+          },
+          {
+            "name": "Pulsetic Status Page",
+            "patterns": ["url: https?://status\\.pulsetic\\.com/", "url: https?://cdn\\.pulsetic\\.com/", "url: https?://pulsetic\\.com/[^\\s]*(?:status-page|widget)"],
+            "evidence": "响应 URL 指向 Pulsetic 状态页"
+          },
+          {
+            "name": "StatusGator",
+            "patterns": ["url: https?://cdn\\.statusgator\\.com/", "url: https?://statusgator\\.com/[^\\s]*(?:statuspage|status-page|widget)"],
+            "evidence": "响应 URL 指向 StatusGator"
+          },
+          {
+            "name": "Healthchecks.io",
+            "patterns": ["url: https?://hc-ping\\.com/", "url: https?://healthchecks\\.io/ping/"],
+            "evidence": "响应 URL 指向 Healthchecks.io"
+          },
+          {
+            "name": "Gatus",
+            "patterns": ["url: https?://[^\\s/]+/api/v1/endpoints/statuses(?:[?#]|$)"],
+            "evidence": "响应 URL 指向 Gatus 状态接口"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "支付系统",
           "confidence": "高"
         },
