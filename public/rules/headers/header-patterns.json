@@ -4358,6 +4358,117 @@
       },
       {
         "defaults": {
+          "category": "地址验证 / 地理编码",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Google Places / Geocoding API",
+            "patterns": ["url: https?://maps\\.googleapis\\.com/maps/api/(?:geocode|place)/"],
+            "evidence": "响应 URL 指向 Google Places / Geocoding API"
+          },
+          {
+            "name": "Mapbox Geocoding",
+            "patterns": ["url: https?://api\\.mapbox\\.com/geocoding/v[0-9]+/"],
+            "evidence": "响应 URL 指向 Mapbox Geocoding"
+          },
+          {
+            "name": "HERE Geocoding & Search",
+            "patterns": ["url: https?://geocode\\.search\\.hereapi\\.com/v[0-9]+/", "url: https?://discover\\.search\\.hereapi\\.com/v[0-9]+/"],
+            "evidence": "响应 URL 指向 HERE Geocoding & Search"
+          },
+          {
+            "name": "TomTom Search API",
+            "patterns": ["url: https?://api\\.tomtom\\.com/search/[0-9.]+/(?:geocode|reverseGeocode|search|poiSearch)"],
+            "evidence": "响应 URL 指向 TomTom Search API"
+          },
+          {
+            "name": "Azure Maps Search",
+            "patterns": ["url: https?://atlas\\.microsoft\\.com/search/(?:address|fuzzy|poi|nearby|address/reverse)"],
+            "evidence": "响应 URL 指向 Azure Maps Search"
+          },
+          {
+            "name": "ArcGIS World Geocoding",
+            "patterns": ["url: https?://geocode\\.arcgis\\.com/arcgis/rest/services/World/GeocodeServer/"],
+            "evidence": "响应 URL 指向 ArcGIS World Geocoding"
+          },
+          {
+            "name": "MapTiler Geocoding",
+            "patterns": ["url: https?://api\\.maptiler\\.com/geocoding/"],
+            "evidence": "响应 URL 指向 MapTiler Geocoding"
+          },
+          {
+            "name": "MapQuest Geocoding",
+            "patterns": ["url: https?://www\\.mapquestapi\\.com/geocoding/v[0-9]+/"],
+            "evidence": "响应 URL 指向 MapQuest Geocoding"
+          },
+          {
+            "name": "OpenCage Geocoder",
+            "patterns": ["url: https?://api\\.opencagedata\\.com/geocode/v[0-9]+/"],
+            "evidence": "响应 URL 指向 OpenCage Geocoder"
+          },
+          {
+            "name": "Geocodio",
+            "patterns": ["url: https?://api\\.geocod\\.io/v[0-9.]+/(?:geocode|reverse)"],
+            "evidence": "响应 URL 指向 Geocodio"
+          },
+          {
+            "name": "Positionstack",
+            "patterns": ["url: https?://api\\.positionstack\\.com/v[0-9]+/(?:forward|reverse)"],
+            "evidence": "响应 URL 指向 Positionstack"
+          },
+          {
+            "name": "Geoapify Geocoding",
+            "patterns": ["url: https?://api\\.geoapify\\.com/v[0-9]+/(?:geocode|geocoder|place-details|places)"],
+            "evidence": "响应 URL 指向 Geoapify Geocoding"
+          },
+          {
+            "name": "LocationIQ Geocoding",
+            "patterns": ["url: https?://api\\.locationiq\\.com/v[0-9]+/(?:search|reverse|autocomplete)"],
+            "evidence": "响应 URL 指向 LocationIQ Geocoding"
+          },
+          {
+            "name": "Radar Geocoding",
+            "patterns": ["url: https?://api\\.radar\\.io/v[0-9]+/(?:geocode|search/autocomplete|search/places)"],
+            "evidence": "响应 URL 指向 Radar Geocoding"
+          },
+          {
+            "name": "Geocode Earth / Pelias",
+            "patterns": ["url: https?://api\\.geocode\\.earth/v[0-9]+/(?:search|reverse|autocomplete|place)"],
+            "evidence": "响应 URL 指向 Geocode Earth / Pelias"
+          },
+          {
+            "name": "OpenStreetMap Nominatim",
+            "patterns": ["url: https?://nominatim\\.openstreetmap\\.org/(?:search|reverse|lookup)"],
+            "evidence": "响应 URL 指向 OpenStreetMap Nominatim"
+          },
+          {
+            "name": "what3words",
+            "patterns": ["url: https?://api\\.what3words\\.com/v[0-9]+/(?:convert-to-3wa|convert-to-coordinates|autosuggest)"],
+            "evidence": "响应 URL 指向 what3words API"
+          },
+          {
+            "name": "Smarty Address Verification",
+            "patterns": [
+              "url: https?://(?:us-street|us-autocomplete-pro|international-street)\\.api\\.smarty\\.com/",
+              "url: https?://api\\.smarty\\.com/(?:street-address|us-autocomplete-pro|international-street)/"
+            ],
+            "evidence": "响应 URL 指向 Smarty 地址验证 API"
+          },
+          {
+            "name": "Loqate Address Capture",
+            "patterns": ["url: https?://api\\.addressy\\.com/Capture/Interactive/", "url: https?://services\\.postcodeanywhere\\.co\\.uk/Capture/Interactive/"],
+            "evidence": "响应 URL 指向 Loqate Address Capture"
+          },
+          {
+            "name": "Ideal Postcodes",
+            "patterns": ["url: https?://api\\.ideal-postcodes\\.co\\.uk/v[0-9]+/"],
+            "evidence": "响应 URL 指向 Ideal Postcodes"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "SaaS / 第三方服务",
           "confidence": "高"
         },
