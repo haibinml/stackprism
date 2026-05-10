@@ -243,6 +243,201 @@
               "matchIn": ["url", "html"]
             }
           ]
+        },
+        {
+          "defaults": { "confidence": "高", "kind": "学习管理系统 / 在线教育平台" },
+          "rules": [
+            {
+              "name": "Canvas LMS",
+              "url": "https://www.instructure.com/canvas",
+              "matchType": "regex",
+              "patterns": [
+                "<meta[^>]+name=['\"]?generator['\"]?[^>]+Canvas",
+                "canvas\\.instructure\\.com|instructure\\.com/[^\\s\"'<>]*(?:canvas|courses)",
+                "(?:^|/)dist/webpack-production/[^\\s\"'<>]*(?:canvas|app)[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ],
+              "matchIn": ["html", "resources", "url"]
+            },
+            {
+              "name": "Open edX",
+              "url": "https://openedx.org",
+              "matchType": "regex",
+              "patterns": [
+                "<meta[^>]+name=['\"]?generator['\"]?[^>]+(?:Open edX|openedx)",
+                "(?:^|/)static/(?:edx|openedx|common|studio)/",
+                "(?:^|/)courses/course-v1:",
+                "openedx[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ],
+              "matchIn": ["html", "resources", "url"]
+            },
+            {
+              "name": "Chamilo",
+              "url": "https://chamilo.org",
+              "matchType": "regex",
+              "patterns": [
+                "<meta[^>]+name=['\"]?generator['\"]?[^>]+Chamilo",
+                "(?:^|/)main/inc/lib/javascript/",
+                "chamilo[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ],
+              "matchIn": ["html", "resources"]
+            },
+            {
+              "name": "ILIAS",
+              "url": "https://www.ilias.de",
+              "matchType": "regex",
+              "patterns": [
+                "<meta[^>]+name=['\"]?generator['\"]?[^>]+ILIAS",
+                "(?:^|/)ilias\\.php(?:[?#]|$)",
+                "(?:^|/)templates/[^\\s\"'<>]*/(?:css|js)/[^\\s\"'<>]*ilias"
+              ],
+              "matchIn": ["html", "resources", "url"]
+            },
+            {
+              "name": "Sakai",
+              "url": "https://www.sakailms.org",
+              "matchType": "regex",
+              "patterns": [
+                "<meta[^>]+name=['\"]?generator['\"]?[^>]+Sakai",
+                "(?:^|/)library/skin/[^\\s\"'<>]*sakai",
+                "sakai[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ],
+              "matchIn": ["html", "resources"]
+            },
+            {
+              "name": "OpenOLAT",
+              "url": "https://www.openolat.com",
+              "matchType": "regex",
+              "patterns": [
+                "<meta[^>]+name=['\"]?generator['\"]?[^>]+OpenOLAT",
+                "openolat[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+                "(?:^|/)olat/(?:raw|dmz|auth)(?:/|[?#]|$)"
+              ],
+              "matchIn": ["html", "resources", "url"]
+            },
+            {
+              "name": "Blackboard Learn",
+              "url": "https://www.blackboard.com/teaching-learning/learning-management/blackboard-learn",
+              "matchType": "regex",
+              "patterns": [
+                "learn\\.blackboardcdn\\.com|blackboard\\.com/[^\\s\"'<>]*(?:learn|bbcswebdav)",
+                "(?:^|/)webapps/blackboard/(?:execute|content|admin)(?:[?#/]|$)",
+                "(?:^|/)bbcswebdav(?:/|[?#]|$)"
+              ],
+              "matchIn": ["resources", "url"]
+            },
+            {
+              "name": "D2L Brightspace",
+              "url": "https://www.d2l.com/brightspace",
+              "matchType": "regex",
+              "patterns": [
+                "brightspace\\.com|d2l\\.com/[^\\s\"'<>]*brightspace|desire2learn",
+                "(?:^|/)d2l/(?:common|lp|le|api)(?:/|[?#]|$)"
+              ],
+              "matchIn": ["html", "resources", "url"]
+            },
+            {
+              "name": "Schoology",
+              "url": "https://www.schoology.com",
+              "matchType": "regex",
+              "patterns": [
+                "schoology\\.com|schoologycdn\\.com",
+                "(?:^|/)sites/all/themes/schoology(?:/|[?#]|$)",
+                "schoology[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ],
+              "matchIn": ["resources", "url"]
+            },
+            {
+              "name": "Docebo",
+              "url": "https://www.docebo.com",
+              "matchType": "regex",
+              "patterns": ["docebo\\.com|docebosaas\\.com", "docebo[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"],
+              "matchIn": ["resources", "url"]
+            },
+            {
+              "name": "Absorb LMS",
+              "url": "https://www.absorblms.com",
+              "matchType": "regex",
+              "patterns": ["myabsorb\\.com|absorblms\\.com", "absorb-lms[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"],
+              "matchIn": ["resources", "url"]
+            },
+            {
+              "name": "LearnUpon",
+              "url": "https://www.learnupon.com",
+              "matchType": "regex",
+              "patterns": ["learnupon\\.com|learnupon\\.net", "learnupon[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"],
+              "matchIn": ["resources", "url"]
+            },
+            {
+              "name": "Totara Learn",
+              "url": "https://www.totara.com/products/totara-learn",
+              "matchType": "regex",
+              "patterns": [
+                "totaralms|totara\\.com/[^\\s\"'<>]*learn",
+                "(?:^|/)theme/totara(?:/|[?#]|$)",
+                "totara[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ],
+              "matchIn": ["html", "resources", "url"]
+            },
+            {
+              "name": "Moodle Workplace",
+              "url": "https://moodle.com/workplace",
+              "matchType": "regex",
+              "patterns": [
+                "moodleworkplace|moodle\\.com/[^\\s\"'<>]*workplace",
+                "workplace[^\\s\"'<>]*moodle[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ],
+              "matchIn": ["html", "resources", "url"]
+            },
+            {
+              "name": "Forma LMS",
+              "url": "https://www.formalms.org",
+              "matchType": "regex",
+              "patterns": ["formalms|forma-lms", "<meta[^>]+name=['\"]?generator['\"]?[^>]+Forma LMS"],
+              "matchIn": ["html", "resources", "url"]
+            },
+            {
+              "name": "Open LMS",
+              "url": "https://www.openlms.net",
+              "matchType": "regex",
+              "patterns": [
+                "openlms\\.net|openlms[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+                "open-lms[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ],
+              "matchIn": ["resources", "url"]
+            },
+            {
+              "name": "Opigno LMS",
+              "url": "https://www.opigno.org",
+              "matchType": "regex",
+              "patterns": ["opigno[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)", "(?:^|/)profiles/opigno_lms(?:/|[?#]|$)"],
+              "matchIn": ["resources", "url"]
+            },
+            {
+              "name": "Open eClass",
+              "url": "https://www.openeclass.org",
+              "matchType": "regex",
+              "patterns": ["openeclass", "(?:^|/)modules/(?:auth|course_home|work|document)(?:/|[?#]|$).*openeclass"],
+              "matchIn": ["html", "resources", "url"]
+            },
+            {
+              "name": "Claroline",
+              "url": "https://www.claroline.net",
+              "matchType": "regex",
+              "patterns": ["claroline[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)", "<meta[^>]+name=['\"]?generator['\"]?[^>]+Claroline"],
+              "matchIn": ["html", "resources"]
+            },
+            {
+              "name": "ATutor",
+              "url": "https://atutor.github.io",
+              "matchType": "regex",
+              "patterns": [
+                "<meta[^>]+name=['\"]?generator['\"]?[^>]+ATutor",
+                "(?:^|/)ATutor(?:/|[?#]|$)",
+                "atutor[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ],
+              "matchIn": ["html", "resources", "url"]
+            }
+          ]
         }
       ]
     }
