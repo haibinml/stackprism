@@ -3080,6 +3080,214 @@
       },
       {
         "defaults": {
+          "category": "产品引导 / 用户反馈",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Pendo",
+            "patterns": ["url: https?://cdn\\.pendo\\.io/agent/static/", "url: https?://app\\.pendo\\.io/(?:data|agent)/"],
+            "evidence": "响应 URL 指向 Pendo 产品引导"
+          },
+          {
+            "name": "Appcues",
+            "patterns": ["url: https?://fast\\.appcues\\.com/", "url: https?://api\\.appcues\\.net/"],
+            "evidence": "响应 URL 指向 Appcues"
+          },
+          {
+            "name": "Userpilot",
+            "patterns": ["url: https?://js\\.userpilot\\.io/", "url: https?://api\\.userpilot\\.io/"],
+            "evidence": "响应 URL 指向 Userpilot"
+          },
+          {
+            "name": "Chameleon Tours",
+            "patterns": ["url: https?://fast\\.chameleon\\.io/", "url: https?://chmln-cdn\\.com/"],
+            "evidence": "响应 URL 指向 Chameleon Tours"
+          },
+          {
+            "name": "WalkMe",
+            "patterns": ["url: https?://cdn\\.walkme\\.com/users/", "url: https?://ec\\.walkme\\.com/"],
+            "evidence": "响应 URL 指向 WalkMe"
+          },
+          {
+            "name": "Whatfix",
+            "patterns": ["url: https?://cdn\\.whatfix\\.com/"],
+            "evidence": "响应 URL 指向 Whatfix"
+          },
+          {
+            "name": "UserGuiding",
+            "patterns": ["url: https?://js\\.userguiding\\.com/", "url: https?://static\\.userguiding\\.com/"],
+            "evidence": "响应 URL 指向 UserGuiding"
+          },
+          {
+            "name": "Product Fruits",
+            "patterns": ["url: https?://app\\.productfruits\\.com/static/", "url: https?://cdn\\.productfruits\\.com/"],
+            "evidence": "响应 URL 指向 Product Fruits"
+          },
+          {
+            "name": "Usetiful",
+            "patterns": ["url: https?://js\\.usetiful\\.com/", "url: https?://(?:www\\.)?usetiful\\.com/dist/usetiful\\.js"],
+            "evidence": "响应 URL 指向 Usetiful"
+          },
+          {
+            "name": "Userflow",
+            "patterns": ["url: https?://js\\.userflow\\.com/", "url: https?://beacon\\.userflow\\.com/"],
+            "evidence": "响应 URL 指向 Userflow"
+          },
+          {
+            "name": "Userlane",
+            "patterns": ["url: https?://cdn\\.userlane\\.com/", "url: https?://api\\.userlane\\.com/"],
+            "evidence": "响应 URL 指向 Userlane"
+          },
+          {
+            "name": "Stonly",
+            "patterns": ["url: https?://cdn\\.stonly\\.com/", "url: https?://stonly\\.com/js/widget"],
+            "evidence": "响应 URL 指向 Stonly"
+          },
+          {
+            "name": "CommandBar",
+            "patterns": ["url: https?://static\\.commandbar\\.com/", "url: https?://api\\.commandbar\\.com/"],
+            "evidence": "响应 URL 指向 CommandBar"
+          },
+          {
+            "name": "HelpHero",
+            "patterns": ["url: https?://app\\.helphero\\.co/embed", "url: https?://static\\.helphero\\.co/"],
+            "evidence": "响应 URL 指向 HelpHero"
+          },
+          {
+            "name": "UserVoice",
+            "patterns": ["url: https?://widget\\.uservoice\\.com/", "url: https?://cdn\\.uservoice\\.com/"],
+            "evidence": "响应 URL 指向 UserVoice"
+          },
+          {
+            "name": "Canny",
+            "patterns": ["url: https?://canny\\.io/sdk\\.js", "url: https?://cdn\\.canny\\.io/"],
+            "evidence": "响应 URL 指向 Canny"
+          },
+          {
+            "name": "Beamer",
+            "patterns": ["url: https?://app\\.getbeamer\\.com/js/beamer-embed\\.js", "url: https?://static\\.getbeamer\\.com/"],
+            "evidence": "响应 URL 指向 Beamer"
+          },
+          {
+            "name": "Headway",
+            "patterns": ["url: https?://cdn\\.headwayapp\\.co/widget", "url: https?://headwayapp\\.co/[^\\s]*(?:widget|changelog)"],
+            "evidence": "响应 URL 指向 Headway"
+          },
+          {
+            "name": "Frill",
+            "patterns": ["url: https?://widget\\.frill\\.co/", "url: https?://cdn\\.frill\\.co/"],
+            "evidence": "响应 URL 指向 Frill"
+          },
+          {
+            "name": "AnnounceKit",
+            "patterns": ["url: https?://announcekit\\.app/widget", "url: https?://cdn\\.announcekit\\.app/"],
+            "evidence": "响应 URL 指向 AnnounceKit"
+          },
+          {
+            "name": "Productboard Portal",
+            "patterns": ["url: https?://portal\\.productboard\\.com/", "url: https?://app\\.productboard\\.com/"],
+            "evidence": "响应 URL 指向 Productboard Portal"
+          },
+          {
+            "name": "Aha! Roadmaps",
+            "patterns": ["url: https?://app\\.aha\\.io/", "url: https?://(?!www\\.)[a-z0-9-]+\\.aha\\.io/(?:ideas|portal|roadmaps?)"],
+            "evidence": "响应 URL 指向 Aha! Roadmaps"
+          },
+          {
+            "name": "ProductPlan",
+            "patterns": ["url: https?://app\\.productplan\\.com/"],
+            "evidence": "响应 URL 指向 ProductPlan"
+          },
+          {
+            "name": "ProdPad",
+            "patterns": ["url: https?://portal\\.prodpad\\.com/", "url: https?://app\\.prodpad\\.com/"],
+            "evidence": "响应 URL 指向 ProdPad"
+          },
+          {
+            "name": "Roadmunk",
+            "patterns": ["url: https?://app\\.roadmunk\\.com/"],
+            "evidence": "响应 URL 指向 Roadmunk"
+          },
+          {
+            "name": "airfocus",
+            "patterns": ["url: https?://app\\.airfocus\\.com/"],
+            "evidence": "响应 URL 指向 airfocus"
+          },
+          {
+            "name": "Nolt",
+            "patterns": ["url: https?://(?!www\\.)[a-z0-9-]+\\.nolt\\.io/"],
+            "evidence": "响应 URL 指向 Nolt"
+          },
+          {
+            "name": "Featurebase",
+            "patterns": ["url: https?://do\\.featurebase\\.app/", "url: https?://feedback\\.featurebase\\.app/"],
+            "evidence": "响应 URL 指向 Featurebase"
+          },
+          {
+            "name": "Sleekplan",
+            "patterns": ["url: https?://widget\\.sleekplan\\.com/", "url: https?://cdn\\.sleekplan\\.com/"],
+            "evidence": "响应 URL 指向 Sleekplan"
+          },
+          {
+            "name": "Hellonext",
+            "patterns": ["url: https?://app\\.hellonext\\.co/"],
+            "evidence": "响应 URL 指向 Hellonext"
+          },
+          {
+            "name": "Upvoty",
+            "patterns": ["url: https?://app\\.upvoty\\.com/"],
+            "evidence": "响应 URL 指向 Upvoty"
+          },
+          {
+            "name": "Changelogfy",
+            "patterns": ["url: https?://app\\.changelogfy\\.com/"],
+            "evidence": "响应 URL 指向 Changelogfy"
+          },
+          {
+            "name": "Supahub",
+            "patterns": ["url: https?://app\\.supahub\\.com/"],
+            "evidence": "响应 URL 指向 Supahub"
+          },
+          {
+            "name": "ProductLift",
+            "patterns": ["url: https?://app\\.productlift\\.dev/"],
+            "evidence": "响应 URL 指向 ProductLift"
+          },
+          {
+            "name": "FeedBear",
+            "patterns": ["url: https?://app\\.feedbear\\.com/"],
+            "evidence": "响应 URL 指向 FeedBear"
+          },
+          {
+            "name": "LoopedIn",
+            "patterns": ["url: https?://app\\.loopedin\\.io/"],
+            "evidence": "响应 URL 指向 LoopedIn"
+          },
+          {
+            "name": "FeatureOS",
+            "patterns": ["url: https?://app\\.featureos\\.app/"],
+            "evidence": "响应 URL 指向 FeatureOS"
+          },
+          {
+            "name": "UserJot",
+            "patterns": ["url: https?://app\\.userjot\\.com/"],
+            "evidence": "响应 URL 指向 UserJot"
+          },
+          {
+            "name": "Noticeable",
+            "patterns": ["url: https?://widgets\\.noticeable\\.io/", "url: https?://sdk\\.noticeable\\.io/"],
+            "evidence": "响应 URL 指向 Noticeable"
+          },
+          {
+            "name": "ReleaseNotes.io",
+            "patterns": ["url: https?://app\\.releasenotes\\.io/"],
+            "evidence": "响应 URL 指向 ReleaseNotes.io"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "SaaS / 第三方服务",
           "confidence": "高"
         },
