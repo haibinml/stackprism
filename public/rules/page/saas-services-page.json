@@ -1797,6 +1797,94 @@
         },
         {
           "defaults": {
+            "kind": "媒体托管 / 图片处理",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Uploadcare",
+              "patterns": ["ucarecdn\\.com|uploadcare\\.com/[^\\s\"'<>]*(?:widget|api|cdn|upload)|uploadcarecdn\\.com"]
+            },
+            {
+              "name": "Filestack",
+              "patterns": ["cdn\\.filestackcontent\\.com|static\\.filestackapi\\.com|filestackapi\\.com|filestackcontent\\.com"]
+            },
+            {
+              "name": "ImageKit Image CDN",
+              "patterns": ["ik\\.imagekit\\.io|imagekit\\.io/[^\\s\"'<>]*(?:tr:|api|media-library|url-endpoint)"]
+            },
+            {
+              "name": "Sirv Media CDN",
+              "patterns": ["sirvcdn\\.com|sirv\\.com/[^\\s\"'<>]*(?:spin|zoom|cdn|image)"]
+            },
+            {
+              "name": "Cloudimage",
+              "patterns": ["cloudimg\\.io|cloudimage\\.io/[^\\s\"'<>]*(?:cdn|api|image|resize)"]
+            },
+            {
+              "name": "TwicPics",
+              "patterns": ["twic\\.pics|twicpics\\.com/[^\\s\"'<>]*(?:script|cdn|image|media)"]
+            },
+            {
+              "name": "ImageEngine",
+              "patterns": ["imgeng\\.in|imageengine\\.io/[^\\s\"'<>]*(?:cdn|image|imgeng|delivery)"]
+            },
+            {
+              "name": "Cloudflare Images",
+              "patterns": ["imagedelivery\\.net|cloudflare\\.com/[^\\s\"'<>]*(?:images|image-resizing)"]
+            },
+            {
+              "name": "Optimole Image CDN",
+              "patterns": ["mlcdn\\.com|optimole\\.com/[^\\s\"'<>]*(?:cdn|image|optimole)|optimole\\.cloud"]
+            },
+            {
+              "name": "ShortPixel CDN",
+              "patterns": ["cdn\\.shortpixel\\.ai|shortpixel\\.ai/[^\\s\"'<>]*(?:spai|cdn|adaptive|image)"]
+            },
+            {
+              "name": "Tinify API / TinyPNG",
+              "patterns": ["tinify\\.com|api\\.tinify\\.com|tinypng\\.com/[^\\s\"'<>]*(?:api|developer|compress)"]
+            },
+            {
+              "name": "Kraken.io",
+              "patterns": ["api\\.kraken\\.io|kraken\\.io/[^\\s\"'<>]*(?:web-interface|api|image-optimizer|resize)"]
+            },
+            {
+              "name": "Transloadit",
+              "patterns": ["tus\\.transloadit\\.com|api\\.transloadit\\.com|transloadit\\.com/[^\\s\"'<>]*(?:assemblies|robots|upload|api)"]
+            },
+            {
+              "name": "CloudConvert",
+              "patterns": ["api\\.cloudconvert\\.com|cloudconvert\\.com/[^\\s\"'<>]*(?:api|jobs|convert|tasks)"]
+            },
+            {
+              "name": "Bytescale",
+              "patterns": ["api\\.bytescale\\.com|upcdn\\.io|upload\\.io/[^\\s\"'<>]*(?:uploader|cdn|api|widget)"]
+            },
+            {
+              "name": "Publitio",
+              "patterns": ["cdn\\.publit\\.io|api\\.publit\\.io|publitio\\.com/[^\\s\"'<>]*(?:api|media|upload|cdn)"]
+            },
+            {
+              "name": "ImageBoss",
+              "patterns": ["imageboss\\.me|img\\.imageboss\\.me|imageboss\\.com/[^\\s\"'<>]*(?:cdn|image|transform)"]
+            },
+            {
+              "name": "Gumlet",
+              "patterns": ["gumlet\\.io|gumlet\\.com/[^\\s\"'<>]*(?:image|video|cdn|resize)"]
+            },
+            {
+              "name": "Pixelbin",
+              "patterns": ["cdn\\.pixelbin\\.io|api\\.pixelbin\\.io|pixelbin\\.io/[^\\s\"'<>]*(?:transform|image|media|cdn)"]
+            },
+            {
+              "name": "imgproxy",
+              "patterns": ["imgproxy/[^\\s\"'<>]*(?:insecure|plain|resize|rs:)|imgproxy\\.net|imgproxy\\.js"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "视频托管 / 嵌入播放器",
             "matchIn": ["resources"]
           },
