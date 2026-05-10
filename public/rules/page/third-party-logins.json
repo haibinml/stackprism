@@ -187,6 +187,76 @@
         "patterns": ["okta\\.com/oauth2", "okta-signin-widget", "OktaAuth"]
       },
       {
+        "defaults": {
+          "kind": "开源身份服务 / SSO"
+        },
+        "rules": [
+          {
+            "name": "Authentik",
+            "confidence": "高",
+            "patterns": ["<title>\\s*authentik(?:\\s*</title>|\\s+-)", "authentik[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+          },
+          {
+            "name": "Authelia",
+            "confidence": "高",
+            "patterns": ["<title>\\s*Authelia(?:\\s*</title>|\\s+-)", "authelia[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+          },
+          {
+            "name": "FusionAuth",
+            "confidence": "高",
+            "patterns": ["<title>\\s*FusionAuth(?:\\s*</title>|\\s+-)", "fusionauth[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+          },
+          {
+            "name": "ZITADEL",
+            "confidence": "高",
+            "patterns": ["<title>\\s*ZITADEL(?:\\s*</title>|\\s+-)", "zitadel[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+          },
+          {
+            "name": "Logto",
+            "confidence": "高",
+            "patterns": ["<title>\\s*Logto(?:\\s*</title>|\\s+-)", "logto[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+          },
+          {
+            "name": "Casdoor",
+            "confidence": "高",
+            "patterns": ["<title>\\s*Casdoor(?:\\s*</title>|\\s+-)", "casdoor[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+          },
+          {
+            "name": "Ory Kratos",
+            "confidence": "高",
+            "patterns": [
+              "<title>\\s*(?:Ory\\s+)?Kratos(?:\\s+Self-Service\\s+UI)?(?:\\s*</title>|\\s+-)",
+              "ory-kratos[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)",
+              "kratos-selfservice[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+            ]
+          },
+          {
+            "name": "Ory Hydra",
+            "confidence": "高",
+            "patterns": ["<title>\\s*Ory\\s+Hydra(?:\\s*</title>|\\s+-)", "ory-hydra[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+          },
+          {
+            "name": "SuperTokens",
+            "confidence": "高",
+            "patterns": ["<title>\\s*SuperTokens(?:\\s*</title>|\\s+-)", "supertokens[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+          },
+          {
+            "name": "Hanko",
+            "confidence": "高",
+            "patterns": ["<title>\\s*Hanko(?:\\s*</title>|\\s+-)", "hanko[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+          },
+          {
+            "name": "Dex",
+            "confidence": "中",
+            "patterns": [
+              "<title>\\s*Dex\\s+(?:Identity Provider|Login)(?:\\s*</title>|\\s+-)",
+              "(?:^|/)dex/(?:static|theme)/(?:css|js|img)(?:/|[?#\\s]|$)",
+              "dexidp[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+            ]
+          }
+        ]
+      },
+      {
         "name": "Keycloak 登录",
         "kind": "开源身份服务",
         "patterns": ["keycloak", "/realms/.*/protocol/openid-connect/auth", "kc-form-login", "Keycloak"]
