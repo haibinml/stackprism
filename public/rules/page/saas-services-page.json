@@ -3335,6 +3335,98 @@
           "name": "Notion",
           "kind": "文档 / 站点",
           "patterns": ["notion\\.so|notion-static\\.com|notion\\.site"]
+        },
+        {
+          "defaults": {
+            "kind": "文档 / 知识库",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "ReadMe.io",
+              "patterns": ["cdn\\.readme\\.io|dash\\.readme\\.com|readme\\.com/[^\\s\"'<>]*(?:docs|reference|recipes|changelog)"]
+            },
+            {
+              "name": "Mintlify",
+              "patterns": ["mintlify\\.app|mintlify\\.com/[^\\s\"'<>]*(?:docs|documentation|api)|mintlify-assets"]
+            },
+            {
+              "name": "Document360",
+              "patterns": [
+                "cdn\\.document360\\.io|document360\\.io/[^\\s\"'<>]*(?:docs|kb|help)|document360\\.com/[^\\s\"'<>]*(?:docs|kb|help)"
+              ]
+            },
+            {
+              "name": "HelpDocs",
+              "patterns": ["static\\.helpdocs\\.io|helpdocs\\.io/[^\\s\"'<>]*(?:article|collection|kb|api)"]
+            },
+            {
+              "name": "Helpjuice",
+              "patterns": ["assets\\.helpjuice\\.com|helpjuice\\.com/[^\\s\"'<>]*(?:help|knowledge|kb|articles)"]
+            },
+            {
+              "name": "Archbee",
+              "patterns": ["app\\.archbee\\.com|archbee\\.com/[^\\s\"'<>]*(?:public|docs|embed|api)"]
+            },
+            {
+              "name": "Slite Docs",
+              "patterns": ["slite\\.com/[^\\s\"'<>]*(?:app/docs|embed|api|workspace)|slite\\.cdn\\.prismic\\.io"]
+            },
+            {
+              "name": "Slab Knowledge Base",
+              "patterns": ["slab\\.com/[^\\s\"'<>]*(?:public|posts|topics|api)|static\\.slab\\.com"]
+            },
+            {
+              "name": "Coda Docs",
+              "patterns": ["coda\\.io/(?:embed|d/|apis/v1)|codahosted\\.io"]
+            },
+            {
+              "name": "Guru Knowledge Base",
+              "patterns": ["app\\.getguru\\.com|assets\\.getguru\\.com|getguru\\.com/[^\\s\"'<>]*(?:card|embed|knowledge|api)"]
+            },
+            {
+              "name": "Nuclino",
+              "patterns": ["nuclino\\.com/[^\\s\"'<>]*(?:embed|api|app|p/)|app\\.nuclino\\.com"]
+            },
+            {
+              "name": "Tettra",
+              "patterns": ["tettra\\.com/[^\\s\"'<>]*(?:knowledge|pages|api|embed)|app\\.tettra\\.co"]
+            },
+            {
+              "name": "Almanac Docs",
+              "patterns": ["almanac\\.io/[^\\s\"'<>]*(?:docs|embed|api|p/)|app\\.almanac\\.io"]
+            },
+            {
+              "name": "Dovetail Research",
+              "patterns": ["dovetail\\.com/[^\\s\"'<>]*(?:embed|projects|insights|research)|dovetailapp\\.com"]
+            },
+            {
+              "name": "Scribe",
+              "patterns": ["scribehow\\.com/(?:embed|shared|page)|scribehow\\.com/[^\\s\"'<>]*(?:view|workspace)"]
+            },
+            {
+              "name": "Tango",
+              "patterns": ["assets\\.tango\\.us|tango\\.us/[^\\s\"'<>]*(?:app/embed|view|workflows|share)"]
+            },
+            {
+              "name": "Guidde",
+              "patterns": ["assets\\.guidde\\.com|guidde\\.com/[^\\s\"'<>]*(?:embed|share|view|playbooks)"]
+            },
+            {
+              "name": "Docsie",
+              "patterns": ["cdn\\.docsie\\.io|docsie\\.io/[^\\s\"'<>]*(?:docs|embed|app|api)"]
+            },
+            {
+              "name": "Stoplight Elements",
+              "patterns": ["stoplight\\.io/[^\\s\"'<>]*(?:elements|api/v1/projects|embed|docs)|stoplight\\.io/api/v1"]
+            },
+            {
+              "name": "Redocly",
+              "patterns": [
+                "cdn\\.redoc\\.ly|redocly\\.com/[^\\s\"'<>]*(?:docs|redoc|reference|api)|redoc\\.ly/[^\\s\"'<>]*(?:docs|reference)"
+              ]
+            }
+          ]
         }
       ]
     }
