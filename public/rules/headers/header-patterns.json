@@ -1004,6 +1004,249 @@
             "name": "Plausible",
             "patterns": ["url: https?://(?:[a-z0-9-]+\\.)*plausible\\.io/"],
             "evidence": "响应 URL 指向 Plausible 服务"
+          },
+          {
+            "name": "Google Analytics",
+            "patterns": [
+              "url: https?://www\\.googletagmanager\\.com/gtag/js",
+              "url: https?://(?:www|region\\d+)\\.google-analytics\\.com/(?:analytics\\.js|ga\\.js|g/collect|collect)"
+            ],
+            "evidence": "响应 URL 指向 Google Analytics"
+          },
+          {
+            "name": "Google Tag Manager",
+            "patterns": ["url: https?://www\\.googletagmanager\\.com/gtm\\.js"],
+            "evidence": "响应 URL 指向 Google Tag Manager"
+          },
+          {
+            "name": "Baidu Tongji / 百度统计",
+            "patterns": ["url: https?://hm\\.baidu\\.com/hm\\.js", "url: https?://hm\\.baidu\\.com/hm\\.gif"],
+            "evidence": "响应 URL 指向百度统计"
+          },
+          {
+            "name": "Cloudflare Web Analytics",
+            "patterns": ["url: https?://static\\.cloudflareinsights\\.com/beacon(?:\\.min)?\\.js"],
+            "evidence": "响应 URL 指向 Cloudflare Web Analytics"
+          },
+          {
+            "name": "Vercel Web Analytics",
+            "patterns": ["url: https?://[^\\s/]+/_vercel/insights/script\\.js", "url: https?://va\\.vercel-scripts\\.com/v1/script\\.js"],
+            "evidence": "响应 URL 指向 Vercel Web Analytics"
+          },
+          {
+            "name": "Vercel Speed Insights",
+            "patterns": [
+              "url: https?://[^\\s/]+/_vercel/speed-insights/script\\.js",
+              "url: https?://va\\.vercel-scripts\\.com/v1/speed-insights"
+            ],
+            "evidence": "响应 URL 指向 Vercel Speed Insights"
+          },
+          {
+            "name": "Yandex Metrica",
+            "patterns": ["url: https?://mc\\.yandex\\.ru/metrika/", "url: https?://mc\\.yandex\\.ru/watch/"],
+            "evidence": "响应 URL 指向 Yandex Metrica"
+          },
+          {
+            "name": "Adobe Analytics",
+            "patterns": ["url: https?://[^\\s/]+\\.sc\\.omtrdc\\.net/", "url: https?://[^\\s/]+\\.2o7\\.net/"],
+            "evidence": "响应 URL 指向 Adobe Analytics"
+          },
+          {
+            "name": "Adobe Launch",
+            "patterns": ["url: https?://assets\\.adobedtm\\.com/"],
+            "evidence": "响应 URL 指向 Adobe Launch"
+          },
+          {
+            "name": "Matomo / Piwik",
+            "patterns": ["url: https?://[^\\s]+/(?:matomo|piwik)\\.js", "url: https?://[^\\s]+/(?:matomo|piwik)\\.php"],
+            "evidence": "响应 URL 指向 Matomo / Piwik"
+          },
+          {
+            "name": "Umami",
+            "patterns": ["url: https?://analytics\\.umami\\.is/script\\.js", "url: https?://cloud\\.umami\\.is/script\\.js"],
+            "evidence": "响应 URL 指向 Umami"
+          },
+          {
+            "name": "Fathom Analytics",
+            "patterns": ["url: https?://cdn\\.usefathom\\.com/script\\.js", "url: https?://api\\.usefathom\\.com/"],
+            "evidence": "响应 URL 指向 Fathom Analytics"
+          },
+          {
+            "name": "Pirsch",
+            "patterns": ["url: https?://api\\.pirsch\\.io/", "url: https?://pirsch\\.io/pirsch\\.js"],
+            "evidence": "响应 URL 指向 Pirsch"
+          },
+          {
+            "name": "Simple Analytics",
+            "patterns": ["url: https?://scripts\\.simpleanalyticscdn\\.com/", "url: https?://queue\\.simpleanalyticscdn\\.com/"],
+            "evidence": "响应 URL 指向 Simple Analytics"
+          },
+          {
+            "name": "GoatCounter",
+            "patterns": ["url: https?://gc\\.ziggoat\\.com/count\\.js", "url: https?://[^\\s/]+\\.goatcounter\\.com/count"],
+            "evidence": "响应 URL 指向 GoatCounter"
+          },
+          {
+            "name": "Clicky",
+            "patterns": ["url: https?://static\\.getclicky\\.com/", "url: https?://in\\.getclicky\\.com/"],
+            "evidence": "响应 URL 指向 Clicky"
+          },
+          {
+            "name": "Statcounter",
+            "patterns": ["url: https?://statcounter\\.com/counter/", "url: https?://c\\.statcounter\\.com/"],
+            "evidence": "响应 URL 指向 Statcounter"
+          },
+          {
+            "name": "Woopra",
+            "patterns": ["url: https?://static\\.woopra\\.com/js/w\\.js", "url: https?://[^\\s/]+\\.woopra\\.com/"],
+            "evidence": "响应 URL 指向 Woopra"
+          },
+          {
+            "name": "Heap",
+            "patterns": ["url: https?://cdn\\.heapanalytics\\.com/", "url: https?://heapanalytics\\.com/"],
+            "evidence": "响应 URL 指向 Heap"
+          },
+          {
+            "name": "Mixpanel",
+            "patterns": ["url: https?://cdn\\.mxpnl\\.com/", "url: https?://api\\.mixpanel\\.com/", "url: https?://api-js\\.mixpanel\\.com/"],
+            "evidence": "响应 URL 指向 Mixpanel"
+          },
+          {
+            "name": "Amplitude",
+            "patterns": ["url: https?://cdn\\.amplitude\\.com/", "url: https?://api2\\.amplitude\\.com/", "url: https?://api\\.eu\\.amplitude\\.com/"],
+            "evidence": "响应 URL 指向 Amplitude"
+          },
+          {
+            "name": "Countly",
+            "patterns": ["url: https?://cdn\\.count\\.ly/", "url: https?://[^\\s]+/countly\\.js"],
+            "evidence": "响应 URL 指向 Countly"
+          },
+          {
+            "name": "LogRocket",
+            "patterns": ["url: https?://cdn\\.lr-ingest\\.com/", "url: https?://cdn\\.logrocket\\.io/"],
+            "evidence": "响应 URL 指向 LogRocket"
+          },
+          {
+            "name": "FullStory",
+            "patterns": ["url: https?://edge\\.fullstory\\.com/", "url: https?://rs\\.fullstory\\.com/"],
+            "evidence": "响应 URL 指向 FullStory"
+          },
+          {
+            "name": "Datadog RUM",
+            "patterns": [
+              "url: https?://www\\.datadoghq-browser-agent\\.com/",
+              "url: https?://browser-intake-[a-z0-9-]+\\.datadoghq\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Datadog RUM"
+          },
+          {
+            "name": "New Relic Browser",
+            "patterns": ["url: https?://js-agent\\.newrelic\\.com/", "url: https?://bam\\.nr-data\\.net/"],
+            "evidence": "响应 URL 指向 New Relic Browser"
+          },
+          {
+            "name": "Bugsnag",
+            "patterns": ["url: https?://browser-notify\\.bugsnag\\.com/", "url: https?://sessions\\.bugsnag\\.com/"],
+            "evidence": "响应 URL 指向 Bugsnag"
+          },
+          {
+            "name": "Rollbar",
+            "patterns": ["url: https?://cdn\\.rollbar\\.com/rollbarjs", "url: https?://api\\.rollbar\\.com/api/1/"],
+            "evidence": "响应 URL 指向 Rollbar"
+          },
+          {
+            "name": "Raygun",
+            "patterns": ["url: https?://cdn\\.raygun\\.io/raygun4js", "url: https?://api\\.raygun\\.io/"],
+            "evidence": "响应 URL 指向 Raygun"
+          },
+          {
+            "name": "TrackJS",
+            "patterns": ["url: https?://cdn\\.trackjs\\.com/", "url: https?://capture\\.trackjs\\.com/"],
+            "evidence": "响应 URL 指向 TrackJS"
+          },
+          {
+            "name": "Honeybadger",
+            "patterns": ["url: https?://js\\.honeybadger\\.io/", "url: https?://api\\.honeybadger\\.io/v1/"],
+            "evidence": "响应 URL 指向 Honeybadger"
+          },
+          {
+            "name": "Elastic APM RUM",
+            "patterns": ["url: https?://[^\\s]+/intake/v\\d+/rum/events", "url: https?://[^\\s]+/elastic-apm-rum"],
+            "evidence": "响应 URL 指向 Elastic APM RUM"
+          },
+          {
+            "name": "Grafana Faro",
+            "patterns": ["url: https?://faro-collector-[a-z0-9-]+\\.grafana\\.net/", "url: https?://[^\\s]+/collect/faro"],
+            "evidence": "响应 URL 指向 Grafana Faro"
+          },
+          {
+            "name": "Dynatrace RUM",
+            "patterns": ["url: https?://js-cdn\\.dynatrace\\.com/", "url: https?://[^\\s]+/ruxitagentjs"],
+            "evidence": "响应 URL 指向 Dynatrace RUM"
+          },
+          {
+            "name": "Splunk RUM",
+            "patterns": ["url: https?://cdn\\.signalfx\\.com/o11y-gdi-rum", "url: https?://rum-ingest\\.[a-z0-9.-]+\\.signalfx\\.com/"],
+            "evidence": "响应 URL 指向 Splunk RUM"
+          },
+          {
+            "name": "SpeedCurve LUX",
+            "patterns": ["url: https?://cdn\\.speedcurve\\.com/js/lux", "url: https?://lux\\.speedcurve\\.com/"],
+            "evidence": "响应 URL 指向 SpeedCurve LUX"
+          },
+          {
+            "name": "Pingdom RUM",
+            "patterns": ["url: https?://rum-static\\.pingdom\\.net/", "url: https?://rum-collector\\.pingdom\\.net/"],
+            "evidence": "响应 URL 指向 Pingdom RUM"
+          },
+          {
+            "name": "Optimizely",
+            "patterns": ["url: https?://cdn\\.optimizely\\.com/"],
+            "evidence": "响应 URL 指向 Optimizely"
+          },
+          {
+            "name": "VWO",
+            "patterns": ["url: https?://dev\\.visualwebsiteoptimizer\\.com/", "url: https?://[^\\s/]+\\.visualwebsiteoptimizer\\.com/"],
+            "evidence": "响应 URL 指向 VWO"
+          },
+          {
+            "name": "LaunchDarkly",
+            "patterns": [
+              "url: https?://clientstream\\.launchdarkly\\.com/",
+              "url: https?://events\\.launchdarkly\\.com/",
+              "url: https?://app\\.launchdarkly\\.com/sdk/"
+            ],
+            "evidence": "响应 URL 指向 LaunchDarkly"
+          },
+          {
+            "name": "Statsig",
+            "patterns": ["url: https?://api\\.statsig\\.com/", "url: https?://events\\.statsigapi\\.net/"],
+            "evidence": "响应 URL 指向 Statsig"
+          },
+          {
+            "name": "GrowthBook",
+            "patterns": ["url: https?://cdn\\.growthbook\\.io/", "url: https?://api\\.growthbook\\.io/"],
+            "evidence": "响应 URL 指向 GrowthBook"
+          },
+          {
+            "name": "ConfigCat",
+            "patterns": ["url: https?://cdn\\.configcat\\.com/", "url: https?://configcat\\.com/[^\\s]*(?:sdk|config|flags)"],
+            "evidence": "响应 URL 指向 ConfigCat"
+          },
+          {
+            "name": "Split.io",
+            "patterns": ["url: https?://sdk\\.split\\.io/", "url: https?://cdn\\.split\\.io/", "url: https?://events\\.split\\.io/"],
+            "evidence": "响应 URL 指向 Split.io"
+          },
+          {
+            "name": "DevCycle",
+            "patterns": ["url: https?://client-sdk\\.devcycle\\.com/", "url: https?://events\\.devcycle\\.com/"],
+            "evidence": "响应 URL 指向 DevCycle"
+          },
+          {
+            "name": "AB Tasty",
+            "patterns": ["url: https?://try\\.abtasty\\.com/", "url: https?://ariane\\.abtasty\\.com/"],
+            "evidence": "响应 URL 指向 AB Tasty"
           }
         ]
       },
