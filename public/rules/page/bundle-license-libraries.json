@@ -465,6 +465,208 @@
             "name": "Sigma.js",
             "url": "https://www.sigmajs.org",
             "patterns": ["Sigma\\.js|sigmajs|sigma\\.min\\.js"]
+          },
+          {
+            "category": "前端框架",
+            "name": "Next.js",
+            "url": "https://nextjs.org",
+            "patterns": ["\\bNext\\.js\\b|@next/(?:env|swc|react-dev-overlay)|next/dist/"]
+          },
+          {
+            "category": "前端框架",
+            "name": "Nuxt",
+            "url": "https://nuxt.com",
+            "patterns": ["\\bNuxt\\b|@nuxt/|nuxt/dist"]
+          },
+          {
+            "name": "Vue Router",
+            "url": "https://router.vuejs.org",
+            "patterns": ["vue-router|Vue Router|router\\.vuejs\\.org"]
+          },
+          {
+            "name": "Pinia",
+            "url": "https://pinia.vuejs.org",
+            "patterns": ["\\bPinia\\b|pinia\\.vuejs\\.org|vuejs/pinia"]
+          },
+          {
+            "name": "Vuex",
+            "url": "https://vuex.vuejs.org",
+            "patterns": ["\\bVuex\\b|vuex\\.vuejs\\.org|vuejs/vuex"]
+          },
+          {
+            "name": "VueUse",
+            "url": "https://vueuse.org",
+            "patterns": ["\\bVueUse\\b|@vueuse/(?:core|shared)|vueuse\\.org"]
+          },
+          {
+            "name": "MobX",
+            "url": "https://mobx.js.org",
+            "patterns": ["\\bMobX\\b|mobx\\.js\\.org|mobx(?:\\.umd)?\\.js"]
+          },
+          {
+            "name": "Jotai",
+            "url": "https://jotai.org",
+            "patterns": ["\\bJotai\\b|pmndrs/jotai|jotai\\.org"]
+          },
+          {
+            "name": "Recoil",
+            "url": "https://recoiljs.org",
+            "patterns": ["\\bRecoil\\b|recoiljs\\.org|facebookexperimental/Recoil"]
+          },
+          {
+            "name": "Valtio",
+            "url": "https://valtio.dev",
+            "patterns": ["\\bValtio\\b|pmndrs/valtio|valtio\\.dev"]
+          },
+          {
+            "name": "Redux Toolkit",
+            "url": "https://redux-toolkit.js.org",
+            "patterns": ["@reduxjs/toolkit|Redux Toolkit|redux-toolkit"]
+          },
+          {
+            "name": "TanStack Table",
+            "url": "https://tanstack.com/table",
+            "patterns": ["@tanstack/(?:react-table|table-core|vue-table|solid-table)|TanStack Table"]
+          },
+          {
+            "name": "TanStack Router",
+            "url": "https://tanstack.com/router",
+            "patterns": ["@tanstack/(?:react-router|router-core|vue-router|solid-router)|TanStack Router"]
+          },
+          {
+            "name": "React DnD",
+            "url": "https://react-dnd.github.io/react-dnd/",
+            "patterns": ["react-dnd|React DnD|react-dnd\\.github\\.io"]
+          },
+          {
+            "name": "dnd kit",
+            "url": "https://dndkit.com",
+            "patterns": ["@dnd-kit/(?:core|sortable|utilities)|\\bdnd kit\\b|dndkit\\.com"]
+          },
+          {
+            "name": "React Beautiful DnD",
+            "url": "https://github.com/atlassian/react-beautiful-dnd",
+            "patterns": ["react-beautiful-dnd|React Beautiful DnD"]
+          },
+          {
+            "name": "VeeValidate",
+            "url": "https://vee-validate.logaretm.com",
+            "patterns": ["vee-validate|VeeValidate|vee-validate\\.logaretm\\.com"]
+          },
+          {
+            "name": "Ajv",
+            "url": "https://ajv.js.org",
+            "patterns": ["\\bAjv\\b|ajv\\.js\\.org|epoberezkin/ajv"]
+          },
+          {
+            "name": "Valibot",
+            "url": "https://valibot.dev",
+            "patterns": ["\\bValibot\\b|valibot\\.dev|fabian-hiller/valibot"]
+          },
+          {
+            "name": "Superstruct",
+            "url": "https://docs.superstructjs.org",
+            "patterns": ["\\bSuperstruct\\b|superstructjs|ianstormtaylor/superstruct"]
+          },
+          {
+            "name": "Tabler Icons",
+            "url": "https://tabler.io/icons",
+            "patterns": ["@tabler/icons|Tabler Icons|tabler\\.io/icons"]
+          },
+          {
+            "name": "Phosphor Icons",
+            "url": "https://phosphoricons.com",
+            "patterns": ["@phosphor-icons/|Phosphor Icons|phosphoricons\\.com"]
+          },
+          {
+            "name": "Iconify",
+            "url": "https://iconify.design",
+            "patterns": ["@iconify/|Iconify|iconify\\.design"]
+          },
+          {
+            "name": "Tippy.js",
+            "url": "https://atomiks.github.io/tippyjs",
+            "patterns": ["Tippy\\.js|tippyjs|@tippyjs/|atomiks\\.github\\.io/tippyjs"]
+          },
+          {
+            "name": "Mousetrap",
+            "url": "https://craig.is/killing/mice",
+            "patterns": ["\\bMousetrap\\b|mousetrap(?:\\.min)?\\.js|craig\\.is/killing/mice"]
+          },
+          {
+            "name": "Fuse.js",
+            "url": "https://www.fusejs.io",
+            "patterns": ["Fuse\\.js|fusejs|fuse\\.js"]
+          },
+          {
+            "name": "Lunr.js",
+            "url": "https://lunrjs.com",
+            "patterns": ["Lunr\\.js|lunrjs|lunr(?:\\.min)?\\.js"]
+          },
+          {
+            "name": "Markdoc",
+            "url": "https://markdoc.dev",
+            "patterns": ["\\bMarkdoc\\b|@markdoc/|markdoc\\.dev"]
+          },
+          {
+            "name": "MDX",
+            "url": "https://mdxjs.com",
+            "patterns": ["\\bMDX\\b|@mdx-js/|mdxjs\\.com"]
+          },
+          {
+            "name": "Slate",
+            "url": "https://www.slatejs.org",
+            "patterns": ["\\bSlate\\b|slatejs|slate-react"]
+          },
+          {
+            "name": "Tiptap",
+            "url": "https://tiptap.dev",
+            "patterns": ["\\bTiptap\\b|@tiptap/|tiptap\\.dev"]
+          },
+          {
+            "name": "EasyMDE",
+            "url": "https://github.com/Ionaru/easy-markdown-editor",
+            "patterns": ["\\bEasyMDE\\b|easy-markdown-editor"]
+          },
+          {
+            "name": "Fabric.js",
+            "url": "https://fabricjs.com",
+            "patterns": ["Fabric\\.js|fabricjs|fabric(?:\\.min)?\\.js"]
+          },
+          {
+            "name": "Konva",
+            "url": "https://konvajs.org",
+            "patterns": ["\\bKonva\\b|konvajs|konva(?:\\.min)?\\.js"]
+          },
+          {
+            "name": "Excalidraw",
+            "url": "https://excalidraw.com",
+            "patterns": ["\\bExcalidraw\\b|@excalidraw/|excalidraw\\.com"]
+          },
+          {
+            "name": "Rough.js",
+            "url": "https://roughjs.com",
+            "patterns": ["Rough\\.js|roughjs|roughjs\\.com"]
+          },
+          {
+            "name": "P5.js",
+            "url": "https://p5js.org",
+            "patterns": ["p5\\.js|p5js|Processing Foundation"]
+          },
+          {
+            "name": "PixiJS",
+            "url": "https://pixijs.com",
+            "patterns": ["\\bPixiJS\\b|pixi\\.js|@pixi/|pixijs\\.com"]
+          },
+          {
+            "name": "Babylon.js",
+            "url": "https://www.babylonjs.com",
+            "patterns": ["Babylon\\.js|@babylonjs/|babylonjs\\.com"]
+          },
+          {
+            "name": "Matter.js",
+            "url": "https://brm.io/matter-js",
+            "patterns": ["Matter\\.js|matter-js|brm\\.io/matter-js"]
           }
         ]
       }
