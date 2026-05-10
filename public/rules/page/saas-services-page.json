@@ -400,6 +400,104 @@
           ]
         },
         {
+          "defaults": {
+            "kind": "AI 客服 / 聊天机器人",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Chatbase",
+              "patterns": [
+                "www\\.chatbase\\.co/embed\\.min\\.js|www\\.chatbase\\.co/chatbot-iframe|chatbase\\.co/[^\\s\"'<>]*(?:chatbot|embed|widget)"
+              ]
+            },
+            {
+              "name": "Botpress Cloud",
+              "patterns": [
+                "cdn\\.botpress\\.cloud/webchat|files\\.bpcontent\\.cloud|botpress\\.cloud/[^\\s\"'<>]*(?:webchat|inject|widget)"
+              ]
+            },
+            {
+              "name": "Voiceflow",
+              "patterns": [
+                "cdn\\.voiceflow\\.com/widget|general-runtime\\.voiceflow\\.com|voiceflow\\.com/[^\\s\"'<>]*(?:widget|chat|embed)"
+              ]
+            },
+            {
+              "name": "SiteGPT",
+              "patterns": ["cdn\\.sitegpt\\.ai|sitegpt\\.ai/[^\\s\"'<>]*(?:widget|chatbot|embed|chat)"]
+            },
+            {
+              "name": "CustomGPT.ai",
+              "patterns": ["app\\.customgpt\\.ai|cdn\\.customgpt\\.ai|customgpt\\.ai/[^\\s\"'<>]*(?:embed|widget|chatbot)"]
+            },
+            {
+              "name": "DocsBot AI",
+              "patterns": ["docsbot\\.ai/(?:embed|widget)|docsbot\\.ai/[^\\s\"'<>]*(?:chat|chatbot|widget)"]
+            },
+            {
+              "name": "Botsonic",
+              "patterns": ["widget\\.botsonic\\.com|cdn\\.botsonic\\.com|botsonic\\.com/[^\\s\"'<>]*(?:widget|embed|chatbot)"]
+            },
+            {
+              "name": "Chatling",
+              "patterns": ["widget\\.chatling\\.ai|chatling\\.ai/[^\\s\"'<>]*(?:widget|embed|chatbot|chat)"]
+            },
+            {
+              "name": "Tiledesk",
+              "patterns": ["widget\\.tiledesk\\.com|cdn\\.tiledesk\\.com|tiledesk\\.com/[^\\s\"'<>]*(?:widget|chat|chatbot)"]
+            },
+            {
+              "name": "Collect.chat",
+              "patterns": ["collectcdn\\.com|collect\\.chat/[^\\s\"'<>]*(?:widget|embed|bot|chat)"]
+            },
+            {
+              "name": "Chatfuel",
+              "patterns": ["static\\.chatfuel\\.com|chatfuel\\.com/[^\\s\"'<>]*(?:bot|widget|embed|chat)"]
+            },
+            {
+              "name": "Flow XO",
+              "patterns": ["widget\\.flowxo\\.com|flowxo\\.com/[^\\s\"'<>]*(?:widget|embed|chat|bot)"]
+            },
+            {
+              "name": "Tars",
+              "patterns": ["hellotars\\.com/conv/|hellotars\\.com/[^\\s\"'<>]*(?:chatbot|embed|widget)"]
+            },
+            {
+              "name": "IBM Watson Assistant Web Chat",
+              "patterns": [
+                "web-chat\\.global\\.assistant\\.watson\\.appdomain\\.cloud|watson-assistant-web-chat|assistant\\.watson\\.cloud\\.ibm\\.com/[^\\s\"'<>]*(?:web-chat|embed)"
+              ]
+            },
+            {
+              "name": "Dialogflow Messenger",
+              "patterns": [
+                "www\\.gstatic\\.com/dialogflow-console/fast/messenger/bootstrap\\.js|dialogflow\\.cloud\\.google\\.com/[^\\s\"'<>]*(?:messenger|embed|console)"
+              ]
+            },
+            {
+              "name": "Yellow.ai",
+              "patterns": ["cdn\\.yellowmessenger\\.com|cloud\\.yellow\\.ai|yellow\\.ai/[^\\s\"'<>]*(?:widget|chatbot|chat)"]
+            },
+            {
+              "name": "Forethought",
+              "patterns": ["solve-widget\\.forethought\\.ai|cdn\\.forethought\\.ai|forethought\\.ai/[^\\s\"'<>]*(?:widget|chat|solve)"]
+            },
+            {
+              "name": "Ultimate.ai",
+              "patterns": ["widget\\.ultimate\\.ai|ultimate\\.ai/[^\\s\"'<>]*(?:widget|chatbot|chat|automation)"]
+            },
+            {
+              "name": "Mavenoid",
+              "patterns": ["embed\\.mavenoid\\.com|app\\.mavenoid\\.com|mavenoid\\.com/[^\\s\"'<>]*(?:assistant|embed|support|widget)"]
+            },
+            {
+              "name": "Aivo",
+              "patterns": ["cdn\\.aivo\\.co|cdn\\.agentbot\\.net|aivo\\.co/[^\\s\"'<>]*(?:agentbot|chat|widget|assistant)"]
+            }
+          ]
+        },
+        {
           "name": "HubSpot",
           "kind": "CRM / 营销自动化",
           "patterns": ["js\\.hs-scripts\\.com|js\\.hsforms\\.net|hs-analytics\\.net|hubspot\\.com"],
