@@ -1776,6 +1776,214 @@
       },
       {
         "defaults": {
+          "category": "物流追踪 / 退货售后",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "AfterShip Tracking Widget",
+            "patterns": [
+              "url: https?://assets\\.aftership\\.com/",
+              "url: https?://static\\.aftership\\.com/",
+              "url: https?://track\\.aftership\\.com/",
+              "url: https?://www\\.aftership\\.com/(?:apps|track-button)(?:/|[?#]|$)"
+            ],
+            "evidence": "响应 URL 指向 AfterShip 物流追踪"
+          },
+          {
+            "name": "Narvar Tracking",
+            "patterns": ["url: https?://tracking\\.narvar\\.com/", "url: https?://assets\\.narvar\\.com/", "url: https?://www\\.narvar\\.com/[^\\s]*(?:tracking|returns|track)"],
+            "evidence": "响应 URL 指向 Narvar 物流追踪 / 退货"
+          },
+          {
+            "name": "Shippo Tracking",
+            "patterns": ["url: https?://track\\.goshippo\\.com/", "url: https?://goshippo\\.com/tracks", "url: https?://www\\.shippo\\.com/[^\\s]*(?:tracking|track)"],
+            "evidence": "响应 URL 指向 Shippo 物流追踪"
+          },
+          {
+            "name": "EasyPost Tracking",
+            "patterns": ["url: https?://track\\.easypost\\.com/", "url: https?://www\\.easypost\\.com/[^\\s]*(?:track|tracking|status)"],
+            "evidence": "响应 URL 指向 EasyPost 物流追踪"
+          },
+          {
+            "name": "ShipStation Tracking",
+            "patterns": ["url: https?://ss\\.shipstation\\.com/", "url: https?://www\\.shipstation\\.com/[^\\s]*(?:tracking|track|widgets?)"],
+            "evidence": "响应 URL 指向 ShipStation 物流追踪"
+          },
+          {
+            "name": "17TRACK Widget",
+            "patterns": ["url: https?://www\\.17track\\.net/[^\\s]*(?:externalcall|track|embed|widget)", "url: https?://res\\.17track\\.net/"],
+            "evidence": "响应 URL 指向 17TRACK 物流追踪"
+          },
+          {
+            "name": "ParcelPanel Tracking Widget",
+            "patterns": ["url: https?://cdn\\.parcelpanel\\.com/", "url: https?://(?:www\\.)?parcelpanel\\.com/[^\\s]*(?:track|tracking|widget|apps)"],
+            "evidence": "响应 URL 指向 ParcelPanel 物流追踪"
+          },
+          {
+            "name": "Track123",
+            "patterns": ["url: https?://cdn\\.track123\\.com/", "url: https?://(?:www\\.)?track123\\.com/[^\\s]*(?:track|tracking|apps|widget)"],
+            "evidence": "响应 URL 指向 Track123 物流追踪"
+          },
+          {
+            "name": "Wonderment",
+            "patterns": ["url: https?://cdn\\.wonderment\\.com/", "url: https?://(?:www\\.)?wonderment\\.com/[^\\s]*(?:tracking|track|widget|apps)"],
+            "evidence": "响应 URL 指向 Wonderment 物流追踪"
+          },
+          {
+            "name": "Malomo",
+            "patterns": ["url: https?://cdn\\.malomo\\.com/", "url: https?://(?:www\\.)?malomo\\.com/[^\\s]*(?:tracking|track|widget)"],
+            "evidence": "响应 URL 指向 Malomo 物流追踪"
+          },
+          {
+            "name": "Loop Returns",
+            "patterns": ["url: https?://returns\\.loopreturns\\.com/", "url: https?://cdn\\.loopreturns\\.com/", "url: https?://(?:www\\.)?loopreturns\\.com/[^\\s]*(?:returns|exchange|apps)"],
+            "evidence": "响应 URL 指向 Loop Returns"
+          },
+          {
+            "name": "Returnly",
+            "patterns": ["url: https?://cdn\\.returnly\\.com/", "url: https?://(?:www\\.)?returnly\\.com/[^\\s]*(?:returns|exchange|portal|widget)"],
+            "evidence": "响应 URL 指向 Returnly 退货售后"
+          },
+          {
+            "name": "Happy Returns",
+            "patterns": ["url: https?://cdn\\.happyreturns\\.com/", "url: https?://(?:www\\.)?happyreturns\\.com/[^\\s]*(?:returns|return-bar|portal|widget)"],
+            "evidence": "响应 URL 指向 Happy Returns"
+          },
+          {
+            "name": "Redo Returns",
+            "patterns": ["url: https?://app\\.redo\\.com/", "url: https?://cdn\\.redo\\.com/", "url: https?://(?:www\\.)?redo\\.com/[^\\s]*(?:returns|protection|widget)"],
+            "evidence": "响应 URL 指向 Redo Returns"
+          },
+          {
+            "name": "ShippyPro",
+            "patterns": ["url: https?://cdn\\.shippypro\\.com/", "url: https?://(?:www\\.)?shippypro\\.com/[^\\s]*(?:tracking|track|returns|widget)"],
+            "evidence": "响应 URL 指向 ShippyPro 物流追踪"
+          },
+          {
+            "name": "Sendcloud",
+            "patterns": ["url: https?://[^\\s/]+\\.sendcloud\\.sc/[^\\s]*(?:tracking|track)", "url: https?://(?:www\\.)?sendcloud\\.com/[^\\s]*(?:tracking|returns|widget)"],
+            "evidence": "响应 URL 指向 Sendcloud 物流追踪"
+          },
+          {
+            "name": "Easyship",
+            "patterns": ["url: https?://cdn\\.easyship\\.com/", "url: https?://(?:www\\.)?easyship\\.com/[^\\s]*(?:tracking|track|checkout|widget)"],
+            "evidence": "响应 URL 指向 Easyship 物流追踪"
+          },
+          {
+            "name": "TrackingMore",
+            "patterns": ["url: https?://cdn\\.trackingmore\\.com/", "url: https?://(?:www\\.)?trackingmore\\.com/[^\\s]*(?:tracking|track|widget|button)"],
+            "evidence": "响应 URL 指向 TrackingMore"
+          },
+          {
+            "name": "Shiprocket Tracking Widget",
+            "patterns": ["url: https?://cdn\\.shiprocket\\.in/", "url: https?://(?:www\\.)?shiprocket\\.in/[^\\s]*(?:shipment-tracking|tracking|track|widget)"],
+            "evidence": "响应 URL 指向 Shiprocket 物流追踪"
+          },
+          {
+            "name": "parcelLab",
+            "patterns": ["url: https?://cdn\\.parcellab\\.com/", "url: https?://api\\.parcellab\\.com/", "url: https?://(?:www\\.)?parcellab\\.com/[^\\s]*(?:track|tracking|returns|widget)"],
+            "evidence": "响应 URL 指向 parcelLab"
+          },
+          {
+            "name": "Parcel Perform",
+            "patterns": ["url: https?://tracking\\.parcelperform\\.com/", "url: https?://cdn\\.parcelperform\\.com/", "url: https?://(?:www\\.)?parcelperform\\.com/[^\\s]*(?:track|tracking|returns|widget)"],
+            "evidence": "响应 URL 指向 Parcel Perform"
+          },
+          {
+            "name": "Ordertracker",
+            "patterns": ["url: https?://cdn\\.ordertracker\\.com/", "url: https?://(?:www\\.)?ordertracker\\.com/[^\\s]*(?:track|tracking|widget|apps)"],
+            "evidence": "响应 URL 指向 Ordertracker"
+          },
+          {
+            "name": "Shipup",
+            "patterns": ["url: https?://cdn\\.shipup\\.co/", "url: https?://api\\.shipup\\.co/", "url: https?://(?:www\\.)?shipup\\.co/[^\\s]*(?:track|tracking|returns|widget)"],
+            "evidence": "响应 URL 指向 Shipup"
+          },
+          {
+            "name": "LateShipment.com",
+            "patterns": ["url: https?://cdn\\.lateshipment\\.com/", "url: https?://(?:www\\.)?lateshipment\\.com/[^\\s]*(?:track|tracking|returns|widget|apps)"],
+            "evidence": "响应 URL 指向 LateShipment.com"
+          },
+          {
+            "name": "WeSupply",
+            "patterns": ["url: https?://cdn\\.wesupplylabs\\.com/", "url: https?://(?:www\\.)?wesupplylabs\\.com/[^\\s]*(?:track|tracking|returns|widget|apps)"],
+            "evidence": "响应 URL 指向 WeSupply"
+          },
+          {
+            "name": "ReturnGO",
+            "patterns": ["url: https?://cdn\\.returngo\\.ai/", "url: https?://(?:www\\.)?returngo\\.ai/[^\\s]*(?:returns|exchange|portal|widget|apps)"],
+            "evidence": "响应 URL 指向 ReturnGO"
+          },
+          {
+            "name": "Return Prime",
+            "patterns": ["url: https?://cdn\\.returnprime\\.com/", "url: https?://(?:www\\.)?returnprime\\.com/[^\\s]*(?:returns|exchange|portal|widget|apps)"],
+            "evidence": "响应 URL 指向 Return Prime"
+          },
+          {
+            "name": "Sendle",
+            "patterns": ["url: https?://api\\.sendle\\.com/", "url: https?://(?:www\\.)?sendle\\.com/[^\\s]*(?:tracking|track|shipments|widget)"],
+            "evidence": "响应 URL 指向 Sendle"
+          },
+          {
+            "name": "ShipBob",
+            "patterns": ["url: https?://api\\.shipbob\\.com/", "url: https?://tracking\\.shipbob\\.com/", "url: https?://(?:www\\.)?shipbob\\.com/[^\\s]*(?:tracking|track|orders|widget)"],
+            "evidence": "响应 URL 指向 ShipBob"
+          },
+          {
+            "name": "ShipHero",
+            "patterns": ["url: https?://tracking\\.shiphero\\.com/", "url: https?://api-gateway\\.shiphero\\.com/", "url: https?://(?:www\\.)?shiphero\\.com/[^\\s]*(?:tracking|track|returns|widget)"],
+            "evidence": "响应 URL 指向 ShipHero"
+          },
+          {
+            "name": "EasyParcel",
+            "patterns": ["url: https?://cdn\\.easyparcel\\.com/", "url: https?://(?:www\\.)?easyparcel\\.com/[^\\s]*(?:tracking|track|widget|courier)"],
+            "evidence": "响应 URL 指向 EasyParcel"
+          },
+          {
+            "name": "Shiptheory",
+            "patterns": ["url: https?://api\\.shiptheory\\.com/", "url: https?://(?:www\\.)?shiptheory\\.com/[^\\s]*(?:tracking|track|shipments|widget)"],
+            "evidence": "响应 URL 指向 Shiptheory"
+          },
+          {
+            "name": "ShipEngine",
+            "patterns": ["url: https?://api\\.shipengine\\.com/", "url: https?://(?:www\\.)?shipengine\\.com/[^\\s]*(?:tracking|track|rates|shipments)"],
+            "evidence": "响应 URL 指向 ShipEngine"
+          },
+          {
+            "name": "Metapack",
+            "patterns": ["url: https?://deliverymanager\\.metapack\\.com/", "url: https?://(?:www\\.)?metapack\\.com/[^\\s]*(?:tracking|track|delivery|returns)"],
+            "evidence": "响应 URL 指向 Metapack"
+          },
+          {
+            "name": "nShift",
+            "patterns": ["url: https?://api\\.unifaun\\.com/", "url: https?://(?:www\\.)?nshift\\.com/[^\\s]*(?:tracking|track|delivery|returns|widget)"],
+            "evidence": "响应 URL 指向 nShift"
+          },
+          {
+            "name": "ShipMonk",
+            "patterns": ["url: https?://tracking\\.shipmonk\\.com/", "url: https?://(?:www\\.)?shipmonk\\.com/[^\\s]*(?:tracking|track|returns|widget)"],
+            "evidence": "响应 URL 指向 ShipMonk"
+          },
+          {
+            "name": "ReBOUND Returns",
+            "patterns": ["url: https?://cdn\\.reboundreturns\\.com/", "url: https?://(?:www\\.)?reboundreturns\\.com/[^\\s]*(?:returns|tracking|portal|widget)"],
+            "evidence": "响应 URL 指向 ReBOUND Returns"
+          },
+          {
+            "name": "ClickPost Tracking",
+            "patterns": ["url: https?://api\\.clickpost\\.ai/", "url: https?://tracking\\.clickpost\\.ai/", "url: https?://(?:www\\.)?clickpost\\.ai/[^\\s]*(?:tracking|track|returns|widget)"],
+            "evidence": "响应 URL 指向 ClickPost Tracking"
+          },
+          {
+            "name": "Parcel Monitor",
+            "patterns": ["url: https?://cdn\\.parcelmonitor\\.com/", "url: https?://(?:www\\.)?parcelmonitor\\.com/[^\\s]*(?:track|tracking|widget)"],
+            "evidence": "响应 URL 指向 Parcel Monitor"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "支付系统",
           "confidence": "高"
         },
