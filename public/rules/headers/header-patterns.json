@@ -996,6 +996,172 @@
       },
       {
         "defaults": {
+          "category": "评价 / UGC",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Trustpilot Widget",
+            "patterns": ["url: https?://widget\\.trustpilot\\.com/", "url: https?://(?:www\\.)?trustpilot\\.com/review/"],
+            "evidence": "响应 URL 指向 Trustpilot 评价组件"
+          },
+          {
+            "name": "Yotpo Reviews",
+            "patterns": ["url: https?://staticw2\\.yotpo\\.com/", "url: https?://cdn-widgetsrepository\\.yotpo\\.com/", "url: https?://api\\.yotpo\\.com/"],
+            "evidence": "响应 URL 指向 Yotpo 评价组件"
+          },
+          {
+            "name": "Judge.me Reviews",
+            "patterns": ["url: https?://cdn\\.judge\\.me/", "url: https?://judge\\.me/api/"],
+            "evidence": "响应 URL 指向 Judge.me 评价组件"
+          },
+          {
+            "name": "Stamped Reviews",
+            "patterns": ["url: https?://cdn1\\.stamped\\.io/", "url: https?://stamped\\.io/files/widget", "url: https?://api\\.stamped\\.io/"],
+            "evidence": "响应 URL 指向 Stamped 评价组件"
+          },
+          {
+            "name": "Reviews.io",
+            "patterns": ["url: https?://widget\\.reviews\\.io/", "url: https?://assets\\.reviews\\.io/", "url: https?://api\\.reviews\\.io/"],
+            "evidence": "响应 URL 指向 Reviews.io 评价组件"
+          },
+          {
+            "name": "Bazaarvoice",
+            "patterns": [
+              "url: https?://apps\\.bazaarvoice\\.com/",
+              "url: https?://display\\.ugc\\.bazaarvoice\\.com/",
+              "url: https?://[^\\s/]+\\.bazaarvoice\\.com/[^\\s]*(?:deployments|bv\\.js|reviews)"
+            ],
+            "evidence": "响应 URL 指向 Bazaarvoice 评价组件"
+          },
+          {
+            "name": "PowerReviews",
+            "patterns": [
+              "url: https?://ui\\.powerreviews\\.com/",
+              "url: https?://display\\.powerreviews\\.com/",
+              "url: https?://[^\\s/]+\\.powerreviews\\.com/[^\\s]*(?:engine|reviews|widgets)"
+            ],
+            "evidence": "响应 URL 指向 PowerReviews 评价组件"
+          },
+          {
+            "name": "Loox Reviews",
+            "patterns": ["url: https?://looxcdn\\.com/", "url: https?://loox\\.io/[^\\s]*(?:widget|reviews|assets)"],
+            "evidence": "响应 URL 指向 Loox 评价组件"
+          },
+          {
+            "name": "Okendo Reviews",
+            "patterns": ["url: https?://cdn\\.okendo\\.io/", "url: https?://d3hw6dc1ow8pp2\\.cloudfront\\.net/", "url: https?://api\\.okendo\\.io/"],
+            "evidence": "响应 URL 指向 Okendo 评价组件"
+          },
+          {
+            "name": "Feefo Reviews",
+            "patterns": ["url: https?://api\\.feefo\\.com/", "url: https?://(?:www\\.)?feefo\\.com/[^\\s]*(?:feefo-widget|reviews|merchant)"],
+            "evidence": "响应 URL 指向 Feefo 评价组件"
+          },
+          {
+            "name": "Fera Reviews",
+            "patterns": ["url: https?://cdn\\.fera\\.ai/", "url: https?://api\\.fera\\.ai/"],
+            "evidence": "响应 URL 指向 Fera 评价组件"
+          },
+          {
+            "name": "Shopper Approved",
+            "patterns": ["url: https?://www\\.shopperapproved\\.com/[^\\s]*(?:widgets|reviews|seal|merchant)"],
+            "evidence": "响应 URL 指向 Shopper Approved 评价组件"
+          },
+          {
+            "name": "Sitejabber",
+            "patterns": ["url: https?://static\\.sitejabber\\.com/", "url: https?://(?:www\\.)?sitejabber\\.com/[^\\s]*(?:widgets|reviews|js)"],
+            "evidence": "响应 URL 指向 Sitejabber 评价组件"
+          },
+          {
+            "name": "Google Customer Reviews",
+            "patterns": ["url: https?://apis\\.google\\.com/js/platform\\.js\\?onload=renderOptIn", "url: https?://www\\.googlecommerce\\.com/trustedstores/"],
+            "evidence": "响应 URL 指向 Google Customer Reviews"
+          },
+          {
+            "name": "Kudobuzz Reviews",
+            "patterns": ["url: https?://cdn\\.kudobuzz\\.com/", "url: https?://(?:www\\.)?kudobuzz\\.com/[^\\s]*(?:widgets|reviews)"],
+            "evidence": "响应 URL 指向 Kudobuzz 评价组件"
+          },
+          {
+            "name": "Growave",
+            "patterns": ["url: https?://static\\.growave\\.io/", "url: https?://app\\.growave\\.io/"],
+            "evidence": "响应 URL 指向 Growave 评价组件"
+          },
+          {
+            "name": "Rivyo Reviews",
+            "patterns": ["url: https?://rivyo\\.app/", "url: https?://thimatic-apps\\.com/[^\\s]*(?:rivyo|reviews)"],
+            "evidence": "响应 URL 指向 Rivyo 评价组件"
+          },
+          {
+            "name": "Ali Reviews",
+            "patterns": ["url: https?://alireviews\\.fireapps\\.io/", "url: https?://cdn\\.fireapps\\.io/[^\\s]*ali"],
+            "evidence": "响应 URL 指向 Ali Reviews"
+          },
+          {
+            "name": "Opinew Reviews",
+            "patterns": ["url: https?://cdn\\.opinew\\.com/", "url: https?://(?:www\\.)?opinew\\.com/[^\\s]*(?:widgets|reviews)"],
+            "evidence": "响应 URL 指向 Opinew 评价组件"
+          },
+          {
+            "name": "Junip Reviews",
+            "patterns": ["url: https?://cdn\\.junip\\.co/", "url: https?://scripts\\.junip\\.co/", "url: https?://api\\.juniphq\\.com/"],
+            "evidence": "响应 URL 指向 Junip 评价组件"
+          },
+          {
+            "name": "Trustmary",
+            "patterns": ["url: https?://embed\\.trustmary\\.com/", "url: https?://scripts\\.trustmary\\.com/"],
+            "evidence": "响应 URL 指向 Trustmary 评价组件"
+          },
+          {
+            "name": "Senja",
+            "patterns": ["url: https?://widget\\.senja\\.io/", "url: https?://senja\\.io/p/"],
+            "evidence": "响应 URL 指向 Senja 评价组件"
+          },
+          {
+            "name": "Endorsal",
+            "patterns": ["url: https?://cdn\\.endorsal\\.io/", "url: https?://embed\\.endorsal\\.io/"],
+            "evidence": "响应 URL 指向 Endorsal 评价组件"
+          },
+          {
+            "name": "Testimonial.to",
+            "patterns": ["url: https?://embed-v2\\.testimonial\\.to/", "url: https?://testimonial\\.to/[^\\s]*(?:embed|wall-of-love|widgets?)"],
+            "evidence": "响应 URL 指向 Testimonial.to"
+          },
+          {
+            "name": "Boast",
+            "patterns": ["url: https?://cdn\\.boast\\.io/", "url: https?://(?:www\\.)?boast\\.io/[^\\s]*(?:forms|widgets?|embed|testimonials)"],
+            "evidence": "响应 URL 指向 Boast"
+          },
+          {
+            "name": "VideoAsk",
+            "patterns": ["url: https?://embed\\.videoask\\.com/", "url: https?://static\\.videoask\\.com/", "url: https?://(?:www\\.)?videoask\\.com/(?:f|embed)/"],
+            "evidence": "响应 URL 指向 VideoAsk"
+          },
+          {
+            "name": "Elfsight",
+            "patterns": ["url: https?://static\\.elfsight\\.com/", "url: https?://apps\\.elfsight\\.com/p/platform\\.js"],
+            "evidence": "响应 URL 指向 Elfsight 组件"
+          },
+          {
+            "name": "POWR Widgets",
+            "patterns": ["url: https?://www\\.powr\\.io/powr\\.js", "url: https?://www\\.powr\\.io/plugins/"],
+            "evidence": "响应 URL 指向 POWR Widgets"
+          },
+          {
+            "name": "Flowbox UGC",
+            "patterns": ["url: https?://connect\\.getflowbox\\.com/", "url: https?://cdn\\.getflowbox\\.com/"],
+            "evidence": "响应 URL 指向 Flowbox UGC"
+          },
+          {
+            "name": "Emplifi UGC",
+            "patterns": ["url: https?://assets\\.emplifi\\.io/", "url: https?://embeds\\.emplifi\\.io/"],
+            "evidence": "响应 URL 指向 Emplifi UGC"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "支付系统",
           "confidence": "高"
         },
