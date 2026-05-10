@@ -1162,6 +1162,227 @@
       },
       {
         "defaults": {
+          "category": "会员积分 / 推荐返利",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Smile.io Loyalty",
+            "patterns": [
+              "url: https?://cdn\\.smile\\.io/",
+              "url: https?://static\\.smile\\.io/",
+              "url: https?://cdn\\.sweettooth\\.io/",
+              "url: https?://(?:www\\.)?smile\\.io/[^\\s]*(?:launcher|embed|sdk)"
+            ],
+            "evidence": "响应 URL 指向 Smile.io 会员积分"
+          },
+          {
+            "name": "LoyaltyLion",
+            "patterns": ["url: https?://cdn\\.loyaltylion\\.net/", "url: https?://sdk\\.loyaltylion\\.net/", "url: https?://api\\.loyaltylion\\.com/"],
+            "evidence": "响应 URL 指向 LoyaltyLion"
+          },
+          {
+            "name": "Yotpo Loyalty",
+            "patterns": ["url: https?://loyalty\\.yotpo\\.com/", "url: https?://cdn\\.swellrewards\\.com/", "url: https?://app\\.swellrewards\\.com/"],
+            "evidence": "响应 URL 指向 Yotpo Loyalty / Swell Rewards"
+          },
+          {
+            "name": "ReferralCandy",
+            "patterns": [
+              "url: https?://cdn\\.referralcandy\\.com/",
+              "url: https?://app\\.referralcandy\\.com/",
+              "url: https?://www\\.referralcandy\\.com/[^\\s]*(?:widget|assets)"
+            ],
+            "evidence": "响应 URL 指向 ReferralCandy"
+          },
+          {
+            "name": "Friendbuy",
+            "patterns": ["url: https?://cdn\\.friendbuy\\.com/", "url: https?://static\\.friendbuy\\.com/", "url: https?://app\\.friendbuy\\.com/"],
+            "evidence": "响应 URL 指向 Friendbuy"
+          },
+          {
+            "name": "Rivo Loyalty",
+            "patterns": ["url: https?://cdn\\.rivo\\.io/", "url: https?://app\\.rivo\\.io/[^\\s]*(?:loyalty|rewards|widget)"],
+            "evidence": "响应 URL 指向 Rivo Loyalty"
+          },
+          {
+            "name": "Rise.ai",
+            "patterns": ["url: https?://cdn\\.rise-ai\\.com/", "url: https?://str\\.rise-ai\\.com/", "url: https?://app\\.rise-ai\\.com/"],
+            "evidence": "响应 URL 指向 Rise.ai"
+          },
+          {
+            "name": "Stamped Loyalty",
+            "patterns": ["url: https?://cdn1\\.stamped\\.io/[^\\s]*loyalty", "url: https?://stamped\\.io/[^\\s]*loyalty"],
+            "evidence": "响应 URL 指向 Stamped Loyalty"
+          },
+          {
+            "name": "Zinrelo",
+            "patterns": ["url: https?://cdn\\.zinrelo\\.com/", "url: https?://static\\.zinrelo\\.com/", "url: https?://api\\.zinrelo\\.com/"],
+            "evidence": "响应 URL 指向 Zinrelo"
+          },
+          {
+            "name": "Annex Cloud",
+            "patterns": ["url: https?://cdn\\.annexcloud\\.com/", "url: https?://[^\\s/]+\\.socialannex\\.com/", "url: https?://api\\.annexcloud\\.com/"],
+            "evidence": "响应 URL 指向 Annex Cloud"
+          },
+          {
+            "name": "Extole",
+            "patterns": ["url: https?://cdn\\.extole\\.io/", "url: https?://events\\.extole\\.io/", "url: https?://[^\\s/]+\\.extole\\.io/[^\\s]*(?:zones|widget|referral)"],
+            "evidence": "响应 URL 指向 Extole"
+          },
+          {
+            "name": "Talkable Referrals",
+            "patterns": [
+              "url: https?://assets\\.talkable\\.com/",
+              "url: https?://d2jjzw81hqbuqv\\.cloudfront\\.net/",
+              "url: https?://[^\\s/]+\\.talkable\\.com/[^\\s]*(?:campaigns|offers|referral|widgets)"
+            ],
+            "evidence": "响应 URL 指向 Talkable Referrals"
+          },
+          {
+            "name": "Viral Loops",
+            "patterns": ["url: https?://app\\.viral-loops\\.com/", "url: https?://viral-loops\\.com/[^\\s]*(?:widgets|referral|campaign)"],
+            "evidence": "响应 URL 指向 Viral Loops"
+          },
+          {
+            "name": "Mention Me",
+            "patterns": ["url: https?://tag\\.mention-me\\.com/", "url: https?://mention-me\\.com/[^\\s]*(?:referral|tag|widget)"],
+            "evidence": "响应 URL 指向 Mention Me"
+          },
+          {
+            "name": "Marsello",
+            "patterns": ["url: https?://cdn\\.marsello\\.com/", "url: https?://app\\.marsello\\.com/"],
+            "evidence": "响应 URL 指向 Marsello"
+          },
+          {
+            "name": "S Loyalty",
+            "patterns": ["url: https?://cdn\\.sloyalty\\.com/", "url: https?://app\\.sloyalty\\.com/", "url: https?://[^\\s/]+\\.s-loyalty\\.com/"],
+            "evidence": "响应 URL 指向 S Loyalty"
+          },
+          {
+            "name": "Voucherify",
+            "patterns": ["url: https?://js\\.voucherify\\.io/", "url: https?://cdn\\.voucherify\\.io/", "url: https?://api\\.voucherify\\.io/"],
+            "evidence": "响应 URL 指向 Voucherify"
+          },
+          {
+            "name": "Talon.One",
+            "patterns": ["url: https?://api\\.talon\\.one/", "url: https?://integration\\.talon\\.one/"],
+            "evidence": "响应 URL 指向 Talon.One"
+          },
+          {
+            "name": "Antavo Loyalty",
+            "patterns": ["url: https?://cdn\\.antavo\\.com/", "url: https?://api\\.antavo\\.com/"],
+            "evidence": "响应 URL 指向 Antavo Loyalty"
+          },
+          {
+            "name": "Rewardful",
+            "patterns": ["url: https?://r\\.wdfl\\.co/", "url: https?://cdn\\.rewardful\\.com/", "url: https?://api\\.rewardful\\.com/"],
+            "evidence": "响应 URL 指向 Rewardful"
+          },
+          {
+            "name": "FirstPromoter",
+            "patterns": ["url: https?://cdn\\.firstpromoter\\.com/", "url: https?://firstpromoter\\.com/[^\\s]*(?:track|referral|affiliate|js|widget)"],
+            "evidence": "响应 URL 指向 FirstPromoter"
+          },
+          {
+            "name": "Tapfiliate",
+            "patterns": ["url: https?://script\\.tapfiliate\\.com/", "url: https?://api\\.tapfiliate\\.com/"],
+            "evidence": "响应 URL 指向 Tapfiliate"
+          },
+          {
+            "name": "PartnerStack",
+            "patterns": ["url: https?://js\\.partnerstack\\.com/", "url: https?://api\\.partnerstack\\.com/"],
+            "evidence": "响应 URL 指向 PartnerStack"
+          },
+          {
+            "name": "Reditus",
+            "patterns": ["url: https?://js\\.getreditus\\.com/", "url: https?://app\\.getreditus\\.com/"],
+            "evidence": "响应 URL 指向 Reditus"
+          },
+          {
+            "name": "LoyaltySurf",
+            "patterns": ["url: https?://cdn\\.loyaltysurf\\.io/", "url: https?://api\\.loyaltysurf\\.io/"],
+            "evidence": "响应 URL 指向 LoyaltySurf"
+          },
+          {
+            "name": "SaaSquatch",
+            "patterns": ["url: https?://fast\\.ssqt\\.io/", "url: https?://app\\.referralsaasquatch\\.com/", "url: https?://referralsaasquatch\\.com/"],
+            "evidence": "响应 URL 指向 SaaSquatch"
+          },
+          {
+            "name": "Referral Rock",
+            "patterns": ["url: https?://app\\.referralrock\\.com/", "url: https?://referralrock\\.com/[^\\s]*(?:track|member|referral|widgets?)"],
+            "evidence": "响应 URL 指向 Referral Rock"
+          },
+          {
+            "name": "InviteReferrals",
+            "patterns": ["url: https?://cdn\\.invitereferrals\\.com/", "url: https?://www\\.invitereferrals\\.com/[^\\s]*(?:campaign|widget|referral|tracking)"],
+            "evidence": "响应 URL 指向 InviteReferrals"
+          },
+          {
+            "name": "GrowSurf",
+            "patterns": ["url: https?://app\\.growsurf\\.com/", "url: https?://growsurf\\.com/[^\\s]*(?:campaign|widget|referral|js)"],
+            "evidence": "响应 URL 指向 GrowSurf"
+          },
+          {
+            "name": "Prefinery",
+            "patterns": ["url: https?://widget\\.prefinery\\.com/", "url: https?://prefinery\\.com/[^\\s]*(?:widget|referral|beta|campaign)"],
+            "evidence": "响应 URL 指向 Prefinery"
+          },
+          {
+            "name": "SparkLoop",
+            "patterns": ["url: https?://dash\\.sparkloop\\.app/", "url: https?://js\\.sparkloop\\.app/"],
+            "evidence": "响应 URL 指向 SparkLoop"
+          },
+          {
+            "name": "KickoffLabs",
+            "patterns": ["url: https?://embed\\.kickofflabs\\.com/", "url: https?://api\\.kickofflabs\\.com/"],
+            "evidence": "响应 URL 指向 KickoffLabs"
+          },
+          {
+            "name": "Gleam",
+            "patterns": ["url: https?://widget\\.gleamjs\\.io/", "url: https?://gleam\\.io/[^\\s]*(?:competitions|giveaway|embed|widget)"],
+            "evidence": "响应 URL 指向 Gleam"
+          },
+          {
+            "name": "Rafflecopter",
+            "patterns": ["url: https?://widget-prime\\.rafflecopter\\.com/", "url: https?://rafflecopter\\.com/rafl/"],
+            "evidence": "响应 URL 指向 Rafflecopter"
+          },
+          {
+            "name": "KingSumo",
+            "patterns": ["url: https?://kingsumo\\.com/g/", "url: https?://app\\.kingsumo\\.com/"],
+            "evidence": "响应 URL 指向 KingSumo"
+          },
+          {
+            "name": "UpViral",
+            "patterns": ["url: https?://app\\.upviral\\.com/", "url: https?://upviral\\.com/[^\\s]*(?:campaign|contest|referral|widget)"],
+            "evidence": "响应 URL 指向 UpViral"
+          },
+          {
+            "name": "ViralSweep",
+            "patterns": ["url: https?://app\\.viralsweep\\.com/", "url: https?://viralsweep\\.com/[^\\s]*(?:embed|promotion|sweeps|contest|widget)"],
+            "evidence": "响应 URL 指向 ViralSweep"
+          },
+          {
+            "name": "SweepWidget",
+            "patterns": ["url: https?://sweepwidget\\.com/(?:view|widget)/", "url: https?://sweepwidget\\.com/[^\\s]*(?:giveaway|contest|embed)"],
+            "evidence": "响应 URL 指向 SweepWidget"
+          },
+          {
+            "name": "Woorise",
+            "patterns": ["url: https?://woorise\\.com/[^\\s]*(?:widget|giveaway|contest|embed|form)"],
+            "evidence": "响应 URL 指向 Woorise"
+          },
+          {
+            "name": "VYPER",
+            "patterns": ["url: https?://embed\\.vyper\\.io/", "url: https?://app\\.vyper\\.io/"],
+            "evidence": "响应 URL 指向 VYPER"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "预约排程",
           "confidence": "高"
         },
