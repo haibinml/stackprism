@@ -241,6 +241,230 @@
             "name": "Highlight.js",
             "url": "https://highlightjs.org",
             "patterns": ["Highlight\\.js|highlightjs|hljs(?:\\.min)?\\.js"]
+          },
+          {
+            "name": "Apollo Client",
+            "url": "https://www.apollographql.com/docs/react",
+            "patterns": ["@apollo/client|Apollo Client|apollo-client"]
+          },
+          {
+            "name": "GraphQL",
+            "url": "https://graphql.org",
+            "patterns": ["\\bGraphQL\\b|graphql(?:\\.min)?\\.js|graphql-js"]
+          },
+          {
+            "name": "SWR",
+            "url": "https://swr.vercel.app",
+            "patterns": ["\\bSWR\\b|swr\\.vercel\\.app|vercel/swr"]
+          },
+          {
+            "name": "Relay",
+            "url": "https://relay.dev",
+            "patterns": ["Relay Runtime|relay-runtime|\\bRelay\\b[\\s\\S]{0,80}(?:MIT|license|copyright)"]
+          },
+          {
+            "name": "urql",
+            "url": "https://urql.dev",
+            "patterns": ["\\burql\\b|@urql/(?:core|exchange|devtools)"]
+          },
+          {
+            "name": "React Hook Form",
+            "url": "https://react-hook-form.com",
+            "patterns": ["react-hook-form|React Hook Form"]
+          },
+          {
+            "name": "Zod",
+            "url": "https://zod.dev",
+            "patterns": ["\\bZod\\b|colinhacks/zod"]
+          },
+          {
+            "name": "Yup",
+            "url": "https://github.com/jquense/yup",
+            "patterns": ["\\bYup\\b[\\s\\S]{0,80}(?:MIT|license|copyright)|jquense/yup"]
+          },
+          {
+            "name": "Formik",
+            "url": "https://formik.org",
+            "patterns": ["\\bFormik\\b|formik\\.org|jaredpalmer/formik"]
+          },
+          {
+            "name": "Immer",
+            "url": "https://immerjs.github.io/immer",
+            "patterns": ["\\bImmer\\b|immerjs|immer(?:\\.umd)?\\.js"]
+          },
+          {
+            "name": "Immutable.js",
+            "url": "https://immutable-js.com",
+            "patterns": ["Immutable\\.js|immutable-js|facebook/immutable-js"]
+          },
+          {
+            "category": "UI / CSS 框架",
+            "name": "MUI",
+            "url": "https://mui.com",
+            "patterns": ["@mui/(?:material|system|base|icons-material)|Material UI|\\bMUI\\b"]
+          },
+          {
+            "category": "UI / CSS 框架",
+            "name": "Ant Design",
+            "url": "https://ant.design",
+            "patterns": ["antd|Ant Design|ant-design"]
+          },
+          {
+            "category": "UI / CSS 框架",
+            "name": "Chakra UI",
+            "url": "https://chakra-ui.com",
+            "patterns": ["@chakra-ui/|Chakra UI"]
+          },
+          {
+            "category": "UI / CSS 框架",
+            "name": "Mantine",
+            "url": "https://mantine.dev",
+            "patterns": ["@mantine/|Mantine"]
+          },
+          {
+            "category": "UI / CSS 框架",
+            "name": "Headless UI",
+            "url": "https://headlessui.com",
+            "patterns": ["@headlessui/|Headless UI"]
+          },
+          {
+            "category": "UI / CSS 框架",
+            "name": "Emotion",
+            "url": "https://emotion.sh",
+            "patterns": ["@emotion/(?:react|styled|css|cache)|emotion\\.sh"]
+          },
+          {
+            "category": "UI / CSS 框架",
+            "name": "styled-components",
+            "url": "https://styled-components.com",
+            "patterns": ["styled-components|styled-components\\.com"]
+          },
+          {
+            "category": "UI / CSS 框架",
+            "name": "Tailwind Merge",
+            "url": "https://github.com/dcastil/tailwind-merge",
+            "patterns": ["tailwind-merge|Tailwind Merge"]
+          },
+          {
+            "category": "UI / CSS 框架",
+            "name": "class-variance-authority",
+            "url": "https://cva.style",
+            "patterns": ["class-variance-authority|cva\\.style"]
+          },
+          {
+            "name": "clsx",
+            "url": "https://github.com/lukeed/clsx",
+            "patterns": ["\\bclsx\\b|lukeed/clsx"]
+          },
+          {
+            "name": "i18next",
+            "url": "https://www.i18next.com",
+            "patterns": ["\\bi18next\\b|i18next\\.com"]
+          },
+          {
+            "name": "react-i18next",
+            "url": "https://react.i18next.com",
+            "patterns": ["react-i18next|react\\.i18next\\.com"]
+          },
+          {
+            "name": "js-cookie",
+            "url": "https://github.com/js-cookie/js-cookie",
+            "patterns": ["js-cookie|JavaScript Cookie"]
+          },
+          {
+            "name": "uuid",
+            "url": "https://github.com/uuidjs/uuid",
+            "patterns": ["uuidjs/uuid|\\buuid\\b[\\s\\S]{0,80}(?:MIT|license|copyright)"]
+          },
+          {
+            "name": "nanoid",
+            "url": "https://github.com/ai/nanoid",
+            "patterns": ["\\bnanoid\\b|ai/nanoid"]
+          },
+          {
+            "name": "DOMPurify",
+            "url": "https://github.com/cure53/DOMPurify",
+            "patterns": ["DOMPurify|cure53/DOMPurify"]
+          },
+          {
+            "name": "Marked",
+            "url": "https://marked.js.org",
+            "patterns": ["\\bMarked\\b|marked\\.js|markedjs"]
+          },
+          {
+            "name": "Mermaid",
+            "url": "https://mermaid.js.org",
+            "patterns": ["\\bMermaid\\b|mermaid\\.js|mermaidjs"]
+          },
+          {
+            "name": "KaTeX",
+            "url": "https://katex.org",
+            "patterns": ["\\bKaTeX\\b|katex\\.org"]
+          },
+          {
+            "name": "MathJax",
+            "url": "https://www.mathjax.org",
+            "patterns": ["\\bMathJax\\b|mathjax\\.org"]
+          },
+          {
+            "name": "PDF.js",
+            "url": "https://mozilla.github.io/pdf.js",
+            "patterns": ["PDF\\.js|pdfjs-dist|mozilla/pdf\\.js"]
+          },
+          {
+            "name": "video.js",
+            "url": "https://videojs.com",
+            "patterns": ["video\\.js|videojs|videojs\\.com"]
+          },
+          {
+            "name": "Hls.js",
+            "url": "https://github.com/video-dev/hls.js",
+            "patterns": ["Hls\\.js|hls\\.js|video-dev/hls\\.js"]
+          },
+          {
+            "name": "Socket.IO",
+            "url": "https://socket.io",
+            "patterns": ["socket\\.io-client|Socket\\.IO|socket\\.io"]
+          },
+          {
+            "name": "SortableJS",
+            "url": "https://sortablejs.github.io/Sortable",
+            "patterns": ["SortableJS|sortablejs|Sortable\\.create"]
+          },
+          {
+            "name": "Hammer.js",
+            "url": "https://hammerjs.github.io",
+            "patterns": ["Hammer\\.js|hammerjs|hammerjs\\.github\\.io"]
+          },
+          {
+            "name": "NProgress",
+            "url": "https://ricostacruz.com/nprogress",
+            "patterns": ["\\bNProgress\\b|nprogress(?:\\.min)?\\.js"]
+          },
+          {
+            "name": "XState",
+            "url": "https://xstate.js.org",
+            "patterns": ["\\bXState\\b|xstate\\.js|statelyai/xstate"]
+          },
+          {
+            "name": "Nivo",
+            "url": "https://nivo.rocks",
+            "patterns": ["@nivo/|\\bNivo\\b"]
+          },
+          {
+            "name": "visx",
+            "url": "https://airbnb.io/visx",
+            "patterns": ["@visx/|\\bvisx\\b|airbnb\\.io/visx"]
+          },
+          {
+            "name": "Cytoscape.js",
+            "url": "https://js.cytoscape.org",
+            "patterns": ["Cytoscape\\.js|cytoscape(?:\\.min)?\\.js|js\\.cytoscape\\.org"]
+          },
+          {
+            "name": "Sigma.js",
+            "url": "https://www.sigmajs.org",
+            "patterns": ["Sigma\\.js|sigmajs|sigma\\.min\\.js"]
           }
         ]
       }
