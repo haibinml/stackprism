@@ -2237,6 +2237,92 @@
             {
               "name": "Brushfire",
               "patterns": ["brushfire\\.com/[^\\s\"'<>]*(?:events|widgets?|tickets|register)|widget\\.brushfire\\.com"]
+            },
+            {
+              "name": "Partiful",
+              "patterns": ["partiful\\.com/(?:e|events)/|partiful\\.com/[^\\s\"'<>]*(?:rsvp|event)"]
+            },
+            {
+              "name": "Swapcard",
+              "patterns": ["app\\.swapcard\\.com/event|swapcard\\.com/[^\\s\"'<>]*(?:event|registration|community)|cdn\\.swapcard\\.com"]
+            },
+            {
+              "name": "Brella",
+              "patterns": ["next\\.brella\\.io|app\\.brella\\.io|brella\\.io/[^\\s\"'<>]*(?:events|event-app|registration)"]
+            },
+            {
+              "name": "Hubilo",
+              "patterns": ["events\\.hubilo\\.com|hubilo\\.com/[^\\s\"'<>]*(?:event|events|webinar|registration)|cdn\\.hubilo\\.com"]
+            },
+            {
+              "name": "HeySummit",
+              "patterns": ["[a-z0-9-]+\\.heysummit\\.com|heysummit\\.com/[^\\s\"'<>]*(?:summit|event|registration|tickets)"]
+            },
+            {
+              "name": "vFairs",
+              "patterns": [
+                "event\\.vfairs\\.com|vfairs\\.com/[^\\s\"'<>]*(?:event|events|conference|webinar|registration)|cdn\\.vfairs\\.com"
+              ]
+            },
+            {
+              "name": "Accelevents",
+              "patterns": ["accelevents\\.com/(?:e|event)/|api\\.accelevents\\.com|cdn\\.accelevents\\.com"]
+            },
+            {
+              "name": "Run The World",
+              "patterns": ["runtheworld\\.today/[^\\s\"'<>]*(?:app|room|event|register)|cdn\\.runtheworld\\.today"]
+            },
+            {
+              "name": "PheedLoop",
+              "patterns": ["app\\.pheedloop\\.com|pheedloop\\.com/[^\\s\"'<>]*(?:event|events|embed|registration)|cdn\\.pheedloop\\.com"]
+            },
+            {
+              "name": "TicketSpice",
+              "patterns": ["ticketspice\\.com/[^\\s\"'<>]*(?:event|events|checkout|tickets)|checkout\\.ticketspice\\.com"]
+            },
+            {
+              "name": "Eventleaf",
+              "patterns": ["app\\.eventleaf\\.com|eventleaf\\.com/[^\\s\"'<>]*(?:event|events|registration|attendee|tickets)"]
+            },
+            {
+              "name": "Glue Up",
+              "patterns": [
+                "app\\.glueup\\.com|glueup\\.com/[^\\s\"'<>]*(?:event|events|membership|registration)|glueup\\.cn/[^\\s\"'<>]*(?:event|events)"
+              ]
+            },
+            {
+              "name": "Eventdex",
+              "patterns": ["eventdex\\.com/[^\\s\"'<>]*(?:events|event-management|registration|ticketing)|eventdexforce\\.com"]
+            },
+            {
+              "name": "Stova Events",
+              "patterns": [
+                "stova\\.io/[^\\s\"'<>]*(?:events|registration|event-management)|aventri\\.com/[^\\s\"'<>]*(?:events|registration)|meetingplay\\.com/[^\\s\"'<>]*(?:events|registration)"
+              ]
+            },
+            {
+              "name": "RegFox",
+              "patterns": ["regfox\\.com/(?:e|embed)/|regfox\\.com/[^\\s\"'<>]*(?:registration|event|tickets)"]
+            },
+            {
+              "name": "RSVPify",
+              "patterns": ["rsvpify\\.com/[^\\s\"'<>]*(?:event|embed|rsvp|registration)|app\\.rsvpify\\.com"]
+            },
+            {
+              "name": "AllEvents",
+              "patterns": ["allevents\\.in/[^\\s\"'<>]*(?:event|tickets|register|embed)|allevents\\.in/api"]
+            },
+            {
+              "name": "Ticketleap",
+              "patterns": ["ticketleap\\.events|ticketleap\\.com/[^\\s\"'<>]*(?:tickets|events|event|checkout)"]
+            },
+            {
+              "name": "Showpass",
+              "patterns": ["showpass\\.com/[^\\s\"'<>]*(?:embed|events|tickets|checkout)|widget\\.showpass\\.com"]
+            },
+            {
+              "name": "TicketSocket",
+              "patterns": ["ticketsocket\\.com/[^\\s\"'<>]*(?:events|ticketing|checkout|widget)|cdn\\.ticketsocket\\.com"]
             }
           ]
         },
