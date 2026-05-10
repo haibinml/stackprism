@@ -827,6 +827,160 @@
             "evidence": "响应 URL 指向 UserEcho"
           },
           {
+            "name": "Chatbase",
+            "patterns": ["url: https?://www\\.chatbase\\.co/embed\\.min\\.js", "url: https?://www\\.chatbase\\.co/chatbot-iframe"],
+            "evidence": "响应 URL 指向 Chatbase"
+          },
+          {
+            "name": "Botpress Cloud",
+            "patterns": [
+              "url: https?://cdn\\.botpress\\.cloud/webchat",
+              "url: https?://files\\.bpcontent\\.cloud/",
+              "url: https?://webchat\\.botpress\\.cloud/"
+            ],
+            "evidence": "响应 URL 指向 Botpress Cloud"
+          },
+          {
+            "name": "Voiceflow",
+            "patterns": ["url: https?://cdn\\.voiceflow\\.com/widget", "url: https?://general-runtime\\.voiceflow\\.com/"],
+            "evidence": "响应 URL 指向 Voiceflow"
+          },
+          {
+            "name": "SiteGPT",
+            "patterns": ["url: https?://cdn\\.sitegpt\\.ai/", "url: https?://sitegpt\\.ai/[^\\s]*(?:widget|chatbot|embed)"],
+            "evidence": "响应 URL 指向 SiteGPT"
+          },
+          {
+            "name": "CustomGPT.ai",
+            "patterns": ["url: https?://app\\.customgpt\\.ai/", "url: https?://cdn\\.customgpt\\.ai/"],
+            "evidence": "响应 URL 指向 CustomGPT.ai"
+          },
+          {
+            "name": "DocsBot AI",
+            "patterns": ["url: https?://docsbot\\.ai/(?:embed|widget|api)/", "url: https?://docsbot\\.ai/[^\\s]*(?:chatbot|widget)"],
+            "evidence": "响应 URL 指向 DocsBot AI"
+          },
+          {
+            "name": "Botsonic",
+            "patterns": ["url: https?://widget\\.botsonic\\.com/", "url: https?://cdn\\.botsonic\\.com/"],
+            "evidence": "响应 URL 指向 Botsonic"
+          },
+          {
+            "name": "Chatling",
+            "patterns": ["url: https?://widget\\.chatling\\.ai/", "url: https?://chatling\\.ai/[^\\s]*(?:widget|embed|chatbot)"],
+            "evidence": "响应 URL 指向 Chatling"
+          },
+          {
+            "name": "Tiledesk",
+            "patterns": ["url: https?://widget\\.tiledesk\\.com/", "url: https?://cdn\\.tiledesk\\.com/"],
+            "evidence": "响应 URL 指向 Tiledesk"
+          },
+          {
+            "name": "Collect.chat",
+            "patterns": ["url: https?://collectcdn\\.com/", "url: https?://collect\\.chat/[^\\s]*(?:widget|embed|bot)"],
+            "evidence": "响应 URL 指向 Collect.chat"
+          },
+          {
+            "name": "Chatfuel",
+            "patterns": ["url: https?://static\\.chatfuel\\.com/", "url: https?://chatfuel\\.com/[^\\s]*(?:widget|embed|bot)"],
+            "evidence": "响应 URL 指向 Chatfuel"
+          },
+          {
+            "name": "Flow XO",
+            "patterns": ["url: https?://widget\\.flowxo\\.com/", "url: https?://flowxo\\.com/[^\\s]*(?:widget|embed)"],
+            "evidence": "响应 URL 指向 Flow XO"
+          },
+          {
+            "name": "Tars",
+            "patterns": ["url: https?://hellotars\\.com/conv/", "url: https?://hellotars\\.com/[^\\s]*(?:chatbot|embed|widget)"],
+            "evidence": "响应 URL 指向 Tars"
+          },
+          {
+            "name": "IBM Watson Assistant Web Chat",
+            "patterns": [
+              "url: https?://web-chat\\.global\\.assistant\\.watson\\.appdomain\\.cloud/",
+              "url: https?://assistant\\.watson\\.cloud\\.ibm\\.com/[^\\s]*(?:web-chat|embed)"
+            ],
+            "evidence": "响应 URL 指向 IBM Watson Assistant Web Chat"
+          },
+          {
+            "name": "Dialogflow Messenger",
+            "patterns": [
+              "url: https?://www\\.gstatic\\.com/dialogflow-console/fast/messenger/bootstrap\\.js",
+              "url: https?://dialogflow\\.cloud\\.google\\.com/[^\\s]*(?:messenger|embed)"
+            ],
+            "evidence": "响应 URL 指向 Dialogflow Messenger"
+          },
+          {
+            "name": "Yellow.ai",
+            "patterns": [
+              "url: https?://cdn\\.yellowmessenger\\.com/",
+              "url: https?://cloud\\.yellow\\.ai/",
+              "url: https?://[^\\s/]+\\.yellow\\.ai/[^\\s]*(?:widget|chatbot)"
+            ],
+            "evidence": "响应 URL 指向 Yellow.ai"
+          },
+          {
+            "name": "Forethought",
+            "patterns": ["url: https?://solve-widget\\.forethought\\.ai/", "url: https?://cdn\\.forethought\\.ai/"],
+            "evidence": "响应 URL 指向 Forethought"
+          },
+          {
+            "name": "Ultimate.ai",
+            "patterns": ["url: https?://widget\\.ultimate\\.ai/", "url: https?://[^\\s/]+\\.ultimate\\.ai/[^\\s]*(?:widget|chatbot|automation)"],
+            "evidence": "响应 URL 指向 Ultimate.ai"
+          },
+          {
+            "name": "Mavenoid",
+            "patterns": ["url: https?://embed\\.mavenoid\\.com/", "url: https?://app\\.mavenoid\\.com/"],
+            "evidence": "响应 URL 指向 Mavenoid"
+          },
+          {
+            "name": "Aivo",
+            "patterns": ["url: https?://cdn\\.aivo\\.co/", "url: https?://cdn\\.agentbot\\.net/"],
+            "evidence": "响应 URL 指向 Aivo"
+          },
+          {
+            "name": "Kapa.ai",
+            "patterns": ["url: https?://widget\\.kapa\\.ai/", "url: https?://kapa\\.ai/[^\\s]*(?:widget|embed|chat|search)"],
+            "evidence": "响应 URL 指向 Kapa.ai"
+          },
+          {
+            "name": "Inkeep",
+            "patterns": ["url: https?://cdn\\.inkeep\\.com/", "url: https?://api\\.inkeep\\.com/"],
+            "evidence": "响应 URL 指向 Inkeep"
+          },
+          {
+            "name": "Mendable",
+            "patterns": ["url: https?://cdn\\.mendable\\.ai/", "url: https?://api\\.mendable\\.ai/"],
+            "evidence": "响应 URL 指向 Mendable"
+          },
+          {
+            "name": "Wonderchat",
+            "patterns": ["url: https?://app\\.wonderchat\\.io/", "url: https?://cdn\\.wonderchat\\.io/"],
+            "evidence": "响应 URL 指向 Wonderchat"
+          },
+          {
+            "name": "Cody AI",
+            "patterns": ["url: https?://embed\\.meetcody\\.ai/", "url: https?://meetcody\\.ai/[^\\s]*(?:embed|widget|chatbot)"],
+            "evidence": "响应 URL 指向 Cody AI"
+          },
+          {
+            "name": "Dante AI",
+            "patterns": ["url: https?://api\\.dante-ai\\.com/", "url: https?://cdn\\.dante-ai\\.com/"],
+            "evidence": "响应 URL 指向 Dante AI"
+          },
+          {
+            "name": "MyAskAI",
+            "patterns": ["url: https?://widget\\.myaskai\\.com/", "url: https?://myaskai\\.com/[^\\s]*(?:embed|widget|chatbot)"],
+            "evidence": "响应 URL 指向 MyAskAI"
+          },
+          {
+            "name": "Fini AI",
+            "patterns": ["url: https?://app\\.usefini\\.com/", "url: https?://cdn\\.usefini\\.com/"],
+            "evidence": "响应 URL 指向 Fini AI"
+          },
+          {
             "name": "Auth0",
             "patterns": ["url: https?://[^\\s/]+\\.auth0\\.com/"],
             "evidence": "响应 URL 指向 Auth0 服务"
