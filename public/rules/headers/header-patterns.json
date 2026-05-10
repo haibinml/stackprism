@@ -4142,6 +4142,114 @@
       },
       {
         "defaults": {
+          "category": "邮箱验证 / 邮件校验 API",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "ZeroBounce Email Validation",
+            "patterns": ["url: https?://api\\.zerobounce\\.net/v[0-9]+/(?:validate|validatewithip|bulk)"],
+            "evidence": "响应 URL 指向 ZeroBounce 邮箱验证 API"
+          },
+          {
+            "name": "NeverBounce",
+            "patterns": ["url: https?://api\\.neverbounce\\.com/v[0-9]+/(?:single|jobs)/"],
+            "evidence": "响应 URL 指向 NeverBounce API"
+          },
+          {
+            "name": "Kickbox Email Verification",
+            "patterns": ["url: https?://api\\.kickbox\\.com/v[0-9]+/(?:verify|disposable)"],
+            "evidence": "响应 URL 指向 Kickbox Email Verification"
+          },
+          {
+            "name": "BriteVerify",
+            "patterns": ["url: https?://bpi\\.briteverify\\.com/(?:emails|phones|addresses)\\.json"],
+            "evidence": "响应 URL 指向 BriteVerify API"
+          },
+          {
+            "name": "EmailListVerify",
+            "patterns": ["url: https?://api\\.emaillistverify\\.com/api/(?:verifyEmail|verifApi)"],
+            "evidence": "响应 URL 指向 EmailListVerify API"
+          },
+          {
+            "name": "mailboxlayer",
+            "patterns": ["url: https?://apilayer\\.net/api/check"],
+            "evidence": "响应 URL 指向 mailboxlayer API"
+          },
+          {
+            "name": "Abstract Email Validation",
+            "patterns": ["url: https?://emailvalidation\\.abstractapi\\.com/v[0-9]+/"],
+            "evidence": "响应 URL 指向 Abstract Email Validation API"
+          },
+          {
+            "name": "Hunter Email Verifier",
+            "patterns": ["url: https?://api\\.hunter\\.io/v[0-9]+/email-verifier"],
+            "evidence": "响应 URL 指向 Hunter Email Verifier"
+          },
+          {
+            "name": "Verifalia",
+            "patterns": ["url: https?://api\\.verifalia\\.com/v[0-9.]+/email-validations"],
+            "evidence": "响应 URL 指向 Verifalia API"
+          },
+          {
+            "name": "Emailable",
+            "patterns": ["url: https?://api\\.emailable\\.com/v[0-9]+/(?:verify|batch)"],
+            "evidence": "响应 URL 指向 Emailable API"
+          },
+          {
+            "name": "Reacher",
+            "patterns": ["url: https?://api\\.reacher\\.email/v[0-9]+/(?:check_email|bulk)"],
+            "evidence": "响应 URL 指向 Reacher API"
+          },
+          {
+            "name": "Mailgun Email Validation",
+            "patterns": ["url: https?://api\\.mailgun\\.net/v[0-9]+/address/(?:validate|parse)"],
+            "evidence": "响应 URL 指向 Mailgun Email Validation"
+          },
+          {
+            "name": "SendGrid Email Validation",
+            "patterns": ["url: https?://api\\.sendgrid\\.com/v[0-9]+/validations/email"],
+            "evidence": "响应 URL 指向 SendGrid Email Validation"
+          },
+          {
+            "name": "DeBounce",
+            "patterns": ["url: https?://api\\.debounce\\.io/v[0-9]+/"],
+            "evidence": "响应 URL 指向 DeBounce API"
+          },
+          {
+            "name": "Bouncer Email Verification",
+            "patterns": ["url: https?://api\\.usebouncer\\.com/v[0-9]+/email/(?:verify|verify/batch)"],
+            "evidence": "响应 URL 指向 Bouncer Email Verification"
+          },
+          {
+            "name": "Clearout Email Verification",
+            "patterns": ["url: https?://api\\.clearout\\.io/v[0-9]+/email_verify/(?:instant|bulk)"],
+            "evidence": "响应 URL 指向 Clearout Email Verification"
+          },
+          {
+            "name": "Email Hippo",
+            "patterns": ["url: https?://api\\.hippoapi\\.com/v[0-9]+/(?:more|single|bulk)/"],
+            "evidence": "响应 URL 指向 Email Hippo API"
+          },
+          {
+            "name": "QuickEmailVerification",
+            "patterns": ["url: https?://api\\.quickemailverification\\.com/v[0-9]+/(?:verify|bulk)"],
+            "evidence": "响应 URL 指向 QuickEmailVerification API"
+          },
+          {
+            "name": "MailboxValidator",
+            "patterns": ["url: https?://api\\.mailboxvalidator\\.com/v[0-9]+/validation/(?:single|disposable|free)"],
+            "evidence": "响应 URL 指向 MailboxValidator API"
+          },
+          {
+            "name": "Truemail",
+            "patterns": ["url: https?://api\\.truemail\\.io/v[0-9]+/(?:verify|bulk)"],
+            "evidence": "响应 URL 指向 Truemail API"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "Web Push / 消息推送",
           "confidence": "高"
         },
