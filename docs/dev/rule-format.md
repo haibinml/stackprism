@@ -1,6 +1,6 @@
 # 规则文件格式
 
-`public/rules/` 下 47 个 JSON 文件，每个负责一类技术。`public/rules/index.json` 是清单，列出了所有规则文件。
+`public/rules/` 下的 JSON 文件按识别方向拆分。`public/rules/index.json` 是清单，列出了构建和运行时需要加载的规则文件。
 
 ## 顶层结构
 

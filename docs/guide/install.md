@@ -1,14 +1,14 @@
 # 安装与启用
 
-StackPrism 兼容所有 Chromium 内核浏览器（Chrome、Edge、Brave、Opera、Vivaldi、Arc 等），需要 MV3 支持。
+StackPrism 面向 Chromium 内核浏览器（Chrome、Edge、Brave、Opera、Vivaldi、Arc 等），需要浏览器支持 Manifest V3。
 
-## 方式一：从 Release 下载 crx（推荐）
+## 方式一：从 Release 下载 crx
 
 1. 打开 [GitHub Releases](https://github.com/setube/stackprism/releases)
 2. 选最新版本，下载 `stackprism-v{version}.crx`
 3. 在浏览器地址栏输入 `chrome://extensions/`（Edge 是 `edge://extensions/`），开启右上角「开发者模式」
 4. 把下载的 `.crx` 文件拖进扩展页面
-5. 弹窗确认「添加扩展」即可
+5. 弹窗出现后确认「添加扩展」
 
 ::: tip
 Chrome 有时会拦截 .crx 拖入安装（提示"无法添加来自此网站的应用、扩展程序和用户脚本"）。这种情况改用方式二。
@@ -50,7 +50,7 @@ pnpm run build
 | `webRequest` | 监听响应头收集 server / x-powered-by 等              |
 | `<all_urls>` | 在所有 http(s) 网页运行                              |
 
-StackPrism **不发起任何外部网络请求**：所有规则文件随扩展打包到本地，检测结果只在你的浏览器内存与扩展 storage 内流转。
+检测过程不依赖外部 API：规则文件随扩展打包到本地，检测结果只在浏览器内存与扩展 storage 内流转。
 
 ## 卸载
 

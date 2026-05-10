@@ -7,7 +7,7 @@
 1. **快速反馈**：在弹窗对应技术卡片点「识别不准确，点击纠正」按钮，会自动打开 GitHub Issue 并填好上下文（页面 URL、当前规则匹配结果、扩展版本）。维护者收到后调整规则。
 2. **直接 PR**：fork 仓库，编辑 `public/rules/` 下对应 JSON，本地验证后提 PR。
 
-后者欢迎，本节讲怎么操作。
+下面主要讲直接 PR 的流程。
 
 ## 找到合适的文件
 
@@ -93,7 +93,7 @@ pnpm run build
 
 或者用「自定义规则」面板先在用户配置层写一遍，确认规则有效后再搬到 `public/rules/`。
 
-## 减少误报小贴士
+## 降低误报
 
 - **优先用 globals**：`window.X` 命中是最稳的，几乎零误报
 - **优先用专属 selector**：`[data-powered-by='examplecms']`、`[ng-version]` 这种明显由该技术写入的属性
@@ -110,4 +110,4 @@ pnpm run build
 4. 在 [Wappalyzer rules](https://github.com/enthec/webappanalyzer)、官网、文档抓 2-3 条证据放在 PR 描述里
 5. 提 PR 到 main 分支
 
-PR 格式参考已合并的：[Pull requests](https://github.com/setube/stackprism/pulls)。
+PR 描述里至少写清楚新增了哪些技术、用什么页面验证过、为什么这些特征不会误伤其它站点。

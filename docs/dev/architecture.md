@@ -16,7 +16,7 @@ stackprism/
 │  │  ├─ wordpress.ts            # WordPress 主题 style.css 抓取
 │  │  ├─ dynamic-snapshot.ts     # 动态快照防抖处理
 │  │  ├─ tech-links.ts           # tech-links.json 懒加载
-│  │  ├─ rule-loader.ts          # 47 个规则 JSON 的合并
+│  │  ├─ rule-loader.ts          # 规则 JSON 的加载与合并
 │  │  ├─ rule-matcher.ts         # 编译缓存 + auto hint 预过滤
 │  │  ├─ detector-settings.ts    # 设置 / 规则缓存
 │  │  ├─ content-injector.ts     # 启动时给已开标签页注入 content script
@@ -49,7 +49,7 @@ stackprism/
 │     └─ constants.ts
 ├─ public/
 │  ├─ icons/                      # 16/32/48/128 PNG
-│  ├─ rules/                      # 47 个 JSON 规则文件，3.1 MB
+│  ├─ rules/                      # 规则 JSON 文件
 │  ├─ tech-links.json             # 524 KB 的技术名 → 官网链接映射
 │  └─ injected/                   # build:injected 输出的两个 IIFE
 ├─ build-scripts/
@@ -117,7 +117,7 @@ Chrome 扩展有四种执行环境，StackPrism 全部用上：
 
 ## 注入脚本的双轨问题
 
-`page-detector.ts` 在原生时代既被 background `importScripts` 引入又被 `executeScript({world:'MAIN', func})` 序列化注入。一旦改成 ESM `import type`，`Function.prototype.toString` 序列化就追不上 import。
+`page-detector.ts` 在原生实现里既被 background `importScripts` 引入，又被 `executeScript({world:'MAIN', func})` 序列化注入。切到 ESM 后，`Function.prototype.toString` 不能处理 import，所以这条路走不通。
 
 解决方案：用 `executeScript({files})` 替代 `{func}`。`page-detector.ts` 独立编译为 IIFE 单文件（`vite.injected.config.ts`），通过两次 RPC 注入：
 
@@ -140,11 +140,11 @@ chrome.scripting.executeScript({
 })
 ```
 
-副作用：background 不再依赖 page-detector，因此 service worker 可以正常切换到 ESM module worker，`importScripts` 这条强耦合彻底消失。
+这样处理后，background 不再直接依赖 page-detector，service worker 也可以使用 ESM module worker。
 
 ## 静态资源
 
-`public/rules/` 47 个 JSON（3.1 MB）+ `public/tech-links.json`（524 KB）由 Vite 1:1 复制到 `dist/`，运行时通过 `chrome.runtime.getURL` + `fetch` 加载。**禁止** `import rules from '...'` ——会让 Rollup inline 进 bundle，service worker 启动慢 1-3 秒。
+`public/rules/` 和 `public/tech-links.json` 由 Vite 1:1 复制到 `dist/`，运行时通过 `chrome.runtime.getURL` + `fetch` 加载。不要用 `import rules from '...'` 直接导入这些大 JSON；那会让 Rollup 把规则内联进 bundle，service worker 冷启动会明显变慢。
 
 build 期还有两个 vite plugin 处理这些 JSON：
 

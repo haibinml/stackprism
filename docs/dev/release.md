@@ -31,21 +31,30 @@ pnpm run typecheck    # vue-tsc --noEmit，全工程严格类型检查
 pnpm run lint         # eslint src
 ```
 
-每次提交前会跑一遍 prettier 统一格式（见 `feedback_prettier_before_commit` memory）。
+提交前统一跑一遍格式化：
+
+```bash
+npx prettier --write .
+```
 
 ## 版本号管理
 
 `package.json` 的 `version` 字段是真源。`@crxjs/vite-plugin` 会自动把它同步到 `dist/manifest.json`。
 
-发布前需要把版本号 bump 一位 patch（`feat` / `fix` / `perf` 类改动）。`feedback_bump_version` memory 里写过这条。
+常规功能、规则和修复改动递增 patch。patch 走到 `99` 后进入下一个 minor，不使用 `1.1.100` 这种版本号：
 
 ```bash
-# 假设当前是 1.0.90，发个 patch
-sed -i 's/"version": "1.0.90"/"version": "1.0.91"/' package.json
+# 1.1.98 -> 1.1.99
+# 1.1.99 -> 1.2.0
+```
+
+只有需要发安装包的版本才创建 GitHub Release：`x.y.0`、`x.y.10`、`x.y.20`、...、`x.y.90`。例如 `1.2.0`、`1.2.10` 要发，`1.2.5`、`1.2.15` 不发。
+
+```bash
+# 修改 package.json 版本后
 git add package.json
-git commit -m "chore: bump 1.0.91"
-git tag v1.0.91
-git push origin main --tags
+git commit -m "chore: bump 1.2.10"
+git push origin main
 ```
 
 ## GitHub Release 工作流
@@ -65,6 +74,17 @@ git push origin main --tags
 6. **如果配置了 secret `EXTENSION_PRIVATE_KEY`**，再用 `npx crx3` 签名出 `stackprism-v{ver}.crx` + sha256；否则跳过 crx 仅传 zip
 7. `gh release upload --clobber` 把所有产物上传到 release tag
 8. `actions/upload-artifact` 同时备一份 artifact
+
+## 发布说明
+
+发布说明从上一个 release tag 到当前提交的 `git log --oneline vPREV..HEAD` 整理，不直接粘 commit 列表。写法按用户能看懂的方向归类，比如：
+
+- 规则增强
+- 弹窗与设置页
+- 文档站
+- 构建与发布流程
+
+发布说明只写用户或维护者关心的变化，不写本地跑了哪些格式化、类型检查、lint 或构建命令。
 
 ## CRX 签名密钥
 
@@ -95,13 +115,15 @@ openssl genrsa -out extension.pem 2048
 
 ## 发布检查清单
 
+- [ ] `npx prettier --write .` 已执行
 - [ ] `pnpm run typecheck` 通过
 - [ ] `pnpm run lint` 通过
 - [ ] `pnpm run build` 通过
 - [ ] 在 chrome 里加载 `dist/` 手动测试关键路径（弹窗打开、识别一个站点、刷新、复制 JSON、设置页加规则）
 - [ ] 把 `package.json` 的 version bump
-- [ ] git commit + push + 在 GitHub UI 发布 release（tag 为 `v{version}`，与 package.json 对齐）
-- [ ] 等 workflow 跑完，确认 release 资产里有 zip + crx + 两个 sha256
+- [ ] git commit + push
+- [ ] 如果版本符合 release 节点，在 GitHub UI 发布 release（tag 为 `v{version}`，与 package.json 对齐）
+- [ ] 等发布工作流跑完，确认 release 资产里有 zip / crx 与 sha256
 
 ## 发布到 Chrome Web Store
 

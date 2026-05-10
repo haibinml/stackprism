@@ -2,7 +2,7 @@
 
 设置页可以通过弹窗顶部的「设置」按钮打开，或者在 `chrome://extensions/` 找到 StackPrism 卡片点「详情 → 扩展程序选项」。
 
-设置页分四个 panel：
+设置页分五块：
 
 - [识别开关](./categories.md) — 23 个分类的启停（关掉后该分类的技术不再显示在弹窗里）
 - [禁用指定技术](./disabled-technologies.md) — 用名字精确屏蔽某些技术（无视分类）
@@ -12,7 +12,7 @@
 
 ## 配置存储位置
 
-所有配置存在 `chrome.storage.sync`，会随你登录的 Google / Edge 账号自动跨设备同步。Key 是 `stackPrismSettings`。如果不想同步可以 disable 浏览器同步。
+所有配置存在 `chrome.storage.sync`，会随你登录的 Google / Edge 账号跨设备同步。Key 是 `stackPrismSettings`。如果不想同步，可以关闭浏览器自己的同步功能。
 
 `chrome.storage.sync` 的容量上限是 100KB，单个 key 不超 8KB。这意味着：
 
@@ -20,7 +20,7 @@
 - 自定义 CSS 长度有上限（不超 10000 字符）
 - 禁用列表不能太长
 
-实际限制由 `src/types/settings.ts` 的 `CUSTOM_RULE_LIMITS` 决定，超出会在保存时报错。
+实际限制由 `src/types/settings.ts` 里的 `CUSTOM_RULE_LIMITS` 决定，超出后保存会失败并显示错误。
 
 ## 改完什么时候生效
 
@@ -30,4 +30,4 @@
 | 自定义规则                       | 保存后下次刷新页面 + 重新打开弹窗 |
 | JSON 导入                        | 同上                              |
 
-「保存设置」按钮按下后会立即写到 storage，不需要刷新设置页。
+点「保存设置」后会立即写入 storage，不需要刷新设置页。

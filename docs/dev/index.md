@@ -1,6 +1,6 @@
 # 开发手册
 
-写给想看代码 / 改代码 / 贡献规则 / 给项目提 PR 的人。
+这一部分写给准备看源码、改规则或提 PR 的人。只需要安装扩展的话，看 [使用指南](/guide/) 就够了。
 
 ## 章节
 
@@ -8,11 +8,13 @@
 - [规则文件格式](./rule-format.md) — `public/rules/` 下 JSON 怎么组织，nested groups + defaults 继承
 - [检测流程](./detection-flow.md) — 从 webRequest / 页面注入到弹窗渲染走过哪些环节
 - [贡献规则](./contribute-rules.md) — 怎么往内置规则集合加新技术
-- [构建与发布](./release.md) — 本地构建、打包、签 crx、release workflow
+- [构建与发布](./release.md) — 本地构建、打包、签 crx、发布工作流
 
-## 一句话技术栈
+## 技术栈概况
 
-Vite 5 + Vue 3 + TypeScript + `@crxjs/vite-plugin` 2.x，Manifest V3 ESM module worker，pnpm，规则在 `public/rules/` 47 个 JSON 文件里手维护，buildtime 用 vite plugin 预编译注入 `__hints` / `__keywordCombined` 字段。
+项目主体是 Vite 5 + Vue 3 + TypeScript + `@crxjs/vite-plugin` 2.x。后台脚本是 Manifest V3 ESM service worker，包管理器用 pnpm。
+
+规则放在 `public/rules/` 下，按页面规则、响应头规则、WordPress / Drupal 生态等方向拆成多个 JSON 文件。构建时会预处理规则，注入 `__hints` / `__keywordCombined` 这类用于匹配加速的字段。
 
 ## 开发常用命令
 
@@ -26,7 +28,7 @@ pnpm run docs:dev       # 起本文档站本地预览
 pnpm run docs:build     # 构建文档静态站
 ```
 
-dev 模式下扩展是 hot reload 的——改 `src/` 内文件 → 扩展页面会自动刷新，但改 `src/background/` 后台代码需要在 `chrome://extensions/` 手动点扩展卡片上的刷新按钮。
+dev 模式下，扩展页面支持热更新。改 popup / settings / help 通常会自动刷新；改 `src/background/` 或 content script 后，需要到 `chrome://extensions/` 手动刷新扩展卡片。
 
 ## Vue 入口
 
@@ -38,7 +40,7 @@ dev 模式下扩展是 hot reload 的——改 `src/` 内文件 → 扩展页面
 | settings | `src/ui/settings/index.html` | 在 `chrome://extensions/` 详情页打开的 options page |
 | help     | `src/ui/help/index.html`     | 设置页里点「使用说明」打开的独立标签页              |
 
-## 仓库链接
+## 相关链接
 
 - [GitHub 仓库](https://github.com/setube/stackprism)
 - [Issue 列表](https://github.com/setube/stackprism/issues)
