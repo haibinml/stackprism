@@ -3724,6 +3724,100 @@
         },
         {
           "defaults": {
+            "kind": "餐饮预订 / 在线点餐",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "OpenTable Reservations",
+              "patterns": ["secure\\.opentable\\.(?:com|co\\.uk)|opentable\\.(?:com|co\\.uk)/[^\\s\"'<>]*(?:widget|booking|reservations?)"]
+            },
+            {
+              "name": "Resy",
+              "patterns": ["widgets\\.resy\\.com|resy\\.com/[^\\s\"'<>]*(?:cities|venues|reservations?|embed|widget)"]
+            },
+            {
+              "name": "SevenRooms",
+              "patterns": ["sevenrooms\\.com/[^\\s\"'<>]*(?:reservations|explore|widget|experiences)|widgets\\.sevenrooms\\.com"]
+            },
+            {
+              "name": "Tock",
+              "patterns": ["exploretock\\.com/[^\\s\"'<>]*(?:experience|checkout|reserve|widget)|widgets?\\.exploretock\\.com"]
+            },
+            {
+              "name": "Toast Online Ordering",
+              "patterns": ["order\\.toasttab\\.com|toasttab\\.com/[^\\s\"'<>]*(?:order|restaurants|local|checkout)|toasttakeout\\.com"]
+            },
+            {
+              "name": "ChowNow Ordering",
+              "patterns": ["ordering\\.chownow\\.com|cf\\.chownowcdn\\.com|chownow\\.com/[^\\s\"'<>]*(?:order|ordering|checkout|widget)"]
+            },
+            {
+              "name": "Slice Ordering",
+              "patterns": ["slicelife\\.com/[^\\s\"'<>]*(?:restaurants|order|menu|checkout)|slice\\.life/[^\\s\"'<>]*(?:order|menu)"]
+            },
+            {
+              "name": "DoorDash Storefront",
+              "patterns": [
+                "order\\.online/(?:store|menu)|doordash\\.com/store/|storefront\\.doordash\\.com|doordash\\.com/[^\\s\"'<>]*(?:storefront|consumer)"
+              ]
+            },
+            {
+              "name": "Uber Eats Storefront",
+              "patterns": ["ubereats\\.com/(?:store|feed)|ubereats\\.com/[^\\s\"'<>]*(?:store|restaurant|merchant|checkout)"]
+            },
+            {
+              "name": "GloriaFood Ordering",
+              "patterns": ["fbgcdn\\.com/embedder|gloriafood\\.com/[^\\s\"'<>]*(?:ordering|widget|restaurant-menu|online-ordering)"]
+            },
+            {
+              "name": "Menufy",
+              "patterns": ["menufy\\.com/[^\\s\"'<>]*(?:order|menu|restaurant|checkout)|cdn\\.menufy\\.com"]
+            },
+            {
+              "name": "BentoBox",
+              "patterns": [
+                "bento-cdn\\.com|assets\\.getbento\\.com|getbento\\.com/[^\\s\"'<>]*(?:bentobox|widgets?|ordering|reservations?)"
+              ]
+            },
+            {
+              "name": "Popmenu",
+              "patterns": ["popmenucloud\\.com|getpopmenu\\.com/[^\\s\"'<>]*(?:widgets?|menus?|ordering|reservations?)"]
+            },
+            {
+              "name": "Owner.com Ordering",
+              "patterns": ["owner\\.com/[^\\s\"'<>]*(?:order|ordering|restaurants?|checkout)|owner\\.app/[^\\s\"'<>]*(?:order|checkout)"]
+            },
+            {
+              "name": "Ritual Ordering",
+              "patterns": ["ritual\\.co/[^\\s\"'<>]*(?:order|restaurants?|merchant)|ritual\\.com/[^\\s\"'<>]*(?:order|restaurants?)"]
+            },
+            {
+              "name": "Eat App Reservations",
+              "patterns": ["eatapp\\.co/[^\\s\"'<>]*(?:reserve|booking|widget|restaurants?)|widgets\\.eatapp\\.co"]
+            },
+            {
+              "name": "Quandoo Reservations",
+              "patterns": [
+                "quandoo\\.(?:com|de|co\\.uk)/[^\\s\"'<>]*(?:widget|booking|reservations?|place)|booking\\.quandoo\\.(?:com|de|co\\.uk)"
+              ]
+            },
+            {
+              "name": "TheFork Reservations",
+              "patterns": ["thefork\\.(?:com|fr|es|it)/[^\\s\"'<>]*(?:restaurant|booking|reserve|widget)|module\\.lafourchette\\.com"]
+            },
+            {
+              "name": "ResDiary",
+              "patterns": ["widget\\.resdiary\\.com|resdiary\\.com/[^\\s\"'<>]*(?:reservations?|booking|widget)"]
+            },
+            {
+              "name": "TableCheck",
+              "patterns": ["tablecheck\\.com/[^\\s\"'<>]*(?:shops|booking|reservations?|widget)|cdn\\.tablecheck\\.com"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "评价 / UGC",
             "matchIn": ["resources"]
           },
