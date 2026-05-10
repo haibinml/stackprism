@@ -3818,6 +3818,102 @@
         },
         {
           "defaults": {
+            "kind": "酒店 / 旅游预订",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Cloudbeds Booking Engine",
+              "patterns": [
+                "hotels\\.cloudbeds\\.com/(?:reservation|booking)|static\\.cloudbeds\\.com|cloudbeds\\.com/[^\\s\"'<>]*(?:booking-engine|reservation|widget)"
+              ]
+            },
+            {
+              "name": "SiteMinder BookingButton",
+              "patterns": [
+                "app\\.thebookingbutton\\.com|thebookingbutton\\.com/[^\\s\"'<>]*(?:properties|booking)|siteminder\\.com/[^\\s\"'<>]*(?:bookingbutton|booking-button)"
+              ]
+            },
+            {
+              "name": "Little Hotelier",
+              "patterns": ["app\\.littlehotelier\\.com|littlehotelier\\.com/[^\\s\"'<>]*(?:booking|properties|reservation)"]
+            },
+            {
+              "name": "Hotelogix Booking Engine",
+              "patterns": ["booking\\.hotelogix\\.com|hotelogix\\.com/[^\\s\"'<>]*(?:booking-engine|reservation|be/)"]
+            },
+            {
+              "name": "Mews Booking Engine",
+              "patterns": [
+                "mews\\.li/booking|app\\.mews\\.com/[^\\s\"'<>]*(?:booking|distributor)|mews\\.com/[^\\s\"'<>]*(?:booking-engine|booking)"
+              ]
+            },
+            {
+              "name": "ThinkReservations",
+              "patterns": ["secure\\.thinkreservations\\.com|thinkreservations\\.com/[^\\s\"'<>]*(?:reservations|booking|widget)"]
+            },
+            {
+              "name": "ResNexus",
+              "patterns": ["secure\\.resnexus\\.com|resnexus\\.com/[^\\s\"'<>]*(?:reservations|booking|lodging|widget)"]
+            },
+            {
+              "name": "Lodgify",
+              "patterns": ["cdn\\.lodgify\\.com|booking\\.lodgify\\.com|lodgify\\.com/[^\\s\"'<>]*(?:booking|checkout|widget)"]
+            },
+            {
+              "name": "Guesty Booking Website",
+              "patterns": ["booking\\.guesty\\.com|guestybookings\\.com|guesty\\.com/[^\\s\"'<>]*(?:booking|booking-engine|widget)"]
+            },
+            {
+              "name": "Hostaway",
+              "patterns": ["hostaway\\.info/[^\\s\"'<>]*(?:booking|reservation)|hostaway\\.com/[^\\s\"'<>]*(?:booking|reservation|widget)"]
+            },
+            {
+              "name": "OwnerRez",
+              "patterns": ["secure\\.ownerrez\\.com|ownerrez\\.com/[^\\s\"'<>]*(?:booknow|widget|booking|checkout)"]
+            },
+            {
+              "name": "Hospitable Direct",
+              "patterns": ["hospitable\\.rentals/[^\\s\"'<>]*(?:book|booking)|hospitable\\.com/[^\\s\"'<>]*(?:direct|booking|checkout)"]
+            },
+            {
+              "name": "FareHarbor",
+              "patterns": ["fareharbor\\.com/embeds|fareharbor\\.com/[^\\s\"'<>]*(?:items|book|booking|embed)"]
+            },
+            {
+              "name": "Peek Pro",
+              "patterns": ["peekpro\\.com|peek\\.com/[^\\s\"'<>]*(?:widget|booking|s/)|peek\\.travel/[^\\s\"'<>]*(?:widget|booking)"]
+            },
+            {
+              "name": "Checkfront",
+              "patterns": ["[a-z0-9-]+\\.checkfront\\.com|checkfront\\.com/[^\\s\"'<>]*(?:reserve|booking|api|widget)"]
+            },
+            {
+              "name": "Rezdy",
+              "patterns": ["rezdy\\.io/[^\\s\"'<>]*(?:booking|widget)|rezdy\\.com/[^\\s\"'<>]*(?:booking|widget|catalog|checkout)"]
+            },
+            {
+              "name": "Xola",
+              "patterns": ["checkout\\.xola\\.com|xola\\.com/[^\\s\"'<>]*(?:checkout|booking|experiences|widget)"]
+            },
+            {
+              "name": "TrekkSoft",
+              "patterns": ["trekkpay\\.io|trekksoft\\.com/[^\\s\"'<>]*(?:booking|widget|checkout)"]
+            },
+            {
+              "name": "Regiondo",
+              "patterns": ["regiondo\\.(?:com|de)/[^\\s\"'<>]*(?:booking|checkout|widget)"]
+            },
+            {
+              "name": "Bokun",
+              "patterns": [
+                "widgets\\.bokun\\.io|bokun\\.io/[^\\s\"'<>]*(?:booking|widgets?|checkout)|bokun\\.is/[^\\s\"'<>]*(?:booking|widgets?)"
+              ]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "评价 / UGC",
             "matchIn": ["resources"]
           },
