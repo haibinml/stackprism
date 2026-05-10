@@ -404,6 +404,89 @@
         },
         {
           "defaults": {
+            "kind": "数据集成 / 工作流 / 大数据控制台"
+          },
+          "rules": [
+            {
+              "name": "Airbyte",
+              "patterns": ["<title>\\s*Airbyte(?:\\s*</title>|\\s+-)", "airbyte[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Prefect",
+              "patterns": ["<title>\\s*Prefect(?:\\s*</title>|\\s+-)", "prefect[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Temporal",
+              "patterns": [
+                "<title>\\s*Temporal\\s+(?:Web|UI)(?:\\s*</title>|\\s+-)",
+                "temporal-ui[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Kestra",
+              "patterns": ["<title>\\s*Kestra(?:\\s*</title>|\\s+-)", "kestra[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Apache NiFi",
+              "patterns": ["<title>\\s*(?:Apache\\s+)?NiFi(?:\\s*</title>|\\s+-)", "(?:^|/)nifi/(?:assets|css|js|images)(?:/|[?#\\s]|$)"]
+            },
+            {
+              "name": "Apache Flink Dashboard",
+              "patterns": [
+                "<title>\\s*(?:Apache\\s+)?Flink(?:\\s+Dashboard)?(?:\\s*</title>|\\s+-)",
+                "flink[^\\s\"'<>]*(?:dashboard|runtime)[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Apache Spark UI",
+              "patterns": [
+                "<title>\\s*(?:Apache Spark|Spark\\s+(?:UI|Master|Worker|History Server))(?:\\s*</title>|\\s+-)",
+                "(?:^|/)static/spark[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Apache Hadoop YARN",
+              "patterns": [
+                "<title>\\s*(?:Hadoop\\s+)?YARN(?:\\s+ResourceManager)?(?:\\s*</title>|\\s+-)",
+                "hadoop-yarn[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Apache HBase UI",
+              "patterns": [
+                "<title>\\s*(?:Apache\\s+)?HBase(?:\\s+UI)?(?:\\s*</title>|\\s+-)",
+                "hbase[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Apache Druid",
+              "patterns": [
+                "<title>\\s*(?:Apache\\s+Druid|Druid\\s+(?:Console|Router|Coordinator|Overlord))(?:\\s*</title>|\\s+-)",
+                "druid-console[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Apache Pinot",
+              "patterns": [
+                "<title>\\s*(?:Apache\\s+Pinot|Pinot\\s+(?:Controller|Query Console|Broker))(?:\\s*</title>|\\s+-)",
+                "pinot[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Ceph Dashboard",
+              "patterns": [
+                "<title>\\s*Ceph(?:\\s+Dashboard)?(?:\\s*</title>|\\s+-)",
+                "ceph[^\\s\"'<>]*dashboard[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "SeaweedFS",
+              "patterns": ["<title>\\s*SeaweedFS(?:\\s*</title>|\\s+-)", "seaweedfs[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "自托管应用"
           },
           "rules": [
