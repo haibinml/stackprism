@@ -126,6 +126,13 @@
         "evidence": "存在 x-pingback 或 WordPress generator 响应头"
       },
       {
+        "category": "AI / 大模型",
+        "name": "New API / One API",
+        "confidence": "高",
+        "patterns": ["(?:^|\\n)x-oneapi-request-id:"],
+        "evidence": "存在 x-oneapi-request-id 响应头"
+      },
+      {
         "defaults": {
           "category": "CDN / 托管"
         },

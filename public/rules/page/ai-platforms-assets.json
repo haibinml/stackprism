@@ -196,6 +196,37 @@
         },
         {
           "defaults": {
+            "kind": "AI API 中转 / 聚合网关"
+          },
+          "rules": [
+            {
+              "name": "New API / One API",
+              "patterns": [
+                "<title>\\s*(?:New API|One API)(?:\\s*</title>|\\s+-)",
+                "OpenAI\\s*接口(?:聚合管理|管理\\s*(?:&amp;|&|和)?\\s*分发系统)",
+                "支持多种渠道包括\\s*Azure，可用于二次分发管理\\s*key",
+                "x-oneapi-request-id",
+                "(?:^|[\\/._-])(?:new-api|one-api)(?:[\\/._-]|[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$))"
+              ]
+            },
+            {
+              "name": "VoAPI",
+              "patterns": [
+                "<title>\\s*VoAPI(?:\\s*</title>|\\s+-)",
+                "(?:^|[\\/._-])voapi(?:[\\/._-]|[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$))"
+              ]
+            },
+            {
+              "name": "Veloera",
+              "patterns": [
+                "<title>\\s*Veloera(?:\\s*</title>|\\s+-)",
+                "(?:^|[\\/._-])veloera(?:[\\/._-]|[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$))"
+              ]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "AI SDK / 浏览器推理",
             "matchIn": ["resources"]
           },

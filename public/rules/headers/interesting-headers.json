@@ -8,6 +8,7 @@
       "x-aspnetmvc-version",
       "x-runtime",
       "x-request-id",
+      "x-oneapi-request-id",
       "x-cache",
       "x-cache-hits",
       "x-served-by",
