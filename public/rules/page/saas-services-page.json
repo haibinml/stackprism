@@ -2555,6 +2555,90 @@
             {
               "name": "Shiprocket Tracking Widget",
               "patterns": ["shiprocket\\.in/[^\\s\"'<>]*(?:shipment-tracking|tracking|track|widget)|cdn\\.shiprocket\\.in"]
+            },
+            {
+              "name": "parcelLab",
+              "patterns": ["cdn\\.parcellab\\.com|api\\.parcellab\\.com|parcellab\\.com/[^\\s\"'<>]*(?:track|tracking|returns|widget)"]
+            },
+            {
+              "name": "Parcel Perform",
+              "patterns": [
+                "parcelperform\\.com/[^\\s\"'<>]*(?:track|tracking|returns|widget)|tracking\\.parcelperform\\.com|cdn\\.parcelperform\\.com"
+              ]
+            },
+            {
+              "name": "Ordertracker",
+              "patterns": ["ordertracker\\.com/[^\\s\"'<>]*(?:track|tracking|widget|apps)|cdn\\.ordertracker\\.com"]
+            },
+            {
+              "name": "Shipup",
+              "patterns": ["cdn\\.shipup\\.co|api\\.shipup\\.co|shipup\\.co/[^\\s\"'<>]*(?:track|tracking|returns|widget)"]
+            },
+            {
+              "name": "LateShipment.com",
+              "patterns": ["lateshipment\\.com/[^\\s\"'<>]*(?:track|tracking|returns|widget|apps)|cdn\\.lateshipment\\.com"]
+            },
+            {
+              "name": "WeSupply",
+              "patterns": ["wesupplylabs\\.com/[^\\s\"'<>]*(?:track|tracking|returns|widget|apps)|cdn\\.wesupplylabs\\.com"]
+            },
+            {
+              "name": "ReturnGO",
+              "patterns": ["returngo\\.ai/[^\\s\"'<>]*(?:returns|exchange|portal|widget|apps)|cdn\\.returngo\\.ai"]
+            },
+            {
+              "name": "Return Prime",
+              "patterns": ["returnprime\\.com/[^\\s\"'<>]*(?:returns|exchange|portal|widget|apps)|cdn\\.returnprime\\.com"]
+            },
+            {
+              "name": "Sendle",
+              "patterns": ["sendle\\.com/[^\\s\"'<>]*(?:tracking|track|shipments|widget)|api\\.sendle\\.com"]
+            },
+            {
+              "name": "ShipBob",
+              "patterns": ["shipbob\\.com/[^\\s\"'<>]*(?:tracking|track|orders|widget)|api\\.shipbob\\.com|tracking\\.shipbob\\.com"]
+            },
+            {
+              "name": "ShipHero",
+              "patterns": [
+                "shiphero\\.com/[^\\s\"'<>]*(?:tracking|track|returns|widget)|tracking\\.shiphero\\.com|api-gateway\\.shiphero\\.com"
+              ]
+            },
+            {
+              "name": "EasyParcel",
+              "patterns": ["easyparcel\\.com/[^\\s\"'<>]*(?:tracking|track|widget|courier)|cdn\\.easyparcel\\.com"]
+            },
+            {
+              "name": "Shiptheory",
+              "patterns": ["shiptheory\\.com/[^\\s\"'<>]*(?:tracking|track|shipments|widget)|api\\.shiptheory\\.com"]
+            },
+            {
+              "name": "ShipEngine",
+              "patterns": ["shipengine\\.com/[^\\s\"'<>]*(?:tracking|track|rates|shipments)|api\\.shipengine\\.com"]
+            },
+            {
+              "name": "Metapack",
+              "patterns": ["metapack\\.com/[^\\s\"'<>]*(?:tracking|track|delivery|returns)|deliverymanager\\.metapack\\.com"]
+            },
+            {
+              "name": "nShift",
+              "patterns": ["nshift\\.com/[^\\s\"'<>]*(?:tracking|track|delivery|returns|widget)|api\\.unifaun\\.com"]
+            },
+            {
+              "name": "ShipMonk",
+              "patterns": ["shipmonk\\.com/[^\\s\"'<>]*(?:tracking|track|returns|widget)|tracking\\.shipmonk\\.com"]
+            },
+            {
+              "name": "ReBOUND Returns",
+              "patterns": ["reboundreturns\\.com/[^\\s\"'<>]*(?:returns|tracking|portal|widget)|cdn\\.reboundreturns\\.com"]
+            },
+            {
+              "name": "ClickPost Tracking",
+              "patterns": ["clickpost\\.ai/[^\\s\"'<>]*(?:tracking|track|returns|widget)|api\\.clickpost\\.ai|tracking\\.clickpost\\.ai"]
+            },
+            {
+              "name": "Parcel Monitor",
+              "patterns": ["parcelmonitor\\.com/[^\\s\"'<>]*(?:track|tracking|widget)|cdn\\.parcelmonitor\\.com"]
             }
           ]
         },
