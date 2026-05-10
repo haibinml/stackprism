@@ -3616,6 +3616,124 @@
       },
       {
         "defaults": {
+          "category": "实时音视频 / 视频 SDK",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Agora RTC",
+            "patterns": [
+              "url: https?://websdk\\.agora\\.io/",
+              "url: https?://download\\.agora\\.io/sdk/release/AgoraRTC"
+            ],
+            "evidence": "响应 URL 指向 Agora RTC Web SDK"
+          },
+          {
+            "name": "Daily.co",
+            "patterns": ["url: https?://static\\.daily\\.co/", "url: https?://(?!www\\.)[a-z0-9-]+\\.daily\\.co/"],
+            "evidence": "响应 URL 指向 Daily.co 视频 SDK"
+          },
+          {
+            "name": "LiveKit",
+            "patterns": [
+              "url: https?://cdn\\.jsdelivr\\.net/npm/livekit-client",
+              "url: https?://unpkg\\.com/livekit-client",
+              "url: https?://[^\\s/]+\\.livekit\\.cloud/"
+            ],
+            "evidence": "响应 URL 指向 LiveKit"
+          },
+          {
+            "name": "100ms",
+            "patterns": ["url: https?://sdk\\.100ms\\.live/", "url: https?://prod-[a-z0-9-]+\\.100ms\\.live/"],
+            "evidence": "响应 URL 指向 100ms 视频 SDK"
+          },
+          {
+            "name": "Twilio Video",
+            "patterns": ["url: https?://sdk\\.twilio\\.com/js/video", "url: https?://media\\.twiliocdn\\.com/sdk/js/video"],
+            "evidence": "响应 URL 指向 Twilio Video SDK"
+          },
+          {
+            "name": "Vonage Video API",
+            "patterns": ["url: https?://static\\.opentok\\.com/", "url: https?://(?!www\\.)[a-z0-9-]+\\.tokbox\\.com/"],
+            "evidence": "响应 URL 指向 Vonage Video / OpenTok"
+          },
+          {
+            "name": "Jitsi Meet External API",
+            "patterns": [
+              "url: https?://meet\\.jit\\.si/external_api\\.js",
+              "url: https?://[^\\s]+/libs/external_api(?:\\.min)?\\.js"
+            ],
+            "evidence": "响应 URL 指向 Jitsi Meet External API"
+          },
+          {
+            "name": "Zoom Web SDK",
+            "patterns": ["url: https?://source\\.zoom\\.us/", "url: https?://dmogdx0jrul3u\\.cloudfront\\.net/"],
+            "evidence": "响应 URL 指向 Zoom Web SDK"
+          },
+          {
+            "name": "Whereby Embed",
+            "patterns": ["url: https?://whereby\\.com/(?:embed|iframe)/", "url: https?://(?!www\\.)[a-z0-9-]+\\.whereby\\.com/"],
+            "evidence": "响应 URL 指向 Whereby Embed"
+          },
+          {
+            "name": "Amazon IVS Player",
+            "patterns": ["url: https?://player\\.live-video\\.net/", "url: https?://[^\\s/]+\\.ivs\\.amazonaws\\.com/"],
+            "evidence": "响应 URL 指向 Amazon IVS Player"
+          },
+          {
+            "name": "THEOplayer",
+            "patterns": ["url: https?://cdn\\.theoplayer\\.com/", "url: https?://[^\\s/]+\\.theoplayer\\.com/"],
+            "evidence": "响应 URL 指向 THEOplayer"
+          },
+          {
+            "name": "Bitmovin Player",
+            "patterns": ["url: https?://cdn\\.bitmovin\\.com/player", "url: https?://[^\\s/]+\\.bitmovin\\.com/player/"],
+            "evidence": "响应 URL 指向 Bitmovin Player"
+          },
+          {
+            "name": "Wowza Player",
+            "patterns": ["url: https?://player\\.wowza\\.com/", "url: https?://[^\\s/]+\\.wowza\\.com/[^\\s]*(?:player|webrtc)"],
+            "evidence": "响应 URL 指向 Wowza Player"
+          },
+          {
+            "name": "api.video",
+            "patterns": ["url: https?://embed\\.api\\.video/", "url: https?://js\\.api\\.video/", "url: https?://ws\\.api\\.video/"],
+            "evidence": "响应 URL 指向 api.video"
+          },
+          {
+            "name": "Livepeer",
+            "patterns": ["url: https?://lvpr\\.tv/", "url: https?://livepeer\\.studio/"],
+            "evidence": "响应 URL 指向 Livepeer"
+          },
+          {
+            "name": "Cincopa",
+            "patterns": ["url: https?://runtime\\.cincopa\\.com/", "url: https?://[^\\s/]+\\.cincopa\\.com/"],
+            "evidence": "响应 URL 指向 Cincopa"
+          },
+          {
+            "name": "Ziggeo",
+            "patterns": ["url: https?://assets\\.ziggeo\\.com/", "url: https?://embed\\.ziggeo\\.com/"],
+            "evidence": "响应 URL 指向 Ziggeo"
+          },
+          {
+            "name": "Bambuser",
+            "patterns": ["url: https?://lc\\.cdn\\.bambuser\\.net/", "url: https?://player\\.bambuser\\.com/"],
+            "evidence": "响应 URL 指向 Bambuser"
+          },
+          {
+            "name": "Millicast",
+            "patterns": ["url: https?://viewer\\.millicast\\.com/", "url: https?://director\\.millicast\\.com/"],
+            "evidence": "响应 URL 指向 Millicast"
+          },
+          {
+            "name": "VideoSDK.live",
+            "patterns": ["url: https?://sdk\\.videosdk\\.live/", "url: https?://api\\.videosdk\\.live/"],
+            "evidence": "响应 URL 指向 VideoSDK.live"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "SaaS / 第三方服务",
           "confidence": "高"
         },
