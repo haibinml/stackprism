@@ -4002,6 +4002,98 @@
         },
         {
           "defaults": {
+            "kind": "评论 / 社区嵌入",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Disqus Comments",
+              "patterns": ["disqus\\.com/embed\\.js|disqus\\.com/count\\.js|disqus\\.com/[^\\s\"'<>]*(?:embed|thread|count)"]
+            },
+            {
+              "name": "giscus",
+              "patterns": ["giscus\\.app/client\\.js|giscus\\.app/[^\\s\"'<>]*(?:client|widget|embed)"]
+            },
+            {
+              "name": "Utterances",
+              "patterns": ["utteranc\\.es/client\\.js|utteranc\\.es/[^\\s\"'<>]*(?:client|embed)"]
+            },
+            {
+              "name": "Commento",
+              "patterns": [
+                "cdn\\.commento\\.io/js/commento\\.js|commento\\.io/js/commento\\.js|commento\\.io/[^\\s\"'<>]*(?:embed|comments)"
+              ]
+            },
+            {
+              "name": "Hyvor Talk",
+              "patterns": ["talk\\.hyvor\\.com/web-api/embed|hyvor\\.com/[^\\s\"'<>]*(?:talk|comments|embed)"]
+            },
+            {
+              "name": "Cusdis",
+              "patterns": ["cusdis\\.com/js/cusdis\\.es\\.js|cusdis\\.com/[^\\s\"'<>]*(?:js|widget|embed)"]
+            },
+            {
+              "name": "Isso Comments",
+              "patterns": [
+                "isso-comments\\.de|/isso/js/embed\\.min\\.js|/isso/embed\\.min\\.js|/comments/js/embed\\.min\\.js[^\\s\"'<>]*isso"
+              ]
+            },
+            {
+              "name": "Remark42",
+              "patterns": ["remark42\\.com/[^\\s\"'<>]*(?:web|embed|comments)|remark42\\.js|/remark42/web/"]
+            },
+            {
+              "name": "Talkyard",
+              "patterns": ["talkyard\\.net/-/talkyard-comments\\.js|talkyard\\.net/[^\\s\"'<>]*(?:comments|embed|forum)"]
+            },
+            {
+              "name": "Coral Talk",
+              "patterns": ["talk\\.coralproject\\.net|coralproject\\.net/[^\\s\"'<>]*(?:assets|embed|talk)|coral-talk"]
+            },
+            {
+              "name": "GraphComment",
+              "patterns": ["graphcomment\\.com/js/integration\\.js|graphcomment\\.com/[^\\s\"'<>]*(?:comments|embed|integration)"]
+            },
+            {
+              "name": "FastComments",
+              "patterns": ["cdn\\.fastcomments\\.com/js/embed|fastcomments\\.com/[^\\s\"'<>]*(?:embed|comments|widget)"]
+            },
+            {
+              "name": "ReplyBox",
+              "patterns": ["cdn\\.getreplybox\\.com/js/embed\\.js|getreplybox\\.com/[^\\s\"'<>]*(?:embed|comments)"]
+            },
+            {
+              "name": "Muut",
+              "patterns": ["muut\\.com/i/|cdn\\.muut\\.com|muut\\.com/[^\\s\"'<>]*(?:embed|forum|comments)"]
+            },
+            {
+              "name": "Cove Comments",
+              "patterns": ["cdn\\.cove\\.chat/comments\\.js|cove\\.chat/[^\\s\"'<>]*(?:comments|embed|widget)"]
+            },
+            {
+              "name": "Viafoura Conversations",
+              "patterns": ["cdn\\.viafoura\\.net|viafoura\\.com/[^\\s\"'<>]*(?:conversations|comments|vf-)"]
+            },
+            {
+              "name": "OpenWeb / Spot.IM",
+              "patterns": ["launcher\\.spot\\.im|api-[0-9-]+\\.spot\\.im|spot\\.im/[^\\s\"'<>]*(?:embed|launcher|conversation)"]
+            },
+            {
+              "name": "Facebook Comments Plugin",
+              "patterns": ["facebook\\.com/plugins/comments\\.php|connect\\.facebook\\.net/[^\\s\"'<>]*/sdk\\.js[^\\s\"'<>]*xfbml"]
+            },
+            {
+              "name": "CommentBox.io",
+              "patterns": ["unpkg\\.com/commentbox\\.io|commentbox\\.io/[^\\s\"'<>]*(?:embed|comments|project)"]
+            },
+            {
+              "name": "IntenseDebate",
+              "patterns": ["intensedebate\\.com/js/genericCommentWrapperV2\\.js|intensedebate\\.com/[^\\s\"'<>]*(?:comments|embed|remote)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "评价 / UGC",
             "matchIn": ["resources"]
           },
