@@ -4577,6 +4577,114 @@
       },
       {
         "defaults": {
+          "category": "翻译 / 本地化 API",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Weglot Translate",
+            "patterns": ["url: https?://cdn\\.weglot\\.com/weglot\\.min\\.js", "url: https?://api\\.weglot\\.com/"],
+            "evidence": "响应 URL 指向 Weglot Translate"
+          },
+          {
+            "name": "Localize.js",
+            "patterns": ["url: https?://global\\.localizecdn\\.com/localize\\.js", "url: https?://cdn\\.localizejs\\.com/"],
+            "evidence": "响应 URL 指向 Localize.js"
+          },
+          {
+            "name": "Phrase Strings",
+            "patterns": ["url: https?://ota\\.phrase\\.com/", "url: https?://api\\.phrase\\.com/v[0-9]+/", "url: https?://phraseapp\\.com/assets/in-context-editor/"],
+            "evidence": "响应 URL 指向 Phrase Strings"
+          },
+          {
+            "name": "Transifex Live",
+            "patterns": ["url: https?://cdn\\.transifex\\.com/live\\.js", "url: https?://rest\\.api\\.transifex\\.com/"],
+            "evidence": "响应 URL 指向 Transifex Live"
+          },
+          {
+            "name": "Crowdin In-Context",
+            "patterns": ["url: https?://(?:www\\.)?crowdin\\.com/js/crowdin-jipt", "url: https?://cdn\\.crowdin\\.com/", "url: https?://api\\.crowdin\\.com/api/v[0-9]+/"],
+            "evidence": "响应 URL 指向 Crowdin In-Context 或 API"
+          },
+          {
+            "name": "Smartling",
+            "patterns": ["url: https?://api\\.smartling\\.com/", "url: https?://cdn\\.smartling\\.com/"],
+            "evidence": "响应 URL 指向 Smartling"
+          },
+          {
+            "name": "Google Translate Widget / API",
+            "patterns": ["url: https?://translate\\.google\\.com/translate_a/element\\.js", "url: https?://translation\\.googleapis\\.com/language/translate/"],
+            "evidence": "响应 URL 指向 Google Translate Widget 或 API"
+          },
+          {
+            "name": "DeepL API",
+            "patterns": ["url: https?://api(?:-free)?\\.deepl\\.com/v[0-9]+/(?:translate|glossaries|usage)"],
+            "evidence": "响应 URL 指向 DeepL API"
+          },
+          {
+            "name": "Microsoft Translator",
+            "patterns": ["url: https?://api\\.cognitive\\.microsofttranslator\\.com/(?:translate|detect|languages)"],
+            "evidence": "响应 URL 指向 Microsoft Translator"
+          },
+          {
+            "name": "Lokalise",
+            "patterns": ["url: https?://ota\\.lokalise\\.com/", "url: https?://api\\.lokalise\\.com/api[0-9]+/"],
+            "evidence": "响应 URL 指向 Lokalise"
+          },
+          {
+            "name": "Tolgee",
+            "patterns": ["url: https?://cdn\\.tolgee\\.io/", "url: https?://app\\.tolgee\\.io/"],
+            "evidence": "响应 URL 指向 Tolgee"
+          },
+          {
+            "name": "locize",
+            "patterns": ["url: https?://api\\.locize\\.app/", "url: https?://cdn\\.locize\\.com/"],
+            "evidence": "响应 URL 指向 locize"
+          },
+          {
+            "name": "Localazy",
+            "patterns": ["url: https?://api\\.localazy\\.com/", "url: https?://cdn\\.localazy\\.com/"],
+            "evidence": "响应 URL 指向 Localazy"
+          },
+          {
+            "name": "POEditor",
+            "patterns": ["url: https?://api\\.poeditor\\.com/v[0-9]+/"],
+            "evidence": "响应 URL 指向 POEditor"
+          },
+          {
+            "name": "SimpleLocalize",
+            "patterns": ["url: https?://cdn\\.simplelocalize\\.io/", "url: https?://api\\.simplelocalize\\.io/"],
+            "evidence": "响应 URL 指向 SimpleLocalize"
+          },
+          {
+            "name": "Weblate",
+            "patterns": ["url: https?://hosted\\.weblate\\.org/(?:api|widgets)/"],
+            "evidence": "响应 URL 指向 Weblate"
+          },
+          {
+            "name": "Localizely",
+            "patterns": ["url: https?://api\\.localizely\\.com/", "url: https?://cdn\\.localizely\\.com/"],
+            "evidence": "响应 URL 指向 Localizely"
+          },
+          {
+            "name": "OneSky",
+            "patterns": ["url: https?://api\\.oneskyapp\\.com/[0-9]+/", "url: https?://platform\\.oneskyapp\\.com/"],
+            "evidence": "响应 URL 指向 OneSky"
+          },
+          {
+            "name": "WOVN.io",
+            "patterns": ["url: https?://j\\.wovn\\.io/", "url: https?://cdn\\.wovn\\.io/"],
+            "evidence": "响应 URL 指向 WOVN.io"
+          },
+          {
+            "name": "ModernMT",
+            "patterns": ["url: https?://api\\.modernmt\\.com/(?:translate|context|memories)"],
+            "evidence": "响应 URL 指向 ModernMT"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "SaaS / 第三方服务",
           "confidence": "高"
         },
