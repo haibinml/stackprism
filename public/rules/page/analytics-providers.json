@@ -234,6 +234,102 @@
         "globals": ["analytics"]
       },
       {
+        "defaults": {
+          "kind": "商用 / CDP 与标签管理",
+          "matchIn": ["resources"]
+        },
+        "rules": [
+          {
+            "name": "RudderStack",
+            "patterns": [
+              "cdn\\.rudderlabs\\.com|hosted\\.rudderlabs\\.com|rudderstack\\.com/[^\\s\"'<>]*(?:analytics|rudder|sdk)|rudder-analytics"
+            ]
+          },
+          {
+            "name": "Tealium iQ",
+            "patterns": ["tags\\.tiqcdn\\.com/utag/|tealiumiq\\.com|tealium\\.com/[^\\s\"'<>]*(?:utag|iq|tag-management)|utag\\.js"]
+          },
+          {
+            "name": "mParticle",
+            "patterns": [
+              "jssdkcdns\\.mparticle\\.com|jssdks\\.mparticle\\.com|identity\\.mparticle\\.com|mparticle\\.com/[^\\s\"'<>]*(?:sdk|js|events)"
+            ]
+          },
+          {
+            "name": "Snowplow Analytics",
+            "patterns": ["cdn\\.snowplowanalytics\\.com|snowplowanalytics\\.com/[^\\s\"'<>]*(?:tracker|analytics|collector)|snowplow\\.js"]
+          },
+          {
+            "name": "Piwik PRO",
+            "patterns": ["container\\.piwik\\.pro|piwik\\.pro/[^\\s\"'<>]*(?:container|ppms|analytics)|ppms\\.js"]
+          },
+          {
+            "name": "Commanders Act",
+            "patterns": [
+              "cdn\\.tagcommander\\.com|cdn\\.commandersact\\.com|privacy\\.commander1\\.com|tagcommander\\.com/[^\\s\"'<>]*(?:container|tags|tc_)"
+            ]
+          },
+          {
+            "name": "Ensighten",
+            "patterns": ["nexus\\.ensighten\\.com|ensighten\\.com/[^\\s\"'<>]*(?:bootstrap|deploy|nexus|tag)"]
+          },
+          {
+            "name": "BlueConic",
+            "patterns": ["blueconic\\.net|blueconic\\.com/[^\\s\"'<>]*(?:rest|script|blueconic|listeners)"]
+          },
+          {
+            "name": "Lytics",
+            "patterns": ["c\\.lytics\\.io|api\\.lytics\\.io|getlytics\\.com|lytics\\.io/[^\\s\"'<>]*(?:tag|collect|js|api)"]
+          },
+          {
+            "name": "Treasure Data CDP",
+            "patterns": ["cdn\\.treasuredata\\.com/sdk|in\\.treasuredata\\.com|treasuredata\\.com/[^\\s\"'<>]*(?:javascript|collect|sdk)"]
+          },
+          {
+            "name": "Freshpaint",
+            "patterns": [
+              "perfalytics\\.com/static/js|api\\.perfalytics\\.com|freshpaintcdn\\.com|freshpaint\\.io/[^\\s\"'<>]*(?:js|track|sdk)"
+            ]
+          },
+          {
+            "name": "Jitsu",
+            "patterns": ["t\\.jitsu\\.com|cdn\\.jitsu\\.com|jitsu\\.com/[^\\s\"'<>]*(?:s/|sdk|track|api)|jitsu-js"]
+          },
+          {
+            "name": "CustomerLabs CDP",
+            "patterns": ["cdn\\.customerlabs\\.co|js\\.customerlabs\\.co|customerlabs\\.co/[^\\s\"'<>]*(?:js|sdk|events|tracking)"]
+          },
+          {
+            "name": "SegmentStream",
+            "patterns": ["cdn\\.segmentstream\\.com|api\\.segmentstream\\.com|segmentstream\\.com/[^\\s\"'<>]*(?:sdk|tracker|events)"]
+          },
+          {
+            "name": "Eulerian Analytics",
+            "patterns": ["eulerian\\.net|eulerian\\.com/[^\\s\"'<>]*(?:ea\\.js|collect|analytics|tag)"]
+          },
+          {
+            "name": "Piano Analytics",
+            "patterns": ["tag\\.aticdn\\.net|logs?\\.xiti\\.com|piano\\.io/[^\\s\"'<>]*(?:analytics|tag)|atinternet"]
+          },
+          {
+            "name": "Contentsquare",
+            "patterns": ["t\\.contentsquare\\.net|ux\\.contentsquare\\.net|contentsquare\\.com/[^\\s\"'<>]*(?:tag|uxa|collect)"]
+          },
+          {
+            "name": "Quantum Metric",
+            "patterns": ["cdn\\.quantummetric\\.com|quantummetric\\.com/[^\\s\"'<>]*(?:qscripts|quantum|analytics)|quantum-metric"]
+          },
+          {
+            "name": "Glassbox",
+            "patterns": ["cdn\\.glassboxdigital\\.io|reporting\\.glassboxdigital\\.com|glassboxdigital\\.com/[^\\s\"'<>]*(?:tag|web|sdk)"]
+          },
+          {
+            "name": "Adobe Experience Platform Web SDK",
+            "patterns": ["adobedc\\.demdex\\.net|adobedc\\.net/ee/|assets\\.adobedtm\\.com/[^\\s\"'<>]*alloy(?:\\.min)?\\.js"]
+          }
+        ]
+      },
+      {
         "name": "Microsoft Clarity",
         "kind": "免费 / 知名统计",
         "patterns": ["clarity\\.ms/tag", "clarity\\.ms/collect", "clarity\\("],
