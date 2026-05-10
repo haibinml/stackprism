@@ -4250,6 +4250,114 @@
       },
       {
         "defaults": {
+          "category": "IP 地理位置 / IP 情报",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "IPinfo",
+            "patterns": ["url: https?://ipinfo\\.io/(?:json|[0-9a-f:.]+/(?:json|geo))"],
+            "evidence": "响应 URL 指向 IPinfo API"
+          },
+          {
+            "name": "ipapi.co",
+            "patterns": ["url: https?://ipapi\\.co/(?:json|[0-9a-f:.]+/(?:json|country|city|latlong))"],
+            "evidence": "响应 URL 指向 ipapi.co API"
+          },
+          {
+            "name": "IP-API.com",
+            "patterns": ["url: https?://(?:(?:pro|api)\\.)?ip-api\\.com/(?:json|batch)"],
+            "evidence": "响应 URL 指向 IP-API.com"
+          },
+          {
+            "name": "ipstack",
+            "patterns": ["url: https?://api\\.ipstack\\.com/(?:check|[0-9a-f:.]+)"],
+            "evidence": "响应 URL 指向 ipstack API"
+          },
+          {
+            "name": "ipdata",
+            "patterns": ["url: https?://api\\.ipdata\\.co/(?:[0-9a-f:.]+|\\?)"],
+            "evidence": "响应 URL 指向 ipdata API"
+          },
+          {
+            "name": "IPGeolocation.io",
+            "patterns": ["url: https?://api\\.ipgeolocation\\.io/(?:ipgeo|timezone|astronomy)"],
+            "evidence": "响应 URL 指向 IPGeolocation.io API"
+          },
+          {
+            "name": "Ipregistry",
+            "patterns": ["url: https?://api\\.ipregistry\\.co/(?:[0-9a-f:.]+|\\?)"],
+            "evidence": "响应 URL 指向 Ipregistry API"
+          },
+          {
+            "name": "Abstract IP Geolocation",
+            "patterns": ["url: https?://ipgeolocation\\.abstractapi\\.com/v[0-9]+/"],
+            "evidence": "响应 URL 指向 Abstract IP Geolocation API"
+          },
+          {
+            "name": "MaxMind GeoIP2",
+            "patterns": ["url: https?://geoip\\.maxmind\\.com/geoip/v[0-9.]+/(?:city|country|insights)"],
+            "evidence": "响应 URL 指向 MaxMind GeoIP2"
+          },
+          {
+            "name": "DB-IP API",
+            "patterns": ["url: https?://api\\.db-ip\\.com/v[0-9]+/(?:[0-9a-f:.]+|free|addrinfo)"],
+            "evidence": "响应 URL 指向 DB-IP API"
+          },
+          {
+            "name": "IP2Location.io",
+            "patterns": ["url: https?://api\\.ip2location\\.io/"],
+            "evidence": "响应 URL 指向 IP2Location.io API"
+          },
+          {
+            "name": "IPWhois.app",
+            "patterns": ["url: https?://ipwhois\\.app/(?:json|xml|line)/"],
+            "evidence": "响应 URL 指向 IPWhois.app"
+          },
+          {
+            "name": "ipwho.is",
+            "patterns": ["url: https?://ipwho\\.is/(?:[0-9a-f:.]+)?(?:\\?|$)"],
+            "evidence": "响应 URL 指向 ipwho.is"
+          },
+          {
+            "name": "BigDataCloud IP Geolocation",
+            "patterns": ["url: https?://api\\.bigdatacloud\\.net/data/(?:ip-geolocation|ip-geolocation-full|client-ip)"],
+            "evidence": "响应 URL 指向 BigDataCloud IP Geolocation"
+          },
+          {
+            "name": "ipbase",
+            "patterns": ["url: https?://api\\.ipbase\\.com/v[0-9]+/(?:info|json)"],
+            "evidence": "响应 URL 指向 ipbase API"
+          },
+          {
+            "name": "ipfind",
+            "patterns": ["url: https?://api\\.ipfind\\.com/(?:\\?|me|ip)"],
+            "evidence": "响应 URL 指向 ipfind API"
+          },
+          {
+            "name": "ipapi.is",
+            "patterns": ["url: https?://api\\.ipapi\\.is/"],
+            "evidence": "响应 URL 指向 ipapi.is API"
+          },
+          {
+            "name": "ipapi.com",
+            "patterns": ["url: https?://api\\.ipapi\\.com/api/(?:check|[0-9a-f:.]+)"],
+            "evidence": "响应 URL 指向 ipapi.com API"
+          },
+          {
+            "name": "IPLocation.net API",
+            "patterns": ["url: https?://api\\.iplocation\\.net/"],
+            "evidence": "响应 URL 指向 IPLocation.net API"
+          },
+          {
+            "name": "FreeGeoIP.app",
+            "patterns": ["url: https?://freegeoip\\.app/(?:json|xml|csv)/"],
+            "evidence": "响应 URL 指向 FreeGeoIP.app"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "Web Push / 消息推送",
           "confidence": "高"
         },
