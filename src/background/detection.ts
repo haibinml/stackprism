@@ -3,6 +3,7 @@ import { buildPopupCacheRecord, cleanPageDetectionRecord } from './popup-cache'
 import { fetchMainHeadersFallback } from './headers'
 import { clearBadge, clearTabSession, getTabData, getTabSnapshot, updateBadgeForTab, writeTabData } from './tab-store'
 import { buildEffectivePageRules, loadDetectorSettings, loadTechRules } from './detector-settings'
+import { scheduleBundleLicenseDetection } from './bundle-license'
 import { isDetectablePageUrl } from '@/utils/page-support'
 
 const activeDetectionTimers = new Map<number, ReturnType<typeof setTimeout>>()
@@ -80,6 +81,7 @@ export const runActivePageDetection = async (tabId: number) => {
 
     data.updatedAt = Date.now()
     await saveTabDataAndBadge(tabId, data, settings)
+    scheduleBundleLicenseDetection(tabId)
   } catch {
     return
   }

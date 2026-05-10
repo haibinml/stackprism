@@ -6,6 +6,7 @@ import { clearActiveDetectionTimer, refreshAllBadges, saveTabDataAndBadge, sched
 import { getTabData, getTabSnapshot } from './tab-store'
 import { SETTINGS_STORAGE_KEY, applyDetectorSettingsUpdate, loadDetectorSettings, loadTechRules } from './detector-settings'
 import { registerMessageRouter } from './message-router'
+import { clearBundleLicenseTimer } from './bundle-license'
 import { isDetectablePageUrl, isObservableRequestUrl } from '@/utils/page-support'
 
 registerMessageRouter()
@@ -20,6 +21,7 @@ chrome.runtime.onStartup.addListener(() => {
 
 chrome.tabs.onRemoved.addListener(tabId => {
   clearActiveDetectionTimer(tabId)
+  clearBundleLicenseTimer(tabId)
   clearDynamicSnapshotTimer(tabId)
   clearPendingDynamicSnapshot(tabId)
   clearTabSession(tabId)
@@ -27,6 +29,7 @@ chrome.tabs.onRemoved.addListener(tabId => {
 
 const clearTabDetectionState = (tabId: number) => {
   clearActiveDetectionTimer(tabId)
+  clearBundleLicenseTimer(tabId)
   clearDynamicSnapshotTimer(tabId)
   clearPendingDynamicSnapshot(tabId)
   clearBadge(tabId)

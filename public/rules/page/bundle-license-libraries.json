@@ -1,0 +1,249 @@
+{
+  "page": {
+    "bundleLicenseLibraries": [
+      {
+        "defaults": {
+          "category": "前端库",
+          "confidence": "高",
+          "matchType": "regex"
+        },
+        "rules": [
+          {
+            "name": "React",
+            "url": "https://react.dev",
+            "patterns": ["@license\\s+React\\b|react(?:\\.production|\\.development)?(?:\\.min)?\\.js|React\\s+v?\\d+\\.\\d+"]
+          },
+          {
+            "name": "React DOM",
+            "url": "https://react.dev",
+            "patterns": ["react-dom(?:\\.production|\\.development)?(?:\\.min)?\\.js|@license\\s+React[\\s\\S]{0,120}react-dom"]
+          },
+          {
+            "name": "Vue",
+            "url": "https://vuejs.org",
+            "patterns": [
+              "Vue\\.js\\s+v?\\d+\\.\\d+|@vue/(?:runtime|shared|reactivity)|vue(?:\\.runtime)?(?:\\.global)?(?:\\.prod)?(?:\\.min)?\\.js"
+            ]
+          },
+          {
+            "name": "Angular",
+            "url": "https://angular.dev",
+            "patterns": ["@angular/(?:core|common|router)|Angular\\s+v?\\d+\\.\\d+"]
+          },
+          {
+            "name": "Svelte",
+            "url": "https://svelte.dev",
+            "patterns": ["\\bSvelte\\b[\\s\\S]{0,80}(?:MIT|license|copyright)|svelte(?:/internal|\\.js)"]
+          },
+          {
+            "name": "Preact",
+            "url": "https://preactjs.com",
+            "patterns": ["\\bPreact\\b[\\s\\S]{0,80}(?:MIT|license|copyright)|preact(?:\\.module)?\\.js"]
+          },
+          {
+            "name": "SolidJS",
+            "url": "https://www.solidjs.com",
+            "patterns": ["solid-js|\\bSolidJS\\b"]
+          },
+          {
+            "name": "Lit",
+            "url": "https://lit.dev",
+            "patterns": ["@lit/(?:reactive-element|html)|\\bLit\\b[\\s\\S]{0,80}(?:license|copyright)"]
+          },
+          {
+            "name": "Alpine.js",
+            "url": "https://alpinejs.dev",
+            "patterns": ["Alpine\\.js|alpinejs"]
+          },
+          {
+            "name": "jQuery",
+            "url": "https://jquery.com",
+            "patterns": ["jQuery\\s+v?\\d+\\.\\d+|jquery(?:\\.min)?\\.js|jquery\\.org/license"]
+          },
+          {
+            "name": "Lodash",
+            "url": "https://lodash.com",
+            "patterns": ["\\bLodash\\b|lodash(?:\\.min)?\\.js|lodash\\.com"]
+          },
+          {
+            "name": "Underscore.js",
+            "url": "https://underscorejs.org",
+            "patterns": ["Underscore\\.js|underscore(?:\\.min)?\\.js|underscorejs\\.org"]
+          },
+          {
+            "name": "RxJS",
+            "url": "https://rxjs.dev",
+            "patterns": ["\\bRxJS\\b|rxjs(?:\\.umd)?(?:\\.min)?\\.js|Reactive Extensions for JavaScript"]
+          },
+          {
+            "name": "Axios",
+            "url": "https://axios-http.com",
+            "patterns": ["\\bAxios\\b\\s+v?\\d+\\.\\d+|axios(?:\\.min)?\\.js|axios is freely distributable"]
+          },
+          {
+            "name": "date-fns",
+            "url": "https://date-fns.org",
+            "patterns": ["date-fns|DateFns"]
+          },
+          {
+            "name": "Day.js",
+            "url": "https://day.js.org",
+            "patterns": ["Day\\.js|dayjs(?:\\.min)?\\.js|iamkun/dayjs"]
+          },
+          {
+            "name": "Moment.js",
+            "url": "https://momentjs.com",
+            "patterns": ["Moment\\.js|moment(?:\\.min)?\\.js|momentjs\\.com"]
+          },
+          {
+            "name": "Luxon",
+            "url": "https://moment.github.io/luxon",
+            "patterns": ["\\bLuxon\\b|moment\\.github\\.io/luxon"]
+          },
+          {
+            "name": "D3.js",
+            "url": "https://d3js.org",
+            "patterns": [
+              "\\bd3-(?:array|axis|brush|chord|color|dispatch|drag|ease|fetch|force|format|geo|hierarchy|interpolate|path|scale|selection|shape|time|timer|transition|zoom)\\b|\\bD3\\.js\\b"
+            ]
+          },
+          {
+            "name": "ECharts",
+            "url": "https://echarts.apache.org",
+            "patterns": ["Apache ECharts|\\bECharts\\b|echarts(?:\\.min)?\\.js"]
+          },
+          {
+            "name": "Chart.js",
+            "url": "https://www.chartjs.org",
+            "patterns": ["Chart\\.js|chartjs\\.org|chart(?:\\.umd)?(?:\\.min)?\\.js"]
+          },
+          {
+            "name": "Three.js",
+            "url": "https://threejs.org",
+            "patterns": ["three\\.js|threejs\\.org|three(?:\\.module)?(?:\\.min)?\\.js"]
+          },
+          {
+            "name": "Recharts",
+            "url": "https://recharts.org",
+            "patterns": ["\\bRecharts\\b|recharts(?:\\.min)?\\.js"]
+          },
+          {
+            "name": "Mapbox GL JS",
+            "url": "https://docs.mapbox.com/mapbox-gl-js",
+            "patterns": ["Mapbox GL JS|mapbox-gl(?:\\.js)?"]
+          },
+          {
+            "name": "Leaflet",
+            "url": "https://leafletjs.com",
+            "patterns": ["Leaflet\\s+v?\\d+\\.\\d+|leaflet(?:\\.min)?\\.js|leafletjs\\.com"]
+          },
+          {
+            "name": "OpenLayers",
+            "url": "https://openlayers.org",
+            "patterns": ["OpenLayers|openlayers\\.org|ol(?:\\.js)?\\s+v?\\d+"]
+          },
+          {
+            "name": "Bootstrap",
+            "url": "https://getbootstrap.com",
+            "patterns": ["Bootstrap\\s+v?\\d+\\.\\d+|getbootstrap\\.com|bootstrap(?:\\.bundle)?(?:\\.min)?\\.js"]
+          },
+          {
+            "name": "Popper",
+            "url": "https://popper.js.org",
+            "patterns": ["@popperjs/core|Popper\\s+v?\\d+\\.\\d+|popper\\.js"]
+          },
+          {
+            "name": "Floating UI",
+            "url": "https://floating-ui.com",
+            "patterns": ["@floating-ui/(?:core|dom|react)|Floating UI"]
+          },
+          {
+            "name": "Framer Motion",
+            "url": "https://motion.dev",
+            "patterns": ["framer-motion|Framer Motion|motion-dom|motion-utils"]
+          },
+          {
+            "name": "GSAP",
+            "url": "https://gsap.com",
+            "patterns": ["GreenSock|GSAP|gsap(?:\\.min)?\\.js"]
+          },
+          {
+            "name": "Swiper",
+            "url": "https://swiperjs.com",
+            "patterns": ["Swiper\\s+v?\\d+\\.\\d+|swiper(?:\\.bundle)?(?:\\.min)?\\.js"]
+          },
+          {
+            "name": "Redux",
+            "url": "https://redux.js.org",
+            "patterns": ["\\bRedux\\b|redux(?:\\.min)?\\.js"]
+          },
+          {
+            "name": "Zustand",
+            "url": "https://zustand-demo.pmnd.rs",
+            "patterns": ["\\bZustand\\b|pmndrs/zustand"]
+          },
+          {
+            "name": "TanStack Query",
+            "url": "https://tanstack.com/query",
+            "patterns": ["@tanstack/(?:react-query|query-core)|TanStack Query|React Query"]
+          },
+          {
+            "name": "React Router",
+            "url": "https://reactrouter.com",
+            "patterns": ["react-router|React Router"]
+          },
+          {
+            "name": "Radix UI",
+            "url": "https://www.radix-ui.com",
+            "patterns": ["@radix-ui/|Radix UI"]
+          },
+          {
+            "name": "Lucide",
+            "url": "https://lucide.dev",
+            "patterns": ["lucide(?:-react|-vue|-svelte)?|Lucide Icons"]
+          },
+          {
+            "name": "Heroicons",
+            "url": "https://heroicons.com",
+            "patterns": ["@heroicons/|Heroicons"]
+          },
+          {
+            "name": "Font Awesome",
+            "url": "https://fontawesome.com",
+            "patterns": ["Font Awesome|@fortawesome/"]
+          },
+          {
+            "name": "Monaco Editor",
+            "url": "https://microsoft.github.io/monaco-editor",
+            "patterns": ["Monaco Editor|monaco-editor"]
+          },
+          {
+            "name": "CodeMirror",
+            "url": "https://codemirror.net",
+            "patterns": ["CodeMirror|@codemirror/"]
+          },
+          {
+            "name": "Quill",
+            "url": "https://quilljs.com",
+            "patterns": ["\\bQuill\\b|quilljs\\.com"]
+          },
+          {
+            "name": "ProseMirror",
+            "url": "https://prosemirror.net",
+            "patterns": ["ProseMirror|prosemirror-"]
+          },
+          {
+            "name": "Prism",
+            "url": "https://prismjs.com",
+            "patterns": ["PrismJS|prismjs|prism(?:\\.min)?\\.js"]
+          },
+          {
+            "name": "Highlight.js",
+            "url": "https://highlightjs.org",
+            "patterns": ["Highlight\\.js|highlightjs|hljs(?:\\.min)?\\.js"]
+          }
+        ]
+      }
+    ]
+  }
+}

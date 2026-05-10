@@ -5,6 +5,7 @@
     "page/frontend-frameworks.json",
     "page/ui-frameworks.json",
     "page/build-runtime.json",
+    "page/bundle-license-libraries.json",
     "page/frontend-extra.json",
     "page/frontend-local-libraries.json",
     "page/frontend-cdn-libraries.json",

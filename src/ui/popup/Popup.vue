@@ -691,6 +691,7 @@
     const isHeaderApi = /·\s*api/i.test(trimmed)
     const isHeaderFrame = /·\s*iframe/i.test(trimmed)
     const isDynamic = trimmed.startsWith('动态监控')
+    const isBundle = trimmed.startsWith('JS 版权注释')
     const isHeader = !isHeaderApi && !isHeaderFrame && trimmed.startsWith('响应头')
 
     const baseInfo = {
@@ -729,6 +730,17 @@
         dynamicObservations: {
           ...dyn,
           technologies: (dyn?.technologies || []).filter(matchTech)
+        }
+      }
+    }
+
+    if (isBundle) {
+      const bundle = raw?.bundleObservations || {}
+      return {
+        ...baseInfo,
+        bundleObservations: {
+          ...bundle,
+          technologies: (bundle?.technologies || []).filter(matchTech)
         }
       }
     }

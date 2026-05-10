@@ -18,10 +18,17 @@ export const POPUP_CACHE_STALE_MS = 2 * 60 * 1000
 const POPUP_CACHE_SCHEMA_VERSION = 1
 
 export const hasStoredDetection = (data: any) =>
-  Boolean(data?.page || data?.main || data?.dynamic || (data?.apis || []).length || (data?.frames || []).length)
+  Boolean(
+    data?.page ||
+    data?.main ||
+    data?.dynamic ||
+    (data?.apis || []).length ||
+    (data?.frames || []).length ||
+    (data?.bundle?.technologies || []).length
+  )
 
 export const getStoredUpdatedAt = (data: any) =>
-  Number(data?.updatedAt || data?.page?.time || data?.dynamic?.updatedAt || data?.main?.time || 0)
+  Number(data?.updatedAt || data?.bundle?.updatedAt || data?.page?.time || data?.dynamic?.updatedAt || data?.main?.time || 0)
 
 const unique = (items: any[]) => [...new Set(items.filter(Boolean))]
 
@@ -198,6 +205,13 @@ const buildDisplayTechnologies = (data: any, settings: any) => {
       source: `${tech.source || '动态监控'} · 页面交互后`
     }))
   )
+  addAllTechnologies(
+    all,
+    (data.bundle?.technologies || []).map((tech: any) => ({
+      ...tech,
+      source: tech.source || 'JS 版权注释'
+    }))
+  )
   return filterTechnologiesBySettings(mergeDisplayTechnologyRecords(all), settings)
 }
 
@@ -233,10 +247,12 @@ export const buildPopupRawResult = async (data: any, settings: any, tab: any) =>
     headers,
     apiObservations: data.apis || [],
     frameObservations: data.frames || [],
+    bundleObservations: data.bundle || null,
     dynamicObservations: data.dynamic || null,
     notes: [
       '前端框架和 UI 框架主要通过页面运行时、DOM、资源 URL 和样式类名判断。',
       'Web 服务器、CDN 和后端框架主要依赖响应头与 Cookie 命名线索；如果站点隐藏响应头，结果会保守显示。',
+      '后台会异步扫描少量主 JS 文件的保留版权注释，用于补充打包进 index/main/vendor chunk 的第三方依赖线索。',
       '动态监控会累计页面交互后新增的脚本、样式、iframe、feed 链接和资源加载，再与当前扫描结果合并。'
     ]
   }

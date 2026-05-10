@@ -12,6 +12,7 @@ import {
 import { clearBadge, clearTabSession, getTabData, getTabSnapshot } from './tab-store'
 import { saveTabDataAndBadge, scheduleActivePageDetection } from './detection'
 import { buildEffectivePageRules, loadDetectorSettings, loadTechRules } from './detector-settings'
+import { scheduleBundleLicenseDetection } from './bundle-license'
 
 const DYNAMIC_FAST_LOOKUP_RULE_MIN = 1000
 const DYNAMIC_SNAPSHOT_PROCESS_DELAY = 800
@@ -643,6 +644,7 @@ const processQueuedDynamicSnapshot = async tabId => {
   data.dynamic = normalizeDynamicSnapshot(snapshot, buildEffectivePageRules(rules.page || {}, settings), data.dynamic)
   data.updatedAt = Date.now()
   await saveTabDataAndBadge(tabId, data, settings)
+  scheduleBundleLicenseDetection(tabId)
   scheduleActivePageDetection(tabId, 900)
 }
 
