@@ -1750,6 +1750,96 @@
               "patterns": [
                 "js\\.monitor\\.azure\\.com/scripts/|az416426\\.vo\\.msecnd\\.net/scripts/|dc\\.services\\.visualstudio\\.com/v2/track"
               ]
+            },
+            {
+              "name": "AppDynamics Browser RUM",
+              "patterns": ["cdn\\.appdynamics\\.com/adrum|eum-appdynamics\\.com|adrum(?:-ext)?(?:\\.min)?\\.js(?:\\?|$)"]
+            },
+            {
+              "name": "AWS CloudWatch RUM",
+              "patterns": ["client\\.rum\\.[a-z0-9-]+\\.amazonaws\\.com|aws-rum-web|@aws-sdk/client-rum|%40aws-sdk%2fclient-rum"]
+            },
+            {
+              "name": "Site24x7 RUM",
+              "patterns": ["static\\.site24x7rum\\.com|site24x7rum-min\\.js|site24x7\\.com/[^\\s\"'<>]*(?:rum|apminsight|apm)"]
+            },
+            {
+              "name": "Blue Triangle",
+              "patterns": ["rum-static\\.bluetriangle\\.com|d\\.bluetriangle\\.com|bluetriangle\\.com/[^\\s\"'<>]*(?:btt|rum|tag)"]
+            },
+            {
+              "name": "HyperDX Browser",
+              "patterns": [
+                "in\\.hyperdx\\.io|cdn\\.hyperdx\\.io|@hyperdx/browser|%40hyperdx%2fbrowser|hyperdx\\.io/[^\\s\"'<>]*(?:browser|rum|ingest)"
+              ]
+            },
+            {
+              "name": "Coralogix RUM",
+              "patterns": ["rum\\.coralogix\\.com|@coralogix/browser|%40coralogix%2fbrowser|coralogix\\.com/[^\\s\"'<>]*(?:rum|browser)"]
+            },
+            {
+              "name": "Honeycomb Web",
+              "patterns": ["api\\.honeycomb\\.io/1/(?:events|batch)|@honeycombio/opentelemetry-web|%40honeycombio%2fopentelemetry-web"]
+            },
+            {
+              "name": "OpenTelemetry Web",
+              "patterns": [
+                "@opentelemetry/(?:sdk-trace-web|instrumentation-(?:fetch|xml-http-request|document-load|user-interaction))|%40opentelemetry%2f(?:sdk-trace-web|instrumentation-(?:fetch|xml-http-request|document-load|user-interaction))|opentelemetry-web"
+              ]
+            },
+            {
+              "name": "Exceptionless",
+              "patterns": [
+                "collector\\.exceptionless\\.io|exceptionless\\.com/[^\\s\"'<>]*(?:api|browser|js)|exceptionless(?:\\.min)?\\.js(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Google Cloud Error Reporting",
+              "patterns": ["stackdriver-errors-js|(?:cloud)?errorreporting\\.googleapis\\.com|@google-cloud/error-reporting"]
+            },
+            {
+              "name": "Loggly JavaScript Tracker",
+              "patterns": [
+                "cloudfront\\.loggly\\.com/js/loggly\\.tracker|logs-01\\.loggly\\.com|loggly\\.com/[^\\s\"'<>]*(?:javascript|tracker)"
+              ]
+            },
+            {
+              "name": "Logz.io RUM",
+              "patterns": ["listener\\.logz\\.io|js\\.logz\\.io|logzio-rum|logz\\.io/[^\\s\"'<>]*(?:rum|browser)"]
+            },
+            {
+              "name": "Sumo Logic RUM",
+              "patterns": [
+                "rum-collector\\.sumologic\\.com|collectors\\.sumologic\\.com/receiver/v1/rum|sumologic\\.com/[^\\s\"'<>]*(?:rum|real-user)"
+              ]
+            },
+            {
+              "name": "Axiom Browser Logger",
+              "patterns": ["api\\.axiom\\.co/v1/(?:datasets|ingest)|cloud\\.axiom\\.co/api/v1/datasets|@axiomhq/js|%40axiomhq%2fjs"]
+            },
+            {
+              "name": "Embrace Web RUM",
+              "patterns": ["cdn\\.embrace\\.io|api\\.embrace\\.io|embrace-web-sdk|@embrace-io/web-sdk|%40embrace-io%2fweb-sdk"]
+            },
+            {
+              "name": "Calibre RUM",
+              "patterns": ["rum\\.calibreapp\\.com|calibreapp\\.com/[^\\s\"'<>]*(?:rum|beacon|analytics)"]
+            },
+            {
+              "name": "Uptrends RUM",
+              "patterns": ["hit\\.uptrendsdata\\.com|rum-static\\.uptrends\\.com|uptrends\\.com/[^\\s\"'<>]*(?:real-user|rum)"]
+            },
+            {
+              "name": "Middleware RUM",
+              "patterns": ["rum\\.middleware\\.io|cdn\\.middleware\\.io|middleware\\.io/[^\\s\"'<>]*(?:rum|browser|frontend)"]
+            },
+            {
+              "name": "Lumigo RUM",
+              "patterns": ["rum\\.lumigo-tracer-edge\\.golumigo\\.com|golumigo\\.com/[^\\s\"'<>]*(?:rum|browser)|@lumigo/browser"]
+            },
+            {
+              "name": "SolarWinds RUM",
+              "patterns": ["rum\\.collectors?\\.solarwinds\\.com|solarwinds\\.com/[^\\s\"'<>]*(?:real-user|rum)|solarwinds-rum"]
             }
           ]
         },
