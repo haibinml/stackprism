@@ -1201,6 +1201,62 @@
         },
         {
           "defaults": {
+            "kind": "移动归因 / 深度链接",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Branch.io",
+              "patterns": ["api\\.branch\\.io/v[0-9]+/|cdn\\.branch\\.io/(?:branch|web-sdk)[^\\s\"'<>]*\\.js|branch\\.io/[^\\s\"'<>]*(?:branch-latest|web-sdk|deepview|journeys)"]
+            },
+            {
+              "name": "AppsFlyer OneLink",
+              "patterns": ["onelinksmartscript\\.appsflyer\\.com/[^\\s\"'<>]*\\.js|websdk\\.appsflyer\\.com|appsflyersdk\\.com|appsflyer\\.com/[^\\s\"'<>]*(?:onelink-smart-script|web-sdk)"]
+            },
+            {
+              "name": "Firebase Dynamic Links",
+              "patterns": ["firebasedynamiclinks\\.googleapis\\.com/v[0-9]+/|firebasedynamiclinks-ipv6\\.googleapis\\.com"]
+            },
+            {
+              "name": "Adjust",
+              "patterns": ["cdn\\.adjust\\.com/adjust[^\\s\"'<>]*\\.js|app\\.adjust\\.com/(?:jsr|deeplink|event|session)|app\\.adjust\\.net\\.in/(?:jsr|deeplink|event|session)"]
+            },
+            {
+              "name": "Singular",
+              "patterns": ["web-sdk-cdn\\.singular\\.net/[^\\s\"'<>]*singular[^\\s\"'<>]*\\.js|sdk-api\\.singular\\.net/api/v[0-9]+/|i\\.sng\\.link/[A-Za-z0-9]"]
+            },
+            {
+              "name": "Kochava",
+              "patterns": ["kvinit-prod\\.api\\.kochava\\.com|control\\.kochava\\.com/v1/(?:cpi|click)|assets\\.kochava\\.com/[^\\s\"'<>]*(?:sdk|kochava)[^\\s\"'<>]*\\.js"]
+            },
+            {
+              "name": "Airbridge",
+              "patterns": ["static\\.airbridge\\.io/sdk/[^\\s\"'<>]*airbridge[^\\s\"'<>]*\\.js|core\\.airbridge\\.io/api/v[0-9]+/|abr\\.ge/[A-Za-z0-9]"]
+            },
+            {
+              "name": "Tenjin",
+              "patterns": ["track\\.tenjin\\.(?:com|io)/(?:v[0-9]+/)?(?:event|init|conversion)|api\\.tenjin\\.com/v[0-9]+/"]
+            },
+            {
+              "name": "Linkfire",
+              "patterns": ["api\\.linkfire\\.com|cdn\\.linkfire\\.com|linkfire\\.com/[^\\s\"'<>]*(?:widget|smartlink|artist-link)"]
+            },
+            {
+              "name": "Geniuslink",
+              "patterns": ["api\\.geniuslink\\.com|cdn\\.geniuslink\\.com|geniuslink\\.com/[^\\s\"'<>]*(?:api|widget|script)"]
+            },
+            {
+              "name": "URLgenius",
+              "patterns": ["api\\.urlgeni\\.us|urlgeni\\.us/[^\\s\"'<>]*(?:api|deeplink|sdk|smartlink)"]
+            },
+            {
+              "name": "YOURLS",
+              "patterns": ["yourls-api\\.php|yourls-loader\\.js|yourls-infos\\.php|yourls-admin/"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "隐私合规 / Cookie 同意",
             "matchIn": ["resources"]
           },
