@@ -3734,6 +3734,172 @@
       },
       {
         "defaults": {
+          "category": "Headless CMS",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Contentful",
+            "patterns": [
+              "url: https?://cdn\\.contentful\\.com/",
+              "url: https?://preview\\.contentful\\.com/",
+              "url: https?://images\\.ctfassets\\.net/",
+              "url: https?://assets\\.ctfassets\\.net/"
+            ],
+            "evidence": "响应 URL 指向 Contentful 内容 API 或资源 CDN"
+          },
+          {
+            "name": "Sanity",
+            "patterns": [
+              "url: https?://cdn\\.sanity\\.io/",
+              "url: https?://[a-z0-9-]+\\.api\\.sanity\\.io/",
+              "url: https?://[a-z0-9-]+\\.apicdn\\.sanity\\.io/"
+            ],
+            "evidence": "响应 URL 指向 Sanity 内容 API 或资源 CDN"
+          },
+          {
+            "name": "Prismic",
+            "patterns": [
+              "url: https?://[a-z0-9-]+\\.cdn\\.prismic\\.io/",
+              "url: https?://images\\.prismic\\.io/",
+              "url: https?://[a-z0-9-]+\\.prismic\\.io/api/v2"
+            ],
+            "evidence": "响应 URL 指向 Prismic 内容 API 或资源 CDN"
+          },
+          {
+            "name": "Storyblok",
+            "patterns": ["url: https?://api\\.storyblok\\.com/", "url: https?://a\\.storyblok\\.com/"],
+            "evidence": "响应 URL 指向 Storyblok 内容 API 或资源 CDN"
+          },
+          {
+            "name": "Hygraph",
+            "patterns": ["url: https?://api(?:-[a-z0-9-]+)?\\.hygraph\\.com/", "url: https?://media\\.graphassets\\.com/"],
+            "evidence": "响应 URL 指向 Hygraph / GraphCMS"
+          },
+          {
+            "name": "Contentstack",
+            "patterns": [
+              "url: https?://assets\\.contentstack\\.io/",
+              "url: https?://images\\.contentstack\\.io/",
+              "url: https?://cdn\\.contentstack\\.io/",
+              "url: https?://graphql\\.contentstack\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Contentstack"
+          },
+          {
+            "name": "DatoCMS",
+            "patterns": [
+              "url: https?://www\\.datocms-assets\\.com/",
+              "url: https?://site-api\\.datocms\\.com/",
+              "url: https?://graphql\\.datocms\\.com/"
+            ],
+            "evidence": "响应 URL 指向 DatoCMS"
+          },
+          {
+            "name": "ButterCMS",
+            "patterns": ["url: https?://cdn\\.buttercms\\.com/", "url: https?://api\\.buttercms\\.com/"],
+            "evidence": "响应 URL 指向 ButterCMS"
+          },
+          {
+            "name": "Kontent.ai",
+            "patterns": [
+              "url: https?://deliver\\.kontent\\.ai/",
+              "url: https?://preview-deliver\\.kontent\\.ai/",
+              "url: https?://assets-[a-z0-9-]+\\.kc-usercontent\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Kontent.ai"
+          },
+          {
+            "name": "Builder.io CMS",
+            "patterns": ["url: https?://cdn\\.builder\\.io/api/v[0-9]+/", "url: https?://builder\\.io/api/v[0-9]+/"],
+            "evidence": "响应 URL 指向 Builder.io 内容 API"
+          },
+          {
+            "name": "Cosmic CMS",
+            "patterns": ["url: https?://api\\.cosmicjs\\.com/", "url: https?://cdn\\.cosmicjs\\.com/"],
+            "evidence": "响应 URL 指向 Cosmic CMS"
+          },
+          {
+            "name": "Agility CMS",
+            "patterns": ["url: https?://cdn\\.agilitycms\\.com/", "url: https?://api\\.aglty\\.io/"],
+            "evidence": "响应 URL 指向 Agility CMS"
+          },
+          {
+            "name": "Zesty.io",
+            "patterns": ["url: https?://media\\.zestyio\\.com/", "url: https?://api\\.zesty\\.io/", "url: https?://content\\.zesty\\.io/"],
+            "evidence": "响应 URL 指向 Zesty.io"
+          },
+          {
+            "name": "Squidex",
+            "patterns": [
+              "url: https?://cloud\\.squidex\\.io/api/(?:content|assets)",
+              "url: https?://(?!www\\.)[a-z0-9-]+\\.squidex\\.io/api/(?:content|assets)"
+            ],
+            "evidence": "响应 URL 指向 Squidex 内容 API"
+          },
+          {
+            "name": "Prepr CMS",
+            "patterns": ["url: https?://api\\.(?:eu1|us1)\\.prepr\\.io/", "url: https?://api\\.prepr\\.io/", "url: https?://cdn\\.prepr\\.io/"],
+            "evidence": "响应 URL 指向 Prepr CMS"
+          },
+          {
+            "name": "TakeShape",
+            "patterns": ["url: https?://api\\.takeshape\\.io/", "url: https?://cdn\\.takeshape\\.io/"],
+            "evidence": "响应 URL 指向 TakeShape"
+          },
+          {
+            "name": "TinaCMS",
+            "patterns": ["url: https?://content\\.tinajs\\.io/", "url: https?://app\\.tina\\.io/"],
+            "evidence": "响应 URL 指向 TinaCMS"
+          },
+          {
+            "name": "Flotiq",
+            "patterns": ["url: https?://api\\.flotiq\\.com/"],
+            "evidence": "响应 URL 指向 Flotiq"
+          },
+          {
+            "name": "StoryChief",
+            "patterns": ["url: https?://api\\.storychief\\.io/", "url: https?://content-api\\.storychief\\.io/"],
+            "evidence": "响应 URL 指向 StoryChief"
+          },
+          {
+            "name": "Amplience Dynamic Content",
+            "patterns": [
+              "url: https?://cdn\\.media\\.amplience\\.net/",
+              "url: https?://cdn\\.c1\\.amplience\\.net/",
+              "url: https?://delivery\\.content\\.amplience\\.net/"
+            ],
+            "evidence": "响应 URL 指向 Amplience Dynamic Content"
+          },
+          {
+            "name": "CloudCannon",
+            "patterns": ["url: https?://app\\.cloudcannon\\.com/"],
+            "evidence": "响应 URL 指向 CloudCannon"
+          },
+          {
+            "name": "Directus Cloud",
+            "patterns": ["url: https?://(?!www\\.)[a-z0-9-]+\\.directus\\.app/", "url: https?://(?!www\\.)[a-z0-9-]+\\.directus\\.cloud/"],
+            "evidence": "响应 URL 指向 Directus Cloud"
+          },
+          {
+            "name": "Strapi Cloud",
+            "patterns": ["url: https?://(?!www\\.)[a-z0-9-]+\\.strapiapp\\.com/"],
+            "evidence": "响应 URL 指向 Strapi Cloud"
+          },
+          {
+            "name": "Payload Cloud",
+            "patterns": ["url: https?://(?!www\\.)[a-z0-9-]+\\.payloadcms\\.app/"],
+            "evidence": "响应 URL 指向 Payload Cloud"
+          },
+          {
+            "name": "Webiny",
+            "patterns": ["url: https?://(?!www\\.)[a-z0-9-]+\\.webiny\\.cloud/"],
+            "evidence": "响应 URL 指向 Webiny Cloud"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "SaaS / 第三方服务",
           "confidence": "高"
         },
