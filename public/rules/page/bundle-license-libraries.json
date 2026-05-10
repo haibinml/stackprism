@@ -362,6 +362,11 @@
             "patterns": ["\\bi18next\\b|i18next\\.com"]
           },
           {
+            "name": "Vue I18n",
+            "url": "https://vue-i18n.intlify.dev",
+            "patterns": ["vue-i18n\\s+v?\\d|\\bvue-i18n\\b|vue-i18n\\.intlify\\.dev"]
+          },
+          {
             "name": "react-i18next",
             "url": "https://react.i18next.com",
             "patterns": ["react-i18next|react\\.i18next\\.com"]
@@ -385,6 +390,16 @@
             "name": "DOMPurify",
             "url": "https://github.com/cure53/DOMPurify",
             "patterns": ["DOMPurify|cure53/DOMPurify"]
+          },
+          {
+            "name": "js-yaml",
+            "url": "https://github.com/nodeca/js-yaml",
+            "patterns": ["js-yaml(?:/dist/js-yaml\\.mjs)?|nodeca/js-yaml"]
+          },
+          {
+            "name": "qrcode.react",
+            "url": "https://github.com/zpao/qrcode.react",
+            "patterns": ["qrcode\\.react|zpao/qrcode\\.react"]
           },
           {
             "name": "Marked",
@@ -440,6 +455,35 @@
             "name": "NProgress",
             "url": "https://ricostacruz.com/nprogress",
             "patterns": ["\\bNProgress\\b|nprogress(?:\\.min)?\\.js"]
+          },
+          {
+            "name": "PullToRefresh.js",
+            "url": "https://github.com/BoxFactura/pulltorefresh.js",
+            "patterns": ["pulltorefreshjs|pulltorefresh\\.js|BoxFactura/pulltorefresh\\.js"]
+          },
+          {
+            "category": "UI / CSS 框架",
+            "name": "Animate.css",
+            "url": "https://animate.style",
+            "patterns": ["animate\\.css|animate\\.style"]
+          },
+          {
+            "category": "构建与运行时",
+            "name": "regenerator-runtime",
+            "url": "https://github.com/facebook/regenerator",
+            "patterns": ["regenerator-runtime|facebook/regenerator|packages/babel-helpers/LICENSE"]
+          },
+          {
+            "category": "构建与运行时",
+            "name": "buffer",
+            "url": "https://github.com/feross/buffer",
+            "patterns": ["The buffer module from node\\.js, for the browser|feross/buffer"]
+          },
+          {
+            "category": "构建与运行时",
+            "name": "ieee754",
+            "url": "https://github.com/feross/ieee754",
+            "patterns": ["ieee754\\. BSD-3-Clause|feross/ieee754|\\bieee754\\b[\\s\\S]{0,80}Feross"]
           },
           {
             "name": "XState",
@@ -647,6 +691,11 @@
             "name": "Rough.js",
             "url": "https://roughjs.com",
             "patterns": ["Rough\\.js|roughjs|roughjs\\.com"]
+          },
+          {
+            "name": "@kurkle/color",
+            "url": "https://github.com/kurkle/color",
+            "patterns": ["@kurkle/color|kurkle/color"]
           },
           {
             "name": "P5.js",

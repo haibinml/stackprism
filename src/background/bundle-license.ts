@@ -6,14 +6,21 @@ import { matchesCompiledRulePatterns, matchesRuleTextHints, passesRulePrefilter 
 import { isDetectablePageUrl } from '@/utils/page-support'
 import { cleanTechnologyUrl } from '@/utils/url'
 
-const BUNDLE_LICENSE_SCHEMA_VERSION = 1
+const BUNDLE_LICENSE_SCHEMA_VERSION = 2
 const BUNDLE_LICENSE_SOURCE = 'JS 版权注释'
 const MAX_CANDIDATE_SCRIPTS = 5
 const MAX_FETCH_BYTES = 384 * 1024
+const MAX_RANGE_SAMPLE_BYTES = 160 * 1024
+const MAX_TOTAL_SAMPLE_BYTES = 2 * 1024 * 1024
+const MIN_SAMPLE_BYTES = 24 * 1024
+const MAX_RANGE_SAMPLES_PER_SCRIPT = 6
+const MAX_RANGE_SAMPLES_PER_SCAN = 10
 const MAX_SIDECAR_BYTES = 160 * 1024
 const MAX_LICENSE_TEXT_CHARS = 180_000
 const FETCH_TIMEOUT_MS = 6000
+const MAX_SCAN_MS = 8000
 const SCAN_DELAY_MS = 1400
+const RANGE_SAMPLE_RATIOS = [0.25, 0.5, 0.8, 0.835, 0.9, 1] as const
 
 const bundleLicenseTimers = new Map<number, ReturnType<typeof setTimeout>>()
 
@@ -29,7 +36,41 @@ type ScriptLicenseObservation = {
   sidecarUrl?: string
 }
 
+type RangeFetchResult = {
+  rangeSupported: boolean
+  text: string
+  totalBytes?: number
+}
+
+type ScanBudget = {
+  deadline: number
+  remainingBytes: number
+  remainingRangeSamples: number
+}
+
 const unique = (items: string[]) => [...new Set(items.filter(Boolean))]
+
+const createScanBudget = (): ScanBudget => ({
+  deadline: Date.now() + MAX_SCAN_MS,
+  remainingBytes: MAX_TOTAL_SAMPLE_BYTES,
+  remainingRangeSamples: MAX_RANGE_SAMPLES_PER_SCAN
+})
+
+const hasScanBudget = (budget: ScanBudget): boolean => budget.remainingBytes >= MIN_SAMPLE_BYTES && Date.now() < budget.deadline
+
+const claimFetchBytes = (budget: ScanBudget, maxBytes: number): number => {
+  if (!hasScanBudget(budget)) return 0
+  const bytes = Math.min(Math.max(1, Math.floor(maxBytes)), budget.remainingBytes)
+  if (bytes < MIN_SAMPLE_BYTES) return 0
+  budget.remainingBytes -= bytes
+  return bytes
+}
+
+const remainingTimeoutMs = (budget: ScanBudget): number => Math.max(1, Math.min(FETCH_TIMEOUT_MS, budget.deadline - Date.now()))
+
+const yieldToEventLoop = async (): Promise<void> => {
+  await new Promise<void>(resolve => setTimeout(resolve, 0))
+}
 
 const toAbsoluteHttpUrl = (value: unknown, baseUrl: string): string => {
   const text = String(value || '').trim()
@@ -136,25 +177,79 @@ const isTextLikeResponse = (url: string, response: Response): boolean => {
   return /javascript|ecmascript|text|plain|octet-stream/i.test(contentType)
 }
 
-const fetchLimitedText = async (url: string, maxBytes: number): Promise<string> => {
+const parseContentRangeTotal = (value: string | null): number | undefined => {
+  const match = value?.match(/\/(\d+)\s*$/)
+  if (!match) return undefined
+  const total = Number(match[1])
+  return Number.isFinite(total) && total > 0 ? total : undefined
+}
+
+const fetchTextRange = async (url: string, start: number, maxBytes: number, budget: ScanBudget): Promise<RangeFetchResult> => {
+  const claimedBytes = claimFetchBytes(budget, maxBytes)
+  if (!claimedBytes) return { rangeSupported: false, text: '' }
+
   const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS)
+  const timeout = setTimeout(() => controller.abort(), remainingTimeoutMs(budget))
+  const safeStart = Math.max(0, Math.floor(start))
+  const safeMaxBytes = Math.max(1, Math.floor(claimedBytes))
+  const end = safeStart + safeMaxBytes - 1
 
   try {
     const response = await fetch(url, {
       cache: 'force-cache',
       credentials: 'omit',
-      headers: { Range: `bytes=0-${maxBytes - 1}` },
+      headers: { Range: `bytes=${safeStart}-${end}` },
       signal: controller.signal
     })
-    if (!response.ok) return ''
-    if (!isTextLikeResponse(url, response)) return ''
-    return readLimitedResponseText(response, maxBytes)
+    if (!response.ok) return { rangeSupported: false, text: '' }
+    if (!isTextLikeResponse(url, response)) return { rangeSupported: false, text: '' }
+
+    const rangeSupported = response.status === 206
+    const totalBytes = parseContentRangeTotal(response.headers.get('content-range'))
+    return {
+      rangeSupported,
+      text: await readLimitedResponseText(response, safeMaxBytes),
+      totalBytes
+    }
   } catch {
-    return ''
+    return { rangeSupported: false, text: '' }
   } finally {
     clearTimeout(timeout)
   }
+}
+
+const fetchLimitedText = async (url: string, maxBytes: number, budget: ScanBudget): Promise<string> =>
+  (await fetchTextRange(url, 0, maxBytes, budget)).text
+
+const buildRangeSampleStarts = (totalBytes: number): number[] => {
+  if (!Number.isFinite(totalBytes) || totalBytes <= MAX_FETCH_BYTES + MAX_RANGE_SAMPLE_BYTES) return []
+
+  const maxStart = Math.max(0, totalBytes - MAX_RANGE_SAMPLE_BYTES)
+  const starts: number[] = []
+  for (const ratio of RANGE_SAMPLE_RATIOS) {
+    const start = ratio >= 1 ? maxStart : Math.floor(maxStart * ratio)
+    if (start <= MAX_FETCH_BYTES) continue
+    if (starts.some(item => Math.abs(item - start) < MAX_RANGE_SAMPLE_BYTES / 2)) continue
+    starts.push(start)
+  }
+
+  return starts.sort((a, b) => a - b).slice(0, MAX_RANGE_SAMPLES_PER_SCRIPT)
+}
+
+const fetchSampledScriptText = async (url: string, budget: ScanBudget): Promise<string> => {
+  const head = await fetchTextRange(url, 0, MAX_FETCH_BYTES, budget)
+  const chunks = [head.text]
+  if (!head.rangeSupported || !head.totalBytes) return chunks.join('\n')
+
+  for (const start of buildRangeSampleStarts(head.totalBytes)) {
+    if (!hasScanBudget(budget) || budget.remainingRangeSamples <= 0) break
+    budget.remainingRangeSamples -= 1
+    await yieldToEventLoop()
+    const result = await fetchTextRange(url, start, MAX_RANGE_SAMPLE_BYTES, budget)
+    if (result.text) chunks.push(result.text)
+  }
+
+  return chunks.join('\n')
 }
 
 const isLicenseComment = (comment: string): boolean =>
@@ -167,6 +262,7 @@ const trimLicenseText = (text: string): string => {
 
 const extractLicenseComments = (source: string): string[] => {
   const comments: string[] = []
+  let commentChars = 0
   const blockCommentPattern = /\/\*[\s\S]*?\*\//g
   let blockMatch: RegExpExecArray | null
 
@@ -174,15 +270,17 @@ const extractLicenseComments = (source: string): string[] => {
     const comment = blockMatch[0]
     if (isLicenseComment(comment)) {
       comments.push(comment)
+      commentChars += comment.length + 1
     }
-    if (comments.join('\n').length >= MAX_LICENSE_TEXT_CHARS) break
+    if (commentChars >= MAX_LICENSE_TEXT_CHARS) break
   }
 
   const lineCommentPattern = /^\s*\/\/[^\n]*(?:@license|@preserve|copyright|license)[^\n]*(?:\n\s*\/\/[^\n]*){0,8}/gim
   let lineMatch: RegExpExecArray | null
   while ((lineMatch = lineCommentPattern.exec(source))) {
     comments.push(lineMatch[0])
-    if (comments.join('\n').length >= MAX_LICENSE_TEXT_CHARS) break
+    commentChars += lineMatch[0].length + 1
+    if (commentChars >= MAX_LICENSE_TEXT_CHARS) break
   }
 
   return comments
@@ -200,11 +298,12 @@ const buildSidecarLicenseUrl = (scriptUrl: string): string => {
   }
 }
 
-const scanScriptLicense = async (scriptUrl: string): Promise<ScriptLicenseObservation | null> => {
-  const source = await fetchLimitedText(scriptUrl, MAX_FETCH_BYTES)
-  const comments = source ? extractLicenseComments(source) : []
+const scanScriptLicense = async (scriptUrl: string, budget: ScanBudget): Promise<ScriptLicenseObservation | null> => {
+  const source = await fetchSampledScriptText(scriptUrl, budget)
+  const comments = unique(source ? extractLicenseComments(source) : [])
   const sidecarUrl = buildSidecarLicenseUrl(scriptUrl)
-  const sidecarText = sidecarUrl ? await fetchLimitedText(sidecarUrl, MAX_SIDECAR_BYTES) : ''
+  const sidecarText =
+    sidecarUrl && comments.length < 12 && hasScanBudget(budget) ? await fetchLimitedText(sidecarUrl, MAX_SIDECAR_BYTES, budget) : ''
   const text = trimLicenseText([...comments, sidecarText].filter(Boolean).join('\n\n'))
 
   if (!text) return null
@@ -260,7 +359,15 @@ export const runBundleLicenseDetection = async (tabId: number): Promise<void> =>
   if (!signature) return
   if (data.bundle?.schemaVersion === BUNDLE_LICENSE_SCHEMA_VERSION && data.bundle?.signature === signature) return
 
-  const observations = (await Promise.all(scripts.map(script => scanScriptLicense(script)))).filter(Boolean) as ScriptLicenseObservation[]
+  const budget = createScanBudget()
+  const observations: ScriptLicenseObservation[] = []
+  for (const script of scripts) {
+    if (!hasScanBudget(budget)) break
+    const observation = await scanScriptLicense(script, budget)
+    if (observation) observations.push(observation)
+    await yieldToEventLoop()
+  }
+
   const technologies = detectTechnologiesFromLicenseText(observations, pageRules.bundleLicenseLibraries || [])
 
   data.bundle = {
