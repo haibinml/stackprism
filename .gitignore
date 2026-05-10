@@ -39,5 +39,3 @@ temp/
 .DS_Store
 Thumbs.db
 .idea/
-.vscode/
-.claude/
