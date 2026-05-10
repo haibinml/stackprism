@@ -2920,6 +2920,106 @@
         },
         {
           "defaults": {
+            "kind": "金融数据 / 账户连接",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "TradingView Widgets",
+              "patterns": [
+                "s3\\.tradingview\\.com/(?:tv\\.js|external-embedding/embed-widget)|widgets\\.tradingview\\.com|tradingview\\.com/(?:widgetembed|embed-widget)"
+              ]
+            },
+            {
+              "name": "CoinMarketCap Widgets",
+              "patterns": [
+                "s3\\.coinmarketcap\\.com/static/widget|files\\.coinmarketcap\\.com/static/widget|widget\\.coinmarketcap\\.com|coinmarketcap\\.com/[^\\s\"'<>]*(?:widget|converter)"
+              ]
+            },
+            {
+              "name": "CoinGecko Widgets",
+              "patterns": [
+                "widgets\\.coingecko\\.com|static\\.coingecko\\.com/[^\\s\"'<>]*(?:widget|coin-price)|coingecko\\.com/[^\\s\"'<>]*(?:widget|coins/[^\\s\"'<>]*/widget)"
+              ]
+            },
+            {
+              "name": "CryptoCompare Widgets",
+              "patterns": ["widgets\\.cryptocompare\\.com|cryptocompare\\.com/[^\\s\"'<>]*(?:widgets|media/js|coins-widget)"]
+            },
+            {
+              "name": "Plaid Link",
+              "patterns": [
+                "cdn\\.plaid\\.com/link/v2/stable/link-initialize\\.js|cdn\\.plaid\\.com/link/v2|plaid\\.com/[^\\s\"'<>]*(?:link|oauth|connect)"
+              ]
+            },
+            {
+              "name": "Tink Link",
+              "patterns": ["cdn\\.tink\\.com|link\\.tink\\.com|tink\\.com/[^\\s\"'<>]*(?:link|connect|oauth)"]
+            },
+            {
+              "name": "TrueLayer Connect",
+              "patterns": ["auth\\.truelayer\\.com|cdn\\.truelayer\\.com|truelayer\\.com/[^\\s\"'<>]*(?:connect|auth|oauth|payments)"]
+            },
+            {
+              "name": "Teller Connect",
+              "patterns": ["cdn\\.teller\\.io|connect\\.teller\\.io|teller\\.io/[^\\s\"'<>]*(?:connect|teller-connect|oauth)"]
+            },
+            {
+              "name": "Yodlee FastLink",
+              "patterns": ["cdn\\.yodlee\\.com/fastlink|fl4\\.sandbox\\.yodlee\\.com|yodlee\\.com/[^\\s\"'<>]*(?:fastlink|finapp|widget)"]
+            },
+            {
+              "name": "Salt Edge Connect",
+              "patterns": [
+                "cdn\\.saltedge\\.com|www\\.saltedge\\.com/[^\\s\"'<>]*(?:connect|widget|oauth)|saltedge\\.com/[^\\s\"'<>]*(?:connect|widget|oauth)"
+              ]
+            },
+            {
+              "name": "Finicity Connect",
+              "patterns": ["connect\\.finicity\\.com|api\\.finicity\\.com|finicity\\.com/[^\\s\"'<>]*(?:connect|customer|oauth)"]
+            },
+            {
+              "name": "MX Platform",
+              "patterns": ["widgets\\.mx\\.com|connect-widget\\.mx\\.com|mx\\.com/[^\\s\"'<>]*(?:connect|widget|oauth)"]
+            },
+            {
+              "name": "Flinks Connect",
+              "patterns": ["cdn\\.flinks\\.io|connect\\.flinks\\.io|flinks\\.io/[^\\s\"'<>]*(?:connect|iframe|widget)"]
+            },
+            {
+              "name": "Belvo Connect",
+              "patterns": ["cdn\\.belvo\\.io|widget\\.belvo\\.io|belvo\\.com/[^\\s\"'<>]*(?:widget|connect|api)"]
+            },
+            {
+              "name": "Stripe Financial Connections",
+              "patterns": [
+                "js\\.stripe\\.com/v3/financial-connections|financial-connections\\.stripe\\.com|stripe\\.com/[^\\s\"'<>]*financial-connections"
+              ]
+            },
+            {
+              "name": "Currencylayer",
+              "patterns": ["api\\.currencylayer\\.com|currencylayer\\.com/[^\\s\"'<>]*(?:api|live|convert)"]
+            },
+            {
+              "name": "Open Exchange Rates",
+              "patterns": ["openexchangerates\\.org/api|openexchangerates\\.org/[^\\s\"'<>]*(?:latest|historical|currencies|api)"]
+            },
+            {
+              "name": "Alpha Vantage",
+              "patterns": ["alphavantage\\.co/query|alphavantage\\.co/[^\\s\"'<>]*(?:query|function=|api)"]
+            },
+            {
+              "name": "Twelve Data",
+              "patterns": ["api\\.twelvedata\\.com|twelvedata\\.com/[^\\s\"'<>]*(?:time_series|quote|api|websocket)"]
+            },
+            {
+              "name": "Finnhub",
+              "patterns": ["finnhub\\.io/api|finnhub\\.io/[^\\s\"'<>]*(?:stock|quote|api|websocket)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "验证码 / Bot 防护"
           },
           "rules": [
