@@ -6104,6 +6104,76 @@
             "evidence": "响应 URL 指向 Clerk 服务"
           },
           {
+            "name": "Stytch",
+            "patterns": ["url: https?://js\\.stytch\\.com/", "url: https?://api\\.stytch\\.com/v[0-9]+/", "url: https?://test\\.stytch\\.com/v[0-9]+/"],
+            "evidence": "响应 URL 指向 Stytch 认证服务"
+          },
+          {
+            "name": "Kinde",
+            "patterns": ["url: https?://auth\\.kinde\\.com/", "url: https?://[^\\s/]+\\.kinde\\.com/oauth2/"],
+            "evidence": "响应 URL 指向 Kinde 认证服务"
+          },
+          {
+            "name": "Descope",
+            "patterns": ["url: https?://cdn\\.descope\\.com/", "url: https?://api\\.descope\\.com/", "url: https?://auth\\.descope\\.com/"],
+            "evidence": "响应 URL 指向 Descope 认证服务"
+          },
+          {
+            "name": "WorkOS",
+            "patterns": ["url: https?://cdn\\.workos\\.com/", "url: https?://api\\.workos\\.com/"],
+            "evidence": "响应 URL 指向 WorkOS 认证服务"
+          },
+          {
+            "name": "Frontegg",
+            "patterns": ["url: https?://cdn\\.frontegg\\.com/", "url: https?://[^\\s/]+\\.frontegg\\.com/(?:oauth|identity|frontegg|resources)/"],
+            "evidence": "响应 URL 指向 Frontegg 认证服务"
+          },
+          {
+            "name": "Authgear",
+            "patterns": ["url: https?://cdn\\.authgear\\.com/", "url: https?://[^\\s/]+\\.authgear\\.cloud/"],
+            "evidence": "响应 URL 指向 Authgear 认证服务"
+          },
+          {
+            "name": "Magic",
+            "patterns": ["url: https?://auth\\.magic\\.link/", "url: https?://(?:cdn\\.jsdelivr\\.net/npm|unpkg\\.com)/magic-sdk(?:@|/|[?#]|$)"],
+            "evidence": "响应 URL 指向 Magic 认证服务或 SDK"
+          },
+          {
+            "name": "Web3Auth",
+            "patterns": ["url: https?://auth\\.web3auth\\.io/", "url: https?://(?:cdn\\.jsdelivr\\.net/npm|unpkg\\.com)/@web3auth/"],
+            "evidence": "响应 URL 指向 Web3Auth 服务或 SDK"
+          },
+          {
+            "name": "Privy Auth",
+            "patterns": ["url: https?://auth\\.privy\\.io/", "url: https?://(?:cdn\\.jsdelivr\\.net/npm|unpkg\\.com)/@privy-io/"],
+            "evidence": "响应 URL 指向 Privy 认证服务或 SDK"
+          },
+          {
+            "name": "Dynamic.xyz Auth",
+            "patterns": ["url: https?://auth\\.dynamic\\.xyz/", "url: https?://app\\.dynamic\\.xyz/", "url: https?://(?:cdn\\.jsdelivr\\.net/npm|unpkg\\.com)/@dynamic-labs/"],
+            "evidence": "响应 URL 指向 Dynamic.xyz 认证服务或 SDK"
+          },
+          {
+            "name": "Passage by 1Password",
+            "patterns": ["url: https?://cdn\\.passage\\.id/", "url: https?://auth\\.passage\\.id/", "url: https?://(?:cdn\\.jsdelivr\\.net/npm|unpkg\\.com)/@passageidentity/"],
+            "evidence": "响应 URL 指向 Passage 认证服务或 SDK"
+          },
+          {
+            "name": "MojoAuth",
+            "patterns": ["url: https?://cdn\\.mojoauth\\.com/", "url: https?://api\\.mojoauth\\.com/"],
+            "evidence": "响应 URL 指向 MojoAuth 认证服务"
+          },
+          {
+            "name": "PropelAuth",
+            "patterns": ["url: https?://auth\\.propelauth\\.com/", "url: https?://(?:cdn\\.jsdelivr\\.net/npm|unpkg\\.com)/@propelauth/"],
+            "evidence": "响应 URL 指向 PropelAuth 认证服务或 SDK"
+          },
+          {
+            "name": "SlashID",
+            "patterns": ["url: https?://cdn\\.slashid\\.com/", "url: https?://api\\.slashid\\.com/"],
+            "evidence": "响应 URL 指向 SlashID 认证服务"
+          },
+          {
             "name": "Sentry",
             "patterns": ["url: https?://[^\\s/]+\\.sentry\\.io/"],
             "evidence": "响应 URL 指向 Sentry 服务"
