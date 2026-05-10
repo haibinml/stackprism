@@ -2071,6 +2071,90 @@
             {
               "name": "Splash",
               "patterns": ["event\\.splashthat\\.com|splashthat\\.com/[^\\s\"'<>]*(?:embed|event)|splash\\.events"]
+            },
+            {
+              "name": "Cvent Events",
+              "patterns": ["web\\.cvent\\.com/event|events\\.cvent\\.com|cvent\\.com/[^\\s\"'<>]*(?:events|event-management|registration)"]
+            },
+            {
+              "name": "Bizzabo Events",
+              "patterns": ["events\\.bizzabo\\.com|cdn\\.bizzabo\\.com|bizzabo\\.com/[^\\s\"'<>]*(?:widget|events|registration)"]
+            },
+            {
+              "name": "Whova",
+              "patterns": ["whova\\.com/[^\\s\"'<>]*(?:embedded|webapp|portal|registration)|whova\\.com/portal/webapp"]
+            },
+            {
+              "name": "RingCentral Events / Hopin",
+              "patterns": [
+                "events\\.ringcentral\\.com|hopin\\.com/events|hopin\\.to/[^\\s\"'<>]*(?:events|embed)|hopin\\.com/[^\\s\"'<>]*(?:widgets|registration)"
+              ]
+            },
+            {
+              "name": "EventMobi",
+              "patterns": ["eventmobi\\.com/[^\\s\"'<>]*(?:app|events|registration|embed)|eventmobi\\.io|assets\\.eventmobi\\.com"]
+            },
+            {
+              "name": "Universe Ticketing",
+              "patterns": ["universe\\.com/embed|universe\\.com/[^\\s\"'<>]*(?:events|tickets)|cdn\\.universe\\.com"]
+            },
+            {
+              "name": "Billetto",
+              "patterns": ["billetto\\.(?:co\\.uk|dk|se|no|fi|nl|ie)/[^\\s\"'<>]*(?:e/|events|widget|embed)"]
+            },
+            {
+              "name": "pretix",
+              "patterns": [
+                "pretix\\.eu/[^\\s\"'<>]*(?:widget|event|api)|pretix\\.eu/widget/v1|pretix\\.(?:dev|cloud)/[^\\s\"'<>]*(?:widget|event)"
+              ]
+            },
+            {
+              "name": "Ticketbud",
+              "patterns": ["ticketbud\\.com/[^\\s\"'<>]*(?:events|tickets|widgets?|embed)|cdn\\.ticketbud\\.com"]
+            },
+            {
+              "name": "EventCreate",
+              "patterns": ["eventcreate\\.com/[^\\s\"'<>]*(?:e/|event|widget|embed|ticket)"]
+            },
+            {
+              "name": "Eventee",
+              "patterns": ["app\\.eventee\\.co|eventee\\.co/[^\\s\"'<>]*(?:embed|events|api|app)"]
+            },
+            {
+              "name": "Airmeet",
+              "patterns": ["airmeet\\.com/[^\\s\"'<>]*(?:e/|event|embed|register)|cdn\\.airmeet\\.com"]
+            },
+            {
+              "name": "Goldcast",
+              "patterns": ["events\\.goldcast\\.io|goldcast\\.io/[^\\s\"'<>]*(?:events|register|embed)|cdn\\.goldcast\\.io"]
+            },
+            {
+              "name": "Livestorm",
+              "patterns": ["app\\.livestorm\\.co|livestorm\\.co/[^\\s\"'<>]*(?:webinars|embed|registration|live)"]
+            },
+            {
+              "name": "Remo Conference",
+              "patterns": ["live\\.remo\\.co|remo\\.co/[^\\s\"'<>]*(?:e/|event|conference|embed)"]
+            },
+            {
+              "name": "BigMarker",
+              "patterns": ["bigmarker\\.com/[^\\s\"'<>]*(?:conferences|events|webinars|widgets?|embed)|assets\\.bigmarker\\.com"]
+            },
+            {
+              "name": "Sessionize",
+              "patterns": ["sessionize\\.com/api/v2|sessionize\\.com/[^\\s\"'<>]*(?:embed|view|app|speaker)"]
+            },
+            {
+              "name": "Sched",
+              "patterns": ["assets\\.sched\\.com|sched\\.com/[^\\s\"'<>]*(?:event|embed|schedule)|sched\\.co/[^\\s\"'<>]*(?:event|embed)"]
+            },
+            {
+              "name": "Expo Pass",
+              "patterns": ["register\\.expopass\\.com|expopass\\.com/[^\\s\"'<>]*(?:events|registration|tickets|embed)"]
+            },
+            {
+              "name": "Brushfire",
+              "patterns": ["brushfire\\.com/[^\\s\"'<>]*(?:events|widgets?|tickets|register)|widget\\.brushfire\\.com"]
             }
           ]
         },
