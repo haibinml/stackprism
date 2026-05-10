@@ -1254,6 +1254,96 @@
             {
               "name": "Attraqt",
               "patterns": ["cdn\\.attraqt\\.io|attraqt\\.io/[^\\s\"'<>]*(?:search|recommend|personalisation)"]
+            },
+            {
+              "name": "Searchanise",
+              "patterns": ["cdn\\.searchanise\\.com|searchserverapi\\.com|searchanise\\.com/[^\\s\"'<>]*(?:widgets|js|search|autocomplete)"]
+            },
+            {
+              "name": "FACT-Finder",
+              "patterns": [
+                "cdn\\.fact-finder\\.de|api\\.fact-finder\\.de|fact-finder\\.(?:de|com)/[^\\s\"'<>]*(?:search|suggest|tracking)|ff-web-components"
+              ]
+            },
+            {
+              "name": "HawkSearch",
+              "patterns": [
+                "cdn\\.hawksearch\\.com|searchapi\\.hawksearch\\.com|hawksearch\\.com/[^\\s\"'<>]*(?:hawksearch|search|autocomplete)"
+              ]
+            },
+            {
+              "name": "AddSearch",
+              "patterns": ["cdn\\.addsearch\\.com|api\\.addsearch\\.com|addsearch\\.com/[^\\s\"'<>]*(?:js|search|autocomplete|embed)"]
+            },
+            {
+              "name": "Elastic Site Search / Swiftype",
+              "patterns": [
+                "swiftypecdn\\.com|api\\.swiftype\\.com|search-api\\.swiftype\\.com|swiftype\\.com/[^\\s\"'<>]*(?:embed|install|search)"
+              ]
+            },
+            {
+              "name": "Coveo Search",
+              "patterns": ["static\\.cloud\\.coveo\\.com|platform\\.cloud\\.coveo\\.com|coveo\\.com/[^\\s\"'<>]*(?:search|atomic|headless)"]
+            },
+            {
+              "name": "Yext Search",
+              "patterns": ["answers\\.yext\\.com|cdn\\.yextapis\\.com|cdn\\.yext\\.com|yextapis\\.com/[^\\s\"'<>]*(?:answers|search)"]
+            },
+            {
+              "name": "Cludo",
+              "patterns": ["customer\\.cludo\\.com|api\\.cludo\\.com|cludo\\.com/[^\\s\"'<>]*(?:scripts|search|assets)"]
+            },
+            {
+              "name": "SearchStax Site Search",
+              "patterns": [
+                "app\\.searchstax\\.com|searchstudio\\.searchstax\\.com|searchstax\\.com/[^\\s\"'<>]*(?:search|studio|site-search)"
+              ]
+            },
+            {
+              "name": "Sajari",
+              "patterns": ["cdn\\.sajari\\.com|api\\.sajari\\.com|sajari\\.com/[^\\s\"'<>]*(?:js|search|pipeline)"]
+            },
+            {
+              "name": "Site Search 360",
+              "patterns": ["cdn\\.sitesearch360\\.com|sitesearch360\\.com/[^\\s\"'<>]*(?:cms|sitesearch360|search|embed)"]
+            },
+            {
+              "name": "Expertrec",
+              "patterns": ["cse\\.expertrec\\.com|expertrec\\.com/[^\\s\"'<>]*(?:api|search|widget|cse)"]
+            },
+            {
+              "name": "Fast Simon",
+              "patterns": ["fastsimon\\.com|instantsearchplus\\.com|assets\\.instantsearchplus\\.com|api\\.instantsearchplus\\.com"]
+            },
+            {
+              "name": "Celebros",
+              "patterns": ["cdn\\.celebros\\.com|celebros\\.com/[^\\s\"'<>]*(?:autoComplete|autocomplete|search|conversion)"]
+            },
+            {
+              "name": "GroupBy Search",
+              "patterns": [
+                "cdn\\.groupbycloud\\.com|api\\.groupbycloud\\.com|groupbyinc\\.com/[^\\s\"'<>]*(?:search|recommend|autocomplete)"
+              ]
+            },
+            {
+              "name": "Fredhopper",
+              "patterns": ["cdn\\.fredhopper\\.com|fredhopper\\.com/[^\\s\"'<>]*(?:search|navigation|recommend)"]
+            },
+            {
+              "name": "Empathy.co Search",
+              "patterns": ["api\\.empathybroker\\.com|assets\\.empathy\\.co|empathy\\.co/[^\\s\"'<>]*(?:search|x-components|tagging)"]
+            },
+            {
+              "name": "Segmentify",
+              "patterns": ["cdn\\.segmentify\\.com|api\\.segmentify\\.com|segmentify\\.com/[^\\s\"'<>]*(?:js|search|recommend)"]
+            },
+            {
+              "name": "ViSenze",
+              "patterns": ["cdn\\.visenze\\.com|search\\.visenze\\.com|visenze\\.com/[^\\s\"'<>]*(?:search|recommend|discover)"]
+            },
+            {
+              "name": "QuarticON",
+              "patterns": ["cdn\\.quarticon\\.com|rec\\.quarticon\\.com|quarticon\\.com/[^\\s\"'<>]*(?:recommend|search|tracking)"]
             }
           ]
         },
