@@ -582,6 +582,31 @@
             "evidence": "响应 URL 指向 Replicate API"
           },
           {
+            "name": "fal.ai",
+            "patterns": ["url: https?://api\\.fal\\.ai/", "url: https?://queue\\.fal\\.run/", "url: https?://[^\\s/]+\\.fal\\.run/"],
+            "evidence": "响应 URL 指向 fal.ai 推理服务"
+          },
+          {
+            "name": "RunPod",
+            "patterns": ["url: https?://api\\.runpod\\.(?:ai|io)/"],
+            "evidence": "响应 URL 指向 RunPod API"
+          },
+          {
+            "name": "Baseten",
+            "patterns": ["url: https?://api\\.baseten\\.co/", "url: https?://[^\\s/]+\\.api\\.baseten\\.co/"],
+            "evidence": "响应 URL 指向 Baseten API"
+          },
+          {
+            "name": "Modal",
+            "patterns": ["url: https?://[^\\s/]+\\.modal\\.run/"],
+            "evidence": "响应 URL 指向 Modal 部署端点"
+          },
+          {
+            "name": "Anyscale Endpoints",
+            "patterns": ["url: https?://api\\.endpoints\\.anyscale\\.com/"],
+            "evidence": "响应 URL 指向 Anyscale Endpoints"
+          },
+          {
             "name": "AWS Bedrock",
             "patterns": [
               "url: https?://bedrock-runtime\\.[a-z0-9-]+\\.amazonaws\\.com/",
@@ -710,6 +735,56 @@
             "name": "iFlytek Spark / 讯飞星火",
             "patterns": ["url: https?://spark-api\\.xf-yun\\.com/"],
             "evidence": "响应 URL 指向讯飞星火 API"
+          },
+          {
+            "name": "ElevenLabs API",
+            "patterns": ["url: https?://api\\.elevenlabs\\.io/"],
+            "evidence": "响应 URL 指向 ElevenLabs API"
+          },
+          {
+            "name": "Deepgram API",
+            "patterns": ["url: https?://api\\.deepgram\\.com/"],
+            "evidence": "响应 URL 指向 Deepgram API"
+          },
+          {
+            "name": "AssemblyAI API",
+            "patterns": ["url: https?://api\\.assemblyai\\.com/"],
+            "evidence": "响应 URL 指向 AssemblyAI API"
+          },
+          {
+            "name": "Speechmatics API",
+            "patterns": ["url: https?://asr\\.api\\.speechmatics\\.com/"],
+            "evidence": "响应 URL 指向 Speechmatics API"
+          },
+          {
+            "name": "Cartesia API",
+            "patterns": ["url: https?://api\\.cartesia\\.ai/"],
+            "evidence": "响应 URL 指向 Cartesia API"
+          },
+          {
+            "name": "PlayHT API",
+            "patterns": ["url: https?://api\\.play\\.ht/"],
+            "evidence": "响应 URL 指向 PlayHT API"
+          },
+          {
+            "name": "Resemble AI",
+            "patterns": ["url: https?://app\\.resemble\\.ai/api/", "url: https?://f\\.cluster\\.resemble\\.ai/"],
+            "evidence": "响应 URL 指向 Resemble AI"
+          },
+          {
+            "name": "HeyGen API",
+            "patterns": ["url: https?://api\\.heygen\\.com/"],
+            "evidence": "响应 URL 指向 HeyGen API"
+          },
+          {
+            "name": "Tavus API",
+            "patterns": ["url: https?://tavusapi\\.com/", "url: https?://api\\.tavus\\.io/"],
+            "evidence": "响应 URL 指向 Tavus API"
+          },
+          {
+            "name": "D-ID API",
+            "patterns": ["url: https?://api\\.d-id\\.com/"],
+            "evidence": "响应 URL 指向 D-ID API"
           }
         ]
       },

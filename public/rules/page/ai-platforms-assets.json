@@ -451,6 +451,26 @@
               "patterns": ["api\\.replicate\\.com|replicate\\.delivery|replicate\\.com/[^\\s\"'<>]*(?:api|predictions|models)"]
             },
             {
+              "name": "fal.ai",
+              "patterns": ["api\\.fal\\.ai|queue\\.fal\\.run|fal\\.run|fal\\.media|@fal-ai/"]
+            },
+            {
+              "name": "RunPod",
+              "patterns": ["api\\.runpod\\.(?:ai|io)|runpod\\.io/[^\\s\"'<>]*(?:serverless|api|endpoint)|@runpod/"]
+            },
+            {
+              "name": "Baseten",
+              "patterns": ["api\\.baseten\\.co|[a-z0-9-]+\\.api\\.baseten\\.co|baseten\\.co/[^\\s\"'<>]*(?:api|model|deployment)"]
+            },
+            {
+              "name": "Modal",
+              "patterns": ["[a-z0-9-]+\\.modal\\.run|modal\\.com/[^\\s\"'<>]*(?:api|apps|deployments)|@modal/"]
+            },
+            {
+              "name": "Anyscale Endpoints",
+              "patterns": ["api\\.endpoints\\.anyscale\\.com|anyscale\\.com/[^\\s\"'<>]*(?:endpoints|api|models)"]
+            },
+            {
               "name": "AWS Bedrock",
               "patterns": [
                 "bedrock-runtime\\.[a-z0-9-]+\\.amazonaws\\.com",
@@ -557,6 +577,46 @@
             {
               "name": "iFlytek Spark / 讯飞星火",
               "patterns": ["spark-api\\.xf-yun\\.com|spark\\.xf-yun\\.com|xfyun\\.cn/[^\\s\"'<>]*(?:spark|xinghuo|api)"]
+            },
+            {
+              "name": "ElevenLabs API",
+              "patterns": ["api\\.elevenlabs\\.io|elevenlabs\\.io/[^\\s\"'<>]*(?:api|text-to-speech|speech-to-text)|@elevenlabs/"]
+            },
+            {
+              "name": "Deepgram API",
+              "patterns": ["api\\.deepgram\\.com|deepgram\\.com/[^\\s\"'<>]*(?:api|listen|speak)|@deepgram/"]
+            },
+            {
+              "name": "AssemblyAI API",
+              "patterns": ["api\\.assemblyai\\.com|assemblyai\\.com/[^\\s\"'<>]*(?:api|transcript)|assemblyai-js"]
+            },
+            {
+              "name": "Speechmatics API",
+              "patterns": ["asr\\.api\\.speechmatics\\.com|speechmatics\\.com/[^\\s\"'<>]*(?:api|transcription)"]
+            },
+            {
+              "name": "Cartesia API",
+              "patterns": ["api\\.cartesia\\.ai|cartesia\\.ai/[^\\s\"'<>]*(?:api|voice|tts)|@cartesia/"]
+            },
+            {
+              "name": "PlayHT API",
+              "patterns": ["api\\.play\\.ht|play\\.ht/[^\\s\"'<>]*(?:api|text-to-speech|voice)"]
+            },
+            {
+              "name": "Resemble AI",
+              "patterns": ["app\\.resemble\\.ai/api|f\\.cluster\\.resemble\\.ai|resemble\\.ai/[^\\s\"'<>]*(?:api|voice|tts)"]
+            },
+            {
+              "name": "HeyGen API",
+              "patterns": ["api\\.heygen\\.com|heygen\\.com/[^\\s\"'<>]*(?:api|avatar|video)"]
+            },
+            {
+              "name": "Tavus API",
+              "patterns": ["tavusapi\\.com|api\\.tavus\\.io|tavus\\.io/[^\\s\"'<>]*(?:api|replica|video)"]
+            },
+            {
+              "name": "D-ID API",
+              "patterns": ["api\\.d-id\\.com|d-id\\.com/[^\\s\"'<>]*(?:api|talks|clips)"]
             }
           ]
         },
