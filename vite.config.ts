@@ -9,9 +9,12 @@ import manifest from './src/manifest.config'
 const HINT_MIN_LEN = 4
 const HINT_MAX_COUNT = 3
 const REGEX_LITERAL_SPLIT = /[\\^$.|?*+()[\]{}]/
+const REGEX_CONTROL_ESCAPE = /\\[bBdDsSwW]/g
 const REGEX_ESCAPE = /[.*+?^${}()|[\]\\]/g
 
 const escapeForRegex = (value: string) => value.replace(REGEX_ESCAPE, '\\$&')
+
+const normalizeHintCandidate = (value: string): string => value.toLowerCase().replace(/\s+/g, ' ').trim()
 
 const extractRuleHints = (patterns: unknown, isKeyword: boolean): string[] => {
   if (!Array.isArray(patterns) || !patterns.length) return []
@@ -24,12 +27,10 @@ const extractRuleHints = (patterns: unknown, isKeyword: boolean): string[] => {
       if (lower.length >= HINT_MIN_LEN) candidates.push(lower)
       continue
     }
-    let longest = ''
-    for (const segment of text.split(REGEX_LITERAL_SPLIT)) {
-      const lower = segment.toLowerCase()
-      if (lower.length > longest.length) longest = lower
+    for (const segment of text.replace(REGEX_CONTROL_ESCAPE, ' ').split(REGEX_LITERAL_SPLIT)) {
+      const lower = normalizeHintCandidate(segment)
+      if (lower.length >= HINT_MIN_LEN) candidates.push(lower)
     }
-    if (longest.length >= HINT_MIN_LEN) candidates.push(longest)
   }
   return [...new Set(candidates)].sort((a, b) => b.length - a.length).slice(0, HINT_MAX_COUNT)
 }
@@ -54,7 +55,7 @@ const precompileRuleTree = (node: any): void => {
   if (typeof node !== 'object') return
   if (isLeafRule(node)) {
     const isKeyword = node.matchType === 'keyword'
-    const hints = extractRuleHints(node.patterns, isKeyword)
+    const hints = Array.isArray(node.__hints) && node.__hints.length ? node.__hints : extractRuleHints(node.patterns, isKeyword)
     if (hints.length) node.__hints = hints
     if (isKeyword) {
       const combined = buildKeywordCombinedSource(node.patterns)

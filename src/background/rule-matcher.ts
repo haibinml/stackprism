@@ -81,6 +81,9 @@ export const getCompiledCombinedPattern = (rule: any, patterns: unknown): RegExp
 const HINT_MIN_LEN = 4
 const HINT_MAX_COUNT = 3
 const REGEX_LITERAL_SPLIT = /[\\^$.|?*+()[\]{}]/
+const REGEX_CONTROL_ESCAPE = /\\[bBdDsSwW]/g
+
+const normalizeHintCandidate = (value: string): string => value.toLowerCase().replace(/\s+/g, ' ').trim()
 
 const extractHintCandidates = (rule: any): string[] => {
   const patterns = Array.isArray(rule?.patterns) ? rule.patterns : []
@@ -96,12 +99,10 @@ const extractHintCandidates = (rule: any): string[] => {
       if (lower.length >= HINT_MIN_LEN) candidates.push(lower)
       continue
     }
-    let longest = ''
-    for (const segment of text.split(REGEX_LITERAL_SPLIT)) {
-      const lower = segment.toLowerCase()
-      if (lower.length > longest.length) longest = lower
+    for (const segment of text.replace(REGEX_CONTROL_ESCAPE, ' ').split(REGEX_LITERAL_SPLIT)) {
+      const lower = normalizeHintCandidate(segment)
+      if (lower.length >= HINT_MIN_LEN) candidates.push(lower)
     }
-    if (longest.length >= HINT_MIN_LEN) candidates.push(longest)
   }
   return candidates
 }

@@ -210,6 +210,15 @@
               ]
             },
             {
+              "name": "Sub2API",
+              "patterns": [
+                "<title>[^<]*-\\s*(?:AI\\s*)?API Gateway\\s*</title>",
+                "\"site_subtitle\"\\s*:\\s*\"Subscription to API Conversion Platform\"",
+                "window\\.__APP_CONFIG__\\s*=\\s*\\{[\\s\\S]{0,1200}(?:hide_ccs_import_button|purchase_subscription_enabled|linuxdo_oauth_enabled|custom_endpoints)",
+                "(?:^|[\\/._-])sub2api(?:[\\/._-]|[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$))"
+              ]
+            },
+            {
               "name": "VoAPI",
               "patterns": [
                 "<title>\\s*VoAPI(?:\\s*</title>|\\s+-)",

@@ -922,20 +922,23 @@ ${html}`
     const patterns = rule.patterns || []
     const isKeyword = rule.matchType === 'keyword'
     const candidates = []
+    const normalizeHintCandidate = value =>
+      String(value || '')
+        .toLowerCase()
+        .replace(/\s+/g, ' ')
+        .trim()
     for (const pattern of patterns) {
       const text = String(pattern || '')
       if (!text) continue
       if (isKeyword) {
-        const lower = text.toLowerCase().trim()
+        const lower = normalizeHintCandidate(text)
         if (lower.length >= 4) candidates.push(lower)
         continue
       }
-      let longest = ''
-      for (const segment of text.split(/[\\^$.|?*+()[\]{}]/)) {
-        const lowerSeg = segment.toLowerCase()
-        if (lowerSeg.length > longest.length) longest = lowerSeg
+      for (const segment of text.replace(/\\[bBdDsSwW]/g, ' ').split(/[\\^$.|?*+()[\]{}]/)) {
+        const lowerSeg = normalizeHintCandidate(segment)
+        if (lowerSeg.length >= 4) candidates.push(lowerSeg)
       }
-      if (longest.length >= 4) candidates.push(longest)
     }
     const unique = [...new Set(candidates)].sort((a, b) => b.length - a.length).slice(0, 3)
     ruleHintCache.set(rule, unique)

@@ -444,7 +444,7 @@
           {
             "name": "SortableJS",
             "url": "https://sortablejs.github.io/Sortable",
-            "patterns": ["SortableJS|sortablejs|Sortable\\.create"]
+            "patterns": ["SortableJS|sortablejs|Sortable\\s+v?\\d+\\.\\d+|Sortable\\.create"]
           },
           {
             "name": "Hammer.js",

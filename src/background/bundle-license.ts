@@ -2,11 +2,11 @@ import { buildPopupCacheRecord } from './popup-cache'
 import { buildEffectivePageRules, loadDetectorSettings, loadTechRules } from './detector-settings'
 import { mergeTechnologyRecords, shortHeaderUrl } from './merge'
 import { getTabData, getTabSnapshot, updateBadgeForTab, writeTabData } from './tab-store'
-import { matchesCompiledRulePatterns, matchesRuleTextHints, passesRulePrefilter } from './rule-matcher'
+import { matchesCompiledRulePatterns, matchesRuleTextHints } from './rule-matcher'
 import { isDetectablePageUrl } from '@/utils/page-support'
 import { cleanTechnologyUrl } from '@/utils/url'
 
-const BUNDLE_LICENSE_SCHEMA_VERSION = 2
+const BUNDLE_LICENSE_SCHEMA_VERSION = 3
 const BUNDLE_LICENSE_SOURCE = 'JS 版权注释'
 const MAX_CANDIDATE_SCRIPTS = 5
 const MAX_FETCH_BYTES = 384 * 1024
@@ -260,6 +260,8 @@ const trimLicenseText = (text: string): string => {
   return text.slice(0, MAX_LICENSE_TEXT_CHARS)
 }
 
+const looksLikeHtmlDocument = (text: string): boolean => /^\s*(?:<!doctype\s+html|<html[\s>])/i.test(text)
+
 const extractLicenseComments = (source: string): string[] => {
   const comments: string[] = []
   let commentChars = 0
@@ -298,12 +300,17 @@ const buildSidecarLicenseUrl = (scriptUrl: string): string => {
   }
 }
 
+const fetchSidecarLicenseText = async (sidecarUrl: string, budget: ScanBudget): Promise<string> => {
+  const text = await fetchLimitedText(sidecarUrl, MAX_SIDECAR_BYTES, budget)
+  if (!text || looksLikeHtmlDocument(text)) return ''
+  return text
+}
+
 const scanScriptLicense = async (scriptUrl: string, budget: ScanBudget): Promise<ScriptLicenseObservation | null> => {
   const source = await fetchSampledScriptText(scriptUrl, budget)
   const comments = unique(source ? extractLicenseComments(source) : [])
   const sidecarUrl = buildSidecarLicenseUrl(scriptUrl)
-  const sidecarText =
-    sidecarUrl && comments.length < 12 && hasScanBudget(budget) ? await fetchLimitedText(sidecarUrl, MAX_SIDECAR_BYTES, budget) : ''
+  const sidecarText = sidecarUrl && comments.length < 12 && hasScanBudget(budget) ? await fetchSidecarLicenseText(sidecarUrl, budget) : ''
   const text = trimLicenseText([...comments, sidecarText].filter(Boolean).join('\n\n'))
 
   if (!text) return null
@@ -322,7 +329,7 @@ const detectTechnologiesFromLicenseText = (observations: ScriptLicenseObservatio
   for (const observation of observations) {
     const lowerText = observation.text.toLowerCase()
     for (const rule of rules) {
-      if (!rule?.name || !passesRulePrefilter(rule, lowerText) || !matchesRuleTextHints(rule, lowerText)) continue
+      if (!rule?.name || !matchesRuleTextHints(rule, lowerText)) continue
       if (!matchesCompiledRulePatterns(rule, observation.text)) continue
       technologies.push({
         category: rule.category || '前端库',
