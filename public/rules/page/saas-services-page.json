@@ -2824,6 +2824,102 @@
         },
         {
           "defaults": {
+            "kind": "天气 / 气象数据",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "WeatherWidget.io",
+              "patterns": ["weatherwidget\\.io/js/widget\\.min\\.js|weatherwidget\\.io/[^\\s\"'<>]*(?:widget|js)"]
+            },
+            {
+              "name": "OpenWeather Widgets",
+              "patterns": [
+                "api\\.openweathermap\\.org/data|openweathermap\\.org/[^\\s\"'<>]*(?:themes|widgets|widget)|openweathermap\\.org/img"
+              ]
+            },
+            {
+              "name": "Windy.com Embed",
+              "patterns": ["embed\\.windy\\.com|windy\\.com/embed|windy\\.app/widget|windy\\.com/[^\\s\"'<>]*(?:widget|embed)"]
+            },
+            {
+              "name": "Meteoblue",
+              "patterns": [
+                "static\\.meteoblue\\.com|my\\.meteoblue\\.com/visimage|meteoblue\\.com/[^\\s\"'<>]*(?:widget|weather-map|embed)"
+              ]
+            },
+            {
+              "name": "AccuWeather Widget",
+              "patterns": ["api\\.accuweather\\.com|accuweather\\.com/[^\\s\"'<>]*(?:widgets|weather-widget|embed)"]
+            },
+            {
+              "name": "Weather Underground Widget",
+              "patterns": [
+                "weatherunderground\\.com/[^\\s\"'<>]*(?:weatherstation|widget|dashboard|forecast)|wunderground\\.com/[^\\s\"'<>]*(?:weatherstation|widget|dashboard|forecast)"
+              ]
+            },
+            {
+              "name": "Tomorrow.io Weather",
+              "patterns": ["api\\.tomorrow\\.io|app\\.tomorrow\\.io|tomorrow\\.io/[^\\s\"'<>]*(?:weather|api|widget|embed)"]
+            },
+            {
+              "name": "WeatherAPI.com",
+              "patterns": ["api\\.weatherapi\\.com|weatherapi\\.com/[^\\s\"'<>]*(?:weather|api|widget)"]
+            },
+            {
+              "name": "Weatherstack",
+              "patterns": ["api\\.weatherstack\\.com|weatherstack\\.com/[^\\s\"'<>]*(?:api|weather|widget)"]
+            },
+            {
+              "name": "AerisWeather",
+              "patterns": [
+                "cdn\\.aerisapi\\.com|api\\.aerisapi\\.com|maps\\.aerisapi\\.com|aerisweather\\.com/[^\\s\"'<>]*(?:api|maps|widget)"
+              ]
+            },
+            {
+              "name": "Visual Crossing Weather",
+              "patterns": ["weather\\.visualcrossing\\.com|visualcrossing\\.com/[^\\s\"'<>]*(?:weather|api|widgets)"]
+            },
+            {
+              "name": "RainViewer",
+              "patterns": ["tilecache\\.rainviewer\\.com|api\\.rainviewer\\.com|rainviewer\\.com/[^\\s\"'<>]*(?:api|map|embed)"]
+            },
+            {
+              "name": "Foreca Weather",
+              "patterns": ["pfa\\.foreca\\.com|foreca\\.com/[^\\s\"'<>]*(?:weather|widget|embed|api)"]
+            },
+            {
+              "name": "Yr.no Weather",
+              "patterns": ["api\\.met\\.no/weatherapi|yr\\.no/[^\\s\"'<>]*(?:widget|place|forecast|api)"]
+            },
+            {
+              "name": "World Weather Online",
+              "patterns": ["api\\.worldweatheronline\\.com|worldweatheronline\\.com/[^\\s\"'<>]*(?:api|widget|weather)"]
+            },
+            {
+              "name": "Open-Meteo",
+              "patterns": ["api\\.open-meteo\\.com|open-meteo\\.com/[^\\s\"'<>]*(?:weather|forecast|api)"]
+            },
+            {
+              "name": "Meteostat",
+              "patterns": ["api\\.meteostat\\.net|meteostat\\.net/[^\\s\"'<>]*(?:api|widget|weather)"]
+            },
+            {
+              "name": "Ventusky",
+              "patterns": ["ventusky\\.com/[^\\s\"'<>]*(?:embed|widget|weather-map|map)"]
+            },
+            {
+              "name": "Windfinder",
+              "patterns": ["windfinder\\.com/[^\\s\"'<>]*(?:widget|forecast|embed|weather)"]
+            },
+            {
+              "name": "Windguru",
+              "patterns": ["windguru\\.cz/[^\\s\"'<>]*(?:int|widget|station|forecast)|windguru\\.net/[^\\s\"'<>]*(?:widget|forecast)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "验证码 / Bot 防护"
           },
           "rules": [
