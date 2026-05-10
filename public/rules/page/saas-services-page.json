@@ -2195,6 +2195,90 @@
             {
               "name": "Podia",
               "patterns": ["cdn\\.podia\\.com|(?:^|[/:.])podia\\.com/[^\\s\"'<>]*(?:embed|checkout|products)"]
+            },
+            {
+              "name": "Teachable",
+              "patterns": ["assets\\.teachablecdn\\.com|my\\.teachable\\.com|teachable\\.com/[^\\s\"'<>]*(?:secure|courses|checkout)"]
+            },
+            {
+              "name": "Thinkific",
+              "patterns": ["cdn\\.thinkific\\.com|assets\\.thinkific\\.com|thinkific\\.com/[^\\s\"'<>]*(?:courses|enroll|checkout|api)"]
+            },
+            {
+              "name": "Kajabi",
+              "patterns": ["kajabi-cdn\\.com|mykajabi\\.com|kajabi\\.com/[^\\s\"'<>]*(?:offers|checkout|embed|products)"]
+            },
+            {
+              "name": "LearnWorlds",
+              "patterns": ["lwfiles\\.mycourse\\.app|learnworlds\\.(?:com|io)/[^\\s\"'<>]*(?:widget|api|course|school|checkout)"]
+            },
+            {
+              "name": "New Zenler",
+              "patterns": [
+                "newzenler\\.com/[^\\s\"'<>]*(?:funnel|courses|checkout|embed)|zenler\\.com/[^\\s\"'<>]*(?:funnel|courses|checkout)"
+              ]
+            },
+            {
+              "name": "TalentLMS",
+              "patterns": ["[a-z0-9-]+\\.talentlms\\.com|talentlms\\.com/[^\\s\"'<>]*(?:widget|api|catalog|course)"]
+            },
+            {
+              "name": "Maven Courses",
+              "patterns": ["maven\\.com/[^\\s\"'<>]*(?:courses|course|checkout|enroll|api)"]
+            },
+            {
+              "name": "Disco Learning",
+              "patterns": ["app\\.disco\\.co|disco\\.co/[^\\s\"'<>]*(?:embed|course|community|event)"]
+            },
+            {
+              "name": "Skool Community",
+              "patterns": ["skool\\.com/[^\\s\"'<>]*(?:community|signup|checkout|api|embed)"]
+            },
+            {
+              "name": "Heartbeat Community",
+              "patterns": ["cdn\\.heartbeat\\.chat|heartbeat\\.chat/[^\\s\"'<>]*(?:embed|widget|community|api)"]
+            },
+            {
+              "name": "Bettermode Community",
+              "patterns": [
+                "cdn\\.tribe\\.so|tribe\\.so/[^\\s\"'<>]*(?:embed|widget|community)|bettermode\\.com/[^\\s\"'<>]*(?:widget|community|embed)"
+              ]
+            },
+            {
+              "name": "Disciple Media",
+              "patterns": ["disciple\\.cloud|disciplemedia\\.com/[^\\s\"'<>]*(?:embed|community|api|app)"]
+            },
+            {
+              "name": "Passion.io",
+              "patterns": ["passioncdn\\.com|passion\\.io/[^\\s\"'<>]*(?:app|embed|course|checkout)"]
+            },
+            {
+              "name": "Fourthwall",
+              "patterns": ["cdn\\.fourthwall\\.com|fourthwall\\.com/[^\\s\"'<>]*(?:shop|products|checkout|embed)"]
+            },
+            {
+              "name": "Stan Store",
+              "patterns": ["stan\\.store/[^\\s\"'<>]*(?:embed|checkout|products|buy)|stanwith\\.me"]
+            },
+            {
+              "name": "LaunchPass",
+              "patterns": ["launchpass\\.com/[^\\s\"'<>]*(?:embed|checkout|discord|signup|api)"]
+            },
+            {
+              "name": "Supercast",
+              "patterns": ["cdn\\.supercast\\.com|supercast\\.com/[^\\s\"'<>]*(?:embed|checkout|subscribe|membership)"]
+            },
+            {
+              "name": "MemberSpace",
+              "patterns": ["cdn\\.memberspace\\.com|memberspace\\.com/[^\\s\"'<>]*(?:widget|embed|signup|member)"]
+            },
+            {
+              "name": "Nas.io Community",
+              "patterns": ["cdn\\.nas\\.io|nas\\.io/[^\\s\"'<>]*(?:checkout|community|embed|events|join)"]
+            },
+            {
+              "name": "Teachery",
+              "patterns": ["cdn\\.teachery\\.co|teachery\\.co/[^\\s\"'<>]*(?:embed|checkout|courses|enroll)"]
             }
           ]
         },
