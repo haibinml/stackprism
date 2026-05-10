@@ -2715,6 +2715,90 @@
             {
               "name": "Rewardful",
               "patterns": ["r\\.wdfl\\.co|cdn\\.rewardful\\.com|rewardful\\.com/[^\\s\"'<>]*(?:affiliate|referral|widget)"]
+            },
+            {
+              "name": "FirstPromoter",
+              "patterns": ["cdn\\.firstpromoter\\.com|firstpromoter\\.com/[^\\s\"'<>]*(?:track|referral|affiliate|js|widget)"]
+            },
+            {
+              "name": "Tapfiliate",
+              "patterns": [
+                "script\\.tapfiliate\\.com|api\\.tapfiliate\\.com|tapfiliate\\.com/[^\\s\"'<>]*(?:tapfiliate|tracking|affiliate)"
+              ]
+            },
+            {
+              "name": "PartnerStack",
+              "patterns": ["js\\.partnerstack\\.com|partnerstack\\.com/[^\\s\"'<>]*(?:tracking|affiliate|referral|partners)"]
+            },
+            {
+              "name": "Reditus",
+              "patterns": ["js\\.getreditus\\.com|app\\.getreditus\\.com|getreditus\\.com/[^\\s\"'<>]*(?:affiliate|tracking|widget)"]
+            },
+            {
+              "name": "LoyaltySurf",
+              "patterns": ["cdn\\.loyaltysurf\\.io|api\\.loyaltysurf\\.io|loyaltysurf\\.io/[^\\s\"'<>]*(?:campaign|referral|widget)"]
+            },
+            {
+              "name": "SaaSquatch",
+              "patterns": [
+                "fast\\.ssqt\\.io|app\\.referralsaasquatch\\.com|referralsaasquatch\\.com|saasquatch\\.com/[^\\s\"'<>]*(?:referral|widget|program)"
+              ]
+            },
+            {
+              "name": "Referral Rock",
+              "patterns": ["app\\.referralrock\\.com|referralrock\\.com/[^\\s\"'<>]*(?:track|member|referral|widgets?)"]
+            },
+            {
+              "name": "InviteReferrals",
+              "patterns": ["cdn\\.invitereferrals\\.com|invitereferrals\\.com/[^\\s\"'<>]*(?:campaign|widget|referral|tracking)"]
+            },
+            {
+              "name": "GrowSurf",
+              "patterns": ["app\\.growsurf\\.com|growsurf\\.com/[^\\s\"'<>]*(?:campaign|widget|referral|js)"]
+            },
+            {
+              "name": "Prefinery",
+              "patterns": ["widget\\.prefinery\\.com|prefinery\\.com/[^\\s\"'<>]*(?:widget|referral|beta|campaign)"]
+            },
+            {
+              "name": "SparkLoop",
+              "patterns": ["dash\\.sparkloop\\.app|js\\.sparkloop\\.app|sparkloop\\.app/[^\\s\"'<>]*(?:widgets?|referral|campaign)"]
+            },
+            {
+              "name": "KickoffLabs",
+              "patterns": ["embed\\.kickofflabs\\.com|api\\.kickofflabs\\.com|kickofflabs\\.com/[^\\s\"'<>]*(?:widgets?|campaign|contest)"]
+            },
+            {
+              "name": "Gleam",
+              "patterns": ["widget\\.gleamjs\\.io|gleam\\.io/[^\\s\"'<>]*(?:competitions|giveaway|embed|widget)"]
+            },
+            {
+              "name": "Rafflecopter",
+              "patterns": ["widget-prime\\.rafflecopter\\.com|rafflecopter\\.com/[^\\s\"'<>]*(?:rafl|giveaway|widget)"]
+            },
+            {
+              "name": "KingSumo",
+              "patterns": ["kingsumo\\.com/g/|kingsumo\\.com/[^\\s\"'<>]*(?:giveaway|contest|embed|widget)"]
+            },
+            {
+              "name": "UpViral",
+              "patterns": ["app\\.upviral\\.com|upviral\\.com/[^\\s\"'<>]*(?:campaign|contest|referral|widget)"]
+            },
+            {
+              "name": "ViralSweep",
+              "patterns": ["app\\.viralsweep\\.com|viralsweep\\.com/[^\\s\"'<>]*(?:embed|promotion|sweeps|contest|widget)"]
+            },
+            {
+              "name": "SweepWidget",
+              "patterns": ["sweepwidget\\.com/(?:view|widget)|sweepwidget\\.com/[^\\s\"'<>]*(?:giveaway|contest|embed)"]
+            },
+            {
+              "name": "Woorise",
+              "patterns": ["woorise\\.com/[^\\s\"'<>]*(?:widget|giveaway|contest|embed|form)"]
+            },
+            {
+              "name": "VYPER",
+              "patterns": ["embed\\.vyper\\.io|app\\.vyper\\.io|vyper\\.io/[^\\s\"'<>]*(?:campaign|giveaway|contest|widget)"]
             }
           ]
         },
