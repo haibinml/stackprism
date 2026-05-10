@@ -2729,6 +2729,86 @@
             {
               "name": "Indeed Apply",
               "patterns": ["indeed\\.com/[^\\s\"'<>]*(?:applystart|indeedapply)|indeed\\.com/viewjob|apply\\.indeed\\.com"]
+            },
+            {
+              "name": "Zoho Recruit",
+              "patterns": ["zohorecruit\\.com/[^\\s\"'<>]*(?:jobs|recruit|career)|recruit\\.zoho\\.(?:com|eu|in)|zoho\\.com/recruit"]
+            },
+            {
+              "name": "LinkedIn Jobs",
+              "patterns": ["linkedin\\.com/jobs/(?:view|collections)|linkedin\\.com/jobs-guest/jobs/api|linkedin\\.com/embed/jobs"]
+            },
+            {
+              "name": "ZipRecruiter Jobs",
+              "patterns": ["ziprecruiter\\.com/[^\\s\"'<>]*(?:jobs|job|candidate/search)|jobs\\.ziprecruiter\\.com"]
+            },
+            {
+              "name": "Glassdoor Jobs",
+              "patterns": ["glassdoor\\.com/[^\\s\"'<>]*(?:Job|job-listing|partner/jobListing)|glassdoor\\.com/Job/"]
+            },
+            {
+              "name": "CATSone",
+              "patterns": ["catsone\\.com/[^\\s\"'<>]*(?:careers|jobs|candidate|apply)|catsone\\.com/js/careers"]
+            },
+            {
+              "name": "JobAdder",
+              "patterns": ["apply\\.jobadder\\.com|public\\.jobadder\\.com|jobadder\\.com/[^\\s\"'<>]*(?:jobs|widgets|apply)"]
+            },
+            {
+              "name": "Bullhorn Career Portal",
+              "patterns": ["bullhornstaffing\\.com|jobs\\.bullhorn\\.com|bullhorn\\.com/[^\\s\"'<>]*(?:career|job-board|jobs)"]
+            },
+            {
+              "name": "Avature Careers",
+              "patterns": ["avature\\.net/[^\\s\"'<>]*(?:careers|jobs|candidate)|avature\\.com/[^\\s\"'<>]*(?:careers|jobs)"]
+            },
+            {
+              "name": "Phenom People",
+              "patterns": ["cdn\\.phenompeople\\.com|phenompeople\\.com/[^\\s\"'<>]*(?:jobs|careers|apply)|phenompro\\.com"]
+            },
+            {
+              "name": "Yello Recruiting",
+              "patterns": ["yello\\.co/[^\\s\"'<>]*(?:jobs|careers|candidate|apply)|yello\\.com/[^\\s\"'<>]*(?:jobs|recruiting)"]
+            },
+            {
+              "name": "JobScore",
+              "patterns": ["careers\\.jobscore\\.com|jobscore\\.com/[^\\s\"'<>]*(?:jobs|careers|apply)"]
+            },
+            {
+              "name": "GoHire",
+              "patterns": ["gohire\\.io/[^\\s\"'<>]*(?:jobs|careers|apply)|gohire\\.com/[^\\s\"'<>]*(?:jobs|careers)"]
+            },
+            {
+              "name": "Homerun",
+              "patterns": ["jobs\\.homerun\\.co|homerun\\.co/[^\\s\"'<>]*(?:jobs|careers|apply)"]
+            },
+            {
+              "name": "JOIN.com",
+              "patterns": ["join\\.com/companies/[^\\s\"'<>]*(?:jobs|embed)|join\\.com/[^\\s\"'<>]*(?:jobs|apply)"]
+            },
+            {
+              "name": "Jobylon",
+              "patterns": ["jobs\\.jobylon\\.com|emp\\.jobylon\\.com|jobylon\\.com/[^\\s\"'<>]*(?:jobs|careers|apply)"]
+            },
+            {
+              "name": "Occupop",
+              "patterns": ["api\\.occupop\\.com|occupop\\.com/[^\\s\"'<>]*(?:job|jobs|careers|apply)"]
+            },
+            {
+              "name": "Hireology",
+              "patterns": ["hireology\\.com/[^\\s\"'<>]*(?:careers|jobs|job|apply)|api\\.hireology\\.com"]
+            },
+            {
+              "name": "Jobsoid",
+              "patterns": ["[a-z0-9-]+\\.jobsoid\\.com|jobsoid\\.com/[^\\s\"'<>]*(?:jobs|careers|apply)"]
+            },
+            {
+              "name": "Manatal",
+              "patterns": ["careers\\.manatal\\.com|api\\.manatal\\.com|manatal\\.com/[^\\s\"'<>]*(?:jobs|careers|apply)"]
+            },
+            {
+              "name": "TRAFFIT",
+              "patterns": ["traffit\\.com/[^\\s\"'<>]*(?:career|careers|jobs|public|apply)|traffit\\.io/[^\\s\"'<>]*(?:jobs|careers)"]
             }
           ]
         },
