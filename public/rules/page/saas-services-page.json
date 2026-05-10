@@ -3562,7 +3562,11 @@
             },
             {
               "name": "Cloudflare Managed Challenge",
-              "patterns": ["challenges\\.cloudflare\\.com/cdn-cgi/challenge-platform|cf_chl_|/cdn-cgi/challenge-platform/"]
+              "patterns": [
+                "challenges\\.cloudflare\\.com/cdn-cgi/challenge-platform",
+                "/cdn-cgi/challenge-platform/[^\\s\"'<>]*(?:orchestrate|challenge|managed|jsch)"
+              ],
+              "matchIn": ["resources"]
             },
             {
               "name": "Capy Puzzle CAPTCHA",

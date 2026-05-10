@@ -431,7 +431,7 @@
           {
             "name": "Nginx Proxy Manager",
             "patterns": [
-              "Nginx Proxy Manager",
+              "<title>\\s*Nginx Proxy Manager(?:\\s*</title>|\\s+-)",
               "nginxproxymanager",
               "(?:^|/)api/nginx/(?:proxy-hosts|redirection-hosts|dead-hosts)(?:[?#\\s]|$)"
             ]

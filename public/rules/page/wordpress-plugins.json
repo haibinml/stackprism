@@ -4324,7 +4324,10 @@
         },
         {
           "name": "Seriously Simple Podcasting",
-          "patterns": ["wp-content/plugins/seriously-simple-podcasting(?:/|[?#]|$)"]
+          "patterns": [
+            "wp-content/plugins/seriously-simple-podcasting(?:/|[?#]|$)",
+            "<meta[^>]+name=[\"']?generator[\"']?[^>]+content=[\"'][^\"']*Seriously Simple Podcasting"
+          ]
         },
         {
           "name": "Giveaways and Contests by RafflePress",

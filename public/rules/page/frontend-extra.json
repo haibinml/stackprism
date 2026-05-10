@@ -242,8 +242,7 @@
           },
           {
             "name": "Semi Design",
-            "patterns": ["semi-design|@douyinfe\\/semi|semi-"],
-            "classPrefixes": ["semi-"]
+            "patterns": ["semi-design|@douyinfe\\/semi"]
           },
           {
             "name": "View UI / iView",

@@ -85,26 +85,45 @@
           {
             "name": "Discuz!",
             "patterns": [
-              "content=[\"'][^\"']*Discuz!",
+              "<meta[^>]+name=[\"']?generator[\"']?[^>]+content=[\"'][^\"']*Discuz!?",
+              "powered by discuz!?",
               "discuz_uid",
               "discuz_tips",
               "discuz_tips\\.js",
-              "static/image/common",
+              "/template/discuz_[^\\s\"'<>?#]+/",
               "data/cache/common_[^\\s\"'<>]*\\.js",
               "source/plugin/"
             ]
           },
           {
             "name": "phpBB",
-            "patterns": ["phpbb", "styles/prosilver", "viewtopic.php"]
+            "patterns": [
+              "<meta[^>]+name=[\"']?generator[\"']?[^>]+content=[\"'][^\"']*phpbb",
+              "powered by phpbb",
+              "styles/(?:prosilver|[a-z0-9_-]+)/(?:theme|template)/",
+              "viewtopic\\.php",
+              "ucp\\.php\\?mode="
+            ]
           },
           {
             "name": "vBulletin",
-            "patterns": ["vbulletin", "clientscript/vbulletin", "showthread.php"]
+            "patterns": [
+              "<meta[^>]+name=[\"']?generator[\"']?[^>]+content=[\"'][^\"']*vbulletin",
+              "powered by vbulletin",
+              "clientscript/vbulletin",
+              "showthread\\.php",
+              "forumdisplay\\.php"
+            ]
           },
           {
             "name": "XenForo",
-            "patterns": ["xenforo", "data-template=", "js/xf/"]
+            "patterns": [
+              "<meta[^>]+name=[\"']?generator[\"']?[^>]+content=[\"'][^\"']*xenforo",
+              "forum software by xenforo",
+              "data-template=",
+              "js/xf/",
+              "xenforo\\.js"
+            ]
           },
           {
             "name": "Flarum",
@@ -115,13 +134,18 @@
       {
         "name": "Discourse",
         "kind": "论坛 / 社区",
-        "patterns": ["discourse", "__DISCOURSE", "/assets/discourse-"],
+        "patterns": [
+          "<meta[^>]+name=[\"']?generator[\"']?[^>]+content=[\"'][^\"']*discourse",
+          "__DISCOURSE",
+          "/assets/discourse-",
+          "discourse_theme"
+        ],
         "globals": ["Discourse"]
       },
       {
         "name": "MediaWiki",
         "kind": "Wiki",
-        "patterns": ["mediawiki", "mw.config", "load.php\\?modules="],
+        "patterns": ["<meta[^>]+name=[\"']?generator[\"']?[^>]+content=[\"'][^\"']*mediawiki", "mw.config", "load.php\\?modules="],
         "globals": ["mw"]
       },
       {
@@ -146,7 +170,12 @@
           },
           {
             "name": "Typecho",
-            "patterns": ["typecho", "usr/themes", "usr/plugins"]
+            "patterns": [
+              "<meta[^>]+name=[\"']?generator[\"']?[^>]+content=[\"'][^\"']*typecho",
+              "powered by typecho",
+              "/usr/themes/",
+              "/usr/plugins/"
+            ]
           },
           {
             "name": "Z-BlogPHP",
@@ -200,7 +229,7 @@
       {
         "name": "Hugo",
         "kind": "静态站点生成器",
-        "patterns": ["hugo", "generator\" content=\"hugo"]
+        "patterns": ["<meta[^>]+name=[\"']?generator[\"']?[^>]+content=[\"'][^\"']*hugo", "generator\" content=\"hugo"]
       },
       {
         "name": "Jekyll",

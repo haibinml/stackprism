@@ -86,8 +86,7 @@
             {
               "name": "Alpine.js",
               "patterns": ["alpinejs"],
-              "globals": ["Alpine"],
-              "selectors": ["[x-data]", "[x-init]", "[x-show]"]
+              "globals": ["Alpine"]
             },
             {
               "name": "Stimulus",

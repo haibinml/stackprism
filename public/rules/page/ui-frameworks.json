@@ -14,8 +14,7 @@
               {
                 "name": "Bootstrap",
                 "patterns": ["bootstrap(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)"],
-                "globals": ["bootstrap"],
-                "classNames": ["container", "row", "navbar", "modal", "dropdown-menu"]
+                "globals": ["bootstrap"]
               },
               {
                 "name": "Tailwind CSS",
@@ -62,7 +61,7 @@
               },
               {
                 "name": "Ant Design",
-                "patterns": ["antd", "ant-design"],
+                "patterns": ["(?:^|/)antd(?:\\.min)?\\.(?:js|css)", "ant-design"],
                 "classPrefixes": ["ant-"]
               },
               {
@@ -91,8 +90,7 @@
               },
               {
                 "name": "Bulma",
-                "patterns": ["bulma(?:\\.min)?\\.css"],
-                "classNames": ["columns", "column", "is-primary", "navbar-menu"]
+                "patterns": ["bulma(?:\\.min)?\\.css"]
               },
               {
                 "name": "Semantic UI / Fomantic UI",
@@ -126,12 +124,14 @@
               {
                 "name": "Prime UI",
                 "patterns": ["primevue", "primereact", "primeng"],
-                "classPrefixes": ["p-"],
                 "selectors": [".p-component", ".p-button", ".p-dialog"]
               },
               {
                 "name": "Vant",
-                "patterns": ["vant(?:\\.min)?"],
+                "patterns": [
+                  "(?:^|[\\/@._-])vant(?:\\.min)?\\.(?:js|css)(?:[?#]|$)",
+                  "(?:^|[\\/@])vant(?:@|/es/|/lib/|/dist/)"
+                ],
                 "classPrefixes": ["van-"]
               },
               {

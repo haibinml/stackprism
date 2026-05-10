@@ -11,7 +11,7 @@
         "name": "TypeScript",
         "kind": "前端源码语言线索",
         "confidence": "低",
-        "patterns": ["tslib", "\\.tsx?(?:\\?|#|$)", "typescript"]
+        "patterns": ["(?:^|/)tslib(?:\\.esm)?\\.js(?:\\?|#|$)", "\\.tsx?(?:\\?|#|$)", "sourceMappingURL=[^\\s\"'<>]+\\.tsx?\\.map"]
       },
       {
         "name": "Node.js",
@@ -31,13 +31,10 @@
               "index\\.php",
               "phpsessid",
               "PHPSESSID",
-              "wp-content",
               "laravel",
               "symfony",
-              "drupal",
-              "joomla",
               "thinkphp",
-              "discuz"
+              "discuz_uid"
             ]
           },
           {
@@ -94,7 +91,7 @@
           },
           {
             "name": "Perl / CGI",
-            "patterns": ["/cgi-bin/", "\\.cgi(?:\\?|#|$)", "\\.pl(?:\\?|#|$)", "mod_perl", "perl"]
+            "patterns": ["/cgi-bin/", "\\.cgi(?:\\?|#|$)", "\\.pl(?:\\?|#|$)", "mod_perl"]
           }
         ]
       },
@@ -129,7 +126,7 @@
           },
           {
             "name": "Elixir",
-            "patterns": ["phoenix_live_view", "phx-click", "phoenix"]
+            "patterns": ["phoenix_live_view", "phx-click", "phx-submit", "live_socket", "phoenix_live_reload"]
           }
         ]
       }

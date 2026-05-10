@@ -65,8 +65,8 @@
       {
         "category": "主题 / 模板",
         "label": "Discuz! 模板",
-        "pattern": "/template/([^/?#\"' <>]+)",
-        "requires": "discuz|forum\\.php|portal\\.php|ucenter"
+        "pattern": "/template/(discuz_[^/?#\"' <>]+)",
+        "requires": "discuz|discuz_uid|/template/discuz_"
       },
       {
         "category": "主题 / 模板",

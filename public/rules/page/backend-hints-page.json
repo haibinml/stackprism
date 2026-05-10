@@ -106,7 +106,7 @@
           "rules": [
             {
               "name": "Spring Boot / Spring MVC",
-              "patterns": ["\\/actuator\\/|spring-security|_csrf|jsessionid"]
+              "patterns": ["\\/actuator\\/|spring-security|spring-webmvc|springboot|x-application-context"]
             },
             {
               "name": "Struts",

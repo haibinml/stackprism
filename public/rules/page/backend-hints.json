@@ -23,7 +23,7 @@
       {
         "name": "Spring Boot / Spring MVC",
         "confidence": "低",
-        "patterns": ["jsessionid", "spring-security", "_csrf"]
+        "patterns": ["spring-security", "spring-webmvc", "springboot", "/actuator/"]
       },
       {
         "name": "Phoenix LiveView",

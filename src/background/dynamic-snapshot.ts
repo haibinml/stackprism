@@ -222,6 +222,9 @@ const extractDynamicMinifiedScriptLibrary = rawUrl => {
   } catch {
     pathname = String(rawUrl || '').split(/[?#]/)[0]
   }
+  if (/\/wp-includes\/js\/dist\//i.test(pathname)) {
+    return null
+  }
   const fileName = safeDecodeURIComponent(pathname.split('/').filter(Boolean).pop() || '')
   if (!/\.js$/i.test(fileName) || !/(?:^|[.-])min\.js$/i.test(fileName)) {
     return null
@@ -422,6 +425,7 @@ const matchDynamicFrontendLookup = (rule, context, defaultCategory) => {
 
 const buildDynamicMatchContext = (snapshot, text) => {
   const resourceUrls = [
+    snapshot.url,
     ...(snapshot.resources || []),
     ...(snapshot.scripts || []),
     ...(snapshot.stylesheets || []),
@@ -527,8 +531,12 @@ const applyDynamicRuleList = (add, rules, contextOrText, sourceLabel, defaultCat
     if (!matchesRuleTextHints(rule, context)) {
       continue
     }
-    const matchText =
-      rule?.resourceOnly === true ? context.resourceText || context.lowerText || '' : context.lowerText || context.text || ''
+    const resourceScoped =
+      rule?.resourceOnly === true ||
+      (Array.isArray(rule?.matchIn) &&
+        rule.matchIn.length > 0 &&
+        rule.matchIn.every((item: string) => ['resources', 'url', 'dynamic'].includes(item)))
+    const matchText = resourceScoped ? context.resourceText || context.lowerText || '' : context.lowerText || context.text || ''
     if (!passesRulePrefilter(rule, matchText)) {
       continue
     }

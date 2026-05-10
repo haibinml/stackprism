@@ -39,8 +39,11 @@
               },
               {
                 "name": "Spring Boot / Spring MVC",
-                "patterns": ["spring|x-application-context"],
-                "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+                "patterns": [
+                  "(?:^|\\n)x-application-context:",
+                  "(?:^|\\n)(?:x-powered-by|server|set-cookie|cookie|x-framework|x-generator|x-application-name):[^\\n]*(?:\\bspring(?:[-\\s]?(?:boot|mvc|framework|security))\\b|spring-security)"
+                ],
+                "evidence": "响应头或 Cookie 名称包含后端框架线索"
               },
               {
                 "name": "Ruby on Rails",
@@ -89,8 +92,8 @@
               },
               {
                 "name": "Phoenix",
-                "patterns": ["phoenix|_csrf_token"],
-                "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+                "patterns": ["(?:^|\\n)(?:x-powered-by|server|set-cookie|cookie):[^\\n]*(?:\\bphoenix\\b|_phoenix_)"],
+                "evidence": "响应头或 Cookie 名称包含后端框架线索"
               },
               {
                 "name": "Go",

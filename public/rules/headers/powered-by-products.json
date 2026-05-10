@@ -186,7 +186,7 @@
           },
           {
             "name": "Spring Boot / Spring MVC",
-            "patterns": ["spring|springboot|spring boot"]
+            "patterns": ["\\bspring(?:[-\\s]?(?:boot|mvc|framework))?\\b|\\bspringboot\\b"]
           },
           {
             "name": "Play Framework",
@@ -230,7 +230,7 @@
           },
           {
             "name": "Phoenix",
-            "patterns": ["phoenix"]
+            "patterns": ["\\bphoenix\\b"]
           },
           {
             "name": "Elixir / Plug",

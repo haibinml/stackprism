@@ -231,6 +231,9 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
     } catch {
       pathname = String(rawUrl || '').split(/[?#]/)[0]
     }
+    if (/\/wp-includes\/js\/dist\//i.test(pathname)) {
+      return null
+    }
     const fileName = safeDecodeURIComponent(pathname.split('/').filter(Boolean).pop() || '')
     if (!/\.js$/i.test(fileName) || !/(?:^|[.-])min\.js$/i.test(fileName)) {
       return null
@@ -489,13 +492,15 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
   }
 
   function detectCmsThemesAndSource(add, resources, classes, html, globalKeys, externalRules, assetExtractors = []) {
-    const text = `${location.href}
-${resources.all.join('\n')}
+    const assetText = `${location.href}
+${resources.all.join('\n')}`
+    const text = `${assetText}
 ${html}`
     const normalizedText = text.toLowerCase()
+    const normalizedAssetText = assetText.toLowerCase()
 
     for (const extractor of assetExtractors) {
-      collectAssetDirectoryMatches(add, text, normalizedText, extractor)
+      collectAssetDirectoryMatches(add, assetText, normalizedAssetText, extractor)
     }
 
     try {
@@ -784,8 +789,13 @@ ${html}`
 
     const matchResource = shouldMatchTarget(rule, 'resources')
     const matchHtml = !ruleResourceOnly && !context.resourceOnly && shouldMatchTarget(rule, 'html')
-    const allResources = context.resources?.all || []
+    const allResources =
+      Array.isArray(rule.matchIn) && rule.matchIn.includes('url')
+        ? unique([location.href, ...(context.resources?.all || [])])
+        : context.resources?.all || []
     const htmlText = context.text || ''
+    const formatUrlEvidence = resource =>
+      resource === location.href ? `页面 URL 匹配 ${shortUrl(resource)}` : `资源 URL 匹配 ${shortUrl(resource)}`
 
     const combined = getCompiledCombinedPattern(rule)
     if (combined) {
@@ -797,7 +807,7 @@ ${html}`
         if (resource) {
           return {
             confidence: rule.confidence || context.resourceConfidence || '高',
-            evidence: `资源 URL 匹配 ${shortUrl(resource)}`
+            evidence: formatUrlEvidence(resource)
           }
         }
       }
@@ -820,7 +830,7 @@ ${html}`
         if (resource) {
           return {
             confidence: rule.confidence || context.resourceConfidence || '高',
-            evidence: `资源 URL 匹配 ${shortUrl(resource)}`
+            evidence: formatUrlEvidence(resource)
           }
         }
       }
@@ -924,11 +934,71 @@ ${html}`
     const patterns = rule.patterns || []
     const isKeyword = rule.matchType === 'keyword'
     const candidates = []
+    const genericHintParts = new Set([
+      'api',
+      'asset',
+      'assets',
+      'cache',
+      'cdn',
+      'common',
+      'content',
+      'css',
+      'data',
+      'file',
+      'files',
+      'image',
+      'images',
+      'img',
+      'js',
+      'plugin',
+      'plugins',
+      'script',
+      'scripts',
+      'source',
+      'static',
+      'style',
+      'styles',
+      'template',
+      'theme',
+      'themes',
+      'url',
+      'version'
+    ])
     const normalizeHintCandidate = value =>
       String(value || '')
         .toLowerCase()
         .replace(/\s+/g, ' ')
+        .replace(/^[^a-z0-9\u4e00-\u9fa5]+|[^a-z0-9\u4e00-\u9fa5]+$/g, '')
         .trim()
+    const getRuleNameTokens = () => {
+      const text = `${rule.name || ''} ${rule.kind || ''}`.toLowerCase()
+      const tokens = text
+        .split(/[^a-z0-9\u4e00-\u9fa5]+/)
+        .map(token => token.trim())
+        .filter(token => token.length >= 3 && !genericHintParts.has(token))
+      if (/discuz/i.test(text)) tokens.push('discuz')
+      if (/phpbb/i.test(text)) tokens.push('phpbb')
+      if (/vbulletin/i.test(text)) tokens.push('vbulletin')
+      if (/xenforo/i.test(text)) tokens.push('xenforo')
+      if (/mediawiki/i.test(text)) tokens.push('mediawiki')
+      if (/typecho/i.test(text)) tokens.push('typecho')
+      return [...new Set(tokens)]
+    }
+    const scoreHintCandidate = (candidate, ruleTokens) => {
+      const parts = candidate.split(/[\/._\-\s:=%]+/).filter(Boolean)
+      const hasRuleToken = ruleTokens.some(token => candidate.includes(token))
+      const genericPartCount = parts.filter(part => genericHintParts.has(part)).length
+      let score = Math.min(candidate.length, 32)
+      if (hasRuleToken) score += 90
+      if (/[_-]/.test(candidate)) score += 14
+      if (/[.]/.test(candidate)) score += 8
+      if (/\d/.test(candidate) && /[a-z]/.test(candidate)) score += 6
+      if (candidate.includes('/')) score += hasRuleToken ? 4 : -8
+      if (parts.length && genericPartCount === parts.length) score -= 80
+      else score -= genericPartCount * 12
+      if (/^(?:content|static|assets|data|source|template|common)(?:[\/:=]|$)/.test(candidate) && !hasRuleToken) score -= 24
+      return score
+    }
     for (const pattern of patterns) {
       const text = String(pattern || '')
       if (!text) continue
@@ -942,7 +1012,10 @@ ${html}`
         if (lowerSeg.length >= 4) candidates.push(lowerSeg)
       }
     }
-    const unique = [...new Set(candidates)].sort((a, b) => b.length - a.length).slice(0, 3)
+    const ruleTokens = getRuleNameTokens()
+    const unique = [...new Set(candidates)]
+      .sort((a, b) => scoreHintCandidate(b, ruleTokens) - scoreHintCandidate(a, ruleTokens) || b.length - a.length)
+      .slice(0, 5)
     ruleHintCache.set(rule, unique)
     return unique
   }
@@ -971,7 +1044,7 @@ ${html}`
       return rule.matchIn.some(item => ['resources', 'url', 'dynamic'].includes(item))
     }
     if (target === 'html') {
-      return rule.matchIn.some(item => ['html', 'body', 'title', 'url', 'resources'].includes(item))
+      return rule.matchIn.some(item => ['html', 'body', 'title'].includes(item))
     }
     if (target === 'globals') {
       return rule.matchIn.some(item => ['html', 'body', 'resources', 'dynamic'].includes(item))

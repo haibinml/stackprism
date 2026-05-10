@@ -28,7 +28,7 @@
           {
             "name": "Next.js",
             "confidence": "高",
-            "patterns": ["/_next/", "__next"]
+            "patterns": ["/_next/", "__next_data__", "__next_f"]
           },
           {
             "name": "Nuxt",
@@ -54,7 +54,7 @@
               },
               {
                 "name": "Alpine.js",
-                "patterns": ["alpinejs", "x-data", "x-init"]
+                "patterns": ["alpinejs", "alpine:init", "window\\.Alpine"]
               },
               {
                 "name": "htmx",
@@ -84,7 +84,7 @@
               },
               {
                 "name": "Ant Design",
-                "patterns": ["antd", "ant-design", "\\.ant-"]
+                "patterns": ["(?:^|/)antd(?:\\.min)?\\.(?:js|css)", "ant-design", "\\.ant-"]
               },
               {
                 "name": "Material UI",

@@ -307,7 +307,7 @@
             "category": "UI / CSS 框架",
             "name": "Ant Design",
             "url": "https://ant.design",
-            "patterns": ["antd|Ant Design|ant-design"]
+            "patterns": ["@ant-design/", "Ant Design", "ant-design", "(?:^|[\\s/*!])antd\\s+v?\\d"]
           },
           {
             "category": "UI / CSS 框架",

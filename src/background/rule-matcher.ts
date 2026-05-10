@@ -79,11 +79,82 @@ export const getCompiledCombinedPattern = (rule: any, patterns: unknown): RegExp
 }
 
 const HINT_MIN_LEN = 4
-const HINT_MAX_COUNT = 3
+const HINT_MAX_COUNT = 5
 const REGEX_LITERAL_SPLIT = /[\\^$.|?*+()[\]{}]/
 const REGEX_CONTROL_ESCAPE = /\\[bBdDsSwW]/g
 
-const normalizeHintCandidate = (value: string): string => value.toLowerCase().replace(/\s+/g, ' ').trim()
+const GENERIC_HINT_PARTS = new Set([
+  'api',
+  'asset',
+  'assets',
+  'cache',
+  'cdn',
+  'common',
+  'content',
+  'css',
+  'data',
+  'file',
+  'files',
+  'image',
+  'images',
+  'img',
+  'js',
+  'plugin',
+  'plugins',
+  'script',
+  'scripts',
+  'source',
+  'static',
+  'style',
+  'styles',
+  'template',
+  'theme',
+  'themes',
+  'url',
+  'version'
+])
+
+const normalizeHintCandidate = (value: string): string =>
+  value
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .replace(/^[^a-z0-9\u4e00-\u9fa5]+|[^a-z0-9\u4e00-\u9fa5]+$/g, '')
+    .trim()
+
+const getRuleNameTokens = (rule: any): string[] => {
+  const text = `${rule?.name || ''} ${rule?.kind || ''}`.toLowerCase()
+  const tokens = text
+    .split(/[^a-z0-9\u4e00-\u9fa5]+/)
+    .map(token => token.trim())
+    .filter(token => token.length >= 3 && !GENERIC_HINT_PARTS.has(token))
+
+  if (/discuz/i.test(text)) tokens.push('discuz')
+  if (/phpbb/i.test(text)) tokens.push('phpbb')
+  if (/vbulletin/i.test(text)) tokens.push('vbulletin')
+  if (/xenforo/i.test(text)) tokens.push('xenforo')
+  if (/mediawiki/i.test(text)) tokens.push('mediawiki')
+  if (/typecho/i.test(text)) tokens.push('typecho')
+
+  return [...new Set(tokens)]
+}
+
+const scoreHintCandidate = (candidate: string, ruleTokens: string[]): number => {
+  const parts = candidate.split(/[\/._\-\s:=%]+/).filter(Boolean)
+  const hasRuleToken = ruleTokens.some(token => candidate.includes(token))
+  const genericPartCount = parts.filter(part => GENERIC_HINT_PARTS.has(part)).length
+  let score = Math.min(candidate.length, 32)
+
+  if (hasRuleToken) score += 90
+  if (/[_-]/.test(candidate)) score += 14
+  if (/[.]/.test(candidate)) score += 8
+  if (/\d/.test(candidate) && /[a-z]/.test(candidate)) score += 6
+  if (candidate.includes('/')) score += hasRuleToken ? 4 : -8
+  if (parts.length && genericPartCount === parts.length) score -= 80
+  else score -= genericPartCount * 12
+  if (/^(?:content|static|assets|data|source|template|common)(?:[\/:=]|$)/.test(candidate) && !hasRuleToken) score -= 24
+
+  return score
+}
 
 const extractHintCandidates = (rule: any): string[] => {
   const patterns = Array.isArray(rule?.patterns) ? rule.patterns : []
@@ -120,7 +191,10 @@ export const getRuleAutoHints = (rule: any): string[] => {
     autoHintCache.set(rule, [])
     return []
   }
-  const unique = [...new Set(candidates)].sort((a, b) => b.length - a.length).slice(0, HINT_MAX_COUNT)
+  const ruleTokens = getRuleNameTokens(rule)
+  const unique = [...new Set(candidates)]
+    .sort((a, b) => scoreHintCandidate(b, ruleTokens) - scoreHintCandidate(a, ruleTokens) || b.length - a.length)
+    .slice(0, HINT_MAX_COUNT)
   autoHintCache.set(rule, unique)
   return unique
 }
