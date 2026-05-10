@@ -6661,6 +6661,121 @@
       },
       {
         "defaults": {
+          "category": "无障碍辅助",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "UserWay Widget",
+            "patterns": ["url: https?://cdn\\.userway\\.org/widget\\.js", "url: https?://(?:[a-z0-9-]+\\.)*userway\\.org/[^\\s]*(?:widget|accessibility)"],
+            "evidence": "响应 URL 指向 UserWay 无障碍组件"
+          },
+          {
+            "name": "accessiBe Widget",
+            "patterns": ["url: https?://acsbapp\\.com/apps/app/", "url: https?://acsbapp\\.com/apps/app/dist/js/app\\.js"],
+            "evidence": "响应 URL 指向 accessiBe 无障碍组件"
+          },
+          {
+            "name": "AudioEye",
+            "patterns": ["url: https?://wsm\\.audioeye\\.com/", "url: https?://(?:[a-z0-9-]+\\.)*audioeye\\.com/[^\\s]*(?:widget|launcher|js)"],
+            "evidence": "响应 URL 指向 AudioEye 无障碍组件"
+          },
+          {
+            "name": "EqualWeb",
+            "patterns": ["url: https?://cdn\\.equalweb\\.com/", "url: https?://(?:[a-z0-9-]+\\.)*equalweb\\.com/[^\\s]*(?:accessibility|widget|js)"],
+            "evidence": "响应 URL 指向 EqualWeb 无障碍组件"
+          },
+          {
+            "name": "Recite Me",
+            "patterns": ["url: https?://api\\.reciteme\\.com/", "url: https?://cdn\\.reciteme\\.com/", "url: https?://(?:[a-z0-9-]+\\.)*reciteme\\.com/[^\\s]*(?:button|toolbar|js)"],
+            "evidence": "响应 URL 指向 Recite Me 无障碍工具栏"
+          },
+          {
+            "name": "Browsealoud",
+            "patterns": ["url: https?://(?:[a-z0-9-]+\\.)*browsealoud\\.com/plus/scripts/ba\\.js"],
+            "evidence": "响应 URL 指向 Browsealoud 脚本"
+          },
+          {
+            "name": "Allyable",
+            "patterns": ["url: https?://cdn\\.allyable\\.com/", "url: https?://(?:[a-z0-9-]+\\.)*allyable\\.com/[^\\s]*(?:widget|accessibility|js)"],
+            "evidence": "响应 URL 指向 Allyable 无障碍组件"
+          },
+          {
+            "name": "Monsido",
+            "patterns": ["url: https?://cdn\\.monsido\\.com/", "url: https?://(?:[a-z0-9-]+\\.)*monsido\\.com/[^\\s]*(?:tracking|script|accessibility)"],
+            "evidence": "响应 URL 指向 Monsido 无障碍或站点治理脚本"
+          },
+          {
+            "name": "Siteimprove Accessibility",
+            "patterns": [
+              "url: https?://(?:[a-z0-9-]+\\.)*siteimproveanalytics\\.com/js/siteanalyze_",
+              "url: https?://(?:[a-z0-9-]+\\.)*siteimprove\\.com/[^\\s]*(?:accessibility|script)"
+            ],
+            "evidence": "响应 URL 指向 Siteimprove Accessibility"
+          },
+          {
+            "name": "Eye-Able",
+            "patterns": [
+              "url: https?://cdn\\.eye-able\\.com/",
+              "url: https?://www\\.eye-able-cdn\\.com/",
+              "url: https?://(?:[a-z0-9-]+\\.)*eye-able\\.com/[^\\s]*(?:configs|widget|accessibility)"
+            ],
+            "evidence": "响应 URL 指向 Eye-Able 无障碍组件"
+          },
+          {
+            "name": "AccessiWay Widget",
+            "patterns": ["url: https?://cdn\\.accessiway\\.com/", "url: https?://(?:[a-z0-9-]+\\.)*accessiway\\.com/[^\\s]*(?:accesswidget|widget|accessibility)"],
+            "evidence": "响应 URL 指向 AccessiWay 无障碍组件"
+          },
+          {
+            "name": "Accessibly App",
+            "patterns": ["url: https?://cdn\\.accessiblyapp\\.com/", "url: https?://(?:[a-z0-9-]+\\.)*accessiblyapp\\.com/[^\\s]*(?:widget|app|embed|accessibility)"],
+            "evidence": "响应 URL 指向 Accessibly App"
+          },
+          {
+            "name": "All in One Accessibility",
+            "patterns": ["url: https?://(?:[a-z0-9-]+\\.)*skynettechnologies\\.com/accessibility/js/all-in-one-accessibility-js-widget"],
+            "evidence": "响应 URL 指向 All in One Accessibility 组件"
+          },
+          {
+            "name": "Level Access / eSSENTIAL Accessibility",
+            "patterns": ["url: https?://app\\.eaccessibility\\.com/", "url: https?://cdn\\.essentialaccessibility\\.com/"],
+            "evidence": "响应 URL 指向 Level Access / eSSENTIAL Accessibility"
+          },
+          {
+            "name": "User1st",
+            "patterns": ["url: https?://(?:[a-z0-9-]+\\.)*user1st\\.info/", "url: https?://(?:[a-z0-9-]+\\.)*user1st\\.com/[^\\s]*(?:widget|accessibility|script|js)"],
+            "evidence": "响应 URL 指向 User1st 无障碍组件"
+          },
+          {
+            "name": "ReadSpeaker webReader",
+            "patterns": ["url: https?://cdn[0-9a-z-]*\\.readspeaker\\.com/script/[^\\s]*/webReader/webReader\\.js"],
+            "evidence": "响应 URL 指向 ReadSpeaker webReader"
+          },
+          {
+            "name": "ReachDeck",
+            "patterns": ["url: https?://(?:[a-z0-9-]+\\.)*reachdeck\\.com/", "url: https?://(?:[a-z0-9-]+\\.)*texthelp\\.com/[^\\s]*(?:reachdeck|toolbar)"],
+            "evidence": "响应 URL 指向 ReachDeck / Texthelp 无障碍工具栏"
+          },
+          {
+            "name": "Silktide Accessibility",
+            "patterns": ["url: https?://static\\.silktide\\.com/", "url: https?://(?:[a-z0-9-]+\\.)*silktide\\.com/[^\\s]*(?:accessibility|toolbar|script)"],
+            "evidence": "响应 URL 指向 Silktide Accessibility"
+          },
+          {
+            "name": "Equally AI",
+            "patterns": ["url: https?://cdn\\.equally\\.ai/", "url: https?://app\\.equally\\.ai/", "url: https?://(?:[a-z0-9-]+\\.)*equally\\.ai/[^\\s]*(?:widget|accessibility|embed|script)"],
+            "evidence": "响应 URL 指向 Equally AI 无障碍组件"
+          },
+          {
+            "name": "UserAccess Widget",
+            "patterns": ["url: https?://widget-v1\\.useraccess\\.live/", "url: https?://(?:[a-z0-9-]+\\.)*useraccess\\.live/[^\\s]*(?:widget|accessibility)"],
+            "evidence": "响应 URL 指向 UserAccess 无障碍组件"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "SaaS / 第三方服务",
           "confidence": "高"
         },
