@@ -411,6 +411,189 @@
             "name": "Paddle",
             "patterns": ["url: https?://(?:[a-z0-9-]+\\.)*(?:paddle|paddlecdn)\\.com/"],
             "evidence": "响应 URL 指向 Paddle 服务"
+          },
+          {
+            "name": "Adyen",
+            "patterns": ["url: https?://checkoutshopper-(?:live|test)(?:-[a-z0-9-]+)?\\.adyen\\.com/", "url: https?://pal-(?:live|test)\\.adyen\\.com/"],
+            "evidence": "响应 URL 指向 Adyen Checkout"
+          },
+          {
+            "name": "Braintree",
+            "patterns": [
+              "url: https?://js\\.braintreegateway\\.com/",
+              "url: https?://assets\\.braintreegateway\\.com/",
+              "url: https?://client-analytics\\.braintreegateway\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Braintree"
+          },
+          {
+            "name": "Razorpay",
+            "patterns": ["url: https?://checkout\\.razorpay\\.com/", "url: https?://api\\.razorpay\\.com/"],
+            "evidence": "响应 URL 指向 Razorpay"
+          },
+          {
+            "name": "Klarna",
+            "patterns": ["url: https?://x\\.klarnacdn\\.net/", "url: https?://js\\.klarna\\.com/", "url: https?://api\\.klarna\\.com/"],
+            "evidence": "响应 URL 指向 Klarna"
+          },
+          {
+            "name": "Afterpay / Clearpay",
+            "patterns": [
+              "url: https?://static(?:-[a-z]+)?\\.afterpay\\.com/",
+              "url: https?://portal\\.afterpay\\.com/",
+              "url: https?://static\\.clearpay\\.co\\.uk/"
+            ],
+            "evidence": "响应 URL 指向 Afterpay / Clearpay"
+          },
+          {
+            "name": "Square",
+            "patterns": ["url: https?://web\\.squarecdn\\.com/", "url: https?://connect\\.squareup\\.com/"],
+            "evidence": "响应 URL 指向 Square Payments"
+          },
+          {
+            "name": "Worldpay",
+            "patterns": ["url: https?://secure\\.worldpay\\.com/", "url: https?://payments\\.worldpay\\.com/"],
+            "evidence": "响应 URL 指向 Worldpay"
+          },
+          {
+            "name": "Checkout.com",
+            "patterns": ["url: https?://cdn\\.checkout\\.com/", "url: https?://api\\.checkout\\.com/", "url: https?://frames\\.checkout\\.com/"],
+            "evidence": "响应 URL 指向 Checkout.com"
+          },
+          {
+            "name": "Mollie",
+            "patterns": ["url: https?://js\\.mollie\\.com/", "url: https?://api\\.mollie\\.com/"],
+            "evidence": "响应 URL 指向 Mollie"
+          },
+          {
+            "name": "Authorize.Net",
+            "patterns": ["url: https?://js\\.authorize\\.net/", "url: https?://accept\\.authorize\\.net/", "url: https?://api\\.authorize\\.net/"],
+            "evidence": "响应 URL 指向 Authorize.Net"
+          },
+          {
+            "name": "CyberSource",
+            "patterns": ["url: https?://flex\\.cybersource\\.com/", "url: https?://secureacceptance\\.cybersource\\.com/"],
+            "evidence": "响应 URL 指向 CyberSource"
+          },
+          {
+            "name": "2Checkout / Verifone",
+            "patterns": ["url: https?://(?:www\\.)?2checkout\\.com/", "url: https?://secure\\.2co\\.com/", "url: https?://[^\\s/]+\\.verifone\\.cloud/"],
+            "evidence": "响应 URL 指向 2Checkout / Verifone"
+          },
+          {
+            "name": "PayU",
+            "patterns": ["url: https?://secure\\.payu\\.[a-z.]+/", "url: https?://checkout\\.payu\\.com/", "url: https?://secure\\.payu\\.in/"],
+            "evidence": "响应 URL 指向 PayU"
+          },
+          {
+            "name": "Payoneer",
+            "patterns": ["url: https?://checkout\\.payoneer\\.com/", "url: https?://api\\.payoneer\\.com/"],
+            "evidence": "响应 URL 指向 Payoneer"
+          },
+          {
+            "name": "Paystack",
+            "patterns": ["url: https?://js\\.paystack\\.co/", "url: https?://api\\.paystack\\.co/", "url: https?://checkout\\.paystack\\.com/"],
+            "evidence": "响应 URL 指向 Paystack"
+          },
+          {
+            "name": "Flutterwave",
+            "patterns": ["url: https?://checkout\\.flutterwave\\.com/", "url: https?://api\\.flutterwave\\.com/", "url: https?://ravemodal\\.flutterwave\\.com/"],
+            "evidence": "响应 URL 指向 Flutterwave"
+          },
+          {
+            "name": "Mercado Pago",
+            "patterns": ["url: https?://sdk\\.mercadopago\\.com/", "url: https?://api\\.mercadopago\\.com/", "url: https?://www\\.mercadopago\\.com/checkout/"],
+            "evidence": "响应 URL 指向 Mercado Pago"
+          },
+          {
+            "name": "Affirm",
+            "patterns": ["url: https?://cdn1\\.affirm\\.com/", "url: https?://cdn-assets\\.affirm\\.com/", "url: https?://api\\.affirm\\.com/"],
+            "evidence": "响应 URL 指向 Affirm"
+          },
+          {
+            "name": "Sezzle",
+            "patterns": ["url: https?://checkout-sdk\\.sezzle\\.com/", "url: https?://widget\\.sezzle\\.com/", "url: https?://gateway\\.sezzle\\.com/"],
+            "evidence": "响应 URL 指向 Sezzle"
+          },
+          {
+            "name": "Zip Pay / Zip Co",
+            "patterns": ["url: https?://static\\.zip\\.co/", "url: https?://checkout\\.zip\\.co/", "url: https?://api\\.quadpay\\.com/"],
+            "evidence": "响应 URL 指向 Zip Pay / Zip Co"
+          },
+          {
+            "name": "Amazon Pay",
+            "patterns": ["url: https?://static-(?:na|eu|fe)\\.payments-amazon\\.com/", "url: https?://pay\\.amazon\\.com/"],
+            "evidence": "响应 URL 指向 Amazon Pay"
+          },
+          {
+            "name": "Google Pay",
+            "patterns": ["url: https?://pay\\.google\\.com/gp/p/js/pay\\.js"],
+            "evidence": "响应 URL 指向 Google Pay"
+          },
+          {
+            "name": "Apple Pay",
+            "patterns": ["url: https?://apple-pay-gateway\\.apple\\.com/", "url: https?://applepay\\.cdn-apple\\.com/"],
+            "evidence": "响应 URL 指向 Apple Pay"
+          },
+          {
+            "name": "Bolt Checkout",
+            "patterns": ["url: https?://connect\\.bolt\\.com/", "url: https?://checkout\\.bolt\\.com/"],
+            "evidence": "响应 URL 指向 Bolt Checkout"
+          },
+          {
+            "name": "Rapyd",
+            "patterns": ["url: https?://checkout\\.rapyd\\.net/", "url: https?://sandboxcheckout\\.rapyd\\.net/", "url: https?://api\\.rapyd\\.net/"],
+            "evidence": "响应 URL 指向 Rapyd"
+          },
+          {
+            "name": "Primer Payments",
+            "patterns": ["url: https?://sdk\\.primer\\.io/", "url: https?://checkout\\.primer\\.io/"],
+            "evidence": "响应 URL 指向 Primer Payments"
+          },
+          {
+            "name": "Airwallex",
+            "patterns": ["url: https?://checkout\\.airwallex\\.com/", "url: https?://checkout-demo\\.airwallex\\.com/", "url: https?://static\\.airwallex\\.com/"],
+            "evidence": "响应 URL 指向 Airwallex"
+          },
+          {
+            "name": "PayMongo",
+            "patterns": ["url: https?://js\\.paymongo\\.com/", "url: https?://api\\.paymongo\\.com/"],
+            "evidence": "响应 URL 指向 PayMongo"
+          },
+          {
+            "name": "Midtrans",
+            "patterns": ["url: https?://app\\.midtrans\\.com/snap/snap\\.js", "url: https?://app\\.sandbox\\.midtrans\\.com/snap/snap\\.js"],
+            "evidence": "响应 URL 指向 Midtrans"
+          },
+          {
+            "name": "Xendit",
+            "patterns": ["url: https?://js\\.xendit\\.co/", "url: https?://checkout\\.xendit\\.co/", "url: https?://api\\.xendit\\.co/"],
+            "evidence": "响应 URL 指向 Xendit"
+          },
+          {
+            "name": "Billplz",
+            "patterns": ["url: https?://www\\.billplz\\.com/bills/", "url: https?://www\\.billplz-sandbox\\.com/bills/"],
+            "evidence": "响应 URL 指向 Billplz"
+          },
+          {
+            "name": "Paytm",
+            "patterns": ["url: https?://securegw\\.paytm\\.in/", "url: https?://securegw-stage\\.paytm\\.in/"],
+            "evidence": "响应 URL 指向 Paytm"
+          },
+          {
+            "name": "PhonePe",
+            "patterns": ["url: https?://mercury\\.phonepe\\.com/", "url: https?://api\\.phonepe\\.com/"],
+            "evidence": "响应 URL 指向 PhonePe"
+          },
+          {
+            "name": "GoCardless",
+            "patterns": ["url: https?://pay\\.gocardless\\.com/", "url: https?://js\\.gocardless\\.com/", "url: https?://api\\.gocardless\\.com/"],
+            "evidence": "响应 URL 指向 GoCardless"
+          },
+          {
+            "name": "Plaid Link",
+            "patterns": ["url: https?://cdn\\.plaid\\.com/link/v2/stable/link-initialize\\.js", "url: https?://production\\.plaid\\.com/link/"],
+            "evidence": "响应 URL 指向 Plaid Link"
           }
         ]
       },
