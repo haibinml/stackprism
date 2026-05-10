@@ -39,6 +39,96 @@
           ]
         },
         {
+          "defaults": {
+            "kind": "身份认证 / IAM",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Kinde",
+              "patterns": ["auth\\.kinde\\.com|kinde\\.com/[^\\s\"'<>]*(?:js|sdk|oauth|login)|kinde\\.com/oauth2"]
+            },
+            {
+              "name": "Descope",
+              "patterns": ["cdn\\.descope\\.com|api\\.descope\\.com|descope\\.com/[^\\s\"'<>]*(?:sdk|widget|auth)|descope-js"]
+            },
+            {
+              "name": "WorkOS",
+              "patterns": ["cdn\\.workos\\.com|api\\.workos\\.com|workos\\.com/[^\\s\"'<>]*(?:authkit|sso|user-management|sdk)"]
+            },
+            {
+              "name": "Frontegg",
+              "patterns": ["cdn\\.frontegg\\.com|frontegg\\.com/[^\\s\"'<>]*(?:oauth|auth|sdk)|frontegg(?:\\.min)?\\.js"]
+            },
+            {
+              "name": "Authgear",
+              "patterns": ["cdn\\.authgear\\.com|authgear\\.cloud|authgear\\.com/[^\\s\"'<>]*(?:sdk|oauth|auth)|authgear-web"]
+            },
+            {
+              "name": "LoginRadius",
+              "patterns": ["cdn\\.loginradius\\.com|auth\\.lrcontent\\.com|loginradius\\.com/[^\\s\"'<>]*(?:js|sdk|auth|sso)"]
+            },
+            {
+              "name": "OneLogin",
+              "patterns": ["onelogin\\.com/[^\\s\"'<>]*(?:oidc|saml|trust|login)|onelogin\\.com/trust/saml2"]
+            },
+            {
+              "name": "Ping Identity",
+              "patterns": ["auth\\.pingone\\.(?:com|eu|asia)|pingone\\.com|pingidentity\\.com/[^\\s\"'<>]*(?:sdk|auth|sso|login)"]
+            },
+            {
+              "name": "Microsoft Entra ID",
+              "patterns": [
+                "login\\.microsoftonline\\.com|alcdn\\.msftauth\\.net|msal-browser|microsoftonline\\.com/[^\\s\"'<>]*(?:oauth2|saml2)"
+              ]
+            },
+            {
+              "name": "Magic",
+              "patterns": ["auth\\.magic\\.link|cdn\\.jsdelivr\\.net/npm/magic-sdk|unpkg\\.com/magic-sdk|magic-sdk(?:\\.min)?\\.js"]
+            },
+            {
+              "name": "Web3Auth",
+              "patterns": ["auth\\.web3auth\\.io|cdn\\.jsdelivr\\.net/npm/@web3auth|unpkg\\.com/@web3auth|web3auth\\.io/[^\\s\"'<>]*sdk"]
+            },
+            {
+              "name": "Privy Auth",
+              "patterns": ["auth\\.privy\\.io|privy\\.io/[^\\s\"'<>]*(?:sdk|auth|login)|@privy-io"]
+            },
+            {
+              "name": "Dynamic.xyz Auth",
+              "patterns": ["auth\\.dynamic\\.xyz|app\\.dynamic\\.xyz|dynamic\\.xyz/[^\\s\"'<>]*(?:sdk|auth|login)|@dynamic-labs"]
+            },
+            {
+              "name": "Passage by 1Password",
+              "patterns": ["cdn\\.passage\\.id|auth\\.passage\\.id|passage\\.id/[^\\s\"'<>]*(?:sdk|auth|login)|@passageidentity"]
+            },
+            {
+              "name": "MojoAuth",
+              "patterns": ["cdn\\.mojoauth\\.com|api\\.mojoauth\\.com|mojoauth\\.com/[^\\s\"'<>]*(?:js|sdk|auth|login)"]
+            },
+            {
+              "name": "PropelAuth",
+              "patterns": ["auth\\.propelauth\\.com|propelauth\\.com/[^\\s\"'<>]*(?:js|sdk|auth|login)|@propelauth"]
+            },
+            {
+              "name": "BoxyHQ Jackson",
+              "patterns": ["boxyhq\\.com/[^\\s\"'<>]*(?:jackson|saml|sso)|jackson\\.boxyhq\\.com|saml-jackson"]
+            },
+            {
+              "name": "SlashID",
+              "patterns": ["cdn\\.slashid\\.com|api\\.slashid\\.com|slashid\\.com/[^\\s\"'<>]*(?:sdk|auth|login)"]
+            },
+            {
+              "name": "Permit.io",
+              "patterns": ["cdn\\.permit\\.io|api\\.permit\\.io|permit\\.io/[^\\s\"'<>]*(?:sdk|authz|authorization)|@permitio"]
+            },
+            {
+              "name": "Cerbos",
+              "patterns": ["cdn\\.cerbos\\.dev|api\\.cerbos\\.cloud|cerbos\\.dev/[^\\s\"'<>]*(?:sdk|hub|authz|policy)"]
+            }
+          ]
+        },
+        {
           "name": "Firebase",
           "kind": "后端云 / 认证",
           "patterns": ["gstatic\\.com\\/firebasejs|firebaseapp\\.com|firebaseio\\.com|firebasestorage\\.googleapis\\.com"],
