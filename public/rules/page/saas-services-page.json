@@ -729,6 +729,102 @@
         },
         {
           "defaults": {
+            "kind": "邮件投递 / Newsletter",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "SendGrid Email API",
+              "patterns": [
+                "api\\.sendgrid\\.com/v3|sendgrid\\.net/[^\\s\"'<>]*(?:tracking|mail|api)|sendgrid\\.com/[^\\s\"'<>]*(?:api|mail)"
+              ]
+            },
+            {
+              "name": "Mailgun Email API",
+              "patterns": [
+                "api\\.mailgun\\.net/v3|mailgun\\.org/[^\\s\"'<>]*(?:track|open|click)|mailgun\\.com/[^\\s\"'<>]*(?:api|messages)"
+              ]
+            },
+            {
+              "name": "Postmark Email API",
+              "patterns": ["api\\.postmarkapp\\.com|postmarkapp\\.com/[^\\s\"'<>]*(?:email|api|track)|pstmrk\\.it"]
+            },
+            {
+              "name": "SparkPost",
+              "patterns": ["api\\.sparkpost\\.com|sparkpostmail\\.com|sparkpost\\.com/[^\\s\"'<>]*(?:api|transmissions|webhooks)"]
+            },
+            {
+              "name": "Resend Email API",
+              "patterns": ["api\\.resend\\.com|resend\\.com/[^\\s\"'<>]*(?:emails|audiences|api)"]
+            },
+            {
+              "name": "Amazon SES Email",
+              "patterns": [
+                "email\\.[a-z0-9-]+\\.amazonaws\\.com|email-smtp\\.[a-z0-9-]+\\.amazonaws\\.com|ses\\.[a-z0-9-]+\\.amazonaws\\.com"
+              ]
+            },
+            {
+              "name": "Mailjet Email API",
+              "patterns": ["api\\.mailjet\\.com|static\\.mailjet\\.com|mailjet\\.com/[^\\s\"'<>]*(?:api|widget|subscription)"]
+            },
+            {
+              "name": "Mandrill Transactional Email",
+              "patterns": ["mandrillapp\\.com/api|mandrillapp\\.com/track|mandrill\\.com/[^\\s\"'<>]*(?:api|messages)"]
+            },
+            {
+              "name": "MailerSend",
+              "patterns": ["api\\.mailersend\\.com|assets\\.mailersend\\.com|mailersend\\.com/[^\\s\"'<>]*(?:api|email|forms)"]
+            },
+            {
+              "name": "Elastic Email API",
+              "patterns": ["api\\.elasticemail\\.com|elasticemail\\.com/[^\\s\"'<>]*(?:api|email|tracking|subscribe)"]
+            },
+            {
+              "name": "SMTP2GO",
+              "patterns": ["api\\.smtp2go\\.com|smtp2go\\.com/[^\\s\"'<>]*(?:api|tracking|email)"]
+            },
+            {
+              "name": "EmailOctopus Forms",
+              "patterns": ["emailoctopus\\.com/lists/[^\\s\"'<>]*/forms|emailoctopus\\.com/[^\\s\"'<>]*(?:forms|embed|subscribe)"]
+            },
+            {
+              "name": "Campaign Monitor Forms",
+              "patterns": [
+                "createsend\\.com/t/[^\\s\"'<>]*(?:subscribe|signup)|campaignmonitor\\.com/[^\\s\"'<>]*(?:forms|signup|subscribe)"
+              ]
+            },
+            {
+              "name": "Buttondown",
+              "patterns": ["buttondown\\.email/[^\\s\"'<>]*(?:api|embed|subscribe|forms)|buttondown\\.email/static/[^\\s\"'<>]*\\.js"]
+            },
+            {
+              "name": "Beehiiv Newsletter",
+              "patterns": ["embeds\\.beehiiv\\.com|beehiiv\\.com/[^\\s\"'<>]*(?:embed|subscribe|newsletter|forms)"]
+            },
+            {
+              "name": "Substack Newsletter",
+              "patterns": ["substackcdn\\.com|substack\\.com/embed|substack\\.com/[^\\s\"'<>]*(?:embed|subscribe|api/v1)"]
+            },
+            {
+              "name": "Loops.so",
+              "patterns": ["app\\.loops\\.so|api\\.loops\\.so|loops\\.so/[^\\s\"'<>]*(?:embed|forms|api|subscribe)"]
+            },
+            {
+              "name": "Plunk Email",
+              "patterns": ["api\\.useplunk\\.com|assets\\.useplunk\\.com|useplunk\\.com/[^\\s\"'<>]*(?:api|forms|subscribe|email)"]
+            },
+            {
+              "name": "Flodesk Forms",
+              "patterns": ["assets\\.flodesk\\.com|flodesk\\.com/[^\\s\"'<>]*(?:forms|embed|subscribe|universal)"]
+            },
+            {
+              "name": "Moosend Forms",
+              "patterns": ["cdn\\.moosend\\.com|moosend\\.com/[^\\s\"'<>]*(?:forms|subscribe|tracking|embed)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "社交分享 / 社交证明",
             "matchIn": ["resources"]
           },
