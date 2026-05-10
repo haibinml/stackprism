@@ -2332,6 +2332,94 @@
             {
               "name": "AnnounceKit",
               "patterns": ["announcekit\\.app/widget|cdn\\.announcekit\\.app|announcekit\\.co/[^\\s\"'<>]*(?:widget|embed)"]
+            },
+            {
+              "name": "Productboard Portal",
+              "patterns": [
+                "portal\\.productboard\\.com|app\\.productboard\\.com|productboard\\.com/[^\\s\"'<>]*(?:portal|roadmap|feedback)"
+              ]
+            },
+            {
+              "name": "Aha! Roadmaps",
+              "patterns": ["app\\.aha\\.io|aha\\.io/[^\\s\"'<>]*(?:roadmaps?|ideas|feedback|embed)"]
+            },
+            {
+              "name": "ProductPlan",
+              "patterns": ["app\\.productplan\\.com|productplan\\.com/[^\\s\"'<>]*(?:roadmap|embed|share|portal)"]
+            },
+            {
+              "name": "ProdPad",
+              "patterns": ["portal\\.prodpad\\.com|app\\.prodpad\\.com|prodpad\\.com/[^\\s\"'<>]*(?:roadmap|feedback|ideas|portal)"]
+            },
+            {
+              "name": "Roadmunk",
+              "patterns": ["app\\.roadmunk\\.com|roadmunk\\.com/[^\\s\"'<>]*(?:roadmap|embed|share|feedback)"]
+            },
+            {
+              "name": "airfocus",
+              "patterns": ["app\\.airfocus\\.com|airfocus\\.com/[^\\s\"'<>]*(?:portal|roadmap|feedback|embed)"]
+            },
+            {
+              "name": "Nolt",
+              "patterns": ["[a-z0-9-]+\\.nolt\\.io|nolt\\.io/[^\\s\"'<>]*(?:widget|roadmap|feedback|changelog)"]
+            },
+            {
+              "name": "Featurebase",
+              "patterns": [
+                "do\\.featurebase\\.app|feedback\\.featurebase\\.app|featurebase\\.app/[^\\s\"'<>]*(?:widget|changelog|roadmap|feedback)"
+              ]
+            },
+            {
+              "name": "Sleekplan",
+              "patterns": [
+                "widget\\.sleekplan\\.com|cdn\\.sleekplan\\.com|sleekplan\\.com/[^\\s\"'<>]*(?:widget|roadmap|changelog|feedback)"
+              ]
+            },
+            {
+              "name": "Hellonext",
+              "patterns": ["app\\.hellonext\\.co|hellonext\\.co/[^\\s\"'<>]*(?:widget|roadmap|changelog|feedback)"]
+            },
+            {
+              "name": "Upvoty",
+              "patterns": ["app\\.upvoty\\.com|upvoty\\.com/[^\\s\"'<>]*(?:widget|roadmap|changelog|feedback)"]
+            },
+            {
+              "name": "Changelogfy",
+              "patterns": ["app\\.changelogfy\\.com|changelogfy\\.com/[^\\s\"'<>]*(?:widget|roadmap|feedback|changelog)"]
+            },
+            {
+              "name": "Supahub",
+              "patterns": ["app\\.supahub\\.com|supahub\\.com/[^\\s\"'<>]*(?:widget|roadmap|feedback|changelog)"]
+            },
+            {
+              "name": "ProductLift",
+              "patterns": ["app\\.productlift\\.dev|productlift\\.dev/[^\\s\"'<>]*(?:widget|roadmap|feedback|changelog)"]
+            },
+            {
+              "name": "FeedBear",
+              "patterns": ["app\\.feedbear\\.com|feedbear\\.com/[^\\s\"'<>]*(?:widget|roadmap|feedback|changelog)"]
+            },
+            {
+              "name": "LoopedIn",
+              "patterns": ["app\\.loopedin\\.io|loopedin\\.io/[^\\s\"'<>]*(?:widget|roadmap|feedback|changelog)"]
+            },
+            {
+              "name": "FeatureOS",
+              "patterns": ["app\\.featureos\\.app|featureos\\.app/[^\\s\"'<>]*(?:widget|roadmap|feedback|changelog)"]
+            },
+            {
+              "name": "UserJot",
+              "patterns": ["app\\.userjot\\.com|userjot\\.com/[^\\s\"'<>]*(?:widget|roadmap|feedback|changelog)"]
+            },
+            {
+              "name": "Noticeable",
+              "patterns": [
+                "widgets\\.noticeable\\.io|sdk\\.noticeable\\.io|noticeable\\.io/[^\\s\"'<>]*(?:widget|changelog|roadmap|feedback)"
+              ]
+            },
+            {
+              "name": "ReleaseNotes.io",
+              "patterns": ["app\\.releasenotes\\.io|releasenotes\\.io/[^\\s\"'<>]*(?:widget|changelog|roadmap|releases)"]
             }
           ]
         },
