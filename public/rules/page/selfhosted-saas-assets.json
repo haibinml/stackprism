@@ -223,6 +223,133 @@
           ]
         },
         {
+          "defaults": {
+            "kind": "BaaS / 后端控制台"
+          },
+          "rules": [
+            {
+              "name": "Appwrite",
+              "resourceHints": ["appwrite"],
+              "patterns": ["appwrite[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)", "appwrite\\.io/[^\\s\"'<>]*(?:console|assets|images)"]
+            },
+            {
+              "name": "PocketBase",
+              "resourceHints": ["pocketbase"],
+              "patterns": ["pocketbase[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Supabase Studio",
+              "resourceHints": ["supabase-studio", "studio.supabase"],
+              "patterns": [
+                "supabase-studio[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)",
+                "studio\\.supabase\\.com/[^\\s\"'<>]*(?:assets|project|dashboard)"
+              ]
+            },
+            {
+              "name": "Parse Dashboard",
+              "resourceHints": ["parse-dashboard"],
+              "patterns": ["parse-dashboard[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Nhost",
+              "resourceHints": ["nhost"],
+              "patterns": ["nhost[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)", "nhost\\.io/[^\\s\"'<>]*(?:dashboard|assets|console)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "kind": "Headless CMS / 内容工作台"
+          },
+          "rules": [
+            {
+              "name": "Payload CMS",
+              "resourceHints": ["payloadcms", "payload-admin"],
+              "patterns": ["payloadcms[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)", "payload-admin[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"]
+            },
+            {
+              "name": "Keystone",
+              "resourceHints": ["keystonejs", "keystone-6"],
+              "patterns": ["keystonejs[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)", "keystone-6[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"]
+            },
+            {
+              "name": "Sanity Studio",
+              "resourceHints": ["sanity-studio", "sanity.io", "@sanity"],
+              "patterns": ["sanity-studio[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)", "@sanity[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"]
+            },
+            {
+              "name": "Decap CMS",
+              "resourceHints": ["decap-cms", "decapcms"],
+              "patterns": ["decap-cms[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)", "decapcms[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"]
+            },
+            {
+              "name": "Netlify CMS",
+              "resourceHints": ["netlify-cms"],
+              "patterns": ["netlify-cms[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "TinaCMS",
+              "resourceHints": ["tinacms", "tina-cms", "tinajs"],
+              "patterns": ["(?:tinacms|tina-cms|tinajs)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Webiny",
+              "resourceHints": ["webiny"],
+              "patterns": ["webiny[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "ApostropheCMS",
+              "resourceHints": ["apostrophecms", "apostrophe-cms"],
+              "patterns": ["(?:apostrophecms|apostrophe-cms)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Cockpit CMS",
+              "resourceHints": ["cockpit-cms", "cockpitcms"],
+              "patterns": ["(?:cockpit-cms|cockpitcms)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "kind": "低代码 / 自动化平台"
+          },
+          "rules": [
+            {
+              "name": "Activepieces",
+              "resourceHints": ["activepieces"],
+              "patterns": ["activepieces[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Windmill",
+              "resourceHints": ["windmill.dev", "windmill-labs"],
+              "patterns": [
+                "windmill-labs[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)",
+                "windmill\\.dev/[^\\s\"'<>]*(?:assets|apps|scripts)"
+              ]
+            },
+            {
+              "name": "Lowcoder",
+              "resourceHints": ["lowcoder"],
+              "patterns": ["lowcoder[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "ILLA Builder",
+              "resourceHints": ["illa-builder", "illacloud"],
+              "patterns": ["illa-builder[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)", "illacloud[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"]
+            },
+            {
+              "name": "Saltcorn",
+              "resourceHints": ["saltcorn"],
+              "patterns": ["saltcorn[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Joget",
+              "resourceHints": ["joget"],
+              "patterns": ["joget[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            }
+          ]
+        },
+        {
           "name": "n8n",
           "kind": "自动化工作流",
           "resourceHints": ["n8n"],
