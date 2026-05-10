@@ -3914,6 +3914,94 @@
         },
         {
           "defaults": {
+            "kind": "音频 / 播客嵌入",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Spotify Embed",
+              "patterns": ["open\\.spotify\\.com/embed/|spotify\\.com/[^\\s\"'<>]*(?:embed|embed-podcast)"]
+            },
+            {
+              "name": "SoundCloud Embed",
+              "patterns": ["w\\.soundcloud\\.com/player|soundcloud\\.com/[^\\s\"'<>]*(?:player|embed)"]
+            },
+            {
+              "name": "Apple Podcasts Embed",
+              "patterns": ["embed\\.podcasts\\.apple\\.com|podcasts\\.apple\\.com/[^\\s\"'<>]*(?:embed|podcast)"]
+            },
+            {
+              "name": "Podbean Player",
+              "patterns": ["podbean\\.com/(?:player-v2|media/player)|podbean\\.com/[^\\s\"'<>]*(?:embed|player)"]
+            },
+            {
+              "name": "Buzzsprout Player",
+              "patterns": ["buzzsprout\\.com/[^\\s\"'<>]*(?:\\.js|player|embed)|player\\.buzzsprout\\.com"]
+            },
+            {
+              "name": "Transistor Player",
+              "patterns": ["share\\.transistor\\.fm/e/|transistor\\.fm/[^\\s\"'<>]*(?:embed|player|episodes)"]
+            },
+            {
+              "name": "Simplecast Embed",
+              "patterns": ["player\\.simplecast\\.com|simplecast\\.com/[^\\s\"'<>]*(?:embed|episodes|player)"]
+            },
+            {
+              "name": "Acast Embed",
+              "patterns": ["embed\\.acast\\.com|play\\.acast\\.com/s/|acast\\.com/[^\\s\"'<>]*(?:embed|player)"]
+            },
+            {
+              "name": "Megaphone Player",
+              "patterns": ["player\\.megaphone\\.fm|playlist\\.megaphone\\.fm|megaphone\\.fm/[^\\s\"'<>]*(?:embed|player)"]
+            },
+            {
+              "name": "Libsyn Player",
+              "patterns": ["html5-player\\.libsyn\\.com|libsyn\\.com/[^\\s\"'<>]*(?:embed|player|episode)"]
+            },
+            {
+              "name": "Audioboom Embed",
+              "patterns": ["audioboom\\.com/[^\\s\"'<>]*(?:embed|player|posts|channels)"]
+            },
+            {
+              "name": "Podigee Player",
+              "patterns": ["player\\.podigee-cdn\\.net|podigee\\.io/[^\\s\"'<>]*(?:embed|player|podcast)"]
+            },
+            {
+              "name": "Castbox Embed",
+              "patterns": ["castbox\\.fm/(?:app/castbox/player|app/castbox/feed)|castbox\\.fm/[^\\s\"'<>]*(?:embed|player)"]
+            },
+            {
+              "name": "Player FM Embed",
+              "patterns": ["player\\.fm/[^\\s\"'<>]*(?:embed|series|episodes)|playerfm\\.com/[^\\s\"'<>]*(?:embed|player)"]
+            },
+            {
+              "name": "Spreaker Player",
+              "patterns": ["widget\\.spreaker\\.com/player|spreaker\\.com/[^\\s\"'<>]*(?:player|embed|episode)"]
+            },
+            {
+              "name": "Captivate.fm Player",
+              "patterns": ["player\\.captivate\\.fm|captivate\\.fm/[^\\s\"'<>]*(?:embed|episode|player)"]
+            },
+            {
+              "name": "RedCircle Player",
+              "patterns": ["redcircle\\.com/[^\\s\"'<>]*(?:embed|shows|episodes|player)"]
+            },
+            {
+              "name": "Omny Studio Player",
+              "patterns": ["omny\\.fm/[^\\s\"'<>]*(?:shows|playlists|embed)|omnycontent\\.com/[^\\s\"'<>]*(?:d/playlist|embed)"]
+            },
+            {
+              "name": "Fireside.fm Player",
+              "patterns": ["fireside\\.fm/player|assets\\.fireside\\.fm|fireside\\.fm/[^\\s\"'<>]*(?:embed|player|episodes)"]
+            },
+            {
+              "name": "Podchaser Embed",
+              "patterns": ["podchaser\\.com/[^\\s\"'<>]*(?:embed|podcasts|episodes)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "评价 / UGC",
             "matchIn": ["resources"]
           },
