@@ -1657,6 +1657,102 @@
         },
         {
           "defaults": {
+            "kind": "会员积分 / 推荐返利",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Smile.io Loyalty",
+              "patterns": [
+                "cdn\\.smile\\.io|static\\.smile\\.io|cdn\\.sweettooth\\.io|smile\\.io/[^\\s\"'<>]*(?:launcher|embed|sdk|loyalty)"
+              ]
+            },
+            {
+              "name": "LoyaltyLion",
+              "patterns": ["cdn\\.loyaltylion\\.net|sdk\\.loyaltylion\\.net|loyaltylion\\.com/[^\\s\"'<>]*(?:sdk|widget|loyalty)"]
+            },
+            {
+              "name": "Yotpo Loyalty",
+              "patterns": ["loyalty\\.yotpo\\.com|cdn\\.swellrewards\\.com|swellrewards\\.com|yotpo\\.com/[^\\s\"'<>]*(?:loyalty|rewards)"]
+            },
+            {
+              "name": "ReferralCandy",
+              "patterns": ["cdn\\.referralcandy\\.com|app\\.referralcandy\\.com|referralcandy\\.com/[^\\s\"'<>]*(?:widget|referral|assets)"]
+            },
+            {
+              "name": "Friendbuy",
+              "patterns": ["cdn\\.friendbuy\\.com|static\\.friendbuy\\.com|friendbuy\\.com/[^\\s\"'<>]*(?:widget|referral|sdk)"]
+            },
+            {
+              "name": "Rivo Loyalty",
+              "patterns": ["cdn\\.rivo\\.io|app\\.rivo\\.io|rivo\\.io/[^\\s\"'<>]*(?:loyalty|rewards|widget)"]
+            },
+            {
+              "name": "Rise.ai",
+              "patterns": ["cdn\\.rise-ai\\.com|str\\.rise-ai\\.com|rise-ai\\.com/[^\\s\"'<>]*(?:store-credit|loyalty|gift-card|widget)"]
+            },
+            {
+              "name": "Stamped Loyalty",
+              "patterns": ["cdn1\\.stamped\\.io/[^\\s\"'<>]*loyalty|stamped\\.io/[^\\s\"'<>]*loyalty"]
+            },
+            {
+              "name": "Zinrelo",
+              "patterns": ["cdn\\.zinrelo\\.com|static\\.zinrelo\\.com|zinrelo\\.com/[^\\s\"'<>]*(?:loyalty|widget|sdk)"]
+            },
+            {
+              "name": "Annex Cloud",
+              "patterns": ["cdn\\.annexcloud\\.com|socialannex\\.com|annexcloud\\.com/[^\\s\"'<>]*(?:loyalty|referral|widget)"]
+            },
+            {
+              "name": "Extole",
+              "patterns": [
+                "cdn\\.extole\\.io|extole\\.io/[^\\s\"'<>]*(?:zones|widget|referral)|extole\\.com/[^\\s\"'<>]*(?:widget|referral)"
+              ]
+            },
+            {
+              "name": "Talkable Referrals",
+              "patterns": [
+                "assets\\.talkable\\.com|talkable\\.com/[^\\s\"'<>]*(?:campaigns|offers|referral|widgets)|d2jjzw81hqbuqv\\.cloudfront\\.net"
+              ]
+            },
+            {
+              "name": "Viral Loops",
+              "patterns": ["app\\.viral-loops\\.com|viral-loops\\.com/[^\\s\"'<>]*(?:widgets|referral|campaign)"]
+            },
+            {
+              "name": "Mention Me",
+              "patterns": ["tag\\.mention-me\\.com|mention-me\\.com/[^\\s\"'<>]*(?:referral|tag|widget)"]
+            },
+            {
+              "name": "Marsello",
+              "patterns": ["cdn\\.marsello\\.com|app\\.marsello\\.com|marsello\\.com/[^\\s\"'<>]*(?:loyalty|widget|customer)"]
+            },
+            {
+              "name": "S Loyalty",
+              "patterns": [
+                "cdn\\.sloyalty\\.com|app\\.sloyalty\\.com|sloyalty\\.com/[^\\s\"'<>]*(?:widget|loyalty|rewards)|s-loyalty\\.com"
+              ]
+            },
+            {
+              "name": "Voucherify",
+              "patterns": ["js\\.voucherify\\.io|cdn\\.voucherify\\.io|voucherify\\.io/[^\\s\"'<>]*(?:widget|promotion|voucher|sdk)"]
+            },
+            {
+              "name": "Talon.One",
+              "patterns": ["api\\.talon\\.one|integration\\.talon\\.one|talon\\.one/[^\\s\"'<>]*(?:sdk|loyalty|promotion)"]
+            },
+            {
+              "name": "Antavo Loyalty",
+              "patterns": ["cdn\\.antavo\\.com|api\\.antavo\\.com|antavo\\.com/[^\\s\"'<>]*(?:loyalty|widget|sdk)"]
+            },
+            {
+              "name": "Rewardful",
+              "patterns": ["r\\.wdfl\\.co|cdn\\.rewardful\\.com|rewardful\\.com/[^\\s\"'<>]*(?:affiliate|referral|widget)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "招聘 / ATS",
             "matchIn": ["resources"]
           },
