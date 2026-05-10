@@ -533,6 +533,16 @@
             "evidence": "响应 URL 指向 Uploadcare 媒体服务"
           },
           {
+            "name": "UploadThing",
+            "patterns": [
+              "url: https?://utfs\\.io/(?:f/[A-Za-z0-9_-]+|a/[A-Za-z0-9_-]+/[A-Za-z0-9_-]+)",
+              "url: https?://[a-z0-9-]+\\.ingest\\.uploadthing\\.com/[A-Za-z0-9_-]+",
+              "url: https?://api\\.uploadthing\\.com/v[0-9]+/(?:uploadFiles|listFiles|deleteFiles|renameFiles|getFileUrl|getSignedURL|callback-result)",
+              "url: https?://(?:cdn\\.jsdelivr\\.net/npm|unpkg\\.com)/@uploadthing/(?:react|solid|svelte|vue|server|shared)(?:@|/|[?#]|$)"
+            ],
+            "evidence": "响应 URL 指向 UploadThing 上传服务或 SDK"
+          },
+          {
             "name": "Filestack",
             "patterns": [
               "url: https?://cdn\\.filestackcontent\\.com/",
@@ -4620,6 +4630,43 @@
               "url: https?://[^\\s/]+\\.ipfscdn\\.io/ipfs/"
             ],
             "evidence": "响应 URL 指向 thirdweb 钱包、API 或 IPFS CDN"
+          },
+          {
+            "name": "Pinata",
+            "patterns": [
+              "url: https?://gateway\\.pinata\\.cloud/ipfs/",
+              "url: https?://[a-z0-9-]+\\.mypinata\\.cloud/(?:ipfs|files)/",
+              "url: https?://api\\.pinata\\.cloud/(?:pinning|psa|v3/(?:files|gateways))",
+              "url: https?://uploads\\.pinata\\.cloud/v3/files"
+            ],
+            "evidence": "响应 URL 指向 Pinata IPFS 网关或 API"
+          },
+          {
+            "name": "web3.storage",
+            "patterns": [
+              "url: https?://api\\.web3\\.storage/(?:upload|user/uploads|car)",
+              "url: https?://w3s\\.link/ipfs/",
+              "url: https?://[a-z0-9]+\\.ipfs\\.w3s\\.link(?:/|$)"
+            ],
+            "evidence": "响应 URL 指向 web3.storage API 或 IPFS 网关"
+          },
+          {
+            "name": "NFT.Storage Gateway",
+            "patterns": ["url: https?://nftstorage\\.link/ipfs/", "url: https?://[a-z0-9]+\\.ipfs\\.nftstorage\\.link(?:/|$)"],
+            "evidence": "响应 URL 指向 NFT.Storage IPFS 网关"
+          },
+          {
+            "name": "Filebase",
+            "patterns": ["url: https?://s3\\.filebase\\.com/", "url: https?://ipfs\\.filebase\\.io/ipfs/"],
+            "evidence": "响应 URL 指向 Filebase S3 或 IPFS 网关"
+          },
+          {
+            "name": "Lighthouse.storage",
+            "patterns": [
+              "url: https?://gateway\\.lighthouse\\.storage/ipfs/",
+              "url: https?://api\\.lighthouse\\.storage/api/lighthouse/(?:pin|upload|file_info)"
+            ],
+            "evidence": "响应 URL 指向 Lighthouse.storage IPFS 网关或 API"
           },
           {
             "name": "Alchemy",

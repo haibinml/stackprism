@@ -367,6 +367,10 @@
           "patterns": ["ucarecdn\\.com|uploadcare\\.com"]
         },
         {
+          "name": "UploadThing",
+          "patterns": ["utfs\\.io|ingest\\.uploadthing\\.com"]
+        },
+        {
           "name": "Contentful Assets CDN",
           "patterns": ["ctfassets\\.net|images\\.ctfassets\\.net"]
         },
@@ -389,6 +393,26 @@
         {
           "name": "Vercel Blob",
           "patterns": ["blob\\.vercel-storage\\.com|public\\.blob\\.vercel-storage\\.com"]
+        },
+        {
+          "name": "Pinata IPFS Gateway",
+          "patterns": ["gateway\\.pinata\\.cloud|mypinata\\.cloud"]
+        },
+        {
+          "name": "web3.storage IPFS Gateway",
+          "patterns": ["w3s\\.link|ipfs\\.w3s\\.link"]
+        },
+        {
+          "name": "NFT.Storage IPFS Gateway",
+          "patterns": ["nftstorage\\.link|ipfs\\.nftstorage\\.link"]
+        },
+        {
+          "name": "Filebase Storage",
+          "patterns": ["s3\\.filebase\\.com|ipfs\\.filebase\\.io"]
+        },
+        {
+          "name": "Lighthouse.storage IPFS Gateway",
+          "patterns": ["gateway\\.lighthouse\\.storage"]
         },
         {
           "name": "MongoDB Atlas App Services",

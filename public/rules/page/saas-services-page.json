@@ -2926,6 +2926,17 @@
               "patterns": ["ucarecdn\\.com|uploadcare\\.com/[^\\s\"'<>]*(?:widget|api|cdn|upload)|uploadcarecdn\\.com"]
             },
             {
+              "name": "UploadThing",
+              "kind": "文件上传 / 媒体托管",
+              "patterns": [
+                "utfs\\.io/(?:f/[A-Za-z0-9_-]+|a/[A-Za-z0-9_-]+/[A-Za-z0-9_-]+)",
+                "[a-z0-9-]+\\.ingest\\.uploadthing\\.com/[A-Za-z0-9_-]+",
+                "api\\.uploadthing\\.com/v[0-9]+/(?:uploadFiles|listFiles|deleteFiles|renameFiles|getFileUrl|getSignedURL|callback-result)",
+                "(?:^|/)api/uploadthing(?:[?#/]|$)",
+                "(?:cdn\\.jsdelivr\\.net/npm|unpkg\\.com)/@uploadthing/(?:react|solid|svelte|vue|server|shared)(?:@|/|[?#]|$)"
+              ]
+            },
+            {
               "name": "Filestack",
               "patterns": ["cdn\\.filestackcontent\\.com|static\\.filestackapi\\.com|filestackapi\\.com|filestackcontent\\.com"]
             },
@@ -3707,6 +3718,40 @@
               "name": "thirdweb",
               "resourceHints": ["thirdweb", "ipfscdn"],
               "patterns": ["connect\\.thirdweb\\.com|in-app-wallet\\.thirdweb\\.com|api\\.thirdweb\\.com|[^\\s/]+\\.ipfscdn\\.io/ipfs/"]
+            },
+            {
+              "name": "Pinata",
+              "resourceHints": ["pinata.cloud", "mypinata.cloud"],
+              "patterns": [
+                "gateway\\.pinata\\.cloud/ipfs/",
+                "[a-z0-9-]+\\.mypinata\\.cloud/(?:ipfs|files)/",
+                "api\\.pinata\\.cloud/(?:pinning|psa|v3/(?:files|gateways))",
+                "uploads\\.pinata\\.cloud/v3/files"
+              ]
+            },
+            {
+              "name": "web3.storage",
+              "resourceHints": ["web3.storage", "w3s.link"],
+              "patterns": [
+                "api\\.web3\\.storage/(?:upload|user/uploads|car)",
+                "w3s\\.link/ipfs/",
+                "[a-z0-9]+\\.ipfs\\.w3s\\.link(?:/|$)"
+              ]
+            },
+            {
+              "name": "NFT.Storage Gateway",
+              "resourceHints": ["nftstorage.link"],
+              "patterns": ["nftstorage\\.link/ipfs/", "[a-z0-9]+\\.ipfs\\.nftstorage\\.link(?:/|$)"]
+            },
+            {
+              "name": "Filebase",
+              "resourceHints": ["filebase"],
+              "patterns": ["s3\\.filebase\\.com", "ipfs\\.filebase\\.io/ipfs/"]
+            },
+            {
+              "name": "Lighthouse.storage",
+              "resourceHints": ["lighthouse.storage"],
+              "patterns": ["gateway\\.lighthouse\\.storage/ipfs/", "api\\.lighthouse\\.storage/api/lighthouse/(?:pin|upload|file_info)"]
             },
             {
               "name": "Alchemy",
