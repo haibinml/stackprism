@@ -141,6 +141,100 @@
           "globals": ["supabase"]
         },
         {
+          "defaults": {
+            "kind": "短信 / 通信 API",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Twilio Messaging",
+              "patterns": ["api\\.twilio\\.com/2010-04-01|twilio\\.com/[^\\s\"'<>]*(?:sms|messaging|verify|lookup)|twilio-cdn\\.com"]
+            },
+            {
+              "name": "Twilio Verify",
+              "patterns": ["verify\\.twilio\\.com|twilio\\.com/[^\\s\"'<>]*(?:verify|otp|2fa)"]
+            },
+            {
+              "name": "Vonage SMS / Nexmo",
+              "patterns": [
+                "rest\\.nexmo\\.com|api\\.nexmo\\.com|api\\.vonage\\.com/[^\\s\"'<>]*(?:sms|verify|messages)|vonage\\.com/[^\\s\"'<>]*(?:sms|verify|messages)"
+              ]
+            },
+            {
+              "name": "MessageBird / Bird",
+              "patterns": [
+                "rest\\.messagebird\\.com|messaging\\.bird\\.com|messagebird\\.com/[^\\s\"'<>]*(?:sms|verify|messages)|bird\\.com/[^\\s\"'<>]*(?:sms|whatsapp|messages)"
+              ]
+            },
+            {
+              "name": "Sinch",
+              "patterns": [
+                "sms\\.api\\.sinch\\.com|verification\\.api\\.sinch\\.com|sinch\\.com/[^\\s\"'<>]*(?:sms|verification|messaging)"
+              ]
+            },
+            {
+              "name": "Infobip",
+              "patterns": ["api\\.infobip\\.com|infobip\\.com/[^\\s\"'<>]*(?:sms|whatsapp|verify|messages)"]
+            },
+            {
+              "name": "Plivo",
+              "patterns": ["api\\.plivo\\.com|plivo\\.com/[^\\s\"'<>]*(?:sms|messaging|verify)"]
+            },
+            {
+              "name": "Telnyx Messaging",
+              "patterns": ["api\\.telnyx\\.com/v2/(?:messages|number_lookup)|telnyx\\.com/[^\\s\"'<>]*(?:sms|messaging|verify)"]
+            },
+            {
+              "name": "Bandwidth Messaging",
+              "patterns": ["messaging\\.bandwidth\\.com|api\\.bandwidth\\.com|bandwidth\\.com/[^\\s\"'<>]*(?:messaging|sms|voice)"]
+            },
+            {
+              "name": "ClickSend SMS",
+              "patterns": ["rest\\.clicksend\\.com|clicksend\\.com/[^\\s\"'<>]*(?:sms|messages|api)"]
+            },
+            {
+              "name": "TextMagic",
+              "patterns": ["rest\\.textmagic\\.com|my\\.textmagic\\.com|textmagic\\.com/[^\\s\"'<>]*(?:sms|api|messages)"]
+            },
+            {
+              "name": "SimpleTexting",
+              "patterns": ["simpletexting\\.com/[^\\s\"'<>]*(?:sms|api|widget|forms)"]
+            },
+            {
+              "name": "Telesign",
+              "patterns": ["rest-api\\.telesign\\.com|telesign\\.com/[^\\s\"'<>]*(?:verify|sms|phoneid|score)"]
+            },
+            {
+              "name": "MessageMedia",
+              "patterns": ["api\\.messagemedia\\.com|messagemedia\\.com/[^\\s\"'<>]*(?:sms|messages|api)"]
+            },
+            {
+              "name": "CM.com Messaging",
+              "patterns": ["gw\\.cmtelecom\\.com|api\\.cm\\.com|cm\\.com/[^\\s\"'<>]*(?:messaging|sms|whatsapp)"]
+            },
+            {
+              "name": "SMSGatewayHub",
+              "patterns": ["smsgatewayhub\\.com/[^\\s\"'<>]*(?:api|sms|send)"]
+            },
+            {
+              "name": "SMS.to",
+              "patterns": ["api\\.sms\\.to|sms\\.to/[^\\s\"'<>]*(?:api|sms|send)"]
+            },
+            {
+              "name": "Termii",
+              "patterns": ["api\\.ng\\.termii\\.com|termii\\.com/[^\\s\"'<>]*(?:api|sms|otp|verify)"]
+            },
+            {
+              "name": "Africa's Talking SMS",
+              "patterns": ["api\\.africastalking\\.com|africastalking\\.com/[^\\s\"'<>]*(?:sms|airtime|voice|ussd)"]
+            },
+            {
+              "name": "MSG91",
+              "patterns": ["api\\.msg91\\.com|control\\.msg91\\.com|msg91\\.com/[^\\s\"'<>]*(?:sms|otp|flow|api)"]
+            }
+          ]
+        },
+        {
           "name": "Intercom",
           "kind": "客服聊天",
           "patterns": ["widget\\.intercom\\.io|js\\.intercomcdn\\.com|intercomcdn\\.com"],
