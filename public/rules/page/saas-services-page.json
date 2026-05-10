@@ -1263,6 +1263,94 @@
             {
               "name": "PushAssist",
               "patterns": ["cdn\\.pushassist\\.com|pushassist\\.com/[^\\s\"'<>]*(?:sdk|push|worker|subscription)"]
+            },
+            {
+              "name": "SendPulse Web Push",
+              "patterns": ["cdn\\.sendpulse\\.com|sendpulse\\.com/[^\\s\"'<>]*(?:webpush|web-push|push|notification|worker)"]
+            },
+            {
+              "name": "WebEngage Web Push",
+              "patterns": [
+                "wsdk-files\\.webengage\\.com|c\\.webengage\\.com|webengage\\.com/[^\\s\"'<>]*(?:web-push|push|sdk|notification)"
+              ]
+            },
+            {
+              "name": "MoEngage Web Push",
+              "patterns": [
+                "cdn\\.moengage\\.com|sdk-\\d+\\.moengage\\.com|websdk\\.moengage\\.com|moengage\\.com/[^\\s\"'<>]*(?:web-push|push|sdk|notification)"
+              ]
+            },
+            {
+              "name": "CleverTap Web Push",
+              "patterns": ["static\\.clevertap\\.com|wzrkt\\.com|clevertap\\.com/[^\\s\"'<>]*(?:web-push|push|clevertap|notification)"]
+            },
+            {
+              "name": "Firebase Cloud Messaging",
+              "patterns": [
+                "gstatic\\.com/firebasejs/[^\\s\"'<>]*firebase-messaging|firebase-messaging-sw\\.js|fcm\\.googleapis\\.com|firebaseinstallations\\.googleapis\\.com"
+              ]
+            },
+            {
+              "name": "Pusher Beams",
+              "patterns": ["js\\.pusher\\.com/beams|beams\\.pusher\\.com|pusher\\.com/[^\\s\"'<>]*(?:beams|push-notifications)"]
+            },
+            {
+              "name": "Engagespot",
+              "patterns": ["cdn\\.engagespot\\.co|api\\.engagespot\\.co|engagespot\\.co/[^\\s\"'<>]*(?:sdk|inbox|notification|push)"]
+            },
+            {
+              "name": "Novu",
+              "patterns": ["embed\\.novu\\.co|api\\.novu\\.co|novu\\.co/[^\\s\"'<>]*(?:embed|notification|inbox|widget)"]
+            },
+            {
+              "name": "MagicBell",
+              "patterns": ["assets\\.magicbell\\.io|api\\.magicbell\\.com|magicbell\\.com/[^\\s\"'<>]*(?:sdk|embed|notification|inbox)"]
+            },
+            {
+              "name": "SuprSend",
+              "patterns": [
+                "hub\\.suprsend\\.com|sdk\\.suprsend\\.com|api\\.suprsend\\.com|suprsend\\.com/[^\\s\"'<>]*(?:sdk|inbox|notification|push)"
+              ]
+            },
+            {
+              "name": "Knock",
+              "patterns": ["cdn\\.knock\\.app|api\\.knock\\.app|knock\\.app/[^\\s\"'<>]*(?:sdk|inbox|notification|feed)"]
+            },
+            {
+              "name": "Pushpad",
+              "patterns": ["cdn\\.pushpad\\.xyz|api\\.pushpad\\.xyz|pushpad\\.xyz/[^\\s\"'<>]*(?:sdk|push|worker|subscription)"]
+            },
+            {
+              "name": "Roost Web Push",
+              "patterns": ["cdn\\.roost\\.me|go\\.roost\\.me|roost\\.me/[^\\s\"'<>]*(?:sdk|push|worker|notification)"]
+            },
+            {
+              "name": "Feedify",
+              "patterns": ["cdn\\.feedify\\.net|feedify\\.net/[^\\s\"'<>]*(?:push|webpush|sdk|notification)"]
+            },
+            {
+              "name": "Push Monkey",
+              "patterns": ["cdn\\.pushmonkey\\.com|getpushmonkey\\.com|pushmonkey\\.com/[^\\s\"'<>]*(?:sdk|push|worker|subscription)"]
+            },
+            {
+              "name": "LetReach",
+              "patterns": ["cdn\\.letreach\\.com|api\\.letreach\\.com|letreach\\.com/[^\\s\"'<>]*(?:sdk|push|worker|subscription)"]
+            },
+            {
+              "name": "PushPrime",
+              "patterns": ["cdn\\.pushprime\\.com|pushprime\\.com/[^\\s\"'<>]*(?:sdk|push|worker|subscription)"]
+            },
+            {
+              "name": "PushAd",
+              "patterns": ["cdn\\.pushad\\.com|static\\.pushad\\.com|pushad\\.com/[^\\s\"'<>]*(?:sdk|push|worker|subscription)"]
+            },
+            {
+              "name": "PushMaze",
+              "patterns": ["cdn\\.pushmaze\\.com|pushmaze\\.com/[^\\s\"'<>]*(?:sdk|push|worker|subscription)"]
+            },
+            {
+              "name": "Push.World",
+              "patterns": ["push\\.world/[^\\s\"'<>]*(?:sdk|push|worker|subscription|notification)"]
             }
           ]
         },
