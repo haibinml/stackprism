@@ -387,6 +387,158 @@
             "patterns": ["OpenObserve", "openobserve", "(?:^|/)api/(?:default/|_meta/)?(?:logs|traces|metrics)(?:[?#\\s/]|$).*openobserve"]
           }
         ]
+      },
+      {
+        "defaults": {
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "defaults": {
+              "kind": "导航 / 首页仪表盘"
+            },
+            "rules": [
+              {
+                "name": "Homepage Dashboard",
+                "patterns": [
+                  "gethomepage(?:\\.dev|[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$))",
+                  "homepage-dashboard[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+                ]
+              },
+              {
+                "name": "Flame Dashboard",
+                "confidence": "中",
+                "patterns": [
+                  "<title>\\s*Flame(?:\\s*</title>|\\s+-\\s*Dashboard)",
+                  "flame-dashboard[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)",
+                  "pawelmalak/flame"
+                ]
+              },
+              {
+                "name": "Organizr",
+                "patterns": ["<title>\\s*Organizr(?:\\s*</title>|\\s+-)", "organizr[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+              },
+              {
+                "name": "Dashdot",
+                "patterns": [
+                  "<title>\\s*Dash\\.(?:\\s*</title>|\\s+-)",
+                  "dashdot[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)",
+                  "getdashdot\\.com"
+                ]
+              },
+              {
+                "name": "Fenrus",
+                "patterns": ["<title>\\s*Fenrus(?:\\s*</title>|\\s+-)", "fenrus[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+              }
+            ]
+          },
+          {
+            "defaults": {
+              "kind": "状态页 / 可用性监控"
+            },
+            "rules": [
+              {
+                "name": "Statusfy",
+                "patterns": [
+                  "<title>\\s*Statusfy(?:\\s*</title>|\\s+-)",
+                  "statusfy[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)",
+                  "powered by Statusfy"
+                ]
+              },
+              {
+                "name": "Kener",
+                "patterns": ["<title>\\s*Kener(?:\\s*</title>|\\s+-)", "kener\\.ing", "powered by Kener"]
+              }
+            ]
+          },
+          {
+            "defaults": {
+              "kind": "企业监控 / 告警"
+            },
+            "rules": [
+              {
+                "name": "Cabot",
+                "patterns": ["<title>\\s*Cabot(?:\\s*</title>|\\s+-)", "cabotapp", "(?:^|/)static/cabot(?:/|[?#\\s]|$)"]
+              },
+              {
+                "name": "Alerta",
+                "patterns": ["<title>\\s*Alerta(?:\\s*</title>|\\s+-)", "alerta-web", "alerta[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+              },
+              {
+                "name": "Bosun",
+                "patterns": ["<title>\\s*Bosun(?:\\s*</title>|\\s+-)", "bosun[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+              },
+              {
+                "name": "HertzBeat",
+                "patterns": ["Apache HertzBeat", "HertzBeat", "hertzbeat[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+              },
+              {
+                "name": "Nightingale / 夜莺",
+                "patterns": [
+                  "夜莺监控",
+                  "<title>\\s*(?:Nightingale|夜莺)(?:\\s*</title>|\\s+-)",
+                  "ccfos/nightingale",
+                  "n9e[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+                ]
+              },
+              {
+                "name": "Open-Falcon",
+                "patterns": ["Open-Falcon", "open-falcon", "falcon-plus"]
+              },
+              {
+                "name": "Uchiwa",
+                "patterns": ["<title>\\s*Uchiwa(?:\\s*</title>|\\s+-)", "uchiwa[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+              }
+            ]
+          },
+          {
+            "defaults": {
+              "kind": "APM / 链路追踪"
+            },
+            "rules": [
+              {
+                "name": "Apache SkyWalking",
+                "patterns": [
+                  "Apache SkyWalking",
+                  "skywalking-ui",
+                  "skywalking-rocketbot-ui",
+                  "skywalking[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+                ]
+              },
+              {
+                "name": "Pinpoint APM",
+                "patterns": ["Pinpoint APM", "pinpoint-web", "(?:^|/)pinpoint-web(?:/|[?#\\s]|$)"]
+              },
+              {
+                "name": "Uptrace",
+                "patterns": ["<title>\\s*Uptrace(?:\\s*</title>|\\s+-)", "uptrace[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+              },
+              {
+                "name": "Coroot",
+                "patterns": ["<title>\\s*Coroot(?:\\s*</title>|\\s+-)", "coroot[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+              }
+            ]
+          },
+          {
+            "defaults": {
+              "kind": "Profiling / 可观测性"
+            },
+            "rules": [
+              {
+                "name": "Pyroscope",
+                "patterns": [
+                  "<title>\\s*Pyroscope(?:\\s*</title>|\\s+-)",
+                  "pyroscope[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)",
+                  "(?:^|/)pyroscope(?:/|[?#\\s]|$)"
+                ]
+              },
+              {
+                "name": "Parca",
+                "patterns": ["<title>\\s*Parca(?:\\s*</title>|\\s+-)", "parca[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+              }
+            ]
+          }
+        ]
       }
     ]
   }
