@@ -2128,6 +2128,110 @@
           ]
         },
         {
+          "defaults": {
+            "kind": "订阅计费 / 税务发票",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Chargebee Billing",
+              "patterns": [
+                "js\\.chargebee\\.com/v[0-9]+/chargebee\\.js|checkout\\.chargebee\\.com|chargebee\\.com/[^\\s\"'<>]*(?:checkout|hosted_pages|billing)"
+              ]
+            },
+            {
+              "name": "Recurly",
+              "patterns": [
+                "js\\.recurly\\.com/v[0-9]+/recurly\\.js|api\\.recurly\\.com/js|recurly\\.com/[^\\s\"'<>]*(?:checkout|pricing|billing)"
+              ]
+            },
+            {
+              "name": "Zuora Billing",
+              "patterns": [
+                "static\\.zuora\\.com/Resources|checkout\\.zuora\\.com|zuora\\.com/[^\\s\"'<>]*(?:PublicHostedPage|checkout|billing)"
+              ]
+            },
+            {
+              "name": "Maxio / Chargify",
+              "patterns": [
+                "js\\.chargify\\.com|chargify\\.com/[^\\s\"'<>]*(?:hosted|checkout|billing|js)|maxio\\.com/[^\\s\"'<>]*(?:checkout|billing)"
+              ]
+            },
+            {
+              "name": "Billsby",
+              "patterns": ["checkoutlib\\.billsby\\.com|checkout\\.billsby\\.com|billsby\\.com/[^\\s\"'<>]*(?:checkout|widgets?|billing)"]
+            },
+            {
+              "name": "ChargeOver",
+              "patterns": [
+                "assets\\.chargeover\\.com|app\\.chargeover\\.com|chargeover\\.com/[^\\s\"'<>]*(?:signup|checkout|invoice|billing)"
+              ]
+            },
+            {
+              "name": "FastSpring Checkout",
+              "patterns": ["sbl\\.onfastspring\\.com|sites\\.fastspring\\.com|fastspring\\.com/[^\\s\"'<>]*(?:embedded-store|checkout|sbl)"]
+            },
+            {
+              "name": "Lemon Squeezy Checkout",
+              "patterns": [
+                "app\\.lemonsqueezy\\.com/checkout|js\\.lemonsqueezy\\.com|cdn\\.lemonsqueezy\\.com|lemonsqueezy\\.com/[^\\s\"'<>]*(?:checkout|buy)"
+              ]
+            },
+            {
+              "name": "Gumroad Embed",
+              "patterns": ["gumroad\\.com/js/gumroad\\.js|gumroad\\.com/[^\\s\"'<>]*(?:l/|checkout|overlay|embed)"]
+            },
+            {
+              "name": "Freemius Checkout",
+              "patterns": ["checkout\\.freemius\\.com|cdn\\.freemius\\.com|freemius\\.com/[^\\s\"'<>]*(?:checkout|pricing|buy)"]
+            },
+            {
+              "name": "Memberful",
+              "patterns": ["js\\.memberful\\.com/embed\\.js|memberful\\.com/[^\\s\"'<>]*(?:checkout|auth|embed|plans)"]
+            },
+            {
+              "name": "Payhip Checkout",
+              "patterns": ["payhip\\.com/[^\\s\"'<>]*(?:b/|checkout|buy-button|embed)|payhip\\.com/payhip\\.js"]
+            },
+            {
+              "name": "ThriveCart",
+              "patterns": ["checkout\\.thrivecart\\.com|thrivecart\\.com/[^\\s\"'<>]*(?:checkout|embed|cart)"]
+            },
+            {
+              "name": "SamCart",
+              "patterns": ["checkout\\.samcart\\.com|samcart\\.com/[^\\s\"'<>]*(?:products|checkout|funnels)"]
+            },
+            {
+              "name": "SendOwl Checkout",
+              "patterns": ["transactions\\.sendowl\\.com|sendowl\\.com/[^\\s\"'<>]*(?:orders|checkout|cart|js)"]
+            },
+            {
+              "name": "FoxyCart",
+              "patterns": [
+                "cdn\\.foxycart\\.com|foxycart\\.com/[^\\s\"'<>]*(?:cart|checkout|loader)|foxy\\.io/[^\\s\"'<>]*(?:cart|checkout)"
+              ]
+            },
+            {
+              "name": "MoonClerk",
+              "patterns": [
+                "app\\.moonclerk\\.com/pay|moonclerk\\.com/pay|js\\.moonclerk\\.com|moonclerk\\.com/[^\\s\"'<>]*(?:forms|checkout)"
+              ]
+            },
+            {
+              "name": "Quaderno Checkout",
+              "patterns": ["js\\.quaderno\\.io|quaderno\\.io/[^\\s\"'<>]*(?:checkout|taxes|invoice|billing)"]
+            },
+            {
+              "name": "TaxJar",
+              "patterns": ["api\\.taxjar\\.com|taxjar\\.com/[^\\s\"'<>]*(?:api|sales-tax-calculator|checkout|tax)"]
+            },
+            {
+              "name": "Avalara AvaTax",
+              "patterns": ["avatax\\.avalara\\.net|sandbox-rest\\.avatax\\.com|avalara\\.com/[^\\s\"'<>]*(?:avatax|api|tax)"]
+            }
+          ]
+        },
+        {
           "name": "Airtable",
           "kind": "表格 / 数据库",
           "patterns": ["airtable\\.com\\/embed|airtable\\.com"]
