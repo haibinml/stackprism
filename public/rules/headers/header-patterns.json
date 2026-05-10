@@ -393,6 +393,136 @@
       },
       {
         "defaults": {
+          "category": "对象存储 / 文件存储",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Amazon S3",
+            "patterns": [
+              "url: https?://[^\\s/]+\\.s3\\.amazonaws\\.com/",
+              "url: https?://[^\\s/]+\\.s3[.-][a-z0-9-]+\\.amazonaws\\.com/",
+              "url: https?://[^\\s/]+\\.s3\\.dualstack\\.[a-z0-9-]+\\.amazonaws\\.com/",
+              "url: https?://[^\\s/]+\\.s3-accelerate(?:\\.dualstack)?\\.amazonaws\\.com/",
+              "url: https?://s3\\.amazonaws\\.com/[^\\s?#]+/",
+              "url: https?://s3[.-][a-z0-9-]+\\.amazonaws\\.com/[^\\s?#]+/",
+              "url: https?://[^\\s/]+\\.s3-website[.-][a-z0-9-]+\\.amazonaws\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Amazon S3"
+          },
+          {
+            "name": "Cloudflare R2",
+            "patterns": ["url: https?://[^\\s/]+\\.r2\\.cloudflarestorage\\.com/"],
+            "evidence": "响应 URL 指向 Cloudflare R2"
+          },
+          {
+            "name": "Google Cloud Storage",
+            "patterns": ["url: https?://storage\\.googleapis\\.com/[^\\s?#]+/", "url: https?://[^\\s/]+\\.storage\\.googleapis\\.com/"],
+            "evidence": "响应 URL 指向 Google Cloud Storage"
+          },
+          {
+            "name": "Firebase Storage",
+            "patterns": ["url: https?://firebasestorage\\.googleapis\\.com/"],
+            "evidence": "响应 URL 指向 Firebase Storage"
+          },
+          {
+            "name": "Azure Blob Storage",
+            "patterns": ["url: https?://[^\\s/]+\\.blob\\.core\\.windows\\.net/"],
+            "evidence": "响应 URL 指向 Azure Blob Storage"
+          },
+          {
+            "name": "Azure Data Lake Storage",
+            "patterns": ["url: https?://[^\\s/]+\\.dfs\\.core\\.windows\\.net/"],
+            "evidence": "响应 URL 指向 Azure Data Lake Storage"
+          },
+          {
+            "name": "Azure Static Website",
+            "patterns": ["url: https?://[^\\s/]+\\.z\\d+\\.web\\.core\\.windows\\.net/"],
+            "evidence": "响应 URL 指向 Azure Storage 静态网站"
+          },
+          {
+            "name": "Alibaba Cloud OSS",
+            "patterns": [
+              "url: https?://[^\\s/]+\\.oss-[a-z0-9-]+\\.aliyuncs\\.com/",
+              "url: https?://oss-[a-z0-9-]+\\.aliyuncs\\.com/[^\\s?#]+/"
+            ],
+            "evidence": "响应 URL 指向阿里云 OSS"
+          },
+          {
+            "name": "Tencent Cloud COS",
+            "patterns": [
+              "url: https?://[^\\s/]+\\.cos\\.[a-z0-9-]+\\.myqcloud\\.com/",
+              "url: https?://cos\\.[a-z0-9-]+\\.myqcloud\\.com/[^\\s?#]+/"
+            ],
+            "evidence": "响应 URL 指向腾讯云 COS"
+          },
+          {
+            "name": "Huawei Cloud OBS",
+            "patterns": [
+              "url: https?://[^\\s/]+\\.obs\\.[a-z0-9-]+\\.myhuaweicloud\\.com/",
+              "url: https?://obs\\.[a-z0-9-]+\\.myhuaweicloud\\.com/[^\\s?#]+/"
+            ],
+            "evidence": "响应 URL 指向华为云 OBS"
+          },
+          {
+            "name": "Backblaze B2",
+            "patterns": ["url: https?://f\\d+\\.backblazeb2\\.com/file/", "url: https?://[^\\s/]+\\.s3\\.[a-z0-9-]+\\.backblazeb2\\.com/"],
+            "evidence": "响应 URL 指向 Backblaze B2"
+          },
+          {
+            "name": "Wasabi Storage",
+            "patterns": ["url: https?://s3\\.[a-z0-9-]+\\.wasabisys\\.com/[^\\s?#]+/", "url: https?://[^\\s/]+\\.s3\\.[a-z0-9-]+\\.wasabisys\\.com/"],
+            "evidence": "响应 URL 指向 Wasabi Storage"
+          },
+          {
+            "name": "DigitalOcean Spaces",
+            "patterns": ["url: https?://[^\\s/]+\\.[a-z0-9-]+\\.digitaloceanspaces\\.com/"],
+            "evidence": "响应 URL 指向 DigitalOcean Spaces"
+          },
+          {
+            "name": "Linode Object Storage",
+            "patterns": ["url: https?://[^\\s/]+\\.[a-z0-9-]+\\.linodeobjects\\.com/"],
+            "evidence": "响应 URL 指向 Linode Object Storage"
+          },
+          {
+            "name": "Scaleway Object Storage",
+            "patterns": ["url: https?://[^\\s/]+\\.s3\\.[a-z0-9-]+\\.scw\\.cloud/"],
+            "evidence": "响应 URL 指向 Scaleway Object Storage"
+          },
+          {
+            "name": "OVHcloud Object Storage",
+            "patterns": ["url: https?://[^\\s/]+\\.s3\\.[a-z0-9-]+\\.io\\.cloud\\.ovh\\.net/"],
+            "evidence": "响应 URL 指向 OVHcloud Object Storage"
+          },
+          {
+            "name": "Oracle Cloud Object Storage",
+            "patterns": ["url: https?://objectstorage\\.[a-z0-9-]+\\.oraclecloud\\.com/"],
+            "evidence": "响应 URL 指向 Oracle Cloud Object Storage"
+          },
+          {
+            "name": "IBM Cloud Object Storage",
+            "patterns": ["url: https?://s3\\.[a-z0-9-]+\\.cloud-object-storage\\.appdomain\\.cloud/"],
+            "evidence": "响应 URL 指向 IBM Cloud Object Storage"
+          },
+          {
+            "name": "MinIO",
+            "patterns": ["(?:^|\\n)x-minio-[^:]+:", "(?:^|\\n)server:[^\\n]*\\bminio\\b"],
+            "evidence": "响应头包含 MinIO 对象存储线索"
+          },
+          {
+            "name": "Supabase Storage",
+            "patterns": ["url: https?://[^\\s/]+\\.supabase\\.co/storage/v1/object/"],
+            "evidence": "响应 URL 指向 Supabase Storage"
+          },
+          {
+            "name": "Vercel Blob",
+            "patterns": ["url: https?://[^\\s/]+\\.public\\.blob\\.vercel-storage\\.com/", "url: https?://blob\\.vercel-storage\\.com/"],
+            "evidence": "响应 URL 指向 Vercel Blob"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "支付系统",
           "confidence": "高"
         },
