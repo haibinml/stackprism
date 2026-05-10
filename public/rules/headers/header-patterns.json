@@ -4577,6 +4577,114 @@
       },
       {
         "defaults": {
+          "category": "OCR / 文档智能 API",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Google Cloud Vision OCR",
+            "patterns": ["url: https?://vision\\.googleapis\\.com/v[0-9]+/images:(?:annotate|asyncBatchAnnotate)"],
+            "evidence": "响应 URL 指向 Google Cloud Vision OCR"
+          },
+          {
+            "name": "Google Document AI",
+            "patterns": ["url: https?://(?:[a-z0-9-]+-)?documentai\\.googleapis\\.com/v[0-9]+/projects/"],
+            "evidence": "响应 URL 指向 Google Document AI"
+          },
+          {
+            "name": "Azure AI Document Intelligence",
+            "patterns": ["url: https?://[^\\s/]+\\.cognitiveservices\\.azure\\.com/(?:formrecognizer|documentintelligence)/(?:documentModels|prebuilt)/"],
+            "evidence": "响应 URL 指向 Azure AI Document Intelligence"
+          },
+          {
+            "name": "Azure Computer Vision OCR",
+            "patterns": ["url: https?://[^\\s/]+\\.cognitiveservices\\.azure\\.com/(?:vision/v[0-9.]+/(?:read|ocr)|computervision/imageanalysis:analyze)"],
+            "evidence": "响应 URL 指向 Azure Computer Vision OCR"
+          },
+          {
+            "name": "AWS Textract",
+            "patterns": ["url: https?://textract\\.[a-z0-9-]+\\.amazonaws\\.com/"],
+            "evidence": "响应 URL 指向 AWS Textract"
+          },
+          {
+            "name": "AWS Rekognition",
+            "patterns": ["url: https?://rekognition\\.[a-z0-9-]+\\.amazonaws\\.com/"],
+            "evidence": "响应 URL 指向 AWS Rekognition"
+          },
+          {
+            "name": "OCR.space",
+            "patterns": ["url: https?://api\\.ocr\\.space/parse/image"],
+            "evidence": "响应 URL 指向 OCR.space API"
+          },
+          {
+            "name": "Mindee",
+            "patterns": ["url: https?://api\\.mindee\\.net/v[0-9]+/products/"],
+            "evidence": "响应 URL 指向 Mindee API"
+          },
+          {
+            "name": "Nanonets OCR",
+            "patterns": ["url: https?://app\\.nanonets\\.com/api/v[0-9]+/OCR/(?:Model|FullText)"],
+            "evidence": "响应 URL 指向 Nanonets OCR API"
+          },
+          {
+            "name": "Rossum",
+            "patterns": ["url: https?://api\\.elis\\.rossum\\.ai/v[0-9]+/"],
+            "evidence": "响应 URL 指向 Rossum API"
+          },
+          {
+            "name": "Veryfi OCR",
+            "patterns": ["url: https?://api\\.veryfi\\.com/api/v[0-9]+/partner/documents"],
+            "evidence": "响应 URL 指向 Veryfi OCR API"
+          },
+          {
+            "name": "Klippa OCR",
+            "patterns": ["url: https?://custom-ocr\\.klippa\\.com/api/v[0-9]+/parseDocument"],
+            "evidence": "响应 URL 指向 Klippa OCR API"
+          },
+          {
+            "name": "ABBYY Cloud OCR",
+            "patterns": ["url: https?://cloud\\.ocrsdk\\.com/(?:process|processImage|processDocument|listTasks)"],
+            "evidence": "响应 URL 指向 ABBYY Cloud OCR"
+          },
+          {
+            "name": "Eden AI OCR",
+            "patterns": ["url: https?://api\\.edenai\\.run/v[0-9]+/ocr/"],
+            "evidence": "响应 URL 指向 Eden AI OCR"
+          },
+          {
+            "name": "FormX.ai",
+            "patterns": ["url: https?://api\\.formx\\.ai/v[0-9]+/(?:extract|documents)"],
+            "evidence": "响应 URL 指向 FormX.ai API"
+          },
+          {
+            "name": "Docsumo",
+            "patterns": ["url: https?://app\\.docsumo\\.com/api/v[0-9]+/"],
+            "evidence": "响应 URL 指向 Docsumo API"
+          },
+          {
+            "name": "Base64.ai",
+            "patterns": ["url: https?://base64\\.ai/api/(?:scan|extract)"],
+            "evidence": "响应 URL 指向 Base64.ai API"
+          },
+          {
+            "name": "Taggun",
+            "patterns": ["url: https?://api\\.taggun\\.io/api/(?:receipt|v[0-9]+)"],
+            "evidence": "响应 URL 指向 Taggun API"
+          },
+          {
+            "name": "Mathpix OCR",
+            "patterns": ["url: https?://api\\.mathpix\\.com/v[0-9]+/(?:text|pdf)"],
+            "evidence": "响应 URL 指向 Mathpix OCR"
+          },
+          {
+            "name": "Cloudmersive OCR API",
+            "patterns": ["url: https?://api\\.cloudmersive\\.com/ocr/"],
+            "evidence": "响应 URL 指向 Cloudmersive OCR API"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "翻译 / 本地化 API",
           "confidence": "高"
         },
