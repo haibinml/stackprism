@@ -1013,6 +1013,96 @@
         },
         {
           "defaults": {
+            "kind": "短链接 / Link-in-bio",
+            "matchIn": ["resources", "url"]
+          },
+          "rules": [
+            {
+              "name": "Bitly",
+              "patterns": ["bit\\.ly/[^\\s\"'<>]+|api-ssl\\.bitly\\.com|bitly\\.com/[^\\s\"'<>]*(?:v4|shorten|links|pages)"]
+            },
+            {
+              "name": "Rebrandly",
+              "patterns": ["rebrand\\.ly/[^\\s\"'<>]+|api\\.rebrandly\\.com|rebrandly\\.com/[^\\s\"'<>]*(?:links|api|dashboard)"]
+            },
+            {
+              "name": "Short.io",
+              "patterns": ["api\\.short\\.io|app\\.short\\.io|short\\.io/[^\\s\"'<>]*(?:links|api|embed|dashboard)"]
+            },
+            {
+              "name": "TinyURL",
+              "patterns": ["tinyurl\\.com/(?:app|api-create\\.php|[^\\s\"'<>]{4,})"]
+            },
+            {
+              "name": "Cuttly",
+              "patterns": ["cutt\\.ly/[^\\s\"'<>]+|cuttly\\.com/[^\\s\"'<>]*(?:api|shorten|dashboard|edit)"]
+            },
+            {
+              "name": "BL.INK",
+              "patterns": ["bl\\.ink/[^\\s\"'<>]+|app\\.bl\\.ink|api\\.bl\\.ink|blink\\.tools"]
+            },
+            {
+              "name": "Dub.co",
+              "patterns": ["dub\\.sh/[^\\s\"'<>]+|app\\.dub\\.co|dub\\.co/[^\\s\"'<>]*(?:api|links|embed|dashboard)"]
+            },
+            {
+              "name": "T2M",
+              "patterns": ["t2m\\.io/[^\\s\"'<>]+|t2mio\\.com/[^\\s\"'<>]*(?:dashboard|api|shorten|links)"]
+            },
+            {
+              "name": "Switchy",
+              "patterns": ["app\\.switchy\\.io|switchy\\.io/[^\\s\"'<>]*(?:links|link|api|embed|dashboard)"]
+            },
+            {
+              "name": "RocketLink",
+              "patterns": ["app\\.rocketlink\\.io|rocketlink\\.io/[^\\s\"'<>]*(?:link|pixel|retarget|api|dashboard)"]
+            },
+            {
+              "name": "PixelMe",
+              "patterns": ["pxlme\\.me/[^\\s\"'<>]+|app\\.pixelme\\.me|pixelme\\.me/[^\\s\"'<>]*(?:link|api|retargeting)"]
+            },
+            {
+              "name": "Linkly",
+              "patterns": ["l\\.linklyhq\\.com|app\\.linklyhq\\.com|linklyhq\\.com/[^\\s\"'<>]*(?:link|track|api|dashboard)"]
+            },
+            {
+              "name": "Shorby",
+              "patterns": ["shor\\.by/[^\\s\"'<>]+|shorby\\.com/[^\\s\"'<>]*(?:embed|page|link|dashboard)"]
+            },
+            {
+              "name": "Linktree",
+              "patterns": [
+                "linktr\\.ee/[^\\s\"'<>]+|assets\\.production\\.linktr\\.ee|linktree\\.com/[^\\s\"'<>]*(?:assets|embed|profiles)"
+              ]
+            },
+            {
+              "name": "Taplink",
+              "patterns": ["taplink\\.(?:at|cc|ru)/[^\\s\"'<>]+|taplink\\.cc/[^\\s\"'<>]*(?:assets|js|embed)"]
+            },
+            {
+              "name": "Bio.link",
+              "patterns": ["bio\\.link/[^\\s\"'<>]+|api\\.bio\\.link|cdn\\.bio\\.link"]
+            },
+            {
+              "name": "Campsite.bio",
+              "patterns": ["campsite\\.bio/[^\\s\"'<>]+|cdn\\.campsite\\.bio"]
+            },
+            {
+              "name": "Carrd",
+              "patterns": ["carrd\\.co/assets|carrd\\.co/build|carrd\\.co/[^\\s\"'<>]+"]
+            },
+            {
+              "name": "Beacons",
+              "patterns": ["beacons\\.ai/[^\\s\"'<>]+|beacons\\.page/[^\\s\"'<>]+|cdn\\.beacons\\.ai"]
+            },
+            {
+              "name": "Lnk.Bio",
+              "patterns": ["lnk\\.bio/[^\\s\"'<>]+|cdn\\.lnk\\.bio"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "隐私合规 / Cookie 同意",
             "matchIn": ["resources"]
           },
