@@ -277,6 +277,72 @@
             {
               "name": "Mongo Express",
               "patterns": ["<title>\\s*Mongo Express(?:\\s*</title>|\\s+-)", "mongo-express[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "Redis Commander",
+              "patterns": ["<title>\\s*Redis Commander(?:\\s*</title>|\\s+-)", "redis-commander[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "phpRedisAdmin",
+              "patterns": ["<title>\\s*phpRedisAdmin(?:\\s*</title>|\\s+-)", "phpredisadmin[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "CouchDB Fauxton",
+              "patterns": [
+                "<title>\\s*(?:CouchDB\\s+)?Fauxton(?:\\s*</title>|\\s+-)",
+                "(?:^|/)_utils/(?:dashboard|fauxton|js|css)(?:/|[?#\\s]|$)",
+                "fauxton[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "ArangoDB",
+              "patterns": [
+                "<title>\\s*ArangoDB(?:\\s*</title>|\\s+-)",
+                "(?:^|/)_db/_system/_admin/(?:aardvark|html|js|css)(?:/|[?#\\s]|$)",
+                "arangodb[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Neo4j Browser",
+              "patterns": ["<title>\\s*Neo4j Browser(?:\\s*</title>|\\s+-)", "neo4j-browser[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "OrientDB Studio",
+              "patterns": [
+                "<title>\\s*OrientDB Studio(?:\\s*</title>|\\s+-)",
+                "orientdb[^\\s\"'<>]*studio[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "QuestDB Console",
+              "patterns": ["<title>\\s*QuestDB Console(?:\\s*</title>|\\s+-)", "questdb[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "InfluxDB UI",
+              "patterns": [
+                "<title>\\s*InfluxDB(?:\\s+UI)?(?:\\s*</title>|\\s+-\\s*(?:Login|Data Explorer|Dashboard))",
+                "influxdb[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Chronograf",
+              "patterns": ["<title>\\s*Chronograf(?:\\s*</title>|\\s+-)", "chronograf[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "ClickHouse Tabix",
+              "patterns": ["<title>\\s*(?:ClickHouse\\s+)?Tabix(?:\\s*</title>|\\s+-)", "tabix[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "Bytebase",
+              "patterns": ["<title>\\s*Bytebase(?:\\s*</title>|\\s+-)", "bytebase[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "CloudBeaver",
+              "patterns": ["<title>\\s*CloudBeaver(?:\\s*</title>|\\s+-)", "cloudbeaver[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "AdminMongo",
+              "patterns": ["<title>\\s*AdminMongo(?:\\s*</title>|\\s+-)", "adminmongo[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
             }
           ]
         },
