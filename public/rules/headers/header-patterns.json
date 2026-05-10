@@ -3288,6 +3288,227 @@
       },
       {
         "defaults": {
+          "category": "站内搜索 / 个性化推荐",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Algolia",
+            "patterns": [
+              "url: https?://[a-z0-9-]+(?:-dsn)?\\.algolia\\.net/",
+              "url: https?://[a-z0-9-]+(?:-dsn)?\\.algolianet\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Algolia 搜索 API"
+          },
+          {
+            "name": "Typesense Cloud",
+            "patterns": ["url: https?://[a-z0-9-]+\\.[a-z0-9-]+\\.typesense\\.net/", "url: https?://[a-z0-9-]+\\.typesense\\.net/"],
+            "evidence": "响应 URL 指向 Typesense Cloud"
+          },
+          {
+            "name": "Constructor.io",
+            "patterns": ["url: https?://cdn\\.constructor\\.io/", "url: https?://(?:ac|qu|cnstrc)\\.cnstrc\\.com/"],
+            "evidence": "响应 URL 指向 Constructor.io 搜索 / 推荐"
+          },
+          {
+            "name": "Bloomreach Discovery",
+            "patterns": ["url: https?://cdn\\.brcdn\\.com/", "url: https?://[^\\s/]*br-trk[^\\s/]*\\.js", "url: https?://[^\\s/]+\\.bloomreach\\.io/"],
+            "evidence": "响应 URL 指向 Bloomreach Discovery"
+          },
+          {
+            "name": "Nosto",
+            "patterns": ["url: https?://connect\\.nosto\\.com/", "url: https?://static\\.nosto\\.com/"],
+            "evidence": "响应 URL 指向 Nosto"
+          },
+          {
+            "name": "Searchspring",
+            "patterns": ["url: https?://cdn\\.searchspring\\.net/", "url: https?://snapui\\.searchspring\\.io/", "url: https?://api\\.searchspring\\.net/"],
+            "evidence": "响应 URL 指向 Searchspring"
+          },
+          {
+            "name": "Klevu",
+            "patterns": ["url: https?://js\\.klevu\\.com/", "url: https?://cdn\\.klevu\\.com/", "url: https?://box\\.klevu\\.com/"],
+            "evidence": "响应 URL 指向 Klevu"
+          },
+          {
+            "name": "Doofinder",
+            "patterns": ["url: https?://cdn\\.doofinder\\.com/", "url: https?://(?:eu|us|global)\\d*-search\\.doofinder\\.com/"],
+            "evidence": "响应 URL 指向 Doofinder"
+          },
+          {
+            "name": "Clerk.io Recommendations",
+            "patterns": ["url: https?://cdn\\.clerk\\.io/", "url: https?://api\\.clerk\\.io/"],
+            "evidence": "响应 URL 指向 Clerk.io Recommendations"
+          },
+          {
+            "name": "Dynamic Yield",
+            "patterns": ["url: https?://cdn\\.dynamicyield\\.com/", "url: https?://st\\.dynamicyield\\.com/", "url: https?://[^\\s/]+\\.dy-api\\.com/"],
+            "evidence": "响应 URL 指向 Dynamic Yield"
+          },
+          {
+            "name": "Monetate",
+            "patterns": ["url: https?://se\\.monetate\\.net/", "url: https?://engine\\.monetate\\.net/"],
+            "evidence": "响应 URL 指向 Monetate"
+          },
+          {
+            "name": "Barilliance",
+            "patterns": ["url: https?://[^\\s/]+\\.barilliance\\.net/", "url: https?://cdn\\.barilliance\\.com/"],
+            "evidence": "响应 URL 指向 Barilliance"
+          },
+          {
+            "name": "Recombee",
+            "patterns": ["url: https?://client-rapi\\.recombee\\.com/", "url: https?://rapi\\.recombee\\.com/"],
+            "evidence": "响应 URL 指向 Recombee"
+          },
+          {
+            "name": "Algonomy",
+            "patterns": ["url: https?://recs\\.richrelevance\\.com/", "url: https?://media\\.richrelevance\\.com/", "url: https?://[^\\s/]+\\.algorecs\\.com/"],
+            "evidence": "响应 URL 指向 Algonomy / RichRelevance"
+          },
+          {
+            "name": "Syte",
+            "patterns": ["url: https?://cdn\\.syteapi\\.com/", "url: https?://[^\\s/]+\\.syteapi\\.com/"],
+            "evidence": "响应 URL 指向 Syte"
+          },
+          {
+            "name": "Vue.ai",
+            "patterns": ["url: https?://cdn\\.vue\\.ai/", "url: https?://assets\\.vue\\.ai/"],
+            "evidence": "响应 URL 指向 Vue.ai"
+          },
+          {
+            "name": "Findify",
+            "patterns": ["url: https?://cdn\\.findify\\.io/", "url: https?://api\\.findify\\.io/", "url: https?://findify-assets\\.s3\\.amazonaws\\.com/"],
+            "evidence": "响应 URL 指向 Findify"
+          },
+          {
+            "name": "Unbxd",
+            "patterns": ["url: https?://libraries\\.unbxdapi\\.com/", "url: https?://search\\.unbxdapi\\.com/", "url: https?://[^\\s/]+\\.unbxd\\.io/"],
+            "evidence": "响应 URL 指向 Unbxd"
+          },
+          {
+            "name": "Retail Rocket",
+            "patterns": ["url: https?://cdn\\.retailrocket\\.net/", "url: https?://api\\.retailrocket\\.net/"],
+            "evidence": "响应 URL 指向 Retail Rocket"
+          },
+          {
+            "name": "Prefixbox",
+            "patterns": ["url: https?://cdn\\.prefixbox\\.com/", "url: https?://api\\.prefixbox\\.com/"],
+            "evidence": "响应 URL 指向 Prefixbox"
+          },
+          {
+            "name": "Luigi's Box",
+            "patterns": ["url: https?://scripts\\.luigisbox\\.com/", "url: https?://live\\.luigisbox\\.com/"],
+            "evidence": "响应 URL 指向 Luigi's Box"
+          },
+          {
+            "name": "Attraqt",
+            "patterns": ["url: https?://cdn\\.attraqt\\.io/", "url: https?://api\\.attraqt\\.io/"],
+            "evidence": "响应 URL 指向 Attraqt"
+          },
+          {
+            "name": "Searchanise",
+            "patterns": ["url: https?://cdn\\.searchanise\\.com/", "url: https?://[^\\s/]+\\.searchserverapi\\.com/"],
+            "evidence": "响应 URL 指向 Searchanise"
+          },
+          {
+            "name": "FACT-Finder",
+            "patterns": ["url: https?://cdn\\.fact-finder\\.de/", "url: https?://api\\.fact-finder\\.de/", "url: https?://[^\\s/]+\\.fact-finder\\.(?:de|com)/"],
+            "evidence": "响应 URL 指向 FACT-Finder"
+          },
+          {
+            "name": "HawkSearch",
+            "patterns": ["url: https?://cdn\\.hawksearch\\.com/", "url: https?://searchapi\\.hawksearch\\.com/"],
+            "evidence": "响应 URL 指向 HawkSearch"
+          },
+          {
+            "name": "AddSearch",
+            "patterns": ["url: https?://cdn\\.addsearch\\.com/", "url: https?://api\\.addsearch\\.com/"],
+            "evidence": "响应 URL 指向 AddSearch"
+          },
+          {
+            "name": "Elastic Site Search / Swiftype",
+            "patterns": ["url: https?://swiftypecdn\\.com/", "url: https?://api\\.swiftype\\.com/", "url: https?://search-api\\.swiftype\\.com/"],
+            "evidence": "响应 URL 指向 Elastic Site Search / Swiftype"
+          },
+          {
+            "name": "Coveo Search",
+            "patterns": ["url: https?://static\\.cloud\\.coveo\\.com/", "url: https?://platform\\.cloud\\.coveo\\.com/"],
+            "evidence": "响应 URL 指向 Coveo Search"
+          },
+          {
+            "name": "Yext Search",
+            "patterns": ["url: https?://answers\\.yext\\.com/", "url: https?://cdn\\.yextapis\\.com/", "url: https?://cdn\\.yext\\.com/"],
+            "evidence": "响应 URL 指向 Yext Search"
+          },
+          {
+            "name": "Cludo",
+            "patterns": ["url: https?://customer\\.cludo\\.com/", "url: https?://api\\.cludo\\.com/"],
+            "evidence": "响应 URL 指向 Cludo"
+          },
+          {
+            "name": "SearchStax Site Search",
+            "patterns": ["url: https?://app\\.searchstax\\.com/", "url: https?://searchstudio\\.searchstax\\.com/"],
+            "evidence": "响应 URL 指向 SearchStax Site Search"
+          },
+          {
+            "name": "Sajari",
+            "patterns": ["url: https?://cdn\\.sajari\\.com/", "url: https?://api\\.sajari\\.com/"],
+            "evidence": "响应 URL 指向 Sajari"
+          },
+          {
+            "name": "Site Search 360",
+            "patterns": ["url: https?://cdn\\.sitesearch360\\.com/", "url: https?://api\\.sitesearch360\\.com/"],
+            "evidence": "响应 URL 指向 Site Search 360"
+          },
+          {
+            "name": "Expertrec",
+            "patterns": ["url: https?://cse\\.expertrec\\.com/", "url: https?://api\\.expertrec\\.com/"],
+            "evidence": "响应 URL 指向 Expertrec"
+          },
+          {
+            "name": "Fast Simon",
+            "patterns": ["url: https?://assets\\.instantsearchplus\\.com/", "url: https?://api\\.instantsearchplus\\.com/", "url: https?://[^\\s/]+\\.fastsimon\\.com/"],
+            "evidence": "响应 URL 指向 Fast Simon"
+          },
+          {
+            "name": "Celebros",
+            "patterns": ["url: https?://cdn\\.celebros\\.com/", "url: https?://[^\\s/]+\\.celebros\\.com/"],
+            "evidence": "响应 URL 指向 Celebros"
+          },
+          {
+            "name": "GroupBy Search",
+            "patterns": ["url: https?://cdn\\.groupbycloud\\.com/", "url: https?://api\\.groupbycloud\\.com/"],
+            "evidence": "响应 URL 指向 GroupBy Search"
+          },
+          {
+            "name": "Fredhopper",
+            "patterns": ["url: https?://cdn\\.fredhopper\\.com/", "url: https?://[^\\s/]+\\.fredhopper\\.com/"],
+            "evidence": "响应 URL 指向 Fredhopper"
+          },
+          {
+            "name": "Empathy.co Search",
+            "patterns": ["url: https?://api\\.empathybroker\\.com/", "url: https?://assets\\.empathy\\.co/"],
+            "evidence": "响应 URL 指向 Empathy.co Search"
+          },
+          {
+            "name": "Segmentify",
+            "patterns": ["url: https?://cdn\\.segmentify\\.com/", "url: https?://api\\.segmentify\\.com/"],
+            "evidence": "响应 URL 指向 Segmentify"
+          },
+          {
+            "name": "ViSenze",
+            "patterns": ["url: https?://cdn\\.visenze\\.com/", "url: https?://search\\.visenze\\.com/"],
+            "evidence": "响应 URL 指向 ViSenze"
+          },
+          {
+            "name": "QuarticON",
+            "patterns": ["url: https?://cdn\\.quarticon\\.com/", "url: https?://rec\\.quarticon\\.com/"],
+            "evidence": "响应 URL 指向 QuarticON"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "SaaS / 第三方服务",
           "confidence": "高"
         },
