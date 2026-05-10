@@ -825,6 +825,100 @@
           "globals": ["OneSignal"]
         },
         {
+          "defaults": {
+            "kind": "Web Push / 消息推送",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "PushEngage Web Push",
+              "patterns": [
+                "clientcdn\\.pushengage\\.com|cdn\\.pushengage\\.com|pushengage\\.com/[^\\s\"'<>]*(?:service-worker|pushengage|subscription|widget)"
+              ]
+            },
+            {
+              "name": "PushOwl",
+              "patterns": ["cdn\\.pushowl\\.com|app\\.pushowl\\.com|pushowl\\.com/[^\\s\"'<>]*(?:widget|sdk|subscription|web-push)"]
+            },
+            {
+              "name": "iZooto",
+              "patterns": ["cdn\\.izooto\\.com|izooto\\.com/[^\\s\"'<>]*(?:sdk|webpush|push|subscription)|api\\.izooto\\.com"]
+            },
+            {
+              "name": "Webpushr Web Push",
+              "patterns": ["cdn\\.webpushr\\.com|webpushr\\.com/[^\\s\"'<>]*(?:webpushr|push|sw|subscription)"]
+            },
+            {
+              "name": "Aimtell",
+              "patterns": ["cdn\\.aimtell\\.com|api\\.aimtell\\.com|aimtell\\.com/[^\\s\"'<>]*(?:sdk|push|subscription|worker)"]
+            },
+            {
+              "name": "VWO Engage / PushCrew",
+              "patterns": [
+                "cdn\\.pushcrew\\.com|static\\.pushcrew\\.com|pushcrew\\.com/[^\\s\"'<>]*(?:sdk|worker|subscription)|vwo\\.com/[^\\s\"'<>]*engage"
+              ]
+            },
+            {
+              "name": "Subscribers.com",
+              "patterns": [
+                "cdn\\.subscribers\\.com|app\\.subscribers\\.com|subscribers\\.com/[^\\s\"'<>]*(?:assets|webpush|widget|subscription)"
+              ]
+            },
+            {
+              "name": "WonderPush",
+              "patterns": ["cdn\\.by\\.wonderpush\\.com|wonderpush\\.com/[^\\s\"'<>]*(?:sdk|webpush|push|worker)"]
+            },
+            {
+              "name": "PushAlert",
+              "patterns": ["cdn\\.pushalert\\.co|pushalert\\.co/[^\\s\"'<>]*(?:pushalert|worker|subscription|widget)"]
+            },
+            {
+              "name": "Truepush",
+              "patterns": ["sdki\\.truepush\\.com|cdn\\.truepush\\.com|truepush\\.com/[^\\s\"'<>]*(?:sdk|webpush|push|worker)"]
+            },
+            {
+              "name": "FoxPush",
+              "patterns": ["cdn\\.foxpush\\.com|api\\.foxpush\\.com|foxpush\\.com/[^\\s\"'<>]*(?:sdk|push|subscription|worker)"]
+            },
+            {
+              "name": "Notix",
+              "patterns": ["notix\\.io/[^\\s\"'<>]*(?:sdk|push|enot|worker)|cdn\\.notix\\.io|push\\.notix\\.io"]
+            },
+            {
+              "name": "Pushnami",
+              "patterns": ["api\\.pushnami\\.com|cdn\\.pushnami\\.com|pushnami\\.com/[^\\s\"'<>]*(?:sdk|push|worker|subscription)"]
+            },
+            {
+              "name": "Gravitec Web Push",
+              "patterns": ["cdn\\.gravitec\\.net|push\\.gravitec\\.net|gravitec\\.net/[^\\s\"'<>]*(?:sdk|web-push|push|worker)"]
+            },
+            {
+              "name": "Pushwoosh Web Push",
+              "patterns": ["cdn\\.pushwoosh\\.com|cp\\.pushwoosh\\.com|pushwoosh\\.com/[^\\s\"'<>]*(?:webpush|push|worker|sdk)"]
+            },
+            {
+              "name": "Airship Web Notify",
+              "patterns": ["aswpsdk(?:us|eu)\\.com|web-sdk\\.urbanairship\\.com|urbanairship\\.com/[^\\s\"'<>]*(?:web-notify|web-push|sdk)"]
+            },
+            {
+              "name": "PushBots",
+              "patterns": ["cdn\\.pushbots\\.com|api\\.pushbots\\.com|pushbots\\.com/[^\\s\"'<>]*(?:sdk|push|worker|subscription)"]
+            },
+            {
+              "name": "Notificare Web Push",
+              "patterns": ["cdn\\.notifica\\.re|push\\.notifica\\.re|notifica\\.re/[^\\s\"'<>]*(?:webpush|push|sdk|worker)"]
+            },
+            {
+              "name": "NotifyVisitors",
+              "patterns": ["cdn\\.notifyvisitors\\.com|notifyvisitors\\.com/[^\\s\"'<>]*(?:push|webpush|sdk|notification)"]
+            },
+            {
+              "name": "PushAssist",
+              "patterns": ["cdn\\.pushassist\\.com|pushassist\\.com/[^\\s\"'<>]*(?:sdk|push|worker|subscription)"]
+            }
+          ]
+        },
+        {
           "name": "Sentry",
           "kind": "错误监控",
           "patterns": ["browser\\.sentry-cdn\\.com|sentry\\.io|sentry-cdn\\.com"],
