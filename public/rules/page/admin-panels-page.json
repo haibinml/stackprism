@@ -155,6 +155,71 @@
               ]
             }
           ]
+        },
+        {
+          "defaults": {
+            "kind": "自托管 PaaS / 应用部署面板"
+          },
+          "rules": [
+            {
+              "name": "Coolify",
+              "patterns": [
+                "(?:^|\\n)Coolify(?:\\s*(?:Login|Dashboard|Console|登录|控制台)|\\s*$)",
+                "coolify[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "CapRover",
+              "patterns": [
+                "(?:^|\\n)CapRover(?:\\s*(?:Login|Dashboard|Console|登录|控制台)|\\s*$)",
+                "caprover[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Dokploy",
+              "patterns": [
+                "(?:^|\\n)Dokploy(?:\\s*(?:Login|Dashboard|Console|登录|控制台)|\\s*$)",
+                "dokploy[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Easypanel",
+              "patterns": [
+                "(?:^|\\n)Easypanel(?:\\s*(?:Login|Dashboard|Console|登录|控制台)|\\s*$)",
+                "easypanel[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Cloudron",
+              "patterns": [
+                "(?:^|\\n)Cloudron(?:\\s*(?:Login|Dashboard|Console|登录|控制台)|\\s*$)",
+                "cloudron[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "YunoHost",
+              "patterns": [
+                "(?:^|\\n)YunoHost(?:\\s*(?:Admin|Login|Dashboard|登录|控制台)|\\s*$)",
+                "(?:^|/)yunohost/(?:admin|api)(?:/|[?#\\s]|$)",
+                "yunohost[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Runtipi",
+              "patterns": [
+                "(?:^|\\n)Runtipi(?:\\s*(?:Login|Dashboard|Console|登录|控制台)|\\s*$)",
+                "runtipi[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Umbrel",
+              "patterns": [
+                "(?:^|\\n)Umbrel(?:\\s*(?:Login|Dashboard|Home|登录|控制台)|\\s*$)",
+                "(?:^|/)umbrel/(?:assets|static|api)(?:/|[?#\\s]|$)",
+                "umbrel-app[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            }
+          ]
         }
       ]
     },

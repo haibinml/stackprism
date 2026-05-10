@@ -333,6 +333,54 @@
               },
               "rules": [
                 {
+                  "name": "Coolify",
+                  "kind": "自托管 PaaS / 应用部署",
+                  "resourceHints": ["coolify"],
+                  "patterns": ["coolify[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+                },
+                {
+                  "name": "CapRover",
+                  "kind": "自托管 PaaS / 应用部署",
+                  "resourceHints": ["caprover"],
+                  "patterns": ["caprover[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+                },
+                {
+                  "name": "Dokploy",
+                  "kind": "自托管 PaaS / 应用部署",
+                  "resourceHints": ["dokploy"],
+                  "patterns": ["dokploy[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+                },
+                {
+                  "name": "Easypanel",
+                  "kind": "自托管 PaaS / 应用部署",
+                  "resourceHints": ["easypanel"],
+                  "patterns": ["easypanel[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+                },
+                {
+                  "name": "Cloudron",
+                  "kind": "自托管 PaaS / 应用部署",
+                  "resourceHints": ["cloudron"],
+                  "patterns": ["cloudron[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+                },
+                {
+                  "name": "YunoHost",
+                  "kind": "自托管 PaaS / 应用管理",
+                  "resourceHints": ["yunohost", "/yunohost/admin"],
+                  "patterns": ["yunohost[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)", "(?:^|/)yunohost/admin(?:/|[?#]|$)"]
+                },
+                {
+                  "name": "Runtipi",
+                  "kind": "自托管 PaaS / 应用商店",
+                  "resourceHints": ["runtipi"],
+                  "patterns": ["runtipi[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+                },
+                {
+                  "name": "Umbrel",
+                  "kind": "家庭服务器 / 应用平台",
+                  "resourceHints": ["umbrel-app", "/umbrel/"],
+                  "patterns": ["umbrel-app[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)", "(?:^|/)umbrel/(?:assets|static)(?:/|[?#]|$)"]
+                },
+                {
                   "name": "Flux CD",
                   "resourceHints": ["fluxcd", "flux-webui"],
                   "patterns": ["fluxcd[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)", "flux-webui[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
