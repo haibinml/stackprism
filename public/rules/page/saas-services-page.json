@@ -3530,6 +3530,104 @@
         },
         {
           "defaults": {
+            "kind": "房地产 / IDX / 虚拟看房",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Matterport Embed",
+              "patterns": [
+                "my\\.matterport\\.com/show/|static\\.matterport\\.com/(?:showcase|api)|matterport\\.com/[^\\s\"'<>]*(?:showcase-sdk|show/)"
+              ]
+            },
+            {
+              "name": "IDX Broker",
+              "patterns": ["(?:widgets|middleware)\\.idxbroker\\.com|idxbroker\\.com/idx/|idxbroker\\.com/[^\\s\"'<>]*(?:idx|widgets?|mls)"]
+            },
+            {
+              "name": "iHomefinder IDX",
+              "patterns": ["idxhome\\.com|ihomefinder\\.com/[^\\s\"'<>]*(?:idx|property-organizer|lead-capture|widget)"]
+            },
+            {
+              "name": "Showcase IDX",
+              "patterns": ["showcaseidx\\.com/[^\\s\"'<>]*(?:assets|idx|widget|embed)|showcaseidx\\.com/wp-content"]
+            },
+            {
+              "name": "Placester",
+              "patterns": [
+                "cdn\\.placester\\.net|placester\\.net/[^\\s\"'<>]*(?:assets|idx|listings)|placester\\.com/[^\\s\"'<>]*(?:idx|listings|widget)"
+              ]
+            },
+            {
+              "name": "Real Geeks",
+              "patterns": ["static\\.realgeeks\\.com|u\\.realgeeks\\.media|realgeeks\\.com/[^\\s\"'<>]*(?:idx|property|widget|valuation)"]
+            },
+            {
+              "name": "BoomTown",
+              "patterns": [
+                "boomtownroi\\.com/[^\\s\"'<>]*(?:idx|listing|widget|assets)|bt-widgets\\.boomtownroi\\.com|boomtown-production\\.s3"
+              ]
+            },
+            {
+              "name": "kvCORE IDX",
+              "patterns": ["kvcore\\.com/[^\\s\"'<>]*(?:idx|listings|assets|property)|kvcoreidx\\.com|kvcore\\.s3"]
+            },
+            {
+              "name": "MoxiWorks IDX",
+              "patterns": ["moxiworks\\.com/[^\\s\"'<>]*(?:idx|listing|widget|embed)|moxiworks\\.net/[^\\s\"'<>]*(?:idx|listing|assets)"]
+            },
+            {
+              "name": "Propertybase Sites",
+              "patterns": ["propertybase\\.com/[^\\s\"'<>]*(?:idx|listing|widget|assets)|propertybase-sites\\.com"]
+            },
+            {
+              "name": "RealScout",
+              "patterns": ["realscout\\.com/[^\\s\"'<>]*(?:embed|home-search|listings|properties)|assets\\.realscout\\.com"]
+            },
+            {
+              "name": "ShowingTime",
+              "patterns": [
+                "showingtime\\.com/[^\\s\"'<>]*(?:schedule|showing|appointment|widget)|showingtimeplus\\.com/[^\\s\"'<>]*(?:widget|embed)"
+              ]
+            },
+            {
+              "name": "Cloud CMA",
+              "patterns": ["cloudcma\\.com/[^\\s\"'<>]*(?:present|report|embed|widget)|cloudcma\\.com/api"]
+            },
+            {
+              "name": "Homebot",
+              "patterns": ["homebotapp\\.com/[^\\s\"'<>]*(?:widget|embed|homeowner|lead)|cdn\\.homebotapp\\.com"]
+            },
+            {
+              "name": "Local Logic",
+              "patterns": [
+                "cdn\\.locallogic\\.co|api\\.locallogic\\.co|widgets\\.locallogic\\.co|locallogic\\.co/[^\\s\"'<>]*(?:widget|embed|map)"
+              ]
+            },
+            {
+              "name": "ListHub",
+              "patterns": ["listhub\\.net/[^\\s\"'<>]*(?:widgets?|listings|property|assets)|cdn\\.listhub\\.net"]
+            },
+            {
+              "name": "Floorplanner Embed",
+              "patterns": ["floorplanner\\.com/[^\\s\"'<>]*(?:embed|projects|plans)|floorplanner\\.com/assets"]
+            },
+            {
+              "name": "CloudPano",
+              "patterns": ["app\\.cloudpano\\.com/tours|cloudpano\\.com/[^\\s\"'<>]*(?:tours?|embed|viewer)"]
+            },
+            {
+              "name": "Kuula Virtual Tours",
+              "patterns": ["kuula\\.co/(?:share|post)/|kuula\\.co/[^\\s\"'<>]*(?:embed|player|tour)"]
+            },
+            {
+              "name": "RICOH360 Tours",
+              "patterns": ["ricoh360\\.com/[^\\s\"'<>]*(?:tours?|viewer|embed)|theta360\\.com/[^\\s\"'<>]*(?:tours?|embed)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "评价 / UGC",
             "matchIn": ["resources"]
           },
