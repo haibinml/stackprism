@@ -319,6 +319,91 @@
         },
         {
           "defaults": {
+            "kind": "自托管模型服务 / 推理后端",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Ollama",
+              "__hints": ["11434", "ollama"],
+              "patterns": [
+                "(?:localhost|127\\.0\\.0\\.1|0\\.0\\.0\\.0|\\[::1\\]):11434/(?:api/(?:generate|chat|embeddings|tags|show|pull|push|ps)|v1/(?:chat/completions|completions|embeddings|models))",
+                "ollama[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "LM Studio",
+              "__hints": ["1234", "lmstudio", "lm-studio"],
+              "patterns": [
+                "(?:localhost|127\\.0\\.0\\.1|0\\.0\\.0\\.0|\\[::1\\]):1234/v1/(?:chat/completions|completions|embeddings|models)",
+                "(?:lmstudio|lm-studio)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "LocalAI",
+              "__hints": ["localai", "local-ai"],
+              "patterns": [
+                "(?:^|[\\/._-])localai(?:[\\/._-]|[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$))",
+                "local-ai[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "vLLM",
+              "__hints": ["vllm"],
+              "patterns": ["(?:^|[\\/._-])vllm(?:[\\/._-]|[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$))"]
+            },
+            {
+              "name": "Xinference",
+              "__hints": ["9997", "xinference"],
+              "patterns": [
+                "(?:localhost|127\\.0\\.0\\.1|0\\.0\\.0\\.0|\\[::1\\]):9997/(?:v1/(?:chat/completions|completions|embeddings|models)|api/v1/(?:models|launch_model|terminate_model|cluster))",
+                "xinference[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "llama.cpp Server",
+              "__hints": ["llama.cpp", "llama-cpp", "llama_cpp"],
+              "patterns": ["(?:llama\\.cpp|llama-cpp|llama_cpp)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "Hugging Face Text Generation Inference",
+              "__hints": ["text-generation-inference", "text_generation_inference"],
+              "patterns": ["(?:text-generation-inference|text_generation_inference)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "SGLang",
+              "__hints": ["sglang"],
+              "patterns": ["(?:^|[\\/._-])sglang(?:[\\/._-]|[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$))"]
+            },
+            {
+              "name": "TensorRT-LLM",
+              "__hints": ["tensorrt-llm", "tensorrt_llm"],
+              "patterns": ["(?:tensorrt-llm|tensorrt_llm)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "NVIDIA Triton Inference Server",
+              "__hints": ["triton-inference-server", "tritonserver", "nvidia-triton"],
+              "patterns": ["(?:triton-inference-server|tritonserver|nvidia-triton)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "TorchServe",
+              "__hints": ["torchserve"],
+              "patterns": ["torchserve[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "KoboldCpp",
+              "__hints": ["koboldcpp"],
+              "patterns": ["koboldcpp[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "TabbyAPI",
+              "__hints": ["tabbyapi", "tabby-api"],
+              "patterns": ["(?:tabbyapi|tabby-api)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "大模型 API / 推理平台",
             "matchIn": ["resources"]
           },
