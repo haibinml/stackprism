@@ -884,6 +884,118 @@
       },
       {
         "defaults": {
+          "category": "评论 / 社区嵌入",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Disqus Comments",
+            "patterns": [
+              "url: https?://[^\\s/]+\\.disqus\\.com/embed\\.js",
+              "url: https?://[^\\s/]+\\.disqus\\.com/count\\.js",
+              "url: https?://disqus\\.com/embed/comments/"
+            ],
+            "evidence": "响应 URL 指向 Disqus 评论组件"
+          },
+          {
+            "name": "giscus",
+            "patterns": ["url: https?://giscus\\.app/client\\.js", "url: https?://giscus\\.app/api/graphql"],
+            "evidence": "响应 URL 指向 giscus 评论组件"
+          },
+          {
+            "name": "Utterances",
+            "patterns": ["url: https?://utteranc\\.es/client\\.js"],
+            "evidence": "响应 URL 指向 Utterances 评论组件"
+          },
+          {
+            "name": "Commento",
+            "patterns": ["url: https?://cdn\\.commento\\.io/js/commento\\.js", "url: https?://commento\\.io/js/commento\\.js"],
+            "evidence": "响应 URL 指向 Commento 评论组件"
+          },
+          {
+            "name": "Hyvor Talk",
+            "patterns": ["url: https?://talk\\.hyvor\\.com/embed/", "url: https?://talk\\.hyvor\\.com/web-api/embed"],
+            "evidence": "响应 URL 指向 Hyvor Talk 评论组件"
+          },
+          {
+            "name": "Cusdis",
+            "patterns": ["url: https?://cusdis\\.com/js/cusdis\\.es\\.js", "url: https?://cusdis\\.com/api/open/"],
+            "evidence": "响应 URL 指向 Cusdis 评论组件"
+          },
+          {
+            "name": "Isso Comments",
+            "patterns": ["url: https?://[^\\s/]+/isso/js/embed\\.min\\.js", "url: https?://[^\\s/]+/isso/embed\\.min\\.js"],
+            "evidence": "响应 URL 指向 Isso 评论组件"
+          },
+          {
+            "name": "Remark42",
+            "patterns": ["url: https?://[^\\s/]+/remark42/web/", "url: https?://[^\\s/]+/remark42\\.js"],
+            "evidence": "响应 URL 指向 Remark42 评论组件"
+          },
+          {
+            "name": "Talkyard",
+            "patterns": ["url: https?://[^\\s/]+/-/talkyard-comments\\.js", "url: https?://talkyard\\.net/-/talkyard-comments\\.js"],
+            "evidence": "响应 URL 指向 Talkyard 评论组件"
+          },
+          {
+            "name": "Coral Talk",
+            "patterns": ["url: https?://talk\\.coralproject\\.net/", "url: https?://[^\\s/]+/assets/js/coral-talk"],
+            "evidence": "响应 URL 指向 Coral Talk 评论组件"
+          },
+          {
+            "name": "GraphComment",
+            "patterns": ["url: https?://graphcomment\\.com/js/integration\\.js"],
+            "evidence": "响应 URL 指向 GraphComment 评论组件"
+          },
+          {
+            "name": "FastComments",
+            "patterns": ["url: https?://cdn\\.fastcomments\\.com/js/embed", "url: https?://fastcomments\\.com/js/embed"],
+            "evidence": "响应 URL 指向 FastComments 评论组件"
+          },
+          {
+            "name": "ReplyBox",
+            "patterns": ["url: https?://cdn\\.getreplybox\\.com/js/embed\\.js"],
+            "evidence": "响应 URL 指向 ReplyBox 评论组件"
+          },
+          {
+            "name": "Muut",
+            "patterns": ["url: https?://cdn\\.muut\\.com/", "url: https?://muut\\.com/i/"],
+            "evidence": "响应 URL 指向 Muut 评论组件"
+          },
+          {
+            "name": "Cove Comments",
+            "patterns": ["url: https?://cdn\\.cove\\.chat/comments\\.js"],
+            "evidence": "响应 URL 指向 Cove Comments"
+          },
+          {
+            "name": "Viafoura Conversations",
+            "patterns": ["url: https?://cdn\\.viafoura\\.net/", "url: https?://[^\\s/]+\\.viafoura\\.net/"],
+            "evidence": "响应 URL 指向 Viafoura Conversations"
+          },
+          {
+            "name": "OpenWeb / Spot.IM",
+            "patterns": ["url: https?://launcher\\.spot\\.im/", "url: https?://api-[0-9-]+\\.spot\\.im/"],
+            "evidence": "响应 URL 指向 OpenWeb / Spot.IM 评论组件"
+          },
+          {
+            "name": "Facebook Comments Plugin",
+            "patterns": ["url: https?://www\\.facebook\\.com/plugins/comments\\.php"],
+            "evidence": "响应 URL 指向 Facebook Comments Plugin"
+          },
+          {
+            "name": "CommentBox.io",
+            "patterns": ["url: https?://unpkg\\.com/commentbox\\.io", "url: https?://commentbox\\.io/(?:embed|project|comments)"],
+            "evidence": "响应 URL 指向 CommentBox.io"
+          },
+          {
+            "name": "IntenseDebate",
+            "patterns": ["url: https?://(?:www\\.)?intensedebate\\.com/js/genericCommentWrapperV2\\.js"],
+            "evidence": "响应 URL 指向 IntenseDebate 评论组件"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "支付系统",
           "confidence": "高"
         },
