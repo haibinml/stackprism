@@ -1984,6 +1984,264 @@
       },
       {
         "defaults": {
+          "category": "订阅计费 / 税务发票",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Chargebee Billing",
+            "patterns": [
+              "url: https?://js\\.chargebee\\.com/v[0-9]+/chargebee\\.js",
+              "url: https?://checkout\\.chargebee\\.com/",
+              "url: https?://[a-z0-9-]+\\.chargebee\\.com/(?:hosted_pages|portal|checkout|api)"
+            ],
+            "evidence": "响应 URL 指向 Chargebee 计费服务"
+          },
+          {
+            "name": "Recurly",
+            "patterns": [
+              "url: https?://js\\.recurly\\.com/v[0-9]+/recurly\\.js",
+              "url: https?://api\\.recurly\\.com/js/",
+              "url: https?://[a-z0-9-]+\\.recurly\\.com/(?:subscribe|account|api|checkout)"
+            ],
+            "evidence": "响应 URL 指向 Recurly 计费服务"
+          },
+          {
+            "name": "Zuora Billing",
+            "patterns": [
+              "url: https?://static\\.zuora\\.com/Resources/",
+              "url: https?://checkout\\.zuora\\.com/",
+              "url: https?://[a-z0-9-]+\\.zuora\\.com/(?:apps|PublicHostedPage|api|billing)"
+            ],
+            "evidence": "响应 URL 指向 Zuora Billing"
+          },
+          {
+            "name": "Maxio / Chargify",
+            "patterns": [
+              "url: https?://js\\.chargify\\.com/",
+              "url: https?://[a-z0-9-]+\\.chargify\\.com/(?:h|hosted|checkout|subscriptions|api)",
+              "url: https?://api\\.maxio\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Maxio / Chargify"
+          },
+          {
+            "name": "Billsby",
+            "patterns": [
+              "url: https?://checkoutlib\\.billsby\\.com/",
+              "url: https?://checkout\\.billsby\\.com/",
+              "url: https?://[a-z0-9-]+\\.billsby\\.com/(?:checkout|account|api)"
+            ],
+            "evidence": "响应 URL 指向 Billsby"
+          },
+          {
+            "name": "ChargeOver",
+            "patterns": [
+              "url: https?://assets\\.chargeover\\.com/",
+              "url: https?://app\\.chargeover\\.com/",
+              "url: https?://api\\.chargeover\\.com/"
+            ],
+            "evidence": "响应 URL 指向 ChargeOver"
+          },
+          {
+            "name": "FastSpring Checkout",
+            "patterns": [
+              "url: https?://sbl\\.onfastspring\\.com/",
+              "url: https?://sites\\.fastspring\\.com/",
+              "url: https?://[a-z0-9-]+\\.onfastspring\\.com/"
+            ],
+            "evidence": "响应 URL 指向 FastSpring Checkout"
+          },
+          {
+            "name": "Lemon Squeezy Checkout",
+            "patterns": [
+              "url: https?://app\\.lemonsqueezy\\.com/checkout",
+              "url: https?://js\\.lemonsqueezy\\.com/",
+              "url: https?://cdn\\.lemonsqueezy\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Lemon Squeezy Checkout"
+          },
+          {
+            "name": "Gumroad Embed",
+            "patterns": ["url: https?://gumroad\\.com/js/gumroad\\.js", "url: https?://gumroad\\.com/(?:l|checkout)/"],
+            "evidence": "响应 URL 指向 Gumroad"
+          },
+          {
+            "name": "Freemius Checkout",
+            "patterns": [
+              "url: https?://checkout\\.freemius\\.com/",
+              "url: https?://cdn\\.freemius\\.com/",
+              "url: https?://api\\.freemius\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Freemius"
+          },
+          {
+            "name": "Memberful",
+            "patterns": [
+              "url: https?://js\\.memberful\\.com/embed\\.js",
+              "url: https?://[a-z0-9-]+\\.memberful\\.com/(?:checkout|account|auth|plans)"
+            ],
+            "evidence": "响应 URL 指向 Memberful"
+          },
+          {
+            "name": "Payhip Checkout",
+            "patterns": ["url: https?://payhip\\.com/payhip\\.js", "url: https?://payhip\\.com/(?:b|checkout)/"],
+            "evidence": "响应 URL 指向 Payhip Checkout"
+          },
+          {
+            "name": "ThriveCart",
+            "patterns": ["url: https?://checkout\\.thrivecart\\.com/", "url: https?://[a-z0-9-]+\\.thrivecart\\.com/(?:checkout|cart|api)"],
+            "evidence": "响应 URL 指向 ThriveCart"
+          },
+          {
+            "name": "SamCart",
+            "patterns": ["url: https?://checkout\\.samcart\\.com/", "url: https?://[a-z0-9-]+\\.samcart\\.com/(?:products|checkout|api)"],
+            "evidence": "响应 URL 指向 SamCart"
+          },
+          {
+            "name": "SendOwl Checkout",
+            "patterns": ["url: https?://transactions\\.sendowl\\.com/", "url: https?://www\\.sendowl\\.com/(?:orders|checkout|cart)"],
+            "evidence": "响应 URL 指向 SendOwl Checkout"
+          },
+          {
+            "name": "FoxyCart",
+            "patterns": [
+              "url: https?://cdn\\.foxycart\\.com/",
+              "url: https?://[a-z0-9-]+\\.foxycart\\.com/(?:cart|checkout)",
+              "url: https?://[a-z0-9-]+\\.foxy\\.io/(?:cart|checkout)"
+            ],
+            "evidence": "响应 URL 指向 FoxyCart"
+          },
+          {
+            "name": "MoonClerk",
+            "patterns": ["url: https?://app\\.moonclerk\\.com/pay", "url: https?://js\\.moonclerk\\.com/"],
+            "evidence": "响应 URL 指向 MoonClerk"
+          },
+          {
+            "name": "Quaderno Checkout",
+            "patterns": ["url: https?://js\\.quaderno\\.io/", "url: https?://api\\.quaderno\\.io/"],
+            "evidence": "响应 URL 指向 Quaderno"
+          },
+          {
+            "name": "TaxJar",
+            "patterns": ["url: https?://api\\.taxjar\\.com/v[0-9]+/"],
+            "evidence": "响应 URL 指向 TaxJar API"
+          },
+          {
+            "name": "Avalara AvaTax",
+            "patterns": [
+              "url: https?://avatax\\.avalara\\.net/",
+              "url: https?://sandbox-rest\\.avatax\\.com/",
+              "url: https?://rest\\.avatax\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Avalara AvaTax"
+          },
+          {
+            "name": "Stripe Billing Portal",
+            "patterns": ["url: https?://billing\\.stripe\\.com/(?:p/|session|pay)"],
+            "evidence": "响应 URL 指向 Stripe Billing Portal"
+          },
+          {
+            "name": "Orb Billing",
+            "patterns": ["url: https?://api\\.withorb\\.com/", "url: https?://app\\.withorb\\.com/"],
+            "evidence": "响应 URL 指向 Orb Billing"
+          },
+          {
+            "name": "Lago Billing",
+            "patterns": ["url: https?://api\\.getlago\\.com/", "url: https?://app\\.getlago\\.com/"],
+            "evidence": "响应 URL 指向 Lago Billing"
+          },
+          {
+            "name": "Metronome Billing",
+            "patterns": ["url: https?://api\\.metronome\\.com/", "url: https?://app\\.metronome\\.com/"],
+            "evidence": "响应 URL 指向 Metronome Billing"
+          },
+          {
+            "name": "Sequence Billing",
+            "patterns": ["url: https?://app\\.sequencehq\\.com/", "url: https?://api\\.sequencehq\\.com/"],
+            "evidence": "响应 URL 指向 Sequence Billing"
+          },
+          {
+            "name": "Younium Billing",
+            "patterns": ["url: https?://app\\.younium\\.com/", "url: https?://api\\.younium\\.com/"],
+            "evidence": "响应 URL 指向 Younium Billing"
+          },
+          {
+            "name": "Fusebill",
+            "patterns": ["url: https?://secure\\.fusebill\\.com/", "url: https?://app\\.fusebill\\.com/", "url: https?://api\\.fusebill\\.com/"],
+            "evidence": "响应 URL 指向 Fusebill"
+          },
+          {
+            "name": "Aria Systems Billing",
+            "patterns": ["url: https?://secure\\.ariasystems\\.net/", "url: https?://api\\.ariasystems\\.net/"],
+            "evidence": "响应 URL 指向 Aria Systems Billing"
+          },
+          {
+            "name": "Gotransverse",
+            "patterns": ["url: https?://api\\.gotransverse\\.com/", "url: https?://app\\.gotransverse\\.com/"],
+            "evidence": "响应 URL 指向 Gotransverse"
+          },
+          {
+            "name": "BillingPlatform",
+            "patterns": ["url: https?://api\\.billingplatform\\.com/", "url: https?://app\\.billingplatform\\.com/"],
+            "evidence": "响应 URL 指向 BillingPlatform"
+          },
+          {
+            "name": "Ordway Billing",
+            "patterns": ["url: https?://app\\.ordwaylabs\\.com/", "url: https?://api\\.ordwaylabs\\.com/"],
+            "evidence": "响应 URL 指向 Ordway Billing"
+          },
+          {
+            "name": "Sage Intacct Billing",
+            "patterns": ["url: https?://api\\.intacct\\.com/", "url: https?://www\\.intacct\\.com/ia/acct"],
+            "evidence": "响应 URL 指向 Sage Intacct"
+          },
+          {
+            "name": "NetSuite SuiteBilling",
+            "patterns": [
+              "url: https?://system\\.netsuite\\.com/[^\\s]*(?:custinvc|billing|app/accounting)",
+              "url: https?://[0-9]+\\.app\\.netsuite\\.com/[^\\s]*(?:custinvc|billing|app/accounting)"
+            ],
+            "evidence": "响应 URL 指向 NetSuite SuiteBilling"
+          },
+          {
+            "name": "FreshBooks Invoicing",
+            "patterns": ["url: https?://my\\.freshbooks\\.com/", "url: https?://api\\.freshbooks\\.com/"],
+            "evidence": "响应 URL 指向 FreshBooks"
+          },
+          {
+            "name": "Xero Invoicing",
+            "patterns": ["url: https?://go\\.xero\\.com/AccountsReceivable", "url: https?://api\\.xero\\.com/"],
+            "evidence": "响应 URL 指向 Xero"
+          },
+          {
+            "name": "QuickBooks Online Invoicing",
+            "patterns": ["url: https?://qbo\\.intuit\\.com/app/invoice", "url: https?://app\\.qbo\\.intuit\\.com/app/invoice"],
+            "evidence": "响应 URL 指向 QuickBooks Online"
+          },
+          {
+            "name": "Invoiced",
+            "patterns": ["url: https?://app\\.invoiced\\.com/", "url: https?://api\\.invoiced\\.com/"],
+            "evidence": "响应 URL 指向 Invoiced"
+          },
+          {
+            "name": "Bill.com",
+            "patterns": ["url: https?://app\\.bill\\.com/", "url: https?://api\\.bill\\.com/"],
+            "evidence": "响应 URL 指向 Bill.com"
+          },
+          {
+            "name": "Tipalti",
+            "patterns": ["url: https?://app\\.tipalti\\.com/", "url: https?://api\\.tipalti\\.com/"],
+            "evidence": "响应 URL 指向 Tipalti"
+          },
+          {
+            "name": "Anrok Tax",
+            "patterns": ["url: https?://api\\.anrok\\.com/", "url: https?://app\\.anrok\\.com/"],
+            "evidence": "响应 URL 指向 Anrok Tax"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "支付系统",
           "confidence": "高"
         },
