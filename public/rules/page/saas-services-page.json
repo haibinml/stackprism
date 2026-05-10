@@ -2537,6 +2537,88 @@
             {
               "name": "Junip Reviews",
               "patterns": ["cdn\\.junip\\.co|scripts\\.junip\\.co|junip\\.co/[^\\s\"'<>]*(?:reviews|widgets)"]
+            },
+            {
+              "name": "Trustmary",
+              "patterns": ["embed\\.trustmary\\.com|scripts\\.trustmary\\.com|trustmary\\.com/[^\\s\"'<>]*(?:widget|embed|testimonials)"]
+            },
+            {
+              "name": "Senja",
+              "patterns": ["widget\\.senja\\.io|senja\\.io/[^\\s\"'<>]*(?:embed|p/|widgets?|testimonials)"]
+            },
+            {
+              "name": "Endorsal",
+              "patterns": ["cdn\\.endorsal\\.io|embed\\.endorsal\\.io|endorsal\\.io/[^\\s\"'<>]*(?:widgets?|embed|testimonials)"]
+            },
+            {
+              "name": "Testimonial.to",
+              "patterns": ["embed-v2\\.testimonial\\.to|testimonial\\.to/[^\\s\"'<>]*(?:embed|wall-of-love|widgets?)"]
+            },
+            {
+              "name": "Boast",
+              "patterns": ["cdn\\.boast\\.io|boast\\.io/[^\\s\"'<>]*(?:forms|widgets?|embed|testimonials)"]
+            },
+            {
+              "name": "VideoAsk",
+              "patterns": ["videoask\\.com/(?:f|embed)/|embed\\.videoask\\.com|static\\.videoask\\.com"]
+            },
+            {
+              "name": "Elfsight",
+              "patterns": ["static\\.elfsight\\.com|apps\\.elfsight\\.com/p/platform\\.js|elfsight\\.com/[^\\s\"'<>]*(?:widget|app)"]
+            },
+            {
+              "name": "POWR Widgets",
+              "patterns": ["www\\.powr\\.io/powr\\.js|powr\\.io/[^\\s\"'<>]*(?:plugins|widgets|embed)"]
+            },
+            {
+              "name": "EmbedSocial",
+              "patterns": ["embedsocial\\.com/cdn|embedsocial\\.com/[^\\s\"'<>]*(?:widgets?|albums?|reviews|feed)"]
+            },
+            {
+              "name": "Taggbox",
+              "patterns": ["widget\\.taggbox\\.com|taggbox\\.com/[^\\s\"'<>]*(?:widget|embed|social-wall|ugc)"]
+            },
+            {
+              "name": "Walls.io",
+              "patterns": ["walls\\.io/js/wallsio-widget|walls\\.io/[^\\s\"'<>]*(?:widget|embed|social-wall)"]
+            },
+            {
+              "name": "Tagembed",
+              "patterns": ["widget\\.tagembed\\.com|tagembed\\.com/[^\\s\"'<>]*(?:widget|embed|social-feed)"]
+            },
+            {
+              "name": "SociableKIT",
+              "patterns": ["widgets\\.sociablekit\\.com|sociablekit\\.com/app/embed|sociablekit\\.com/[^\\s\"'<>]*(?:widgets|embed)"]
+            },
+            {
+              "name": "Curator.io",
+              "patterns": ["cdn\\.curator\\.io|curator\\.io/[^\\s\"'<>]*(?:published|widgets|embed|social-feed)"]
+            },
+            {
+              "name": "Flockler",
+              "patterns": ["plugins\\.flockler\\.com|api\\.flockler\\.com|flockler\\.com/[^\\s\"'<>]*(?:embed|wall|social-feed)"]
+            },
+            {
+              "name": "Juicer.io",
+              "patterns": ["assets\\.juicer\\.io|juicer\\.io/[^\\s\"'<>]*(?:embed|api|social-feed)"]
+            },
+            {
+              "name": "TINT",
+              "patterns": ["cdn\\.tintup\\.com|tintup\\.com/[^\\s\"'<>]*(?:widgets?|embed|app|social-wall)"]
+            },
+            {
+              "name": "Flowbox UGC",
+              "patterns": ["connect\\.getflowbox\\.com|cdn\\.getflowbox\\.com|getflowbox\\.com/[^\\s\"'<>]*(?:embed|widgets?|ugc)"]
+            },
+            {
+              "name": "Pixlee TurnTo",
+              "patterns": [
+                "assets\\.pixlee\\.com|distillery\\.pixlee\\.com|pixlee\\.com/[^\\s\"'<>]*(?:api|widget|ugc)|turnto\\.com/[^\\s\"'<>]*(?:reviews|ugc|widgets)"
+              ]
+            },
+            {
+              "name": "Emplifi UGC",
+              "patterns": ["static\\.emplifi\\.io|emplifi\\.io/[^\\s\"'<>]*(?:ugc|social-commerce|widgets?|embed)"]
             }
           ]
         },
