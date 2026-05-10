@@ -381,6 +381,18 @@
         {
           "name": "Prismic CDN",
           "patterns": ["prismic\\.io|prismic\\.cdn"]
+        },
+        {
+          "name": "Cloudflare R2",
+          "patterns": ["r2\\.cloudflarestorage\\.com"]
+        },
+        {
+          "name": "Vercel Blob",
+          "patterns": ["blob\\.vercel-storage\\.com|public\\.blob\\.vercel-storage\\.com"]
+        },
+        {
+          "name": "MongoDB Atlas App Services",
+          "patterns": ["services\\.cloud\\.mongodb\\.com|realm\\.mongodb\\.com"]
         }
       ]
     }

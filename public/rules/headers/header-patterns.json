@@ -426,6 +426,94 @@
             "evidence": "响应头或响应 URL 指向 Supabase 服务"
           },
           {
+            "name": "Firebase",
+            "patterns": [
+              "(?:^|\\n)x-firebase-",
+              "url: https?://[^\\s/]+\\.firebaseio\\.com/",
+              "url: https?://firebasestorage\\.googleapis\\.com/"
+            ],
+            "evidence": "响应头或响应 URL 指向 Firebase 服务"
+          },
+          {
+            "name": "Appwrite",
+            "patterns": ["(?:^|\\n)x-appwrite-", "url: https?://cloud\\.appwrite\\.io/v1/"],
+            "evidence": "响应头或响应 URL 指向 Appwrite 服务"
+          },
+          {
+            "name": "Nhost",
+            "patterns": ["url: https?://[^\\s/]+\\.nhost\\.(?:run|io)/", "url: https?://[^\\s/]+\\.nhost\\.app/"],
+            "evidence": "响应 URL 指向 Nhost 服务"
+          },
+          {
+            "name": "Convex",
+            "patterns": ["url: https?://[^\\s/]+\\.convex\\.(?:cloud|site)/"],
+            "evidence": "响应 URL 指向 Convex 服务"
+          },
+          {
+            "name": "Neon Database",
+            "patterns": ["url: https?://api\\.neon\\.tech/", "url: https?://console\\.neon\\.tech/api/"],
+            "evidence": "响应 URL 指向 Neon API"
+          },
+          {
+            "name": "PlanetScale",
+            "patterns": ["url: https?://api\\.planetscale\\.com/"],
+            "evidence": "响应 URL 指向 PlanetScale API"
+          },
+          {
+            "name": "Turso",
+            "patterns": ["url: https?://api\\.turso\\.tech/", "url: https?://[^\\s/]+\\.turso\\.io/"],
+            "evidence": "响应 URL 指向 Turso 服务"
+          },
+          {
+            "name": "MongoDB Atlas",
+            "patterns": [
+              "url: https?://data\\.mongodb-api\\.com/",
+              "url: https?://realm\\.mongodb\\.com/",
+              "url: https?://(?:[a-z0-9-]+\\.)?services\\.cloud\\.mongodb\\.com/"
+            ],
+            "evidence": "响应 URL 指向 MongoDB Atlas 服务"
+          },
+          {
+            "name": "Aiven",
+            "patterns": ["url: https?://api\\.aiven\\.io/"],
+            "evidence": "响应 URL 指向 Aiven API"
+          },
+          {
+            "name": "CockroachDB Cloud",
+            "patterns": ["url: https?://cockroachlabs\\.cloud/api/", "url: https?://api\\.cockroachlabs\\.cloud/"],
+            "evidence": "响应 URL 指向 CockroachDB Cloud API"
+          },
+          {
+            "name": "Cloudflare R2",
+            "patterns": ["url: https?://[^\\s/]+\\.r2\\.cloudflarestorage\\.com/"],
+            "evidence": "响应 URL 指向 Cloudflare R2"
+          },
+          {
+            "name": "Vercel Blob",
+            "patterns": ["url: https?://[^\\s/]+\\.public\\.blob\\.vercel-storage\\.com/", "url: https?://blob\\.vercel-storage\\.com/"],
+            "evidence": "响应 URL 指向 Vercel Blob"
+          },
+          {
+            "name": "Hasura",
+            "patterns": ["(?:^|\\n)x-hasura-", "url: https?://[^\\s/]+\\.hasura\\.app/"],
+            "evidence": "响应头或响应 URL 指向 Hasura 服务"
+          },
+          {
+            "name": "PostgREST",
+            "patterns": ["(?:^|\\n)server:.*\\bpostgrest\\b"],
+            "evidence": "Server 响应头包含 PostgREST"
+          },
+          {
+            "name": "Strapi",
+            "patterns": ["(?:^|\\n)x-powered-by:.*\\bstrapi\\b"],
+            "evidence": "x-powered-by 包含 Strapi"
+          },
+          {
+            "name": "Directus",
+            "patterns": ["(?:^|\\n)x-powered-by:.*\\bdirectus\\b", "(?:^|\\n)x-directus-"],
+            "evidence": "响应头包含 Directus 线索"
+          },
+          {
             "name": "Auth0",
             "patterns": ["url: https?://[^\\s/]+\\.auth0\\.com/"],
             "evidence": "响应 URL 指向 Auth0 服务"

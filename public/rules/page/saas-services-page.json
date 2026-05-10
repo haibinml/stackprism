@@ -142,6 +142,76 @@
         },
         {
           "defaults": {
+            "kind": "后端云 / 数据 API",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Appwrite Cloud",
+              "patterns": ["cloud\\.appwrite\\.io/v1|appwrite\\.io/[^\\s\"'<>]*(?:v1|sdk|console)|appwrite-js"]
+            },
+            {
+              "name": "Nhost",
+              "patterns": ["nhost\\.(?:run|io|app)|nhost-js|@nhost/"]
+            },
+            {
+              "name": "Convex",
+              "patterns": ["convex\\.(?:cloud|site)|convex\\.dev/[^\\s\"'<>]*(?:api|sdk)|@convex-dev|convex/browser"]
+            },
+            {
+              "name": "Upstash",
+              "patterns": ["upstash\\.io|upstashredis\\.com|qstash\\.upstash\\.io|upstash-vector|@upstash/"]
+            },
+            {
+              "name": "Xata",
+              "patterns": ["api\\.xata\\.io|xata\\.sh|@xata\\.io"]
+            },
+            {
+              "name": "Fauna",
+              "patterns": ["db\\.fauna\\.com|faunadb|fauna\\.com/[^\\s\"'<>]*(?:query|graphql|api)"]
+            },
+            {
+              "name": "Neon Database",
+              "patterns": ["api\\.neon\\.tech|console\\.neon\\.tech/api|neon\\.tech/[^\\s\"'<>]*(?:api|dashboard|console)"]
+            },
+            {
+              "name": "PlanetScale",
+              "patterns": ["api\\.planetscale\\.com|planetscale\\.com/[^\\s\"'<>]*(?:api|dashboard|console)"]
+            },
+            {
+              "name": "Turso",
+              "patterns": ["api\\.turso\\.tech|[a-z0-9-]+\\.turso\\.io|libsql(?:-|\\.)|@libsql/"]
+            },
+            {
+              "name": "MongoDB Atlas",
+              "patterns": [
+                "data\\.mongodb-api\\.com|realm\\.mongodb\\.com|services\\.cloud\\.mongodb\\.com|mongodb\\.com/[^\\s\"'<>]*(?:atlas|realm|data-api)"
+              ]
+            },
+            {
+              "name": "Aiven",
+              "patterns": ["api\\.aiven\\.io|aiven\\.io/[^\\s\"'<>]*(?:api|console|service)"]
+            },
+            {
+              "name": "CockroachDB Cloud",
+              "patterns": ["cockroachlabs\\.cloud/api|api\\.cockroachlabs\\.cloud"]
+            },
+            {
+              "name": "Cloudflare R2",
+              "patterns": ["[a-z0-9.-]+\\.r2\\.cloudflarestorage\\.com|r2\\.cloudflarestorage\\.com"]
+            },
+            {
+              "name": "Vercel Blob",
+              "patterns": ["[a-z0-9.-]+\\.public\\.blob\\.vercel-storage\\.com|blob\\.vercel-storage\\.com|@vercel/blob"]
+            },
+            {
+              "name": "Vercel KV",
+              "patterns": ["[a-z0-9.-]+\\.kv\\.vercel-storage\\.com|@vercel/kv"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "短信 / 通信 API",
             "matchIn": ["resources"]
           },

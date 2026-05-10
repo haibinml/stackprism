@@ -47,6 +47,18 @@
             "name": "Cloudflare Web Analytics",
             "kind": "商用 / 网站统计",
             "patterns": ["static\\.cloudflareinsights\\.com/beacon(?:\\.min)?\\.js", "cloudflareinsights\\.com/beacon"]
+          },
+          {
+            "name": "Vercel Web Analytics",
+            "kind": "商用 / 网站统计",
+            "matchIn": ["resources"],
+            "patterns": ["(?:^|/)\\_vercel/insights/script\\.js(?:[?#]|$)", "va\\.vercel-scripts\\.com/v1/script\\.js"]
+          },
+          {
+            "name": "Vercel Speed Insights",
+            "kind": "商用 / 性能监控",
+            "matchIn": ["resources"],
+            "patterns": ["(?:^|/)\\_vercel/speed-insights/script\\.js(?:[?#]|$)", "va\\.vercel-scripts\\.com/v1/speed-insights"]
           }
         ]
       },

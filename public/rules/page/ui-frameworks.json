@@ -93,6 +93,30 @@
                 "patterns": ["bulma(?:\\.min)?\\.css"]
               },
               {
+                "name": "Pico CSS",
+                "patterns": ["@picocss/pico", "(?:^|/)pico(?:\\.classless)?(?:\\.min)?\\.css(?:[?#]|$)"]
+              },
+              {
+                "name": "UnoCSS",
+                "patterns": ["@unocss/", "(?:^|/)unocss(?:\\.min)?\\.css(?:[?#]|$)", "__unocss_hash"]
+              },
+              {
+                "name": "Windi CSS",
+                "patterns": ["@windicss/", "windicss", "(?:^|/)windi(?:\\.min)?\\.css(?:[?#]|$)"]
+              },
+              {
+                "name": "Open Props",
+                "patterns": ["@open-props/", "(?:^|/)open-props(?:\\.min)?\\.css(?:[?#]|$)"]
+              },
+              {
+                "name": "Primer CSS",
+                "patterns": ["@primer/css", "(?:^|/)primer(?:\\.min)?\\.css(?:[?#]|$)"]
+              },
+              {
+                "name": "NES.css",
+                "patterns": ["nes(?:\\.min)?\\.css(?:[?#]|$)", "nostalgic-css\\.github\\.io/NES\\.css"]
+              },
+              {
                 "name": "Semantic UI / Fomantic UI",
                 "patterns": ["semantic(?:\\.min)?\\.(?:css|js)", "fomantic"],
                 "selectors": [".ui.button", ".ui.menu", ".ui.dropdown"]

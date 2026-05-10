@@ -20,6 +20,35 @@
           "confidence": "高",
           "patterns": ["webflow\\.js", "webflow\\.com"],
           "selectors": ["html[data-wf-page]"]
+        },
+        {
+          "defaults": {
+            "kind": "站点构建器",
+            "confidence": "高",
+            "matchIn": ["resources", "url"]
+          },
+          "rules": [
+            {
+              "name": "Framer Sites",
+              "patterns": ["framerusercontent\\.com|framerstatic\\.com|framer\\.com/[^\\s\"'<>]*(?:sites|projects|m/)"]
+            },
+            {
+              "name": "Tilda",
+              "patterns": ["static\\.tildacdn\\.com|tilda\\.ws|tilda(?:-blocks|-scripts)[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"]
+            },
+            {
+              "name": "Cargo",
+              "patterns": ["(?:static|freight)\\.cargo\\.site|cargo\\.site/[^\\s\"'<>]*(?:assets|sites|build)"]
+            },
+            {
+              "name": "Dorik",
+              "patterns": ["cdn\\.dorik\\.com|dorik\\.io|dorik\\.com/[^\\s\"'<>]*(?:assets|static|sites)"]
+            },
+            {
+              "name": "Typedream",
+              "patterns": ["typedream\\.com/[^\\s\"'<>]*(?:assets|site|static)|typedreamusercontent\\.com"]
+            }
+          ]
         }
       ]
     }
