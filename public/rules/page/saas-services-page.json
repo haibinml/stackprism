@@ -729,6 +729,100 @@
         },
         {
           "defaults": {
+            "kind": "社交分享 / 社交证明",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "ShareThis Buttons",
+              "patterns": [
+                "platform-api\\.sharethis\\.com/js/sharethis\\.js|buttons\\.sharethis\\.com|sharethis\\.com/[^\\s\"'<>]*(?:button|sharethis|widget)"
+              ]
+            },
+            {
+              "name": "AddThis Sharing Buttons",
+              "patterns": ["s7\\.addthis\\.com/js/300/addthis_widget\\.js|addthis\\.com/[^\\s\"'<>]*(?:widget|share|button)"]
+            },
+            {
+              "name": "AddToAny",
+              "patterns": ["static\\.addtoany\\.com/menu/page\\.js|addtoany\\.com/[^\\s\"'<>]*(?:menu|buttons|share)"]
+            },
+            {
+              "name": "Shareaholic",
+              "patterns": [
+                "dsms0mj1bbhn4\\.cloudfront\\.net/assets/pub/shareaholic\\.js|shareaholic\\.com/[^\\s\"'<>]*(?:assets|share|button|widget)"
+              ]
+            },
+            {
+              "name": "Sumo / BDOW",
+              "patterns": [
+                "load\\.sumome\\.com|sumome\\.com/[^\\s\"'<>]*(?:load|widget|popup)|bdow\\.com/[^\\s\"'<>]*(?:popup|widget|share)"
+              ]
+            },
+            {
+              "name": "Social9 Share",
+              "patterns": ["cdn\\.social9\\.com/js/socialshare\\.min\\.js|social9\\.com/[^\\s\"'<>]*(?:share|widget|embed)"]
+            },
+            {
+              "name": "AddShoppers",
+              "patterns": ["shop\\.addshoppers\\.com|cdn\\.addshoppers\\.com|addshoppers\\.com/[^\\s\"'<>]*(?:widget|social|share)"]
+            },
+            {
+              "name": "Fomo",
+              "patterns": ["load\\.fomo\\.com|fomo\\.com/[^\\s\"'<>]*(?:api|sites|widget|notification)"]
+            },
+            {
+              "name": "Proof / UseProof",
+              "patterns": ["cdn\\.useproof\\.com|useproof\\.com/[^\\s\"'<>]*(?:js|script|notifications|pulse)"]
+            },
+            {
+              "name": "Nudgify",
+              "patterns": ["cdn\\.nudgify\\.com|nudgify\\.com/[^\\s\"'<>]*(?:cdn|widget|nudges|notifications)"]
+            },
+            {
+              "name": "ProveSource",
+              "patterns": ["cdn\\.provesrc\\.com|provesrc\\.com/[^\\s\"'<>]*(?:widget|notifications|script)"]
+            },
+            {
+              "name": "TrustPulse",
+              "patterns": ["cdn\\.trustpulse\\.com|trustpulse\\.com/[^\\s\"'<>]*(?:api|notifications|widget)"]
+            },
+            {
+              "name": "WiserNotify",
+              "patterns": ["cdn\\.wisernotify\\.com|wisernotify\\.com/[^\\s\"'<>]*(?:widget|script|notifications)"]
+            },
+            {
+              "name": "NotificationX Social Proof",
+              "patterns": ["cdn\\.notificationx\\.com|notificationx\\.com/[^\\s\"'<>]*(?:embed|widget|notification)"]
+            },
+            {
+              "name": "Nextsale",
+              "patterns": ["cdn\\.nextsale\\.io|nextsale\\.io/[^\\s\"'<>]*(?:widget|notifications|script)"]
+            },
+            {
+              "name": "ProofFactor",
+              "patterns": ["cdn\\.prooffactor\\.com|prooffactor\\.com/[^\\s\"'<>]*(?:widget|notifications|script)"]
+            },
+            {
+              "name": "Beeketing",
+              "patterns": ["sdk\\.beeketing\\.com|beeketing\\.com/[^\\s\"'<>]*(?:widget|sales-pop|social-proof)"]
+            },
+            {
+              "name": "Hextom",
+              "patterns": ["cdn\\.hextom\\.com|hextom\\.com/[^\\s\"'<>]*(?:sales-pop|notification|widget)"]
+            },
+            {
+              "name": "SalesPop",
+              "patterns": ["cdn\\.salespop\\.com|salespop\\.com/[^\\s\"'<>]*(?:widget|notification|popup)"]
+            },
+            {
+              "name": "Convertful",
+              "patterns": ["app\\.convertful\\.com|cdn\\.convertful\\.com|convertful\\.com/[^\\s\"'<>]*(?:widget|script|popup)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "隐私合规 / Cookie 同意",
             "matchIn": ["resources"]
           },
