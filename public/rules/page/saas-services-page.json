@@ -717,6 +717,108 @@
           ]
         },
         {
+          "defaults": {
+            "kind": "KYC / 反欺诈风控",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Persona KYC",
+              "patterns": [
+                "cdn\\.withpersona\\.com|inquiry\\.withpersona\\.com|withpersona\\.com/[^\\s\"'<>]*(?:verify|inquiry|sdk|widget)"
+              ]
+            },
+            {
+              "name": "Onfido",
+              "patterns": ["sdk\\.onfido\\.com|assets\\.onfido\\.com|onfido\\.com/[^\\s\"'<>]*(?:sdk|workflow|identity|api)"]
+            },
+            {
+              "name": "Sumsub",
+              "patterns": [
+                "static\\.sumsub\\.com|api\\.sumsub\\.com|idensic\\.com|sumsub\\.com/[^\\s\"'<>]*(?:idensic|sdk|websdk|verification)"
+              ]
+            },
+            {
+              "name": "Veriff",
+              "patterns": [
+                "cdn\\.veriff\\.me|magic\\.veriff\\.me|stationapi\\.veriff\\.com|veriff\\.com/[^\\s\"'<>]*(?:sdk|session|verification)"
+              ]
+            },
+            {
+              "name": "Jumio",
+              "patterns": ["netverify\\.com|jumio\\.ai/[^\\s\"'<>]*(?:websdk|sdk|workflow)|jumio\\.com/[^\\s\"'<>]*(?:websdk|sdk|identity)"]
+            },
+            {
+              "name": "Trulioo",
+              "patterns": ["api\\.trulioo\\.com|api\\.globaldatacompany\\.com|trulioo\\.com/[^\\s\"'<>]*(?:sdk|identity|verification|api)"]
+            },
+            {
+              "name": "Socure",
+              "patterns": [
+                "sdk\\.socure\\.com|websdk\\.socure\\.com|api\\.socure\\.com|socure\\.com/[^\\s\"'<>]*(?:sdk|identity|verification)"
+              ]
+            },
+            {
+              "name": "Alloy Identity",
+              "patterns": ["sdk\\.alloy\\.co|api\\.alloy\\.co|alloy\\.co/[^\\s\"'<>]*(?:sdk|identity|verification|workflow)"]
+            },
+            {
+              "name": "Sardine",
+              "patterns": ["sdk\\.sardine\\.ai|api\\.sardine\\.ai|sardine\\.ai/[^\\s\"'<>]*(?:device|sdk|fraud|risk)"]
+            },
+            {
+              "name": "Sift",
+              "patterns": ["cdn\\.siftscience\\.com|sift\\.com/[^\\s\"'<>]*(?:beacon|sdk|events)|siftscience\\.com"]
+            },
+            {
+              "name": "Riskified",
+              "patterns": ["beacon\\.riskified\\.com|c\\.riskified\\.com|riskified\\.com/[^\\s\"'<>]*(?:beacon|sdk|checkout|api)"]
+            },
+            {
+              "name": "Forter",
+              "patterns": ["cdn\\.forter\\.com|forter\\.com/[^\\s\"'<>]*(?:js|sdk|api|device)|api\\.forter\\.com"]
+            },
+            {
+              "name": "Signifyd",
+              "patterns": ["cdn\\.signifyd\\.com|beacon\\.signifyd\\.com|signifyd\\.com/[^\\s\"'<>]*(?:beacon|sdk|api)"]
+            },
+            {
+              "name": "Arkose Labs",
+              "patterns": ["client-api\\.arkoselabs\\.com|iframe\\.arkoselabs\\.com|arkoselabs\\.com/[^\\s\"'<>]*(?:fc|v2|api|client)"]
+            },
+            {
+              "name": "DataDome",
+              "patterns": ["js\\.datadome\\.co|api\\.datadome\\.co|datadome\\.co/[^\\s\"'<>]*(?:tags|js|captcha|api)"]
+            },
+            {
+              "name": "Fingerprint Pro",
+              "patterns": [
+                "metrics\\.fingerprint\\.com|cdn\\.fingerprint\\.com|fpjscdn\\.net|fingerprint\\.com/[^\\s\"'<>]*(?:js-agent|sdk|pro)"
+              ]
+            },
+            {
+              "name": "HUMAN Bot Defender",
+              "patterns": [
+                "perimeterx\\.net|px-cdn\\.net|client\\.perimeterx\\.net|humansecurity\\.com/[^\\s\"'<>]*(?:bot-defender|sdk|sensor)"
+              ]
+            },
+            {
+              "name": "LexisNexis ThreatMetrix",
+              "patterns": ["online-metrix\\.net|h-online-metrix\\.net|threatmetrix\\.com/[^\\s\"'<>]*(?:fp|profiling|sdk)"]
+            },
+            {
+              "name": "Kount",
+              "patterns": [
+                "kaptcha\\.kount\\.net|risk\\.kount\\.net|kount\\.net/[^\\s\"'<>]*(?:collect|logo|session)|kount\\.com/[^\\s\"'<>]*(?:sdk|fraud)"
+              ]
+            },
+            {
+              "name": "SEON Fraud Prevention",
+              "patterns": ["cdn\\.seon\\.io|api\\.seon\\.io|seon\\.io/[^\\s\"'<>]*(?:sdk|fraud|fingerprint)"]
+            }
+          ]
+        },
+        {
           "name": "OneSignal",
           "kind": "消息推送",
           "patterns": ["onesignal\\.com|onesignalcdn\\.com|onesignal-sdk"],
