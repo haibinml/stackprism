@@ -712,6 +712,136 @@
             "evidence": "响应 URL 指向 Vercel Blob"
           },
           {
+            "name": "Google Maps Platform",
+            "patterns": ["url: https?://maps\\.googleapis\\.com/", "url: https?://maps\\.gstatic\\.com/maps/"],
+            "evidence": "响应 URL 指向 Google Maps Platform"
+          },
+          {
+            "name": "Mapbox",
+            "patterns": ["url: https?://api\\.mapbox\\.com/", "url: https?://events\\.mapbox\\.com/"],
+            "evidence": "响应 URL 指向 Mapbox"
+          },
+          {
+            "name": "AMap / 高德地图",
+            "patterns": ["url: https?://webapi\\.amap\\.com/", "url: https?://restapi\\.amap\\.com/", "url: https?://cache\\.amap\\.com/"],
+            "evidence": "响应 URL 指向高德地图"
+          },
+          {
+            "name": "Baidu Maps",
+            "patterns": ["url: https?://api\\.map\\.baidu\\.com/", "url: https?://maponline\\d*\\.bdimg\\.com/"],
+            "evidence": "响应 URL 指向百度地图"
+          },
+          {
+            "name": "Tencent Maps",
+            "patterns": [
+              "url: https?://map\\.qq\\.com/api/js",
+              "url: https?://apis\\.map\\.qq\\.com/",
+              "url: https?://mapapi\\.qq\\.com/",
+              "url: https?://3gimg\\.qq\\.com/lightmap/"
+            ],
+            "evidence": "响应 URL 指向腾讯地图"
+          },
+          {
+            "name": "HERE Maps",
+            "patterns": ["url: https?://js\\.api\\.here\\.com/", "url: https?://maps\\.hereapi\\.com/"],
+            "evidence": "响应 URL 指向 HERE Maps"
+          },
+          {
+            "name": "MapTiler",
+            "patterns": ["url: https?://api\\.maptiler\\.com/", "url: https?://cdn\\.maptiler\\.com/"],
+            "evidence": "响应 URL 指向 MapTiler"
+          },
+          {
+            "name": "TomTom Maps",
+            "patterns": ["url: https?://api\\.tomtom\\.com/(?:map|maps|search)", "url: https?://api\\.tomtom\\.com/traffic/"],
+            "evidence": "响应 URL 指向 TomTom Maps"
+          },
+          {
+            "name": "Azure Maps",
+            "patterns": ["url: https?://atlas\\.microsoft\\.com/", "url: https?://atlas\\.microsoft\\.com/sdk/javascript/mapcontrol/"],
+            "evidence": "响应 URL 指向 Azure Maps"
+          },
+          {
+            "name": "ArcGIS Maps SDK",
+            "patterns": ["url: https?://js\\.arcgis\\.com/", "url: https?://[^\\s/]+\\.arcgis\\.com/", "url: https?://[^\\s/]+\\.arcgisonline\\.com/"],
+            "evidence": "响应 URL 指向 ArcGIS Maps SDK"
+          },
+          {
+            "name": "MapQuest",
+            "patterns": ["url: https?://api\\.mqcdn\\.com/", "url: https?://www\\.mapquestapi\\.com/"],
+            "evidence": "响应 URL 指向 MapQuest"
+          },
+          {
+            "name": "CARTO",
+            "patterns": ["url: https?://[^\\s/]+\\.cartocdn\\.com/", "url: https?://[^\\s/]+\\.cartodb\\.com/"],
+            "evidence": "响应 URL 指向 CARTO"
+          },
+          {
+            "name": "Thunderforest",
+            "patterns": ["url: https?://tile\\.thunderforest\\.com/"],
+            "evidence": "响应 URL 指向 Thunderforest"
+          },
+          {
+            "name": "Stadia Maps",
+            "patterns": ["url: https?://tiles\\.stadiamaps\\.com/", "url: https?://api\\.stadiamaps\\.com/"],
+            "evidence": "响应 URL 指向 Stadia Maps"
+          },
+          {
+            "name": "OpenStreetMap Tiles",
+            "patterns": ["url: https?://(?:[abc]\\.)?tile\\.openstreetmap\\.org/"],
+            "evidence": "响应 URL 指向 OpenStreetMap 瓦片服务"
+          },
+          {
+            "name": "Bing Maps",
+            "patterns": ["url: https?://www\\.bing\\.com/api/maps/mapcontrol", "url: https?://ecn\\.dev\\.virtualearth\\.net/", "url: https?://[^\\s/]+\\.virtualearth\\.net/"],
+            "evidence": "响应 URL 指向 Bing Maps"
+          },
+          {
+            "name": "Apple MapKit JS",
+            "patterns": ["url: https?://cdn\\.apple-mapkit\\.com/", "url: https?://maps\\.apple\\.com/embed"],
+            "evidence": "响应 URL 指向 Apple MapKit JS"
+          },
+          {
+            "name": "Yandex Maps",
+            "patterns": ["url: https?://api-maps\\.yandex\\.ru/", "url: https?://yastatic\\.net/s3/mapsapi/"],
+            "evidence": "响应 URL 指向 Yandex Maps"
+          },
+          {
+            "name": "2GIS Maps",
+            "patterns": ["url: https?://maps\\.api\\.2gis\\.ru/", "url: https?://catalog\\.api\\.2gis\\.com/"],
+            "evidence": "响应 URL 指向 2GIS Maps"
+          },
+          {
+            "name": "Kakao Maps",
+            "patterns": ["url: https?://dapi\\.kakao\\.com/v2/maps/sdk\\.js", "url: https?://t1\\.daumcdn\\.net/mapjsapi/"],
+            "evidence": "响应 URL 指向 Kakao Maps"
+          },
+          {
+            "name": "Naver Maps",
+            "patterns": ["url: https?://openapi\\.map\\.naver\\.com/", "url: https?://naveropenapi\\.apigw\\.ntruss\\.com/map/"],
+            "evidence": "响应 URL 指向 Naver Maps"
+          },
+          {
+            "name": "Mappls / MapmyIndia",
+            "patterns": ["url: https?://apis\\.mappls\\.com/(?:advancedmaps|map_v3)", "url: https?://apis\\.mapmyindia\\.com/(?:advancedmaps|map_v3)"],
+            "evidence": "响应 URL 指向 Mappls / MapmyIndia"
+          },
+          {
+            "name": "Geoapify",
+            "patterns": ["url: https?://maps\\.geoapify\\.com/", "url: https?://api\\.geoapify\\.com/"],
+            "evidence": "响应 URL 指向 Geoapify"
+          },
+          {
+            "name": "LocationIQ",
+            "patterns": ["url: https?://tiles\\.locationiq\\.com/", "url: https?://api\\.locationiq\\.com/"],
+            "evidence": "响应 URL 指向 LocationIQ"
+          },
+          {
+            "name": "Cesium ion",
+            "patterns": ["url: https?://api\\.cesium\\.com/", "url: https?://assets\\.ion\\.cesium\\.com/"],
+            "evidence": "响应 URL 指向 Cesium ion"
+          },
+          {
             "name": "Hasura",
             "patterns": ["(?:^|\\n)x-hasura-", "url: https?://[^\\s/]+\\.hasura\\.app/"],
             "evidence": "响应头或响应 URL 指向 Hasura 服务"
