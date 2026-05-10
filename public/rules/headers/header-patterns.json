@@ -2367,6 +2367,240 @@
       },
       {
         "defaults": {
+          "category": "电子签名 / 合同",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "DocuSign Embedded Signing",
+            "patterns": [
+              "url: https?://(?:apps|apps-d)\\.docusign\\.com/",
+              "url: https?://demo\\.docusign\\.net/",
+              "url: https?://[^\\s/]+\\.docusign\\.net/[^\\s]*(?:signing|envelope|recipient|embedded)"
+            ],
+            "evidence": "响应 URL 指向 DocuSign 嵌入签署"
+          },
+          {
+            "name": "Adobe Acrobat Sign",
+            "patterns": [
+              "url: https?://secure(?:\\.[a-z0-9-]+)?\\.adobesign\\.com/",
+              "url: https?://[^\\s/]+\\.echosign\\.com/",
+              "url: https?://adobesign\\.com/[^\\s]*(?:public|sign|widget|api)"
+            ],
+            "evidence": "响应 URL 指向 Adobe Acrobat Sign"
+          },
+          {
+            "name": "Dropbox Sign",
+            "patterns": [
+              "url: https?://app\\.hellosign\\.com/",
+              "url: https?://hellosign\\.com/[^\\s]*(?:embedded|sign|api)",
+              "url: https?://dropboxsign\\.com/[^\\s]*(?:embed|sign|api)"
+            ],
+            "evidence": "响应 URL 指向 Dropbox Sign / HelloSign"
+          },
+          {
+            "name": "PandaDoc Embed",
+            "patterns": [
+              "url: https?://app\\.pandadoc\\.com/[^\\s]*(?:document|s/|a/)",
+              "url: https?://cdn\\.pandadoc-static\\.com/",
+              "url: https?://api\\.pandadoc\\.com/"
+            ],
+            "evidence": "响应 URL 指向 PandaDoc"
+          },
+          {
+            "name": "signNow",
+            "patterns": ["url: https?://app\\.signnow\\.com/", "url: https?://api\\.signnow\\.com/"],
+            "evidence": "响应 URL 指向 signNow"
+          },
+          {
+            "name": "SignRequest",
+            "patterns": [
+              "url: https?://signrequest\\.com/[^\\s]*(?:#/sign|document|api|embed)",
+              "url: https?://app\\.signrequest\\.com/"
+            ],
+            "evidence": "响应 URL 指向 SignRequest"
+          },
+          {
+            "name": "RightSignature",
+            "patterns": ["url: https?://rightsignature\\.com/[^\\s]*(?:signature|document|embedded|api)"],
+            "evidence": "响应 URL 指向 RightSignature"
+          },
+          {
+            "name": "DocHub",
+            "patterns": ["url: https?://dochub\\.com/[^\\s]*(?:sign|document|editor|embed|api)"],
+            "evidence": "响应 URL 指向 DocHub"
+          },
+          {
+            "name": "DocuSeal",
+            "patterns": ["url: https?://cdn\\.docuseal\\.com/", "url: https?://docuseal\\.com/[^\\s]*(?:d/|s/|embed|forms)"],
+            "evidence": "响应 URL 指向 DocuSeal"
+          },
+          {
+            "name": "Juro",
+            "patterns": ["url: https?://app\\.juro\\.com/", "url: https?://api\\.juro\\.com/"],
+            "evidence": "响应 URL 指向 Juro"
+          },
+          {
+            "name": "Ironclad",
+            "patterns": ["url: https?://[^\\s/]+\\.ironcladapp\\.com/", "url: https?://ironclad\\.app/[^\\s]*(?:contract|sign|embed)"],
+            "evidence": "响应 URL 指向 Ironclad"
+          },
+          {
+            "name": "Concord Contracts",
+            "patterns": ["url: https?://app\\.concordnow\\.com/", "url: https?://api\\.concordnow\\.com/"],
+            "evidence": "响应 URL 指向 Concord"
+          },
+          {
+            "name": "Oneflow",
+            "patterns": ["url: https?://app\\.oneflow\\.com/", "url: https?://api\\.oneflow\\.com/"],
+            "evidence": "响应 URL 指向 Oneflow"
+          },
+          {
+            "name": "Yousign",
+            "patterns": ["url: https?://api\\.yousign\\.com/", "url: https?://app\\.yousign\\.com/", "url: https?://yousign\\.app/"],
+            "evidence": "响应 URL 指向 Yousign"
+          },
+          {
+            "name": "GetAccept",
+            "patterns": ["url: https?://app\\.getaccept\\.com/", "url: https?://cdn\\.getaccept\\.com/"],
+            "evidence": "响应 URL 指向 GetAccept"
+          },
+          {
+            "name": "Signeasy",
+            "patterns": ["url: https?://app\\.signeasy\\.com/", "url: https?://api\\.signeasy\\.com/"],
+            "evidence": "响应 URL 指向 Signeasy"
+          },
+          {
+            "name": "Signable",
+            "patterns": ["url: https?://app\\.signable\\.co\\.uk/", "url: https?://api\\.signable\\.co\\.uk/"],
+            "evidence": "响应 URL 指向 Signable"
+          },
+          {
+            "name": "BoldSign",
+            "patterns": ["url: https?://app\\.boldsign\\.com/", "url: https?://api\\.boldsign\\.com/"],
+            "evidence": "响应 URL 指向 BoldSign"
+          },
+          {
+            "name": "Scrive",
+            "patterns": ["url: https?://app\\.scrive\\.com/", "url: https?://api\\.scrive\\.com/"],
+            "evidence": "响应 URL 指向 Scrive"
+          },
+          {
+            "name": "Xodo Sign / eversign",
+            "patterns": ["url: https?://app\\.eversign\\.com/", "url: https?://api\\.eversign\\.com/", "url: https?://xodosign\\.com/"],
+            "evidence": "响应 URL 指向 Xodo Sign / eversign"
+          },
+          {
+            "name": "OneSpan Sign",
+            "patterns": [
+              "url: https?://apps\\.e-signlive\\.(?:com|ca)/",
+              "url: https?://[^\\s/]+\\.esignlive\\.com/",
+              "url: https?://onespan\\.com/[^\\s]*(?:sign|esign)"
+            ],
+            "evidence": "响应 URL 指向 OneSpan Sign"
+          },
+          {
+            "name": "Signicat Sign",
+            "patterns": ["url: https?://app\\.signicat\\.com/", "url: https?://api\\.signicat\\.com/"],
+            "evidence": "响应 URL 指向 Signicat Sign"
+          },
+          {
+            "name": "Signaturit",
+            "patterns": ["url: https?://app\\.signaturit\\.com/", "url: https?://api\\.signaturit\\.com/"],
+            "evidence": "响应 URL 指向 Signaturit"
+          },
+          {
+            "name": "Zoho Sign",
+            "patterns": ["url: https?://sign\\.zoho\\.(?:com|eu|in)/", "url: https?://zohosign\\.com/"],
+            "evidence": "响应 URL 指向 Zoho Sign"
+          },
+          {
+            "name": "Sertifi",
+            "patterns": ["url: https?://app\\.sertifi\\.com/", "url: https?://api\\.sertifi\\.com/"],
+            "evidence": "响应 URL 指向 Sertifi"
+          },
+          {
+            "name": "SignWell",
+            "patterns": ["url: https?://app\\.signwell\\.com/", "url: https?://api\\.signwell\\.com/"],
+            "evidence": "响应 URL 指向 SignWell"
+          },
+          {
+            "name": "Signaturely",
+            "patterns": ["url: https?://app\\.signaturely\\.com/", "url: https?://api\\.signaturely\\.com/"],
+            "evidence": "响应 URL 指向 Signaturely"
+          },
+          {
+            "name": "Foxit eSign",
+            "patterns": ["url: https?://esign\\.foxit\\.com/", "url: https?://foxitesign\\.com/"],
+            "evidence": "响应 URL 指向 Foxit eSign"
+          },
+          {
+            "name": "Nitro Sign",
+            "patterns": ["url: https?://app\\.gonitro\\.com/[^\\s]*(?:sign|document)", "url: https?://gosign\\.nitro\\.com/"],
+            "evidence": "响应 URL 指向 Nitro Sign"
+          },
+          {
+            "name": "Legalesign",
+            "patterns": ["url: https?://app\\.legalesign\\.com/", "url: https?://api\\.legalesign\\.com/"],
+            "evidence": "响应 URL 指向 Legalesign"
+          },
+          {
+            "name": "Contractbook",
+            "patterns": ["url: https?://app\\.contractbook\\.com/", "url: https?://api\\.contractbook\\.com/"],
+            "evidence": "响应 URL 指向 Contractbook"
+          },
+          {
+            "name": "SpotDraft",
+            "patterns": ["url: https?://app\\.spotdraft\\.com/", "url: https?://api\\.spotdraft\\.com/"],
+            "evidence": "响应 URL 指向 SpotDraft"
+          },
+          {
+            "name": "LinkSquares",
+            "patterns": ["url: https?://app\\.linksquares\\.com/", "url: https?://api\\.linksquares\\.com/"],
+            "evidence": "响应 URL 指向 LinkSquares"
+          },
+          {
+            "name": "ContractSafe",
+            "patterns": ["url: https?://app\\.contractsafe\\.com/", "url: https?://api\\.contractsafe\\.com/"],
+            "evidence": "响应 URL 指向 ContractSafe"
+          },
+          {
+            "name": "Lexion",
+            "patterns": ["url: https?://app\\.lexion\\.ai/", "url: https?://api\\.lexion\\.ai/"],
+            "evidence": "响应 URL 指向 Lexion"
+          },
+          {
+            "name": "Evisort",
+            "patterns": ["url: https?://app\\.evisort\\.com/", "url: https?://api\\.evisort\\.com/"],
+            "evidence": "响应 URL 指向 Evisort"
+          },
+          {
+            "name": "Agiloft CLM",
+            "patterns": ["url: https?://[a-z0-9-]+\\.agiloft\\.com/"],
+            "evidence": "响应 URL 指向 Agiloft CLM"
+          },
+          {
+            "name": "Conga Contracts",
+            "patterns": ["url: https?://contracts\\.conga\\.com/", "url: https?://app\\.conga\\.com/"],
+            "evidence": "响应 URL 指向 Conga Contracts"
+          },
+          {
+            "name": "Icertis CLM",
+            "patterns": [
+              "url: https?://app\\.icertis\\.com/",
+              "url: https?://(?!www\\.)[a-z0-9-]+\\.icertis\\.com/(?:ICM|icm|api)"
+            ],
+            "evidence": "响应 URL 指向 Icertis CLM"
+          },
+          {
+            "name": "Sirion CLM",
+            "patterns": ["url: https?://app\\.sirionlabs\\.com/", "url: https?://api\\.sirionlabs\\.com/"],
+            "evidence": "响应 URL 指向 Sirion CLM"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "SaaS / 第三方服务",
           "confidence": "高"
         },
