@@ -1162,6 +1162,172 @@
       },
       {
         "defaults": {
+          "category": "预约排程",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Calendly",
+            "patterns": [
+              "url: https?://assets\\.calendly\\.com/",
+              "url: https?://calendly\\.com/(?:assets|api|app|widget|event_types|scheduled_events)(?:/|[?#]|$)",
+              "url: https?://calendly\\.com/(?!(?:blog|features|pricing|about|integrations|product|resources|contact|login|signup|help|docs|company|solutions|customers|teams)(?:/|[?#]|$))[^\\s/?#]+/[^\\s?#]+"
+            ],
+            "evidence": "响应 URL 指向 Calendly 预约排程"
+          },
+          {
+            "name": "Cal.com",
+            "patterns": ["url: https?://app\\.cal\\.com/", "url: https?://cal\\.com/(?:embed|booking|api/bookings)(?:/|[?#]|$)"],
+            "evidence": "响应 URL 指向 Cal.com 预约排程"
+          },
+          {
+            "name": "Acuity Scheduling",
+            "patterns": [
+              "url: https?://embed\\.acuityscheduling\\.com/",
+              "url: https?://(?:www\\.)?acuityscheduling\\.com/schedule\\.php",
+              "url: https?://acuityplatform\\.com/embed"
+            ],
+            "evidence": "响应 URL 指向 Acuity Scheduling"
+          },
+          {
+            "name": "YouCanBookMe",
+            "patterns": ["url: https?://cdn\\.youcanbook\\.me/", "url: https?://booking\\.youcanbook\\.me/", "url: https?://[^\\s/]+\\.youcanbook\\.me/"],
+            "evidence": "响应 URL 指向 YouCanBookMe"
+          },
+          {
+            "name": "SavvyCal",
+            "patterns": ["url: https?://cdn\\.savvycal\\.com/", "url: https?://savvycal\\.com/[^\\s]*(?:embed|widget|booking)"],
+            "evidence": "响应 URL 指向 SavvyCal"
+          },
+          {
+            "name": "OnceHub / ScheduleOnce",
+            "patterns": ["url: https?://cdn\\.oncehub\\.com/", "url: https?://(?:www\\.)?oncehub\\.com/[^\\s]*(?:widget|embed)", "url: https?://[^\\s/]+\\.scheduleonce\\.com/"],
+            "evidence": "响应 URL 指向 OnceHub / ScheduleOnce"
+          },
+          {
+            "name": "Chili Piper",
+            "patterns": ["url: https?://js\\.chilipiper\\.com/", "url: https?://(?:www\\.)?chilipiper\\.com/[^\\s]*(?:concierge|book|router)"],
+            "evidence": "响应 URL 指向 Chili Piper"
+          },
+          {
+            "name": "TidyCal",
+            "patterns": ["url: https?://tidycal\\.com/[^\\s]*(?:embed|booking|widgets?)"],
+            "evidence": "响应 URL 指向 TidyCal"
+          },
+          {
+            "name": "Microsoft Bookings",
+            "patterns": [
+              "url: https?://outlook\\.office(?:365)?\\.com/owa/calendar/[^\\s]*(?:bookings|book)",
+              "url: https?://outlook\\.office\\.com/book/"
+            ],
+            "evidence": "响应 URL 指向 Microsoft Bookings"
+          },
+          {
+            "name": "Doodle Booking",
+            "patterns": ["url: https?://doodle\\.com/(?:meeting/participate|poll|booking-page|bp/)"],
+            "evidence": "响应 URL 指向 Doodle 预约排程"
+          },
+          {
+            "name": "SimplyBook.me Booking Widget",
+            "patterns": [
+              "url: https?://widget\\.simplybook\\.me/",
+              "url: https?://[^\\s/]+\\.simplybook\\.me/[^\\s]*(?:booking|iframe|widget)",
+              "url: https?://[^\\s/]+\\.simplybook\\.it/[^\\s]*(?:booking|widget)"
+            ],
+            "evidence": "响应 URL 指向 SimplyBook.me"
+          },
+          {
+            "name": "Setmore",
+            "patterns": ["url: https?://my\\.setmore\\.com/bookingpage/", "url: https?://(?:www\\.)?setmore\\.com/bookingpage/", "url: https?://assets\\.setmore\\.com/"],
+            "evidence": "响应 URL 指向 Setmore"
+          },
+          {
+            "name": "Appointlet",
+            "patterns": ["url: https?://assets\\.appointlet\\.com/", "url: https?://(?:www\\.)?appointlet\\.com/[^\\s]*(?:embed|s/|book)"],
+            "evidence": "响应 URL 指向 Appointlet"
+          },
+          {
+            "name": "Bookafy",
+            "patterns": ["url: https?://(?:www\\.)?bookafy\\.com/[^\\s]*(?:schedule|booking|widget|embed)", "url: https?://[^\\s/]+\\.bookafy\\.net/"],
+            "evidence": "响应 URL 指向 Bookafy"
+          },
+          {
+            "name": "Picktime",
+            "patterns": ["url: https?://(?:www\\.)?picktime\\.com/[^\\s]*(?:booking|widget)", "url: https?://(?:www\\.)?picktime\\.com/assets/"],
+            "evidence": "响应 URL 指向 Picktime"
+          },
+          {
+            "name": "Calendesk",
+            "patterns": ["url: https?://cdn\\.calendesk\\.com/", "url: https?://(?:www\\.)?calendesk\\.com/[^\\s]*(?:widget|booking|embed)"],
+            "evidence": "响应 URL 指向 Calendesk"
+          },
+          {
+            "name": "TimeTap",
+            "patterns": ["url: https?://api\\.timetap\\.com/", "url: https?://(?:www\\.)?timetap\\.com/[^\\s]*(?:embed|booking|scheduler)"],
+            "evidence": "响应 URL 指向 TimeTap"
+          },
+          {
+            "name": "Book Like A Boss",
+            "patterns": ["url: https?://booklikeaboss\\.com/[^\\s]*(?:embed|widget|s/|book)"],
+            "evidence": "响应 URL 指向 Book Like A Boss"
+          },
+          {
+            "name": "zcal",
+            "patterns": ["url: https?://zcal\\.co/[^\\s]*(?:embed|i/|meeting|book)"],
+            "evidence": "响应 URL 指向 zcal"
+          },
+          {
+            "name": "Square Appointments",
+            "patterns": ["url: https?://squareup\\.com/appointments/book/", "url: https?://square\\.site/appointments/"],
+            "evidence": "响应 URL 指向 Square Appointments"
+          },
+          {
+            "name": "Vagaro",
+            "patterns": ["url: https?://(?:www\\.)?vagaro\\.com/BookingWidget", "url: https?://(?:www\\.)?vagaro\\.com/[^\\s]*(?:users/booking|appointment|book-now)"],
+            "evidence": "响应 URL 指向 Vagaro"
+          },
+          {
+            "name": "Booksy",
+            "patterns": ["url: https?://(?:www\\.)?booksy\\.com/widget", "url: https?://(?:www\\.)?booksy\\.com/[^\\s]*(?:book|biz|booking)"],
+            "evidence": "响应 URL 指向 Booksy"
+          },
+          {
+            "name": "Fresha",
+            "patterns": ["url: https?://widget\\.fresha\\.com/", "url: https?://(?:www\\.)?fresha\\.com/book-now", "url: https?://(?:www\\.)?fresha\\.com/a/[^\\s]*(?:booking|book-now)"],
+            "evidence": "响应 URL 指向 Fresha"
+          },
+          {
+            "name": "Mindbody",
+            "patterns": [
+              "url: https?://widgets\\.mindbodyonline\\.com/",
+              "url: https?://clients\\.mindbodyonline\\.com/[^\\s]*(?:classic/ws|asp/main_shop|launch)"
+            ],
+            "evidence": "响应 URL 指向 Mindbody"
+          },
+          {
+            "name": "Squire Appointments",
+            "patterns": ["url: https?://getsquire\\.com/booking", "url: https?://shops\\.getsquire\\.com/[^\\s]*(?:book|booking)"],
+            "evidence": "响应 URL 指向 Squire Appointments"
+          },
+          {
+            "name": "Zenoti",
+            "patterns": ["url: https?://booknow\\.zenoti\\.com/", "url: https?://api\\.zenoti\\.com/", "url: https?://(?:www\\.)?zenoti\\.com/[^\\s]*(?:webstore|booking|online-booking)"],
+            "evidence": "响应 URL 指向 Zenoti"
+          },
+          {
+            "name": "Timely Booking",
+            "patterns": ["url: https?://book\\.gettimely\\.com/", "url: https?://bookings\\.gettimely\\.com/"],
+            "evidence": "响应 URL 指向 Timely Booking"
+          },
+          {
+            "name": "Reservio",
+            "patterns": ["url: https?://booking\\.reservio\\.com/", "url: https?://(?:www\\.)?reservio\\.com/[^\\s]*(?:booking|services|embed|widgets?)"],
+            "evidence": "响应 URL 指向 Reservio"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "支付系统",
           "confidence": "高"
         },
