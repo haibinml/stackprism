@@ -4023,6 +4023,125 @@
       },
       {
         "defaults": {
+          "category": "短信 / 通信 API",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Twilio Messaging",
+            "patterns": [
+              "url: https?://api\\.twilio\\.com/2010-04-01/Accounts/[^\\s/]+/Messages(?:\\.json)?",
+              "url: https?://messaging\\.twilio\\.com/v1/Services/[^\\s/]+/Messages"
+            ],
+            "evidence": "响应 URL 指向 Twilio Messaging API"
+          },
+          {
+            "name": "Twilio Verify",
+            "patterns": ["url: https?://verify\\.twilio\\.com/v2/Services/"],
+            "evidence": "响应 URL 指向 Twilio Verify API"
+          },
+          {
+            "name": "Vonage SMS / Messages",
+            "patterns": [
+              "url: https?://rest\\.nexmo\\.com/sms/json",
+              "url: https?://api\\.nexmo\\.com/v[0-9.]+/messages",
+              "url: https?://api\\.vonage\\.com/v[0-9.]+/messages"
+            ],
+            "evidence": "响应 URL 指向 Vonage / Nexmo 消息 API"
+          },
+          {
+            "name": "MessageBird / Bird",
+            "patterns": [
+              "url: https?://rest\\.messagebird\\.com/messages",
+              "url: https?://conversations\\.messagebird\\.com/v1/",
+              "url: https?://api\\.bird\\.com/workspaces/[^\\s/]+/(?:channels|messages|conversations)"
+            ],
+            "evidence": "响应 URL 指向 MessageBird / Bird 通信 API"
+          },
+          {
+            "name": "Sinch SMS",
+            "patterns": ["url: https?://(?:[a-z0-9-]+\\.)?sms\\.api\\.sinch\\.com/", "url: https?://verification\\.api\\.sinch\\.com/"],
+            "evidence": "响应 URL 指向 Sinch SMS 或验证 API"
+          },
+          {
+            "name": "Infobip Messaging",
+            "patterns": ["url: https?://[^\\s/]+\\.api\\.infobip\\.com/(?:sms|2fa)/", "url: https?://api\\.infobip\\.com/(?:sms|2fa)/"],
+            "evidence": "响应 URL 指向 Infobip 消息 API"
+          },
+          {
+            "name": "Plivo Messaging",
+            "patterns": ["url: https?://api\\.plivo\\.com/v1/Account/[^\\s/]+/Message/"],
+            "evidence": "响应 URL 指向 Plivo Messaging API"
+          },
+          {
+            "name": "Telnyx Messaging",
+            "patterns": ["url: https?://api\\.telnyx\\.com/v2/messages"],
+            "evidence": "响应 URL 指向 Telnyx Messaging API"
+          },
+          {
+            "name": "Bandwidth Messaging",
+            "patterns": ["url: https?://messaging\\.bandwidth\\.com/api/v2/users/[^\\s/]+/messages"],
+            "evidence": "响应 URL 指向 Bandwidth Messaging API"
+          },
+          {
+            "name": "ClickSend SMS",
+            "patterns": ["url: https?://rest\\.clicksend\\.com/v[0-9]+/sms/"],
+            "evidence": "响应 URL 指向 ClickSend SMS API"
+          },
+          {
+            "name": "MessageMedia",
+            "patterns": ["url: https?://api\\.messagemedia\\.com/v1/messages"],
+            "evidence": "响应 URL 指向 MessageMedia API"
+          },
+          {
+            "name": "SMSAPI",
+            "patterns": ["url: https?://api\\.smsapi\\.(?:com|pl)/sms\\.do"],
+            "evidence": "响应 URL 指向 SMSAPI"
+          },
+          {
+            "name": "SMS.to",
+            "patterns": ["url: https?://api\\.sms\\.to/sms/"],
+            "evidence": "响应 URL 指向 SMS.to API"
+          },
+          {
+            "name": "Textlocal",
+            "patterns": ["url: https?://api\\.(?:textlocal\\.in|txtlocal\\.com)/send/"],
+            "evidence": "响应 URL 指向 Textlocal API"
+          },
+          {
+            "name": "TextMagic",
+            "patterns": ["url: https?://rest\\.textmagic\\.com/api/v2/messages"],
+            "evidence": "响应 URL 指向 TextMagic API"
+          },
+          {
+            "name": "Africa's Talking SMS",
+            "patterns": ["url: https?://api\\.africastalking\\.com/version1/messaging"],
+            "evidence": "响应 URL 指向 Africa's Talking Messaging API"
+          },
+          {
+            "name": "Alibaba Cloud SMS",
+            "patterns": ["url: https?://dysmsapi\\.aliyuncs\\.com/"],
+            "evidence": "响应 URL 指向阿里云短信 API"
+          },
+          {
+            "name": "Tencent Cloud SMS",
+            "patterns": ["url: https?://sms\\.tencentcloudapi\\.com/"],
+            "evidence": "响应 URL 指向腾讯云短信 API"
+          },
+          {
+            "name": "Huawei Cloud Message & SMS",
+            "patterns": ["url: https?://smsapi\\.[a-z0-9-]+\\.myhuaweicloud\\.com/"],
+            "evidence": "响应 URL 指向华为云短信 API"
+          },
+          {
+            "name": "Netgsm",
+            "patterns": ["url: https?://api\\.netgsm\\.com\\.tr/(?:sms|bulkhttppost)"],
+            "evidence": "响应 URL 指向 Netgsm SMS API"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "SaaS / 第三方服务",
           "confidence": "高"
         },
