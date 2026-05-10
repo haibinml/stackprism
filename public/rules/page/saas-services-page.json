@@ -3606,6 +3606,98 @@
         },
         {
           "defaults": {
+            "kind": "视频会议 / Webinar",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "GoTo Webinar",
+              "patterns": [
+                "attendee\\.gotowebinar\\.com/(?:register|recording|rt)|global\\.gotowebinar\\.com/(?:join|recording)|gotowebinar\\.com/[^\\s\"'<>]*(?:register|webinar|recording)"
+              ]
+            },
+            {
+              "name": "ON24 Webcast",
+              "patterns": ["event\\.on24\\.com|wcc\\.on24\\.com|gateway\\.on24\\.com|on24\\.com/[^\\s\"'<>]*(?:webcast|event|wcc)"]
+            },
+            {
+              "name": "Demio",
+              "patterns": ["my\\.demio\\.com/(?:ref|recording|join)|cdn\\.demio\\.com|demio\\.com/[^\\s\"'<>]*(?:webinar|join|embed)"]
+            },
+            {
+              "name": "WebinarJam",
+              "patterns": ["event\\.webinarjam\\.com|app\\.webinarjam\\.com|webinarjam\\.com/[^\\s\"'<>]*(?:register|webinar|live)"]
+            },
+            {
+              "name": "EverWebinar",
+              "patterns": ["event\\.everwebinar\\.com|app\\.everwebinar\\.com|everwebinar\\.com/[^\\s\"'<>]*(?:register|webinar|live)"]
+            },
+            {
+              "name": "ClickMeeting",
+              "patterns": [
+                "embed\\.clickmeeting\\.com|room\\.clickmeeting\\.com|clickmeeting\\.com/[^\\s\"'<>]*(?:event|webinar|embed|register)"
+              ]
+            },
+            {
+              "name": "WebinarNinja",
+              "patterns": ["app\\.webinarninja\\.com|webinarninja\\.com/[^\\s\"'<>]*(?:webinars|live|register|embed)"]
+            },
+            {
+              "name": "EasyWebinar",
+              "patterns": ["event\\.easywebinar\\.com|app\\.easywebinar\\.com|easywebinar\\.com/[^\\s\"'<>]*(?:event|webinar|register)"]
+            },
+            {
+              "name": "eWebinar",
+              "patterns": ["app\\.ewebinar\\.com|ewebinar\\.com/[^\\s\"'<>]*(?:webinars|embed|register|watch)"]
+            },
+            {
+              "name": "Crowdcast",
+              "patterns": ["crowdcast\\.io/(?:e|embed)/|crowdcast\\.io/[^\\s\"'<>]*(?:webinar|register|replay)"]
+            },
+            {
+              "name": "Cisco Webex",
+              "patterns": ["webex\\.com/(?:meet|webappng/sites|recordingservice/sites)|webexapis\\.com|webexcontent\\.com"]
+            },
+            {
+              "name": "Microsoft Teams Meetings",
+              "patterns": ["teams\\.microsoft\\.com/l/meetup-join|teams\\.live\\.com/meet|teams\\.microsoft\\.com/dl/launcher"]
+            },
+            {
+              "name": "Google Meet",
+              "patterns": ["meet\\.google\\.com/[a-z]{3}-[a-z]{4}-[a-z]{3}|meet\\.google\\.com/lookup/"]
+            },
+            {
+              "name": "BlueJeans",
+              "patterns": ["bluejeans\\.com/[0-9]{6,}|bluejeans\\.com/s/|bluejeans\\.com/[^\\s\"'<>]*(?:webrtc|meeting|event)"]
+            },
+            {
+              "name": "Riverside.fm",
+              "patterns": ["app\\.riverside\\.fm|riverside\\.fm/(?:studio|dashboard|recording)|riverside\\.fm/[^\\s\"'<>]*(?:embed|join)"]
+            },
+            {
+              "name": "StreamYard",
+              "patterns": ["streamyard\\.com/(?:watch|broadcast|embed)|streamyard\\.com/[^\\s\"'<>]*(?:live|watch|embed)"]
+            },
+            {
+              "name": "Restream Player",
+              "patterns": ["player\\.restream\\.io|restream\\.io/[^\\s\"'<>]*(?:embed|studio|join|live)"]
+            },
+            {
+              "name": "Sessions.us",
+              "patterns": ["app\\.sessions\\.us|sessions\\.us/[^\\s\"'<>]*(?:webinar|event|room|embed)"]
+            },
+            {
+              "name": "Butter.us",
+              "patterns": ["app\\.butter\\.us|butter\\.us/[^\\s\"'<>]*(?:room|session|embed|join)"]
+            },
+            {
+              "name": "Around.co",
+              "patterns": ["app\\.around\\.co|around\\.co/[^\\s\"'<>]*(?:room|meet|join)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "会员社区 / 创作者变现",
             "matchIn": ["resources"]
           },
