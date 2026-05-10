@@ -4193,6 +4193,94 @@
               "patterns": [
                 "cdn\\.redoc\\.ly|redocly\\.com/[^\\s\"'<>]*(?:docs|redoc|reference|api)|redoc\\.ly/[^\\s\"'<>]*(?:docs|reference)"
               ]
+            },
+            {
+              "name": "Zendesk Guide",
+              "patterns": ["static\\.zdassets\\.com/hc|zendesk\\.com/hc/(?:[a-z]{2}|api|hc)|zdassets\\.com/[^\\s\"'<>]*guide"]
+            },
+            {
+              "name": "Intercom Articles",
+              "patterns": [
+                "intercom\\.help/|intercom-help\\.eu/|static\\.intercomassets\\.com/[^\\s\"'<>]*(?:articles|educate|help-center)"
+              ]
+            },
+            {
+              "name": "Help Scout Docs",
+              "patterns": ["helpscoutdocs\\.com|docs\\.helpscout\\.net|helpscout\\.com/[^\\s\"'<>]*(?:docs|knowledge-base)"]
+            },
+            {
+              "name": "Freshdesk Knowledge Base",
+              "patterns": [
+                "freshdesk\\.com/support/(?:solutions|home)|freshdesk\\.com/a/solutions|assets\\.freshdesk\\.com/[^\\s\"'<>]*(?:help|solutions|portal)"
+              ]
+            },
+            {
+              "name": "Zoho Desk Help Center",
+              "patterns": ["desk\\.zoho\\.(?:com|eu|in)/portal/|zohodesk\\.(?:com|eu|in)/portal/|zoho\\.com/desk/[^\\s\"'<>]*help-center"]
+            },
+            {
+              "name": "LiveAgent Knowledge Base",
+              "patterns": [
+                "ladesk\\.com/[^\\s\"'<>]*(?:knowledgebase|kb|help)|liveagent\\.com/[^\\s\"'<>]*(?:knowledge-base|kb|help-center)"
+              ]
+            },
+            {
+              "name": "ProProfs Knowledge Base",
+              "patterns": ["proprofskb\\.com|proprofsdesk\\.com|proprofs\\.com/[^\\s\"'<>]*(?:knowledgebase|knowledge-base|kb)"]
+            },
+            {
+              "name": "KnowledgeOwl",
+              "patterns": ["knowledgeowl\\.com/help|knowledgeowl\\.com/[^\\s\"'<>]*(?:assets|kb|knowledge-base)|knowledgeowlcdn\\.com"]
+            },
+            {
+              "name": "HelpSite",
+              "patterns": ["helpsite\\.com/[^\\s\"'<>]*(?:articles|knowledge-base|kb|support)|cdn\\.helpsite\\.com"]
+            },
+            {
+              "name": "HelpCenter.io",
+              "patterns": ["helpcenter\\.io/[^\\s\"'<>]*(?:articles|collections|knowledge-base|hc)|cdn\\.helpcenter\\.io"]
+            },
+            {
+              "name": "HelpKit",
+              "patterns": ["helpkit\\.so|helpkit\\.js|cdn\\.helpkit\\.so|helpkit\\.co/[^\\s\"'<>]*(?:docs|help|kb)"]
+            },
+            {
+              "name": "Notaku",
+              "patterns": ["notaku\\.so|notaku\\.site|cdn\\.notaku\\.so|notaku\\.com/[^\\s\"'<>]*(?:docs|help|notion)"]
+            },
+            {
+              "name": "Super.so",
+              "patterns": ["assets\\.super\\.so|super\\.site|super\\.so/[^\\s\"'<>]*(?:static|site|notion)"]
+            },
+            {
+              "name": "Potion",
+              "patterns": ["potion\\.so|potion\\.pages\\.dev|cdn\\.potion\\.so|potion\\.com/[^\\s\"'<>]*(?:notion|site|docs)"]
+            },
+            {
+              "name": "GitBook Docs",
+              "patterns": ["assets\\.gitbook\\.com|gitbook\\.io|gitbook\\.com/[^\\s\"'<>]*(?:embed|docs|spaces|api)"]
+            },
+            {
+              "name": "Read the Docs",
+              "patterns": [
+                "readthedocs\\.io|readthedocs-hosted\\.com|media\\.readthedocs\\.org|readthedocs\\.org/[^\\s\"'<>]*(?:projects|api)"
+              ]
+            },
+            {
+              "name": "Fern Docs",
+              "patterns": ["buildwithfern\\.com|docs\\.buildwithfern\\.com|fern-api\\.com|fern\\.com/[^\\s\"'<>]*(?:docs|api-reference)"]
+            },
+            {
+              "name": "Bump.sh",
+              "patterns": ["bump\\.sh/[^\\s\"'<>]*(?:doc|hub|api-reference|embed)|bumpcdn\\.com"]
+            },
+            {
+              "name": "Theneo",
+              "patterns": ["theneo\\.io/[^\\s\"'<>]*(?:docs|api|embed|portal)|cdn\\.theneo\\.io|app\\.theneo\\.io"]
+            },
+            {
+              "name": "Scalar Docs",
+              "patterns": ["cdn\\.scalar\\.com|scalar\\.com/[^\\s\"'<>]*(?:api-reference|docs|embed)|cdn\\.jsdelivr\\.net/npm/@scalar/"]
             }
           ]
         }
