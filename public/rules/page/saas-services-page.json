@@ -2903,6 +2903,88 @@
             {
               "name": "Xodo Sign / eversign",
               "patterns": ["app\\.eversign\\.com|eversign\\.com/[^\\s\"'<>]*(?:document|sign|embedded|api)|xodosign\\.com"]
+            },
+            {
+              "name": "OneSpan Sign",
+              "patterns": [
+                "apps\\.e-signlive\\.(?:com|ca)|esignlive\\.com/[^\\s\"'<>]*(?:sign|package|document)|onespan\\.com/[^\\s\"'<>]*(?:sign|esign)"
+              ]
+            },
+            {
+              "name": "Signicat Sign",
+              "patterns": ["signicat\\.com/[^\\s\"'<>]*(?:sign|esign|document)|app\\.signicat\\.com|api\\.signicat\\.com"]
+            },
+            {
+              "name": "Signaturit",
+              "patterns": ["app\\.signaturit\\.com|signaturit\\.com/[^\\s\"'<>]*(?:document|signature|sign|api)"]
+            },
+            {
+              "name": "Zoho Sign",
+              "patterns": ["sign\\.zoho\\.(?:com|eu|in)|zohosign\\.com|zoho\\.com/sign/[^\\s\"'<>]*(?:document|api|embed)"]
+            },
+            {
+              "name": "Sertifi",
+              "patterns": ["app\\.sertifi\\.com|sertifi\\.com/[^\\s\"'<>]*(?:sign|agreement|contract|document)"]
+            },
+            {
+              "name": "SignWell",
+              "patterns": ["app\\.signwell\\.com|signwell\\.com/[^\\s\"'<>]*(?:document|sign|embed|api)"]
+            },
+            {
+              "name": "Signaturely",
+              "patterns": ["app\\.signaturely\\.com|signaturely\\.com/[^\\s\"'<>]*(?:document|sign|embed|api)"]
+            },
+            {
+              "name": "Foxit eSign",
+              "patterns": ["esign\\.foxit\\.com|foxitesign\\.com|foxit\\.com/[^\\s\"'<>]*(?:esign|e-sign|sign)"]
+            },
+            {
+              "name": "Nitro Sign",
+              "patterns": ["app\\.gonitro\\.com/[^\\s\"'<>]*(?:sign|document)|gosign\\.nitro\\.com|nitro\\.com/[^\\s\"'<>]*(?:sign|esign)"]
+            },
+            {
+              "name": "Legalesign",
+              "patterns": ["app\\.legalesign\\.com|legalesign\\.com/[^\\s\"'<>]*(?:sign|document|contract|api)"]
+            },
+            {
+              "name": "Contractbook",
+              "patterns": ["app\\.contractbook\\.com|contractbook\\.com/[^\\s\"'<>]*(?:contracts|documents|sign|api)"]
+            },
+            {
+              "name": "SpotDraft",
+              "patterns": ["app\\.spotdraft\\.com|spotdraft\\.com/[^\\s\"'<>]*(?:contract|sign|document|clm)"]
+            },
+            {
+              "name": "LinkSquares",
+              "patterns": ["app\\.linksquares\\.com|linksquares\\.com/[^\\s\"'<>]*(?:contracts|clm|finalize|analyze)"]
+            },
+            {
+              "name": "ContractSafe",
+              "patterns": ["app\\.contractsafe\\.com|contractsafe\\.com/[^\\s\"'<>]*(?:contract|document|repository|api)"]
+            },
+            {
+              "name": "Lexion",
+              "patterns": ["app\\.lexion\\.ai|lexion\\.ai/[^\\s\"'<>]*(?:contracts|clm|workflow|repository)"]
+            },
+            {
+              "name": "Evisort",
+              "patterns": ["app\\.evisort\\.com|evisort\\.com/[^\\s\"'<>]*(?:contract|clm|document|ai)"]
+            },
+            {
+              "name": "Agiloft CLM",
+              "patterns": ["[a-z0-9-]+\\.agiloft\\.com|agiloft\\.com/[^\\s\"'<>]*(?:clm|contract|workflow|api)"]
+            },
+            {
+              "name": "Conga Contracts",
+              "patterns": ["contracts\\.conga\\.com|app\\.conga\\.com|conga\\.com/[^\\s\"'<>]*(?:contracts|clm|sign|composer)"]
+            },
+            {
+              "name": "Icertis CLM",
+              "patterns": ["icertis\\.com/[^\\s\"'<>]*(?:contract|clm|icm|platform)|app\\.icertis\\.com"]
+            },
+            {
+              "name": "Sirion CLM",
+              "patterns": ["app\\.sirionlabs\\.com|sirionlabs\\.com/[^\\s\"'<>]*(?:contract|clm|supplier|workflow)"]
             }
           ]
         },
