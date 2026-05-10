@@ -3678,6 +3678,100 @@
         },
         {
           "defaults": {
+            "kind": "Web3 钱包 / 链上基础设施",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "WalletConnect",
+              "resourceHints": ["walletconnect"],
+              "patterns": [
+                "(?:https?|wss?)://(?:relay|rpc|notify|explorer-api|pulse)\\.walletconnect\\.(?:com|org)"
+              ]
+            },
+            {
+              "name": "Reown AppKit",
+              "resourceHints": ["reown", "web3modal", "walletconnect"],
+              "patterns": [
+                "api\\.web3modal\\.(?:com|org)|events\\.walletconnect\\.com|secure\\.walletconnect\\.com|cdn\\.jsdelivr\\.net/npm/@reown/appkit|unpkg\\.com/@reown/appkit|@reown/appkit"
+              ]
+            },
+            {
+              "name": "Coinbase Wallet SDK",
+              "resourceHints": ["coinbase", "wallet-sdk"],
+              "patterns": [
+                "wallet\\.coinbase\\.com/(?:wallet-sdk|sdk)|coinbase\\.com/wallet-sdk|cdn\\.jsdelivr\\.net/npm/@coinbase/wallet-sdk|unpkg\\.com/@coinbase/wallet-sdk"
+              ]
+            },
+            {
+              "name": "thirdweb",
+              "resourceHints": ["thirdweb", "ipfscdn"],
+              "patterns": ["connect\\.thirdweb\\.com|in-app-wallet\\.thirdweb\\.com|api\\.thirdweb\\.com|[^\\s/]+\\.ipfscdn\\.io/ipfs/"]
+            },
+            {
+              "name": "Alchemy",
+              "resourceHints": ["alchemy"],
+              "patterns": ["[a-z0-9-]+\\.g\\.alchemy\\.com/v2/|alchemyapi\\.io/v2/"]
+            },
+            {
+              "name": "Infura",
+              "resourceHints": ["infura"],
+              "patterns": ["[a-z0-9-]+\\.infura\\.io/v3/|ipfs\\.infura\\.io:5001/api/v0/"]
+            },
+            {
+              "name": "QuickNode",
+              "resourceHints": ["quiknode"],
+              "patterns": ["[a-z0-9-]+\\.quiknode\\.pro/"]
+            },
+            {
+              "name": "Moralis",
+              "resourceHints": ["moralis"],
+              "patterns": ["deep-index\\.moralis\\.io/api/v2(?:\\.2)?/|authapi\\.moralis\\.io|streams-api\\.moralis\\.io"]
+            },
+            {
+              "name": "The Graph",
+              "resourceHints": ["thegraph"],
+              "patterns": ["gateway\\.thegraph\\.com/api/|api\\.thegraph\\.com/subgraphs/name/|api\\.studio\\.thegraph\\.com/query/"]
+            },
+            {
+              "name": "Covalent",
+              "resourceHints": ["covalent"],
+              "patterns": ["api\\.covalenthq\\.com/v1/|api\\.covalent\\.hq/v1/"]
+            },
+            {
+              "name": "Helius",
+              "resourceHints": ["helius"],
+              "patterns": ["(?:mainnet|devnet)\\.helius-rpc\\.com/|api\\.helius\\.xyz/v[0-9]+/"]
+            },
+            {
+              "name": "Ankr RPC",
+              "resourceHints": ["ankr"],
+              "patterns": ["rpc\\.ankr\\.com/(?:eth|polygon|bsc|arbitrum|optimism|avalanche|fantom|gnosis|base|solana)"]
+            },
+            {
+              "name": "Blocknative",
+              "resourceHints": ["blocknative"],
+              "patterns": ["api\\.blocknative\\.com|notify\\.blocknative\\.com|cdn\\.blocknative\\.com"]
+            },
+            {
+              "name": "Tenderly RPC",
+              "resourceHints": ["tenderly"],
+              "patterns": ["rpc\\.tenderly\\.co/fork/|virtual\\.[a-z0-9-]+\\.rpc\\.tenderly\\.co|api\\.tenderly\\.co/api/v1/"]
+            },
+            {
+              "name": "GetBlock",
+              "resourceHints": ["getblock"],
+              "patterns": ["go\\.getblock\\.io/[A-Za-z0-9]+|api\\.getblock\\.io/"]
+            },
+            {
+              "name": "Tatum",
+              "resourceHints": ["tatum"],
+              "patterns": ["api\\.tatum\\.io/v[0-9]+/"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "验证码 / Bot 防护"
           },
           "rules": [

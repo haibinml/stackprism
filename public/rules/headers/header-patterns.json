@@ -4581,6 +4581,126 @@
       },
       {
         "defaults": {
+          "category": "Web3 钱包 / 链上基础设施",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "WalletConnect",
+            "patterns": [
+              "url: (?:https?|wss?)://(?:relay|rpc|notify|explorer-api|pulse)\\.walletconnect\\.(?:com|org)"
+            ],
+            "evidence": "响应 URL 指向 WalletConnect relay、RPC 或 SDK"
+          },
+          {
+            "name": "Reown AppKit",
+            "patterns": [
+              "url: https?://api\\.web3modal\\.(?:com|org)/",
+              "url: https?://events\\.walletconnect\\.com/",
+              "url: https?://secure\\.walletconnect\\.com/",
+              "url: https?://(?:cdn\\.jsdelivr\\.net/npm|unpkg\\.com)/@reown/appkit"
+            ],
+            "evidence": "响应 URL 指向 Reown AppKit / Web3Modal 服务"
+          },
+          {
+            "name": "Coinbase Wallet SDK",
+            "patterns": [
+              "url: https?://wallet\\.coinbase\\.com/(?:wallet-sdk|sdk)",
+              "url: https?://(?:www\\.)?coinbase\\.com/wallet-sdk",
+              "url: https?://(?:cdn\\.jsdelivr\\.net/npm|unpkg\\.com)/@coinbase/wallet-sdk"
+            ],
+            "evidence": "响应 URL 指向 Coinbase Wallet SDK"
+          },
+          {
+            "name": "thirdweb",
+            "patterns": [
+              "url: https?://connect\\.thirdweb\\.com/",
+              "url: https?://in-app-wallet\\.thirdweb\\.com/",
+              "url: https?://api\\.thirdweb\\.com/",
+              "url: https?://[^\\s/]+\\.ipfscdn\\.io/ipfs/"
+            ],
+            "evidence": "响应 URL 指向 thirdweb 钱包、API 或 IPFS CDN"
+          },
+          {
+            "name": "Alchemy",
+            "patterns": ["url: https?://[a-z0-9-]+\\.g\\.alchemy\\.com/v2/", "url: https?://[^\\s/]+\\.alchemyapi\\.io/v2/"],
+            "evidence": "响应 URL 指向 Alchemy RPC"
+          },
+          {
+            "name": "Infura",
+            "patterns": ["url: https?://[a-z0-9-]+\\.infura\\.io/v3/", "url: https?://ipfs\\.infura\\.io:5001/api/v0/"],
+            "evidence": "响应 URL 指向 Infura RPC 或 IPFS API"
+          },
+          {
+            "name": "QuickNode",
+            "patterns": ["url: https?://[a-z0-9-]+\\.quiknode\\.pro/"],
+            "evidence": "响应 URL 指向 QuickNode RPC"
+          },
+          {
+            "name": "Moralis",
+            "patterns": [
+              "url: https?://deep-index\\.moralis\\.io/api/v2(?:\\.2)?/",
+              "url: https?://authapi\\.moralis\\.io/",
+              "url: https?://streams-api\\.moralis\\.io/"
+            ],
+            "evidence": "响应 URL 指向 Moralis Web3 API"
+          },
+          {
+            "name": "The Graph",
+            "patterns": [
+              "url: https?://gateway\\.thegraph\\.com/api/",
+              "url: https?://api\\.thegraph\\.com/subgraphs/name/",
+              "url: https?://api\\.studio\\.thegraph\\.com/query/"
+            ],
+            "evidence": "响应 URL 指向 The Graph 查询 API"
+          },
+          {
+            "name": "Covalent",
+            "patterns": ["url: https?://api\\.covalenthq\\.com/v1/", "url: https?://api\\.covalent\\.hq/v1/"],
+            "evidence": "响应 URL 指向 Covalent API"
+          },
+          {
+            "name": "Helius",
+            "patterns": ["url: https?://(?:mainnet|devnet)\\.helius-rpc\\.com/", "url: https?://api\\.helius\\.xyz/v[0-9]+/"],
+            "evidence": "响应 URL 指向 Helius RPC 或 API"
+          },
+          {
+            "name": "Ankr RPC",
+            "patterns": ["url: https?://rpc\\.ankr\\.com/(?:eth|polygon|bsc|arbitrum|optimism|avalanche|fantom|gnosis|base|solana)"],
+            "evidence": "响应 URL 指向 Ankr RPC"
+          },
+          {
+            "name": "Blocknative",
+            "patterns": [
+              "url: https?://api\\.blocknative\\.com/",
+              "url: https?://notify\\.blocknative\\.com/",
+              "url: https?://cdn\\.blocknative\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Blocknative Web3 服务"
+          },
+          {
+            "name": "Tenderly RPC",
+            "patterns": [
+              "url: https?://rpc\\.tenderly\\.co/fork/",
+              "url: https?://virtual\\.[a-z0-9-]+\\.rpc\\.tenderly\\.co/",
+              "url: https?://api\\.tenderly\\.co/api/v1/"
+            ],
+            "evidence": "响应 URL 指向 Tenderly RPC 或 API"
+          },
+          {
+            "name": "GetBlock",
+            "patterns": ["url: https?://go\\.getblock\\.io/[A-Za-z0-9]+", "url: https?://api\\.getblock\\.io/"],
+            "evidence": "响应 URL 指向 GetBlock API"
+          },
+          {
+            "name": "Tatum",
+            "patterns": ["url: https?://api\\.tatum\\.io/v[0-9]+/"],
+            "evidence": "响应 URL 指向 Tatum Web3 API"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "Web Push / 消息推送",
           "confidence": "高"
         },
