@@ -651,6 +651,94 @@
             {
               "name": "Siteimprove Accessibility",
               "patterns": ["siteimproveanalytics\\.com/js/siteanalyze_|siteimprove\\.com/[^\\s\"'<>]*(?:accessibility|script)"]
+            },
+            {
+              "name": "Eye-Able",
+              "patterns": ["cdn\\.eye-able\\.com|www\\.eye-able-cdn\\.com|eye-able\\.com/[^\\s\"'<>]*(?:configs|widget|accessibility)"]
+            },
+            {
+              "name": "AccessiWay Widget",
+              "patterns": ["accessiway\\.com/[^\\s\"'<>]*(?:accesswidget|widget|accessibility)|cdn\\.accessiway\\.com"]
+            },
+            {
+              "name": "Accessibly App",
+              "patterns": ["accessiblyapp\\.com/[^\\s\"'<>]*(?:widget|app|embed|accessibility)|cdn\\.accessiblyapp\\.com"]
+            },
+            {
+              "name": "Accessibility Enabler",
+              "patterns": ["accessibilityenabler\\.com|accessibility-enabler\\.com/[^\\s\"'<>]*(?:widget|js|accessibility)"]
+            },
+            {
+              "name": "All in One Accessibility",
+              "patterns": [
+                "skynettechnologies\\.com/accessibility/js/all-in-one-accessibility-js-widget|all-in-one-accessibility[^\\s\"'<>]*\\.js"
+              ]
+            },
+            {
+              "name": "Level Access / eSSENTIAL Accessibility",
+              "patterns": [
+                "app\\.eaccessibility\\.com|cdn\\.essentialaccessibility\\.com|essentialaccessibility\\.com/[^\\s\"'<>]*(?:app|assistive)|levelaccess\\.com/[^\\s\"'<>]*(?:accessibility|assistive)"
+              ]
+            },
+            {
+              "name": "User1st",
+              "patterns": ["user1st\\.info|user1st\\.com/[^\\s\"'<>]*(?:widget|accessibility|script|js)"]
+            },
+            {
+              "name": "UsableNet Assistive",
+              "patterns": [
+                "usablenet\\.com/[^\\s\"'<>]*(?:assistive|accessibility|aqa)|info\\.usablenet\\.com/[^\\s\"'<>]*(?:assistive|accessibility)"
+              ]
+            },
+            {
+              "name": "ReadSpeaker webReader",
+              "patterns": [
+                "cdn[0-9a-z-]*\\.readspeaker\\.com/script/[^\\s\"'<>]*/webReader/webReader\\.js|readspeaker\\.com/[^\\s\"'<>]*(?:webReader|docReader)"
+              ]
+            },
+            {
+              "name": "ReachDeck",
+              "patterns": ["reachdeck\\.com|texthelp\\.com/[^\\s\"'<>]*(?:reachdeck|toolbar)|browsealoud\\.com/plus/scripts/ba\\.js"]
+            },
+            {
+              "name": "Silktide Accessibility",
+              "patterns": ["static\\.silktide\\.com|silktide\\.com/[^\\s\"'<>]*(?:accessibility|toolbar|script)"]
+            },
+            {
+              "name": "Deque axe Monitor",
+              "patterns": ["axe\\.deque\\.com|deque\\.com/[^\\s\"'<>]*(?:axe-monitor|accessibility-monitoring|axe-core)"]
+            },
+            {
+              "name": "Equally AI",
+              "patterns": ["equally\\.ai/[^\\s\"'<>]*(?:widget|accessibility|embed|script)|cdn\\.equally\\.ai|app\\.equally\\.ai"]
+            },
+            {
+              "name": "Adally Widget",
+              "patterns": ["adally\\.com/[^\\s\"'<>]*(?:accessibility|widget|commonaccess)|accessibilitytoolurl"]
+            },
+            {
+              "name": "MaxAccess",
+              "patterns": ["maxaccess\\.io/[^\\s\"'<>]*(?:widget|accessibility|script)|cdn\\.maxaccess\\.io"]
+            },
+            {
+              "name": "WebAbility.io",
+              "patterns": ["webability\\.io/[^\\s\"'<>]*(?:widget|accessibility|script)|cdn\\.webability\\.io"]
+            },
+            {
+              "name": "Tenably",
+              "patterns": ["tenably\\.app|tenably\\.com/[^\\s\"'<>]*(?:widget|accessibility|script)"]
+            },
+            {
+              "name": "Accessible Web RAMP",
+              "patterns": ["accessibleweb\\.com/[^\\s\"'<>]*(?:ramp|widget|accessibility)|cdn\\.accessibleweb\\.com"]
+            },
+            {
+              "name": "Pope Tech",
+              "patterns": ["app\\.popetech\\.com|popetech\\.com/[^\\s\"'<>]*(?:accessibility|widget|scanner)"]
+            },
+            {
+              "name": "UserAccess Widget",
+              "patterns": ["widget-v1\\.useraccess\\.live|useraccess\\.live/[^\\s\"'<>]*(?:widget|accessibility)"]
             }
           ]
         },
