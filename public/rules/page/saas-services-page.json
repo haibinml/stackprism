@@ -3963,6 +3963,100 @@
         },
         {
           "defaults": {
+            "kind": "低代码 / 自动化 / 内部工具",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Retool",
+              "patterns": ["cdn\\.tryretool\\.com|retool-edge\\.com|retool\\.com/[^\\s\"'<>]*(?:embed|apps|api|workflows)"]
+            },
+            {
+              "name": "Superblocks",
+              "patterns": [
+                "app\\.superblocks\\.com|assets\\.superblocks\\.com|superblocks\\.com/[^\\s\"'<>]*(?:embed|applications|workflows|api)"
+              ]
+            },
+            {
+              "name": "UI Bakery",
+              "patterns": ["app\\.uibakery\\.io|cdn\\.uibakery\\.io|uibakery\\.io/[^\\s\"'<>]*(?:embed|app|automation|api)"]
+            },
+            {
+              "name": "Jet Admin",
+              "patterns": ["app\\.jetadmin\\.io|assets\\.jetadmin\\.io|jetadmin\\.io/[^\\s\"'<>]*(?:embed|app|portal|api)"]
+            },
+            {
+              "name": "Forest Admin",
+              "patterns": [
+                "app\\.forestadmin\\.com|cdn\\.forestadmin\\.com|api\\.forestadmin\\.com|forestadmin\\.com/[^\\s\"'<>]*(?:agent|admin|api)"
+              ]
+            },
+            {
+              "name": "Internal.io",
+              "patterns": ["app\\.internal\\.io|cdn\\.internal\\.io|internal\\.io/[^\\s\"'<>]*(?:embed|app|admin|api)"]
+            },
+            {
+              "name": "DronaHQ",
+              "patterns": ["app\\.dronahq\\.com|cdn\\.dronahq\\.com|dronahq\\.com/[^\\s\"'<>]*(?:embed|microapp|workflow|api)"]
+            },
+            {
+              "name": "Zapier Interfaces",
+              "patterns": ["interfaces\\.zapier\\.com|tables\\.zapier\\.com|zapier\\.com/[^\\s\"'<>]*(?:interfaces|tables|embed)"]
+            },
+            {
+              "name": "Make.com",
+              "patterns": [
+                "hook(?:\\.(?:eu1|us1))?\\.make\\.com|make\\.com/[^\\s\"'<>]*(?:scenario|embed|integrations|api)|integromat\\.com/[^\\s\"'<>]*(?:scenario|hook|api)"
+              ]
+            },
+            {
+              "name": "Pipedream",
+              "patterns": ["api\\.pipedream\\.com|pipedream\\.com/[^\\s\"'<>]*(?:apps|workflows|embed|api)|pipedream\\.net"]
+            },
+            {
+              "name": "Parabola",
+              "patterns": ["app\\.parabola\\.io|api\\.parabola\\.io|parabola\\.io/[^\\s\"'<>]*(?:flow|embed|api|automation)"]
+            },
+            {
+              "name": "Workato",
+              "patterns": ["app\\.workato\\.com|workato\\.com/[^\\s\"'<>]*(?:embed|recipe|api|oem)|workato\\.userflow\\.com"]
+            },
+            {
+              "name": "Tray.io",
+              "patterns": ["cdn\\.tray\\.io|app\\.tray\\.io|tray\\.io/[^\\s\"'<>]*(?:embedded|workflow|api|connector)"]
+            },
+            {
+              "name": "Glide Apps",
+              "patterns": ["glideapps\\.com|glide\\.page|go\\.glideapps\\.com|storage\\.googleapis\\.com/glide-prod"]
+            },
+            {
+              "name": "Softr",
+              "patterns": ["cdn\\.softr\\.io|assets\\.softr-files\\.com|softr\\.app|softr\\.io/[^\\s\"'<>]*(?:app|embed|api)"]
+            },
+            {
+              "name": "Stacker",
+              "patterns": ["app\\.stackerhq\\.com|assets\\.stackerhq\\.com|stacker\\.app|stackerhq\\.com/[^\\s\"'<>]*(?:app|embed|api)"]
+            },
+            {
+              "name": "Bubble",
+              "patterns": ["bubbleapps\\.io|bubble\\.io/[^\\s\"'<>]*(?:page|version-test|plugin|api)|d1muf25xaso8hp\\.cloudfront\\.net"]
+            },
+            {
+              "name": "Adalo",
+              "patterns": ["previewer\\.adalo\\.com|app\\.adalo\\.com|adalo\\.com/[^\\s\"'<>]*(?:embed|app|api)"]
+            },
+            {
+              "name": "WeWeb",
+              "patterns": ["cdn\\.weweb\\.io|editor\\.weweb\\.io|weweb\\.io/[^\\s\"'<>]*(?:app|embed|api)|weweb-preview\\.io"]
+            },
+            {
+              "name": "FlutterFlow",
+              "patterns": ["app\\.flutterflow\\.io|flutterflow\\.app|flutterflow\\.io/[^\\s\"'<>]*(?:app|embed|api|project)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "表单 / 问卷",
             "matchIn": ["resources"]
           },
