@@ -2272,7 +2272,7 @@
         },
         {
           "defaults": {
-            "kind": "验证码"
+            "kind": "验证码 / Bot 防护"
           },
           "rules": [
             {
@@ -2293,6 +2293,96 @@
               ],
               "selectors": [".cf-turnstile", "[data-sitekey].cf-turnstile"],
               "globals": ["turnstile"]
+            },
+            {
+              "name": "Friendly Captcha",
+              "patterns": ["cdn\\.friendlycaptcha\\.com|friendlycaptcha\\.com/[^\\s\"'<>]*(?:widget|sdk|captcha)|frc-captcha"]
+            },
+            {
+              "name": "MTCaptcha",
+              "patterns": ["service\\.mtcaptcha\\.com|mtcaptcha\\.com/[^\\s\"'<>]*(?:mtcaptcha|widget|api)|mtcaptcha\\.min\\.js"]
+            },
+            {
+              "name": "ALTCHA",
+              "patterns": [
+                "cdn\\.jsdelivr\\.net/npm/altcha|unpkg\\.com/altcha|altcha\\.org/[^\\s\"'<>]*(?:widget|captcha)|altcha(?:\\.min)?\\.js"
+              ]
+            },
+            {
+              "name": "BotDetect CAPTCHA",
+              "patterns": ["captcha\\.com/(?:botdetect|scripts)|botdetectcaptcha|BotDetectCaptcha"]
+            },
+            {
+              "name": "Tencent CAPTCHA",
+              "patterns": [
+                "turing\\.captcha\\.qcloud\\.com|ssl\\.captcha\\.qq\\.com|captcha\\.qq\\.com|tencentcloud\\.com/[^\\s\"'<>]*(?:captcha|turing)"
+              ]
+            },
+            {
+              "name": "Alibaba Cloud CAPTCHA",
+              "patterns": [
+                "captcha\\.aliyuncs\\.com|g\\.alicdn\\.com/AWSC|g\\.alicdn\\.com/sd/ncpc|aliyun\\.com/[^\\s\"'<>]*(?:captcha|risk)"
+              ]
+            },
+            {
+              "name": "Baidu CAPTCHA",
+              "patterns": [
+                "passport\\.baidu\\.com/[^\\s\"'<>]*(?:captcha|vcode)|wappass\\.baidu\\.com/[^\\s\"'<>]*captcha|baidu\\.com/[^\\s\"'<>]*(?:captcha|vcode)"
+              ]
+            },
+            {
+              "name": "GeeTest",
+              "patterns": ["static\\.geetest\\.com|api\\.geetest\\.com|get\\.geetest\\.com|geetest\\.com/[^\\s\"'<>]*(?:gt|captcha|static)"]
+            },
+            {
+              "name": "NetEase Yidun CAPTCHA",
+              "patterns": [
+                "cstaticdun\\.126\\.net|cstaticdun\\.163\\.com|acstatic-dun\\.126\\.net|dun\\.163\\.com/[^\\s\"'<>]*(?:captcha|watchman|yidun)"
+              ]
+            },
+            {
+              "name": "Yandex SmartCaptcha",
+              "patterns": ["smartcaptcha\\.yandexcloud\\.net|captcha-api\\.yandex\\.ru|yandex\\.cloud/[^\\s\"'<>]*smartcaptcha"]
+            },
+            {
+              "name": "VK Captcha",
+              "patterns": ["vk\\.com/[^\\s\"'<>]*(?:captcha|widget_captcha)|api\\.vk\\.com/[^\\s\"'<>]*captcha"]
+            },
+            {
+              "name": "Cloudflare Managed Challenge",
+              "patterns": ["challenges\\.cloudflare\\.com/cdn-cgi/challenge-platform|cf_chl_|/cdn-cgi/challenge-platform/"]
+            },
+            {
+              "name": "Capy Puzzle CAPTCHA",
+              "patterns": ["api\\.capy\\.me|capy\\.me/[^\\s\"'<>]*(?:puzzle|captcha|challenge)|capy_captchakey"]
+            },
+            {
+              "name": "KeyCAPTCHA",
+              "patterns": ["backs\\.keycaptcha\\.com|keycaptcha\\.com/[^\\s\"'<>]*(?:captcha|widget|swfs)|s_s_c_user_id"]
+            },
+            {
+              "name": "Solve Media CAPTCHA",
+              "patterns": ["api-secure\\.solvemedia\\.com|api\\.solvemedia\\.com|solvemedia\\.com/[^\\s\"'<>]*(?:challenge|papi|captcha)"]
+            },
+            {
+              "name": "mCaptcha",
+              "patterns": ["mcaptcha\\.org/[^\\s\"'<>]*(?:widget|captcha)|mcaptcha(?:\\.min)?\\.js|data-mcaptcha-sitekey"]
+            },
+            {
+              "name": "Akamai Bot Manager",
+              "patterns": ["akamaihd\\.net/[^\\s\"'<>]*(?:akam|bm|bot)|/akam/[^\\s\"'<>]*(?:sensor|bm)|bm-verify"]
+            },
+            {
+              "name": "Imperva Bot Protection",
+              "patterns": ["imperva\\.com/[^\\s\"'<>]*(?:bot|incapsula)|incapsula\\.com/[^\\s\"'<>]*(?:js|resource)|_Incapsula_Resource"]
+            },
+            {
+              "name": "Kasada",
+              "patterns": ["kasada\\.io|kpsdk|/ips\\.js|/fp\\?x-kpsdk"]
+            },
+            {
+              "name": "CHEQ",
+              "patterns": ["cheqzone\\.com|ob\\.cheqzone\\.com|cheq\\.ai/[^\\s\"'<>]*(?:tag|bot|fraud)"]
             }
           ]
         },
