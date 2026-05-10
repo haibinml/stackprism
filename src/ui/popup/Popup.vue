@@ -160,9 +160,14 @@
           <span class="footer-panel-title">
             {{ footerPanel === 'search' ? '网页源代码搜索' : rawPanelTitle }}
           </span>
-          <RippleButton class="footer-panel-close" title="关闭面板" @click="closeFooterPanel">
-            <X :size="14" :stroke-width="2" />
-          </RippleButton>
+          <div class="footer-panel-actions">
+            <RippleButton v-if="footerPanel === 'raw'" class="footer-panel-copy" title="复制原始线索" @click="copyRawOutput">
+              <Copy :size="12" :stroke-width="2" />
+            </RippleButton>
+            <RippleButton class="footer-panel-close" title="关闭面板" @click="closeFooterPanel">
+              <X :size="14" :stroke-width="2" />
+            </RippleButton>
+          </div>
         </header>
         <div v-if="footerPanel === 'search'" class="footer-panel-body">
           <div class="search-row">
@@ -661,6 +666,20 @@
       const raw = await getRawResult()
       await navigator.clipboard.writeText(JSON.stringify(raw, null, 2))
       setStatus('已复制检测 JSON。')
+    } catch (error: any) {
+      setStatus(`复制失败：${String(error?.message || error)}`)
+    }
+  }
+
+  const copyRawOutput = async () => {
+    const text = rawOutputText.value
+    if (!text || text === RAW_PLACEHOLDER || text === RAW_LOADING_TEXT) {
+      setStatus('暂无可复制的原始线索。')
+      return
+    }
+    try {
+      await navigator.clipboard.writeText(text)
+      setStatus('已复制原始线索。')
     } catch (error: any) {
       setStatus(`复制失败：${String(error?.message || error)}`)
     }
@@ -1588,7 +1607,14 @@
     text-transform: uppercase;
   }
 
-  .footer-panel-close {
+  .footer-panel-actions {
+    display: inline-flex;
+    flex-shrink: 0;
+    gap: 4px;
+  }
+
+  .footer-panel-close,
+  .footer-panel-copy {
     align-items: center;
     background: transparent;
     border: 0;
@@ -1605,7 +1631,8 @@
     width: 22px;
   }
 
-  .footer-panel-close:hover {
+  .footer-panel-close:hover,
+  .footer-panel-copy:hover {
     background: var(--accent-soft);
     color: var(--accent);
   }
