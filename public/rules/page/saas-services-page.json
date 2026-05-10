@@ -2652,6 +2652,94 @@
             {
               "name": "Fillout",
               "patterns": ["forms\\.fillout\\.com|server\\.fillout\\.com/embed|fillout\\.com/embed"]
+            },
+            {
+              "name": "Zoho Forms",
+              "patterns": [
+                "forms\\.zohopublic\\.com|forms\\.zoho\\.com/[^\\s\"'<>]*(?:form|embed|public)|zohopublic\\.com/[^\\s\"'<>]*form"
+              ]
+            },
+            {
+              "name": "forms.app",
+              "patterns": ["forms\\.app/[^\\s\"'<>]*(?:form|embed)|my\\.forms\\.app|forms\\.app/static"]
+            },
+            {
+              "name": "123FormBuilder",
+              "patterns": ["123formbuilder\\.com/(?:form|sf|embed)|static\\.123formbuilder\\.com|formbuilder\\.online/[^\\s\"'<>]*123"]
+            },
+            {
+              "name": "Formsite",
+              "patterns": ["formsite\\.com/(?:form_app|include|[^\\s\"'<>]*/form)|fs8\\.formsite\\.com"]
+            },
+            {
+              "name": "Alchemer",
+              "patterns": ["alchemer\\.com/s3/|surveygizmo\\.com/s3/|surveygizmo\\.com/[^\\s\"'<>]*(?:survey|embed)"]
+            },
+            {
+              "name": "SurveySparrow",
+              "patterns": [
+                "surveysparrow\\.com/[^\\s\"'<>]*(?:s/|embed|survey|widget)|static\\.surveysparrow\\.com|app\\.surveysparrow\\.com"
+              ]
+            },
+            {
+              "name": "QuestionPro",
+              "patterns": ["questionpro\\.com/(?:a/TakeSurvey|t/|survey/)|questionpro\\.com/[^\\s\"'<>]*(?:survey|embed)"]
+            },
+            {
+              "name": "Survicate",
+              "patterns": ["survey\\.survicate\\.com|cdn\\.survicate\\.com|survicate\\.com/[^\\s\"'<>]*(?:survey|widget|embed)"]
+            },
+            {
+              "name": "Delighted Surveys",
+              "patterns": ["web\\.delighted\\.com|delighted\\.com/[^\\s\"'<>]*(?:widget|survey|embed)"]
+            },
+            {
+              "name": "GetFeedback",
+              "patterns": ["web\\.getfeedback\\.com|app\\.getfeedback\\.com|getfeedback\\.com/[^\\s\"'<>]*(?:r/|survey|embed)"]
+            },
+            {
+              "name": "Medallia Digital",
+              "patterns": [
+                "resources\\.digital-cloud\\.medallia\\.com|assets\\.medallia\\.com|medallia\\.com/[^\\s\"'<>]*(?:digital|survey|feedback)"
+              ]
+            },
+            {
+              "name": "Qualaroo",
+              "patterns": ["cl\\.qualaroo\\.com|qualaroo\\.com/[^\\s\"'<>]*(?:ki\\.js|survey|embed|widget)"]
+            },
+            {
+              "name": "Refiner",
+              "patterns": ["js\\.refiner\\.io|api\\.refiner\\.io|refiner\\.io/[^\\s\"'<>]*(?:widget|survey|embed)"]
+            },
+            {
+              "name": "UserReport",
+              "patterns": ["widget\\.userreport\\.com|survey\\.userreport\\.com|userreport\\.com/[^\\s\"'<>]*(?:survey|widget|feedback)"]
+            },
+            {
+              "name": "Formaloo",
+              "patterns": ["formaloo\\.net|formaloo\\.co/[^\\s\"'<>]*(?:widgets|form|embed)|app\\.formaloo\\.com"]
+            },
+            {
+              "name": "involve.me",
+              "patterns": ["app\\.involve\\.me/embed|involve\\.me/[^\\s\"'<>]*(?:embed|funnel|quiz|form)"]
+            },
+            {
+              "name": "Outgrow",
+              "patterns": ["outgrow\\.co/[^\\s\"'<>]*(?:embed|quiz|calculator|survey)|outgrow\\.uservoice\\.com"]
+            },
+            {
+              "name": "Opinion Stage",
+              "patterns": [
+                "opinionstage\\.com/assets/loader\\.js|cdn\\.opinionstage\\.com|opinionstage\\.com/[^\\s\"'<>]*(?:poll|quiz|survey)"
+              ]
+            },
+            {
+              "name": "Mopinion",
+              "patterns": ["deploy\\.mopinion\\.com|mopinion\\.com/[^\\s\"'<>]*(?:survey|feedback|deploy)"]
+            },
+            {
+              "name": "Wootric",
+              "patterns": ["cdn\\.wootric\\.com|wootric\\.com/[^\\s\"'<>]*(?:wootric-sdk|survey|embed|nps)"]
             }
           ]
         },
