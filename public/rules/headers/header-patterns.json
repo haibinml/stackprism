@@ -4358,6 +4358,114 @@
       },
       {
         "defaults": {
+          "category": "金融数据 / 汇率 API",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "TradingView Widgets",
+            "patterns": ["url: https?://s3\\.tradingview\\.com/(?:tv\\.js|external-embedding/embed-widget)", "url: https?://widgets\\.tradingview\\.com/"],
+            "evidence": "响应 URL 指向 TradingView Widget"
+          },
+          {
+            "name": "CoinMarketCap Widgets",
+            "patterns": ["url: https?://(?:s3|files)\\.coinmarketcap\\.com/static/widget/", "url: https?://widget\\.coinmarketcap\\.com/"],
+            "evidence": "响应 URL 指向 CoinMarketCap Widget"
+          },
+          {
+            "name": "CoinGecko",
+            "patterns": ["url: https?://api\\.coingecko\\.com/api/v[0-9]+/", "url: https?://widgets\\.coingecko\\.com/"],
+            "evidence": "响应 URL 指向 CoinGecko API 或 Widget"
+          },
+          {
+            "name": "CryptoCompare",
+            "patterns": ["url: https?://min-api\\.cryptocompare\\.com/", "url: https?://widgets\\.cryptocompare\\.com/"],
+            "evidence": "响应 URL 指向 CryptoCompare"
+          },
+          {
+            "name": "Currencylayer",
+            "patterns": ["url: https?://api\\.currencylayer\\.com/(?:live|historical|convert|list)"],
+            "evidence": "响应 URL 指向 Currencylayer API"
+          },
+          {
+            "name": "Open Exchange Rates",
+            "patterns": ["url: https?://openexchangerates\\.org/api/(?:latest|historical|currencies|convert)"],
+            "evidence": "响应 URL 指向 Open Exchange Rates API"
+          },
+          {
+            "name": "Fixer",
+            "patterns": ["url: https?://data\\.fixer\\.io/api/(?:latest|symbols|convert|[0-9]{4}-[0-9]{2}-[0-9]{2})"],
+            "evidence": "响应 URL 指向 Fixer API"
+          },
+          {
+            "name": "ExchangeRate-API",
+            "patterns": ["url: https?://v[0-9]+\\.exchangerate-api\\.com/v[0-9]+/[^\\s/]+/(?:latest|pair|codes)"],
+            "evidence": "响应 URL 指向 ExchangeRate-API"
+          },
+          {
+            "name": "ExchangeRatesAPI.io",
+            "patterns": ["url: https?://api\\.exchangeratesapi\\.io/v[0-9]+/(?:latest|symbols|convert|[0-9]{4}-[0-9]{2}-[0-9]{2})"],
+            "evidence": "响应 URL 指向 ExchangeRatesAPI.io"
+          },
+          {
+            "name": "CurrencyAPI.com",
+            "patterns": ["url: https?://api\\.currencyapi\\.com/v[0-9]+/(?:latest|historical|currencies|convert)"],
+            "evidence": "响应 URL 指向 CurrencyAPI.com"
+          },
+          {
+            "name": "Alpha Vantage",
+            "patterns": ["url: https?://(?:www\\.)?alphavantage\\.co/query"],
+            "evidence": "响应 URL 指向 Alpha Vantage API"
+          },
+          {
+            "name": "Twelve Data",
+            "patterns": ["url: https?://api\\.twelvedata\\.com/(?:time_series|quote|price|exchange_rate|stocks|forex_pairs|cryptocurrencies)"],
+            "evidence": "响应 URL 指向 Twelve Data API"
+          },
+          {
+            "name": "Finnhub",
+            "patterns": ["url: https?://finnhub\\.io/api/v[0-9]+/(?:quote|stock|crypto|forex|search|calendar)"],
+            "evidence": "响应 URL 指向 Finnhub API"
+          },
+          {
+            "name": "Polygon.io",
+            "patterns": ["url: https?://api\\.polygon\\.io/v[0-9]+/"],
+            "evidence": "响应 URL 指向 Polygon.io API"
+          },
+          {
+            "name": "Financial Modeling Prep",
+            "patterns": ["url: https?://financialmodelingprep\\.com/api/v[0-9]+/"],
+            "evidence": "响应 URL 指向 Financial Modeling Prep API"
+          },
+          {
+            "name": "Marketstack",
+            "patterns": ["url: https?://api\\.marketstack\\.com/v[0-9]+/(?:eod|intraday|tickers|exchanges|currencies)"],
+            "evidence": "响应 URL 指向 Marketstack API"
+          },
+          {
+            "name": "EODHD",
+            "patterns": ["url: https?://eodhistoricaldata\\.com/api/(?:eod|real-time|intraday|fundamentals|exchanges)"],
+            "evidence": "响应 URL 指向 EODHD API"
+          },
+          {
+            "name": "IEX Cloud",
+            "patterns": ["url: https?://(?:cloud|sandbox)\\.iexapis\\.com/(?:stable|beta)/"],
+            "evidence": "响应 URL 指向 IEX Cloud API"
+          },
+          {
+            "name": "Tiingo",
+            "patterns": ["url: https?://api\\.tiingo\\.com/(?:tiingo|iex|crypto|fx)/"],
+            "evidence": "响应 URL 指向 Tiingo API"
+          },
+          {
+            "name": "Nasdaq Data Link",
+            "patterns": ["url: https?://data\\.nasdaq\\.com/api/v[0-9]+/", "url: https?://www\\.quandl\\.com/api/v[0-9]+/"],
+            "evidence": "响应 URL 指向 Nasdaq Data Link / Quandl API"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "Web Push / 消息推送",
           "confidence": "高"
         },
