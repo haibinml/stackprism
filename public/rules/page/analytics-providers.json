@@ -596,6 +596,100 @@
             "globals": ["_qevents"]
           },
           {
+            "defaults": {
+              "kind": "广告验证 / 品牌安全",
+              "matchIn": ["resources"]
+            },
+            "rules": [
+              {
+                "name": "DoubleVerify",
+                "patterns": ["doubleverify\\.com|tps\\.doubleverify\\.com|cdn\\.doubleverify\\.com|dvtag"]
+              },
+              {
+                "name": "Integral Ad Science",
+                "patterns": ["adsafeprotected\\.com|iasds01\\.com|integralads\\.com|static\\.adsafeprotected\\.com"]
+              },
+              {
+                "name": "Oracle Moat",
+                "patterns": ["moatads\\.com|z\\.moatads\\.com|js\\.moatads\\.com|moat\\.com/[^\\s\"'<>]*(?:analytics|measurement|ads)"]
+              },
+              {
+                "name": "Comscore",
+                "patterns": [
+                  "scorecardresearch\\.com|sb\\.scorecardresearch\\.com|comscore\\.com/[^\\s\"'<>]*(?:beacon|measurement)|COMSCORE"
+                ]
+              },
+              {
+                "name": "Nielsen Digital Ad Ratings",
+                "patterns": ["imrworldwide\\.com|secure-[a-z0-9-]+\\.imrworldwide\\.com|nielsen\\.com/[^\\s\"'<>]*digital-ad-ratings|nol_t"]
+              },
+              {
+                "name": "Pixalate",
+                "patterns": ["pixalate\\.com/[^\\s\"'<>]*(?:tag|adfraud|analytics|api)|cdn\\.pixalate\\.com|api\\.pixalate\\.com"]
+              },
+              {
+                "name": "Adloox",
+                "patterns": ["adlooxtracking\\.com|j\\.adlooxtracking\\.com|adloox\\.com/[^\\s\"'<>]*(?:tracking|verification|analytics)"]
+              },
+              {
+                "name": "Meetrics",
+                "patterns": ["meetrics\\.net|s\\.meetrics\\.net|meetrics\\.com/[^\\s\"'<>]*(?:ad|verification|measurement)"]
+              },
+              {
+                "name": "FouAnalytics",
+                "patterns": ["fouanalytics\\.com|cdn\\.fouanalytics\\.com|fouanalytics[^\\s\"'<>]*\\.(?:js|gif|png)(?:\\?|$)"]
+              },
+              {
+                "name": "GeoEdge",
+                "patterns": ["geoedge\\.be|cdn\\.geoedge\\.com|geoedge\\.com/[^\\s\"'<>]*(?:ad|security|verification|malvertising)"]
+              },
+              {
+                "name": "Confiant",
+                "patterns": [
+                  "confiant-integrations\\.global\\.ssl\\.fastly\\.net|cdn\\.confiant\\.io|confiant-integrations\\.net|confiant\\.com/[^\\s\"'<>]*(?:tag|integration|ads)"
+                ]
+              },
+              {
+                "name": "Clean.io",
+                "patterns": ["cdn\\.clean\\.io|clean\\.gg|clean\\.io/[^\\s\"'<>]*(?:tag|malvertising|security|ads)"]
+              },
+              {
+                "name": "Ad Lightning",
+                "patterns": ["cdn\\.adlightning\\.com|tagan\\.adlightning\\.com|adlightning\\.com/[^\\s\"'<>]*(?:tag|script|analytics|ads)"]
+              },
+              {
+                "name": "Fraudlogix",
+                "patterns": ["fraudlogix\\.com/[^\\s\"'<>]*(?:tag|pixel|fraud|verification)|cdn\\.fraudlogix\\.com|api\\.fraudlogix\\.com"]
+              },
+              {
+                "name": "Protected Media",
+                "patterns": ["protected\\.media|cdn\\.protected\\.media|api\\.protected\\.media"]
+              },
+              {
+                "name": "Forensiq",
+                "patterns": ["forensiq\\.com|verifi\\.forensiq\\.com|forensiq\\.com/[^\\s\"'<>]*(?:tag|fraud|verification)"]
+              },
+              {
+                "name": "Zefr",
+                "patterns": ["zefr\\.com/[^\\s\"'<>]*(?:brand-safety|measurement|ads|tag)|cdn\\.zefr\\.com|zefr\\.js"]
+              },
+              {
+                "name": "GumGum Verity",
+                "patterns": ["verity\\.gumgum\\.com|gumgum\\.com/[^\\s\"'<>]*(?:verity|contextual|brand-safety)|js\\.gumgum\\.com"]
+              },
+              {
+                "name": "BrandVerity",
+                "patterns": [
+                  "brandverity\\.com/[^\\s\"'<>]*(?:tag|tracking|monitoring|api)|cdn\\.brandverity\\.com|api\\.brandverity\\.com"
+                ]
+              },
+              {
+                "name": "CHEQ Essentials",
+                "patterns": ["cheqzone\\.com|ob\\.cheqzone\\.com|cdn\\.cheq\\.ai|cheq\\.ai/[^\\s\"'<>]*(?:essentials|tag|security|fraud)"]
+              }
+            ]
+          },
+          {
             "name": "UTM Campaign Parameters",
             "kind": "流量来源 / 营销归因",
             "patterns": ["(?:\\?|&)(?:utm_source|utm_medium|utm_campaign|utm_term|utm_content)="]
