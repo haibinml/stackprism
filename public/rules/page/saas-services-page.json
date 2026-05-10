@@ -3089,6 +3089,96 @@
             {
               "name": "Avalara AvaTax",
               "patterns": ["avatax\\.avalara\\.net|sandbox-rest\\.avatax\\.com|avalara\\.com/[^\\s\"'<>]*(?:avatax|api|tax)"]
+            },
+            {
+              "name": "Stripe Billing Portal",
+              "patterns": ["billing\\.stripe\\.com/(?:p/|session|pay)|stripe\\.com/[^\\s\"'<>]*(?:billing|customer-portal)"]
+            },
+            {
+              "name": "Orb Billing",
+              "patterns": ["api\\.withorb\\.com|app\\.withorb\\.com|withorb\\.com/[^\\s\"'<>]*(?:billing|usage|invoice)"]
+            },
+            {
+              "name": "Lago Billing",
+              "patterns": ["api\\.getlago\\.com|app\\.getlago\\.com|getlago\\.com/[^\\s\"'<>]*(?:billing|invoice|api)"]
+            },
+            {
+              "name": "Metronome Billing",
+              "patterns": ["api\\.metronome\\.com|app\\.metronome\\.com|metronome\\.com/[^\\s\"'<>]*(?:billing|usage|invoice)"]
+            },
+            {
+              "name": "Sequence Billing",
+              "patterns": ["app\\.sequencehq\\.com|api\\.sequencehq\\.com|sequencehq\\.com/[^\\s\"'<>]*(?:billing|pricing|invoice)"]
+            },
+            {
+              "name": "Younium Billing",
+              "patterns": ["app\\.younium\\.com|api\\.younium\\.com|younium\\.com/[^\\s\"'<>]*(?:billing|subscription|invoice)"]
+            },
+            {
+              "name": "Fusebill",
+              "patterns": ["secure\\.fusebill\\.com|app\\.fusebill\\.com|fusebill\\.com/[^\\s\"'<>]*(?:billing|subscription|hosted)"]
+            },
+            {
+              "name": "Aria Systems Billing",
+              "patterns": [
+                "secure\\.ariasystems\\.net|api\\.ariasystems\\.net|ariasystems\\.com/[^\\s\"'<>]*(?:billing|monetization|subscription)"
+              ]
+            },
+            {
+              "name": "Gotransverse",
+              "patterns": [
+                "api\\.gotransverse\\.com|app\\.gotransverse\\.com|gotransverse\\.com/[^\\s\"'<>]*(?:billing|subscription|rating)"
+              ]
+            },
+            {
+              "name": "BillingPlatform",
+              "patterns": [
+                "api\\.billingplatform\\.com|app\\.billingplatform\\.com|billingplatform\\.com/[^\\s\"'<>]*(?:billing|monetization|invoice)"
+              ]
+            },
+            {
+              "name": "Ordway Billing",
+              "patterns": ["app\\.ordwaylabs\\.com|api\\.ordwaylabs\\.com|ordwaylabs\\.com/[^\\s\"'<>]*(?:billing|revenue|invoice)"]
+            },
+            {
+              "name": "Sage Intacct Billing",
+              "patterns": ["api\\.intacct\\.com|www\\.intacct\\.com/ia/acct|sage\\.com/[^\\s\"'<>]*(?:intacct|subscription-billing)"]
+            },
+            {
+              "name": "NetSuite SuiteBilling",
+              "patterns": [
+                "netsuite\\.com/[^\\s\"'<>]*(?:suitebilling|suite-billing)|system\\.netsuite\\.com/[^\\s\"'<>]*(?:custinvc|billing)"
+              ]
+            },
+            {
+              "name": "FreshBooks Invoicing",
+              "patterns": ["my\\.freshbooks\\.com|freshbooks\\.com/[^\\s\"'<>]*(?:invoice|billing|payments)"]
+            },
+            {
+              "name": "Xero Invoicing",
+              "patterns": ["go\\.xero\\.com/AccountsReceivable|api\\.xero\\.com|xero\\.com/[^\\s\"'<>]*(?:invoice|billing)"]
+            },
+            {
+              "name": "QuickBooks Online Invoicing",
+              "patterns": [
+                "qbo\\.intuit\\.com/app/invoice|app\\.qbo\\.intuit\\.com|quickbooks\\.intuit\\.com/[^\\s\"'<>]*(?:invoice|payments)"
+              ]
+            },
+            {
+              "name": "Invoiced",
+              "patterns": ["app\\.invoiced\\.com|api\\.invoiced\\.com|invoiced\\.com/[^\\s\"'<>]*(?:invoice|billing|payment)"]
+            },
+            {
+              "name": "Bill.com",
+              "patterns": ["app\\.bill\\.com|api\\.bill\\.com|bill\\.com/[^\\s\"'<>]*(?:invoice|bill-pay|payments)"]
+            },
+            {
+              "name": "Tipalti",
+              "patterns": ["app\\.tipalti\\.com|api\\.tipalti\\.com|tipalti\\.com/[^\\s\"'<>]*(?:payments|payables|supplier)"]
+            },
+            {
+              "name": "Anrok Tax",
+              "patterns": ["api\\.anrok\\.com|app\\.anrok\\.com|anrok\\.com/[^\\s\"'<>]*(?:tax|sales-tax|billing)"]
             }
           ]
         },
