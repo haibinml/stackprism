@@ -4142,6 +4142,114 @@
       },
       {
         "defaults": {
+          "category": "Web Push / 消息推送",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "OneSignal",
+            "patterns": ["url: https?://cdn\\.onesignal\\.com/sdks/", "url: https?://onesignal\\.com/api/v1/"],
+            "evidence": "响应 URL 指向 OneSignal Web Push"
+          },
+          {
+            "name": "PushEngage Web Push",
+            "patterns": ["url: https?://clientcdn\\.pushengage\\.com/", "url: https?://cdn\\.pushengage\\.com/"],
+            "evidence": "响应 URL 指向 PushEngage Web Push"
+          },
+          {
+            "name": "PushOwl",
+            "patterns": ["url: https?://cdn\\.pushowl\\.com/", "url: https?://app\\.pushowl\\.com/"],
+            "evidence": "响应 URL 指向 PushOwl"
+          },
+          {
+            "name": "iZooto",
+            "patterns": ["url: https?://cdn\\.izooto\\.com/", "url: https?://api\\.izooto\\.com/"],
+            "evidence": "响应 URL 指向 iZooto"
+          },
+          {
+            "name": "Webpushr Web Push",
+            "patterns": ["url: https?://cdn\\.webpushr\\.com/", "url: https?://(?:www\\.)?webpushr\\.com/[^\\s]*(?:sw|sdk|subscriber|subscription|webpushr)"],
+            "evidence": "响应 URL 指向 Webpushr"
+          },
+          {
+            "name": "Aimtell",
+            "patterns": ["url: https?://cdn\\.aimtell\\.com/", "url: https?://api\\.aimtell\\.com/"],
+            "evidence": "响应 URL 指向 Aimtell"
+          },
+          {
+            "name": "VWO Engage / PushCrew",
+            "patterns": ["url: https?://cdn\\.pushcrew\\.com/", "url: https?://static\\.pushcrew\\.com/"],
+            "evidence": "响应 URL 指向 VWO Engage / PushCrew"
+          },
+          {
+            "name": "WonderPush",
+            "patterns": ["url: https?://cdn\\.by\\.wonderpush\\.com/", "url: https?://management-api\\.wonderpush\\.com/"],
+            "evidence": "响应 URL 指向 WonderPush"
+          },
+          {
+            "name": "PushAlert",
+            "patterns": ["url: https?://cdn\\.pushalert\\.co/", "url: https?://(?:www\\.)?pushalert\\.co/[^\\s]*(?:pushalert|worker|subscription|widget)"],
+            "evidence": "响应 URL 指向 PushAlert"
+          },
+          {
+            "name": "Truepush",
+            "patterns": ["url: https?://sdki\\.truepush\\.com/", "url: https?://cdn\\.truepush\\.com/"],
+            "evidence": "响应 URL 指向 Truepush"
+          },
+          {
+            "name": "FoxPush",
+            "patterns": ["url: https?://cdn\\.foxpush\\.com/", "url: https?://api\\.foxpush\\.com/"],
+            "evidence": "响应 URL 指向 FoxPush"
+          },
+          {
+            "name": "Notix",
+            "patterns": ["url: https?://cdn\\.notix\\.io/", "url: https?://push\\.notix\\.io/"],
+            "evidence": "响应 URL 指向 Notix"
+          },
+          {
+            "name": "Gravitec Web Push",
+            "patterns": ["url: https?://cdn\\.gravitec\\.net/", "url: https?://push\\.gravitec\\.net/"],
+            "evidence": "响应 URL 指向 Gravitec Web Push"
+          },
+          {
+            "name": "Pushwoosh Web Push",
+            "patterns": ["url: https?://cdn\\.pushwoosh\\.com/", "url: https?://cp\\.pushwoosh\\.com/"],
+            "evidence": "响应 URL 指向 Pushwoosh Web Push"
+          },
+          {
+            "name": "Airship Web Notify",
+            "patterns": ["url: https?://aswpsdk(?:us|eu)\\.com/", "url: https?://web-sdk\\.urbanairship\\.com/"],
+            "evidence": "响应 URL 指向 Airship Web Notify"
+          },
+          {
+            "name": "Notificare Web Push",
+            "patterns": ["url: https?://cdn\\.notifica\\.re/", "url: https?://push\\.notifica\\.re/"],
+            "evidence": "响应 URL 指向 Notificare Web Push"
+          },
+          {
+            "name": "SendPulse Web Push",
+            "patterns": ["url: https?://cdn\\.sendpulse\\.com/", "url: https?://(?:www\\.)?sendpulse\\.com/[^\\s]*(?:webpush|web-push|push|notification|worker)"],
+            "evidence": "响应 URL 指向 SendPulse Web Push"
+          },
+          {
+            "name": "Firebase Cloud Messaging",
+            "patterns": ["url: https?://fcm\\.googleapis\\.com/", "url: https?://firebaseinstallations\\.googleapis\\.com/"],
+            "evidence": "响应 URL 指向 Firebase Cloud Messaging"
+          },
+          {
+            "name": "Pusher Beams",
+            "patterns": ["url: https?://js\\.pusher\\.com/beams/", "url: https?://beams\\.pusher\\.com/"],
+            "evidence": "响应 URL 指向 Pusher Beams"
+          },
+          {
+            "name": "Pushpad",
+            "patterns": ["url: https?://cdn\\.pushpad\\.xyz/", "url: https?://api\\.pushpad\\.xyz/"],
+            "evidence": "响应 URL 指向 Pushpad"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "SaaS / 第三方服务",
           "confidence": "高"
         },
