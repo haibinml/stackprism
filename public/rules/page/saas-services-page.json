@@ -3921,6 +3921,19 @@
           "globals": ["growthbook"]
         },
         {
+          "name": "Flagsmith",
+          "kind": "Feature Flag",
+          "patterns": ["edge\\.api\\.flagsmith\\.com/api/v[0-9]+/|api\\.flagsmith\\.com/api/v[0-9]+/|cdn\\.jsdelivr\\.net/npm/flagsmith|unpkg\\.com/flagsmith"],
+          "globals": ["flagsmith"]
+        },
+        {
+          "name": "Unleash",
+          "kind": "Feature Flag",
+          "patterns": [
+            "unleash-hosted\\.com/api/(?:frontend|client|proxy)|cdn\\.jsdelivr\\.net/npm/(?:unleash-proxy-client|@unleash/)|unpkg\\.com/(?:unleash-proxy-client|@unleash/)"
+          ]
+        },
+        {
           "defaults": {
             "kind": "Feature Flag / 实验平台",
             "matchIn": ["resources"]

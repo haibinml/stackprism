@@ -6295,6 +6295,23 @@
             "evidence": "响应 URL 指向 GrowthBook"
           },
           {
+            "name": "Flagsmith",
+            "patterns": [
+              "url: https?://edge\\.api\\.flagsmith\\.com/api/v[0-9]+/",
+              "url: https?://api\\.flagsmith\\.com/api/v[0-9]+/",
+              "url: https?://(?:cdn\\.jsdelivr\\.net/npm|unpkg\\.com)/flagsmith"
+            ],
+            "evidence": "响应 URL 指向 Flagsmith"
+          },
+          {
+            "name": "Unleash",
+            "patterns": [
+              "url: https?://[^\\s/]+\\.unleash-hosted\\.com/api/(?:frontend|client|proxy)",
+              "url: https?://(?:cdn\\.jsdelivr\\.net/npm|unpkg\\.com)/(?:unleash-proxy-client|@unleash/)"
+            ],
+            "evidence": "响应 URL 指向 Unleash"
+          },
+          {
             "name": "ConfigCat",
             "patterns": ["url: https?://cdn\\.configcat\\.com/", "url: https?://configcat\\.com/[^\\s]*(?:sdk|config|flags)"],
             "evidence": "响应 URL 指向 ConfigCat"
@@ -6310,9 +6327,92 @@
             "evidence": "响应 URL 指向 DevCycle"
           },
           {
+            "name": "CloudBees Feature Management",
+            "patterns": [
+              "url: https?://app\\.rollout\\.io/",
+              "url: https?://statestore\\.rollout\\.io/",
+              "url: https?://[^\\s/]+\\.rollout\\.io/[^\\s]*(?:scripts|sdk)"
+            ],
+            "evidence": "响应 URL 指向 CloudBees Feature Management"
+          },
+          {
+            "name": "Harness Feature Flags",
+            "patterns": [
+              "url: https?://sdk\\.ff\\.harness\\.io/",
+              "url: https?://config\\.ff\\.harness\\.io/",
+              "url: https?://events\\.ff\\.harness\\.io/"
+            ],
+            "evidence": "响应 URL 指向 Harness Feature Flags"
+          },
+          {
+            "name": "Taplytics",
+            "patterns": ["url: https?://js\\.taplytics\\.com/", "url: https?://api\\.taplytics\\.com/"],
+            "evidence": "响应 URL 指向 Taplytics"
+          },
+          {
             "name": "AB Tasty",
             "patterns": ["url: https?://try\\.abtasty\\.com/", "url: https?://ariane\\.abtasty\\.com/"],
             "evidence": "响应 URL 指向 AB Tasty"
+          },
+          {
+            "name": "Kameleoon",
+            "patterns": ["url: https?://static\\.kameleoon\\.com/", "url: https?://events\\.kameleoon\\.com/"],
+            "evidence": "响应 URL 指向 Kameleoon"
+          },
+          {
+            "name": "Convert Experiences",
+            "patterns": ["url: https?://cdn-[0-9]+\\.convertexperiments\\.com/"],
+            "evidence": "响应 URL 指向 Convert Experiences"
+          },
+          {
+            "name": "SiteSpect",
+            "patterns": ["url: https?://cdn\\.sitespect\\.com/"],
+            "evidence": "响应 URL 指向 SiteSpect"
+          },
+          {
+            "name": "Eppo",
+            "patterns": ["url: https?://cdn\\.geteppo\\.com/", "url: https?://[^\\s/]+\\.eppo\\.cloud/"],
+            "evidence": "响应 URL 指向 Eppo"
+          },
+          {
+            "name": "Mutiny",
+            "patterns": ["url: https?://client-registry\\.mutinycdn\\.com/", "url: https?://cdn\\.mutinycdn\\.com/"],
+            "evidence": "响应 URL 指向 Mutiny"
+          },
+          {
+            "name": "Intellimize",
+            "patterns": ["url: https?://cdn\\.intellimize\\.co/", "url: https?://log\\.intellimize\\.co/"],
+            "evidence": "响应 URL 指向 Intellimize"
+          },
+          {
+            "name": "Adobe Target",
+            "patterns": ["url: https?://mboxedge[0-9]*\\.tt\\.omtrdc\\.net/", "url: https?://assets\\.adobedtm\\.com/[^\\s]*at\\.js"],
+            "evidence": "响应 URL 指向 Adobe Target"
+          },
+          {
+            "name": "Oracle Maxymiser",
+            "patterns": ["url: https?://service\\.maxymiser\\.net/"],
+            "evidence": "响应 URL 指向 Oracle Maxymiser"
+          },
+          {
+            "name": "Convertize",
+            "patterns": ["url: https?://cdn\\.convertize\\.io/", "url: https?://scripts\\.convertize\\.io/"],
+            "evidence": "响应 URL 指向 Convertize"
+          },
+          {
+            "name": "FeatureHub",
+            "patterns": ["url: https?://edge\\.featurehub\\.io/"],
+            "evidence": "响应 URL 指向 FeatureHub"
+          },
+          {
+            "name": "Hypertune",
+            "patterns": ["url: https?://edge\\.hypertune\\.com/"],
+            "evidence": "响应 URL 指向 Hypertune"
+          },
+          {
+            "name": "Tggl",
+            "patterns": ["url: https?://api\\.tggl\\.io/", "url: https?://cdn\\.tggl\\.io/"],
+            "evidence": "响应 URL 指向 Tggl"
           }
         ]
       },
