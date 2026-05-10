@@ -104,6 +104,100 @@
         },
         {
           "defaults": {
+            "kind": "大模型 API / 推理平台",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "OpenAI API",
+              "patterns": ["api\\.openai\\.com|chatgpt\\.com/(?:backend-api|share)|openai\\.com/[^\\s\"'<>]*(?:v1|api|models)"]
+            },
+            {
+              "name": "Anthropic API",
+              "patterns": ["api\\.anthropic\\.com|claude\\.ai/api|anthropic\\.com/[^\\s\"'<>]*(?:api|sdk|messages)"]
+            },
+            {
+              "name": "Google Gemini API",
+              "patterns": [
+                "generativelanguage\\.googleapis\\.com|aiplatform\\.googleapis\\.com|ai\\.google\\.dev/[^\\s\"'<>]*(?:gemini|api)"
+              ]
+            },
+            {
+              "name": "Perplexity API",
+              "patterns": ["api\\.perplexity\\.ai|perplexity\\.ai/[^\\s\"'<>]*(?:api|search|chat)"]
+            },
+            {
+              "name": "Hugging Face Inference API",
+              "patterns": ["api-inference\\.huggingface\\.co|huggingface\\.co/[^\\s\"'<>]*(?:api|spaces|models)|hf\\.space"]
+            },
+            {
+              "name": "Replicate API",
+              "patterns": ["api\\.replicate\\.com|replicate\\.delivery|replicate\\.com/[^\\s\"'<>]*(?:api|predictions|models)"]
+            },
+            {
+              "name": "Cohere API",
+              "patterns": ["api\\.cohere\\.ai|cohere\\.com/[^\\s\"'<>]*(?:api|embed|generate|rerank)"]
+            },
+            {
+              "name": "Mistral AI API",
+              "patterns": ["api\\.mistral\\.ai|mistral\\.ai/[^\\s\"'<>]*(?:api|models|chat)"]
+            },
+            {
+              "name": "Together AI",
+              "patterns": ["api\\.together\\.xyz|together\\.ai/[^\\s\"'<>]*(?:api|inference|models)"]
+            },
+            {
+              "name": "Groq API",
+              "patterns": ["api\\.groq\\.com|groq\\.com/[^\\s\"'<>]*(?:api|openai|chat|models)"]
+            },
+            {
+              "name": "DeepSeek API",
+              "patterns": ["api\\.deepseek\\.com|deepseek\\.com/[^\\s\"'<>]*(?:api|chat|models)"]
+            },
+            {
+              "name": "Moonshot AI / Kimi",
+              "patterns": ["api\\.moonshot\\.cn|kimi\\.moonshot\\.cn|moonshot\\.cn/[^\\s\"'<>]*(?:api|kimi|chat)"]
+            },
+            {
+              "name": "MiniMax API",
+              "patterns": ["api\\.minimax\\.chat|minimax\\.chat/[^\\s\"'<>]*(?:api|chatcompletion|text|image)|abab\\.chat"]
+            },
+            {
+              "name": "SiliconFlow",
+              "patterns": ["api\\.siliconflow\\.cn|siliconflow\\.cn/[^\\s\"'<>]*(?:api|models|inference)"]
+            },
+            {
+              "name": "OpenRouter",
+              "patterns": ["openrouter\\.ai/api|openrouter\\.ai/[^\\s\"'<>]*(?:models|chat|completions)"]
+            },
+            {
+              "name": "Alibaba DashScope / 通义千问",
+              "patterns": [
+                "dashscope\\.aliyuncs\\.com|dashscope\\.aliyun\\.com|aliyuncs\\.com/[^\\s\"'<>]*(?:dashscope|qwen)|qwen\\.aliyun\\.com"
+              ]
+            },
+            {
+              "name": "Volcengine Ark / 火山方舟",
+              "patterns": ["ark\\.cn-beijing\\.volces\\.com|ark\\.volces\\.com|volcengine\\.com/[^\\s\"'<>]*(?:ark|doubao|maas)"]
+            },
+            {
+              "name": "Baidu Qianfan / 文心千帆",
+              "patterns": [
+                "qianfan\\.baidu\\.com|aip\\.baidubce\\.com/rpc/2\\.0/ai_custom|wenxin\\.baidu\\.com|baidubce\\.com/[^\\s\"'<>]*(?:qianfan|ernie)"
+              ]
+            },
+            {
+              "name": "Zhipu AI / 智谱 GLM",
+              "patterns": ["open\\.bigmodel\\.cn|bigmodel\\.cn/[^\\s\"'<>]*(?:api|glm|chat)"]
+            },
+            {
+              "name": "iFlytek Spark / 讯飞星火",
+              "patterns": ["spark-api\\.xf-yun\\.com|spark\\.xf-yun\\.com|xfyun\\.cn/[^\\s\"'<>]*(?:spark|xinghuo|api)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "AI Demo / 数据科学应用"
           },
           "rules": [
