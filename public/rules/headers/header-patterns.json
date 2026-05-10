@@ -599,6 +599,183 @@
       },
       {
         "defaults": {
+          "category": "第三方登录 / OAuth",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "QQ 登录",
+            "patterns": ["url: https?://graph\\.qq\\.com/oauth2\\.0/authorize", "url: https?://connect\\.qq\\.com/"],
+            "evidence": "响应 URL 指向 QQ OAuth 登录"
+          },
+          {
+            "name": "微信登录",
+            "patterns": ["url: https?://open\\.weixin\\.qq\\.com/connect/qrconnect", "url: https?://open\\.weixin\\.qq\\.com/connect/oauth2/authorize"],
+            "evidence": "响应 URL 指向微信 OAuth 登录"
+          },
+          {
+            "name": "微博登录",
+            "patterns": ["url: https?://api\\.weibo\\.com/oauth2/authorize"],
+            "evidence": "响应 URL 指向微博 OAuth 登录"
+          },
+          {
+            "name": "支付宝登录",
+            "patterns": ["url: https?://openauth\\.alipay\\.com/oauth2/publicAppAuthorize\\.htm", "url: https?://auth\\.alipay\\.com/login/index\\.htm"],
+            "evidence": "响应 URL 指向支付宝授权登录"
+          },
+          {
+            "name": "钉钉登录",
+            "patterns": ["url: https?://oapi\\.dingtalk\\.com/connect/qrconnect", "url: https?://login\\.dingtalk\\.com/oauth2/auth"],
+            "evidence": "响应 URL 指向钉钉 OAuth 登录"
+          },
+          {
+            "name": "飞书 / Lark 登录",
+            "patterns": [
+              "url: https?://open\\.feishu\\.cn/open-apis/authen/",
+              "url: https?://passport\\.feishu\\.cn/",
+              "url: https?://passport\\.larksuite\\.com/"
+            ],
+            "evidence": "响应 URL 指向飞书 / Lark 登录"
+          },
+          {
+            "name": "企业微信登录",
+            "patterns": ["url: https?://open\\.work\\.weixin\\.qq\\.com/wwopen/sso/qrConnect", "url: https?://open\\.work\\.weixin\\.qq\\.com/wwopen/sso/3rd_qrConnect"],
+            "evidence": "响应 URL 指向企业微信登录"
+          },
+          {
+            "name": "华为帐号登录",
+            "patterns": ["url: https?://oauth-login\\.cloud\\.huawei\\.com/oauth2/", "url: https?://login\\.huawei\\.com/oauth2/"],
+            "evidence": "响应 URL 指向华为帐号 OAuth 登录"
+          },
+          {
+            "name": "小米帐号登录",
+            "patterns": ["url: https?://account\\.xiaomi\\.com/oauth2/authorize"],
+            "evidence": "响应 URL 指向小米帐号 OAuth 登录"
+          },
+          {
+            "name": "百度帐号登录",
+            "patterns": ["url: https?://openapi\\.baidu\\.com/oauth/2\\.0/authorize", "url: https?://passport\\.baidu\\.com/v2/"],
+            "evidence": "响应 URL 指向百度帐号登录"
+          },
+          {
+            "name": "GitHub 登录",
+            "patterns": ["url: https?://github\\.com/login/oauth/authorize"],
+            "evidence": "响应 URL 指向 GitHub OAuth 登录"
+          },
+          {
+            "name": "Gitee 登录",
+            "patterns": ["url: https?://gitee\\.com/oauth/authorize"],
+            "evidence": "响应 URL 指向 Gitee OAuth 登录"
+          },
+          {
+            "name": "GitLab 登录",
+            "patterns": ["url: https?://gitlab\\.com/oauth/authorize", "url: https?://[^\\s/]+\\.gitlab\\.io/oauth/authorize"],
+            "evidence": "响应 URL 指向 GitLab OAuth 登录"
+          },
+          {
+            "name": "Bitbucket 登录",
+            "patterns": ["url: https?://bitbucket\\.org/site/oauth2/authorize"],
+            "evidence": "响应 URL 指向 Bitbucket OAuth 登录"
+          },
+          {
+            "name": "Google 登录",
+            "patterns": ["url: https?://accounts\\.google\\.com/o/oauth2/", "url: https?://accounts\\.google\\.com/gsi/client"],
+            "evidence": "响应 URL 指向 Google 登录"
+          },
+          {
+            "name": "Apple 登录",
+            "patterns": ["url: https?://appleid\\.apple\\.com/auth/authorize", "url: https?://appleid\\.cdn-apple\\.com/appleauth/static/jsapi/appleid/"],
+            "evidence": "响应 URL 指向 Apple 登录"
+          },
+          {
+            "name": "Microsoft 登录",
+            "patterns": ["url: https?://login\\.microsoftonline\\.com/[^\\s]+/oauth2/v2\\.0/authorize", "url: https?://login\\.live\\.com/oauth20_authorize\\.srf"],
+            "evidence": "响应 URL 指向 Microsoft OAuth 登录"
+          },
+          {
+            "name": "Facebook 登录",
+            "patterns": ["url: https?://www\\.facebook\\.com/[^\\s]+/dialog/oauth"],
+            "evidence": "响应 URL 指向 Facebook 登录"
+          },
+          {
+            "name": "Twitter / X 登录",
+            "patterns": ["url: https?://twitter\\.com/i/oauth2/authorize", "url: https?://x\\.com/i/oauth2/authorize", "url: https?://api\\.twitter\\.com/oauth/"],
+            "evidence": "响应 URL 指向 Twitter / X OAuth 登录"
+          },
+          {
+            "name": "LinkedIn 登录",
+            "patterns": ["url: https?://www\\.linkedin\\.com/oauth/v2/authorization"],
+            "evidence": "响应 URL 指向 LinkedIn OAuth 登录"
+          },
+          {
+            "name": "Slack 登录",
+            "patterns": ["url: https?://slack\\.com/oauth/v2/authorize", "url: https?://slack\\.com/openid/connect/authorize"],
+            "evidence": "响应 URL 指向 Slack OAuth / OIDC 登录"
+          },
+          {
+            "name": "Discord 登录",
+            "patterns": ["url: https?://discord\\.com/oauth2/authorize", "url: https?://discordapp\\.com/oauth2/authorize"],
+            "evidence": "响应 URL 指向 Discord OAuth 登录"
+          },
+          {
+            "name": "Telegram 登录",
+            "patterns": ["url: https?://oauth\\.telegram\\.org/auth", "url: https?://telegram\\.org/js/telegram-widget\\.js"],
+            "evidence": "响应 URL 指向 Telegram 登录"
+          },
+          {
+            "name": "LINE 登录",
+            "patterns": ["url: https?://access\\.line\\.me/oauth2/v2\\.1/authorize"],
+            "evidence": "响应 URL 指向 LINE OAuth 登录"
+          },
+          {
+            "name": "Kakao 登录",
+            "patterns": ["url: https?://kauth\\.kakao\\.com/oauth/authorize"],
+            "evidence": "响应 URL 指向 Kakao OAuth 登录"
+          },
+          {
+            "name": "Naver 登录",
+            "patterns": ["url: https?://nid\\.naver\\.com/oauth2\\.0/authorize"],
+            "evidence": "响应 URL 指向 Naver OAuth 登录"
+          },
+          {
+            "name": "Auth0 Universal Login",
+            "patterns": ["url: https?://[^\\s/]+\\.auth0\\.com/authorize", "url: https?://[^\\s/]+\\.auth0\\.com/u/login"],
+            "evidence": "响应 URL 指向 Auth0 Universal Login"
+          },
+          {
+            "name": "Okta 登录",
+            "patterns": ["url: https?://[^\\s/]+\\.okta\\.com/oauth2/[^\\s]*/v1/authorize", "url: https?://[^\\s/]+\\.okta\\.com/oauth2/v1/authorize"],
+            "evidence": "响应 URL 指向 Okta OAuth 登录"
+          },
+          {
+            "name": "Keycloak 登录",
+            "patterns": ["url: https?://[^\\s]+/realms/[^\\s/]+/protocol/openid-connect/auth", "url: https?://[^\\s]+/auth/realms/[^\\s/]+/protocol/openid-connect/auth"],
+            "evidence": "响应 URL 指向 Keycloak OpenID Connect 登录"
+          },
+          {
+            "name": "Kinde",
+            "patterns": ["url: https?://[^\\s/]+\\.kinde\\.com/oauth2/auth", "url: https?://[^\\s/]+\\.kinde\\.com/oauth2/authorize"],
+            "evidence": "响应 URL 指向 Kinde OAuth 登录"
+          },
+          {
+            "name": "WorkOS",
+            "patterns": ["url: https?://api\\.workos\\.com/sso/authorize", "url: https?://api\\.workos\\.com/user_management/authorize"],
+            "evidence": "响应 URL 指向 WorkOS 登录"
+          },
+          {
+            "name": "Descope",
+            "patterns": ["url: https?://api\\.descope\\.com/oauth2/v1/authorize", "url: https?://auth\\.descope\\.com/"],
+            "evidence": "响应 URL 指向 Descope 登录"
+          },
+          {
+            "name": "Logto",
+            "patterns": ["url: https?://[^\\s/]+\\.logto\\.app/oidc/auth", "url: https?://[^\\s/]+\\.logto\\.app/oidc/.well-known/openid-configuration"],
+            "evidence": "响应 URL 指向 Logto / OIDC 登录"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "SaaS / 第三方服务",
           "confidence": "高"
         },
