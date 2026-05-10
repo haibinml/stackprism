@@ -4250,6 +4250,114 @@
       },
       {
         "defaults": {
+          "category": "电话 / 呼叫追踪",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "CallRail Tracking",
+            "patterns": ["url: https?://cdn\\.callrail\\.com/", "url: https?://scripts\\.callrail\\.com/"],
+            "evidence": "响应 URL 指向 CallRail Tracking"
+          },
+          {
+            "name": "CallTrackingMetrics",
+            "patterns": ["url: https?://scripts\\.calltrackingmetrics\\.com/", "url: https?://cdn\\.calltrackingmetrics\\.com/"],
+            "evidence": "响应 URL 指向 CallTrackingMetrics"
+          },
+          {
+            "name": "Invoca Call Tracking",
+            "patterns": ["url: https?://solutions\\.invocacdn\\.com/", "url: https?://pnapi\\.invoca\\.net/"],
+            "evidence": "响应 URL 指向 Invoca Call Tracking"
+          },
+          {
+            "name": "DialogTech",
+            "patterns": ["url: https?://js\\.dialogtech\\.com/", "url: https?://dtkwidgets\\.dialogtech\\.com/", "url: https?://secure\\.ifbyphone\\.com/"],
+            "evidence": "响应 URL 指向 DialogTech"
+          },
+          {
+            "name": "WhatConverts Tracking",
+            "patterns": ["url: https?://scripts\\.whatconverts\\.com/"],
+            "evidence": "响应 URL 指向 WhatConverts Tracking"
+          },
+          {
+            "name": "Ringba",
+            "patterns": ["url: https?://js\\.ringba\\.com/"],
+            "evidence": "响应 URL 指向 Ringba"
+          },
+          {
+            "name": "Marchex Call Analytics",
+            "patterns": ["url: https?://rw\\d*\\.marchex\\.io/", "url: https?://static\\.marchex\\.io/"],
+            "evidence": "响应 URL 指向 Marchex Call Analytics"
+          },
+          {
+            "name": "Infinity Call Tracking",
+            "patterns": ["url: https?://cdn\\.infinity\\.co/", "url: https?://tag\\.infinity\\.co/", "url: https?://webservices\\.infinity-tracking\\.com/"],
+            "evidence": "响应 URL 指向 Infinity Call Tracking"
+          },
+          {
+            "name": "ResponseTap",
+            "patterns": ["url: https?://static\\.responsetap\\.com/"],
+            "evidence": "响应 URL 指向 ResponseTap"
+          },
+          {
+            "name": "Nimbata",
+            "patterns": ["url: https?://cdn\\.nimbata\\.com/", "url: https?://app\\.nimbata\\.com/"],
+            "evidence": "响应 URL 指向 Nimbata"
+          },
+          {
+            "name": "Ruler Analytics",
+            "patterns": ["url: https?://analytics\\.ruleranalytics\\.com/"],
+            "evidence": "响应 URL 指向 Ruler Analytics"
+          },
+          {
+            "name": "Mediahawk",
+            "patterns": ["url: https?://hawk\\.mediahawk\\.co\\.uk/"],
+            "evidence": "响应 URL 指向 Mediahawk"
+          },
+          {
+            "name": "Phonexa",
+            "patterns": ["url: https?://cdn\\.phonexa\\.com/", "url: https?://js\\.phonexa\\.com/"],
+            "evidence": "响应 URL 指向 Phonexa"
+          },
+          {
+            "name": "Convirza",
+            "patterns": ["url: https?://cdn\\.convirza\\.com/", "url: https?://scripts\\.convirza\\.com/", "url: https?://[^\\s/]+\\.logmycalls\\.com/"],
+            "evidence": "响应 URL 指向 Convirza"
+          },
+          {
+            "name": "Callcap",
+            "patterns": ["url: https?://cdn\\.callcap\\.com/"],
+            "evidence": "响应 URL 指向 Callcap"
+          },
+          {
+            "name": "PhoneWagon",
+            "patterns": ["url: https?://cdn\\.phonewagon\\.com/"],
+            "evidence": "响应 URL 指向 PhoneWagon"
+          },
+          {
+            "name": "Retreaver",
+            "patterns": ["url: https?://cdn\\.retreaver\\.com/", "url: https?://retreaver\\.com/[^\\s]*(?:track|tracking|number|script)"],
+            "evidence": "响应 URL 指向 Retreaver"
+          },
+          {
+            "name": "CallSource",
+            "patterns": ["url: https?://cdn\\.callsource\\.com/", "url: https?://(?:www\\.)?callsource\\.com/[^\\s]*(?:tracking|analytics|number|script)"],
+            "evidence": "响应 URL 指向 CallSource"
+          },
+          {
+            "name": "CallScaler",
+            "patterns": ["url: https?://cdn\\.callscaler\\.com/", "url: https?://(?:www\\.)?callscaler\\.com/[^\\s]*(?:tracking|numbers|script|widget)"],
+            "evidence": "响应 URL 指向 CallScaler"
+          },
+          {
+            "name": "CallTrackingPro",
+            "patterns": ["url: https?://cdn\\.calltrackingpro\\.com/", "url: https?://(?:www\\.)?calltrackingpro\\.com/[^\\s]*(?:tracking|number|script|widget)"],
+            "evidence": "响应 URL 指向 CallTrackingPro"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "SaaS / 第三方服务",
           "confidence": "高"
         },
