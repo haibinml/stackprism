@@ -6535,6 +6535,132 @@
       },
       {
         "defaults": {
+          "category": "隐私合规 / Cookie 同意",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "OneTrust",
+            "patterns": [
+              "url: https?://cdn\\.cookielaw\\.org/",
+              "url: https?://geolocation\\.onetrust\\.com/",
+              "url: https?://optanon\\.blob\\.core\\.windows\\.net/"
+            ],
+            "evidence": "响应 URL 指向 OneTrust Cookie 合规服务"
+          },
+          {
+            "name": "Cookiebot",
+            "patterns": ["url: https?://consent\\.cookiebot\\.com/(?:uc|sdk|scripts?)[^\\s]*\\.js", "url: https?://[^\\s/]*cookiebot\\.com/[^\\s]*uc\\.js"],
+            "evidence": "响应 URL 指向 Cookiebot CMP"
+          },
+          {
+            "name": "CookieYes",
+            "patterns": ["url: https?://cdn-cookieyes\\.com/client_data/[^\\s]*\\.js", "url: https?://cookieyes\\.com/client_data/[^\\s]*\\.js"],
+            "evidence": "响应 URL 指向 CookieYes CMP"
+          },
+          {
+            "name": "iubenda",
+            "patterns": ["url: https?://cdn\\.iubenda\\.com/(?:cs|iubenda)[^\\s]*\\.js", "url: https?://[^\\s/]*iubenda\\.com/[^\\s]*(?:cs|privacy)"],
+            "evidence": "响应 URL 指向 iubenda 合规服务"
+          },
+          {
+            "name": "Didomi",
+            "patterns": ["url: https?://sdk\\.privacy-center\\.org/", "url: https?://notice\\.didomi\\.io/", "url: https?://[^\\s/]*didomi\\.io/[^\\s]*(?:sdk|notice)"],
+            "evidence": "响应 URL 指向 Didomi CMP"
+          },
+          {
+            "name": "TrustArc",
+            "patterns": ["url: https?://consent\\.trustarc\\.com/", "url: https?://[^\\s/]*trustarc\\.com/[^\\s]*(?:notice|consent)"],
+            "evidence": "响应 URL 指向 TrustArc 同意管理"
+          },
+          {
+            "name": "Quantcast Choice",
+            "patterns": ["url: https?://quantcast\\.mgr\\.consensu\\.org/", "url: https?://cmp\\.quantcast\\.com/", "url: https?://choice\\.quantcast\\.com/"],
+            "evidence": "响应 URL 指向 Quantcast Choice CMP"
+          },
+          {
+            "name": "Termly",
+            "patterns": ["url: https?://app\\.termly\\.io/(?:embed|resource-blocker)[^\\s]*\\.js"],
+            "evidence": "响应 URL 指向 Termly 合规脚本"
+          },
+          {
+            "name": "Osano",
+            "patterns": ["url: https?://cmp\\.osano\\.com/", "url: https?://[^\\s/]*osano\\.com/[^\\s]*(?:cmp|consent)"],
+            "evidence": "响应 URL 指向 Osano CMP"
+          },
+          {
+            "name": "Usercentrics CMP",
+            "patterns": ["url: https?://app\\.usercentrics\\.eu/browser-ui", "url: https?://privacy-proxy\\.usercentrics\\.eu/"],
+            "evidence": "响应 URL 指向 Usercentrics CMP"
+          },
+          {
+            "name": "Sourcepoint CMP",
+            "patterns": ["url: https?://cdn\\.privacy-mgmt\\.com/", "url: https?://sourcepoint\\.mgr\\.consensu\\.org/", "url: https?://[^\\s/]*sp-prod\\.net/"],
+            "evidence": "响应 URL 指向 Sourcepoint CMP"
+          },
+          {
+            "name": "Ketch",
+            "patterns": ["url: https?://global\\.ketchcdn\\.com/", "url: https?://cdn\\.ketchjs\\.com/"],
+            "evidence": "响应 URL 指向 Ketch 同意管理"
+          },
+          {
+            "name": "Axeptio",
+            "patterns": ["url: https?://static\\.axept\\.io/sdk\\.js"],
+            "evidence": "响应 URL 指向 Axeptio CMP"
+          },
+          {
+            "name": "Civic Cookie Control",
+            "patterns": ["url: https?://cc\\.cdn\\.civiccomputing\\.com/", "url: https?://[^\\s/]*civiccomputing\\.com/[^\\s]*cookie-control"],
+            "evidence": "响应 URL 指向 Civic Cookie Control"
+          },
+          {
+            "name": "CookieScript CMP",
+            "patterns": ["url: https?://cdn\\.cookie-script\\.com/s/", "url: https?://cookie-script\\.com/s/"],
+            "evidence": "响应 URL 指向 CookieScript CMP"
+          },
+          {
+            "name": "CookieHub",
+            "patterns": ["url: https?://cdn\\.cookiehub\\.eu/", "url: https?://[^\\s/]*cookiehub\\.net/", "url: https?://[^\\s/]*cookiehub\\.com/[^\\s]*(?:cookie|consent|banner)"],
+            "evidence": "响应 URL 指向 CookieHub"
+          },
+          {
+            "name": "CookieFirst",
+            "patterns": ["url: https?://consent\\.cookiefirst\\.com/", "url: https?://[^\\s/]*cookiefirst\\.com/[^\\s]*(?:banner|consent|cookies)"],
+            "evidence": "响应 URL 指向 CookieFirst"
+          },
+          {
+            "name": "ConsentManager.net",
+            "patterns": [
+              "url: https?://cdn\\.consentmanager\\.net/",
+              "url: https?://delivery\\.consentmanager\\.net/",
+              "url: https?://consentmanager\\.mgr\\.consensu\\.org/"
+            ],
+            "evidence": "响应 URL 指向 ConsentManager.net"
+          },
+          {
+            "name": "Cookie Information",
+            "patterns": ["url: https?://policy\\.app\\.cookieinformation\\.com/", "url: https?://policy\\.cookieinformation\\.com/"],
+            "evidence": "响应 URL 指向 Cookie Information"
+          },
+          {
+            "name": "Secure Privacy",
+            "patterns": ["url: https?://cdn\\.secureprivacy\\.ai/", "url: https?://app\\.secureprivacy\\.ai/"],
+            "evidence": "响应 URL 指向 Secure Privacy"
+          },
+          {
+            "name": "Transcend Consent",
+            "patterns": ["url: https?://cdn\\.transcend\\.io/", "url: https?://[^\\s/]+\\.transcend-cdn\\.com/"],
+            "evidence": "响应 URL 指向 Transcend Consent"
+          },
+          {
+            "name": "Securiti Consent",
+            "patterns": ["url: https?://cdn-prod\\.securiti\\.ai/", "url: https?://privacy-central\\.securiti\\.ai/"],
+            "evidence": "响应 URL 指向 Securiti Consent"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "SaaS / 第三方服务",
           "confidence": "高"
         },
