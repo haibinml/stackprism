@@ -3778,6 +3778,239 @@
       },
       {
         "defaults": {
+          "category": "KYC / 反欺诈风控",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Persona KYC",
+            "patterns": ["url: https?://cdn\\.withpersona\\.com/", "url: https?://inquiry\\.withpersona\\.com/"],
+            "evidence": "响应 URL 指向 Persona KYC"
+          },
+          {
+            "name": "Onfido",
+            "patterns": [
+              "url: https?://sdk\\.onfido\\.com/",
+              "url: https?://assets\\.onfido\\.com/",
+              "url: https?://api\\.onfido\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Onfido"
+          },
+          {
+            "name": "Sumsub",
+            "patterns": ["url: https?://static\\.sumsub\\.com/", "url: https?://api\\.sumsub\\.com/", "url: https?://[^\\s/]+\\.idensic\\.com/"],
+            "evidence": "响应 URL 指向 Sumsub / Idensic"
+          },
+          {
+            "name": "Veriff",
+            "patterns": [
+              "url: https?://cdn\\.veriff\\.me/",
+              "url: https?://magic\\.veriff\\.me/",
+              "url: https?://stationapi\\.veriff\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Veriff"
+          },
+          {
+            "name": "Jumio",
+            "patterns": [
+              "url: https?://[^\\s/]+\\.netverify\\.com/",
+              "url: https?://api\\.jumio\\.com/",
+              "url: https?://jumio\\.ai/[^\\s]+(?:websdk|sdk|workflow)"
+            ],
+            "evidence": "响应 URL 指向 Jumio"
+          },
+          {
+            "name": "Trulioo",
+            "patterns": ["url: https?://api\\.trulioo\\.com/", "url: https?://api\\.globaldatacompany\\.com/"],
+            "evidence": "响应 URL 指向 Trulioo"
+          },
+          {
+            "name": "Socure",
+            "patterns": [
+              "url: https?://sdk\\.socure\\.com/",
+              "url: https?://websdk\\.socure\\.com/",
+              "url: https?://api\\.socure\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Socure"
+          },
+          {
+            "name": "Alloy Identity",
+            "patterns": ["url: https?://sdk\\.alloy\\.co/", "url: https?://api\\.alloy\\.co/"],
+            "evidence": "响应 URL 指向 Alloy Identity"
+          },
+          {
+            "name": "Sardine",
+            "patterns": ["url: https?://sdk\\.sardine\\.ai/", "url: https?://api\\.sardine\\.ai/"],
+            "evidence": "响应 URL 指向 Sardine"
+          },
+          {
+            "name": "Sift",
+            "patterns": [
+              "url: https?://(?:cdn|api[0-9]*)\\.siftscience\\.com/",
+              "url: https?://(?:cdn|api|events)\\.sift\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Sift"
+          },
+          {
+            "name": "Riskified",
+            "patterns": ["url: https?://beacon\\.riskified\\.com/", "url: https?://c\\.riskified\\.com/"],
+            "evidence": "响应 URL 指向 Riskified"
+          },
+          {
+            "name": "Forter",
+            "patterns": [
+              "url: https?://cdn\\.forter\\.com/",
+              "url: https?://api\\.forter\\.com/",
+              "url: https?://events\\.forter\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Forter"
+          },
+          {
+            "name": "Signifyd",
+            "patterns": [
+              "url: https?://cdn\\.signifyd\\.com/",
+              "url: https?://beacon\\.signifyd\\.com/",
+              "url: https?://api\\.signifyd\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Signifyd"
+          },
+          {
+            "name": "LexisNexis ThreatMetrix",
+            "patterns": [
+              "url: https?://(?:[^\\s/]+\\.)?online-metrix\\.net/",
+              "url: https?://(?:[^\\s/]+\\.)?h-online-metrix\\.net/"
+            ],
+            "evidence": "响应 URL 指向 ThreatMetrix"
+          },
+          {
+            "name": "Kount",
+            "patterns": [
+              "url: https?://(?:kaptcha|risk)\\.kount\\.net/",
+              "url: https?://(?:ssl|tst)\\.kaptcha\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Kount"
+          },
+          {
+            "name": "SEON Fraud Prevention",
+            "patterns": ["url: https?://cdn\\.seon\\.io/", "url: https?://api\\.seon\\.io/"],
+            "evidence": "响应 URL 指向 SEON"
+          },
+          {
+            "name": "Shufti Pro",
+            "patterns": ["url: https?://api\\.shuftipro\\.com/", "url: https?://app\\.shuftipro\\.com/"],
+            "evidence": "响应 URL 指向 Shufti Pro"
+          },
+          {
+            "name": "iDenfy",
+            "patterns": ["url: https?://ui\\.idenfy\\.com/", "url: https?://ivs\\.idenfy\\.com/", "url: https?://api\\.idenfy\\.com/"],
+            "evidence": "响应 URL 指向 iDenfy"
+          },
+          {
+            "name": "IDnow",
+            "patterns": ["url: https?://api\\.idnow\\.de/", "url: https?://go\\.idnow\\.de/", "url: https?://api\\.idnow\\.io/"],
+            "evidence": "响应 URL 指向 IDnow"
+          },
+          {
+            "name": "ComplyCube",
+            "patterns": [
+              "url: https?://assets\\.complycube\\.com/",
+              "url: https?://api\\.complycube\\.com/",
+              "url: https?://app\\.complycube\\.com/"
+            ],
+            "evidence": "响应 URL 指向 ComplyCube"
+          },
+          {
+            "name": "Verisoul",
+            "patterns": ["url: https?://api\\.verisoul\\.ai/", "url: https?://cdn\\.verisoul\\.ai/"],
+            "evidence": "响应 URL 指向 Verisoul"
+          },
+          {
+            "name": "Castle",
+            "patterns": ["url: https?://api\\.castle\\.io/", "url: https?://cdn\\.castle\\.io/"],
+            "evidence": "响应 URL 指向 Castle"
+          },
+          {
+            "name": "ClearSale",
+            "patterns": [
+              "url: https?://device\\.clearsale\\.com\\.br/",
+              "url: https?://api\\.clearsale\\.com\\.br/",
+              "url: https?://api\\.clearsale\\.com/"
+            ],
+            "evidence": "响应 URL 指向 ClearSale"
+          },
+          {
+            "name": "NoFraud",
+            "patterns": ["url: https?://cdn\\.nofraud\\.com/", "url: https?://api\\.nofraud\\.com/"],
+            "evidence": "响应 URL 指向 NoFraud"
+          },
+          {
+            "name": "FraudLabs Pro",
+            "patterns": ["url: https?://api\\.fraudlabspro\\.com/"],
+            "evidence": "响应 URL 指向 FraudLabs Pro"
+          },
+          {
+            "name": "Fraud.net",
+            "patterns": ["url: https?://api\\.fraud\\.net/"],
+            "evidence": "响应 URL 指向 Fraud.net"
+          },
+          {
+            "name": "Eye4Fraud",
+            "patterns": ["url: https?://api\\.eye4fraud\\.com/"],
+            "evidence": "响应 URL 指向 Eye4Fraud"
+          },
+          {
+            "name": "Ravelin",
+            "patterns": ["url: https?://api\\.ravelin\\.com/", "url: https?://cdn\\.ravelin\\.com/"],
+            "evidence": "响应 URL 指向 Ravelin"
+          },
+          {
+            "name": "Ekata",
+            "patterns": ["url: https?://api\\.ekata\\.com/"],
+            "evidence": "响应 URL 指向 Ekata"
+          },
+          {
+            "name": "Prove",
+            "patterns": ["url: https?://api\\.prove\\.com/", "url: https?://cdn\\.prove\\.com/"],
+            "evidence": "响应 URL 指向 Prove"
+          },
+          {
+            "name": "TransUnion iovation",
+            "patterns": ["url: https?://ci-mpsnare\\.iovation\\.com/", "url: https?://mpsnare\\.iesnare\\.com/"],
+            "evidence": "响应 URL 指向 TransUnion iovation"
+          },
+          {
+            "name": "BioCatch",
+            "patterns": [
+              "url: https?://cdn\\.biocatch\\.com/",
+              "url: https?://api\\.biocatch\\.com/",
+              "url: https?://mtracker\\.biocatch\\.com/"
+            ],
+            "evidence": "响应 URL 指向 BioCatch"
+          },
+          {
+            "name": "Feedzai",
+            "patterns": ["url: https?://api\\.feedzai\\.com/"],
+            "evidence": "响应 URL 指向 Feedzai"
+          },
+          {
+            "name": "Featurespace ARIC",
+            "patterns": ["url: https?://api\\.featurespace\\.com/"],
+            "evidence": "响应 URL 指向 Featurespace ARIC"
+          },
+          {
+            "name": "Incode",
+            "patterns": ["url: https?://api\\.incode\\.com/", "url: https?://sdk\\.incode\\.com/"],
+            "evidence": "响应 URL 指向 Incode"
+          },
+          {
+            "name": "Yoti",
+            "patterns": ["url: https?://api\\.yoti\\.com/", "url: https?://sdk\\.yoti\\.com/"],
+            "evidence": "响应 URL 指向 Yoti"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "SaaS / 第三方服务",
           "confidence": "高"
         },
