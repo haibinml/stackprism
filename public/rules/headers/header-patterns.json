@@ -597,6 +597,236 @@
             "evidence": "响应 URL 指向 CometChat"
           },
           {
+            "name": "Intercom",
+            "patterns": [
+              "url: https?://widget\\.intercom\\.io/",
+              "url: https?://js\\.intercomcdn\\.com/",
+              "url: https?://(?:api|api-iam|nexus|uploads)\\.intercom\\.io/"
+            ],
+            "evidence": "响应 URL 指向 Intercom"
+          },
+          {
+            "name": "Zendesk",
+            "patterns": [
+              "url: https?://static\\.zdassets\\.com/",
+              "url: https?://ekr\\.zdassets\\.com/",
+              "url: https?://[^\\s/]+\\.zendesk\\.com/",
+              "url: https?://[^\\s/]+\\.zopim\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Zendesk"
+          },
+          {
+            "name": "Crisp",
+            "patterns": [
+              "url: https?://client\\.crisp\\.chat/",
+              "url: https?://api\\.crisp\\.chat/",
+              "url: https?://(?:image|storage)\\.crisp\\.chat/"
+            ],
+            "evidence": "响应 URL 指向 Crisp"
+          },
+          {
+            "name": "Drift",
+            "patterns": ["url: https?://js\\.driftt\\.com/", "url: https?://widget\\.drift\\.com/", "url: https?://event\\.api\\.drift\\.com/"],
+            "evidence": "响应 URL 指向 Drift"
+          },
+          {
+            "name": "Tawk.to",
+            "patterns": ["url: https?://embed\\.tawk\\.to/", "url: https?://va\\.tawk\\.to/", "url: https?://vs\\d+\\.tawk\\.to/"],
+            "evidence": "响应 URL 指向 Tawk.to"
+          },
+          {
+            "name": "Freshchat",
+            "patterns": ["url: https?://wchat\\.freshchat\\.com/", "url: https?://snippets\\.freshchat\\.com/"],
+            "evidence": "响应 URL 指向 Freshchat"
+          },
+          {
+            "name": "Tidio",
+            "patterns": ["url: https?://code\\.tidio\\.co/", "url: https?://(?:widget-v4|socket)\\.tidiochat\\.com/"],
+            "evidence": "响应 URL 指向 Tidio"
+          },
+          {
+            "name": "Olark",
+            "patterns": ["url: https?://static\\.olark\\.com/jsclient/", "url: https?://olark\\.com/jsclient/"],
+            "evidence": "响应 URL 指向 Olark"
+          },
+          {
+            "name": "Userlike",
+            "patterns": ["url: https?://userlike-cdn-widgets\\.", "url: https?://[^\\s/]+\\.userlike\\.com/[^\\s]*(?:widget|widgets|assets)"],
+            "evidence": "响应 URL 指向 Userlike"
+          },
+          {
+            "name": "JivoChat",
+            "patterns": ["url: https?://code\\.jivosite\\.com/widget/", "url: https?://code\\.jivo\\.ru/widget/"],
+            "evidence": "响应 URL 指向 JivoChat"
+          },
+          {
+            "name": "Smartsupp",
+            "patterns": ["url: https?://www\\.smartsuppchat\\.com/loader\\.js", "url: https?://bootstrap\\.smartsuppchat\\.com/"],
+            "evidence": "响应 URL 指向 Smartsupp"
+          },
+          {
+            "name": "Chatra",
+            "patterns": ["url: https?://call\\.chatra\\.io/chatra\\.js", "url: https?://chat\\.chatra\\.io/"],
+            "evidence": "响应 URL 指向 Chatra"
+          },
+          {
+            "name": "Chaport",
+            "patterns": ["url: https?://app\\.chaport\\.com/javascripts/insert\\.js", "url: https?://app\\.chaport\\.com/widget/"],
+            "evidence": "响应 URL 指向 Chaport"
+          },
+          {
+            "name": "Help Scout Beacon",
+            "patterns": ["url: https?://beacon-v2\\.helpscout\\.net/", "url: https?://[^\\s/]+\\.helpscout\\.net/beacon/"],
+            "evidence": "响应 URL 指向 Help Scout Beacon"
+          },
+          {
+            "name": "LiveChat",
+            "patterns": [
+              "url: https?://cdn\\.livechatinc\\.com/",
+              "url: https?://secure\\.livechatinc\\.com/",
+              "url: https?://api\\.livechatinc\\.com/"
+            ],
+            "evidence": "响应 URL 指向 LiveChat"
+          },
+          {
+            "name": "Gorgias",
+            "patterns": [
+              "url: https?://config\\.gorgias\\.chat/",
+              "url: https?://client-builds\\.gorgias\\.chat/",
+              "url: https?://chat\\.gorgias\\.chat/"
+            ],
+            "evidence": "响应 URL 指向 Gorgias"
+          },
+          {
+            "name": "LiveAgent",
+            "patterns": ["url: https?://[^\\s/]+\\.ladesk\\.com/", "url: https?://[^\\s/]+\\.liveagent\\.com/[^\\s]*(?:scripts|widget|chat)"],
+            "evidence": "响应 URL 指向 LiveAgent"
+          },
+          {
+            "name": "Zoho SalesIQ",
+            "patterns": ["url: https?://salesiq\\.zoho\\.com/widget", "url: https?://salesiq\\.zohopublic\\.com/widget"],
+            "evidence": "响应 URL 指向 Zoho SalesIQ"
+          },
+          {
+            "name": "Kommunicate",
+            "patterns": ["url: https?://widget\\.kommunicate\\.io/", "url: https?://[^\\s/]+\\.kommunicate\\.app/"],
+            "evidence": "响应 URL 指向 Kommunicate"
+          },
+          {
+            "name": "Ada",
+            "patterns": ["url: https?://static\\.ada\\.support/", "url: https?://[^\\s/]+\\.ada\\.support/[^\\s]*(?:embed|chat)"],
+            "evidence": "响应 URL 指向 Ada"
+          },
+          {
+            "name": "Kustomer",
+            "patterns": ["url: https?://cdn\\.kustomerapp\\.com/chat-web/", "url: https?://api\\.kustomerapp\\.com/"],
+            "evidence": "响应 URL 指向 Kustomer"
+          },
+          {
+            "name": "Front Chat",
+            "patterns": ["url: https?://chat-assets\\.frontapp\\.com/", "url: https?://chat\\.frontapp\\.com/"],
+            "evidence": "响应 URL 指向 Front Chat"
+          },
+          {
+            "name": "Re:amaze",
+            "patterns": ["url: https?://cdn\\.reamaze\\.com/assets/", "url: https?://[^\\s/]+\\.reamaze\\.com/"],
+            "evidence": "响应 URL 指向 Re:amaze"
+          },
+          {
+            "name": "Genesys Cloud Web Messaging",
+            "patterns": [
+              "url: https?://apps\\.mypurecloud\\.com/widgets",
+              "url: https?://webmessaging\\.mypurecloud\\.com/",
+              "url: https?://apps\\.[a-z0-9-]+\\.pure\\.cloud/widgets"
+            ],
+            "evidence": "响应 URL 指向 Genesys Cloud Web Messaging"
+          },
+          {
+            "name": "Freshdesk Support Widget",
+            "patterns": ["url: https?://assets\\.freshdesk\\.com/widget/", "url: https?://[^\\s/]+\\.freshdesk\\.com/(?:widget|support|helpdesk)"],
+            "evidence": "响应 URL 指向 Freshdesk"
+          },
+          {
+            "name": "Freshservice Portal",
+            "patterns": ["url: https?://assets\\.freshservice\\.com/", "url: https?://[^\\s/]+\\.freshservice\\.com/(?:support|helpdesk|assets|widget)"],
+            "evidence": "响应 URL 指向 Freshservice"
+          },
+          {
+            "name": "Zoho Desk ASAP",
+            "patterns": ["url: https?://desk\\.zoho\\.com/portal/api/feedbackwidget", "url: https?://zohodesk\\.com/portal/api/feedbackwidget"],
+            "evidence": "响应 URL 指向 Zoho Desk ASAP"
+          },
+          {
+            "name": "Gladly Sidekick",
+            "patterns": ["url: https?://cdn\\.gladly\\.com/", "url: https?://[^\\s/]+\\.gladly\\.com/[^\\s]*(?:sidekick|chat|web-sdk)"],
+            "evidence": "响应 URL 指向 Gladly Sidekick"
+          },
+          {
+            "name": "Dixa Messenger",
+            "patterns": ["url: https?://messenger\\.dixa\\.io/", "url: https?://cdn\\.dixa\\.io/"],
+            "evidence": "响应 URL 指向 Dixa Messenger"
+          },
+          {
+            "name": "Kayako Messenger",
+            "patterns": ["url: https?://assets\\.kayako\\.com/", "url: https?://cdn\\.kayako\\.com/"],
+            "evidence": "响应 URL 指向 Kayako"
+          },
+          {
+            "name": "HelpCrunch",
+            "patterns": ["url: https?://widget\\.helpcrunch\\.com/", "url: https?://[^\\s/]+\\.helpcrunch\\.com/[^\\s]*(?:sdk|widget|embed)"],
+            "evidence": "响应 URL 指向 HelpCrunch"
+          },
+          {
+            "name": "HappyFox Help Desk",
+            "patterns": ["url: https?://happyfoxchat\\.com/", "url: https?://[^\\s/]+\\.happyfox\\.com/[^\\s]*(?:widget|helpdesk|support-center)"],
+            "evidence": "响应 URL 指向 HappyFox"
+          },
+          {
+            "name": "Groove Helpdesk",
+            "patterns": ["url: https?://assets\\.groovehq\\.com/", "url: https?://[^\\s/]+\\.groovehq\\.com/[^\\s]*(?:widgets|help|knowledge_base)"],
+            "evidence": "响应 URL 指向 Groove"
+          },
+          {
+            "name": "HelpDesk.com",
+            "patterns": ["url: https?://cdn\\.helpdesk\\.com/", "url: https?://[^\\s/]+\\.helpdesk\\.com/[^\\s]*(?:widget|chat|helpdesk)"],
+            "evidence": "响应 URL 指向 HelpDesk.com"
+          },
+          {
+            "name": "Helpshift Web Chat",
+            "patterns": ["url: https?://webchat\\.helpshift\\.com/", "url: https?://[^\\s/]+\\.helpshift\\.com/[^\\s]*(?:webchat|sdk|embed)"],
+            "evidence": "响应 URL 指向 Helpshift"
+          },
+          {
+            "name": "Salesforce Embedded Service",
+            "patterns": ["url: https?://service\\.force\\.com/embeddedservice/", "url: https?://[^\\s/]+\\.force\\.com/embeddedservice/"],
+            "evidence": "响应 URL 指向 Salesforce Embedded Service"
+          },
+          {
+            "name": "Comm100 Live Chat",
+            "patterns": ["url: https?://chatserver\\.comm100\\.com/", "url: https?://[^\\s/]+\\.comm100\\.com/[^\\s]*(?:chatserver|livechat|visitorchat)"],
+            "evidence": "响应 URL 指向 Comm100"
+          },
+          {
+            "name": "Talkdesk Digital Engagement",
+            "patterns": ["url: https?://cdn\\.talkdeskapp\\.com/", "url: https?://[^\\s/]+\\.talkdeskapp\\.com/"],
+            "evidence": "响应 URL 指向 Talkdesk"
+          },
+          {
+            "name": "Oracle Service Cloud",
+            "patterns": ["url: https?://static\\.custhelp\\.com/", "url: https?://rightnow\\.custhelp\\.com/"],
+            "evidence": "响应 URL 指向 Oracle Service Cloud"
+          },
+          {
+            "name": "Deskpro",
+            "patterns": ["url: https?://cdn\\.deskpro\\.com/", "url: https?://[^\\s/]+\\.deskpro\\.com/[^\\s]*(?:widget|messenger|helpdesk)"],
+            "evidence": "响应 URL 指向 Deskpro"
+          },
+          {
+            "name": "UserEcho",
+            "patterns": ["url: https?://cdn\\.userecho\\.com/", "url: https?://[^\\s/]+\\.userecho\\.com/[^\\s]*(?:widget|forum|feedback)"],
+            "evidence": "响应 URL 指向 UserEcho"
+          },
+          {
             "name": "Auth0",
             "patterns": ["url: https?://[^\\s/]+\\.auth0\\.com/"],
             "evidence": "响应 URL 指向 Auth0 服务"
