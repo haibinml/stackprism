@@ -1987,6 +1987,96 @@
         },
         {
           "defaults": {
+            "kind": "实时音视频 / 视频 SDK",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Agora RTC",
+              "patterns": ["websdk\\.agora\\.io|download\\.agora\\.io/sdk/release/AgoraRTC|agora\\.io/[^\\s\"'<>]*(?:rtc|sdk|websdk)"]
+            },
+            {
+              "name": "Daily.co",
+              "patterns": ["static\\.daily\\.co|daily\\.co/[^\\s\"'<>]*(?:embed|daily-js|sdk)|@daily-co/daily-js"]
+            },
+            {
+              "name": "LiveKit",
+              "patterns": [
+                "cdn\\.jsdelivr\\.net/npm/livekit-client|unpkg\\.com/livekit-client|livekit\\.cloud|livekit\\.io/[^\\s\"'<>]*(?:client|sdk|room)"
+              ]
+            },
+            {
+              "name": "100ms",
+              "patterns": ["sdk\\.100ms\\.live|prod-[a-z0-9-]+\\.100ms\\.live|100ms\\.live/[^\\s\"'<>]*(?:sdk|preview|room)"]
+            },
+            {
+              "name": "Twilio Video",
+              "patterns": ["sdk\\.twilio\\.com/js/video|media\\.twiliocdn\\.com/sdk/js/video|twilio-video(?:\\.min)?\\.js"]
+            },
+            {
+              "name": "Vonage Video API",
+              "patterns": ["static\\.opentok\\.com|opentok(?:\\.min)?\\.js|tokbox\\.com/[^\\s\"'<>]*(?:embed|v2|webrtc)"]
+            },
+            {
+              "name": "Jitsi Meet External API",
+              "patterns": ["meet\\.jit\\.si/external_api\\.js|/libs/external_api(?:\\.min)?\\.js|lib-jitsi-meet(?:\\.min)?\\.js"]
+            },
+            {
+              "name": "Zoom Web SDK",
+              "patterns": ["source\\.zoom\\.us/(?:[\\d.]+/)?(?:lib|zoom-meeting)|@zoomus/websdk|ZoomMtg"]
+            },
+            {
+              "name": "Whereby Embed",
+              "patterns": ["whereby\\.com/(?:embed|iframe)/|whereby\\.dev/[^\\s\"'<>]*(?:embed|room|sdk)"]
+            },
+            {
+              "name": "Amazon IVS Player",
+              "patterns": ["player\\.live-video\\.net|amazon-ivs-player(?:\\.min)?\\.js|ivs\\.rocks/[^\\s\"'<>]*(?:player|sdk)"]
+            },
+            {
+              "name": "THEOplayer",
+              "patterns": ["cdn\\.theoplayer\\.com|theoplayer(?:\\.min)?\\.js|theoplayer\\.com/[^\\s\"'<>]*(?:sdk|player)"]
+            },
+            {
+              "name": "Bitmovin Player",
+              "patterns": ["cdn\\.bitmovin\\.com/player|bitmovinplayer(?:\\.min)?\\.js|bitmovin\\.com/[^\\s\"'<>]*(?:player|analytics)"]
+            },
+            {
+              "name": "Wowza Player",
+              "patterns": ["player\\.wowza\\.com|wowza\\.com/[^\\s\"'<>]*(?:player|embed|webrtc|streaming)"]
+            },
+            {
+              "name": "api.video",
+              "patterns": ["embed\\.api\\.video|js\\.api\\.video|api\\.video/[^\\s\"'<>]*(?:player|embed|sdk)"]
+            },
+            {
+              "name": "Livepeer",
+              "patterns": ["lvpr\\.tv|livepeer\\.studio|livepeer\\.com/[^\\s\"'<>]*(?:embed|player|sdk)"]
+            },
+            {
+              "name": "Cincopa",
+              "patterns": ["runtime\\.cincopa\\.com|cincopa\\.com/[^\\s\"'<>]*(?:media-platform|embed|runtime)"]
+            },
+            {
+              "name": "Ziggeo",
+              "patterns": ["assets\\.ziggeo\\.com|ziggeo\\.com/[^\\s\"'<>]*(?:assets|embed|recorder|player)"]
+            },
+            {
+              "name": "Bambuser",
+              "patterns": ["lc\\.cdn\\.bambuser\\.net|bambuser\\.com/[^\\s\"'<>]*(?:embed|player|live-shopping)"]
+            },
+            {
+              "name": "Millicast",
+              "patterns": ["viewer\\.millicast\\.com|millicast\\.com/[^\\s\"'<>]*(?:sdk|viewer|player|webrtc)"]
+            },
+            {
+              "name": "VideoSDK.live",
+              "patterns": ["sdk\\.videosdk\\.live|videosdk\\.live/[^\\s\"'<>]*(?:sdk|rtc|room|embed)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "Headless CMS"
           },
           "rules": [
