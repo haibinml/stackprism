@@ -630,6 +630,252 @@
         },
         "rules": [
           {
+            "name": "HubSpot",
+            "patterns": [
+              "url: https?://js\\.hs-scripts\\.com/",
+              "url: https?://js\\.hsforms\\.net/",
+              "url: https?://forms\\.hsforms\\.com/",
+              "url: https?://(?:js\\.)?hs-analytics\\.net/"
+            ],
+            "evidence": "响应 URL 指向 HubSpot 营销服务"
+          },
+          {
+            "name": "Marketo",
+            "patterns": [
+              "url: https?://munchkin\\.marketo\\.net/",
+              "url: https?://app-[a-z0-9]+\\.marketo\\.com/",
+              "url: https?://[^\\s/]+\\.mktoweb\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Marketo"
+          },
+          {
+            "name": "Mailchimp",
+            "patterns": [
+              "url: https?://(?:[a-z0-9-]+\\.)*chimpstatic\\.com/",
+              "url: https?://(?:[a-z0-9-]+\\.)*list-manage\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Mailchimp"
+          },
+          {
+            "name": "Klaviyo",
+            "patterns": [
+              "url: https?://static\\.klaviyo\\.com/",
+              "url: https?://a\\.klaviyo\\.com/",
+              "url: https?://fast\\.a\\.klaviyo\\.com/",
+              "url: https?://static-tracking\\.klaviyo\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Klaviyo"
+          },
+          {
+            "name": "Braze",
+            "patterns": [
+              "url: https?://js\\.appboycdn\\.com/",
+              "url: https?://(?:sdk|rest)\\.[a-z0-9-]+\\.braze\\.(?:com|eu)/"
+            ],
+            "evidence": "响应 URL 指向 Braze"
+          },
+          {
+            "name": "Customer.io",
+            "patterns": [
+              "url: https?://track\\.customer\\.io/",
+              "url: https?://assets\\.customer\\.io/",
+              "url: https?://api\\.customer\\.io/"
+            ],
+            "evidence": "响应 URL 指向 Customer.io"
+          },
+          {
+            "name": "Iterable",
+            "patterns": [
+              "url: https?://static\\.iterable\\.com/",
+              "url: https?://js\\.iterable\\.com/",
+              "url: https?://api\\.iterable\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Iterable"
+          },
+          {
+            "name": "Attentive",
+            "patterns": [
+              "url: https?://cdn\\.attn\\.tv/",
+              "url: https?://creatives\\.attn\\.tv/",
+              "url: https?://api\\.attentivemobile\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Attentive"
+          },
+          {
+            "name": "Omnisend Marketing",
+            "patterns": [
+              "url: https?://omnisnippet1\\.com/",
+              "url: https?://omnisrc\\.com/",
+              "url: https?://api\\.omnisend\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Omnisend"
+          },
+          {
+            "name": "ActiveCampaign Tracking",
+            "patterns": [
+              "url: https?://trackcmp\\.net/",
+              "url: https?://[^\\s/]+\\.activehosted\\.com/f/embed"
+            ],
+            "evidence": "响应 URL 指向 ActiveCampaign"
+          },
+          {
+            "name": "Drip Marketing",
+            "patterns": [
+              "url: https?://tag\\.getdrip\\.com/",
+              "url: https?://cdn\\.getdrip\\.com/",
+              "url: https?://api\\.getdrip\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Drip"
+          },
+          {
+            "name": "Kit Forms",
+            "patterns": [
+              "url: https?://f\\.convertkit\\.com/",
+              "url: https?://cdn\\.convertkit\\.com/",
+              "url: https?://app\\.convertkit\\.com/[^\\s]+(?:forms|landing_pages)"
+            ],
+            "evidence": "响应 URL 指向 Kit / ConvertKit"
+          },
+          {
+            "name": "MailerLite Forms",
+            "patterns": [
+              "url: https?://assets\\.mailerlite\\.com/",
+              "url: https?://static\\.mailerlite\\.com/",
+              "url: https?://dashboard\\.mailerlite\\.com/forms/"
+            ],
+            "evidence": "响应 URL 指向 MailerLite"
+          },
+          {
+            "name": "Brevo Tracking",
+            "patterns": [
+              "url: https?://sibautomation\\.com/",
+              "url: https?://sibforms\\.com/",
+              "url: https?://api\\.brevo\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Brevo / Sendinblue"
+          },
+          {
+            "name": "SendGrid Email API",
+            "patterns": [
+              "url: https?://api\\.sendgrid\\.com/v3",
+              "url: https?://(?:[a-z0-9-]+\\.)*sendgrid\\.net/"
+            ],
+            "evidence": "响应 URL 指向 SendGrid"
+          },
+          {
+            "name": "Mailgun Email API",
+            "patterns": [
+              "url: https?://api\\.mailgun\\.net/v3",
+              "url: https?://(?:[a-z0-9-]+\\.)*mailgun\\.org/"
+            ],
+            "evidence": "响应 URL 指向 Mailgun"
+          },
+          {
+            "name": "Postmark Email API",
+            "patterns": ["url: https?://api\\.postmarkapp\\.com/", "url: https?://pstmrk\\.it/"],
+            "evidence": "响应 URL 指向 Postmark"
+          },
+          {
+            "name": "SparkPost",
+            "patterns": ["url: https?://api\\.sparkpost\\.com/", "url: https?://[^\\s/]+\\.sparkpostmail\\.com/"],
+            "evidence": "响应 URL 指向 SparkPost"
+          },
+          {
+            "name": "Resend Email API",
+            "patterns": ["url: https?://api\\.resend\\.com/"],
+            "evidence": "响应 URL 指向 Resend"
+          },
+          {
+            "name": "Amazon SES Email",
+            "patterns": [
+              "url: https?://email\\.[a-z0-9-]+\\.amazonaws\\.com/",
+              "url: https?://email-smtp\\.[a-z0-9-]+\\.amazonaws\\.com/",
+              "url: https?://ses\\.[a-z0-9-]+\\.amazonaws\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Amazon SES"
+          },
+          {
+            "name": "Mailjet Email API",
+            "patterns": ["url: https?://api\\.mailjet\\.com/", "url: https?://static\\.mailjet\\.com/"],
+            "evidence": "响应 URL 指向 Mailjet"
+          },
+          {
+            "name": "Mandrill Transactional Email",
+            "patterns": ["url: https?://mandrillapp\\.com/api", "url: https?://mandrillapp\\.com/track"],
+            "evidence": "响应 URL 指向 Mandrill"
+          },
+          {
+            "name": "MailerSend",
+            "patterns": ["url: https?://api\\.mailersend\\.com/", "url: https?://assets\\.mailersend\\.com/"],
+            "evidence": "响应 URL 指向 MailerSend"
+          },
+          {
+            "name": "Elastic Email API",
+            "patterns": ["url: https?://api\\.elasticemail\\.com/"],
+            "evidence": "响应 URL 指向 Elastic Email"
+          },
+          {
+            "name": "SMTP2GO",
+            "patterns": ["url: https?://api\\.smtp2go\\.com/"],
+            "evidence": "响应 URL 指向 SMTP2GO"
+          },
+          {
+            "name": "EmailOctopus Forms",
+            "patterns": ["url: https?://emailoctopus\\.com/lists/[^\\s/]+/forms"],
+            "evidence": "响应 URL 指向 EmailOctopus"
+          },
+          {
+            "name": "Campaign Monitor Forms",
+            "patterns": [
+              "url: https?://[^\\s/]+\\.createsend\\.com/",
+              "url: https?://createsend\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Campaign Monitor"
+          },
+          {
+            "name": "Buttondown",
+            "patterns": ["url: https?://buttondown\\.email/static/", "url: https?://buttondown\\.email/[^\\s]+(?:subscribe|forms|api)"],
+            "evidence": "响应 URL 指向 Buttondown"
+          },
+          {
+            "name": "Beehiiv Newsletter",
+            "patterns": ["url: https?://embeds\\.beehiiv\\.com/", "url: https?://[^\\s/]+\\.beehiiv\\.com/"],
+            "evidence": "响应 URL 指向 Beehiiv"
+          },
+          {
+            "name": "Substack Newsletter",
+            "patterns": ["url: https?://substackcdn\\.com/", "url: https?://[^\\s/]+\\.substack\\.com/embed"],
+            "evidence": "响应 URL 指向 Substack"
+          },
+          {
+            "name": "Loops.so",
+            "patterns": ["url: https?://app\\.loops\\.so/", "url: https?://api\\.loops\\.so/"],
+            "evidence": "响应 URL 指向 Loops.so"
+          },
+          {
+            "name": "Plunk Email",
+            "patterns": ["url: https?://api\\.useplunk\\.com/", "url: https?://assets\\.useplunk\\.com/"],
+            "evidence": "响应 URL 指向 Plunk"
+          },
+          {
+            "name": "Flodesk Forms",
+            "patterns": ["url: https?://assets\\.flodesk\\.com/", "url: https?://flodesk\\.com/[^\\s]+(?:forms|embed|subscribe)"],
+            "evidence": "响应 URL 指向 Flodesk"
+          },
+          {
+            "name": "Moosend Forms",
+            "patterns": ["url: https?://cdn\\.moosend\\.com/", "url: https?://moosend\\.com/[^\\s]+(?:forms|subscribe|tracking|embed)"],
+            "evidence": "响应 URL 指向 Moosend"
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "category": "SaaS / 第三方服务",
+          "confidence": "高"
+        },
+        "rules": [
+          {
             "name": "Google reCAPTCHA",
             "patterns": [
               "url: https?://www\\.google\\.com/recaptcha/",
