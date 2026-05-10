@@ -3440,6 +3440,96 @@
         },
         {
           "defaults": {
+            "kind": "捐赠 / 筹款",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Donorbox Widget",
+              "patterns": ["donorbox\\.org/(?:widget\\.js|embed)|donorbox\\.org/[^\\s\"'<>]*(?:donate|campaign|checkout)"]
+            },
+            {
+              "name": "Givebutter Donations",
+              "patterns": ["widgets\\.givebutter\\.com|givebutter\\.com/[^\\s\"'<>]*(?:embed|widget|campaign|donate|checkout)"]
+            },
+            {
+              "name": "Fundraise Up",
+              "patterns": ["cdn\\.fundraiseup\\.com|donate\\.fundraiseup\\.com|fundraiseup\\.com/[^\\s\"'<>]*(?:widget|checkout|donate)"]
+            },
+            {
+              "name": "Classy Fundraising",
+              "patterns": ["cdn\\.classy\\.org|classy\\.org/[^\\s\"'<>]*(?:give|campaign|event|checkout|donate)"]
+            },
+            {
+              "name": "GoFundMe Charity",
+              "patterns": ["charity\\.gofundme\\.com|gofundme\\.com/[^\\s\"'<>]*(?:charity|donate|fundraising-widget)"]
+            },
+            {
+              "name": "JustGiving",
+              "patterns": ["widgets\\.justgiving\\.com|justgiving\\.com/[^\\s\"'<>]*(?:campaign|crowdfunding|fundraising|donation)"]
+            },
+            {
+              "name": "Raisely",
+              "patterns": ["cdn\\.raisely\\.com|raisely\\.com/[^\\s\"'<>]*(?:donate|campaign|embed|checkout)"]
+            },
+            {
+              "name": "Donately",
+              "patterns": ["cdn\\.donately\\.com|donately\\.com/[^\\s\"'<>]*(?:checkout|donate|embed|campaign)"]
+            },
+            {
+              "name": "Qgiv",
+              "patterns": ["secure\\.qgiv\\.com/for/|qgiv\\.com/[^\\s\"'<>]*(?:event|donate|embed|form|widget)"]
+            },
+            {
+              "name": "Give Lively",
+              "patterns": ["secure\\.givelively\\.org|givelively\\.org/[^\\s\"'<>]*(?:donate|widget|campaign|checkout)"]
+            },
+            {
+              "name": "Network for Good Donations",
+              "patterns": ["networkforgood\\.org/[^\\s\"'<>]*(?:donate|fundraising|donation)|nfg\\.org/[^\\s\"'<>]*(?:donate|fundraising)"]
+            },
+            {
+              "name": "Bloomerang Donation Forms",
+              "patterns": [
+                "crm\\.bloomerang\\.co/HostedDonation|bloomerang\\.co/HostedDonation|bloomerang\\.com/[^\\s\"'<>]*(?:donation|form|embed)"
+              ]
+            },
+            {
+              "name": "Kindful Donation Forms",
+              "patterns": ["kindful\\.com/[^\\s\"'<>]*(?:register|campaigns|checkout|donate|embeds?)"]
+            },
+            {
+              "name": "Neon CRM Donation Forms",
+              "patterns": ["app\\.neoncrm\\.com/np/clients|neoncrm\\.com/np/clients|neonone\\.com/[^\\s\"'<>]*(?:donation|forms|embed)"]
+            },
+            {
+              "name": "EveryAction Forms",
+              "patterns": ["secure\\.everyaction\\.com|everyaction\\.com/[^\\s\"'<>]*(?:donate|forms|signup|contribute)"]
+            },
+            {
+              "name": "ActBlue Donations",
+              "patterns": ["secure\\.actblue\\.com/(?:donate|contribute)|actblue\\.com/[^\\s\"'<>]*(?:donate|contribute)"]
+            },
+            {
+              "name": "Anedot",
+              "patterns": ["secure\\.anedot\\.com|anedot\\.com/[^\\s\"'<>]*(?:donate|embed|campaign|checkout)"]
+            },
+            {
+              "name": "GiveForms",
+              "patterns": ["static\\.giveforms\\.com|giveforms\\.com/[^\\s\"'<>]*(?:embed|donate|campaign|checkout)"]
+            },
+            {
+              "name": "Tiltify",
+              "patterns": ["tiltify\\.com/[^\\s\"'<>]*(?:campaigns|events|donate|donation|api|@)"]
+            },
+            {
+              "name": "DonorPerfect Forms",
+              "patterns": ["donorperfect\\.net/prod/|donorperfect\\.com/[^\\s\"'<>]*(?:donation|forms|embed|online-forms)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "评价 / UGC",
             "matchIn": ["resources"]
           },
