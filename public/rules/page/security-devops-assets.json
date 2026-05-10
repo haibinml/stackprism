@@ -295,6 +295,167 @@
           },
           "rules": [
             {
+              "defaults": {
+                "kind": "容器镜像 / 制品仓库"
+              },
+              "rules": [
+                {
+                  "name": "Quay",
+                  "resourceHints": ["quay.io", "quay-enterprise"],
+                  "patterns": [
+                    "quay(?:-enterprise|-registry)?[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+                    "quay\\.io/(?:repository|assets|static)(?:/|[?#]|$)"
+                  ]
+                },
+                {
+                  "name": "ChartMuseum",
+                  "resourceHints": ["chartmuseum"],
+                  "patterns": ["chartmuseum[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)", "(?:^|/)api/charts(?:[?#\\s/]|$).*chartmuseum"]
+                },
+                {
+                  "name": "Portus",
+                  "resourceHints": ["suse-portus", "portus-ui"],
+                  "patterns": [
+                    "<title>\\s*Portus(?:\\s*</title>|\\s+-)",
+                    "(?:suse-)?portus(?:-ui)?[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Docker Registry UI",
+                  "resourceHints": ["docker-registry-ui", "joxit/docker-registry-ui"],
+                  "patterns": ["docker-registry-ui[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)", "joxit/docker-registry-ui(?:/|[?#]|$)"]
+                }
+              ]
+            },
+            {
+              "defaults": {
+                "kind": "GitOps / 部署平台"
+              },
+              "rules": [
+                {
+                  "name": "Flux CD",
+                  "resourceHints": ["fluxcd", "flux-webui"],
+                  "patterns": ["fluxcd[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)", "flux-webui[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+                },
+                {
+                  "name": "Weave GitOps",
+                  "resourceHints": ["weave-gitops", "weaveworks"],
+                  "patterns": [
+                    "weave-gitops[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+                    "weaveworks[^\\s\"'<>]*gitops[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Spinnaker",
+                  "resourceHints": ["spinnaker", "spinnaker-deck"],
+                  "patterns": ["spinnaker(?:-deck)?[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)", "(?:^|/)deck(?:/|[?#\\s]|$).*spinnaker"]
+                },
+                {
+                  "name": "Octopus Deploy",
+                  "resourceHints": ["octopusdeploy", "octopus.server.web"],
+                  "patterns": [
+                    "octopusdeploy[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+                    "octopus\\.server\\.web[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Harness CI/CD",
+                  "resourceHints": ["static.harness.io", "app.harness.io"],
+                  "patterns": [
+                    "static\\.harness\\.io|app\\.harness\\.io/[^\\s\"'<>]*(?:ng|gateway|static|assets)|harness[^\\s\"'<>]*ci[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "Devtron",
+                  "resourceHints": ["devtron"],
+                  "patterns": [
+                    "devtron[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)",
+                    "devtron\\.ai/[^\\s\"'<>]*(?:dashboard|assets|static)"
+                  ]
+                }
+              ]
+            },
+            {
+              "defaults": {
+                "kind": "CI / DevOps"
+              },
+              "rules": [
+                {
+                  "name": "Buildkite",
+                  "resourceHints": ["buildkiteassets.com", "buildkite.com"],
+                  "patterns": ["buildkiteassets\\.com|buildkite\\.com/[^\\s\"'<>]*(?:assets|organizations|pipelines|builds)"]
+                },
+                {
+                  "name": "Semaphore CI",
+                  "resourceHints": ["semaphoreci.com", "assets.semaphoreci.com"],
+                  "patterns": ["assets\\.semaphoreci\\.com|semaphoreci\\.com/[^\\s\"'<>]*(?:assets|projects|workflows|jobs)"]
+                },
+                {
+                  "name": "CircleCI",
+                  "resourceHints": ["circleci.com", "assets.circleci.com"],
+                  "patterns": ["assets\\.circleci\\.com|circleci\\.com/[^\\s\"'<>]*(?:assets|pipelines|workflows|projects)"]
+                }
+              ]
+            },
+            {
+              "defaults": {
+                "kind": "代码检索 / 代码评审"
+              },
+              "rules": [
+                {
+                  "name": "Sourcegraph",
+                  "resourceHints": ["sourcegraph", "/.assets/"],
+                  "patterns": [
+                    "sourcegraph[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+                    "(?:^|/)\\.assets/(?:scripts|styles)(?:/|[?#]|$).*sourcegraph"
+                  ]
+                },
+                {
+                  "name": "Gerrit Code Review",
+                  "resourceHints": ["polygerrit", "gerrit_ui"],
+                  "patterns": ["polygerrit[^\\s\"'<>]*\\.(?:js|css|html)(?:\\?|$)", "gerrit_ui[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"]
+                },
+                {
+                  "name": "Phabricator",
+                  "resourceHints": ["phabricator", "/rsrc/"],
+                  "patterns": [
+                    "phabricator[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+                    "(?:^|/)rsrc/[^\\s\"'<>]*(?:phabricator|javelin)[^\\s\"'<>]*"
+                  ]
+                },
+                {
+                  "name": "Phorge",
+                  "resourceHints": ["phorge"],
+                  "patterns": ["<title>\\s*Phorge(?:\\s*</title>|\\s+-)", "phorge[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+                },
+                {
+                  "name": "Review Board",
+                  "resourceHints": ["reviewboard", "review-board"],
+                  "patterns": [
+                    "reviewboard[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+                    "review-board[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+                  ]
+                },
+                {
+                  "name": "RhodeCode",
+                  "resourceHints": ["rhodecode"],
+                  "patterns": ["rhodecode[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)", "(?:^|/)rhodecode(?:/|[?#\\s]|$)"]
+                },
+                {
+                  "name": "OpenGrok",
+                  "resourceHints": ["opengrok"],
+                  "patterns": ["opengrok[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)", "(?:^|/)xref/(?:[^\\s\"'<>]+)?(?:[?#]|$).*opengrok"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "defaults": {
+            "confidence": "高"
+          },
+          "rules": [
+            {
               "name": "HashiCorp Consul",
               "kind": "服务发现 / Service Mesh",
               "resourceHints": ["consul-ui", "hashicorp-consul"],
