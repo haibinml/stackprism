@@ -446,6 +446,19 @@
         ]
       },
       {
+        "defaults": {
+          "category": "安全与协议",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "WebSocket",
+            "patterns": ["url:\\s*wss?://|(?:^|\\n)upgrade:\\s*websocket|(?:^|\\n)sec-websocket-accept:"],
+            "evidence": "WebSocket 握手或 ws/wss 请求 URL"
+          }
+        ]
+      },
+      {
         "category": "CMS / 电商平台",
         "name": "Shopify",
         "confidence": "中",

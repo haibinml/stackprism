@@ -1,6 +1,6 @@
 import { attachTechnologyLinks } from './tech-links'
 import { addStoredCustomHeaderRules } from './headers'
-import { getPopupCache, getTabData, getTabSnapshot, popupStorageKey, storageKey } from './tab-store'
+import { clearBadge, clearTabSession, getPopupCache, getTabData, getTabSnapshot, popupStorageKey, storageKey } from './tab-store'
 import {
   strongerConfidence,
   suppressDuplicateWebsiteProgramCategories,
@@ -12,6 +12,7 @@ import { categoryIndex, confidenceRank } from '@/utils/category-order'
 import { cleanTechnologyUrl } from '@/utils/url'
 import { cleanStringArray } from '@/utils/normalize-settings'
 import { normalizeTechName } from '@/utils/tech-name'
+import { checkPageSupport } from '@/utils/page-support'
 
 export const POPUP_CACHE_STALE_MS = 2 * 60 * 1000
 const POPUP_CACHE_SCHEMA_VERSION = 1
@@ -70,6 +71,18 @@ const buildTechnologyCounts = (technologies: any[]) => ({
   high: technologies.filter(tech => tech.confidence === '高').length,
   medium: technologies.filter(tech => tech.confidence === '中').length,
   low: technologies.filter(tech => tech.confidence === '低').length
+})
+
+const buildEmptyPopupResult = (tab: any) => ({
+  url: tab?.url || '',
+  title: tab?.title || '',
+  generatedAt: new Date().toISOString(),
+  updatedAt: 0,
+  technologies: [],
+  counts: buildTechnologyCounts([]),
+  categoryCounts: {},
+  resources: { total: 0 },
+  headerCount: 0
 })
 
 const buildCategoryCounts = (technologies: any[]) =>
@@ -243,6 +256,22 @@ export const buildPopupCacheRecord = (data: any, settings: any, tab: any) => {
 }
 
 export const getPopupResultResponse = async (tabId: number) => {
+  const tab = await getTabSnapshot(tabId)
+  const support = checkPageSupport(tab.url)
+  if (!support.supported) {
+    await clearTabSession(tabId)
+    clearBadge(tabId)
+    return {
+      ok: true,
+      data: buildEmptyPopupResult(tab),
+      hasCache: false,
+      stale: false,
+      updatedAt: 0,
+      unsupported: true,
+      reason: support.reason
+    }
+  }
+
   const [storedPopup, settings] = await Promise.all([getPopupCache(tabId), loadDetectorSettings()])
   const cachedPopup = getCachedPopupResult(storedPopup, settings)
   if (cachedPopup) {
@@ -255,7 +284,7 @@ export const getPopupResultResponse = async (tabId: number) => {
     }
   }
 
-  const [data, tab] = await Promise.all([getTabData(tabId), getTabSnapshot(tabId)])
+  const data = await getTabData(tabId)
   const popup = buildPopupCacheRecord(data, settings, tab)
   if (hasStoredDetection(data)) {
     const { popup: legacyPopup, ...tabData } = data || {}

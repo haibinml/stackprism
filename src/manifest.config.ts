@@ -20,7 +20,7 @@ export default defineManifest({
   },
   content_scripts: [
     {
-      matches: ['<all_urls>'],
+      matches: ['http://*/*', 'https://*/*'],
       js: ['src/content/content-observer.ts'],
       run_at: 'document_idle'
     }
@@ -42,7 +42,7 @@ export default defineManifest({
   web_accessible_resources: [
     {
       resources: ['rules/*', 'tech-links.json', 'injected/page-detector.iife.js', 'injected/page-source-search.iife.js'],
-      matches: ['<all_urls>']
+      matches: ['http://*/*', 'https://*/*']
     }
   ]
 })

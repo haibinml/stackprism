@@ -3,9 +3,10 @@ import { clearBadge, clearTabSession } from './tab-store'
 import { clearDynamicSnapshotTimer, clearPendingDynamicSnapshot } from './dynamic-snapshot'
 import { buildHeaderRecord, dedupeApiRecords } from './headers'
 import { clearActiveDetectionTimer, refreshAllBadges, saveTabDataAndBadge, scheduleActivePageDetection } from './detection'
-import { getTabData } from './tab-store'
+import { getTabData, getTabSnapshot } from './tab-store'
 import { SETTINGS_STORAGE_KEY, applyDetectorSettingsUpdate, loadDetectorSettings, loadTechRules } from './detector-settings'
 import { registerMessageRouter } from './message-router'
+import { isDetectablePageUrl, isObservableRequestUrl } from '@/utils/page-support'
 
 registerMessageRouter()
 
@@ -24,7 +25,21 @@ chrome.tabs.onRemoved.addListener(tabId => {
   clearTabSession(tabId)
 })
 
-chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
+const clearTabDetectionState = (tabId: number) => {
+  clearActiveDetectionTimer(tabId)
+  clearDynamicSnapshotTimer(tabId)
+  clearPendingDynamicSnapshot(tabId)
+  clearBadge(tabId)
+  clearTabSession(tabId).catch(() => {})
+}
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  const url = changeInfo.url || tab.url || ''
+  if (url && !isDetectablePageUrl(url)) {
+    clearTabDetectionState(tabId)
+    return
+  }
+
   if (changeInfo.status === 'loading') {
     clearActiveDetectionTimer(tabId)
     clearDynamicSnapshotTimer(tabId)
@@ -34,7 +49,11 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
   }
 
   if (changeInfo.status === 'complete') {
-    scheduleActivePageDetection(tabId, 600)
+    if (isDetectablePageUrl(url)) {
+      scheduleActivePageDetection(tabId, 600)
+    } else {
+      clearTabDetectionState(tabId)
+    }
   }
 })
 
@@ -48,9 +67,18 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 chrome.webRequest.onHeadersReceived.addListener(
   details => {
     if (details.tabId < 0 || !details.responseHeaders) return
+    if (!isObservableRequestUrl(details.url)) return
 
-    Promise.all([getTabData(details.tabId), loadTechRules(), loadDetectorSettings()])
-      .then(([data, rules, settings]) => {
+    Promise.all([getTabData(details.tabId), loadTechRules(), loadDetectorSettings(), getTabSnapshot(details.tabId)])
+      .then(([data, rules, settings, tab]) => {
+        if (details.type === 'main_frame' && !isDetectablePageUrl(details.url)) {
+          clearTabDetectionState(details.tabId)
+          return
+        }
+        if (details.type !== 'main_frame' && !isDetectablePageUrl(tab.url)) {
+          clearTabDetectionState(details.tabId)
+          return
+        }
         const record = buildHeaderRecord(details, rules.headers || {}, settings)
         if (details.type === 'main_frame') {
           data.main = record
@@ -58,7 +86,7 @@ chrome.webRequest.onHeadersReceived.addListener(
           data.frames = []
           delete data.page
           delete data.dynamic
-        } else if (details.type === 'xmlhttprequest' || (details.type as string) === 'fetch') {
+        } else if (details.type === 'xmlhttprequest' || (details.type as string) === 'fetch' || details.type === 'websocket') {
           data.apis = dedupeApiRecords([record, ...(data.apis || [])])
         } else if (details.type === 'sub_frame') {
           data.frames = dedupeApiRecords([record, ...(data.frames || [])]).slice(0, 10)
@@ -68,6 +96,6 @@ chrome.webRequest.onHeadersReceived.addListener(
       })
       .catch(() => {})
   },
-  { urls: ['<all_urls>'] },
+  { urls: ['http://*/*', 'https://*/*', 'ws://*/*', 'wss://*/*'] },
   ['responseHeaders', 'extraHeaders']
 )

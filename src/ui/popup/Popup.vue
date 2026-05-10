@@ -244,6 +244,7 @@
   import { buildCorrectionIssueUrl } from '@/utils/build-issue-url'
   import { CACHE_REFRESH_DELAYS, FOCUS_CATEGORY, REPOSITORY_URL, RAW_PLACEHOLDER, SETTINGS_STORAGE_KEY } from '@/utils/constants'
   import { cycleTheme, getStoredTheme, setStoredTheme, themeLabel, type ThemeMode } from '@/utils/theme'
+  import { checkPageSupport } from '@/utils/page-support'
 
   const RAW_LOADING_TEXT = '正在请求原始线索...'
 
@@ -521,19 +522,6 @@
     scheduleCachedResultRefresh(tabId, previousUpdatedAt, attempt + 1)
   }
 
-  const checkPageSupport = (url: string): { supported: boolean; reason: string } => {
-    if (!url) return { supported: false, reason: '当前标签页还没有加载网页。' }
-    if (/^chrome:/i.test(url)) return { supported: false, reason: 'Chrome 浏览器内置页面无法注入检测脚本。' }
-    if (/^edge:/i.test(url)) return { supported: false, reason: 'Edge 浏览器内置页面无法注入检测脚本。' }
-    if (/^(brave|opera|vivaldi):/i.test(url)) return { supported: false, reason: '浏览器内置页面无法注入检测脚本。' }
-    if (/^chrome-extension:/i.test(url)) return { supported: false, reason: '扩展程序内部页面无法识别。' }
-    if (/^(moz-extension|safari-web-extension):/i.test(url)) return { supported: false, reason: '扩展程序内部页面无法识别。' }
-    if (/^about:/i.test(url)) return { supported: false, reason: '浏览器内部页面无法注入检测脚本。' }
-    if (/^view-source:/i.test(url)) return { supported: false, reason: '查看源码页面不支持检测。' }
-    if (/^(devtools|chrome-search|chrome-untrusted):/i.test(url)) return { supported: false, reason: '当前页面不支持检测。' }
-    return { supported: true, reason: '' }
-  }
-
   const markUnsupportedPage = (url: string, reason: string) => {
     state.pageSupported = false
     state.result = null
@@ -690,6 +678,8 @@
   const getActiveTabId = async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
     if (!tab || !tab.id) throw new Error('无法读取当前标签页。')
+    const support = checkPageSupport(tab.url || '')
+    if (!support.supported) throw new Error(support.reason)
     state.currentTabId = tab.id
     return tab.id
   }
@@ -779,6 +769,12 @@
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
     if (!tab || !tab.id) {
       search.meta = '无法读取当前标签页。'
+      search.output = ''
+      return
+    }
+    const support = checkPageSupport(tab.url || '')
+    if (!support.supported) {
+      search.meta = support.reason
       search.output = ''
       return
     }

@@ -1,5 +1,6 @@
-const canInjectContentObserver = (tab: chrome.tabs.Tab): boolean =>
-  typeof tab?.id === 'number' && /^https?:\/\//i.test(String(tab.url || ''))
+import { isDetectablePageUrl } from '@/utils/page-support'
+
+const canInjectContentObserver = (tab: chrome.tabs.Tab): boolean => typeof tab?.id === 'number' && isDetectablePageUrl(tab.url)
 
 export const injectContentObserver = async (tabId: number): Promise<void> => {
   const observerFile = chrome.runtime.getManifest().content_scripts?.[0]?.js?.[0]

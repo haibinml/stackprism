@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { safeDecodeURIComponent } from '@/utils/url'
+import { isDetectablePageUrl } from '@/utils/page-support'
 import { mergeTechnologyRecords, normalizeDynamicFallbackTechName, shortHeaderUrl } from './merge'
 import {
   createCollector,
@@ -8,7 +9,7 @@ import {
   matchesRuleTextHints,
   passesRulePrefilter
 } from './rule-matcher'
-import { getTabData } from './tab-store'
+import { clearBadge, clearTabSession, getTabData, getTabSnapshot } from './tab-store'
 import { saveTabDataAndBadge, scheduleActivePageDetection } from './detection'
 import { buildEffectivePageRules, loadDetectorSettings, loadTechRules } from './detector-settings'
 
@@ -628,6 +629,13 @@ const processQueuedDynamicSnapshot = async tabId => {
   const snapshot = pendingDynamicSnapshots.get(tabId)
   pendingDynamicSnapshots.delete(tabId)
   if (!snapshot) {
+    return
+  }
+
+  const tab = await getTabSnapshot(tabId)
+  if (!isDetectablePageUrl(tab.url)) {
+    await clearTabSession(tabId)
+    clearBadge(tabId)
     return
   }
 

@@ -54,6 +54,14 @@
           "selectors": ["link[rel=\"manifest\"]"]
         },
         {
+          "category": "安全与协议",
+          "name": "WebSocket",
+          "confidence": "中",
+          "resourceOnly": true,
+          "resourceHints": ["ws://", "wss://"],
+          "patterns": ["^wss?://"]
+        },
+        {
           "name": "Zone.js",
           "confidence": "高",
           "globals": ["Zone"]
