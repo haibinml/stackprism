@@ -1945,6 +1945,90 @@
             {
               "name": "TidyCal",
               "patterns": ["(?:^|[/:.])tidycal\\.com/[^\\s\"'<>]*(?:embed|booking|widgets?)"]
+            },
+            {
+              "name": "Microsoft Bookings",
+              "patterns": ["outlook\\.office(?:365)?\\.com/owa/calendar/[^\\s\"'<>]*(?:bookings|book)|outlook\\.office\\.com/book/"]
+            },
+            {
+              "name": "Doodle Booking",
+              "patterns": ["doodle\\.com/(?:meeting/participate|poll|booking-page|bp/)"]
+            },
+            {
+              "name": "SimplyBook.me Booking Widget",
+              "patterns": [
+                "widget\\.simplybook\\.me|simplybook\\.me/[^\\s\"'<>]*(?:booking|iframe|widget)|simplybook\\.it/[^\\s\"'<>]*(?:booking|widget)"
+              ]
+            },
+            {
+              "name": "Setmore",
+              "patterns": ["my\\.setmore\\.com/bookingpage|setmore\\.com/bookingpage|assets\\.setmore\\.com"]
+            },
+            {
+              "name": "Appointlet",
+              "patterns": ["assets\\.appointlet\\.com|appointlet\\.com/[^\\s\"'<>]*(?:embed|s/|book)"]
+            },
+            {
+              "name": "Bookafy",
+              "patterns": ["bookafy\\.com/[^\\s\"'<>]*(?:schedule|booking|widget|embed)|bookafy\\.net"]
+            },
+            {
+              "name": "Picktime",
+              "patterns": ["picktime\\.com/[^\\s\"'<>]*(?:booking|widget)|picktime\\.com/assets"]
+            },
+            {
+              "name": "Calendesk",
+              "patterns": ["cdn\\.calendesk\\.com|calendesk\\.com/[^\\s\"'<>]*(?:widget|booking|embed)"]
+            },
+            {
+              "name": "TimeTap",
+              "patterns": ["api\\.timetap\\.com|timetap\\.com/[^\\s\"'<>]*(?:embed|booking|scheduler)"]
+            },
+            {
+              "name": "Book Like A Boss",
+              "patterns": ["booklikeaboss\\.com/[^\\s\"'<>]*(?:embed|widget|s/|book)"]
+            },
+            {
+              "name": "zcal",
+              "patterns": ["(?:^|[/:.])zcal\\.co/[^\\s\"'<>]*(?:embed|i/|meeting|book)"]
+            },
+            {
+              "name": "Square Appointments",
+              "patterns": ["squareup\\.com/appointments/book/|square\\.site/appointments/|squareup\\.com/[^\\s\"'<>]*(?:appointments/book)"]
+            },
+            {
+              "name": "Vagaro",
+              "patterns": ["vagaro\\.com/BookingWidget|vagaro\\.com/[^\\s\"'<>]*(?:users/booking|appointment|book-now)"]
+            },
+            {
+              "name": "Booksy",
+              "patterns": ["booksy\\.com/widget|booksy\\.com/[^\\s\"'<>]*(?:book|biz|booking)"]
+            },
+            {
+              "name": "Fresha",
+              "patterns": ["widget\\.fresha\\.com|fresha\\.com/book-now|fresha\\.com/a/[^\\s\"'<>]*(?:booking|book-now)"]
+            },
+            {
+              "name": "Mindbody",
+              "patterns": [
+                "widgets\\.mindbodyonline\\.com|clients\\.mindbodyonline\\.com/[^\\s\"'<>]*(?:classic/ws|asp/main_shop|launch)|mindbodyonline\\.com/[^\\s\"'<>]*widget"
+              ]
+            },
+            {
+              "name": "Squire Appointments",
+              "patterns": ["getsquire\\.com/booking|shops\\.getsquire\\.com/[^\\s\"'<>]*(?:book|booking)"]
+            },
+            {
+              "name": "Zenoti",
+              "patterns": ["booknow\\.zenoti\\.com|api\\.zenoti\\.com|zenoti\\.com/[^\\s\"'<>]*(?:webstore|booking|online-booking)"]
+            },
+            {
+              "name": "Timely Booking",
+              "patterns": ["book\\.gettimely\\.com|bookings\\.gettimely\\.com|gettimely\\.com/[^\\s\"'<>]*(?:book|booking|widget)"]
+            },
+            {
+              "name": "Reservio",
+              "patterns": ["booking\\.reservio\\.com|reservio\\.com/[^\\s\"'<>]*(?:booking|services|embed|widgets?)"]
             }
           ]
         },
