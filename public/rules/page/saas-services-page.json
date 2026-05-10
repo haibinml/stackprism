@@ -4014,6 +4014,88 @@
             {
               "name": "Wootric",
               "patterns": ["cdn\\.wootric\\.com|wootric\\.com/[^\\s\"'<>]*(?:wootric-sdk|survey|embed|nps)"]
+            },
+            {
+              "name": "Feathery",
+              "patterns": ["form\\.feathery\\.io|cdn\\.feathery\\.io|feathery\\.io/[^\\s\"'<>]*(?:embed|form|widget)"]
+            },
+            {
+              "name": "Formbricks",
+              "patterns": ["app\\.formbricks\\.com|cdn\\.formbricks\\.com|formbricks\\.com/[^\\s\"'<>]*(?:js|embed|survey|api)"]
+            },
+            {
+              "name": "FormKeep",
+              "patterns": ["formkeep\\.com/(?:f|forms|embed)/|formkeep\\.com/[^\\s\"'<>]*(?:form|embed|widget)"]
+            },
+            {
+              "name": "Getform",
+              "patterns": ["getform\\.io/(?:f|forms|embed)/|getform\\.io/[^\\s\"'<>]*(?:form|embed|endpoint)"]
+            },
+            {
+              "name": "Basin",
+              "patterns": ["usebasin\\.com/(?:f|form|forms)/|usebasin\\.com/[^\\s\"'<>]*(?:embed|endpoint|submission)"]
+            },
+            {
+              "name": "Reform",
+              "patterns": ["reform\\.app/(?:embed|forms?)/|forms\\.reform\\.app|reform\\.app/[^\\s\"'<>]*(?:embed|widget)"]
+            },
+            {
+              "name": "Tripetto",
+              "patterns": ["tripetto\\.app/(?:run|embed)/|cdn\\.tripetto\\.com|tripetto\\.com/[^\\s\"'<>]*(?:embed|runner|form)"]
+            },
+            {
+              "name": "Heyflow",
+              "patterns": ["heyflow\\.id/|static\\.heyflow\\.app|heyflow\\.app/[^\\s\"'<>]*(?:widget|embed|flow)"]
+            },
+            {
+              "name": "Typebot",
+              "patterns": [
+                "viewer\\.typebot\\.io|embed\\.typebot\\.io|typebot\\.io/[^\\s\"'<>]*(?:js|embed|viewer)|typebot\\.co/[^\\s\"'<>]*(?:js|embed)"
+              ]
+            },
+            {
+              "name": "Landbot",
+              "patterns": ["static\\.landbot\\.io|cdn\\.landbot\\.io|landbot\\.io/[^\\s\"'<>]*(?:v3|u/|widget|embed)"]
+            },
+            {
+              "name": "Formester",
+              "patterns": ["formester\\.com/(?:forms|embed)/|cdn\\.formester\\.com|formester\\.com/[^\\s\"'<>]*(?:widget|form)"]
+            },
+            {
+              "name": "MakeForms",
+              "patterns": ["makeforms\\.io/(?:forms|embed)/|cdn\\.makeforms\\.io|makeforms\\.io/[^\\s\"'<>]*(?:widget|form)"]
+            },
+            {
+              "name": "Formcrafts",
+              "patterns": ["formcrafts\\.com/(?:a|embed|form)/|cdn\\.formcrafts\\.com|formcrafts\\.com/[^\\s\"'<>]*(?:widget|form)"]
+            },
+            {
+              "name": "Sogolytics",
+              "patterns": ["sogolytics\\.com/[^\\s\"'<>]*(?:survey|poll|embed|questionnaire)|survey\\.sogolytics\\.com"]
+            },
+            {
+              "name": "SurveyLegend",
+              "patterns": ["surveylegend\\.com/(?:s|surveys)/|surveylegend\\.com/[^\\s\"'<>]*(?:embed|survey)"]
+            },
+            {
+              "name": "Enalyzer",
+              "patterns": ["survey\\.enalyzer\\.com|enalyzer\\.com/[^\\s\"'<>]*(?:survey|embed|form)"]
+            },
+            {
+              "name": "Responster",
+              "patterns": ["responster\\.com/(?:survey|s)/|responster\\.com/[^\\s\"'<>]*(?:embed|survey|form)"]
+            },
+            {
+              "name": "BlockSurvey",
+              "patterns": ["blocksurvey\\.io/(?:survey|forms|embed)/|blocksurvey\\.io/[^\\s\"'<>]*(?:survey|form|embed)"]
+            },
+            {
+              "name": "Survio",
+              "patterns": ["survio\\.com/(?:survey|s/)|survio\\.com/[^\\s\"'<>]*(?:embed|questionnaire|survey)"]
+            },
+            {
+              "name": "Pointerpro",
+              "patterns": ["pointerpro\\.com/[^\\s\"'<>]*(?:survey|questionnaire|assessment|embed)|survey\\.pointerpro\\.com"]
             }
           ]
         },
