@@ -1489,6 +1489,101 @@
             {
               "name": "Hygraph",
               "patterns": ["hygraph\\.com|graphcms\\.com|graphassets\\.com"]
+            },
+            {
+              "defaults": {
+                "matchIn": ["resources"]
+              },
+              "rules": [
+                {
+                  "name": "Contentstack",
+                  "patterns": ["assets\\.contentstack\\.io|images\\.contentstack\\.io|cdn\\.contentstack\\.io|graphql\\.contentstack\\.com"]
+                },
+                {
+                  "name": "DatoCMS",
+                  "patterns": ["datocms-assets\\.com|site-api\\.datocms\\.com|graphql\\.datocms\\.com|datocms\\.com/[^\\s\"'<>]*api"]
+                },
+                {
+                  "name": "ButterCMS",
+                  "patterns": ["cdn\\.buttercms\\.com|api\\.buttercms\\.com|buttercms\\.com/v2/"]
+                },
+                {
+                  "name": "Kontent.ai",
+                  "patterns": [
+                    "deliver\\.kontent\\.ai|preview-deliver\\.kontent\\.ai|assets-[a-z0-9-]+\\.kc-usercontent\\.com|deliver\\.kenticocloud\\.com"
+                  ]
+                },
+                {
+                  "name": "Builder.io CMS",
+                  "patterns": [
+                    "cdn\\.builder\\.io/api/(?:v1|v2|v3)|builder\\.io/api/(?:v1|v2|v3)|builder\\.io/[^\\s\"'<>]*(?:content|page-model)"
+                  ]
+                },
+                {
+                  "name": "Cosmic CMS",
+                  "patterns": ["api\\.cosmicjs\\.com|cdn\\.cosmicjs\\.com|cosmicjs\\.com/[^\\s\"'<>]*(?:api|bucket|content)"]
+                },
+                {
+                  "name": "Agility CMS",
+                  "patterns": ["cdn\\.agilitycms\\.com|api\\.aglty\\.io|agilitycms\\.com/[^\\s\"'<>]*(?:api|cdn|preview|content)"]
+                },
+                {
+                  "name": "Zesty.io",
+                  "patterns": ["media\\.zestyio\\.com|api\\.zesty\\.io|content\\.zesty\\.io|zesty\\.io/[^\\s\"'<>]*(?:api|content)"]
+                },
+                {
+                  "name": "Squidex",
+                  "patterns": ["cloud\\.squidex\\.io|squidex\\.io/api/(?:content|assets)|squidex\\.io/[^\\s\"'<>]*graphql"]
+                },
+                {
+                  "name": "Prepr CMS",
+                  "patterns": [
+                    "api\\.(?:eu1|us1)\\.prepr\\.io|api\\.prepr\\.io|cdn\\.prepr\\.io|prepr\\.io/[^\\s\"'<>]*(?:graphql|content)"
+                  ]
+                },
+                {
+                  "name": "TakeShape",
+                  "patterns": ["api\\.takeshape\\.io|cdn\\.takeshape\\.io|takeshape\\.io/[^\\s\"'<>]*(?:graphql|project|content)"]
+                },
+                {
+                  "name": "TinaCMS",
+                  "patterns": ["content\\.tinajs\\.io|app\\.tina\\.io|tina\\.io/[^\\s\"'<>]*(?:admin|graphql|content)"]
+                },
+                {
+                  "name": "Flotiq",
+                  "patterns": ["api\\.flotiq\\.com|flotiq\\.com/[^\\s\"'<>]*(?:api|graphql|content)"]
+                },
+                {
+                  "name": "StoryChief",
+                  "patterns": ["api\\.storychief\\.io|content-api\\.storychief\\.io|storychief\\.io/[^\\s\"'<>]*(?:api|embed|content)"]
+                },
+                {
+                  "name": "Amplience Dynamic Content",
+                  "patterns": [
+                    "cdn\\.media\\.amplience\\.net|cdn\\.c1\\.amplience\\.net|delivery\\.content\\.amplience\\.net|amplience\\.net/[^\\s\"'<>]*(?:content|media)"
+                  ]
+                },
+                {
+                  "name": "CloudCannon",
+                  "patterns": ["app\\.cloudcannon\\.com|cloudcannon\\.com/[^\\s\"'<>]*(?:cms|api|editor|build)"]
+                },
+                {
+                  "name": "Directus Cloud",
+                  "patterns": ["directus\\.app|directus\\.cloud|directus\\.io/[^\\s\"'<>]*(?:assets|items|graphql)"]
+                },
+                {
+                  "name": "Strapi Cloud",
+                  "patterns": ["strapi\\.cloud|strapi\\.io/[^\\s\"'<>]*(?:cloud|uploads|content-manager)"]
+                },
+                {
+                  "name": "Payload Cloud",
+                  "patterns": ["payloadcms\\.app|payloadcms\\.com/[^\\s\"'<>]*(?:api|media|graphql|cloud)"]
+                },
+                {
+                  "name": "Webiny",
+                  "patterns": ["webiny\\.cloud|webiny\\.com/[^\\s\"'<>]*(?:api|cms|graphql|headless)"]
+                }
+              ]
             }
           ]
         },
