@@ -9,12 +9,12 @@
         <p>这页专门讲怎么添加自己的识别规则。你可以把规则理解成一句话：看到什么字，就认为网页用了什么东西。</p>
       </div>
       <div class="header-actions">
-        <button type="button" class="icon-btn primary" title="打开设置页" @click="openSettings">
+        <RippleButton class="icon-btn primary" variant="primary" title="打开设置页" @click="openSettings">
           <Settings2 :size="16" :stroke-width="2" />
-        </button>
-        <button type="button" class="icon-btn" title="GitHub 仓库" @click="openRepo">
+        </RippleButton>
+        <RippleButton class="icon-btn" title="GitHub 仓库" @click="openRepo">
           <ExternalLink :size="16" :stroke-width="2" />
-        </button>
+        </RippleButton>
       </div>
     </div>
   </header>
@@ -341,6 +341,7 @@ examplepay-sdk</pre
 <script setup lang="ts">
   import { onMounted, ref } from 'vue'
   import { ExternalLink, Settings2 } from 'lucide-vue-next'
+  import RippleButton from '@/ui/components/RippleButton.vue'
   import { REPOSITORY_URL } from '@/utils/constants'
 
   const version = ref('')

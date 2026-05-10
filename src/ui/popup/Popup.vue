@@ -9,20 +9,20 @@
         <p class="url">{{ pageUrl }}</p>
       </div>
       <div class="actions">
-        <button type="button" class="icon-btn" :title="`主题：${themeLabel(theme)}（点击切换）`" @click="toggleTheme">
+        <RippleButton class="icon-btn" :title="`主题：${themeLabel(theme)}（点击切换）`" @click="toggleTheme">
           <Sun v-if="theme === 'light'" :size="16" :stroke-width="2" />
           <Moon v-else-if="theme === 'dark'" :size="16" :stroke-width="2" />
           <Monitor v-else :size="16" :stroke-width="2" />
-        </button>
-        <button type="button" class="icon-btn" title="打开设置页" @click="openSettings">
+        </RippleButton>
+        <RippleButton class="icon-btn" title="打开设置页" @click="openSettings">
           <Settings2 :size="16" :stroke-width="2" />
-        </button>
-        <button type="button" class="icon-btn" title="复制检测 JSON" @click="copyResult">
+        </RippleButton>
+        <RippleButton class="icon-btn" title="复制检测 JSON" @click="copyResult">
           <Copy :size="16" :stroke-width="2" />
-        </button>
-        <button type="button" class="icon-btn primary" title="重新检测" @click="runDetection({ force: true })">
+        </RippleButton>
+        <RippleButton class="icon-btn primary" variant="primary" title="重新检测" @click="runDetection({ force: true })">
           <RefreshCw :size="16" :stroke-width="2" />
-        </button>
+        </RippleButton>
       </div>
     </header>
 
@@ -59,8 +59,7 @@
 
         <nav class="filter-bar" aria-label="技术分类过滤">
           <div class="segment" role="tablist">
-            <button
-              type="button"
+            <RippleButton
               role="tab"
               :class="['segment-btn', { active: state.activeCategory === FOCUS_CATEGORY }]"
               :aria-selected="state.activeCategory === FOCUS_CATEGORY"
@@ -68,9 +67,8 @@
             >
               <span>重点</span>
               <span class="segment-count">{{ focusCount }}</span>
-            </button>
-            <button
-              type="button"
+            </RippleButton>
+            <RippleButton
               role="tab"
               :class="['segment-btn', { active: state.activeCategory === '全部' }]"
               :aria-selected="state.activeCategory === '全部'"
@@ -78,7 +76,7 @@
             >
               <span>全部</span>
               <span class="segment-count">{{ totalCount }}</span>
-            </button>
+            </RippleButton>
           </div>
           <div class="filter-select">
             <Select v-model="categoryFilterValue" :options="categoryFilterOptions" placeholder="选择分类" />
@@ -149,9 +147,9 @@
         </div>
 
         <Transition name="scroll-top-fade">
-          <button v-show="showScrollTop" type="button" class="scroll-top" title="返回顶部" @click="scrollSectionsTop">
+          <RippleButton v-show="showScrollTop" class="scroll-top" title="返回顶部" @click="scrollSectionsTop">
             <ArrowUp :size="16" :stroke-width="2" />
-          </button>
+          </RippleButton>
         </Transition>
       </template>
     </template>
@@ -162,14 +160,14 @@
           <span class="footer-panel-title">
             {{ footerPanel === 'search' ? '网页源代码搜索' : rawPanelTitle }}
           </span>
-          <button type="button" class="footer-panel-close" title="关闭面板" @click="closeFooterPanel">
+          <RippleButton class="footer-panel-close" title="关闭面板" @click="closeFooterPanel">
             <X :size="14" :stroke-width="2" />
-          </button>
+          </RippleButton>
         </header>
         <div v-if="footerPanel === 'search'" class="footer-panel-body">
           <div class="search-row">
             <input v-model="search.query" type="search" placeholder="输入关键词或正则表达式" @keydown.enter="searchPageSourceFromPopup" />
-            <button type="button" @click="searchPageSourceFromPopup">搜索</button>
+            <RippleButton @click="searchPageSourceFromPopup">搜索</RippleButton>
           </div>
           <div class="search-options">
             <label>
@@ -196,24 +194,22 @@
 
     <footer class="app-footer">
       <div class="footer-tools">
-        <button
-          type="button"
+        <RippleButton
           :class="['footer-tool-btn', { active: footerPanel === 'search' }]"
           title="网页源代码搜索"
           @click="toggleFooterPanel('search')"
         >
           <Search :size="13" :stroke-width="2" />
           <span>搜索</span>
-        </button>
-        <button
-          type="button"
+        </RippleButton>
+        <RippleButton
           :class="['footer-tool-btn', { active: footerPanel === 'raw' }]"
           title="查看原始线索"
           @click="toggleFooterPanel('raw')"
         >
           <FileCode :size="13" :stroke-width="2" />
           <span>原始线索</span>
-        </button>
+        </RippleButton>
       </div>
       <a class="footer-repo" :href="REPOSITORY_URL" target="_blank" rel="noreferrer" @click="openRepository">GitHub</a>
     </footer>
@@ -241,6 +237,7 @@
     X
   } from 'lucide-vue-next'
   import Select from '@/ui/components/Select.vue'
+  import RippleButton from '@/ui/components/RippleButton.vue'
   import { categoryIndex, confidenceClass, confidenceRank } from '@/utils/category-order'
   import { applyCustomCss } from '@/utils/apply-custom-css'
   import { normalizeSettings } from '@/utils/normalize-settings'

@@ -9,28 +9,28 @@
         <p>控制识别分类，添加自定义规则，并覆盖弹窗样式。</p>
       </div>
       <div class="header-actions">
-        <button type="button" :title="`主题：${themeLabel(theme)}（点击切换）`" @click="toggleTheme">
+        <RippleButton :title="`主题：${themeLabel(theme)}（点击切换）`" @click="toggleTheme">
           <Sun v-if="theme === 'light'" :size="14" :stroke-width="2" />
           <Moon v-else-if="theme === 'dark'" :size="14" :stroke-width="2" />
           <Monitor v-else :size="14" :stroke-width="2" />
           <span>主题：{{ themeLabel(theme) }}</span>
-        </button>
-        <button type="button" @click="openHelp">
+        </RippleButton>
+        <RippleButton @click="openHelp">
           <BookOpen :size="14" :stroke-width="2" />
           <span>使用说明</span>
-        </button>
-        <button type="button" title="GitHub 仓库" @click="openRepository">
+        </RippleButton>
+        <RippleButton title="GitHub 仓库" @click="openRepository">
           <ExternalLink :size="14" :stroke-width="2" />
           <span>GitHub 仓库</span>
-        </button>
-        <button type="button" class="primary" @click="saveSettings">
+        </RippleButton>
+        <RippleButton class="primary" variant="primary" @click="saveSettings">
           <Save :size="14" :stroke-width="2" />
           <span>保存设置</span>
-        </button>
-        <button type="button" @click="resetSettings">
+        </RippleButton>
+        <RippleButton @click="resetSettings">
           <RotateCcw :size="14" :stroke-width="2" />
           <span>恢复默认</span>
-        </button>
+        </RippleButton>
       </div>
     </div>
   </header>
@@ -41,8 +41,8 @@
       <div class="panel-head">
         <h2>识别开关</h2>
         <div class="inline-actions">
-          <button type="button" @click="setAllCategories(true)">全开</button>
-          <button type="button" @click="setAllCategories(false)">全关</button>
+          <RippleButton @click="setAllCategories(true)">全开</RippleButton>
+          <RippleButton @click="setAllCategories(false)">全关</RippleButton>
         </div>
       </div>
       <div class="category-grid">
@@ -75,8 +75,8 @@
       <div class="panel-head">
         <h2>自定义规则</h2>
         <div class="inline-actions">
-          <button type="button" @click="openContribute">提交规则贡献</button>
-          <button type="button" @click="clearRuleForm">清空表单</button>
+          <RippleButton @click="openContribute">提交规则贡献</RippleButton>
+          <RippleButton @click="clearRuleForm">清空表单</RippleButton>
         </div>
       </div>
 
@@ -135,8 +135,8 @@
       </div>
 
       <div class="form-actions">
-        <button type="button" class="primary" @click="addRuleFromForm">添加规则</button>
-        <button type="button" @click="updateRuleFromForm">更新当前规则</button>
+        <RippleButton class="primary" variant="primary" @click="addRuleFromForm">添加规则</RippleButton>
+        <RippleButton @click="updateRuleFromForm">更新当前规则</RippleButton>
       </div>
 
       <div class="rules-list">
@@ -150,12 +150,12 @@
             <div class="rule-meta">{{ ruleListLines[index] }}</div>
           </div>
           <div class="rule-actions">
-            <button type="button" class="icon-btn" title="编辑此规则" @click="fillRuleForm(rule, index)">
+            <RippleButton class="icon-btn" title="编辑此规则" @click="fillRuleForm(rule, index)">
               <Pencil :size="14" :stroke-width="2" />
-            </button>
-            <button type="button" class="icon-btn danger" title="删除此规则" @click="deleteRule(index)">
+            </RippleButton>
+            <RippleButton class="icon-btn danger" variant="danger" title="删除此规则" @click="deleteRule(index)">
               <Trash2 :size="14" :stroke-width="2" />
-            </button>
+            </RippleButton>
           </div>
         </div>
       </div>
@@ -165,8 +165,8 @@
       <div class="panel-head">
         <h2>规则 JSON</h2>
         <div class="inline-actions">
-          <button type="button" @click="importRulesJson">从 JSON 导入</button>
-          <button type="button" @click="formatRulesJson">格式化</button>
+          <RippleButton @click="importRulesJson">从 JSON 导入</RippleButton>
+          <RippleButton @click="formatRulesJson">格式化</RippleButton>
         </div>
       </div>
       <textarea v-model="rulesJsonText" rows="13" spellcheck="false"></textarea>
@@ -178,6 +178,7 @@
   import { onMounted, reactive, ref, watch, computed } from 'vue'
   import { BookOpen, ExternalLink, Inbox, Monitor, Moon, Pencil, RotateCcw, Save, Sun, Trash2 } from 'lucide-vue-next'
   import Select from '@/ui/components/Select.vue'
+  import RippleButton from '@/ui/components/RippleButton.vue'
   import { CATEGORY_ORDER } from '@/utils/category-order'
   import { applyCustomCss } from '@/utils/apply-custom-css'
   import { cleanCustomRules, cleanStringArray, defaultSettings, normalizeSettings } from '@/utils/normalize-settings'
