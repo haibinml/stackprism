@@ -128,6 +128,39 @@
           {
             "name": "Bun",
             "patterns": ["\\bbun\\b"]
+          },
+          {
+            "name": "Rust Actix",
+            "patterns": ["actix(?:-web)?"]
+          },
+          {
+            "name": "Rust Rocket",
+            "patterns": ["rocket(?:\\s*(?:rs|framework)|/\\d|\\s|$)"]
+          },
+          {
+            "name": "Rust Axum",
+            "patterns": ["\\baxum\\b"]
+          },
+          {
+            "name": "Rust Warp",
+            "patterns": ["\\bwarp\\b"]
+          },
+          {
+            "name": "Rust Poem",
+            "patterns": ["\\bpoem\\b"]
+          },
+          {
+            "name": "Rust Salvo",
+            "patterns": ["\\bsalvo\\b"]
+          },
+          {
+            "name": "Rust Tide",
+            "patterns": ["\\btide\\b"]
+          },
+          {
+            "name": "Rust Hyper",
+            "confidence": "中",
+            "patterns": ["\\bhyper\\b"]
           }
         ]
       },

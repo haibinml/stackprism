@@ -16,7 +16,8 @@
       {
         "name": "Node.js",
         "kind": "后端运行时",
-        "patterns": ["node_modules", "express-session", "connect.sid", "/_next/", "/_nuxt/", "sveltekit", "nestjs"]
+        "confidence": "低",
+        "patterns": ["express-session", "connect.sid", "nestjs"]
       },
       {
         "defaults": {
@@ -113,7 +114,18 @@
           },
           {
             "name": "Rust",
-            "patterns": ["actix", "rocket", "axum", "warp"]
+            "confidence": "低",
+            "patterns": [
+              "powered by (?:actix(?:-web)?|axum|warp|poem|salvo|tide)",
+              "powered by rocket(?:\\s*(?:rs|framework)|/\\d|\\s|<|$)",
+              "\\bactix-web\\b",
+              "\\bactix_web\\b",
+              "\\baxum\\b",
+              "\\bwarp\\b",
+              "\\bpoem\\b",
+              "\\bsalvo\\b",
+              "\\btide\\b"
+            ]
           },
           {
             "name": "Elixir",

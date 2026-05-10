@@ -198,11 +198,37 @@
           },
           {
             "name": "Rust Rocket",
-            "patterns": ["rocket"]
+            "patterns": ["rocket(?:\\s*(?:rs|framework)|/\\d|\\s|$)"]
           },
           {
             "name": "Rust Axum",
             "patterns": ["axum"]
+          },
+          {
+            "name": "Rust Warp",
+            "patterns": ["\\bwarp\\b"]
+          },
+          {
+            "name": "Rust Poem",
+            "patterns": ["\\bpoem\\b"]
+          },
+          {
+            "name": "Rust Salvo",
+            "patterns": ["\\bsalvo\\b"]
+          },
+          {
+            "name": "Rust Tide",
+            "patterns": ["\\btide\\b"]
+          },
+          {
+            "name": "Rust Hyper",
+            "confidence": "中",
+            "patterns": ["\\bhyper\\b"]
+          },
+          {
+            "name": "Rust",
+            "confidence": "中",
+            "patterns": ["\\brust\\b|rustlang"]
           }
         ]
       }

@@ -98,6 +98,13 @@
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
               {
+                "name": "Rust",
+                "patterns": [
+                  "(?:^|\\n)(?:server|x-powered-by):.*(?:rust|actix(?:-web)?|rocket(?:\\s*(?:rs|framework)|/\\d|\\s|$)|axum|warp|poem|salvo|tide|ntex|\\bhyper\\b)"
+                ],
+                "evidence": "响应头包含 Rust 或 Rust Web 框架线索"
+              },
+              {
                 "name": "GraphQL",
                 "patterns": ["graphql"],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"

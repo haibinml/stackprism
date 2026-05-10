@@ -75,7 +75,10 @@
       },
       {
         "name": "Rust",
-        "patterns": ["x-powered-by:.*(?:actix|rocket|axum|warp)"]
+        "patterns": [
+          "x-powered-by:.*(?:rust|actix(?:-web)?|rocket(?:\\s*(?:rs|framework)|/\\d|\\s|$)|axum|warp|poem|salvo|tide|ntex|\\bhyper\\b)",
+          "server:.*(?:actix(?:-web)?|rocket(?:\\s*(?:rs|framework)|/\\d|\\s|$)|axum|warp|poem|salvo|tide|ntex|\\bhyper\\b)"
+        ]
       },
       {
         "name": "Elixir",
