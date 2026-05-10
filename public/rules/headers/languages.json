@@ -6,6 +6,8 @@
         "patterns": [
           "x-powered-by:.*php",
           "server:.*php",
+          "x-powered-by:.*(?:frankenphp|roadrunner|swoole|openswoole)",
+          "server:.*(?:frankenphp|roadrunner|swoole|openswoole)",
           "set-cookie:.*phpsessid",
           "\\.php(?:\\?|#|$)",
           "x-generator:.*(?:wordpress|drupal|joomla|discuz|thinkphp)"
@@ -17,15 +19,23 @@
       },
       {
         "name": "Python",
-        "patterns": ["x-powered-by:.*(?:django|flask|fastapi)", "server:.*(?:uvicorn|gunicorn|werkzeug)", "set-cookie:.*csrftoken"]
+        "patterns": [
+          "x-powered-by:.*(?:django|flask|fastapi|starlette|sanic)",
+          "server:.*(?:uvicorn|gunicorn|uwsgi|werkzeug|hypercorn|daphne|waitress|granian)",
+          "set-cookie:.*csrftoken"
+        ]
       },
       {
         "name": "Ruby",
-        "patterns": ["x-powered-by:.*rails", "server:.*(?:puma|unicorn|passenger)", "x-runtime:"]
+        "patterns": ["x-powered-by:.*(?:rails|phusion passenger|passenger)", "server:.*(?:puma|unicorn|passenger)", "x-runtime:"]
       },
       {
         "name": "Java / JVM",
-        "patterns": ["set-cookie:.*jsessionid", "server:.*(?:tomcat|jetty|undertow|wildfly|weblogic|websphere)"]
+        "patterns": [
+          "set-cookie:.*jsessionid",
+          "x-powered-by:.*(?:quarkus|micronaut|ktor|helidon|dropwizard|javalin|ratpack|vert\\.x|vertx|akka)",
+          "server:.*(?:tomcat|jetty|undertow|wildfly|weblogic|websphere|quarkus|micronaut|ktor|helidon|dropwizard|javalin|ratpack|vert\\.x|vertx|akka)"
+        ]
       },
       {
         "name": "JSP / JavaServer Pages",
@@ -71,7 +81,10 @@
       },
       {
         "name": "Go",
-        "patterns": ["x-powered-by:.*(?:gin|fiber|go)", "server:.*caddy"]
+        "patterns": [
+          "x-powered-by:.*(?:gin|fiber|echo|beego|hertz|cloudwego|goframe|go\\s*frame|go-kratos|kratos|\\biris\\b|gobuffalo|\\bbuffalo\\b|\\bgo\\b)",
+          "server:.*(?:caddy|gin|fiber|echo|beego|hertz|cloudwego|goframe|go\\s*frame|go-kratos|kratos|\\biris\\b|gobuffalo|\\bbuffalo\\b)"
+        ]
       },
       {
         "name": "Rust",

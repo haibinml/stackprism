@@ -99,6 +99,10 @@
             "patterns": ["unicorn"]
           },
           {
+            "name": "Phusion Passenger",
+            "patterns": ["phusion passenger|passenger(?:/\\d+(?:\\.\\d+)*)?"]
+          },
+          {
             "name": "uWSGI",
             "patterns": ["uwsgi"]
           },
@@ -107,8 +111,44 @@
             "patterns": ["gunicorn"]
           },
           {
+            "name": "Uvicorn",
+            "patterns": ["uvicorn"]
+          },
+          {
+            "name": "Hypercorn",
+            "patterns": ["hypercorn"]
+          },
+          {
+            "name": "Daphne",
+            "patterns": ["daphne"]
+          },
+          {
+            "name": "Waitress",
+            "patterns": ["waitress"]
+          },
+          {
+            "name": "Granian",
+            "patterns": ["granian"]
+          },
+          {
             "name": "Werkzeug",
             "patterns": ["werkzeug"]
+          },
+          {
+            "name": "FrankenPHP",
+            "patterns": ["frankenphp"]
+          },
+          {
+            "name": "RoadRunner",
+            "patterns": ["roadrunner"]
+          },
+          {
+            "name": "Swoole",
+            "patterns": ["\\bswoole\\b"]
+          },
+          {
+            "name": "OpenSwoole",
+            "patterns": ["openswoole|open\\s*swoole"]
           }
         ]
       },
@@ -128,6 +168,50 @@
           {
             "name": "Bun",
             "patterns": ["\\bbun\\b"]
+          },
+          {
+            "name": "Hono",
+            "patterns": ["\\bhono(?:/\\d+(?:\\.\\d+)*)?\\b"]
+          },
+          {
+            "name": "Elysia",
+            "patterns": ["\\belysia(?:js|\\.js)?(?:/\\d+(?:\\.\\d+)*)?\\b"]
+          },
+          {
+            "name": "Gin",
+            "patterns": ["\\bgin(?:/\\d+(?:\\.\\d+)*)?\\b"]
+          },
+          {
+            "name": "Fiber",
+            "patterns": ["\\bfiber(?:/\\d+(?:\\.\\d+)*)?\\b"]
+          },
+          {
+            "name": "Go Echo",
+            "patterns": ["\\becho(?:/\\d+(?:\\.\\d+)*)?\\b"]
+          },
+          {
+            "name": "Beego",
+            "patterns": ["\\bbeego\\b"]
+          },
+          {
+            "name": "CloudWeGo Hertz",
+            "patterns": ["\\bhertz(?:/\\d+(?:\\.\\d+)*)?\\b|cloudwego"]
+          },
+          {
+            "name": "GoFrame",
+            "patterns": ["goframe|go\\s*frame"]
+          },
+          {
+            "name": "Kratos",
+            "patterns": ["go-kratos|\\bkratos\\b"]
+          },
+          {
+            "name": "Go Iris",
+            "patterns": ["\\biris(?:/\\d+(?:\\.\\d+)*)?\\b"]
+          },
+          {
+            "name": "Buffalo",
+            "patterns": ["gobuffalo|\\bbuffalo\\b"]
           },
           {
             "name": "Rust Actix",
@@ -158,9 +242,41 @@
             "patterns": ["\\btide\\b"]
           },
           {
+            "name": "Rust Ntex",
+            "patterns": ["\\bntex\\b"]
+          },
+          {
             "name": "Rust Hyper",
             "confidence": "中",
             "patterns": ["\\bhyper\\b"]
+          },
+          {
+            "name": "Quarkus",
+            "patterns": ["\\bquarkus\\b"]
+          },
+          {
+            "name": "Micronaut",
+            "patterns": ["\\bmicronaut\\b"]
+          },
+          {
+            "name": "Ktor",
+            "patterns": ["\\bktor(?:/\\d+(?:\\.\\d+)*)?\\b"]
+          },
+          {
+            "name": "Helidon",
+            "patterns": ["\\bhelidon\\b"]
+          },
+          {
+            "name": "Dropwizard",
+            "patterns": ["\\bdropwizard\\b"]
+          },
+          {
+            "name": "Javalin",
+            "patterns": ["\\bjavalin\\b"]
+          },
+          {
+            "name": "Ratpack",
+            "patterns": ["\\bratpack\\b"]
           }
         ]
       },

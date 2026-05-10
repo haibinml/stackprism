@@ -10,6 +10,7 @@ import { clearBundleLicenseTimer } from './bundle-license'
 import { isDetectablePageUrl, isObservableRequestUrl } from '@/utils/page-support'
 
 registerMessageRouter()
+refreshAllBadges().catch(() => {})
 
 chrome.runtime.onInstalled.addListener(() => {
   injectContentObserverIntoOpenTabs()

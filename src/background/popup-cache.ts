@@ -341,6 +341,8 @@ const cleanPageResources = (resources: any) => ({
   total: Number(resources?.total || 0),
   scripts: cleanStringList(resources?.scripts, 160),
   stylesheets: cleanStringList(resources?.stylesheets, 160),
+  resourceTiming: cleanStringList(resources?.resourceTiming, 220),
+  all: cleanStringList(resources?.all, 300),
   themeAssetUrls: cleanStringList(resources?.themeAssetUrls, 100),
   resourceDomains: cleanResourceDomains(resources?.resourceDomains),
   cssVariableCount: Number(resources?.cssVariableCount || 0),

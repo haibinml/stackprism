@@ -94,7 +94,9 @@
               },
               {
                 "name": "Go",
-                "patterns": ["gorilla\\.csrf|go-http-client|golang"],
+                "patterns": [
+                  "gorilla\\.csrf|go-http-client|golang|(?:^|\\n)(?:server|x-powered-by):.*(?:gin|fiber|echo|beego|hertz|cloudwego|goframe|go\\s*frame|go-kratos|kratos|\\biris\\b|gobuffalo|\\bbuffalo\\b)"
+                ],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
               {
@@ -163,6 +165,31 @@
                 "name": "Netlify",
                 "patterns": ["(?:^|\\n)x-nf-request-id:"],
                 "evidence": "存在 x-nf-request-id 响应头"
+              },
+              {
+                "name": "Render",
+                "patterns": ["(?:^|\\n)rndr-id:", "(?:^|\\n)x-render-origin-server:"],
+                "evidence": "存在 Render 响应头"
+              },
+              {
+                "name": "Fly.io",
+                "patterns": ["(?:^|\\n)fly-(?:request-id|cache-status|region):"],
+                "evidence": "存在 Fly.io 响应头"
+              },
+              {
+                "name": "Railway",
+                "patterns": ["(?:^|\\n)x-railway-(?:request-id|edge):", "server:.*railway-edge"],
+                "evidence": "存在 Railway 响应头"
+              },
+              {
+                "name": "Heroku",
+                "patterns": ["via:.*\\bvegur\\b"],
+                "evidence": "Via 包含 Heroku router 线索"
+              },
+              {
+                "name": "Deno Deploy",
+                "patterns": ["(?:^|\\n)x-deno-ray:"],
+                "evidence": "存在 Deno Deploy 响应头"
               },
               {
                 "name": "AWS CloudFront",
@@ -358,6 +385,240 @@
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               }
             ]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "category": "支付系统",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Stripe",
+            "patterns": ["url: https?://(?:[a-z0-9-]+\\.)*stripe\\.(?:com|network)/"],
+            "evidence": "响应 URL 指向 Stripe 服务"
+          },
+          {
+            "name": "PayPal",
+            "patterns": ["url: https?://(?:[a-z0-9-]+\\.)*(?:paypal|paypalobjects)\\.com/"],
+            "evidence": "响应 URL 指向 PayPal 服务"
+          },
+          {
+            "name": "Paddle",
+            "patterns": ["url: https?://(?:[a-z0-9-]+\\.)*(?:paddle|paddlecdn)\\.com/"],
+            "evidence": "响应 URL 指向 Paddle 服务"
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "category": "SaaS / 第三方服务",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Supabase",
+            "patterns": ["(?:^|\\n)x-supabase-api-version:", "url: https?://[^\\s/]+\\.supabase\\.co/"],
+            "evidence": "响应头或响应 URL 指向 Supabase 服务"
+          },
+          {
+            "name": "Auth0",
+            "patterns": ["url: https?://[^\\s/]+\\.auth0\\.com/"],
+            "evidence": "响应 URL 指向 Auth0 服务"
+          },
+          {
+            "name": "Clerk",
+            "patterns": ["url: https?://(?:api\\.)?clerk\\.(?:com|dev)/", "url: https?://[^\\s/]+\\.clerk\\.accounts\\.dev/"],
+            "evidence": "响应 URL 指向 Clerk 服务"
+          },
+          {
+            "name": "Sentry",
+            "patterns": ["url: https?://[^\\s/]+\\.sentry\\.io/"],
+            "evidence": "响应 URL 指向 Sentry 服务"
+          },
+          {
+            "name": "PostHog",
+            "patterns": ["url: https?://[^\\s/]+\\.posthog\\.com/"],
+            "evidence": "响应 URL 指向 PostHog 服务"
+          },
+          {
+            "name": "Plausible",
+            "patterns": ["url: https?://(?:[a-z0-9-]+\\.)*plausible\\.io/"],
+            "evidence": "响应 URL 指向 Plausible 服务"
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "category": "AI / 大模型",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "OpenAI API",
+            "patterns": ["url: https?://api\\.openai\\.com/", "url: https?://chatgpt\\.com/backend-api/"],
+            "evidence": "响应 URL 指向 OpenAI API"
+          },
+          {
+            "name": "Azure OpenAI Service",
+            "patterns": ["url: https?://[a-z0-9-]+\\.openai\\.azure\\.com/openai/"],
+            "evidence": "响应 URL 指向 Azure OpenAI 服务"
+          },
+          {
+            "name": "Anthropic API",
+            "patterns": ["url: https?://api\\.anthropic\\.com/", "url: https?://claude\\.ai/api/"],
+            "evidence": "响应 URL 指向 Anthropic API"
+          },
+          {
+            "name": "Google Gemini API",
+            "patterns": ["url: https?://generativelanguage\\.googleapis\\.com/", "url: https?://aiplatform\\.googleapis\\.com/"],
+            "evidence": "响应 URL 指向 Google Gemini / Vertex AI API"
+          },
+          {
+            "name": "Perplexity API",
+            "patterns": ["url: https?://api\\.perplexity\\.ai/"],
+            "evidence": "响应 URL 指向 Perplexity API"
+          },
+          {
+            "name": "Hugging Face Inference API",
+            "patterns": ["url: https?://api-inference\\.huggingface\\.co/", "url: https?://[^\\s/]+\\.hf\\.space/"],
+            "evidence": "响应 URL 指向 Hugging Face 推理服务"
+          },
+          {
+            "name": "Replicate API",
+            "patterns": ["url: https?://api\\.replicate\\.com/", "url: https?://replicate\\.delivery/"],
+            "evidence": "响应 URL 指向 Replicate API"
+          },
+          {
+            "name": "AWS Bedrock",
+            "patterns": [
+              "url: https?://bedrock-runtime\\.[a-z0-9-]+\\.amazonaws\\.com/",
+              "url: https?://bedrock\\.[a-z0-9-]+\\.amazonaws\\.com/"
+            ],
+            "evidence": "响应 URL 指向 AWS Bedrock"
+          },
+          {
+            "name": "Cloudflare AI Gateway",
+            "patterns": [
+              "url: https?://gateway\\.ai\\.cloudflare\\.com/",
+              "url: https?://api\\.cloudflare\\.com/client/v4/accounts/[^\\s/]+/ai-gateway/"
+            ],
+            "evidence": "响应 URL 指向 Cloudflare AI Gateway"
+          },
+          {
+            "name": "Cloudflare Workers AI",
+            "patterns": ["url: https?://api\\.cloudflare\\.com/client/v4/accounts/[^\\s/]+/ai/run/"],
+            "evidence": "响应 URL 指向 Cloudflare Workers AI"
+          },
+          {
+            "name": "Cohere API",
+            "patterns": ["url: https?://api\\.cohere\\.ai/"],
+            "evidence": "响应 URL 指向 Cohere API"
+          },
+          {
+            "name": "Mistral AI API",
+            "patterns": ["url: https?://api\\.mistral\\.ai/"],
+            "evidence": "响应 URL 指向 Mistral AI API"
+          },
+          {
+            "name": "Together AI",
+            "patterns": ["url: https?://api\\.together\\.xyz/"],
+            "evidence": "响应 URL 指向 Together AI"
+          },
+          {
+            "name": "Groq API",
+            "patterns": ["url: https?://api\\.groq\\.com/"],
+            "evidence": "响应 URL 指向 Groq API"
+          },
+          {
+            "name": "xAI API",
+            "patterns": ["url: https?://api\\.x\\.ai/"],
+            "evidence": "响应 URL 指向 xAI API"
+          },
+          {
+            "name": "DeepSeek API",
+            "patterns": ["url: https?://api\\.deepseek\\.com/"],
+            "evidence": "响应 URL 指向 DeepSeek API"
+          },
+          {
+            "name": "Moonshot AI / Kimi",
+            "patterns": ["url: https?://api\\.moonshot\\.cn/", "url: https?://kimi\\.moonshot\\.cn/"],
+            "evidence": "响应 URL 指向 Moonshot / Kimi API"
+          },
+          {
+            "name": "MiniMax API",
+            "patterns": ["url: https?://api\\.minimax\\.chat/"],
+            "evidence": "响应 URL 指向 MiniMax API"
+          },
+          {
+            "name": "SiliconFlow",
+            "patterns": ["url: https?://api\\.siliconflow\\.cn/"],
+            "evidence": "响应 URL 指向 SiliconFlow API"
+          },
+          {
+            "name": "Fireworks AI",
+            "patterns": ["url: https?://api\\.fireworks\\.ai/"],
+            "evidence": "响应 URL 指向 Fireworks AI API"
+          },
+          {
+            "name": "Cerebras Inference",
+            "patterns": ["url: https?://api\\.cerebras\\.ai/"],
+            "evidence": "响应 URL 指向 Cerebras Inference API"
+          },
+          {
+            "name": "NVIDIA NIM",
+            "patterns": [
+              "url: https?://integrate\\.api\\.nvidia\\.com/",
+              "url: https?://ai\\.api\\.nvidia\\.com/v1/",
+              "url: https?://api\\.nvcf\\.nvidia\\.com/"
+            ],
+            "evidence": "响应 URL 指向 NVIDIA NIM / NVCF API"
+          },
+          {
+            "name": "SambaNova Cloud",
+            "patterns": ["url: https?://api\\.sambanova\\.ai/"],
+            "evidence": "响应 URL 指向 SambaNova Cloud API"
+          },
+          {
+            "name": "Novita AI",
+            "patterns": ["url: https?://api\\.novita\\.ai/"],
+            "evidence": "响应 URL 指向 Novita AI API"
+          },
+          {
+            "name": "ModelScope / 魔搭",
+            "patterns": ["url: https?://api-inference\\.modelscope\\.cn/"],
+            "evidence": "响应 URL 指向 ModelScope 推理 API"
+          },
+          {
+            "name": "OpenRouter",
+            "patterns": ["url: https?://openrouter\\.ai/api/"],
+            "evidence": "响应 URL 指向 OpenRouter API"
+          },
+          {
+            "name": "Alibaba DashScope / 通义千问",
+            "patterns": ["url: https?://dashscope\\.aliyuncs\\.com/", "url: https?://dashscope\\.aliyun\\.com/"],
+            "evidence": "响应 URL 指向 Alibaba DashScope API"
+          },
+          {
+            "name": "Volcengine Ark / 火山方舟",
+            "patterns": ["url: https?://ark\\.cn-beijing\\.volces\\.com/", "url: https?://ark\\.volces\\.com/"],
+            "evidence": "响应 URL 指向火山方舟 API"
+          },
+          {
+            "name": "Baidu Qianfan / 文心千帆",
+            "patterns": ["url: https?://qianfan\\.baidu\\.com/", "url: https?://aip\\.baidubce\\.com/rpc/2\\.0/ai_custom/"],
+            "evidence": "响应 URL 指向百度千帆 API"
+          },
+          {
+            "name": "Zhipu AI / 智谱 GLM",
+            "patterns": ["url: https?://open\\.bigmodel\\.cn/"],
+            "evidence": "响应 URL 指向智谱 GLM API"
+          },
+          {
+            "name": "iFlytek Spark / 讯飞星火",
+            "patterns": ["url: https?://spark-api\\.xf-yun\\.com/"],
+            "evidence": "响应 URL 指向讯飞星火 API"
           }
         ]
       },

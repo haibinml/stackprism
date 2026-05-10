@@ -41,6 +41,14 @@
           {
             "name": "Meteor",
             "patterns": ["meteor"]
+          },
+          {
+            "name": "Hono",
+            "patterns": ["\\bhono(?:/\\d+(?:\\.\\d+)*)?\\b"]
+          },
+          {
+            "name": "Elysia",
+            "patterns": ["\\belysia(?:js|\\.js)?(?:/\\d+(?:\\.\\d+)*)?\\b"]
           }
         ]
       },
@@ -87,6 +95,22 @@
           {
             "name": "PHP",
             "patterns": ["php"]
+          },
+          {
+            "name": "FrankenPHP",
+            "patterns": ["frankenphp"]
+          },
+          {
+            "name": "RoadRunner",
+            "patterns": ["roadrunner"]
+          },
+          {
+            "name": "Swoole",
+            "patterns": ["\\bswoole\\b"]
+          },
+          {
+            "name": "OpenSwoole",
+            "patterns": ["openswoole|open\\s*swoole"]
           },
           {
             "name": "Laravel",
@@ -149,6 +173,10 @@
             "patterns": ["rails|phusion passenger"]
           },
           {
+            "name": "Phusion Passenger",
+            "patterns": ["phusion passenger|passenger(?:/\\d+(?:\\.\\d+)*)?"]
+          },
+          {
             "name": "Sinatra",
             "patterns": ["sinatra"]
           },
@@ -173,6 +201,34 @@
             "patterns": ["akka"]
           },
           {
+            "name": "Quarkus",
+            "patterns": ["\\bquarkus\\b"]
+          },
+          {
+            "name": "Micronaut",
+            "patterns": ["\\bmicronaut\\b"]
+          },
+          {
+            "name": "Ktor",
+            "patterns": ["\\bktor(?:/\\d+(?:\\.\\d+)*)?\\b"]
+          },
+          {
+            "name": "Helidon",
+            "patterns": ["\\bhelidon\\b"]
+          },
+          {
+            "name": "Dropwizard",
+            "patterns": ["\\bdropwizard\\b"]
+          },
+          {
+            "name": "Javalin",
+            "patterns": ["\\bjavalin\\b"]
+          },
+          {
+            "name": "Ratpack",
+            "patterns": ["\\bratpack\\b"]
+          },
+          {
             "name": "Phoenix",
             "patterns": ["phoenix"]
           },
@@ -191,6 +247,34 @@
           {
             "name": "Fiber",
             "patterns": ["\\bfiber\\b"]
+          },
+          {
+            "name": "Go Echo",
+            "patterns": ["\\becho(?:/\\d+(?:\\.\\d+)*)?\\b"]
+          },
+          {
+            "name": "Beego",
+            "patterns": ["\\bbeego\\b"]
+          },
+          {
+            "name": "CloudWeGo Hertz",
+            "patterns": ["\\bhertz(?:/\\d+(?:\\.\\d+)*)?\\b|cloudwego"]
+          },
+          {
+            "name": "GoFrame",
+            "patterns": ["goframe|go\\s*frame"]
+          },
+          {
+            "name": "Kratos",
+            "patterns": ["go-kratos|\\bkratos\\b"]
+          },
+          {
+            "name": "Go Iris",
+            "patterns": ["\\biris(?:/\\d+(?:\\.\\d+)*)?\\b"]
+          },
+          {
+            "name": "Buffalo",
+            "patterns": ["gobuffalo|\\bbuffalo\\b"]
           },
           {
             "name": "Rust Actix",
@@ -219,6 +303,10 @@
           {
             "name": "Rust Tide",
             "patterns": ["\\btide\\b"]
+          },
+          {
+            "name": "Rust Ntex",
+            "patterns": ["\\bntex\\b"]
           },
           {
             "name": "Rust Hyper",

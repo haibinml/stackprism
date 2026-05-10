@@ -50,6 +50,8 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
       total: resources.all.length,
       scripts: resources.scripts.slice(0, 120),
       stylesheets: resources.stylesheets.slice(0, 120),
+      resourceTiming: resources.resourceTiming.slice(0, 220),
+      all: resources.all.slice(0, 300),
       themeAssetUrls: resources.all.filter(url => /\/wp-content\/themes\//i.test(url)).slice(0, 80),
       resourceDomains: summarizeDomains(resources.all),
       cssVariableCount: cssVariables.names.length,

@@ -115,6 +115,8 @@ const collectCandidateScripts = (data: any, tabUrl: string): string[] => {
 
   const scriptUrls = unique([
     ...(data?.page?.resources?.scripts || []),
+    ...(data?.page?.resources?.resourceTiming || []),
+    ...(data?.page?.resources?.all || []),
     ...(data?.dynamic?.scripts || []),
     ...(data?.dynamic?.resources || [])
   ])
