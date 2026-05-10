@@ -327,6 +327,101 @@
           {
             "name": "Mercado Pago",
             "patterns": ["mercadopago\\.com", "sdk\\.mercadopago\\.com", "MercadoPago"]
+          },
+          {
+            "defaults": {
+              "matchIn": ["resources"]
+            },
+            "rules": [
+              {
+                "name": "Affirm",
+                "patterns": ["cdn1\\.affirm\\.com|cdn-assets\\.affirm\\.com|affirm\\.com/[^\\s\"'<>]*(?:js|checkout|affirm|promo)"]
+              },
+              {
+                "name": "Sezzle",
+                "patterns": [
+                  "checkout-sdk\\.sezzle\\.com|widget\\.sezzle\\.com|gateway\\.sezzle\\.com|sezzle\\.com/[^\\s\"'<>]*(?:sdk|checkout|widget)"
+                ]
+              },
+              {
+                "name": "Zip Pay / Zip Co",
+                "patterns": ["static\\.zip\\.co|checkout\\.zip\\.co|zip\\.co/[^\\s\"'<>]*(?:checkout|assets|sdk)|quadpay\\.com"]
+              },
+              {
+                "name": "Amazon Pay",
+                "patterns": [
+                  "static-(?:na|eu|fe)\\.payments-amazon\\.com|pay\\.amazon\\.com/[^\\s\"'<>]*(?:checkout|widgets|sdk)|amazonpay"
+                ]
+              },
+              {
+                "name": "Google Pay",
+                "patterns": ["pay\\.google\\.com/gp/p/js/pay\\.js|google\\.com/pay/[^\\s\"'<>]*(?:button|js|payments)"]
+              },
+              {
+                "name": "Apple Pay",
+                "patterns": ["apple-pay-gateway\\.apple\\.com|applepay\\.cdn-apple\\.com|apple\\.com/[^\\s\"'<>]*apple-pay"]
+              },
+              {
+                "name": "Bolt Checkout",
+                "patterns": ["connect\\.bolt\\.com|checkout\\.bolt\\.com|bolt\\.com/[^\\s\"'<>]*(?:checkout|merchant|payments)"]
+              },
+              {
+                "name": "Rapyd",
+                "patterns": ["checkout\\.rapyd\\.net|sandboxcheckout\\.rapyd\\.net|rapyd\\.net/[^\\s\"'<>]*(?:checkout|sdk|payments)"]
+              },
+              {
+                "name": "Primer Payments",
+                "patterns": ["sdk\\.primer\\.io|checkout\\.primer\\.io|primer\\.io/[^\\s\"'<>]*(?:checkout|payments|sdk)"]
+              },
+              {
+                "name": "Airwallex",
+                "patterns": [
+                  "checkout\\.airwallex\\.com|checkout-demo\\.airwallex\\.com|static\\.airwallex\\.com|airwallex\\.com/[^\\s\"'<>]*(?:checkout|payments)"
+                ]
+              },
+              {
+                "name": "PayMongo",
+                "patterns": ["js\\.paymongo\\.com|api\\.paymongo\\.com|paymongo\\.com/[^\\s\"'<>]*(?:js|checkout|payment)"]
+              },
+              {
+                "name": "Midtrans",
+                "patterns": [
+                  "app\\.midtrans\\.com/snap/snap\\.js|app\\.sandbox\\.midtrans\\.com/snap/snap\\.js|midtrans\\.com/[^\\s\"'<>]*(?:snap|checkout)"
+                ]
+              },
+              {
+                "name": "Xendit",
+                "patterns": ["js\\.xendit\\.co|checkout\\.xendit\\.co|xendit\\.co/[^\\s\"'<>]*(?:checkout|payment|sdk)"]
+              },
+              {
+                "name": "Billplz",
+                "patterns": ["www\\.billplz\\.com/bills/|billplz\\.com/[^\\s\"'<>]*(?:bills|checkout|payment)"]
+              },
+              {
+                "name": "PayHere",
+                "patterns": ["www\\.payhere\\.lk/pay/checkout|payhere\\.lk/[^\\s\"'<>]*(?:checkout|pay|sdk)"]
+              },
+              {
+                "name": "Paytm",
+                "patterns": ["securegw\\.paytm\\.in|securegw-stage\\.paytm\\.in|paytm\\.com/[^\\s\"'<>]*(?:checkout|theia|payment)"]
+              },
+              {
+                "name": "PhonePe",
+                "patterns": ["mercury\\.phonepe\\.com|api\\.phonepe\\.com|phonepe\\.com/[^\\s\"'<>]*(?:pg|payment|checkout)"]
+              },
+              {
+                "name": "Yoco",
+                "patterns": ["js\\.yoco\\.com/sdk|pay\\.yoco\\.com|yoco\\.com/[^\\s\"'<>]*(?:checkout|payments|sdk)"]
+              },
+              {
+                "name": "Paysera",
+                "patterns": ["bank\\.paysera\\.com|checkout\\.paysera\\.com|paysera\\.com/[^\\s\"'<>]*(?:checkout|payments|wallet)"]
+              },
+              {
+                "name": "GoCardless",
+                "patterns": ["pay\\.gocardless\\.com|js\\.gocardless\\.com|gocardless\\.com/[^\\s\"'<>]*(?:checkout|hosted|paylink)"]
+              }
+            ]
           }
         ]
       }
