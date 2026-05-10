@@ -163,6 +163,34 @@
               "patterns": ["upstash\\.io|upstashredis\\.com|qstash\\.upstash\\.io|upstash-vector|@upstash/"]
             },
             {
+              "name": "Pinecone",
+              "patterns": ["api\\.pinecone\\.io|[a-z0-9-]+\\.svc\\.[a-z0-9.-]+\\.pinecone\\.io|@pinecone-database/pinecone"]
+            },
+            {
+              "name": "Qdrant Cloud",
+              "patterns": ["cloud\\.qdrant\\.io|[a-z0-9-]+\\.[a-z0-9-]+\\.cloud\\.qdrant\\.io|qdrant-js"]
+            },
+            {
+              "name": "Weaviate Cloud",
+              "patterns": ["[a-z0-9-]+\\.weaviate\\.network|console\\.weaviate\\.cloud|weaviate-ts-client"]
+            },
+            {
+              "name": "Zilliz Cloud",
+              "patterns": ["api\\.cloud\\.zilliz\\.com|vectordb\\.zillizcloud\\.com|zillizcloud\\.com"]
+            },
+            {
+              "name": "DataStax Astra DB",
+              "patterns": ["api\\.astra\\.datastax\\.com|apps\\.astra\\.datastax\\.com|@datastax/astra-db-ts"]
+            },
+            {
+              "name": "Turbopuffer",
+              "patterns": ["api\\.turbopuffer\\.com|turbopuffer\\.com/[^\\s\"'<>]*(?:api|vectors)|@turbopuffer/"]
+            },
+            {
+              "name": "Cloudflare Vectorize",
+              "patterns": ["api\\.cloudflare\\.com/client/v4/accounts/[^\\s\"'<>]+/vectorize"]
+            },
+            {
               "name": "Xata",
               "patterns": ["api\\.xata\\.io|xata\\.sh|@xata\\.io"]
             },

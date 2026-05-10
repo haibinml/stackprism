@@ -465,6 +465,41 @@
             "evidence": "响应 URL 指向 Turso 服务"
           },
           {
+            "name": "Pinecone",
+            "patterns": ["url: https?://api\\.pinecone\\.io/", "url: https?://[^\\s/]+\\.svc\\.[a-z0-9.-]+\\.pinecone\\.io/"],
+            "evidence": "响应 URL 指向 Pinecone 向量数据库"
+          },
+          {
+            "name": "Qdrant Cloud",
+            "patterns": ["url: https?://cloud\\.qdrant\\.io/", "url: https?://[^\\s/]+\\.[a-z0-9-]+\\.cloud\\.qdrant\\.io/"],
+            "evidence": "响应 URL 指向 Qdrant Cloud"
+          },
+          {
+            "name": "Weaviate Cloud",
+            "patterns": ["url: https?://[^\\s/]+\\.weaviate\\.network/", "url: https?://console\\.weaviate\\.cloud/"],
+            "evidence": "响应 URL 指向 Weaviate Cloud"
+          },
+          {
+            "name": "Zilliz Cloud",
+            "patterns": ["url: https?://api\\.cloud\\.zilliz\\.com/", "url: https?://[^\\s/]+\\.vectordb\\.zillizcloud\\.com/"],
+            "evidence": "响应 URL 指向 Zilliz Cloud"
+          },
+          {
+            "name": "DataStax Astra DB",
+            "patterns": ["url: https?://api\\.astra\\.datastax\\.com/", "url: https?://[^\\s/]+\\.apps\\.astra\\.datastax\\.com/"],
+            "evidence": "响应 URL 指向 DataStax Astra DB"
+          },
+          {
+            "name": "Turbopuffer",
+            "patterns": ["url: https?://api\\.turbopuffer\\.com/"],
+            "evidence": "响应 URL 指向 Turbopuffer"
+          },
+          {
+            "name": "Cloudflare Vectorize",
+            "patterns": ["url: https?://api\\.cloudflare\\.com/client/v4/accounts/[^\\s/]+/vectorize/"],
+            "evidence": "响应 URL 指向 Cloudflare Vectorize"
+          },
+          {
             "name": "MongoDB Atlas",
             "patterns": [
               "url: https?://data\\.mongodb-api\\.com/",
