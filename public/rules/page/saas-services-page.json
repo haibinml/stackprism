@@ -1077,6 +1077,92 @@
             {
               "name": "SEON Fraud Prevention",
               "patterns": ["cdn\\.seon\\.io|api\\.seon\\.io|seon\\.io/[^\\s\"'<>]*(?:sdk|fraud|fingerprint)"]
+            },
+            {
+              "name": "Shufti Pro",
+              "patterns": ["api\\.shuftipro\\.com|app\\.shuftipro\\.com|shuftipro\\.com/[^\\s\"'<>]*(?:verification|kyc|sdk|api)"]
+            },
+            {
+              "name": "iDenfy",
+              "patterns": [
+                "ui\\.idenfy\\.com|ivs\\.idenfy\\.com|api\\.idenfy\\.com|idenfy\\.com/[^\\s\"'<>]*(?:identity|verification|kyc|sdk)"
+              ]
+            },
+            {
+              "name": "IDnow",
+              "patterns": ["api\\.idnow\\.de|go\\.idnow\\.de|idnow\\.io/[^\\s\"'<>]*(?:identity|verification|video-ident|sdk)"]
+            },
+            {
+              "name": "ComplyCube",
+              "patterns": [
+                "assets\\.complycube\\.com|api\\.complycube\\.com|app\\.complycube\\.com|complycube\\.com/[^\\s\"'<>]*(?:sdk|verification|kyc)"
+              ]
+            },
+            {
+              "name": "Verisoul",
+              "patterns": ["api\\.verisoul\\.ai|cdn\\.verisoul\\.ai|verisoul\\.ai/[^\\s\"'<>]*(?:sdk|verification|fraud|identity)"]
+            },
+            {
+              "name": "Castle",
+              "patterns": ["api\\.castle\\.io|cdn\\.castle\\.io|castle\\.io/[^\\s\"'<>]*(?:sdk|risk|fraud|beacon)"]
+            },
+            {
+              "name": "ClearSale",
+              "patterns": [
+                "device\\.clearsale\\.com\\.br|clearsale\\.com/[^\\s\"'<>]*(?:fraud|risk|sdk|device)|clearsale\\.com\\.br/[^\\s\"'<>]*(?:fraud|risk|sdk)"
+              ]
+            },
+            {
+              "name": "NoFraud",
+              "patterns": ["cdn\\.nofraud\\.com|api\\.nofraud\\.com|nofraud\\.com/[^\\s\"'<>]*(?:fraud|checkout|sdk|js)"]
+            },
+            {
+              "name": "FraudLabs Pro",
+              "patterns": ["api\\.fraudlabspro\\.com|fraudlabspro\\.com/[^\\s\"'<>]*(?:api|fraud|screening|sdk)"]
+            },
+            {
+              "name": "Fraud.net",
+              "patterns": ["api\\.fraud\\.net|fraud\\.net/[^\\s\"'<>]*(?:api|fraud|risk|device|sdk)"]
+            },
+            {
+              "name": "Eye4Fraud",
+              "patterns": ["api\\.eye4fraud\\.com|eye4fraud\\.com/[^\\s\"'<>]*(?:fraud|api|screening|risk)"]
+            },
+            {
+              "name": "Ravelin",
+              "patterns": ["api\\.ravelin\\.com|cdn\\.ravelin\\.com|ravelin\\.com/[^\\s\"'<>]*(?:sdk|fraud|device|js)"]
+            },
+            {
+              "name": "Ekata",
+              "patterns": ["api\\.ekata\\.com|ekata\\.com/[^\\s\"'<>]*(?:identity|verification|risk|api)"]
+            },
+            {
+              "name": "Prove",
+              "patterns": ["api\\.prove\\.com|cdn\\.prove\\.com|prove\\.com/[^\\s\"'<>]*(?:identity|phone|verification|sdk)"]
+            },
+            {
+              "name": "TransUnion iovation",
+              "patterns": ["ci-mpsnare\\.iovation\\.com|mpsnare\\.iesnare\\.com|iovation\\.com/[^\\s\"'<>]*(?:fraud|device|risk)"]
+            },
+            {
+              "name": "BioCatch",
+              "patterns": ["biocatch\\.com/[^\\s\"'<>]*(?:sdk|behavioral|fraud|risk)|cdn\\.biocatch\\.com|api\\.biocatch\\.com"]
+            },
+            {
+              "name": "Feedzai",
+              "patterns": ["feedzai\\.com/[^\\s\"'<>]*(?:fraud|risk|api|financial-crime)|api\\.feedzai\\.com"]
+            },
+            {
+              "name": "Featurespace ARIC",
+              "patterns": ["featurespace\\.com/[^\\s\"'<>]*(?:aric|fraud|risk|transaction-monitoring)|api\\.featurespace\\.com"]
+            },
+            {
+              "name": "Incode",
+              "patterns": ["api\\.incode\\.com|sdk\\.incode\\.com|incode\\.com/[^\\s\"'<>]*(?:sdk|identity|verification|kyc)"]
+            },
+            {
+              "name": "Yoti",
+              "patterns": ["api\\.yoti\\.com|sdk\\.yoti\\.com|yoti\\.com/[^\\s\"'<>]*(?:identity|verification|age|sdk)"]
             }
           ]
         },
