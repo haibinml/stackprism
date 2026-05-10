@@ -1328,6 +1328,256 @@
       },
       {
         "defaults": {
+          "category": "活动 / 票务",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Eventbrite Widgets",
+            "patterns": [
+              "url: https?://www\\.eventbrite\\.com/static/widgets/",
+              "url: https?://www\\.eventbrite\\.com/tickets-external",
+              "url: https?://www\\.eventbrite\\.com/e/[^\\s?#]*tickets"
+            ],
+            "evidence": "响应 URL 指向 Eventbrite 活动 / 票务组件"
+          },
+          {
+            "name": "Humanitix",
+            "patterns": ["url: https?://events\\.humanitix\\.com/", "url: https?://events\\.humanitix\\.com/[^\\s]*(?:widgets|checkout|tickets)"],
+            "evidence": "响应 URL 指向 Humanitix 活动 / 票务"
+          },
+          {
+            "name": "Ticket Tailor",
+            "patterns": ["url: https?://cdn\\.tickettailor\\.com/", "url: https?://www\\.tickettailor\\.com/[^\\s]*(?:checkout|all-tickets|events|embed)"],
+            "evidence": "响应 URL 指向 Ticket Tailor 票务"
+          },
+          {
+            "name": "Tito",
+            "patterns": ["url: https?://js\\.tito\\.io/", "url: https?://ti\\.to/[^\\s/]+/[^\\s?#]+", "url: https?://(?:www\\.)?tito\\.io/[^\\s]*(?:embed|checkout)"],
+            "evidence": "响应 URL 指向 Tito 票务"
+          },
+          {
+            "name": "Luma Events",
+            "patterns": ["url: https?://api\\.lu\\.ma/", "url: https?://lu\\.ma/embed/"],
+            "evidence": "响应 URL 指向 Luma Events"
+          },
+          {
+            "name": "Meetup",
+            "patterns": ["url: https?://secure\\.meetupstatic\\.com/", "url: https?://www\\.meetup\\.com/[^\\s/]*/events/"],
+            "evidence": "响应 URL 指向 Meetup 活动"
+          },
+          {
+            "name": "Eventzilla",
+            "patterns": ["url: https?://cdn\\.eventzilla\\.net/", "url: https?://(?:www\\.)?eventzilla\\.net/[^\\s]*(?:web/event|widgets|ticketing)"],
+            "evidence": "响应 URL 指向 Eventzilla 票务"
+          },
+          {
+            "name": "Splash",
+            "patterns": ["url: https?://event\\.splashthat\\.com/", "url: https?://(?:www\\.)?splashthat\\.com/[^\\s]*(?:embed|event)", "url: https?://[^\\s/]+\\.splash\\.events/"],
+            "evidence": "响应 URL 指向 Splash 活动"
+          },
+          {
+            "name": "Cvent Events",
+            "patterns": ["url: https?://web\\.cvent\\.com/event", "url: https?://events\\.cvent\\.com/", "url: https?://(?:www\\.)?cvent\\.com/[^\\s]*(?:events|event-management|registration)"],
+            "evidence": "响应 URL 指向 Cvent Events"
+          },
+          {
+            "name": "Bizzabo Events",
+            "patterns": ["url: https?://events\\.bizzabo\\.com/", "url: https?://cdn\\.bizzabo\\.com/", "url: https?://(?:www\\.)?bizzabo\\.com/[^\\s]*(?:widget|events|registration)"],
+            "evidence": "响应 URL 指向 Bizzabo Events"
+          },
+          {
+            "name": "Whova",
+            "patterns": ["url: https?://(?:www\\.)?whova\\.com/[^\\s]*(?:embedded|webapp|portal|registration)", "url: https?://whova\\.com/portal/webapp/"],
+            "evidence": "响应 URL 指向 Whova 活动平台"
+          },
+          {
+            "name": "RingCentral Events / Hopin",
+            "patterns": [
+              "url: https?://events\\.ringcentral\\.com/",
+              "url: https?://hopin\\.com/events/",
+              "url: https?://hopin\\.to/[^\\s]*(?:events|embed)",
+              "url: https?://hopin\\.com/[^\\s]*(?:widgets|registration)"
+            ],
+            "evidence": "响应 URL 指向 RingCentral Events / Hopin"
+          },
+          {
+            "name": "EventMobi",
+            "patterns": ["url: https?://assets\\.eventmobi\\.com/", "url: https?://eventmobi\\.io/", "url: https?://(?:www\\.)?eventmobi\\.com/[^\\s]*(?:app|events|registration|embed)"],
+            "evidence": "响应 URL 指向 EventMobi"
+          },
+          {
+            "name": "Universe Ticketing",
+            "patterns": ["url: https?://cdn\\.universe\\.com/", "url: https?://www\\.universe\\.com/embed/", "url: https?://www\\.universe\\.com/[^\\s]*(?:events|tickets)"],
+            "evidence": "响应 URL 指向 Universe Ticketing"
+          },
+          {
+            "name": "Billetto",
+            "patterns": ["url: https?://billetto\\.(?:co\\.uk|dk|se|no|fi|nl|ie)/[^\\s]*(?:e/|events|widget|embed)"],
+            "evidence": "响应 URL 指向 Billetto 票务"
+          },
+          {
+            "name": "pretix",
+            "patterns": [
+              "url: https?://pretix\\.eu/widget/v1",
+              "url: https?://pretix\\.eu/[^\\s]*(?:widget|event|api)",
+              "url: https?://pretix\\.(?:dev|cloud)/[^\\s]*(?:widget|event)"
+            ],
+            "evidence": "响应 URL 指向 pretix 票务"
+          },
+          {
+            "name": "Ticketbud",
+            "patterns": ["url: https?://cdn\\.ticketbud\\.com/", "url: https?://(?:www\\.)?ticketbud\\.com/[^\\s]*(?:events|tickets|widgets?|embed)"],
+            "evidence": "响应 URL 指向 Ticketbud 票务"
+          },
+          {
+            "name": "EventCreate",
+            "patterns": ["url: https?://www\\.eventcreate\\.com/[^\\s]*(?:e/|event|widget|embed|ticket)"],
+            "evidence": "响应 URL 指向 EventCreate"
+          },
+          {
+            "name": "Eventee",
+            "patterns": ["url: https?://app\\.eventee\\.co/", "url: https?://eventee\\.co/[^\\s]*(?:embed|events|api|app)"],
+            "evidence": "响应 URL 指向 Eventee"
+          },
+          {
+            "name": "Airmeet",
+            "patterns": ["url: https?://cdn\\.airmeet\\.com/", "url: https?://www\\.airmeet\\.com/[^\\s]*(?:e/|event|embed|register)"],
+            "evidence": "响应 URL 指向 Airmeet"
+          },
+          {
+            "name": "Goldcast",
+            "patterns": ["url: https?://events\\.goldcast\\.io/", "url: https?://cdn\\.goldcast\\.io/", "url: https?://www\\.goldcast\\.io/[^\\s]*(?:events|register|embed)"],
+            "evidence": "响应 URL 指向 Goldcast"
+          },
+          {
+            "name": "Livestorm",
+            "patterns": ["url: https?://app\\.livestorm\\.co/", "url: https?://livestorm\\.co/[^\\s]*(?:webinars|embed|registration|live)"],
+            "evidence": "响应 URL 指向 Livestorm"
+          },
+          {
+            "name": "Remo Conference",
+            "patterns": ["url: https?://live\\.remo\\.co/", "url: https?://remo\\.co/[^\\s]*(?:e/|event|conference|embed)"],
+            "evidence": "响应 URL 指向 Remo Conference"
+          },
+          {
+            "name": "BigMarker",
+            "patterns": ["url: https?://assets\\.bigmarker\\.com/", "url: https?://www\\.bigmarker\\.com/[^\\s]*(?:conferences|events|webinars|widgets?|embed)"],
+            "evidence": "响应 URL 指向 BigMarker"
+          },
+          {
+            "name": "Sessionize",
+            "patterns": ["url: https?://sessionize\\.com/api/v2", "url: https?://sessionize\\.com/[^\\s]*(?:embed|view|app|speaker)"],
+            "evidence": "响应 URL 指向 Sessionize"
+          },
+          {
+            "name": "Sched",
+            "patterns": ["url: https?://assets\\.sched\\.com/", "url: https?://[^\\s/]+\\.sched\\.com/[^\\s]*(?:event|embed|schedule)", "url: https?://sched\\.co/[^\\s]*(?:event|embed)"],
+            "evidence": "响应 URL 指向 Sched"
+          },
+          {
+            "name": "Expo Pass",
+            "patterns": ["url: https?://register\\.expopass\\.com/", "url: https?://(?:www\\.)?expopass\\.com/[^\\s]*(?:events|registration|tickets|embed)"],
+            "evidence": "响应 URL 指向 Expo Pass"
+          },
+          {
+            "name": "Brushfire",
+            "patterns": ["url: https?://widget\\.brushfire\\.com/", "url: https?://(?:www\\.)?brushfire\\.com/[^\\s]*(?:events|widgets?|tickets|register)"],
+            "evidence": "响应 URL 指向 Brushfire"
+          },
+          {
+            "name": "Partiful",
+            "patterns": ["url: https?://partiful\\.com/(?:e|events)/"],
+            "evidence": "响应 URL 指向 Partiful 活动"
+          },
+          {
+            "name": "Swapcard",
+            "patterns": ["url: https?://app\\.swapcard\\.com/event", "url: https?://cdn\\.swapcard\\.com/", "url: https?://www\\.swapcard\\.com/[^\\s]*(?:event|registration|community)"],
+            "evidence": "响应 URL 指向 Swapcard"
+          },
+          {
+            "name": "Brella",
+            "patterns": ["url: https?://next\\.brella\\.io/", "url: https?://app\\.brella\\.io/", "url: https?://www\\.brella\\.io/[^\\s]*(?:events|event-app|registration)"],
+            "evidence": "响应 URL 指向 Brella"
+          },
+          {
+            "name": "Hubilo",
+            "patterns": ["url: https?://events\\.hubilo\\.com/", "url: https?://cdn\\.hubilo\\.com/", "url: https?://www\\.hubilo\\.com/[^\\s]*(?:event|events|webinar|registration)"],
+            "evidence": "响应 URL 指向 Hubilo"
+          },
+          {
+            "name": "HeySummit",
+            "patterns": ["url: https?://[^\\s/]+\\.heysummit\\.com/", "url: https?://heysummit\\.com/[^\\s]*(?:summit|event|registration|tickets)"],
+            "evidence": "响应 URL 指向 HeySummit"
+          },
+          {
+            "name": "vFairs",
+            "patterns": ["url: https?://event\\.vfairs\\.com/", "url: https?://cdn\\.vfairs\\.com/", "url: https?://www\\.vfairs\\.com/[^\\s]*(?:event|events|conference|webinar|registration)"],
+            "evidence": "响应 URL 指向 vFairs"
+          },
+          {
+            "name": "Accelevents",
+            "patterns": ["url: https?://api\\.accelevents\\.com/", "url: https?://cdn\\.accelevents\\.com/", "url: https?://www\\.accelevents\\.com/(?:e|event)/"],
+            "evidence": "响应 URL 指向 Accelevents"
+          },
+          {
+            "name": "Run The World",
+            "patterns": ["url: https?://cdn\\.runtheworld\\.today/", "url: https?://www\\.runtheworld\\.today/[^\\s]*(?:app|room|event|register)"],
+            "evidence": "响应 URL 指向 Run The World"
+          },
+          {
+            "name": "PheedLoop",
+            "patterns": ["url: https?://app\\.pheedloop\\.com/", "url: https?://cdn\\.pheedloop\\.com/", "url: https?://www\\.pheedloop\\.com/[^\\s]*(?:event|events|embed|registration)"],
+            "evidence": "响应 URL 指向 PheedLoop"
+          },
+          {
+            "name": "TicketSpice",
+            "patterns": ["url: https?://checkout\\.ticketspice\\.com/", "url: https?://(?:www\\.)?ticketspice\\.com/[^\\s]*(?:event|events|checkout|tickets)"],
+            "evidence": "响应 URL 指向 TicketSpice"
+          },
+          {
+            "name": "Eventleaf",
+            "patterns": ["url: https?://app\\.eventleaf\\.com/", "url: https?://www\\.eventleaf\\.com/[^\\s]*(?:event|events|registration|attendee|tickets)"],
+            "evidence": "响应 URL 指向 Eventleaf"
+          },
+          {
+            "name": "Glue Up",
+            "patterns": ["url: https?://app\\.glueup\\.com/", "url: https?://www\\.glueup\\.com/[^\\s]*(?:event|events|membership|registration)", "url: https?://www\\.glueup\\.cn/[^\\s]*(?:event|events)"],
+            "evidence": "响应 URL 指向 Glue Up"
+          },
+          {
+            "name": "Eventdex",
+            "patterns": ["url: https?://eventdexforce\\.com/", "url: https?://www\\.eventdex\\.com/[^\\s]*(?:events|event-management|registration|ticketing)"],
+            "evidence": "响应 URL 指向 Eventdex"
+          },
+          {
+            "name": "Stova Events",
+            "patterns": [
+              "url: https?://www\\.stova\\.io/[^\\s]*(?:events|registration|event-management)",
+              "url: https?://www\\.aventri\\.com/[^\\s]*(?:events|registration)",
+              "url: https?://www\\.meetingplay\\.com/[^\\s]*(?:events|registration)"
+            ],
+            "evidence": "响应 URL 指向 Stova / Aventri / MeetingPlay"
+          },
+          {
+            "name": "RegFox",
+            "patterns": ["url: https?://www\\.regfox\\.com/(?:e|embed)/", "url: https?://www\\.regfox\\.com/[^\\s]*(?:registration|event|tickets)"],
+            "evidence": "响应 URL 指向 RegFox"
+          },
+          {
+            "name": "RSVPify",
+            "patterns": ["url: https?://app\\.rsvpify\\.com/", "url: https?://rsvpify\\.com/[^\\s]*(?:event|embed|rsvp|registration)"],
+            "evidence": "响应 URL 指向 RSVPify"
+          },
+          {
+            "name": "AllEvents",
+            "patterns": ["url: https?://allevents\\.in/api", "url: https?://allevents\\.in/[^\\s]*(?:event|tickets|register|embed)"],
+            "evidence": "响应 URL 指向 AllEvents"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "支付系统",
           "confidence": "高"
         },
