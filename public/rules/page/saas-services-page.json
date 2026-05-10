@@ -3628,6 +3628,102 @@
         },
         {
           "defaults": {
+            "kind": "医疗预约 / 患者表单",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Zocdoc Booking",
+              "patterns": ["book\\.zocdoc\\.com|zocdoc\\.com/[^\\s\"'<>]*(?:book|widget|appointments?)"]
+            },
+            {
+              "name": "Doctolib Booking",
+              "patterns": [
+                "doctolib\\.(?:fr|de|it)/[^\\s\"'<>]*(?:booking|appointments?|sessions)|pro\\.doctolib\\.(?:fr|de|it)|cdn\\.doctolib\\.(?:fr|de|it)"
+              ]
+            },
+            {
+              "name": "Docplanner",
+              "patterns": [
+                "docplanner\\.com/[^\\s\"'<>]*(?:booking|widget|appointments?)|znanylekarz\\.pl/[^\\s\"'<>]*(?:booking|widget|umow-wizyte)|miodottore\\.it/[^\\s\"'<>]*(?:prenota|booking)"
+              ]
+            },
+            {
+              "name": "HotDoc",
+              "patterns": ["hotdoc\\.com\\.au/[^\\s\"'<>]*(?:book|booking|appointment|widget)"]
+            },
+            {
+              "name": "Healthengine",
+              "patterns": ["healthengine\\.com\\.au/[^\\s\"'<>]*(?:appointment|booking|practices?|widget)"]
+            },
+            {
+              "name": "SimplePractice Client Portal",
+              "patterns": ["simplepractice\\.com/clientportal|widget\\.simplepractice\\.com|cdn\\.simplepractice\\.com"]
+            },
+            {
+              "name": "Jane App Booking",
+              "patterns": [
+                "janeapp\\.com/locations|janeapp\\.com/[^\\s\"'<>]*(?:book|booking|online_booking)|jane\\.app/[^\\s\"'<>]*(?:book|booking)"
+              ]
+            },
+            {
+              "name": "Cliniko",
+              "patterns": ["cliniko\\.com/bookings|cliniko\\.com/[^\\s\"'<>]*(?:bookings|appointments)"]
+            },
+            {
+              "name": "Practice Better",
+              "patterns": ["my\\.practicebetter\\.io|practicebetter\\.io/[^\\s\"'<>]*(?:booking|appointment|widget)"]
+            },
+            {
+              "name": "NexHealth",
+              "patterns": ["cdn\\.nexhealth\\.com|api\\.nexhealth\\.com|nexhealth\\.com/[^\\s\"'<>]*(?:booking|widget|appointments?)"]
+            },
+            {
+              "name": "Luma Health",
+              "patterns": ["nextpatient\\.co|lumahealth\\.io/[^\\s\"'<>]*(?:booking|scheduler|widget)"]
+            },
+            {
+              "name": "Solutionreach",
+              "patterns": ["srhealth\\.com|solutionreach\\.com/[^\\s\"'<>]*(?:patient|schedule|widget)"]
+            },
+            {
+              "name": "Phreesia",
+              "patterns": ["phreesia\\.net|phreesia\\.com/[^\\s\"'<>]*(?:appointments|intake|forms|patient)"]
+            },
+            {
+              "name": "Klara",
+              "patterns": ["patient\\.klara\\.com|klara\\.com/[^\\s\"'<>]*(?:web-messenger|widget|patient|chat)"]
+            },
+            {
+              "name": "OhMD",
+              "patterns": ["app\\.ohmd\\.com|ohmd\\.com/[^\\s\"'<>]*(?:widget|patient|chat|schedule)"]
+            },
+            {
+              "name": "Healthie",
+              "patterns": ["secure\\.gethealthie\\.com|gethealthie\\.com/[^\\s\"'<>]*(?:appointments?|booking|embed|forms)"]
+            },
+            {
+              "name": "IntakeQ",
+              "patterns": ["intakeq\\.com/js|intakeq\\.com/[^\\s\"'<>]*(?:booking|new|intake|widget|forms)"]
+            },
+            {
+              "name": "FormDr",
+              "patterns": ["cdn\\.formdr\\.com|formdr\\.com/[^\\s\"'<>]*(?:forms|form|intake|embed|patient)"]
+            },
+            {
+              "name": "Tebra PatientPop",
+              "patterns": [
+                "patientpop\\.com/[^\\s\"'<>]*(?:booking|appointments?|widget)|tebra\\.com/[^\\s\"'<>]*(?:booking|patient|schedule)"
+              ]
+            },
+            {
+              "name": "Demandforce",
+              "patterns": ["local\\.demandforce\\.com|demandforce\\.com/[^\\s\"'<>]*(?:appointment|booking|widget|schedule)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "评价 / UGC",
             "matchIn": ["resources"]
           },
