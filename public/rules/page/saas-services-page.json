@@ -2105,6 +2105,46 @@
           ]
         },
         {
+          "defaults": {
+            "kind": "实时消息 / 协作 API",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Pusher Channels",
+              "patterns": ["js\\.pusher\\.com|(?:sockjs|ws)-[a-z0-9-]+\\.pusher\\.com|api(?:-[a-z0-9-]+)?\\.pusher\\.com|pusher-js"]
+            },
+            {
+              "name": "Ably Realtime",
+              "patterns": ["cdn\\.ably\\.com|(?:rest|realtime)\\.ably\\.io|ably\\.com/[^\\s\"'<>]*(?:channels|realtime|sdk)|ably-js"]
+            },
+            {
+              "name": "PubNub",
+              "patterns": ["ps\\.pndsn\\.com|pubsub\\.pubnub\\.com|cdn\\.pubnub\\.com|pubnub\\.com/[^\\s\"'<>]*(?:sdk|api|subscribe)|pubnub(?:\\.min)?\\.js"]
+            },
+            {
+              "name": "Liveblocks",
+              "patterns": ["api\\.liveblocks\\.io|liveblocks\\.io/api|@liveblocks/(?:client|react|core)"]
+            },
+            {
+              "name": "Stream Chat",
+              "patterns": ["chat\\.stream-io-api\\.com|video\\.stream-io-api\\.com|stream-chat(?:\\.min)?\\.js|@stream-io/|stream-chat-react"]
+            },
+            {
+              "name": "Sendbird",
+              "patterns": ["api-[a-z0-9-]+\\.sendbird\\.com|ws-[a-z0-9-]+\\.sendbird\\.com|static\\.sendbird\\.com|sendbird(?:-calls)?(?:\\.min)?\\.js|@sendbird/"]
+            },
+            {
+              "name": "TalkJS",
+              "patterns": ["cdn\\.talkjs\\.com|api\\.talkjs\\.com|app\\.talkjs\\.com|talkjs(?:\\.min)?\\.js"]
+            },
+            {
+              "name": "CometChat",
+              "patterns": ["widget-js\\.cometchat\\.io|cdn\\.cometchat\\.io|api-[a-z0-9-]+\\.cometchat\\.io|@cometchat/"]
+            }
+          ]
+        },
+        {
           "name": "Sentry",
           "kind": "错误监控",
           "patterns": ["browser\\.sentry-cdn\\.com|sentry\\.io|sentry-cdn\\.com"],

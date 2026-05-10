@@ -549,6 +549,54 @@
             "evidence": "响应头包含 Directus 线索"
           },
           {
+            "name": "Pusher Channels",
+            "patterns": [
+              "url: https?://(?:sockjs|ws)-[a-z0-9-]+\\.pusher\\.com/",
+              "url: https?://api(?:-[a-z0-9-]+)?\\.pusher\\.com/",
+              "url: https?://js\\.pusher\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Pusher Channels"
+          },
+          {
+            "name": "Ably Realtime",
+            "patterns": ["url: https?://(?:rest|realtime)\\.ably\\.io/", "url: https?://cdn\\.ably\\.com/"],
+            "evidence": "响应 URL 指向 Ably Realtime"
+          },
+          {
+            "name": "PubNub",
+            "patterns": ["url: https?://ps\\.pndsn\\.com/", "url: https?://pubsub\\.pubnub\\.com/", "url: https?://cdn\\.pubnub\\.com/"],
+            "evidence": "响应 URL 指向 PubNub"
+          },
+          {
+            "name": "Liveblocks",
+            "patterns": ["url: https?://api\\.liveblocks\\.io/", "url: https?://liveblocks\\.io/api/"],
+            "evidence": "响应 URL 指向 Liveblocks"
+          },
+          {
+            "name": "Stream Chat",
+            "patterns": ["url: https?://chat\\.stream-io-api\\.com/", "url: https?://video\\.stream-io-api\\.com/"],
+            "evidence": "响应 URL 指向 Stream Chat / Video"
+          },
+          {
+            "name": "Sendbird",
+            "patterns": ["url: https?://api-[a-z0-9-]+\\.sendbird\\.com/", "url: https?://ws-[a-z0-9-]+\\.sendbird\\.com/"],
+            "evidence": "响应 URL 指向 Sendbird"
+          },
+          {
+            "name": "TalkJS",
+            "patterns": ["url: https?://api\\.talkjs\\.com/", "url: https?://app\\.talkjs\\.com/", "url: https?://cdn\\.talkjs\\.com/"],
+            "evidence": "响应 URL 指向 TalkJS"
+          },
+          {
+            "name": "CometChat",
+            "patterns": [
+              "url: https?://widget-js\\.cometchat\\.io/",
+              "url: https?://cdn\\.cometchat\\.io/",
+              "url: https?://api-[a-z0-9-]+\\.cometchat\\.io/"
+            ],
+            "evidence": "响应 URL 指向 CometChat"
+          },
+          {
             "name": "Auth0",
             "patterns": ["url: https?://[^\\s/]+\\.auth0\\.com/"],
             "evidence": "响应 URL 指向 Auth0 服务"
