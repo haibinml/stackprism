@@ -62,9 +62,31 @@
             ]
           },
           {
+            "name": "Komari",
+            "kind": "服务器监控面板",
+            "patterns": [
+              "<title>\\s*Komari(?:\\s*</title>|\\s+-)",
+              "Komari\\s*(?:Monitor|Monitoring|监控)",
+              "komari-monitor",
+              "komari-agent",
+              "komari-web",
+              "(?:localhost|127\\.0\\.0\\.1|0\\.0\\.0\\.0|\\[::1\\]):25774/(?:api/(?:public|clients|nodes|settings)|dashboard)(?:[?#\\s/]|$)"
+            ]
+          },
+          {
             "name": "Uptime Kuma",
             "kind": "可用性监控",
             "patterns": ["Uptime Kuma", "uptime-kuma", "kuma", "status-page"]
+          },
+          {
+            "name": "Tianji",
+            "kind": "网站统计 / 可用性监控",
+            "patterns": [
+              "<title>\\s*Tianji(?:\\s*</title>|\\s+-)",
+              "Tianji\\s*(?:Analytics|Insight|监控|统计)",
+              "msgbyte/tianji",
+              "(?:^|[\\/._-])tianji(?:[\\/._-]|[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$))"
+            ]
           },
           {
             "name": "Netdata",
@@ -87,6 +109,46 @@
         "name": "Glances",
         "kind": "服务器监控",
         "patterns": ["Glances", "glances", "glances-web", "/api/3/"]
+      },
+      {
+        "defaults": {
+          "kind": "网络测速 / 质量监控",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "MySpeed",
+            "patterns": [
+              "<title>\\s*MySpeed(?:\\s*</title>|\\s+-)",
+              "gnmyt/myspeed",
+              "myspeed[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+            ]
+          },
+          {
+            "name": "LibreSpeed",
+            "patterns": [
+              "<title>\\s*LibreSpeed(?:\\s*</title>|\\s+-)",
+              "librespeed\\.org",
+              "librespeed(?:-speedtest)?[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+            ]
+          },
+          {
+            "name": "Speedtest Tracker",
+            "patterns": [
+              "<title>\\s*Speedtest Tracker(?:\\s*</title>|\\s+-)",
+              "alexjustesen/speedtest-tracker",
+              "speedtest-tracker[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+            ]
+          },
+          {
+            "name": "OpenSpeedTest",
+            "patterns": [
+              "<title>\\s*OpenSpeedTest(?:\\s*</title>|\\s+-)",
+              "openspeedtest\\.com",
+              "openspeedtest[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+            ]
+          }
+        ]
       },
       {
         "defaults": {
