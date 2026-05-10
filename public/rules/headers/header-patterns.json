@@ -1578,6 +1578,204 @@
       },
       {
         "defaults": {
+          "category": "招聘 / ATS",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Greenhouse Job Board",
+            "patterns": ["url: https?://boards\\.greenhouse\\.io/", "url: https?://job-boards\\.greenhouse\\.io/", "url: https?://boards-api\\.greenhouse\\.io/"],
+            "evidence": "响应 URL 指向 Greenhouse 招聘系统"
+          },
+          {
+            "name": "Lever Jobs",
+            "patterns": ["url: https?://jobs\\.lever\\.co/", "url: https?://api\\.lever\\.co/v0/postings/"],
+            "evidence": "响应 URL 指向 Lever 招聘系统"
+          },
+          {
+            "name": "Workable",
+            "patterns": ["url: https?://apply\\.workable\\.com/", "url: https?://www\\.workable\\.com/widgets/", "url: https?://www\\.workable\\.com/api/accounts/[^\\s/]+/jobs"],
+            "evidence": "响应 URL 指向 Workable 招聘系统"
+          },
+          {
+            "name": "Ashby",
+            "patterns": ["url: https?://jobs\\.ashbyhq\\.com/", "url: https?://embed\\.ashbyhq\\.com/", "url: https?://api\\.ashbyhq\\.com/posting-api/"],
+            "evidence": "响应 URL 指向 Ashby 招聘系统"
+          },
+          {
+            "name": "SmartRecruiters",
+            "patterns": ["url: https?://jobs\\.smartrecruiters\\.com/", "url: https?://api\\.smartrecruiters\\.com/"],
+            "evidence": "响应 URL 指向 SmartRecruiters"
+          },
+          {
+            "name": "BambooHR Careers",
+            "patterns": ["url: https?://[^\\s/]+\\.bamboohr\\.com/careers/", "url: https?://www\\.bamboohr\\.com/jobs/embed2\\.php", "url: https?://api\\.bamboohr\\.com/"],
+            "evidence": "响应 URL 指向 BambooHR Careers"
+          },
+          {
+            "name": "iCIMS Talent Cloud",
+            "patterns": ["url: https?://careers\\.icims\\.com/", "url: https?://[^\\s/]+\\.icims\\.com/jobs/", "url: https?://platform\\.icims\\.com/"],
+            "evidence": "响应 URL 指向 iCIMS Talent Cloud"
+          },
+          {
+            "name": "JazzHR",
+            "patterns": ["url: https?://applytojob\\.com/", "url: https?://jazz\\.co/apply/", "url: https?://www\\.jazzhr\\.com/[^\\s]*(?:jobs|apply)"],
+            "evidence": "响应 URL 指向 JazzHR"
+          },
+          {
+            "name": "Recruitee",
+            "patterns": ["url: https?://[^\\s/]+\\.recruitee\\.com/(?:c|o)/", "url: https?://api\\.recruitee\\.com/", "url: https?://cdn\\.recruitee\\.com/"],
+            "evidence": "响应 URL 指向 Recruitee"
+          },
+          {
+            "name": "Teamtailor",
+            "patterns": ["url: https?://[^\\s/]+\\.teamtailor\\.com/jobs", "url: https?://teamtailor-cdn\\.com/", "url: https?://api\\.teamtailor\\.com/"],
+            "evidence": "响应 URL 指向 Teamtailor"
+          },
+          {
+            "name": "Comeet",
+            "patterns": ["url: https?://www\\.comeet\\.co/jobs-api/", "url: https?://www\\.comeet\\.co/careers/", "url: https?://www\\.comeet\\.co/jobs/"],
+            "evidence": "响应 URL 指向 Comeet"
+          },
+          {
+            "name": "Jobvite",
+            "patterns": ["url: https?://jobs\\.jobvite\\.com/", "url: https?://[^\\s/]+\\.jobvite\\.com/(?:job|jobs|CompanyJobs)"],
+            "evidence": "响应 URL 指向 Jobvite"
+          },
+          {
+            "name": "Personio Recruiting",
+            "patterns": ["url: https?://jobs\\.personio\\.com/", "url: https?://[^\\s/]+\\.jobs\\.personio\\.de/", "url: https?://[^\\s/]+\\.jobs\\.personio\\.com/"],
+            "evidence": "响应 URL 指向 Personio Recruiting"
+          },
+          {
+            "name": "Pinpoint ATS",
+            "patterns": ["url: https?://[^\\s/]+\\.pinpointhq\\.com/postings/", "url: https?://[^\\s/]+\\.pinpointhq\\.com/jobs/"],
+            "evidence": "响应 URL 指向 Pinpoint ATS"
+          },
+          {
+            "name": "Breezy HR",
+            "patterns": ["url: https?://[^\\s/]+\\.breezy\\.hr/p/", "url: https?://[^\\s/]+\\.breezy\\.hr/embed/", "url: https?://api\\.breezy\\.hr/"],
+            "evidence": "响应 URL 指向 Breezy HR"
+          },
+          {
+            "name": "Recruiterbox",
+            "patterns": ["url: https?://[^\\s/]+\\.recruiterbox\\.com/jobs", "url: https?://[^\\s/]+\\.recruiterbox\\.com/embed", "url: https?://apply\\.recruiterbox\\.com/"],
+            "evidence": "响应 URL 指向 Recruiterbox"
+          },
+          {
+            "name": "Workday Recruiting",
+            "patterns": ["url: https?://[^\\s/]+\\.myworkdayjobs\\.com/", "url: https?://[^\\s/]+\\.workdayjobs\\.com/", "url: https?://wd1\\.myworkdaysite\\.com/"],
+            "evidence": "响应 URL 指向 Workday Recruiting"
+          },
+          {
+            "name": "Eightfold AI Careers",
+            "patterns": ["url: https?://api\\.eightfold\\.ai/", "url: https?://cdn\\.eightfold\\.ai/", "url: https?://[^\\s/]+\\.eightfold\\.ai/[^\\s]*(?:careers|jobs)"],
+            "evidence": "响应 URL 指向 Eightfold AI Careers"
+          },
+          {
+            "name": "Fountain",
+            "patterns": ["url: https?://www\\.fountain\\.com/jobs/", "url: https?://www\\.fountain\\.com/[^\\s]*(?:applicants|apply)", "url: https?://api\\.fountain\\.com/"],
+            "evidence": "响应 URL 指向 Fountain 招聘系统"
+          },
+          {
+            "name": "Indeed Apply",
+            "patterns": ["url: https?://www\\.indeed\\.com/(?:applystart|indeedapply|viewjob)", "url: https?://apply\\.indeed\\.com/"],
+            "evidence": "响应 URL 指向 Indeed Apply"
+          },
+          {
+            "name": "Zoho Recruit",
+            "patterns": ["url: https?://recruit\\.zoho\\.(?:com|eu|in)/", "url: https?://www\\.zohorecruit\\.com/[^\\s]*(?:jobs|recruit|career)"],
+            "evidence": "响应 URL 指向 Zoho Recruit"
+          },
+          {
+            "name": "LinkedIn Jobs",
+            "patterns": ["url: https?://www\\.linkedin\\.com/jobs/(?:view|collections)", "url: https?://www\\.linkedin\\.com/jobs-guest/jobs/api/", "url: https?://www\\.linkedin\\.com/embed/jobs/"],
+            "evidence": "响应 URL 指向 LinkedIn Jobs"
+          },
+          {
+            "name": "ZipRecruiter Jobs",
+            "patterns": ["url: https?://www\\.ziprecruiter\\.com/[^\\s]*(?:jobs|job|candidate/search)", "url: https?://jobs\\.ziprecruiter\\.com/"],
+            "evidence": "响应 URL 指向 ZipRecruiter Jobs"
+          },
+          {
+            "name": "Glassdoor Jobs",
+            "patterns": ["url: https?://www\\.glassdoor\\.com/(?:Job|job-listing|partner/jobListing)"],
+            "evidence": "响应 URL 指向 Glassdoor Jobs"
+          },
+          {
+            "name": "CATSone",
+            "patterns": ["url: https?://[^\\s/]+\\.catsone\\.com/[^\\s]*(?:careers|jobs|candidate|apply)", "url: https?://[^\\s/]+\\.catsone\\.com/js/careers"],
+            "evidence": "响应 URL 指向 CATSone"
+          },
+          {
+            "name": "JobAdder",
+            "patterns": ["url: https?://apply\\.jobadder\\.com/", "url: https?://public\\.jobadder\\.com/", "url: https?://[^\\s/]+\\.jobadder\\.com/[^\\s]*(?:jobs|widgets|apply)"],
+            "evidence": "响应 URL 指向 JobAdder"
+          },
+          {
+            "name": "Bullhorn Career Portal",
+            "patterns": ["url: https?://jobs\\.bullhorn\\.com/", "url: https?://[^\\s/]+\\.bullhornstaffing\\.com/", "url: https?://[^\\s/]+\\.bullhorn\\.com/[^\\s]*(?:career|job-board|jobs)"],
+            "evidence": "响应 URL 指向 Bullhorn Career Portal"
+          },
+          {
+            "name": "Avature Careers",
+            "patterns": ["url: https?://[^\\s/]+\\.avature\\.net/[^\\s]*(?:careers|jobs|candidate)", "url: https?://[^\\s/]+\\.avature\\.com/[^\\s]*(?:careers|jobs)"],
+            "evidence": "响应 URL 指向 Avature Careers"
+          },
+          {
+            "name": "Phenom People",
+            "patterns": ["url: https?://cdn\\.phenompeople\\.com/", "url: https?://[^\\s/]+\\.phenompeople\\.com/[^\\s]*(?:jobs|careers|apply)", "url: https?://[^\\s/]+\\.phenompro\\.com/"],
+            "evidence": "响应 URL 指向 Phenom People"
+          },
+          {
+            "name": "JobScore",
+            "patterns": ["url: https?://careers\\.jobscore\\.com/", "url: https?://www\\.jobscore\\.com/[^\\s]*(?:jobs|careers|apply)"],
+            "evidence": "响应 URL 指向 JobScore"
+          },
+          {
+            "name": "GoHire",
+            "patterns": ["url: https?://[^\\s/]+\\.gohire\\.io/[^\\s]*(?:jobs|careers|apply)", "url: https?://[^\\s/]+\\.gohire\\.com/[^\\s]*(?:jobs|careers)"],
+            "evidence": "响应 URL 指向 GoHire"
+          },
+          {
+            "name": "Homerun",
+            "patterns": ["url: https?://jobs\\.homerun\\.co/", "url: https?://[^\\s/]+\\.homerun\\.co/[^\\s]*(?:jobs|careers|apply)"],
+            "evidence": "响应 URL 指向 Homerun"
+          },
+          {
+            "name": "JOIN.com",
+            "patterns": ["url: https?://join\\.com/companies/[^\\s]*(?:jobs|embed)", "url: https?://join\\.com/[^\\s]*(?:jobs|apply)"],
+            "evidence": "响应 URL 指向 JOIN.com"
+          },
+          {
+            "name": "Jobylon",
+            "patterns": ["url: https?://jobs\\.jobylon\\.com/", "url: https?://emp\\.jobylon\\.com/", "url: https?://www\\.jobylon\\.com/[^\\s]*(?:jobs|careers|apply)"],
+            "evidence": "响应 URL 指向 Jobylon"
+          },
+          {
+            "name": "Occupop",
+            "patterns": ["url: https?://api\\.occupop\\.com/", "url: https?://www\\.occupop\\.com/[^\\s]*(?:job|jobs|careers|apply)"],
+            "evidence": "响应 URL 指向 Occupop"
+          },
+          {
+            "name": "Hireology",
+            "patterns": ["url: https?://api\\.hireology\\.com/", "url: https?://www\\.hireology\\.com/[^\\s]*(?:careers|jobs|job|apply)"],
+            "evidence": "响应 URL 指向 Hireology"
+          },
+          {
+            "name": "Jobsoid",
+            "patterns": ["url: https?://[^\\s/]+\\.jobsoid\\.com/", "url: https?://www\\.jobsoid\\.com/[^\\s]*(?:jobs|careers|apply)"],
+            "evidence": "响应 URL 指向 Jobsoid"
+          },
+          {
+            "name": "Manatal",
+            "patterns": ["url: https?://careers\\.manatal\\.com/", "url: https?://api\\.manatal\\.com/", "url: https?://www\\.manatal\\.com/[^\\s]*(?:jobs|careers|apply)"],
+            "evidence": "响应 URL 指向 Manatal"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "支付系统",
           "confidence": "高"
         },
