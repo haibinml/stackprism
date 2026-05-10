@@ -651,6 +651,239 @@
       },
       {
         "defaults": {
+          "category": "表单 / 问卷",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Typeform",
+            "patterns": ["url: https?://embed\\.typeform\\.com/", "url: https?://form\\.typeform\\.com/to/"],
+            "evidence": "响应 URL 指向 Typeform 表单"
+          },
+          {
+            "name": "Jotform",
+            "patterns": ["url: https?://cdn\\.jotfor\\.ms/", "url: https?://js\\.jotform\\.com/JotForm\\.js", "url: https?://(?:form|www)\\.jotform\\.com/(?:form/)?\\d+"],
+            "evidence": "响应 URL 指向 Jotform 表单"
+          },
+          {
+            "name": "Formspree",
+            "patterns": ["url: https?://formspree\\.io/f/", "url: https?://formspree\\.io/js/formbutton"],
+            "evidence": "响应 URL 指向 Formspree 表单"
+          },
+          {
+            "name": "Formstack",
+            "patterns": ["url: https?://static\\.formstack\\.com/", "url: https?://(?:www\\.)?formstack\\.com/forms/js\\.php", "url: https?://formstack\\.io/forms/js\\.php"],
+            "evidence": "响应 URL 指向 Formstack 表单"
+          },
+          {
+            "name": "Paperform",
+            "patterns": ["url: https?://paperform\\.co/__embed", "url: https?://paperform\\.co/forms/"],
+            "evidence": "响应 URL 指向 Paperform 表单"
+          },
+          {
+            "name": "Tally",
+            "patterns": ["url: https?://tally\\.so/widgets/embed\\.js", "url: https?://tally\\.so/embed/"],
+            "evidence": "响应 URL 指向 Tally 表单"
+          },
+          {
+            "name": "Cognito Forms",
+            "patterns": ["url: https?://(?:www\\.)?cognitoforms\\.com/f/seamless\\.js", "url: https?://(?:www\\.)?cognitoforms\\.com/forms/"],
+            "evidence": "响应 URL 指向 Cognito Forms"
+          },
+          {
+            "name": "Wufoo",
+            "patterns": ["url: https?://secure\\.wufoo\\.com/scripts/embed/form\\.js", "url: https?://[^\\s/]+\\.wufoo\\.com/forms/"],
+            "evidence": "响应 URL 指向 Wufoo 表单"
+          },
+          {
+            "name": "SurveyMonkey",
+            "patterns": ["url: https?://(?:www\\.)?surveymonkey\\.com/jsEmbed\\.aspx", "url: https?://(?:www\\.)?surveymonkey\\.com/r/"],
+            "evidence": "响应 URL 指向 SurveyMonkey 问卷"
+          },
+          {
+            "name": "Qualtrics",
+            "patterns": ["url: https?://siteintercept\\.qualtrics\\.com/", "url: https?://[^\\s/]+\\.qualtrics\\.com/jfe/form/"],
+            "evidence": "响应 URL 指向 Qualtrics 问卷"
+          },
+          {
+            "name": "Google Forms",
+            "patterns": ["url: https?://docs\\.google\\.com/forms/(?:d|u/\\d+/d)/"],
+            "evidence": "响应 URL 指向 Google Forms"
+          },
+          {
+            "name": "Microsoft Forms",
+            "patterns": ["url: https?://forms\\.office\\.com/(?:Pages/ResponsePage\\.aspx|r/|e/)"],
+            "evidence": "响应 URL 指向 Microsoft Forms"
+          },
+          {
+            "name": "Fillout",
+            "patterns": ["url: https?://forms\\.fillout\\.com/", "url: https?://server\\.fillout\\.com/embed", "url: https?://fillout\\.com/embed/"],
+            "evidence": "响应 URL 指向 Fillout 表单"
+          },
+          {
+            "name": "Zoho Forms",
+            "patterns": ["url: https?://forms\\.zohopublic\\.com/", "url: https?://forms\\.zoho\\.(?:com|eu|in)\\/"],
+            "evidence": "响应 URL 指向 Zoho Forms"
+          },
+          {
+            "name": "forms.app",
+            "patterns": ["url: https?://my\\.forms\\.app/", "url: https?://forms\\.app/(?:form|embed)/"],
+            "evidence": "响应 URL 指向 forms.app"
+          },
+          {
+            "name": "123FormBuilder",
+            "patterns": ["url: https?://static\\.123formbuilder\\.com/", "url: https?://(?:www\\.)?123formbuilder\\.com/(?:form|sf|embed)"],
+            "evidence": "响应 URL 指向 123FormBuilder"
+          },
+          {
+            "name": "Formsite",
+            "patterns": ["url: https?://fs\\d+\\.formsite\\.com/", "url: https?://(?:www\\.)?formsite\\.com/form_app/"],
+            "evidence": "响应 URL 指向 Formsite"
+          },
+          {
+            "name": "Alchemer",
+            "patterns": ["url: https?://(?:www\\.)?alchemer\\.com/s3/", "url: https?://(?:www\\.)?surveygizmo\\.com/s3/"],
+            "evidence": "响应 URL 指向 Alchemer / SurveyGizmo"
+          },
+          {
+            "name": "SurveySparrow",
+            "patterns": ["url: https?://static\\.surveysparrow\\.com/", "url: https?://app\\.surveysparrow\\.com/", "url: https?://[^\\s/]+\\.surveysparrow\\.com/s/"],
+            "evidence": "响应 URL 指向 SurveySparrow"
+          },
+          {
+            "name": "QuestionPro",
+            "patterns": ["url: https?://(?:www\\.)?questionpro\\.com/(?:a/TakeSurvey|t/|survey/)"],
+            "evidence": "响应 URL 指向 QuestionPro 问卷"
+          },
+          {
+            "name": "Survicate",
+            "patterns": ["url: https?://survey\\.survicate\\.com/", "url: https?://cdn\\.survicate\\.com/"],
+            "evidence": "响应 URL 指向 Survicate"
+          },
+          {
+            "name": "Delighted Surveys",
+            "patterns": ["url: https?://web\\.delighted\\.com/"],
+            "evidence": "响应 URL 指向 Delighted 问卷"
+          },
+          {
+            "name": "GetFeedback",
+            "patterns": ["url: https?://web\\.getfeedback\\.com/", "url: https?://app\\.getfeedback\\.com/"],
+            "evidence": "响应 URL 指向 GetFeedback"
+          },
+          {
+            "name": "Medallia Digital",
+            "patterns": ["url: https?://resources\\.digital-cloud\\.medallia\\.com/", "url: https?://assets\\.medallia\\.com/"],
+            "evidence": "响应 URL 指向 Medallia Digital"
+          },
+          {
+            "name": "Qualaroo",
+            "patterns": ["url: https?://cl\\.qualaroo\\.com/"],
+            "evidence": "响应 URL 指向 Qualaroo"
+          },
+          {
+            "name": "Refiner",
+            "patterns": ["url: https?://js\\.refiner\\.io/", "url: https?://api\\.refiner\\.io/"],
+            "evidence": "响应 URL 指向 Refiner"
+          },
+          {
+            "name": "UserReport",
+            "patterns": ["url: https?://widget\\.userreport\\.com/", "url: https?://survey\\.userreport\\.com/"],
+            "evidence": "响应 URL 指向 UserReport"
+          },
+          {
+            "name": "Formaloo",
+            "patterns": ["url: https?://[^\\s/]+\\.formaloo\\.net/", "url: https?://app\\.formaloo\\.com/", "url: https?://formaloo\\.co/(?:widgets|form|embed)"],
+            "evidence": "响应 URL 指向 Formaloo"
+          },
+          {
+            "name": "involve.me",
+            "patterns": ["url: https?://app\\.involve\\.me/embed/", "url: https?://[^\\s/]+\\.involve\\.me/"],
+            "evidence": "响应 URL 指向 involve.me"
+          },
+          {
+            "name": "Outgrow",
+            "patterns": ["url: https?://(?:www\\.)?outgrow\\.co/[^\\s]*(?:embed|quiz|calculator|survey)"],
+            "evidence": "响应 URL 指向 Outgrow"
+          },
+          {
+            "name": "Opinion Stage",
+            "patterns": ["url: https?://opinionstage\\.com/assets/loader\\.js", "url: https?://cdn\\.opinionstage\\.com/"],
+            "evidence": "响应 URL 指向 Opinion Stage"
+          },
+          {
+            "name": "Mopinion",
+            "patterns": ["url: https?://deploy\\.mopinion\\.com/"],
+            "evidence": "响应 URL 指向 Mopinion"
+          },
+          {
+            "name": "Wootric",
+            "patterns": ["url: https?://cdn\\.wootric\\.com/"],
+            "evidence": "响应 URL 指向 Wootric"
+          },
+          {
+            "name": "Feathery",
+            "patterns": ["url: https?://form\\.feathery\\.io/", "url: https?://cdn\\.feathery\\.io/"],
+            "evidence": "响应 URL 指向 Feathery"
+          },
+          {
+            "name": "Formbricks",
+            "patterns": ["url: https?://app\\.formbricks\\.com/", "url: https?://cdn\\.formbricks\\.com/"],
+            "evidence": "响应 URL 指向 Formbricks"
+          },
+          {
+            "name": "FormKeep",
+            "patterns": ["url: https?://formkeep\\.com/(?:f|forms|embed)/"],
+            "evidence": "响应 URL 指向 FormKeep"
+          },
+          {
+            "name": "Getform",
+            "patterns": ["url: https?://getform\\.io/(?:f|forms|embed)/"],
+            "evidence": "响应 URL 指向 Getform"
+          },
+          {
+            "name": "Basin",
+            "patterns": ["url: https?://usebasin\\.com/(?:f|form|forms)/"],
+            "evidence": "响应 URL 指向 Basin"
+          },
+          {
+            "name": "Reform",
+            "patterns": ["url: https?://forms\\.reform\\.app/", "url: https?://reform\\.app/(?:embed|forms?)/"],
+            "evidence": "响应 URL 指向 Reform"
+          },
+          {
+            "name": "Tripetto",
+            "patterns": ["url: https?://tripetto\\.app/(?:run|embed)/", "url: https?://cdn\\.tripetto\\.com/"],
+            "evidence": "响应 URL 指向 Tripetto"
+          },
+          {
+            "name": "Heyflow",
+            "patterns": ["url: https?://[^\\s/]+\\.heyflow\\.id/", "url: https?://static\\.heyflow\\.app/"],
+            "evidence": "响应 URL 指向 Heyflow"
+          },
+          {
+            "name": "Typebot",
+            "patterns": ["url: https?://viewer\\.typebot\\.io/", "url: https?://embed\\.typebot\\.io/"],
+            "evidence": "响应 URL 指向 Typebot"
+          },
+          {
+            "name": "Landbot",
+            "patterns": ["url: https?://static\\.landbot\\.io/", "url: https?://cdn\\.landbot\\.io/"],
+            "evidence": "响应 URL 指向 Landbot"
+          },
+          {
+            "name": "Formester",
+            "patterns": ["url: https?://cdn\\.formester\\.com/", "url: https?://formester\\.com/(?:forms|embed)/"],
+            "evidence": "响应 URL 指向 Formester"
+          },
+          {
+            "name": "MakeForms",
+            "patterns": ["url: https?://cdn\\.makeforms\\.io/", "url: https?://makeforms\\.io/(?:forms|embed)/"],
+            "evidence": "响应 URL 指向 MakeForms"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "支付系统",
           "confidence": "高"
         },
