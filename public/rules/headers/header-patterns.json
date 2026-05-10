@@ -523,6 +523,113 @@
       },
       {
         "defaults": {
+          "category": "媒体托管 / 图片处理",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Uploadcare",
+            "patterns": ["url: https?://ucarecdn\\.com/", "url: https?://uploadcarecdn\\.com/", "url: https?://upload\\.uploadcare\\.com/"],
+            "evidence": "响应 URL 指向 Uploadcare 媒体服务"
+          },
+          {
+            "name": "Filestack",
+            "patterns": [
+              "url: https?://cdn\\.filestackcontent\\.com/",
+              "url: https?://static\\.filestackapi\\.com/",
+              "url: https?://cdn\\.filestackapi\\.com/"
+            ],
+            "evidence": "响应 URL 指向 Filestack"
+          },
+          {
+            "name": "Sirv Media CDN",
+            "patterns": ["url: https?://[^\\s/]+\\.sirvcdn\\.com/", "url: https?://(?!www\\.)[a-z0-9-]+\\.sirv\\.com/"],
+            "evidence": "响应 URL 指向 Sirv Media CDN"
+          },
+          {
+            "name": "Cloudimage",
+            "patterns": ["url: https?://[^\\s/]+\\.cloudimg\\.io/", "url: https?://[^\\s/]+\\.cloudimage\\.io/"],
+            "evidence": "响应 URL 指向 Cloudimage"
+          },
+          {
+            "name": "TwicPics",
+            "patterns": ["url: https?://[^\\s/]+\\.twic\\.pics/", "url: https?://assets\\.twicpics\\.com/"],
+            "evidence": "响应 URL 指向 TwicPics"
+          },
+          {
+            "name": "ImageEngine",
+            "patterns": ["url: https?://[^\\s/]+\\.imgeng\\.in/", "url: https?://[^\\s/]+\\.imageengine\\.io/"],
+            "evidence": "响应 URL 指向 ImageEngine"
+          },
+          {
+            "name": "Cloudflare Images",
+            "patterns": ["url: https?://imagedelivery\\.net/"],
+            "evidence": "响应 URL 指向 Cloudflare Images"
+          },
+          {
+            "name": "Optimole Image CDN",
+            "patterns": ["url: https?://[^\\s/]+\\.optimole\\.cloud/", "url: https?://[^\\s/]+\\.mlcdn\\.com/"],
+            "evidence": "响应 URL 指向 Optimole Image CDN"
+          },
+          {
+            "name": "ShortPixel CDN",
+            "patterns": ["url: https?://cdn\\.shortpixel\\.ai/", "url: https?://[^\\s/]+\\.shortpixel\\.ai/spai/"],
+            "evidence": "响应 URL 指向 ShortPixel CDN"
+          },
+          {
+            "name": "Tinify API / TinyPNG",
+            "patterns": ["url: https?://api\\.tinify\\.com/", "url: https?://api\\.tinypng\\.com/"],
+            "evidence": "响应 URL 指向 Tinify / TinyPNG API"
+          },
+          {
+            "name": "Kraken.io",
+            "patterns": ["url: https?://api\\.kraken\\.io/"],
+            "evidence": "响应 URL 指向 Kraken.io"
+          },
+          {
+            "name": "Transloadit",
+            "patterns": ["url: https?://tus\\.transloadit\\.com/", "url: https?://api(?:2)?\\.transloadit\\.com/"],
+            "evidence": "响应 URL 指向 Transloadit"
+          },
+          {
+            "name": "CloudConvert",
+            "patterns": ["url: https?://api\\.cloudconvert\\.com/"],
+            "evidence": "响应 URL 指向 CloudConvert"
+          },
+          {
+            "name": "Bytescale",
+            "patterns": ["url: https?://api\\.bytescale\\.com/", "url: https?://upcdn\\.io/", "url: https?://js\\.bytescale\\.com/"],
+            "evidence": "响应 URL 指向 Bytescale"
+          },
+          {
+            "name": "Publitio",
+            "patterns": ["url: https?://cdn\\.publit\\.io/", "url: https?://api\\.publit\\.io/"],
+            "evidence": "响应 URL 指向 Publitio"
+          },
+          {
+            "name": "ImageBoss",
+            "patterns": ["url: https?://img\\.imageboss\\.me/", "url: https?://(?!www\\.)[a-z0-9-]+\\.imageboss\\.me/"],
+            "evidence": "响应 URL 指向 ImageBoss"
+          },
+          {
+            "name": "Gumlet",
+            "patterns": ["url: https?://(?!www\\.)[^\\s/]+\\.gumlet\\.io/", "url: https?://(?!www\\.)[^\\s/]+\\.gumlet\\.com/"],
+            "evidence": "响应 URL 指向 Gumlet"
+          },
+          {
+            "name": "Pixelbin",
+            "patterns": ["url: https?://cdn\\.pixelbin\\.io/", "url: https?://api\\.pixelbin\\.io/", "url: https?://(?!www\\.)[a-z0-9-]+\\.pixelbin\\.io/"],
+            "evidence": "响应 URL 指向 Pixelbin"
+          },
+          {
+            "name": "imgproxy",
+            "patterns": ["url: https?://[^\\s]+/imgproxy/(?:insecure|[A-Za-z0-9_-]{16,})/(?:plain/|rs:|resize:|w:|h:)"],
+            "evidence": "响应 URL 包含 imgproxy 转换路径"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "状态页 / 可用性监控",
           "confidence": "高"
         },
