@@ -104,6 +104,98 @@
         },
         {
           "defaults": {
+            "kind": "LLM 观测 / 网关 / 评测",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "LangSmith",
+              "patterns": ["api\\.smith\\.langchain\\.com|smith\\.langchain\\.com|langsmith\\.com/[^\\s\"'<>]*(?:api|tracing|projects)"]
+            },
+            {
+              "name": "Helicone",
+              "patterns": ["api\\.helicone\\.ai|oai\\.helicone\\.ai|helicone\\.ai/[^\\s\"'<>]*(?:api|gateway|observability)"]
+            },
+            {
+              "name": "Braintrust",
+              "patterns": ["api\\.braintrustdata\\.com|braintrustdata\\.com/[^\\s\"'<>]*(?:api|evals|experiments|traces)"]
+            },
+            {
+              "name": "Humanloop",
+              "patterns": ["api\\.humanloop\\.com|humanloop\\.com/[^\\s\"'<>]*(?:api|evals|prompt|logs)"]
+            },
+            {
+              "name": "Weights & Biases Weave",
+              "patterns": [
+                "api\\.wandb\\.ai/[^\\s\"'<>]*(?:weave|traces|runs)|wandb\\.ai/[^\\s\"'<>]*(?:weave|traces|runs)|weave\\.wandb\\.ai"
+              ]
+            },
+            {
+              "name": "Arize Phoenix",
+              "patterns": ["phoenix\\.arize\\.com|app\\.arize\\.com|arize\\.com/[^\\s\"'<>]*(?:phoenix|tracing|observability)"]
+            },
+            {
+              "name": "LangWatch",
+              "patterns": ["app\\.langwatch\\.ai|api\\.langwatch\\.ai|langwatch\\.ai/[^\\s\"'<>]*(?:traces|analytics|api)"]
+            },
+            {
+              "name": "Portkey AI Gateway",
+              "patterns": ["api\\.portkey\\.ai|gateway\\.portkey\\.ai|portkey\\.ai/[^\\s\"'<>]*(?:gateway|api|logs)"]
+            },
+            {
+              "name": "LiteLLM Proxy",
+              "patterns": ["litellm\\.ai|litellm_proxy|litellm[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "PromptLayer",
+              "patterns": ["api\\.promptlayer\\.com|promptlayer\\.com/[^\\s\"'<>]*(?:api|logs|prompt)"]
+            },
+            {
+              "name": "Traceloop",
+              "patterns": ["api\\.traceloop\\.com|traceloop\\.com/[^\\s\"'<>]*(?:sdk|traces|observability)|openllmetry"]
+            },
+            {
+              "name": "Keywords AI",
+              "patterns": ["api\\.keywordsai\\.co|keywordsai\\.co/[^\\s\"'<>]*(?:api|gateway|logs|traces)"]
+            },
+            {
+              "name": "Maxim AI",
+              "patterns": ["app\\.getmaxim\\.ai|api\\.getmaxim\\.ai|getmaxim\\.ai/[^\\s\"'<>]*(?:evals|simulation|observability)"]
+            },
+            {
+              "name": "Agenta",
+              "patterns": ["agenta\\.ai|agenta[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
+            },
+            {
+              "name": "OpenPipe",
+              "patterns": ["api\\.openpipe\\.ai|openpipe\\.ai/[^\\s\"'<>]*(?:api|logs|finetune|datasets)"]
+            },
+            {
+              "name": "Vellum AI",
+              "patterns": ["api\\.vellum\\.ai|vellum\\.ai/[^\\s\"'<>]*(?:workflows|evals|deployments|api)"]
+            },
+            {
+              "name": "Parea AI",
+              "patterns": ["api\\.parea\\.ai|parea\\.ai/[^\\s\"'<>]*(?:api|logs|experiments|evals)"]
+            },
+            {
+              "name": "Literal AI",
+              "patterns": ["literalai\\.com|literal\\.ai/[^\\s\"'<>]*(?:api|traces|logs)|api\\.literalai\\.com"]
+            },
+            {
+              "name": "HoneyHive",
+              "patterns": ["api\\.honeyhive\\.ai|honeyhive\\.ai/[^\\s\"'<>]*(?:api|traces|evals|observability)"]
+            },
+            {
+              "name": "Laminar",
+              "patterns": [
+                "api\\.lmnr\\.ai|lmnr\\.ai/[^\\s\"'<>]*(?:traces|evals|observability|api)|laminar\\.ai/[^\\s\"'<>]*(?:traces|evals|observability)"
+              ]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "大模型 API / 推理平台",
             "matchIn": ["resources"]
           },
