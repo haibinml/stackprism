@@ -1570,6 +1570,205 @@
         },
         "rules": [
           {
+            "name": "Meta Pixel",
+            "category": "广告 / 营销",
+            "patterns": ["url: https?://connect\\.facebook\\.net/[^\\s]+/fbevents\\.js", "url: https?://www\\.facebook\\.com/tr"],
+            "evidence": "响应 URL 指向 Meta Pixel"
+          },
+          {
+            "name": "TikTok Pixel",
+            "category": "广告 / 营销",
+            "patterns": ["url: https?://analytics\\.tiktok\\.com/i18n/pixel/", "url: https?://analytics\\.tiktok\\.com/api/v\\d+/pixel/"],
+            "evidence": "响应 URL 指向 TikTok Pixel"
+          },
+          {
+            "name": "LinkedIn Insight Tag",
+            "category": "广告 / 营销",
+            "patterns": ["url: https?://snap\\.licdn\\.com/li\\.lms-analytics/", "url: https?://px\\.ads\\.linkedin\\.com/"],
+            "evidence": "响应 URL 指向 LinkedIn Insight Tag"
+          },
+          {
+            "name": "Pinterest Tag",
+            "category": "广告 / 营销",
+            "patterns": ["url: https?://s\\.pinimg\\.com/ct/core\\.js", "url: https?://ct\\.pinterest\\.com/"],
+            "evidence": "响应 URL 指向 Pinterest Tag"
+          },
+          {
+            "name": "Twitter / X Pixel",
+            "category": "广告 / 营销",
+            "patterns": ["url: https?://static\\.ads-twitter\\.com/uwt\\.js", "url: https?://analytics\\.twitter\\.com/i/adsct", "url: https?://t\\.co/i/adsct"],
+            "evidence": "响应 URL 指向 Twitter / X Pixel"
+          },
+          {
+            "name": "Microsoft Advertising UET",
+            "category": "广告 / 营销",
+            "patterns": ["url: https?://bat\\.bing\\.com/bat\\.js", "url: https?://bat\\.bing\\.com/action/"],
+            "evidence": "响应 URL 指向 Microsoft Advertising UET"
+          },
+          {
+            "name": "Google Ads Conversion Tracking",
+            "category": "广告 / 营销",
+            "patterns": [
+              "url: https?://www\\.googletagmanager\\.com/gtag/js\\?id=AW-",
+              "url: https?://www\\.googleadservices\\.com/pagead/conversion/",
+              "url: https?://googleads\\.g\\.doubleclick\\.net/pagead/viewthroughconversion/"
+            ],
+            "evidence": "响应 URL 指向 Google Ads 转化跟踪"
+          },
+          {
+            "name": "Google AdSense",
+            "category": "广告 / 营销",
+            "patterns": ["url: https?://pagead2\\.googlesyndication\\.com/pagead/js/adsbygoogle\\.js"],
+            "evidence": "响应 URL 指向 Google AdSense"
+          },
+          {
+            "name": "Google Publisher Tag",
+            "category": "广告 / 营销",
+            "patterns": ["url: https?://securepubads\\.g\\.doubleclick\\.net/tag/js/gpt\\.js", "url: https?://www\\.googletagservices\\.com/tag/js/gpt\\.js"],
+            "evidence": "响应 URL 指向 Google Publisher Tag"
+          },
+          {
+            "name": "Google Ad Manager / DoubleClick",
+            "category": "广告 / 营销",
+            "patterns": ["url: https?://pubads\\.g\\.doubleclick\\.net/gampad/ads", "url: https?://ad\\.doubleclick\\.net/", "url: https?://securepubads\\.g\\.doubleclick\\.net/"],
+            "evidence": "响应 URL 指向 Google Ad Manager / DoubleClick"
+          },
+          {
+            "name": "Google Campaign Manager / Floodlight",
+            "category": "广告 / 营销",
+            "patterns": ["url: https?://fls\\.doubleclick\\.net/activityi", "url: https?://ad\\.doubleclick\\.net/ddm/activity/"],
+            "evidence": "响应 URL 指向 Google Campaign Manager / Floodlight"
+          },
+          {
+            "name": "Amazon Ads",
+            "category": "广告 / 营销",
+            "patterns": ["url: https?://c\\.amazon-adsystem\\.com/", "url: https?://aax\\.amazon-adsystem\\.com/", "url: https?://[^\\s/]+\\.amazon-adsystem\\.com/"],
+            "evidence": "响应 URL 指向 Amazon Ads"
+          },
+          {
+            "name": "Snap Pixel",
+            "category": "广告 / 营销",
+            "patterns": ["url: https?://sc-static\\.net/scevent\\.min\\.js", "url: https?://tr\\.snapchat\\.com/"],
+            "evidence": "响应 URL 指向 Snap Pixel"
+          },
+          {
+            "name": "Reddit Pixel",
+            "category": "广告 / 营销",
+            "patterns": ["url: https?://www\\.redditstatic\\.com/ads/pixel\\.js", "url: https?://alb\\.reddit\\.com/"],
+            "evidence": "响应 URL 指向 Reddit Pixel"
+          },
+          {
+            "name": "Quora Pixel",
+            "category": "广告 / 营销",
+            "patterns": ["url: https?://q\\.quora\\.com/_/ad/", "url: https?://qevents\\.quora\\.com/"],
+            "evidence": "响应 URL 指向 Quora Pixel"
+          },
+          {
+            "name": "YouTube Embed",
+            "patterns": ["url: https?://www\\.youtube\\.com/(?:embed/|iframe_api)", "url: https?://www\\.youtube-nocookie\\.com/embed/"],
+            "evidence": "响应 URL 指向 YouTube 嵌入播放器"
+          },
+          {
+            "name": "Vimeo Player",
+            "patterns": ["url: https?://player\\.vimeo\\.com/(?:api/player\\.js|video/)", "url: https?://f\\.vimeocdn\\.com/"],
+            "evidence": "响应 URL 指向 Vimeo Player"
+          },
+          {
+            "name": "Wistia",
+            "patterns": ["url: https?://fast\\.wistia\\.com/assets/external/E-v1\\.js", "url: https?://fast\\.wistia\\.(?:com|net)/(?:embed|assets)/"],
+            "evidence": "响应 URL 指向 Wistia"
+          },
+          {
+            "name": "Vidyard",
+            "patterns": ["url: https?://play\\.vidyard\\.com/(?:embed|player|watch)", "url: https?://cdn\\.vidyard\\.com/"],
+            "evidence": "响应 URL 指向 Vidyard"
+          },
+          {
+            "name": "Brightcove Player",
+            "patterns": ["url: https?://players\\.brightcove\\.net/", "url: https?://videojs\\.brightcove\\.net/"],
+            "evidence": "响应 URL 指向 Brightcove Player"
+          },
+          {
+            "name": "Kaltura Player",
+            "patterns": ["url: https?://(?:cdnapi|cdnapisec)\\.kaltura\\.com/", "url: https?://[^\\s/]+\\.kaltura\\.com/p/"],
+            "evidence": "响应 URL 指向 Kaltura Player"
+          },
+          {
+            "name": "Mux Video",
+            "patterns": ["url: https?://stream\\.mux\\.com/", "url: https?://image\\.mux\\.com/", "url: https?://player\\.mux\\.com/"],
+            "evidence": "响应 URL 指向 Mux Video"
+          },
+          {
+            "name": "Cloudflare Stream",
+            "patterns": ["url: https?://iframe\\.videodelivery\\.net/", "url: https?://[^\\s/]+\\.cloudflarestream\\.com/", "url: https?://videodelivery\\.net/"],
+            "evidence": "响应 URL 指向 Cloudflare Stream"
+          },
+          {
+            "name": "Bunny Stream",
+            "patterns": ["url: https?://iframe\\.mediadelivery\\.net/embed/", "url: https?://video\\.bunnycdn\\.com/", "url: https?://vz-[a-z0-9-]+\\.b-cdn\\.net/"],
+            "evidence": "响应 URL 指向 Bunny Stream"
+          },
+          {
+            "name": "Dacast",
+            "patterns": ["url: https?://player\\.dacast\\.com/", "url: https?://iframe\\.dacast\\.com/"],
+            "evidence": "响应 URL 指向 Dacast"
+          },
+          {
+            "name": "SproutVideo",
+            "patterns": ["url: https?://videos\\.sproutvideo\\.com/", "url: https?://embed\\.sproutvideo\\.com/"],
+            "evidence": "响应 URL 指向 SproutVideo"
+          },
+          {
+            "name": "Loom Embed",
+            "patterns": ["url: https?://www\\.loom\\.com/embed/", "url: https?://cdn\\.loom\\.com/"],
+            "evidence": "响应 URL 指向 Loom Embed"
+          },
+          {
+            "name": "Panopto",
+            "patterns": ["url: https?://[^\\s/]+\\.panopto\\.com/Panopto/", "url: https?://[^\\s]+/Panopto/(?:Pages/Embed|Scripts)"],
+            "evidence": "响应 URL 指向 Panopto"
+          },
+          {
+            "name": "Streamable",
+            "patterns": ["url: https?://streamable\\.com/(?:e|o)/", "url: https?://cdn\\.streamable\\.com/"],
+            "evidence": "响应 URL 指向 Streamable"
+          },
+          {
+            "name": "JW Player Embed",
+            "patterns": ["url: https?://cdn\\.jwplayer\\.com/(?:players|libraries)/", "url: https?://content\\.jwplatform\\.com/(?:players|videos)/", "url: https?://[^\\s/]+\\.jwpsrv\\.com/"],
+            "evidence": "响应 URL 指向 JW Player"
+          },
+          {
+            "name": "Dailymotion Embed",
+            "patterns": ["url: https?://geo\\.dailymotion\\.com/player/", "url: https?://www\\.dailymotion\\.com/embed/video/", "url: https?://[^\\s/]+\\.dmcdn\\.net/"],
+            "evidence": "响应 URL 指向 Dailymotion Embed"
+          },
+          {
+            "name": "Rumble Embed",
+            "patterns": ["url: https?://rumble\\.com/(?:embed|embedJS)"],
+            "evidence": "响应 URL 指向 Rumble Embed"
+          },
+          {
+            "name": "Twitch Embed",
+            "patterns": ["url: https?://player\\.twitch\\.tv/", "url: https?://embed\\.twitch\\.tv/"],
+            "evidence": "响应 URL 指向 Twitch Embed"
+          },
+          {
+            "name": "VdoCipher",
+            "patterns": ["url: https?://player\\.vdocipher\\.com/", "url: https?://otp\\.video/"],
+            "evidence": "响应 URL 指向 VdoCipher"
+          },
+          {
+            "name": "Spotlightr",
+            "patterns": ["url: https?://cdn\\.spotlightr\\.com/", "url: https?://video\\.spotlightr\\.com/"],
+            "evidence": "响应 URL 指向 Spotlightr"
+          },
+          {
+            "name": "Adilo",
+            "patterns": ["url: https?://embed\\.adilo\\.com/", "url: https?://player\\.adilo\\.com/", "url: https?://adilo\\.bigcommand\\.com/"],
+            "evidence": "响应 URL 指向 Adilo"
+          },
+          {
             "name": "HubSpot",
             "patterns": [
               "url: https?://js\\.hs-scripts\\.com/",
