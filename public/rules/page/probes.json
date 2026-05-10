@@ -25,6 +25,23 @@
       },
       {
         "defaults": {
+          "kind": "服务器性能测试 / VPS 测评"
+        },
+        "rules": [
+          {
+            "name": "NodeQuality",
+            "confidence": "高",
+            "patterns": ["NodeQuality", "nodequality\\.com", "LloydAsp/NodeQuality", "run\\.NodeQuality\\.com"]
+          },
+          {
+            "name": "YABS",
+            "confidence": "中",
+            "patterns": ["Yet-Another-Bench-Script", "masonr/yet-another-bench-script", "yabs\\.sh", "YABS completed"]
+          }
+        ]
+      },
+      {
+        "defaults": {
           "kind": "服务器状态探针"
         },
         "rules": [
@@ -109,6 +126,41 @@
         "name": "Glances",
         "kind": "服务器监控",
         "patterns": ["Glances", "glances", "glances-web", "/api/3/"]
+      },
+      {
+        "defaults": {
+          "kind": "网络诊断 / Looking Glass",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "hyperglass Looking Glass",
+            "patterns": [
+              "<title>\\s*hyperglass(?:\\s*</title>|\\s+-)",
+              "powered by hyperglass",
+              "thatmattlove/hyperglass",
+              "hyperglass[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+            ]
+          },
+          {
+            "name": "Hybula Looking Glass",
+            "patterns": [
+              "Hybula\\s+Looking\\s+Glass",
+              "hybula/lookingglass",
+              "hybula-lookingglass",
+              "lookingglass[^\\s\"'<>]*(?:hybula|query)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+            ]
+          },
+          {
+            "name": "BIRD Looking Glass",
+            "patterns": [
+              "BIRD\\s+Looking\\s+Glass",
+              "bird-lg(?:-go)?",
+              "xddxdd/bird-lg-go",
+              "(?:bird-lg|bird-lg-go)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
+            ]
+          }
+        ]
       },
       {
         "defaults": {
