@@ -3698,6 +3698,102 @@
         },
         {
           "defaults": {
+            "kind": "实时投票 / 观众互动",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "Slido",
+              "patterns": [
+                "app\\.sli\\.do|embed\\.sli\\.do|sli\\.do/[^\\s\"'<>]*(?:event|embed|poll|qa)|slido\\.com/[^\\s\"'<>]*(?:event|embed)"
+              ]
+            },
+            {
+              "name": "Mentimeter",
+              "patterns": ["static\\.mentimeter\\.com|menti\\.com|mentimeter\\.com/[^\\s\"'<>]*(?:app|embed|presentation|s/)"]
+            },
+            {
+              "name": "Poll Everywhere",
+              "patterns": [
+                "assets\\.polleverywhere\\.com|pollev\\.com|polleverywhere\\.com/[^\\s\"'<>]*(?:activities|multiple_choice_polls|embed|present)"
+              ]
+            },
+            {
+              "name": "Vevox",
+              "patterns": ["vevox\\.app|vevox\\.com/[^\\s\"'<>]*(?:app|polling|embed|session)|cdn\\.vevox\\.com"]
+            },
+            {
+              "name": "Wooclap",
+              "patterns": ["app\\.wooclap\\.com|wooclap\\.com/[^\\s\"'<>]*(?:app|events|embed|question|poll)"]
+            },
+            {
+              "name": "AhaSlides",
+              "patterns": [
+                "static\\.ahaslides\\.com|presenter\\.ahaslides\\.com|ahaslides\\.com/[^\\s\"'<>]*(?:embed|presentation|session|poll)"
+              ]
+            },
+            {
+              "name": "Pigeonhole Live",
+              "patterns": ["pigeonhole\\.at|pigeonholelive\\.com/[^\\s\"'<>]*(?:event|embed|live|qa|poll)"]
+            },
+            {
+              "name": "Kahoot!",
+              "patterns": [
+                "kahoot\\.it|create\\.kahoot\\.it/[^\\s\"'<>]*(?:share|details)|kahoot\\.com/[^\\s\"'<>]*(?:embed|academy|kahoot)"
+              ]
+            },
+            {
+              "name": "Crowdpurr",
+              "patterns": ["app\\.crowdpurr\\.com|crowdpurr\\.com/[^\\s\"'<>]*(?:event|embed|trivia|poll)"]
+            },
+            {
+              "name": "Glisser",
+              "patterns": ["app\\.glisser\\.com|glisser\\.com/[^\\s\"'<>]*(?:event|present|embed|poll)"]
+            },
+            {
+              "name": "Crowdsignal",
+              "patterns": ["crowdsignal\\.com/[^\\s\"'<>]*(?:surveys|polls|embed|widgets)|polldaddy\\.com/[^\\s\"'<>]*(?:poll|survey|s/)"]
+            },
+            {
+              "name": "Quizizz",
+              "patterns": ["quizizz\\.com/(?:join|admin/quiz|embed)|cf\\.quizizz\\.com|quizizz\\.com/[^\\s\"'<>]*(?:quiz|presentation)"]
+            },
+            {
+              "name": "Nearpod",
+              "patterns": ["app\\.nearpod\\.com|nearpod\\.com/[^\\s\"'<>]*(?:student|resources|presentation|embed)"]
+            },
+            {
+              "name": "Pear Deck",
+              "patterns": ["app\\.peardeck\\.com|peardeck\\.com/[^\\s\"'<>]*(?:student|join|embed|presentation)"]
+            },
+            {
+              "name": "MeetingPulse",
+              "patterns": ["app\\.meetingpulse\\.net|meetingpulse\\.net/[^\\s\"'<>]*(?:app|event|embed|poll|survey)"]
+            },
+            {
+              "name": "Beekast",
+              "patterns": ["my\\.beekast\\.com|beekast\\.com/[^\\s\"'<>]*(?:session|embed|activity|poll)"]
+            },
+            {
+              "name": "Klaxoon",
+              "patterns": ["app\\.klaxoon\\.com|klaxoon\\.com/[^\\s\"'<>]*(?:session|join|activity|board)"]
+            },
+            {
+              "name": "PollUnit",
+              "patterns": ["pollunit\\.com/(?:polls|en/polls|surveys|en/surveys)|pollunit\\.com/[^\\s\"'<>]*(?:embed|voting)"]
+            },
+            {
+              "name": "Dotstorming",
+              "patterns": ["dotstorming\\.com/[^\\s\"'<>]*(?:b/|m/|embed|board|wall)"]
+            },
+            {
+              "name": "ParticiPoll",
+              "patterns": ["participoll\\.com/[^\\s\"'<>]*(?:poll|embed|present|audience)|app\\.participoll\\.com"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "会员社区 / 创作者变现",
             "matchIn": ["resources"]
           },
