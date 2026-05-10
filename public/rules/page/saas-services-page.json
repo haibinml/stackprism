@@ -1745,6 +1745,88 @@
             {
               "name": "OpenStreetMap Tiles",
               "patterns": ["(?:[abc]\\.)?tile\\.openstreetmap\\.org"]
+            },
+            {
+              "name": "Bing Maps",
+              "patterns": ["www\\.bing\\.com/api/maps/mapcontrol|ecn\\.dev\\.virtualearth\\.net|virtualearth\\.net"]
+            },
+            {
+              "name": "Apple MapKit JS",
+              "patterns": ["cdn\\.apple-mapkit\\.com|maps\\.apple\\.com/[^\\s\"'<>]*(?:embed|sdk|mapkit)"]
+            },
+            {
+              "name": "Yandex Maps",
+              "patterns": ["api-maps\\.yandex\\.ru|yastatic\\.net/[^\\s\"'<>]*(?:mapsapi|mapkit)|yandex\\.com/maps-api"]
+            },
+            {
+              "name": "2GIS Maps",
+              "patterns": ["maps\\.api\\.2gis\\.ru|catalog\\.api\\.2gis\\.com|2gis\\.com/[^\\s\"'<>]*(?:maps|api|sdk)"]
+            },
+            {
+              "name": "Kakao Maps",
+              "patterns": ["dapi\\.kakao\\.com/v2/maps/sdk\\.js|map\\.kakao\\.com/link|t1\\.daumcdn\\.net/mapjsapi"]
+            },
+            {
+              "name": "Naver Maps",
+              "patterns": ["openapi\\.map\\.naver\\.com|naveropenapi\\.apigw\\.ntruss\\.com/map|navermaps\\.github\\.io"]
+            },
+            {
+              "name": "Mappls / MapmyIndia",
+              "patterns": [
+                "apis\\.mappls\\.com/(?:advancedmaps|map_v3)|apis\\.mapmyindia\\.com/(?:advancedmaps|map_v3)|mapmyindia\\.com/api"
+              ]
+            },
+            {
+              "name": "Geoapify",
+              "patterns": ["maps\\.geoapify\\.com|api\\.geoapify\\.com|geoapify\\.com/[^\\s\"'<>]*(?:map|geocoding|places)"]
+            },
+            {
+              "name": "LocationIQ",
+              "patterns": ["tiles\\.locationiq\\.com|api\\.locationiq\\.com|locationiq\\.com/[^\\s\"'<>]*(?:maps|geocoding|sdk)"]
+            },
+            {
+              "name": "OpenCage Geocoding",
+              "patterns": ["api\\.opencagedata\\.com/geocode|opencagedata\\.com/[^\\s\"'<>]*(?:api|geocoding)"]
+            },
+            {
+              "name": "Geocodio",
+              "patterns": ["api\\.geocod\\.io|geocod\\.io/[^\\s\"'<>]*(?:geocode|api|maps)"]
+            },
+            {
+              "name": "what3words",
+              "patterns": ["assets\\.what3words\\.com|api\\.what3words\\.com/v3|what3words\\.com/[^\\s\"'<>]*(?:embed|api|autosuggest)"]
+            },
+            {
+              "name": "Radar Maps",
+              "patterns": ["js\\.radar\\.com|api\\.radar\\.io|radar\\.com/[^\\s\"'<>]*(?:maps|geofences|places|sdk)"]
+            },
+            {
+              "name": "Jawg Maps",
+              "patterns": ["tile\\.jawg\\.io|api\\.jawg\\.io|jawg\\.io/[^\\s\"'<>]*(?:maps|tiles|static)"]
+            },
+            {
+              "name": "OpenMapTiles",
+              "patterns": ["tiles\\.openmaptiles\\.com|fonts\\.openmaptiles\\.org|openmaptiles\\.org/[^\\s\"'<>]*(?:styles|schema|fonts)"]
+            },
+            {
+              "name": "Cesium ion",
+              "patterns": ["assets\\.cesium\\.com|api\\.cesium\\.com|ion\\.cesium\\.com|cesium\\.com/[^\\s\"'<>]*(?:ion|assets|tokens)"]
+            },
+            {
+              "name": "Mapillary",
+              "patterns": ["images\\.mapillary\\.com|graph\\.mapillary\\.com|mapillary\\.com/[^\\s\"'<>]*(?:embed|app|api)"]
+            },
+            {
+              "name": "Nextzen",
+              "patterns": ["tile\\.nextzen\\.org|tiles\\.nextzen\\.org|nextzen\\.org/[^\\s\"'<>]*(?:tiles|vector|api)"]
+            },
+            {
+              "name": "Protomaps",
+              "patterns": ["api\\.protomaps\\.com|protomaps\\.com/[^\\s\"'<>]*(?:tiles|basemaps|pmtiles)|protomaps\\.github\\.io"]
+            },
+            {
+              "name": "Felt Maps",
+              "patterns": ["felt\\.com/(?:embed|map)/|felt\\.com/[^\\s\"'<>]*(?:map|embed|public)"]
             }
           ]
         },
