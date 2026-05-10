@@ -523,6 +523,90 @@
               "name": "Civic Cookie Control",
               "patterns": ["cc\\.cdn\\.civiccomputing\\.com|civiccomputing\\.com[^\\s\"'<>]*/cookie-control"],
               "globals": ["CookieControl"]
+            },
+            {
+              "name": "CookieScript CMP",
+              "patterns": ["cdn\\.cookie-script\\.com/s/|cookie-script\\.com/s/|cookie-script\\.com/[^\\s\"'<>]*(?:script|cookie|consent)"]
+            },
+            {
+              "name": "CookieHub",
+              "patterns": ["cdn\\.cookiehub\\.eu|cookiehub\\.net|cookiehub\\.com/[^\\s\"'<>]*(?:cookie|consent|banner)"]
+            },
+            {
+              "name": "CookieFirst",
+              "patterns": ["consent\\.cookiefirst\\.com|cookiefirst\\.com/[^\\s\"'<>]*(?:banner|consent|cookies)"]
+            },
+            {
+              "name": "ConsentManager.net",
+              "patterns": [
+                "cdn\\.consentmanager\\.net|delivery\\.consentmanager\\.net|consentmanager\\.mgr\\.consensu\\.org|consentmanager\\.net/[^\\s\"'<>]*(?:cmp|delivery|consent)"
+              ]
+            },
+            {
+              "name": "Cookie Information",
+              "patterns": [
+                "policy\\.app\\.cookieinformation\\.com|policy\\.cookieinformation\\.com|cookieinformation\\.com/[^\\s\"'<>]*(?:consent|banner|cookie)"
+              ]
+            },
+            {
+              "name": "Secure Privacy",
+              "patterns": ["cdn\\.secureprivacy\\.ai|app\\.secureprivacy\\.ai|secureprivacy\\.ai/[^\\s\"'<>]*(?:script|consent|cookie)"]
+            },
+            {
+              "name": "Seers CMP",
+              "patterns": ["cmp\\.seersco\\.com|seersco\\.com/[^\\s\"'<>]*(?:cmp|cookie|consent)"]
+            },
+            {
+              "name": "Sirdata CMP",
+              "patterns": ["cache\\.consentframework\\.com|choices\\.consentframework\\.com|sirdata\\.com/[^\\s\"'<>]*(?:cmp|consent)"]
+            },
+            {
+              "name": "UniConsent CMP",
+              "patterns": ["cdn\\.uniconsent\\.com|uniconsent\\.com/[^\\s\"'<>]*(?:cmp|consent|sdk)"]
+            },
+            {
+              "name": "Tarteaucitron.js",
+              "patterns": ["tarteaucitron\\.io|tarteaucitron\\.github\\.io|tarteaucitron(?:\\.min)?\\.js"]
+            },
+            {
+              "name": "Evidon / Crownpeak CMP",
+              "patterns": ["c\\.evidon\\.com|evidon\\.mgr\\.consensu\\.org|crownpeak\\.com/[^\\s\"'<>]*(?:consent|privacy|cmp)"]
+            },
+            {
+              "name": "Transcend Consent",
+              "patterns": ["cdn\\.transcend\\.io|transcend-cdn\\.com|transcend\\.io/[^\\s\"'<>]*(?:consent|privacy|airgap)"]
+            },
+            {
+              "name": "Securiti Consent",
+              "patterns": ["cdn-prod\\.securiti\\.ai|privacy-central\\.securiti\\.ai|securiti\\.ai/[^\\s\"'<>]*(?:consent|privacy|cookie)"]
+            },
+            {
+              "name": "Enzuzo Privacy",
+              "patterns": ["cdn\\.enzuzo\\.com|app\\.enzuzo\\.com|enzuzo\\.com/[^\\s\"'<>]*(?:privacy|consent|cookie)"]
+            },
+            {
+              "name": "Pandectes GDPR Compliance",
+              "patterns": ["cdn\\.pandectes\\.io|pandectes\\.io/[^\\s\"'<>]*(?:gdpr|cookie|consent)"]
+            },
+            {
+              "name": "AdOpt CMP",
+              "patterns": ["cdn\\.adopt\\.com\\.br|cmp\\.adopt\\.com\\.br|adopt\\.com\\.br/[^\\s\"'<>]*(?:cmp|consent|sdk)"]
+            },
+            {
+              "name": "CookieSeal",
+              "patterns": ["cdn\\.cookieseal\\.com|app\\.cookieseal\\.com|cookieseal\\.com/[^\\s\"'<>]*(?:seal|cookie|consent)"]
+            },
+            {
+              "name": "PrivacyBee",
+              "patterns": ["cdn\\.privacybee\\.com|privacybee\\.com/[^\\s\"'<>]*(?:widget|privacy|consent)"]
+            },
+            {
+              "name": "DataGrail Privacy",
+              "patterns": ["cdn\\.datagrail\\.io|datagrail\\.io/[^\\s\"'<>]*(?:privacy|consent|preferences)"]
+            },
+            {
+              "name": "MineOS Privacy",
+              "patterns": ["cdn\\.mineos\\.ai|api\\.mineos\\.ai|mineos\\.ai/[^\\s\"'<>]*(?:privacy|consent|preferences)"]
             }
           ]
         },
