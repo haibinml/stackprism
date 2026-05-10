@@ -791,6 +791,96 @@
             {
               "name": "Lokalise",
               "patterns": ["ota\\.lokalise\\.com|lokalise\\.cloud|lokalise\\.com/[^\\s\"'<>]*(?:ota|sdk|in-context)"]
+            },
+            {
+              "name": "Tolgee",
+              "patterns": ["cdn\\.tolgee\\.io|app\\.tolgee\\.io|tolgee\\.io/[^\\s\"'<>]*(?:sdk|cdn|translations|api)"]
+            },
+            {
+              "name": "locize",
+              "patterns": ["api\\.locize\\.app|cdn\\.locize\\.com|locize\\.app|locize\\.com/[^\\s\"'<>]*(?:i18n|translations|sdk|api)"]
+            },
+            {
+              "name": "Localazy",
+              "patterns": ["api\\.localazy\\.com|cdn\\.localazy\\.com|localazy\\.com/[^\\s\"'<>]*(?:api|cdn|download|widget)"]
+            },
+            {
+              "name": "POEditor",
+              "patterns": ["api\\.poeditor\\.com|poeditor\\.com/[^\\s\"'<>]*(?:api|projects|localization)"]
+            },
+            {
+              "name": "SimpleLocalize",
+              "patterns": [
+                "cdn\\.simplelocalize\\.io|api\\.simplelocalize\\.io|simplelocalize\\.io/[^\\s\"'<>]*(?:cdn|api|translations|editor)"
+              ]
+            },
+            {
+              "name": "Weblate",
+              "patterns": [
+                "hosted\\.weblate\\.org|weblate\\.org/[^\\s\"'<>]*(?:widgets|api|projects)|weblate[^\\s\"'<>]*\\.(?:js|css)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Localizely",
+              "patterns": ["api\\.localizely\\.com|cdn\\.localizely\\.com|localizely\\.com/[^\\s\"'<>]*(?:api|sdk|translations)"]
+            },
+            {
+              "name": "OneSky",
+              "patterns": ["api\\.oneskyapp\\.com|platform\\.oneskyapp\\.com|oneskyapp\\.com/[^\\s\"'<>]*(?:api|translations|localization)"]
+            },
+            {
+              "name": "WOVN.io",
+              "patterns": ["j\\.wovn\\.io|cdn\\.wovn\\.io|wovn\\.io/[^\\s\"'<>]*(?:js|widget|translation|api)"]
+            },
+            {
+              "name": "Smartcat",
+              "patterns": [
+                "smartcat\\.com/[^\\s\"'<>]*(?:website-translator|translations|api|widget)|smartcat\\.ai/[^\\s\"'<>]*(?:api|translate)"
+              ]
+            },
+            {
+              "name": "TransPerfect GlobalLink",
+              "patterns": [
+                "globallink\\.transperfect\\.com|translations\\.com/[^\\s\"'<>]*(?:globallink|api|live|translations)|transperfect\\.com/[^\\s\"'<>]*globallink"
+              ]
+            },
+            {
+              "name": "MotionPoint",
+              "patterns": ["cdn\\.motionpoint\\.com|motionpoint\\.com/[^\\s\"'<>]*(?:translate|translation|proxy|js)"]
+            },
+            {
+              "name": "Lingotek",
+              "patterns": ["api\\.lingotek\\.com|cloud\\.lingotek\\.com|lingotek\\.com/[^\\s\"'<>]*(?:api|cloud|translations)"]
+            },
+            {
+              "name": "Unbabel",
+              "patterns": ["api\\.unbabel\\.com|unbabel\\.com/[^\\s\"'<>]*(?:api|translation|widget|chat)"]
+            },
+            {
+              "name": "LanguageWire",
+              "patterns": ["api\\.languagewire\\.com|languagewire\\.com/[^\\s\"'<>]*(?:api|translate|translation|platform)"]
+            },
+            {
+              "name": "TextUnited",
+              "patterns": ["textunited\\.com/[^\\s\"'<>]*(?:api|translation|widget|website-translation)|api\\.textunited\\.com"]
+            },
+            {
+              "name": "ModernMT",
+              "patterns": ["api\\.modernmt\\.com|modernmt\\.com/[^\\s\"'<>]*(?:api|translate|translation)"]
+            },
+            {
+              "name": "Pairaphrase",
+              "patterns": ["pairaphrase\\.com/[^\\s\"'<>]*(?:api|translation|translate|portal)|app\\.pairaphrase\\.com"]
+            },
+            {
+              "name": "Transcy",
+              "patterns": [
+                "cdn\\.transcy\\.io|transcy\\.io/[^\\s\"'<>]*(?:widget|translate|currency|localization)|fireapps\\.io/[^\\s\"'<>]*transcy"
+              ]
+            },
+            {
+              "name": "LangShop",
+              "patterns": ["cdn\\.langshop\\.app|langshop\\.app/[^\\s\"'<>]*(?:widget|translate|localization|currency)"]
             }
           ]
         },
