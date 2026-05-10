@@ -1855,6 +1855,96 @@
         },
         {
           "defaults": {
+            "kind": "物流追踪 / 退货售后",
+            "matchIn": ["resources"]
+          },
+          "rules": [
+            {
+              "name": "AfterShip Tracking Widget",
+              "patterns": [
+                "assets\\.aftership\\.com|static\\.aftership\\.com|track\\.aftership\\.com|aftership\\.com/[^\\s\"'<>]*(?:tracking|track-button|apps)"
+              ]
+            },
+            {
+              "name": "Route Package Protection",
+              "patterns": ["cdn\\.route\\.com|routeapp\\.io|route\\.com/[^\\s\"'<>]*(?:package-protection|protection|widget)"]
+            },
+            {
+              "name": "Narvar Tracking",
+              "patterns": ["tracking\\.narvar\\.com|assets\\.narvar\\.com|narvar\\.com/[^\\s\"'<>]*(?:tracking|returns|track)"]
+            },
+            {
+              "name": "Shippo Tracking",
+              "patterns": ["track\\.goshippo\\.com|goshippo\\.com/tracks|shippo\\.com/[^\\s\"'<>]*(?:tracking|track)"]
+            },
+            {
+              "name": "EasyPost Tracking",
+              "patterns": ["track\\.easypost\\.com|easypost\\.com/[^\\s\"'<>]*(?:track|tracking|status)"]
+            },
+            {
+              "name": "ShipStation Tracking",
+              "patterns": ["ss\\.shipstation\\.com|shipstation\\.com/[^\\s\"'<>]*(?:tracking|track|widgets?)"]
+            },
+            {
+              "name": "17TRACK Widget",
+              "patterns": ["17track\\.net/[^\\s\"'<>]*(?:externalcall|track|embed|widget)|res\\.17track\\.net"]
+            },
+            {
+              "name": "ParcelPanel Tracking Widget",
+              "patterns": ["parcelpanel\\.com/[^\\s\"'<>]*(?:track|tracking|widget|apps)|cdn\\.parcelpanel\\.com"]
+            },
+            {
+              "name": "Track123",
+              "patterns": ["track123\\.com/[^\\s\"'<>]*(?:track|tracking|apps|widget)|cdn\\.track123\\.com"]
+            },
+            {
+              "name": "Wonderment",
+              "patterns": ["wonderment\\.com/[^\\s\"'<>]*(?:tracking|track|widget|apps)|cdn\\.wonderment\\.com"]
+            },
+            {
+              "name": "Malomo",
+              "patterns": ["malomo\\.com/[^\\s\"'<>]*(?:tracking|track|widget)|cdn\\.malomo\\.com"]
+            },
+            {
+              "name": "Loop Returns",
+              "patterns": ["returns\\.loopreturns\\.com|loopreturns\\.com/[^\\s\"'<>]*(?:returns|exchange|apps)|cdn\\.loopreturns\\.com"]
+            },
+            {
+              "name": "Returnly",
+              "patterns": ["returnly\\.com/[^\\s\"'<>]*(?:returns|exchange|portal|widget)|cdn\\.returnly\\.com"]
+            },
+            {
+              "name": "Happy Returns",
+              "patterns": ["happyreturns\\.com/[^\\s\"'<>]*(?:returns|return-bar|portal|widget)|cdn\\.happyreturns\\.com"]
+            },
+            {
+              "name": "Redo Returns",
+              "patterns": ["redo\\.com/[^\\s\"'<>]*(?:returns|protection|widget)|cdn\\.redo\\.com|app\\.redo\\.com"]
+            },
+            {
+              "name": "ShippyPro",
+              "patterns": ["shippypro\\.com/[^\\s\"'<>]*(?:tracking|track|returns|widget)|cdn\\.shippypro\\.com"]
+            },
+            {
+              "name": "Sendcloud",
+              "patterns": ["sendcloud\\.sc/[^\\s\"'<>]*(?:tracking|track)|sendcloud\\.com/[^\\s\"'<>]*(?:tracking|returns|widget)"]
+            },
+            {
+              "name": "Easyship",
+              "patterns": ["easyship\\.com/[^\\s\"'<>]*(?:tracking|track|checkout|widget)|cdn\\.easyship\\.com"]
+            },
+            {
+              "name": "TrackingMore",
+              "patterns": ["trackingmore\\.com/[^\\s\"'<>]*(?:tracking|track|widget|button)|cdn\\.trackingmore\\.com"]
+            },
+            {
+              "name": "Shiprocket Tracking Widget",
+              "patterns": ["shiprocket\\.in/[^\\s\"'<>]*(?:shipment-tracking|tracking|track|widget)|cdn\\.shiprocket\\.in"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "招聘 / ATS",
             "matchIn": ["resources"]
           },
