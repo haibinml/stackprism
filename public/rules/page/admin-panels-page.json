@@ -487,6 +487,81 @@
         },
         {
           "defaults": {
+            "kind": "日志 / BI / 可观测性控制台"
+          },
+          "rules": [
+            {
+              "name": "Kibana",
+              "patterns": [
+                "<title>\\s*Kibana(?:\\s*</title>|\\s+-)",
+                "(?:^|/)built_assets/(?:dlls|js|css)(?:/|[?#\\s]|$)",
+                "kibana[^\\s\"'<>]*\\.(?:js|css|svg|png|ico)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "OpenSearch Dashboards",
+              "patterns": [
+                "<title>\\s*OpenSearch Dashboards(?:\\s*</title>|\\s+-)",
+                "opensearch(?:-)?dashboards[^\\s\"'<>]*\\.(?:js|css|svg|png|ico)(?:\\?|$)",
+                "(?:^|/)ui/favicons/opensearch[^\\s\"'<>]*"
+              ]
+            },
+            {
+              "name": "Graylog",
+              "patterns": [
+                "<title>\\s*Graylog(?:\\s*</title>|\\s+-)",
+                "(?:^|/)assets/plugin/org\\.graylog[^\\s\"'<>]*",
+                "graylog[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "Metabase",
+              "patterns": ["<title>\\s*Metabase(?:\\s*</title>|\\s+-)", "metabase[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "Apache Superset",
+              "patterns": [
+                "<title>\\s*(?:Apache\\s+)?Superset(?:\\s*</title>|\\s+-)",
+                "superset[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)",
+                "(?:^|/)static/assets/(?:images/)?superset[^\\s\"'<>]*"
+              ]
+            },
+            {
+              "name": "Apache Airflow",
+              "patterns": ["<title>\\s*(?:Apache\\s+)?Airflow(?:\\s*</title>|\\s+-)", "airflow[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "Dagster",
+              "patterns": [
+                "<title>\\s*Dagster(?:\\s*</title>|\\s+-)",
+                "(?:^|/)assets/dagster(?:/|[?#\\s]|$)",
+                "dagster[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
+              ]
+            },
+            {
+              "name": "MLflow",
+              "patterns": ["<title>\\s*MLflow(?:\\s*</title>|\\s+-)", "mlflow[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "SigNoz",
+              "patterns": ["<title>\\s*SigNoz(?:\\s*</title>|\\s+-)", "signoz[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "OpenObserve",
+              "patterns": ["<title>\\s*OpenObserve(?:\\s*</title>|\\s+-)", "openobserve[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "Jaeger",
+              "patterns": ["<title>\\s*Jaeger\\s+UI(?:\\s*</title>|\\s+-)", "jaeger[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            },
+            {
+              "name": "Zipkin",
+              "patterns": ["<title>\\s*Zipkin(?:\\s*</title>|\\s+-)", "zipkin[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+            }
+          ]
+        },
+        {
+          "defaults": {
             "kind": "自托管应用"
           },
           "rules": [
