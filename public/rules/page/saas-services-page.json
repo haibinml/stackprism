@@ -6196,6 +6196,90 @@
             {
               "name": "FlutterFlow",
               "patterns": ["app\\.flutterflow\\.io|flutterflow\\.app|flutterflow\\.io/[^\\s\"'<>]*(?:app|embed|api|project)"]
+            },
+            {
+              "name": "AppSheet",
+              "patterns": ["appsheet\\.com/(?:start|template|api|embed)|www\\.appsheet\\.com/[^\\s\"'<>]*(?:start|template|app)"]
+            },
+            {
+              "name": "Microsoft Power Apps",
+              "patterns": [
+                "apps\\.powerapps\\.com|make\\.powerapps\\.com|content\\.powerapps\\.com|powerapps\\.microsoft\\.com/[^\\s\"'<>]*(?:apps|canvas|embed)"
+              ]
+            },
+            {
+              "name": "Zoho Creator",
+              "patterns": [
+                "creator\\.zoho\\.(?:com|eu|in)|creatorapp\\.zoho\\.(?:com|eu|in)|zoho\\.com/creator/[^\\s\"'<>]*(?:app|embed|api)"
+              ]
+            },
+            {
+              "name": "Quickbase",
+              "patterns": ["[a-z0-9-]+\\.quickbase\\.com/(?:db|nav|up)|quickbase\\.com/[^\\s\"'<>]*(?:app|db|api|embed)"]
+            },
+            {
+              "name": "Caspio",
+              "patterns": ["caspio\\.com/(?:scripts|dp|datapage)|b\\d?\\.caspio\\.com/dp|caspio\\.com/[^\\s\"'<>]*(?:datapage|embed|app)"]
+            },
+            {
+              "name": "Knack",
+              "patterns": ["loader\\.knack\\.com|api\\.knack\\.com|knack\\.com/[^\\s\"'<>]*(?:apps|embed|builder|api)"]
+            },
+            {
+              "name": "Tadabase",
+              "patterns": ["app\\.tadabase\\.io|cdn\\.tadabase\\.io|tadabase\\.io/[^\\s\"'<>]*(?:embed|app|builder|api)"]
+            },
+            {
+              "name": "Noloco",
+              "patterns": ["app\\.noloco\\.io|cdn\\.noloco\\.io|noloco\\.io/[^\\s\"'<>]*(?:embed|app|portal|api)"]
+            },
+            {
+              "name": "Bildr",
+              "patterns": ["app\\.bildr\\.com|assets\\.bildr\\.com|bildr\\.com/[^\\s\"'<>]*(?:app|embed|project|api)"]
+            },
+            {
+              "name": "Draftbit",
+              "patterns": ["app\\.draftbit\\.com|cdn\\.draftbit\\.com|draftbit\\.com/[^\\s\"'<>]*(?:apps|embed|projects|api)"]
+            },
+            {
+              "name": "Bravo Studio",
+              "patterns": ["app\\.bravostudio\\.app|bravostudio\\.app/[^\\s\"'<>]*(?:app|embed|prototype|api)"]
+            },
+            {
+              "name": "Thunkable",
+              "patterns": ["x\\.thunkable\\.com|thunkable\\.site|thunkable\\.com/[^\\s\"'<>]*(?:project|apps|embed|api)"]
+            },
+            {
+              "name": "SAP Build Apps / AppGyver",
+              "patterns": ["appgyver\\.com|appgyverapp\\.com|build\\.me\\.sap|sap\\.com/[^\\s\"'<>]*(?:build-apps|appgyver)"]
+            },
+            {
+              "name": "Betty Blocks",
+              "patterns": ["app\\.bettyblocks\\.com|bettyblocks\\.com/[^\\s\"'<>]*(?:platform|app|embed|api)|betty\\.app"]
+            },
+            {
+              "name": "Mendix",
+              "patterns": ["mendixcloud\\.com|mxapps\\.io|mendix\\.com/[^\\s\"'<>]*(?:app|cloud|deploy|runtime)"]
+            },
+            {
+              "name": "OutSystems",
+              "patterns": ["outsystemscloud\\.com|outsystemsenterprise\\.com|outsystems\\.com/[^\\s\"'<>]*(?:apps|platform|embed|api)"]
+            },
+            {
+              "name": "Backendless",
+              "patterns": ["backendlessappcontent\\.com|api\\.backendless\\.com|backendless\\.com/[^\\s\"'<>]*(?:app|api|embed|files)"]
+            },
+            {
+              "name": "AppMaster.io",
+              "patterns": ["appmaster\\.io/[^\\s\"'<>]*(?:app|studio|api|embed)|app\\.appmaster\\.io"]
+            },
+            {
+              "name": "Clappia",
+              "patterns": ["app\\.clappia\\.com|clappia\\.com/[^\\s\"'<>]*(?:app|apps|workflow|embed|api)"]
+            },
+            {
+              "name": "Jestor",
+              "patterns": ["app\\.jestor\\.com|jestor\\.com/[^\\s\"'<>]*(?:app|apps|workflow|embed|api)"]
             }
           ]
         },
