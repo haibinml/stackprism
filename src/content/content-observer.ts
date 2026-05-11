@@ -10,6 +10,7 @@
   const MUTATION_BURST_THRESHOLD = 150
   const MUTATION_COOLDOWN_MS = 5000
   const MUTATION_FLUSH_DELAY = 200
+  const MUTATION_OBSERVER_LIFETIME_MS = 30000
   const CONTEXT_INVALIDATED_PATTERN = /extension context invalidated|context invalidated/i
   const OBSERVER_INSTANCE_KEY = '__stackPrismContentObserver__'
   const SKIP_TAGS = new Set(['VIDEO', 'AUDIO', 'CANVAS', 'PICTURE', 'SOURCE', 'TRACK', 'SVG', 'IMG'])
@@ -51,6 +52,8 @@
   let mutationBurstWindowStart = Date.now()
   let mutationBurstCount = 0
   let mutationCooldownUntil = 0
+  let mutationCooldownReconnect = 0
+  let mutationLifetimeTimer = 0
 
   // ----- 调试埋点（默认关闭，开启：localStorage.setItem('__sp_observer_debug__','1') + 刷新） -----
 
@@ -380,6 +383,11 @@
         state.url = location.href
         state.title = document.title
         collectStaticSnapshot()
+        try {
+          if (document.body) collectFromElement(document.body)
+        } catch {
+          // ignore
+        }
         addDomMarker(`route:${location.pathname}${location.search}`)
         scheduleSend()
       }
@@ -411,6 +419,14 @@
       pendingMutationFrame = 0
     }
     pendingMutationNodes = []
+    if (mutationCooldownReconnect) {
+      window.clearTimeout(mutationCooldownReconnect)
+      mutationCooldownReconnect = 0
+    }
+    if (mutationLifetimeTimer) {
+      window.clearTimeout(mutationLifetimeTimer)
+      mutationLifetimeTimer = 0
+    }
     if (perfDumpTimer) {
       window.clearInterval(perfDumpTimer)
       perfDumpTimer = 0
@@ -518,6 +534,16 @@
     pendingMutationFrame = setTimeout(processPendingMutationNodes, MUTATION_FLUSH_DELAY)
   }
 
+  const observeMutationTarget = () => {
+    if (!mutationObserver) return
+    const target = document.body || document.documentElement || document
+    try {
+      mutationObserver.observe(target, { childList: true, subtree: true })
+    } catch {
+      // ignore
+    }
+  }
+
   const triggerMutationCooldown = now => {
     mutationCooldownUntil = now + MUTATION_COOLDOWN_MS
     pendingMutationNodes = []
@@ -525,10 +551,20 @@
       clearTimeout(pendingMutationFrame)
       pendingMutationFrame = 0
     }
+    if (mutationObserver) {
+      mutationObserver.disconnect()
+      if (mutationCooldownReconnect) {
+        window.clearTimeout(mutationCooldownReconnect)
+      }
+      mutationCooldownReconnect = window.setTimeout(() => {
+        mutationCooldownReconnect = 0
+        if (stopped) return
+        observeMutationTarget()
+      }, MUTATION_COOLDOWN_MS)
+    }
   }
 
   const installMutationObserver = () => {
-    const root = document.documentElement || document
     const observer = new MutationObserver(mutations => {
       if (stopped) return
       const now = Date.now()
@@ -573,7 +609,7 @@
       perfMeasure('sp:mutation-callback', 'sp:mo-start', { mutations: mutations.length, accepted, cooldown: false })
     })
     mutationObserver = observer
-    observer.observe(root, { childList: true, subtree: true })
+    observeMutationTarget()
   }
 
   const installNavigationObserver = () => {
@@ -618,6 +654,18 @@
     installMutationObserver()
     installNavigationObserver()
     scheduleSend()
+    mutationLifetimeTimer = window.setTimeout(() => {
+      mutationLifetimeTimer = 0
+      if (stopped) return
+      if (mutationCooldownReconnect) {
+        window.clearTimeout(mutationCooldownReconnect)
+        mutationCooldownReconnect = 0
+      }
+      if (mutationObserver) {
+        mutationObserver.disconnect()
+        mutationObserver = null
+      }
+    }, MUTATION_OBSERVER_LIFETIME_MS)
     if (PERF_DEBUG) {
       console.log('[StackPrism observer] 性能埋点已启用，每 ' + PERF_DUMP_INTERVAL_MS + 'ms 输出一次摘要')
       perfDumpTimer = window.setInterval(dumpPerfSnapshot, PERF_DUMP_INTERVAL_MS)
