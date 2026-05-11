@@ -7012,6 +7012,42 @@
             "evidence": "响应 URL 指向百度统计"
           },
           {
+            "category": "探针 / 监控",
+            "name": "Baidu BadJS / 百度前端错误监控",
+            "patterns": ["url: https?://staticiot\\.cdn\\.bcebos\\.com/union/badjs-sdk(?:-min)?(?:\\.min)?\\.js"],
+            "evidence": "响应 URL 指向百度前端错误监控 SDK"
+          },
+          {
+            "category": "探针 / 监控",
+            "name": "Baidu Spy Client / 百度性能监控",
+            "patterns": ["url: https?://[^\\s/]+/[^\\s\"'<>]*/spy-client(?:\\.iife)?(?:\\.min)?\\.js"],
+            "evidence": "响应 URL 指向百度性能监控 SDK"
+          },
+          {
+            "category": "探针 / 监控",
+            "name": "Baidu Risk Control / 百度风控指纹",
+            "patterns": [
+              "url: https?://wappass\\.baidu\\.com/[^\\s\"'<>]*(?:moonshad|mkd|fingerprint)\\.js",
+              "url: https?://passport\\.baidu\\.com/[^\\s\"'<>]*(?:moonshad|mkd|fingerprint)\\.js"
+            ],
+            "evidence": "响应 URL 指向百度风控指纹 SDK"
+          },
+          {
+            "category": "探针 / 监控",
+            "name": "Bilibili Collect / 哔哩哔哩埋点",
+            "patterns": [
+              "url: https?://data\\.bilibili\\.com/log/web(?:[?#]|$)",
+              "url: https?://s1\\.hdslb\\.com/bfs/cm/cm-sdk/static/js/bili-collect\\.js(?:[?#]|$)"
+            ],
+            "evidence": "响应 URL 指向哔哩哔哩埋点 SDK"
+          },
+          {
+            "category": "探针 / 监控",
+            "name": "Bilibili Log Reporter / 哔哩哔哩日志上报",
+            "patterns": ["url: https?://s1\\.hdslb\\.com/bfs/seed/log/report/log-reporter\\.js(?:[?#]|$)"],
+            "evidence": "响应 URL 指向哔哩哔哩日志上报 SDK"
+          },
+          {
             "name": "Cloudflare Web Analytics",
             "patterns": ["url: https?://static\\.cloudflareinsights\\.com/beacon(?:\\.min)?\\.js"],
             "evidence": "响应 URL 指向 Cloudflare Web Analytics"

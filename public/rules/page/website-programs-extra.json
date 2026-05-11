@@ -254,6 +254,17 @@
               "matchIn": ["html"]
             },
             {
+              "name": "海芯聚合支付 / PayUnk",
+              "kind": "聚合支付系统",
+              "url": "https://payunk.com",
+              "matchType": "regex",
+              "patterns": [
+                "payunk\\.com",
+                "(?=[\\s\\S]*(?:河南海芯数据科技有限公司|海芯数据))(?=[\\s\\S]*(?:聚合支付|/index/index/demo(?:[?#\\s\"'<>]|$)|/static/common/(?:vue|element|layer|js)/))"
+              ],
+              "matchIn": ["url", "html", "resources"]
+            },
+            {
               "name": "百度网盘 / Baidu Netdisk",
               "kind": "网盘 / 文件协作",
               "url": "https://pan.baidu.com",

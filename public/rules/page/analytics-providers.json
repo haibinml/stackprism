@@ -46,6 +46,27 @@
             "patterns": ["(?:^|/)spy-client(?:\\.iife)?(?:\\.min)?\\.js(?:[?#]|$)"]
           },
           {
+            "category": "探针 / 监控",
+            "name": "Bilibili Collect / 哔哩哔哩埋点",
+            "kind": "自有埋点 SDK",
+            "resourceOnly": true,
+            "patterns": [
+              "data\\.bilibili\\.com/log/web(?:[?#]|$)",
+              "s1\\.hdslb\\.com/bfs/cm/cm-sdk/static/js/bili-collect\\.js(?:[?#]|$)",
+              "(?:^|/)bili-collect(?:\\.min)?\\.js(?:[?#]|[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "category": "探针 / 监控",
+            "name": "Bilibili Log Reporter / 哔哩哔哩日志上报",
+            "kind": "自有日志上报 SDK",
+            "resourceOnly": true,
+            "patterns": [
+              "s1\\.hdslb\\.com/bfs/seed/log/report/log-reporter\\.js(?:[?#]|$)",
+              "(?:^|/)log-reporter(?:\\.min)?\\.js(?:[?#]|[\"'<>\\s]|$)"
+            ]
+          },
+          {
             "name": "CNZZ / Umeng Analytics",
             "kind": "商用 / 国内知名统计",
             "patterns": ["cnzz\\.com", "s\\d+\\.cnzz\\.com/z_stat\\.php", "z_stat\\.php", "umeng\\.com", "umtrack", "_czc"],

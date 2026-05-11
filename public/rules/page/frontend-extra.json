@@ -331,8 +331,21 @@
           },
           {
             "name": "Pinia",
-            "patterns": ["pinia(?:\\.iife)?(?:\\.prod)?\\.js|\\/pinia\\/"],
+            "resourceHints": ["pinia"],
+            "patterns": [
+              "(?:^|/)pinia(?:\\.(?:iife|global|esm-browser|cjs|prod))*(?:\\.min)?\\.js(?:[?#]|[\"'<>\\s]|$)",
+              "(?:^|/)pinia(?:/|[?#]|$)"
+            ],
             "globals": ["Pinia"]
+          },
+          {
+            "name": "Vue Router",
+            "resourceHints": ["vue-router"],
+            "patterns": [
+              "(?:^|/)vue-router(?:\\.(?:global|esm-browser|cjs|runtime))?(?:\\.prod)?(?:\\.min)?\\.js(?:[?#]|[\"'<>\\s]|$)",
+              "(?:^|/)vue-router(?:/|[?#]|$)"
+            ],
+            "globals": ["VueRouter"]
           },
           {
             "name": "Apollo Client",
