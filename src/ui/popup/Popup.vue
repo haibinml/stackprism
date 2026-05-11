@@ -17,7 +17,7 @@
         <RippleButton class="icon-btn" title="打开设置页" @click="openSettings">
           <Settings2 :size="16" :stroke-width="2" />
         </RippleButton>
-        <RippleButton class="icon-btn" title="复制检测 JSON" @click="copyResult">
+        <RippleButton class="icon-btn" title="复制当前页 URL" @click="copyResult">
           <Copy :size="16" :stroke-width="2" />
         </RippleButton>
         <RippleButton class="icon-btn primary" variant="primary" title="重新检测" @click="runDetection({ force: true })">
@@ -517,9 +517,7 @@
       const result = response.data || emptyPopupResult(tab)
       state.result = result
       state.activeCategory = FOCUS_CATEGORY
-      state.rawResult = null
-      state.rawLoaded = false
-      rawOutputText.value = RAW_PLACEHOLDER
+      resetRawState()
       setStatus('')
       return
     }
@@ -661,11 +659,14 @@
   }
 
   const copyResult = async () => {
-    if (!state.result) return
+    const url = (state.result as any)?.url || pageUrl.value
+    if (!url || url === '正在检测当前标签页...') {
+      setStatus('暂无可复制的当前页 URL。')
+      return
+    }
     try {
-      const raw = await getRawResult()
-      await navigator.clipboard.writeText(JSON.stringify(raw, null, 2))
-      setStatus('已复制检测 JSON。')
+      await navigator.clipboard.writeText(String(url))
+      setStatus('已复制当前页 URL。')
     } catch (error: any) {
       setStatus(`复制失败：${String(error?.message || error)}`)
     }
@@ -767,6 +768,16 @@
     return {
       ...baseInfo,
       technologies: (raw?.technologies || []).filter(matchTech)
+    }
+  }
+
+  const resetRawState = () => {
+    state.rawResult = null
+    state.rawLoaded = false
+    if (footerPanel.value === 'raw') {
+      void renderRawOutput()
+    } else {
+      rawOutputText.value = RAW_PLACEHOLDER
     }
   }
 
@@ -905,9 +916,7 @@
     if (!newPopup || typeof newPopup !== 'object') return
     if (popupCacheSignature(newPopup) === popupCacheSignature(state.result)) return
     state.result = newPopup
-    state.rawResult = null
-    state.rawLoaded = false
-    rawOutputText.value = RAW_PLACEHOLDER
+    resetRawState()
     setStatus('')
   }
 
