@@ -52,6 +52,40 @@
   let mutationBurstCount = 0
   let mutationCooldownUntil = 0
 
+  // ----- 调试埋点（默认关闭，开启：localStorage.setItem('__sp_observer_debug__','1') + 刷新） -----
+
+  const PERF_DEBUG = (() => {
+    try {
+      return localStorage.getItem('__sp_observer_debug__') === '1'
+    } catch {
+      return false
+    }
+  })()
+  const noop = () => {}
+  const perfMark = PERF_DEBUG
+    ? name => {
+        try {
+          performance.mark(name)
+        } catch {
+          // ignore
+        }
+      }
+    : noop
+  const perfMeasure = PERF_DEBUG
+    ? (name, startMark, detail) => {
+        try {
+          performance.measure(name, { start: startMark, detail })
+        } catch {
+          // ignore
+        }
+        try {
+          performance.clearMarks(startMark)
+        } catch {
+          // ignore
+        }
+      }
+    : noop
+
   // ----- 底层 helper -----
 
   const trimList = (list, max) => {
@@ -256,6 +290,7 @@
   }
 
   const sendSnapshot = () => {
+    perfMark('sp:send-start')
     const runtime = getRuntime()
     if (stopped || !runtime) {
       stopObserver()
@@ -282,6 +317,13 @@
     } catch (error) {
       handleSendFailure(error)
     }
+    perfMeasure('sp:send-snapshot', 'sp:send-start', {
+      resources: state.resources.length,
+      scripts: state.scripts.length,
+      stylesheets: state.stylesheets.length,
+      iframes: state.iframes.length,
+      domMarkers: state.domMarkers.length
+    })
   }
 
   const scheduleSend = () => {
@@ -386,8 +428,10 @@
     try {
       const observer = new PerformanceObserver(list => {
         if (stopped) return
+        perfMark('sp:po-start')
         let added = 0
-        for (const entry of list.getEntries()) {
+        const entries = list.getEntries()
+        for (const entry of entries) {
           if (SKIP_INITIATOR_TYPES.has(entry.initiatorType)) continue
           if (SKIP_RESOURCE_EXT.test(entry.name)) continue
           if (addUrl('resources', entry.name)) added += 1
@@ -398,6 +442,7 @@
           performanceObserver = null
         }
         if (added) scheduleSend()
+        perfMeasure('sp:perf-observer', 'sp:po-start', { entries: entries.length, added })
       })
       performanceObserver = observer
       observer.observe({ type: 'resource', buffered: true })
@@ -412,15 +457,19 @@
     const nodes = pendingMutationNodes
     pendingMutationNodes = []
     if (!nodes.length) return
+    perfMark('sp:flush-start')
     let changed = false
+    let processed = 0
     for (const node of nodes) {
       if (!node.isConnected) continue
+      processed += 1
       changed = collectFromElement(node) || changed
     }
     if (changed) {
       state.updatedAt = Date.now()
       scheduleSend()
     }
+    perfMeasure('sp:mutation-flush', 'sp:flush-start', { queued: nodes.length, processed, changed })
   }
 
   const scheduleMutationFlush = () => {
@@ -443,10 +492,12 @@
       if (stopped) return
       const now = Date.now()
       if (now < mutationCooldownUntil) return
+      perfMark('sp:mo-start')
       if (now - mutationBurstWindowStart > MUTATION_BURST_WINDOW_MS) {
         mutationBurstWindowStart = now
         mutationBurstCount = 0
       }
+      const pendingBefore = pendingMutationNodes.length
       let pendingFull = false
       outer: for (const mutation of mutations) {
         for (const node of mutation.addedNodes) {
@@ -462,8 +513,15 @@
           }
         }
       }
+      const accepted = pendingMutationNodes.length - pendingBefore
       if (pendingFull || mutationBurstCount >= MUTATION_BURST_THRESHOLD) {
         triggerMutationCooldown(now)
+        perfMeasure('sp:mutation-callback', 'sp:mo-start', {
+          mutations: mutations.length,
+          accepted,
+          cooldown: true,
+          pendingFull
+        })
         return
       }
       if (state.mutationCount >= MAX_MUTATION_COUNT) {
@@ -471,6 +529,7 @@
         mutationObserver = null
       }
       if (pendingMutationNodes.length) scheduleMutationFlush()
+      perfMeasure('sp:mutation-callback', 'sp:mo-start', { mutations: mutations.length, accepted, cooldown: false })
     })
     mutationObserver = observer
     observer.observe(root, { childList: true, subtree: true })
