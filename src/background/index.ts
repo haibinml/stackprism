@@ -88,8 +88,6 @@ chrome.webRequest.onHeadersReceived.addListener(
           data.main = shouldMergeHeaderRecords(data.main, record) ? mergeHeaderRecords(data.main, record) : record
           data.apis = []
           data.frames = []
-          delete data.page
-          delete data.dynamic
         } else if (details.type === 'xmlhttprequest' || (details.type as string) === 'fetch' || details.type === 'websocket') {
           data.apis = dedupeApiRecords([record, ...(data.apis || [])])
         } else if (details.type === 'sub_frame') {
