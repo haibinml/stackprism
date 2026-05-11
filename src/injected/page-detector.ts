@@ -46,7 +46,9 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
     url: location.href,
     title: document.title,
     generatedAt: new Date().toISOString(),
-    technologies: suppressDuplicateWebsiteProgramCategories(suppressFrontendFallbackDuplicates(technologies)),
+    technologies: suppressDuplicateWebsiteProgramCategories(
+      suppressFrontendAliasTechnologies(suppressFrontendFallbackDuplicates(technologies))
+    ),
     resources: {
       total: resources.all.length,
       scripts: resources.scripts.slice(0, 120),
@@ -351,11 +353,37 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
       .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '')
     const aliases = {
       clipboardjs: 'clipboard',
+      jquerycompat: 'jquery',
       imagesloadedjs: 'imagesloaded',
       slickcarousel: 'slick',
+      twitterbootstrap: 'bootstrap',
       vuejs: 'vue'
     }
     return aliases[normalized] || normalized
+  }
+
+  function suppressFrontendAliasTechnologies(items) {
+    if (!Array.isArray(items) || !items.length) {
+      return []
+    }
+    const aliases = {
+      jquerycompat: { category: '前端库', name: 'jQuery' },
+      twitterbootstrap: { category: 'UI / CSS 框架', name: 'Bootstrap' }
+    }
+    const frontendCategories = new Set(['前端库', '前端框架', 'UI / CSS 框架'])
+    return items.map(item => {
+      if (!frontendCategories.has(item?.category)) {
+        return item
+      }
+      const key = String(item?.name || '')
+        .toLowerCase()
+        .replace(/^疑似前端库:\s*/, '')
+        .replace(/(?:\.js|js)$/i, '')
+        .replace(/(?:[._-]pkgd)$/i, '')
+        .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '')
+      const canonical = aliases[key]
+      return canonical ? { ...item, category: canonical.category, name: canonical.name } : item
+    })
   }
 
   function suppressFrontendFallbackDuplicates(items) {

@@ -2,6 +2,7 @@ import { attachTechnologyLinks } from './tech-links'
 import { addStoredCustomHeaderRules } from './headers'
 import { clearBadge, clearTabSession, getPopupCache, getTabData, getTabSnapshot, popupStorageKey, storageKey } from './tab-store'
 import {
+  canonicalizeFrontendAliasTechnologies,
   strongerConfidence,
   suppressDuplicateWebsiteProgramCategories,
   suppressFrontendFallbackDuplicates,
@@ -134,7 +135,7 @@ export const filterTechnologiesBySettings = (technologies: any[], settings: any)
 const mergeDisplayTechnologyRecords = (items: any[]) => {
   const map = new Map()
   for (const item of suppressDuplicateWebsiteProgramCategories(
-    suppressWordPressThemeDirectoryFallbacks(suppressFrontendFallbackDuplicates(items))
+    suppressWordPressThemeDirectoryFallbacks(canonicalizeFrontendAliasTechnologies(suppressFrontendFallbackDuplicates(items)))
   )) {
     if (!item?.name) continue
     const category = item.category || '其他库'

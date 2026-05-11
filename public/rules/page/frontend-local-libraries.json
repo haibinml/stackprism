@@ -55,6 +55,28 @@
             "patterns": ["(?:^|/)(?:lazyload|lazy-load|vanilla-lazyload)(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
           },
           {
+            "name": "OwlCarousel2",
+            "patterns": [
+              "(?:^|/)owl\\.carousel(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)owl\\.carousel/.+\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "magnific-popup.js",
+            "patterns": ["(?:^|/)(?:jquery\\.)?magnific-popup(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "font-awesome",
+            "patterns": [
+              "(?:^|/)font-?awesome(?:\\.min)?\\.css(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)font-?awesome/.+\\.css(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "spin.js",
+            "patterns": ["(?:^|/)spin(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
+          },
+          {
             "name": "Layer.js",
             "patterns": ["(?:^|/)layer(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
           },

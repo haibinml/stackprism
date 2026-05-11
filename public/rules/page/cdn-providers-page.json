@@ -27,6 +27,14 @@
           "patterns": ["cdnjs\\.cloudflare\\.com"]
         },
         {
+          "name": "cdnjs 国内镜像",
+          "patterns": [
+            "cdnjs\\.webstatic\\.cn(?:/ajax/libs/|[/?#]|$)",
+            "mirrors\\.sustech\\.edu\\.cn/cdnjs/",
+            "s4\\.zstatic\\.net/ajax/libs/"
+          ]
+        },
+        {
           "name": "Google Hosted Libraries / Fonts",
           "patterns": ["ajax\\.googleapis\\.com|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com"]
         },

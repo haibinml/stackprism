@@ -27,24 +27,50 @@ export const shortHeaderUrl = (raw: unknown): string => {
   }
 }
 
-export const normalizeDynamicFallbackTechName = (name: unknown): string => {
-  const normalized = String(name || '')
+const normalizeFrontendTechKey = (name: unknown): string =>
+  String(name || '')
     .toLowerCase()
     .replace(/^疑似前端库:\s*/, '')
     .replace(/(?:\.js|js)$/i, '')
     .replace(/(?:[._-]pkgd)$/i, '')
     .replace(/[^a-z0-9一-龥]+/g, '')
 
+export const normalizeDynamicFallbackTechName = (name: unknown): string => {
+  const normalized = normalizeFrontendTechKey(name)
   const aliases: Record<string, string> = {
     clipboardjs: 'clipboard',
+    jquerycompat: 'jquery',
     imagesloadedjs: 'imagesloaded',
     slickcarousel: 'slick',
+    twitterbootstrap: 'bootstrap',
     vuejs: 'vue'
   }
   return aliases[normalized] || normalized
 }
 
 export const isFrontendFallback = (item: any) => item?.category === '前端库' && /^疑似前端库:/i.test(String(item?.name || '').trim())
+
+const frontendTechnologyCategories = new Set(['前端库', '前端框架', 'UI / CSS 框架'])
+
+const frontendAliasTechnologies: Record<string, { category: string; name: string }> = {
+  jquerycompat: { category: '前端库', name: 'jQuery' },
+  twitterbootstrap: { category: 'UI / CSS 框架', name: 'Bootstrap' }
+}
+
+export const canonicalizeFrontendAliasTechnologies = (items: any[]) => {
+  if (!Array.isArray(items) || !items.length) return []
+
+  return items.map(item => {
+    if (!frontendTechnologyCategories.has(item?.category)) return item
+    const canonical = frontendAliasTechnologies[normalizeFrontendTechKey(item.name)]
+    if (!canonical) return item
+    return {
+      ...item,
+      category: canonical.category,
+      name: canonical.name
+    }
+  })
+}
 
 const isWordPressThemeDirectoryFallbackEvidence = (evidenceText: string) =>
   /(?:资源或源码路径包含|动态资源路径包含)/i.test(evidenceText) && /\/wp-content\/themes\//i.test(evidenceText)
@@ -117,7 +143,7 @@ export const suppressWordPressThemeDirectoryFallbacks = (items: any[]) => {
 export const mergeTechnologyRecords = (items: any[]) => {
   const map = new Map<string, any>()
   for (const item of suppressDuplicateWebsiteProgramCategories(
-    suppressWordPressThemeDirectoryFallbacks(suppressFrontendFallbackDuplicates(items))
+    suppressWordPressThemeDirectoryFallbacks(canonicalizeFrontendAliasTechnologies(suppressFrontendFallbackDuplicates(items)))
   )) {
     const key = `${item.category}::${item.name}`.toLowerCase()
     const current = map.get(key) || { ...item, evidence: [] }

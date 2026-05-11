@@ -85,6 +85,10 @@
             "patterns": ["(?:^|/)assets/icon/dingtalk\\.(?:png|svg|webp)(?:[?#]|[\"'<>\\s]|$)"]
           },
           {
+            "name": "企业微信登录",
+            "patterns": ["(?:^|/)assets/icon/(?:wxwork|qywechat|wecom|wework|work-weixin|workwx)\\.(?:png|svg|webp)(?:[?#]|[\"'<>\\s]|$)"]
+          },
+          {
             "name": "飞书 / Lark 登录",
             "patterns": ["(?:^|/)assets/icon/(?:feishu|lark)\\.(?:png|svg|webp)(?:[?#]|[\"'<>\\s]|$)"]
           },
@@ -130,7 +134,7 @@
         "rules": [
           {
             "name": "钉钉登录",
-            "patterns": ["oapi\\.dingtalk\\.com/connect/qrconnect", "login\\.dingtalk\\.com", "DingTalk", "钉钉登录"]
+            "patterns": ["oapi\\.dingtalk\\.com/connect/qrconnect", "login\\.dingtalk\\.com/(?:oauth2|login|authorize)"]
           },
           {
             "name": "飞书 / Lark 登录",
@@ -144,7 +148,7 @@
           },
           {
             "name": "企业微信登录",
-            "patterns": ["open\\.work\\.weixin\\.qq\\.com", "work.weixin.qq.com", "企业微信登录", "wecom"]
+            "patterns": ["open\\.work\\.weixin\\.qq\\.com", "work\\.weixin\\.qq\\.com/[^\\s\"'<>]*(?:oauth|login|qrconnect|wwopen)"]
           }
         ]
       },

@@ -1034,6 +1034,7 @@
     "jsDelivr": "https://www.jsdelivr.com",
     "UNPKG": "https://unpkg.com",
     "cdnjs": "https://cdnjs.com",
+    "cdnjs 国内镜像": "https://cdnjs.com",
     "Google Hosted Libraries / Fonts": "https://developers.google.com/speed/libraries",
     "Google Cloud CDN / Storage": "https://cloud.google.com/cdn",
     "Microsoft Ajax CDN": "https://learn.microsoft.com/aspnet/ajax/cdn/overview",
