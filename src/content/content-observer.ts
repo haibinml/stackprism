@@ -214,7 +214,8 @@
   }
 
   const SUBTREE_SCAN_LIMIT = 200
-  const SUBTREE_SELECTOR = 'script[src], link[href], iframe[src], [id], [class], [data-v-app], [ng-version], astro-island, astro-slot'
+  const SUBTREE_SELECTOR =
+    'script[src], link[href], iframe[src], [data-v-app], [ng-version], [data-reactroot], [data-turbo], [data-controller], astro-island, astro-slot'
 
   const matchesSkipContainer = element => {
     const tokens = []
@@ -342,8 +343,8 @@
     stopped = true
     clearTimeout(sendTimer)
     if (pendingMutationFrame) {
-      if (typeof cancelAnimationFrame === 'function') {
-        cancelAnimationFrame(pendingMutationFrame)
+      if (typeof cancelIdleCallback === 'function') {
+        cancelIdleCallback(pendingMutationFrame)
       } else {
         clearTimeout(pendingMutationFrame)
       }
@@ -453,10 +454,10 @@
 
   const scheduleMutationFlush = () => {
     if (pendingMutationFrame || stopped) return
-    if (typeof requestAnimationFrame === 'function') {
-      pendingMutationFrame = requestAnimationFrame(processPendingMutationNodes)
+    if (typeof requestIdleCallback === 'function') {
+      pendingMutationFrame = requestIdleCallback(processPendingMutationNodes, { timeout: 1000 })
     } else {
-      pendingMutationFrame = setTimeout(processPendingMutationNodes, 16)
+      pendingMutationFrame = setTimeout(processPendingMutationNodes, 200)
     }
   }
 
@@ -484,7 +485,7 @@
         mutationCooldownUntil = now + MUTATION_COOLDOWN_MS
         pendingMutationNodes = []
         if (pendingMutationFrame) {
-          if (typeof cancelAnimationFrame === 'function') cancelAnimationFrame(pendingMutationFrame)
+          if (typeof cancelIdleCallback === 'function') cancelIdleCallback(pendingMutationFrame)
           else clearTimeout(pendingMutationFrame)
           pendingMutationFrame = 0
         }
@@ -517,7 +518,7 @@
     history.pushState = wrappedPushState
     history.replaceState = wrappedReplaceState
     window.addEventListener('popstate', handleUrlChange)
-    navigationInterval = window.setInterval(handleUrlChange, 1200)
+    navigationInterval = window.setInterval(handleUrlChange, 5000)
   }
 
   const installContextInvalidationGuards = () => {
