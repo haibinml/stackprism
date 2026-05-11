@@ -222,7 +222,12 @@ const detectPageTechnologies = async (ruleConfig: Record<string, unknown> = {}) 
   }
 
   function detectUiFrameworks(add, resources, classes, cssVariables, html, externalRules) {
-    if (scoreTailwind(classes) >= 10) {
+    const atomicCssOrigin = detectAtomicCssOrigin(cssVariables)
+    if (atomicCssOrigin === 'unocss') {
+      add('UI / CSS 框架', 'UnoCSS', '高', '存在 --un-* CSS 变量(UnoCSS 默认前缀)')
+    } else if (atomicCssOrigin === 'tailwind') {
+      add('UI / CSS 框架', 'Tailwind CSS', '高', '存在 --tw-* CSS 变量(Tailwind 默认前缀)')
+    } else if (scoreTailwind(classes) >= 10) {
       add('UI / CSS 框架', 'Tailwind CSS', '中', '存在大量 Tailwind 风格原子类名')
     }
 
@@ -236,6 +241,45 @@ const detectPageTechnologies = async (ruleConfig: Record<string, unknown> = {}) 
       resourceConfidence: '中',
       sourceLabel: 'JSON UI 框架规则'
     })
+  }
+
+  function detectAtomicCssOrigin(cssVariables) {
+    const names = cssVariables?.names || []
+    let hasUn = false
+    let hasTw = false
+    for (const name of names) {
+      if (!hasUn && name.startsWith('--un-')) hasUn = true
+      if (!hasTw && name.startsWith('--tw-')) hasTw = true
+      if (hasUn && hasTw) break
+    }
+    if (hasUn) return 'unocss'
+    if (hasTw) return 'tailwind'
+
+    try {
+      for (const sheet of document.styleSheets) {
+        let rules
+        try {
+          rules = sheet.cssRules
+        } catch {
+          continue
+        }
+        if (!rules) continue
+        const limit = rules.length < 400 ? rules.length : 400
+        for (let i = 0; i < limit; i++) {
+          const text = rules[i]?.cssText || ''
+          if (!hasUn && text.includes('--un-')) hasUn = true
+          if (!hasTw && text.includes('--tw-')) hasTw = true
+          if (hasUn || hasTw) break
+        }
+        if (hasUn || hasTw) break
+      }
+    } catch {
+      // ignore
+    }
+
+    if (hasUn) return 'unocss'
+    if (hasTw) return 'tailwind'
+    return ''
   }
 
   function detectAdditionalFrontendTechnologies(add, resources, classes, html, externalRules) {
