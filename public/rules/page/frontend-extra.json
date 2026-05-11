@@ -93,8 +93,8 @@
           },
           {
             "name": "Unpoly",
-            "patterns": ["unpoly(?:\\.min)?\\.js|up-target=|up-follow"],
-            "globals": ["up"]
+            "resourceOnly": true,
+            "patterns": ["(?:^|/)unpoly(?:\\.esm)?(?:\\.min)?\\.js(?:[?#]|[\"'<>\\s]|$)", "@unpoly\\/"]
           }
         ]
       },

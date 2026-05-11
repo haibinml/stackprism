@@ -68,6 +68,13 @@
           "patterns": ["^wss?://"]
         },
         {
+          "name": "WebAssembly",
+          "confidence": "高",
+          "resourceOnly": true,
+          "resourceHints": [".wasm"],
+          "patterns": ["\\.wasm(?:[?#]|[\"'<>\\s]|$)"]
+        },
+        {
           "name": "Zone.js",
           "confidence": "高",
           "globals": ["Zone"]
