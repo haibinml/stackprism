@@ -86,6 +86,43 @@
       }
     : noop
 
+  const PERF_DUMP_INTERVAL_MS = 3000
+  const PERF_MEASURE_NAMES = ['sp:mutation-callback', 'sp:mutation-flush', 'sp:perf-observer', 'sp:send-snapshot']
+  let perfDumpTimer = 0
+
+  const dumpPerfSnapshot = () => {
+    const summary = {}
+    let hasAny = false
+    for (const name of PERF_MEASURE_NAMES) {
+      const entries = performance.getEntriesByName(name)
+      if (!entries.length) continue
+      hasAny = true
+      let total = 0
+      let max = 0
+      let lastDetail = null
+      for (const entry of entries) {
+        total += entry.duration
+        if (entry.duration > max) max = entry.duration
+        if (entry.detail !== undefined) lastDetail = entry.detail
+      }
+      summary[name] = {
+        count: entries.length,
+        totalMs: Number(total.toFixed(1)),
+        avgMs: Number((total / entries.length).toFixed(2)),
+        maxMs: Number(max.toFixed(1)),
+        lastDetail
+      }
+      try {
+        performance.clearMeasures(name)
+      } catch {
+        // ignore
+      }
+    }
+    if (hasAny) {
+      console.log('[StackPrism observer]', new Date().toISOString().slice(11, 19), summary)
+    }
+  }
+
   // ----- 底层 helper -----
 
   const trimList = (list, max) => {
@@ -374,6 +411,10 @@
       pendingMutationFrame = 0
     }
     pendingMutationNodes = []
+    if (perfDumpTimer) {
+      window.clearInterval(perfDumpTimer)
+      perfDumpTimer = 0
+    }
     if (navigationInterval) {
       window.clearInterval(navigationInterval)
       navigationInterval = 0
@@ -577,6 +618,10 @@
     installMutationObserver()
     installNavigationObserver()
     scheduleSend()
+    if (PERF_DEBUG) {
+      console.log('[StackPrism observer] 性能埋点已启用，每 ' + PERF_DUMP_INTERVAL_MS + 'ms 输出一次摘要')
+      perfDumpTimer = window.setInterval(dumpPerfSnapshot, PERF_DUMP_INTERVAL_MS)
+    }
   } catch (error) {
     if (!isExtensionContextInvalidated(error)) {
       throw error
