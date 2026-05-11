@@ -47,7 +47,8 @@
       {
         "name": "京东支付",
         "kind": "国内支付",
-        "patterns": ["jdpay", "pay\\.jd\\.com", "京东支付"]
+        "matchIn": ["url", "resources"],
+        "patterns": ["(?:^|[/?#&_.=-])jdpay(?:[/?#&_.=-]|sdk|$)", "pay\\.jd\\.com"]
       },
       {
         "name": "百度收银台",
@@ -167,7 +168,12 @@
       {
         "name": "码支付 / CodePay",
         "kind": "第四方支付 / 免签聚合支付",
-        "patterns": ["codepay\\.fateqq\\.com", "codepay", "码支付", "codepay_id", "codepay_key", "pay\\.codepay"]
+        "patterns": [
+          "codepay\\.fateqq\\.com",
+          "pay\\.codepay",
+          "(?:^|[?&#\\s\"'<>])codepay_(?:id|key)(?:[\\s\"'<>:=&]|$)",
+          "name=[\"']codepay_(?:id|key)[\"']"
+        ]
       },
       {
         "name": "易支付 / EPay 聚合支付",
@@ -210,7 +216,11 @@
       {
         "name": "YPay / 源支付",
         "kind": "第四方支付 / 聚合支付",
-        "patterns": ["YPay", "源支付", "ypay", "ypay_order", "YPay聚合支付"]
+        "patterns": [
+          "(?:^|/)ypay(?:/|[?#\\s\"'<>]|$)",
+          "(?:^|[?&#\\s\"'<>])ypay_(?:order|api|notify|return|config)(?:[\\s\"'<>:=&]|$)",
+          "name=[\"']ypay_(?:order|api|notify|return|config)[\"']"
+        ]
       },
       {
         "defaults": {

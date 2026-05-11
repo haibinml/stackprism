@@ -70,7 +70,11 @@
               },
               {
                 "name": "Element UI / Element Plus",
-                "patterns": ["element-plus", "element-ui"],
+                "patterns": [
+                  "element-plus",
+                  "element-ui",
+                  "(?=[\\s\\S]*(?:^|/)element/index(?:\\.min)?\\.js(?:[?#]|[\"'<>\\s]|$))(?=[\\s\\S]*(?:(?:^|/)element/index(?:\\.min)?\\.css(?:[?#]|[\"'<>\\s]|$)|el-(?:button|form|input|table|dialog|select)))"
+                ],
                 "classPrefixes": ["el-"]
               }
             ]

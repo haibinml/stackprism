@@ -442,7 +442,7 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
   }
 
   function detectBackendFrameworkHints(add, resources, html, externalRules) {
-    const text = [resources.text, html].join('\n')
+    const text = [location.href, resources.text, html].join('\n')
     detectJsonRuleList(add, externalRules, {
       defaultCategory: '后端 / 服务器框架',
       resources,

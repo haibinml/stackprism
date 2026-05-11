@@ -115,18 +115,22 @@ const detectFromHeaders = (headers: Record<string, string>, url: string, headerR
 export const fetchMainHeadersFallback = async (url: string, headerRules: any, settings: any) => {
   if (!url || !/^https?:/i.test(url)) return null
   try {
-    let response = await fetch(url, { method: 'HEAD', credentials: 'omit', cache: 'no-store', redirect: 'follow' })
-    if (!response.ok && response.status !== 405 && response.status !== 0) {
-      response = await fetch(url, { method: 'GET', credentials: 'omit', cache: 'no-store', redirect: 'follow' })
-    }
-    const responseHeaders: Array<{ name: string; value: string }> = []
+    let method = 'HEAD'
+    let response = await fetch(url, { method, credentials: 'omit', cache: 'no-store', redirect: 'follow' })
+    let responseHeaders: Array<{ name: string; value: string }> = []
     response.headers.forEach((value, name) => responseHeaders.push({ name, value }))
+    if ((!response.ok && response.status !== 405 && response.status !== 0) || !responseHeaders.length) {
+      method = 'GET'
+      response = await fetch(url, { method: 'GET', credentials: 'omit', cache: 'no-store', redirect: 'follow' })
+      responseHeaders = []
+      response.headers.forEach((value, name) => responseHeaders.push({ name, value }))
+    }
     if (!responseHeaders.length) return null
     return buildHeaderRecord(
       {
         url: response.url || url,
         type: 'main_frame',
-        method: 'HEAD',
+        method,
         statusCode: response.status,
         responseHeaders
       },
@@ -142,6 +146,7 @@ export const buildHeaderRecord = (details: any, headerRules: any, settings: any)
   const normalizedHeaders = normalizeHeaders(details.responseHeaders)
   const headers = pickHeaders(normalizedHeaders, headerRules.interestingHeaders || [])
   return {
+    requestId: details.requestId || '',
     url: details.url,
     type: details.type,
     method: details.method,
@@ -150,6 +155,39 @@ export const buildHeaderRecord = (details: any, headerRules: any, settings: any)
     headers,
     headerCount: Object.keys(normalizedHeaders).length,
     technologies: detectFromHeaders(normalizedHeaders, details.url, headerRules, settings)
+  }
+}
+
+const normalizeRecordUrl = (value: unknown): string => {
+  try {
+    const url = new URL(String(value || ''))
+    url.hash = ''
+    return url.href
+  } catch {
+    return ''
+  }
+}
+
+export const shouldMergeHeaderRecords = (previous: any, next: any): boolean => {
+  if (!previous || !next) return false
+  if (previous.requestId && next.requestId && previous.requestId === next.requestId) return true
+  const previousUrl = normalizeRecordUrl(previous.url)
+  const nextUrl = normalizeRecordUrl(next.url)
+  return Boolean(previousUrl && nextUrl && previousUrl === nextUrl)
+}
+
+export const mergeHeaderRecords = (previous: any, next: any) => {
+  if (!previous) return next
+  if (!next) return previous
+  return {
+    ...previous,
+    ...next,
+    headers: {
+      ...(previous.headers || {}),
+      ...(next.headers || {})
+    },
+    headerCount: Math.max(Number(previous.headerCount || 0), Number(next.headerCount || 0)),
+    technologies: mergeTechnologyRecords([...(previous.technologies || []), ...(next.technologies || [])])
   }
 }
 

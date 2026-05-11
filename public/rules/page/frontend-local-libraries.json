@@ -55,6 +55,21 @@
             "patterns": ["(?:^|/)(?:lazyload|lazy-load|vanilla-lazyload)(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
           },
           {
+            "name": "Layer.js",
+            "patterns": ["(?:^|/)layer(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "jQuery UI",
+            "patterns": [
+              "(?:^|/)jquery-ui(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)jquery\\.ui(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "jQuery cxCalendar",
+            "patterns": ["(?:^|/)jquery\\.cxcalendar(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
+          },
+          {
             "name": "Zooming",
             "patterns": ["(?:^|/)zooming(?:\\.min)?\\.js(?:[?#].*)?$"]
           }

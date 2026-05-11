@@ -59,6 +59,12 @@
         "patterns": ["\\.jsp(?:\\?|#|$)", "\\.jspx(?:\\?|#|$)", "JSESSIONID", "javax\\.servlet\\.jsp", "org\\.apache\\.jsp"]
       },
       {
+        "name": "FreeMarker",
+        "kind": "后端模板语言",
+        "confidence": "中",
+        "patterns": ["\\.ftl(?:\\?|#|$)", "freemarker", "FreeMarker template error", "org\\.apache\\.freemarker"]
+      },
+      {
         "name": "Java Servlet",
         "kind": "后端 Java Web 技术",
         "patterns": ["JSESSIONID", "\\.do(?:\\?|#|$)", "\\.action(?:\\?|#|$)", "/servlet/", "javax\\.servlet", "jakarta\\.servlet"]

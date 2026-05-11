@@ -96,8 +96,15 @@
           },
           {
             "name": "Alibaba Aplus / 阿里统计",
-            "patterns": ["g\\.alicdn\\.com/alilog", "aplus\\.js", "log\\.mmstat\\.com", "arms-retcode", "__bl"],
-            "globals": ["goldlog", "__bl"]
+            "patterns": ["g\\.alicdn\\.com/alilog", "aplus\\.js", "log\\.mmstat\\.com"],
+            "globals": ["goldlog"]
+          },
+          {
+            "category": "探针 / 监控",
+            "name": "Alibaba ARMS / 前端 APM",
+            "kind": "前端性能监控 / APM",
+            "patterns": ["retcode\\.alicdn\\.com/retcode", "arms-retcode", "__bl"],
+            "globals": ["__bl"]
           }
         ]
       },

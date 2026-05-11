@@ -1,7 +1,7 @@
 import { injectContentObserverIntoOpenTabs } from './content-injector'
 import { clearBadge, clearTabSession } from './tab-store'
 import { clearDynamicSnapshotTimer, clearPendingDynamicSnapshot } from './dynamic-snapshot'
-import { buildHeaderRecord, dedupeApiRecords } from './headers'
+import { buildHeaderRecord, dedupeApiRecords, mergeHeaderRecords, shouldMergeHeaderRecords } from './headers'
 import { clearActiveDetectionTimer, refreshAllBadges, saveTabDataAndBadge, scheduleActivePageDetection } from './detection'
 import { getTabData, getTabSnapshot } from './tab-store'
 import { SETTINGS_STORAGE_KEY, applyDetectorSettingsUpdate, loadDetectorSettings, loadTechRules } from './detector-settings'
@@ -85,7 +85,7 @@ chrome.webRequest.onHeadersReceived.addListener(
         }
         const record = buildHeaderRecord(details, rules.headers || {}, settings)
         if (details.type === 'main_frame') {
-          data.main = record
+          data.main = shouldMergeHeaderRecords(data.main, record) ? mergeHeaderRecords(data.main, record) : record
           data.apis = []
           data.frames = []
           delete data.page

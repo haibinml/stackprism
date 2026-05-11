@@ -63,6 +63,15 @@
           "patterns": ["yii(?:\\.activeForm|\\.gridView)|yii\\.js"]
         },
         {
+          "name": "ThinkPHP",
+          "confidence": "中",
+          "patterns": [
+            "thinkphp",
+            "index\\.php\\?s=",
+            "(?:^|/)index/(?:index|home|pay|user|api)/[a-z0-9_-]+(?:[?#\\s\"'<>]|$)"
+          ]
+        },
+        {
           "name": "CakePHP",
           "confidence": "低",
           "patterns": ["cakephp|csrfToken.*cake"]

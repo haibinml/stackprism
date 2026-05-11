@@ -275,7 +275,7 @@
               "matchType": "regex",
               "patterns": [
                 "<meta[^>]+name=['\"]?generator['\"]?[^>]+(?:Open edX|openedx)",
-                "(?:^|/)static/(?:edx|openedx|common|studio)/",
+                "(?:^|/)static/(?:edx|openedx|studio)/",
                 "(?:^|/)courses/course-v1:",
                 "openedx[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"
               ],

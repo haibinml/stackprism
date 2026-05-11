@@ -4,9 +4,34 @@ import { fetchMainHeadersFallback } from './headers'
 import { clearBadge, clearTabSession, getTabData, getTabSnapshot, updateBadgeForTab, writeTabData } from './tab-store'
 import { buildEffectivePageRules, loadDetectorSettings, loadTechRules } from './detector-settings'
 import { scheduleBundleLicenseDetection } from './bundle-license'
+import { injectContentObserver } from './content-injector'
 import { isDetectablePageUrl } from '@/utils/page-support'
 
 const activeDetectionTimers = new Map<number, ReturnType<typeof setTimeout>>()
+
+const normalizePageUrl = (value: unknown): string => {
+  try {
+    const url = new URL(String(value || ''))
+    url.hash = ''
+    return url.href
+  } catch {
+    return ''
+  }
+}
+
+const needsMainHeadersFallback = (record: any, currentUrl: string): boolean => {
+  if (!record) return true
+  const recordUrl = normalizePageUrl(record.url)
+  const tabUrl = normalizePageUrl(currentUrl)
+  if (recordUrl && tabUrl && recordUrl !== tabUrl) return true
+  return !Number(record.headerCount || 0) && !(record.technologies || []).length
+}
+
+const headerRecordMatchesUrl = (record: any, currentUrl: string): boolean => {
+  const recordUrl = normalizePageUrl(record?.url)
+  const tabUrl = normalizePageUrl(currentUrl)
+  return Boolean(recordUrl && tabUrl && recordUrl === tabUrl)
+}
 
 export const saveTabDataAndBadge = async (tabId: number, data: any, settings: any) => {
   const tab = await getTabSnapshot(tabId)
@@ -53,6 +78,7 @@ export const runActivePageDetection = async (tabId: number) => {
       clearBadge(tabId)
       return
     }
+    await injectContentObserver(tabId)
     const [data, rules, settings] = await Promise.all([getTabData(tabId), loadTechRules(), loadDetectorSettings()])
     const pageRules = buildEffectivePageRules(rules.page || {}, settings)
     await chrome.scripting.executeScript({
@@ -74,9 +100,10 @@ export const runActivePageDetection = async (tabId: number) => {
     const augmentedPage = await augmentPageWithWordPressThemeStyles(page)
     data.page = cleanPageDetectionRecord(augmentedPage)
 
-    if (!data.main) {
+    if (needsMainHeadersFallback(data.main, (page as any).url || tab.url)) {
       const fallback = await fetchMainHeadersFallback((page as any).url || '', rules.headers || {}, settings)
       if (fallback) data.main = fallback
+      else if (data.main && !headerRecordMatchesUrl(data.main, (page as any).url || tab.url)) delete data.main
     }
 
     data.updatedAt = Date.now()
