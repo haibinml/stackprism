@@ -299,7 +299,7 @@
               },
               {
                 "name": "Tencent Cloud CDN",
-                "patterns": ["x-cos-|x-tencent-|qcloud|tencent|myqcloud|gtimg"],
+                "patterns": ["x-cos-|x-tencent-|qcloudcdn|myqcloud|gtimg|tencent-cloud|tencent-cdn|tencent-cos|tencentcs|tencentcdn"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
@@ -350,7 +350,7 @@
               {
                 "name": "UCloud CDN",
                 "patterns": [
-                  "ucloud\\.cn|ufileos\\.com|ucloudstack\\.com|ucache\\.io",
+                  "(?:^|[\\s/.\"'<>:=])(?:ucloud\\.cn|ufileos\\.com|ucloudstack\\.com|ucache\\.io)\\b",
                   "(?:^|\\n)(?:server|via):[^\\n]*\\bucache\\b",
                   "(?:^|\\n)x-ucloud-"
                 ],
@@ -495,7 +495,10 @@
           },
           {
             "name": "Wasabi Storage",
-            "patterns": ["url: https?://s3\\.[a-z0-9-]+\\.wasabisys\\.com/[^\\s?#]+/", "url: https?://[^\\s/]+\\.s3\\.[a-z0-9-]+\\.wasabisys\\.com/"],
+            "patterns": [
+              "url: https?://s3\\.[a-z0-9-]+\\.wasabisys\\.com/[^\\s?#]+/",
+              "url: https?://[^\\s/]+\\.s3\\.[a-z0-9-]+\\.wasabisys\\.com/"
+            ],
             "evidence": "响应 URL 指向 Wasabi Storage"
           },
           {
@@ -652,7 +655,11 @@
           },
           {
             "name": "Pixelbin",
-            "patterns": ["url: https?://cdn\\.pixelbin\\.io/", "url: https?://api\\.pixelbin\\.io/", "url: https?://(?!www\\.)[a-z0-9-]+\\.pixelbin\\.io/"],
+            "patterns": [
+              "url: https?://cdn\\.pixelbin\\.io/",
+              "url: https?://api\\.pixelbin\\.io/",
+              "url: https?://(?!www\\.)[a-z0-9-]+\\.pixelbin\\.io/"
+            ],
             "evidence": "响应 URL 指向 Pixelbin"
           },
           {
@@ -692,7 +699,11 @@
           },
           {
             "name": "Status.io",
-            "patterns": ["url: https?://cdn\\.status\\.io/", "url: https?://api\\.status\\.io/", "url: https?://status\\.io/(?:pages|assets)/"],
+            "patterns": [
+              "url: https?://cdn\\.status\\.io/",
+              "url: https?://api\\.status\\.io/",
+              "url: https?://status\\.io/(?:pages|assets)/"
+            ],
             "evidence": "响应 URL 指向 Status.io"
           },
           {
@@ -725,17 +736,29 @@
           },
           {
             "name": "incident.io Status Page",
-            "patterns": ["url: https?://status\\.incident\\.io/", "url: https?://assets\\.incident\\.io/", "url: https?://incident\\.io/[^\\s]*(?:status-page|status_pages)"],
+            "patterns": [
+              "url: https?://status\\.incident\\.io/",
+              "url: https?://assets\\.incident\\.io/",
+              "url: https?://incident\\.io/[^\\s]*(?:status-page|status_pages)"
+            ],
             "evidence": "响应 URL 指向 incident.io 状态页"
           },
           {
             "name": "FireHydrant Status Page",
-            "patterns": ["url: https?://status\\.firehydrant\\.io/", "url: https?://cdn\\.firehydrant\\.io/", "url: https?://firehydrant\\.io/[^\\s]*(?:status-page|status_pages)"],
+            "patterns": [
+              "url: https?://status\\.firehydrant\\.io/",
+              "url: https?://cdn\\.firehydrant\\.io/",
+              "url: https?://firehydrant\\.io/[^\\s]*(?:status-page|status_pages)"
+            ],
             "evidence": "响应 URL 指向 FireHydrant 状态页"
           },
           {
             "name": "Rootly Status Page",
-            "patterns": ["url: https?://status\\.rootly\\.com/", "url: https?://cdn\\.rootly\\.com/", "url: https?://rootly\\.com/[^\\s]*(?:status-page|status_pages)"],
+            "patterns": [
+              "url: https?://status\\.rootly\\.com/",
+              "url: https?://cdn\\.rootly\\.com/",
+              "url: https?://rootly\\.com/[^\\s]*(?:status-page|status_pages)"
+            ],
             "evidence": "响应 URL 指向 Rootly 状态页"
           },
           {
@@ -750,7 +773,11 @@
           },
           {
             "name": "Hyperping Status Page",
-            "patterns": ["url: https?://status\\.hyperping\\.io/", "url: https?://cdn\\.hyperping\\.io/", "url: https?://hyperping\\.io/[^\\s]*(?:widget|embed|status-page)"],
+            "patterns": [
+              "url: https?://status\\.hyperping\\.io/",
+              "url: https?://cdn\\.hyperping\\.io/",
+              "url: https?://hyperping\\.io/[^\\s]*(?:widget|embed|status-page)"
+            ],
             "evidence": "响应 URL 指向 Hyperping 状态页"
           },
           {
@@ -765,17 +792,28 @@
           },
           {
             "name": "Cronitor Status Page",
-            "patterns": ["url: https?://status\\.cronitor\\.io/", "url: https?://cronitorstatus\\.com/", "url: https?://cronitor\\.io/[^\\s]*(?:status-page|status_pages)"],
+            "patterns": [
+              "url: https?://status\\.cronitor\\.io/",
+              "url: https?://cronitorstatus\\.com/",
+              "url: https?://cronitor\\.io/[^\\s]*(?:status-page|status_pages)"
+            ],
             "evidence": "响应 URL 指向 Cronitor 状态页"
           },
           {
             "name": "Pulsetic Status Page",
-            "patterns": ["url: https?://status\\.pulsetic\\.com/", "url: https?://cdn\\.pulsetic\\.com/", "url: https?://pulsetic\\.com/[^\\s]*(?:status-page|widget)"],
+            "patterns": [
+              "url: https?://status\\.pulsetic\\.com/",
+              "url: https?://cdn\\.pulsetic\\.com/",
+              "url: https?://pulsetic\\.com/[^\\s]*(?:status-page|widget)"
+            ],
             "evidence": "响应 URL 指向 Pulsetic 状态页"
           },
           {
             "name": "StatusGator",
-            "patterns": ["url: https?://cdn\\.statusgator\\.com/", "url: https?://statusgator\\.com/[^\\s]*(?:statuspage|status-page|widget)"],
+            "patterns": [
+              "url: https?://cdn\\.statusgator\\.com/",
+              "url: https?://statusgator\\.com/[^\\s]*(?:statuspage|status-page|widget)"
+            ],
             "evidence": "响应 URL 指向 StatusGator"
           },
           {
@@ -803,7 +841,11 @@
           },
           {
             "name": "Jotform",
-            "patterns": ["url: https?://cdn\\.jotfor\\.ms/", "url: https?://js\\.jotform\\.com/JotForm\\.js", "url: https?://(?:form|www)\\.jotform\\.com/(?:form/)?\\d+"],
+            "patterns": [
+              "url: https?://cdn\\.jotfor\\.ms/",
+              "url: https?://js\\.jotform\\.com/JotForm\\.js",
+              "url: https?://(?:form|www)\\.jotform\\.com/(?:form/)?\\d+"
+            ],
             "evidence": "响应 URL 指向 Jotform 表单"
           },
           {
@@ -813,7 +855,11 @@
           },
           {
             "name": "Formstack",
-            "patterns": ["url: https?://static\\.formstack\\.com/", "url: https?://(?:www\\.)?formstack\\.com/forms/js\\.php", "url: https?://formstack\\.io/forms/js\\.php"],
+            "patterns": [
+              "url: https?://static\\.formstack\\.com/",
+              "url: https?://(?:www\\.)?formstack\\.com/forms/js\\.php",
+              "url: https?://formstack\\.io/forms/js\\.php"
+            ],
             "evidence": "响应 URL 指向 Formstack 表单"
           },
           {
@@ -828,7 +874,10 @@
           },
           {
             "name": "Cognito Forms",
-            "patterns": ["url: https?://(?:www\\.)?cognitoforms\\.com/f/seamless\\.js", "url: https?://(?:www\\.)?cognitoforms\\.com/forms/"],
+            "patterns": [
+              "url: https?://(?:www\\.)?cognitoforms\\.com/f/seamless\\.js",
+              "url: https?://(?:www\\.)?cognitoforms\\.com/forms/"
+            ],
             "evidence": "响应 URL 指向 Cognito Forms"
           },
           {
@@ -858,7 +907,11 @@
           },
           {
             "name": "Fillout",
-            "patterns": ["url: https?://forms\\.fillout\\.com/", "url: https?://server\\.fillout\\.com/embed", "url: https?://fillout\\.com/embed/"],
+            "patterns": [
+              "url: https?://forms\\.fillout\\.com/",
+              "url: https?://server\\.fillout\\.com/embed",
+              "url: https?://fillout\\.com/embed/"
+            ],
             "evidence": "响应 URL 指向 Fillout 表单"
           },
           {
@@ -888,7 +941,11 @@
           },
           {
             "name": "SurveySparrow",
-            "patterns": ["url: https?://static\\.surveysparrow\\.com/", "url: https?://app\\.surveysparrow\\.com/", "url: https?://[^\\s/]+\\.surveysparrow\\.com/s/"],
+            "patterns": [
+              "url: https?://static\\.surveysparrow\\.com/",
+              "url: https?://app\\.surveysparrow\\.com/",
+              "url: https?://[^\\s/]+\\.surveysparrow\\.com/s/"
+            ],
             "evidence": "响应 URL 指向 SurveySparrow"
           },
           {
@@ -933,7 +990,11 @@
           },
           {
             "name": "Formaloo",
-            "patterns": ["url: https?://[^\\s/]+\\.formaloo\\.net/", "url: https?://app\\.formaloo\\.com/", "url: https?://formaloo\\.co/(?:widgets|form|embed)"],
+            "patterns": [
+              "url: https?://[^\\s/]+\\.formaloo\\.net/",
+              "url: https?://app\\.formaloo\\.com/",
+              "url: https?://formaloo\\.co/(?:widgets|form|embed)"
+            ],
             "evidence": "响应 URL 指向 Formaloo"
           },
           {
@@ -1148,7 +1209,11 @@
           },
           {
             "name": "Yotpo Reviews",
-            "patterns": ["url: https?://staticw2\\.yotpo\\.com/", "url: https?://cdn-widgetsrepository\\.yotpo\\.com/", "url: https?://api\\.yotpo\\.com/"],
+            "patterns": [
+              "url: https?://staticw2\\.yotpo\\.com/",
+              "url: https?://cdn-widgetsrepository\\.yotpo\\.com/",
+              "url: https?://api\\.yotpo\\.com/"
+            ],
             "evidence": "响应 URL 指向 Yotpo 评价组件"
           },
           {
@@ -1158,12 +1223,20 @@
           },
           {
             "name": "Stamped Reviews",
-            "patterns": ["url: https?://cdn1\\.stamped\\.io/", "url: https?://stamped\\.io/files/widget", "url: https?://api\\.stamped\\.io/"],
+            "patterns": [
+              "url: https?://cdn1\\.stamped\\.io/",
+              "url: https?://stamped\\.io/files/widget",
+              "url: https?://api\\.stamped\\.io/"
+            ],
             "evidence": "响应 URL 指向 Stamped 评价组件"
           },
           {
             "name": "Reviews.io",
-            "patterns": ["url: https?://widget\\.reviews\\.io/", "url: https?://assets\\.reviews\\.io/", "url: https?://api\\.reviews\\.io/"],
+            "patterns": [
+              "url: https?://widget\\.reviews\\.io/",
+              "url: https?://assets\\.reviews\\.io/",
+              "url: https?://api\\.reviews\\.io/"
+            ],
             "evidence": "响应 URL 指向 Reviews.io 评价组件"
           },
           {
@@ -1191,12 +1264,19 @@
           },
           {
             "name": "Okendo Reviews",
-            "patterns": ["url: https?://cdn\\.okendo\\.io/", "url: https?://d3hw6dc1ow8pp2\\.cloudfront\\.net/", "url: https?://api\\.okendo\\.io/"],
+            "patterns": [
+              "url: https?://cdn\\.okendo\\.io/",
+              "url: https?://d3hw6dc1ow8pp2\\.cloudfront\\.net/",
+              "url: https?://api\\.okendo\\.io/"
+            ],
             "evidence": "响应 URL 指向 Okendo 评价组件"
           },
           {
             "name": "Feefo Reviews",
-            "patterns": ["url: https?://api\\.feefo\\.com/", "url: https?://(?:www\\.)?feefo\\.com/[^\\s]*(?:feefo-widget|reviews|merchant)"],
+            "patterns": [
+              "url: https?://api\\.feefo\\.com/",
+              "url: https?://(?:www\\.)?feefo\\.com/[^\\s]*(?:feefo-widget|reviews|merchant)"
+            ],
             "evidence": "响应 URL 指向 Feefo 评价组件"
           },
           {
@@ -1211,12 +1291,18 @@
           },
           {
             "name": "Sitejabber",
-            "patterns": ["url: https?://static\\.sitejabber\\.com/", "url: https?://(?:www\\.)?sitejabber\\.com/[^\\s]*(?:widgets|reviews|js)"],
+            "patterns": [
+              "url: https?://static\\.sitejabber\\.com/",
+              "url: https?://(?:www\\.)?sitejabber\\.com/[^\\s]*(?:widgets|reviews|js)"
+            ],
             "evidence": "响应 URL 指向 Sitejabber 评价组件"
           },
           {
             "name": "Google Customer Reviews",
-            "patterns": ["url: https?://apis\\.google\\.com/js/platform\\.js\\?onload=renderOptIn", "url: https?://www\\.googlecommerce\\.com/trustedstores/"],
+            "patterns": [
+              "url: https?://apis\\.google\\.com/js/platform\\.js\\?onload=renderOptIn",
+              "url: https?://www\\.googlecommerce\\.com/trustedstores/"
+            ],
             "evidence": "响应 URL 指向 Google Customer Reviews"
           },
           {
@@ -1266,17 +1352,27 @@
           },
           {
             "name": "Testimonial.to",
-            "patterns": ["url: https?://embed-v2\\.testimonial\\.to/", "url: https?://testimonial\\.to/[^\\s]*(?:embed|wall-of-love|widgets?)"],
+            "patterns": [
+              "url: https?://embed-v2\\.testimonial\\.to/",
+              "url: https?://testimonial\\.to/[^\\s]*(?:embed|wall-of-love|widgets?)"
+            ],
             "evidence": "响应 URL 指向 Testimonial.to"
           },
           {
             "name": "Boast",
-            "patterns": ["url: https?://cdn\\.boast\\.io/", "url: https?://(?:www\\.)?boast\\.io/[^\\s]*(?:forms|widgets?|embed|testimonials)"],
+            "patterns": [
+              "url: https?://cdn\\.boast\\.io/",
+              "url: https?://(?:www\\.)?boast\\.io/[^\\s]*(?:forms|widgets?|embed|testimonials)"
+            ],
             "evidence": "响应 URL 指向 Boast"
           },
           {
             "name": "VideoAsk",
-            "patterns": ["url: https?://embed\\.videoask\\.com/", "url: https?://static\\.videoask\\.com/", "url: https?://(?:www\\.)?videoask\\.com/(?:f|embed)/"],
+            "patterns": [
+              "url: https?://embed\\.videoask\\.com/",
+              "url: https?://static\\.videoask\\.com/",
+              "url: https?://(?:www\\.)?videoask\\.com/(?:f|embed)/"
+            ],
             "evidence": "响应 URL 指向 VideoAsk"
           },
           {
@@ -1319,12 +1415,20 @@
           },
           {
             "name": "LoyaltyLion",
-            "patterns": ["url: https?://cdn\\.loyaltylion\\.net/", "url: https?://sdk\\.loyaltylion\\.net/", "url: https?://api\\.loyaltylion\\.com/"],
+            "patterns": [
+              "url: https?://cdn\\.loyaltylion\\.net/",
+              "url: https?://sdk\\.loyaltylion\\.net/",
+              "url: https?://api\\.loyaltylion\\.com/"
+            ],
             "evidence": "响应 URL 指向 LoyaltyLion"
           },
           {
             "name": "Yotpo Loyalty",
-            "patterns": ["url: https?://loyalty\\.yotpo\\.com/", "url: https?://cdn\\.swellrewards\\.com/", "url: https?://app\\.swellrewards\\.com/"],
+            "patterns": [
+              "url: https?://loyalty\\.yotpo\\.com/",
+              "url: https?://cdn\\.swellrewards\\.com/",
+              "url: https?://app\\.swellrewards\\.com/"
+            ],
             "evidence": "响应 URL 指向 Yotpo Loyalty / Swell Rewards"
           },
           {
@@ -1338,7 +1442,11 @@
           },
           {
             "name": "Friendbuy",
-            "patterns": ["url: https?://cdn\\.friendbuy\\.com/", "url: https?://static\\.friendbuy\\.com/", "url: https?://app\\.friendbuy\\.com/"],
+            "patterns": [
+              "url: https?://cdn\\.friendbuy\\.com/",
+              "url: https?://static\\.friendbuy\\.com/",
+              "url: https?://app\\.friendbuy\\.com/"
+            ],
             "evidence": "响应 URL 指向 Friendbuy"
           },
           {
@@ -1358,17 +1466,29 @@
           },
           {
             "name": "Zinrelo",
-            "patterns": ["url: https?://cdn\\.zinrelo\\.com/", "url: https?://static\\.zinrelo\\.com/", "url: https?://api\\.zinrelo\\.com/"],
+            "patterns": [
+              "url: https?://cdn\\.zinrelo\\.com/",
+              "url: https?://static\\.zinrelo\\.com/",
+              "url: https?://api\\.zinrelo\\.com/"
+            ],
             "evidence": "响应 URL 指向 Zinrelo"
           },
           {
             "name": "Annex Cloud",
-            "patterns": ["url: https?://cdn\\.annexcloud\\.com/", "url: https?://[^\\s/]+\\.socialannex\\.com/", "url: https?://api\\.annexcloud\\.com/"],
+            "patterns": [
+              "url: https?://cdn\\.annexcloud\\.com/",
+              "url: https?://[^\\s/]+\\.socialannex\\.com/",
+              "url: https?://api\\.annexcloud\\.com/"
+            ],
             "evidence": "响应 URL 指向 Annex Cloud"
           },
           {
             "name": "Extole",
-            "patterns": ["url: https?://cdn\\.extole\\.io/", "url: https?://events\\.extole\\.io/", "url: https?://[^\\s/]+\\.extole\\.io/[^\\s]*(?:zones|widget|referral)"],
+            "patterns": [
+              "url: https?://cdn\\.extole\\.io/",
+              "url: https?://events\\.extole\\.io/",
+              "url: https?://[^\\s/]+\\.extole\\.io/[^\\s]*(?:zones|widget|referral)"
+            ],
             "evidence": "响应 URL 指向 Extole"
           },
           {
@@ -1397,12 +1517,20 @@
           },
           {
             "name": "S Loyalty",
-            "patterns": ["url: https?://cdn\\.sloyalty\\.com/", "url: https?://app\\.sloyalty\\.com/", "url: https?://[^\\s/]+\\.s-loyalty\\.com/"],
+            "patterns": [
+              "url: https?://cdn\\.sloyalty\\.com/",
+              "url: https?://app\\.sloyalty\\.com/",
+              "url: https?://[^\\s/]+\\.s-loyalty\\.com/"
+            ],
             "evidence": "响应 URL 指向 S Loyalty"
           },
           {
             "name": "Voucherify",
-            "patterns": ["url: https?://js\\.voucherify\\.io/", "url: https?://cdn\\.voucherify\\.io/", "url: https?://api\\.voucherify\\.io/"],
+            "patterns": [
+              "url: https?://js\\.voucherify\\.io/",
+              "url: https?://cdn\\.voucherify\\.io/",
+              "url: https?://api\\.voucherify\\.io/"
+            ],
             "evidence": "响应 URL 指向 Voucherify"
           },
           {
@@ -1422,7 +1550,10 @@
           },
           {
             "name": "FirstPromoter",
-            "patterns": ["url: https?://cdn\\.firstpromoter\\.com/", "url: https?://firstpromoter\\.com/[^\\s]*(?:track|referral|affiliate|js|widget)"],
+            "patterns": [
+              "url: https?://cdn\\.firstpromoter\\.com/",
+              "url: https?://firstpromoter\\.com/[^\\s]*(?:track|referral|affiliate|js|widget)"
+            ],
             "evidence": "响应 URL 指向 FirstPromoter"
           },
           {
@@ -1447,17 +1578,27 @@
           },
           {
             "name": "SaaSquatch",
-            "patterns": ["url: https?://fast\\.ssqt\\.io/", "url: https?://app\\.referralsaasquatch\\.com/", "url: https?://referralsaasquatch\\.com/"],
+            "patterns": [
+              "url: https?://fast\\.ssqt\\.io/",
+              "url: https?://app\\.referralsaasquatch\\.com/",
+              "url: https?://referralsaasquatch\\.com/"
+            ],
             "evidence": "响应 URL 指向 SaaSquatch"
           },
           {
             "name": "Referral Rock",
-            "patterns": ["url: https?://app\\.referralrock\\.com/", "url: https?://referralrock\\.com/[^\\s]*(?:track|member|referral|widgets?)"],
+            "patterns": [
+              "url: https?://app\\.referralrock\\.com/",
+              "url: https?://referralrock\\.com/[^\\s]*(?:track|member|referral|widgets?)"
+            ],
             "evidence": "响应 URL 指向 Referral Rock"
           },
           {
             "name": "InviteReferrals",
-            "patterns": ["url: https?://cdn\\.invitereferrals\\.com/", "url: https?://www\\.invitereferrals\\.com/[^\\s]*(?:campaign|widget|referral|tracking)"],
+            "patterns": [
+              "url: https?://cdn\\.invitereferrals\\.com/",
+              "url: https?://www\\.invitereferrals\\.com/[^\\s]*(?:campaign|widget|referral|tracking)"
+            ],
             "evidence": "响应 URL 指向 InviteReferrals"
           },
           {
@@ -1467,7 +1608,10 @@
           },
           {
             "name": "Prefinery",
-            "patterns": ["url: https?://widget\\.prefinery\\.com/", "url: https?://prefinery\\.com/[^\\s]*(?:widget|referral|beta|campaign)"],
+            "patterns": [
+              "url: https?://widget\\.prefinery\\.com/",
+              "url: https?://prefinery\\.com/[^\\s]*(?:widget|referral|beta|campaign)"
+            ],
             "evidence": "响应 URL 指向 Prefinery"
           },
           {
@@ -1502,12 +1646,18 @@
           },
           {
             "name": "ViralSweep",
-            "patterns": ["url: https?://app\\.viralsweep\\.com/", "url: https?://viralsweep\\.com/[^\\s]*(?:embed|promotion|sweeps|contest|widget)"],
+            "patterns": [
+              "url: https?://app\\.viralsweep\\.com/",
+              "url: https?://viralsweep\\.com/[^\\s]*(?:embed|promotion|sweeps|contest|widget)"
+            ],
             "evidence": "响应 URL 指向 ViralSweep"
           },
           {
             "name": "SweepWidget",
-            "patterns": ["url: https?://sweepwidget\\.com/(?:view|widget)/", "url: https?://sweepwidget\\.com/[^\\s]*(?:giveaway|contest|embed)"],
+            "patterns": [
+              "url: https?://sweepwidget\\.com/(?:view|widget)/",
+              "url: https?://sweepwidget\\.com/[^\\s]*(?:giveaway|contest|embed)"
+            ],
             "evidence": "响应 URL 指向 SweepWidget"
           },
           {
@@ -1553,7 +1703,11 @@
           },
           {
             "name": "YouCanBookMe",
-            "patterns": ["url: https?://cdn\\.youcanbook\\.me/", "url: https?://booking\\.youcanbook\\.me/", "url: https?://[^\\s/]+\\.youcanbook\\.me/"],
+            "patterns": [
+              "url: https?://cdn\\.youcanbook\\.me/",
+              "url: https?://booking\\.youcanbook\\.me/",
+              "url: https?://[^\\s/]+\\.youcanbook\\.me/"
+            ],
             "evidence": "响应 URL 指向 YouCanBookMe"
           },
           {
@@ -1563,12 +1717,19 @@
           },
           {
             "name": "OnceHub / ScheduleOnce",
-            "patterns": ["url: https?://cdn\\.oncehub\\.com/", "url: https?://(?:www\\.)?oncehub\\.com/[^\\s]*(?:widget|embed)", "url: https?://[^\\s/]+\\.scheduleonce\\.com/"],
+            "patterns": [
+              "url: https?://cdn\\.oncehub\\.com/",
+              "url: https?://(?:www\\.)?oncehub\\.com/[^\\s]*(?:widget|embed)",
+              "url: https?://[^\\s/]+\\.scheduleonce\\.com/"
+            ],
             "evidence": "响应 URL 指向 OnceHub / ScheduleOnce"
           },
           {
             "name": "Chili Piper",
-            "patterns": ["url: https?://js\\.chilipiper\\.com/", "url: https?://(?:www\\.)?chilipiper\\.com/[^\\s]*(?:concierge|book|router)"],
+            "patterns": [
+              "url: https?://js\\.chilipiper\\.com/",
+              "url: https?://(?:www\\.)?chilipiper\\.com/[^\\s]*(?:concierge|book|router)"
+            ],
             "evidence": "响应 URL 指向 Chili Piper"
           },
           {
@@ -1600,7 +1761,11 @@
           },
           {
             "name": "Setmore",
-            "patterns": ["url: https?://my\\.setmore\\.com/bookingpage/", "url: https?://(?:www\\.)?setmore\\.com/bookingpage/", "url: https?://assets\\.setmore\\.com/"],
+            "patterns": [
+              "url: https?://my\\.setmore\\.com/bookingpage/",
+              "url: https?://(?:www\\.)?setmore\\.com/bookingpage/",
+              "url: https?://assets\\.setmore\\.com/"
+            ],
             "evidence": "响应 URL 指向 Setmore"
           },
           {
@@ -1610,17 +1775,26 @@
           },
           {
             "name": "Bookafy",
-            "patterns": ["url: https?://(?:www\\.)?bookafy\\.com/[^\\s]*(?:schedule|booking|widget|embed)", "url: https?://[^\\s/]+\\.bookafy\\.net/"],
+            "patterns": [
+              "url: https?://(?:www\\.)?bookafy\\.com/[^\\s]*(?:schedule|booking|widget|embed)",
+              "url: https?://[^\\s/]+\\.bookafy\\.net/"
+            ],
             "evidence": "响应 URL 指向 Bookafy"
           },
           {
             "name": "Picktime",
-            "patterns": ["url: https?://(?:www\\.)?picktime\\.com/[^\\s]*(?:booking|widget)", "url: https?://(?:www\\.)?picktime\\.com/assets/"],
+            "patterns": [
+              "url: https?://(?:www\\.)?picktime\\.com/[^\\s]*(?:booking|widget)",
+              "url: https?://(?:www\\.)?picktime\\.com/assets/"
+            ],
             "evidence": "响应 URL 指向 Picktime"
           },
           {
             "name": "Calendesk",
-            "patterns": ["url: https?://cdn\\.calendesk\\.com/", "url: https?://(?:www\\.)?calendesk\\.com/[^\\s]*(?:widget|booking|embed)"],
+            "patterns": [
+              "url: https?://cdn\\.calendesk\\.com/",
+              "url: https?://(?:www\\.)?calendesk\\.com/[^\\s]*(?:widget|booking|embed)"
+            ],
             "evidence": "响应 URL 指向 Calendesk"
           },
           {
@@ -1645,17 +1819,27 @@
           },
           {
             "name": "Vagaro",
-            "patterns": ["url: https?://(?:www\\.)?vagaro\\.com/BookingWidget", "url: https?://(?:www\\.)?vagaro\\.com/[^\\s]*(?:users/booking|appointment|book-now)"],
+            "patterns": [
+              "url: https?://(?:www\\.)?vagaro\\.com/BookingWidget",
+              "url: https?://(?:www\\.)?vagaro\\.com/[^\\s]*(?:users/booking|appointment|book-now)"
+            ],
             "evidence": "响应 URL 指向 Vagaro"
           },
           {
             "name": "Booksy",
-            "patterns": ["url: https?://(?:www\\.)?booksy\\.com/widget", "url: https?://(?:www\\.)?booksy\\.com/[^\\s]*(?:book|biz|booking)"],
+            "patterns": [
+              "url: https?://(?:www\\.)?booksy\\.com/widget",
+              "url: https?://(?:www\\.)?booksy\\.com/[^\\s]*(?:book|biz|booking)"
+            ],
             "evidence": "响应 URL 指向 Booksy"
           },
           {
             "name": "Fresha",
-            "patterns": ["url: https?://widget\\.fresha\\.com/", "url: https?://(?:www\\.)?fresha\\.com/book-now", "url: https?://(?:www\\.)?fresha\\.com/a/[^\\s]*(?:booking|book-now)"],
+            "patterns": [
+              "url: https?://widget\\.fresha\\.com/",
+              "url: https?://(?:www\\.)?fresha\\.com/book-now",
+              "url: https?://(?:www\\.)?fresha\\.com/a/[^\\s]*(?:booking|book-now)"
+            ],
             "evidence": "响应 URL 指向 Fresha"
           },
           {
@@ -1673,7 +1857,11 @@
           },
           {
             "name": "Zenoti",
-            "patterns": ["url: https?://booknow\\.zenoti\\.com/", "url: https?://api\\.zenoti\\.com/", "url: https?://(?:www\\.)?zenoti\\.com/[^\\s]*(?:webstore|booking|online-booking)"],
+            "patterns": [
+              "url: https?://booknow\\.zenoti\\.com/",
+              "url: https?://api\\.zenoti\\.com/",
+              "url: https?://(?:www\\.)?zenoti\\.com/[^\\s]*(?:webstore|booking|online-booking)"
+            ],
             "evidence": "响应 URL 指向 Zenoti"
           },
           {
@@ -1683,7 +1871,10 @@
           },
           {
             "name": "Reservio",
-            "patterns": ["url: https?://booking\\.reservio\\.com/", "url: https?://(?:www\\.)?reservio\\.com/[^\\s]*(?:booking|services|embed|widgets?)"],
+            "patterns": [
+              "url: https?://booking\\.reservio\\.com/",
+              "url: https?://(?:www\\.)?reservio\\.com/[^\\s]*(?:booking|services|embed|widgets?)"
+            ],
             "evidence": "响应 URL 指向 Reservio"
           }
         ]
@@ -1705,17 +1896,27 @@
           },
           {
             "name": "Humanitix",
-            "patterns": ["url: https?://events\\.humanitix\\.com/", "url: https?://events\\.humanitix\\.com/[^\\s]*(?:widgets|checkout|tickets)"],
+            "patterns": [
+              "url: https?://events\\.humanitix\\.com/",
+              "url: https?://events\\.humanitix\\.com/[^\\s]*(?:widgets|checkout|tickets)"
+            ],
             "evidence": "响应 URL 指向 Humanitix 活动 / 票务"
           },
           {
             "name": "Ticket Tailor",
-            "patterns": ["url: https?://cdn\\.tickettailor\\.com/", "url: https?://www\\.tickettailor\\.com/[^\\s]*(?:checkout|all-tickets|events|embed)"],
+            "patterns": [
+              "url: https?://cdn\\.tickettailor\\.com/",
+              "url: https?://www\\.tickettailor\\.com/[^\\s]*(?:checkout|all-tickets|events|embed)"
+            ],
             "evidence": "响应 URL 指向 Ticket Tailor 票务"
           },
           {
             "name": "Tito",
-            "patterns": ["url: https?://js\\.tito\\.io/", "url: https?://ti\\.to/[^\\s/]+/[^\\s?#]+", "url: https?://(?:www\\.)?tito\\.io/[^\\s]*(?:embed|checkout)"],
+            "patterns": [
+              "url: https?://js\\.tito\\.io/",
+              "url: https?://ti\\.to/[^\\s/]+/[^\\s?#]+",
+              "url: https?://(?:www\\.)?tito\\.io/[^\\s]*(?:embed|checkout)"
+            ],
             "evidence": "响应 URL 指向 Tito 票务"
           },
           {
@@ -1730,27 +1931,45 @@
           },
           {
             "name": "Eventzilla",
-            "patterns": ["url: https?://cdn\\.eventzilla\\.net/", "url: https?://(?:www\\.)?eventzilla\\.net/[^\\s]*(?:web/event|widgets|ticketing)"],
+            "patterns": [
+              "url: https?://cdn\\.eventzilla\\.net/",
+              "url: https?://(?:www\\.)?eventzilla\\.net/[^\\s]*(?:web/event|widgets|ticketing)"
+            ],
             "evidence": "响应 URL 指向 Eventzilla 票务"
           },
           {
             "name": "Splash",
-            "patterns": ["url: https?://event\\.splashthat\\.com/", "url: https?://(?:www\\.)?splashthat\\.com/[^\\s]*(?:embed|event)", "url: https?://[^\\s/]+\\.splash\\.events/"],
+            "patterns": [
+              "url: https?://event\\.splashthat\\.com/",
+              "url: https?://(?:www\\.)?splashthat\\.com/[^\\s]*(?:embed|event)",
+              "url: https?://[^\\s/]+\\.splash\\.events/"
+            ],
             "evidence": "响应 URL 指向 Splash 活动"
           },
           {
             "name": "Cvent Events",
-            "patterns": ["url: https?://web\\.cvent\\.com/event", "url: https?://events\\.cvent\\.com/", "url: https?://(?:www\\.)?cvent\\.com/[^\\s]*(?:events|event-management|registration)"],
+            "patterns": [
+              "url: https?://web\\.cvent\\.com/event",
+              "url: https?://events\\.cvent\\.com/",
+              "url: https?://(?:www\\.)?cvent\\.com/[^\\s]*(?:events|event-management|registration)"
+            ],
             "evidence": "响应 URL 指向 Cvent Events"
           },
           {
             "name": "Bizzabo Events",
-            "patterns": ["url: https?://events\\.bizzabo\\.com/", "url: https?://cdn\\.bizzabo\\.com/", "url: https?://(?:www\\.)?bizzabo\\.com/[^\\s]*(?:widget|events|registration)"],
+            "patterns": [
+              "url: https?://events\\.bizzabo\\.com/",
+              "url: https?://cdn\\.bizzabo\\.com/",
+              "url: https?://(?:www\\.)?bizzabo\\.com/[^\\s]*(?:widget|events|registration)"
+            ],
             "evidence": "响应 URL 指向 Bizzabo Events"
           },
           {
             "name": "Whova",
-            "patterns": ["url: https?://(?:www\\.)?whova\\.com/[^\\s]*(?:embedded|webapp|portal|registration)", "url: https?://whova\\.com/portal/webapp/"],
+            "patterns": [
+              "url: https?://(?:www\\.)?whova\\.com/[^\\s]*(?:embedded|webapp|portal|registration)",
+              "url: https?://whova\\.com/portal/webapp/"
+            ],
             "evidence": "响应 URL 指向 Whova 活动平台"
           },
           {
@@ -1765,12 +1984,20 @@
           },
           {
             "name": "EventMobi",
-            "patterns": ["url: https?://assets\\.eventmobi\\.com/", "url: https?://eventmobi\\.io/", "url: https?://(?:www\\.)?eventmobi\\.com/[^\\s]*(?:app|events|registration|embed)"],
+            "patterns": [
+              "url: https?://assets\\.eventmobi\\.com/",
+              "url: https?://eventmobi\\.io/",
+              "url: https?://(?:www\\.)?eventmobi\\.com/[^\\s]*(?:app|events|registration|embed)"
+            ],
             "evidence": "响应 URL 指向 EventMobi"
           },
           {
             "name": "Universe Ticketing",
-            "patterns": ["url: https?://cdn\\.universe\\.com/", "url: https?://www\\.universe\\.com/embed/", "url: https?://www\\.universe\\.com/[^\\s]*(?:events|tickets)"],
+            "patterns": [
+              "url: https?://cdn\\.universe\\.com/",
+              "url: https?://www\\.universe\\.com/embed/",
+              "url: https?://www\\.universe\\.com/[^\\s]*(?:events|tickets)"
+            ],
             "evidence": "响应 URL 指向 Universe Ticketing"
           },
           {
@@ -1789,7 +2016,10 @@
           },
           {
             "name": "Ticketbud",
-            "patterns": ["url: https?://cdn\\.ticketbud\\.com/", "url: https?://(?:www\\.)?ticketbud\\.com/[^\\s]*(?:events|tickets|widgets?|embed)"],
+            "patterns": [
+              "url: https?://cdn\\.ticketbud\\.com/",
+              "url: https?://(?:www\\.)?ticketbud\\.com/[^\\s]*(?:events|tickets|widgets?|embed)"
+            ],
             "evidence": "响应 URL 指向 Ticketbud 票务"
           },
           {
@@ -1809,7 +2039,11 @@
           },
           {
             "name": "Goldcast",
-            "patterns": ["url: https?://events\\.goldcast\\.io/", "url: https?://cdn\\.goldcast\\.io/", "url: https?://www\\.goldcast\\.io/[^\\s]*(?:events|register|embed)"],
+            "patterns": [
+              "url: https?://events\\.goldcast\\.io/",
+              "url: https?://cdn\\.goldcast\\.io/",
+              "url: https?://www\\.goldcast\\.io/[^\\s]*(?:events|register|embed)"
+            ],
             "evidence": "响应 URL 指向 Goldcast"
           },
           {
@@ -1824,7 +2058,10 @@
           },
           {
             "name": "BigMarker",
-            "patterns": ["url: https?://assets\\.bigmarker\\.com/", "url: https?://www\\.bigmarker\\.com/[^\\s]*(?:conferences|events|webinars|widgets?|embed)"],
+            "patterns": [
+              "url: https?://assets\\.bigmarker\\.com/",
+              "url: https?://www\\.bigmarker\\.com/[^\\s]*(?:conferences|events|webinars|widgets?|embed)"
+            ],
             "evidence": "响应 URL 指向 BigMarker"
           },
           {
@@ -1834,17 +2071,27 @@
           },
           {
             "name": "Sched",
-            "patterns": ["url: https?://assets\\.sched\\.com/", "url: https?://[^\\s/]+\\.sched\\.com/[^\\s]*(?:event|embed|schedule)", "url: https?://sched\\.co/[^\\s]*(?:event|embed)"],
+            "patterns": [
+              "url: https?://assets\\.sched\\.com/",
+              "url: https?://[^\\s/]+\\.sched\\.com/[^\\s]*(?:event|embed|schedule)",
+              "url: https?://sched\\.co/[^\\s]*(?:event|embed)"
+            ],
             "evidence": "响应 URL 指向 Sched"
           },
           {
             "name": "Expo Pass",
-            "patterns": ["url: https?://register\\.expopass\\.com/", "url: https?://(?:www\\.)?expopass\\.com/[^\\s]*(?:events|registration|tickets|embed)"],
+            "patterns": [
+              "url: https?://register\\.expopass\\.com/",
+              "url: https?://(?:www\\.)?expopass\\.com/[^\\s]*(?:events|registration|tickets|embed)"
+            ],
             "evidence": "响应 URL 指向 Expo Pass"
           },
           {
             "name": "Brushfire",
-            "patterns": ["url: https?://widget\\.brushfire\\.com/", "url: https?://(?:www\\.)?brushfire\\.com/[^\\s]*(?:events|widgets?|tickets|register)"],
+            "patterns": [
+              "url: https?://widget\\.brushfire\\.com/",
+              "url: https?://(?:www\\.)?brushfire\\.com/[^\\s]*(?:events|widgets?|tickets|register)"
+            ],
             "evidence": "响应 URL 指向 Brushfire"
           },
           {
@@ -1854,62 +2101,105 @@
           },
           {
             "name": "Swapcard",
-            "patterns": ["url: https?://app\\.swapcard\\.com/event", "url: https?://cdn\\.swapcard\\.com/", "url: https?://www\\.swapcard\\.com/[^\\s]*(?:event|registration|community)"],
+            "patterns": [
+              "url: https?://app\\.swapcard\\.com/event",
+              "url: https?://cdn\\.swapcard\\.com/",
+              "url: https?://www\\.swapcard\\.com/[^\\s]*(?:event|registration|community)"
+            ],
             "evidence": "响应 URL 指向 Swapcard"
           },
           {
             "name": "Brella",
-            "patterns": ["url: https?://next\\.brella\\.io/", "url: https?://app\\.brella\\.io/", "url: https?://www\\.brella\\.io/[^\\s]*(?:events|event-app|registration)"],
+            "patterns": [
+              "url: https?://next\\.brella\\.io/",
+              "url: https?://app\\.brella\\.io/",
+              "url: https?://www\\.brella\\.io/[^\\s]*(?:events|event-app|registration)"
+            ],
             "evidence": "响应 URL 指向 Brella"
           },
           {
             "name": "Hubilo",
-            "patterns": ["url: https?://events\\.hubilo\\.com/", "url: https?://cdn\\.hubilo\\.com/", "url: https?://www\\.hubilo\\.com/[^\\s]*(?:event|events|webinar|registration)"],
+            "patterns": [
+              "url: https?://events\\.hubilo\\.com/",
+              "url: https?://cdn\\.hubilo\\.com/",
+              "url: https?://www\\.hubilo\\.com/[^\\s]*(?:event|events|webinar|registration)"
+            ],
             "evidence": "响应 URL 指向 Hubilo"
           },
           {
             "name": "HeySummit",
-            "patterns": ["url: https?://[^\\s/]+\\.heysummit\\.com/", "url: https?://heysummit\\.com/[^\\s]*(?:summit|event|registration|tickets)"],
+            "patterns": [
+              "url: https?://[^\\s/]+\\.heysummit\\.com/",
+              "url: https?://heysummit\\.com/[^\\s]*(?:summit|event|registration|tickets)"
+            ],
             "evidence": "响应 URL 指向 HeySummit"
           },
           {
             "name": "vFairs",
-            "patterns": ["url: https?://event\\.vfairs\\.com/", "url: https?://cdn\\.vfairs\\.com/", "url: https?://www\\.vfairs\\.com/[^\\s]*(?:event|events|conference|webinar|registration)"],
+            "patterns": [
+              "url: https?://event\\.vfairs\\.com/",
+              "url: https?://cdn\\.vfairs\\.com/",
+              "url: https?://www\\.vfairs\\.com/[^\\s]*(?:event|events|conference|webinar|registration)"
+            ],
             "evidence": "响应 URL 指向 vFairs"
           },
           {
             "name": "Accelevents",
-            "patterns": ["url: https?://api\\.accelevents\\.com/", "url: https?://cdn\\.accelevents\\.com/", "url: https?://www\\.accelevents\\.com/(?:e|event)/"],
+            "patterns": [
+              "url: https?://api\\.accelevents\\.com/",
+              "url: https?://cdn\\.accelevents\\.com/",
+              "url: https?://www\\.accelevents\\.com/(?:e|event)/"
+            ],
             "evidence": "响应 URL 指向 Accelevents"
           },
           {
             "name": "Run The World",
-            "patterns": ["url: https?://cdn\\.runtheworld\\.today/", "url: https?://www\\.runtheworld\\.today/[^\\s]*(?:app|room|event|register)"],
+            "patterns": [
+              "url: https?://cdn\\.runtheworld\\.today/",
+              "url: https?://www\\.runtheworld\\.today/[^\\s]*(?:app|room|event|register)"
+            ],
             "evidence": "响应 URL 指向 Run The World"
           },
           {
             "name": "PheedLoop",
-            "patterns": ["url: https?://app\\.pheedloop\\.com/", "url: https?://cdn\\.pheedloop\\.com/", "url: https?://www\\.pheedloop\\.com/[^\\s]*(?:event|events|embed|registration)"],
+            "patterns": [
+              "url: https?://app\\.pheedloop\\.com/",
+              "url: https?://cdn\\.pheedloop\\.com/",
+              "url: https?://www\\.pheedloop\\.com/[^\\s]*(?:event|events|embed|registration)"
+            ],
             "evidence": "响应 URL 指向 PheedLoop"
           },
           {
             "name": "TicketSpice",
-            "patterns": ["url: https?://checkout\\.ticketspice\\.com/", "url: https?://(?:www\\.)?ticketspice\\.com/[^\\s]*(?:event|events|checkout|tickets)"],
+            "patterns": [
+              "url: https?://checkout\\.ticketspice\\.com/",
+              "url: https?://(?:www\\.)?ticketspice\\.com/[^\\s]*(?:event|events|checkout|tickets)"
+            ],
             "evidence": "响应 URL 指向 TicketSpice"
           },
           {
             "name": "Eventleaf",
-            "patterns": ["url: https?://app\\.eventleaf\\.com/", "url: https?://www\\.eventleaf\\.com/[^\\s]*(?:event|events|registration|attendee|tickets)"],
+            "patterns": [
+              "url: https?://app\\.eventleaf\\.com/",
+              "url: https?://www\\.eventleaf\\.com/[^\\s]*(?:event|events|registration|attendee|tickets)"
+            ],
             "evidence": "响应 URL 指向 Eventleaf"
           },
           {
             "name": "Glue Up",
-            "patterns": ["url: https?://app\\.glueup\\.com/", "url: https?://www\\.glueup\\.com/[^\\s]*(?:event|events|membership|registration)", "url: https?://www\\.glueup\\.cn/[^\\s]*(?:event|events)"],
+            "patterns": [
+              "url: https?://app\\.glueup\\.com/",
+              "url: https?://www\\.glueup\\.com/[^\\s]*(?:event|events|membership|registration)",
+              "url: https?://www\\.glueup\\.cn/[^\\s]*(?:event|events)"
+            ],
             "evidence": "响应 URL 指向 Glue Up"
           },
           {
             "name": "Eventdex",
-            "patterns": ["url: https?://eventdexforce\\.com/", "url: https?://www\\.eventdex\\.com/[^\\s]*(?:events|event-management|registration|ticketing)"],
+            "patterns": [
+              "url: https?://eventdexforce\\.com/",
+              "url: https?://www\\.eventdex\\.com/[^\\s]*(?:events|event-management|registration|ticketing)"
+            ],
             "evidence": "响应 URL 指向 Eventdex"
           },
           {
@@ -1923,7 +2213,10 @@
           },
           {
             "name": "RegFox",
-            "patterns": ["url: https?://www\\.regfox\\.com/(?:e|embed)/", "url: https?://www\\.regfox\\.com/[^\\s]*(?:registration|event|tickets)"],
+            "patterns": [
+              "url: https?://www\\.regfox\\.com/(?:e|embed)/",
+              "url: https?://www\\.regfox\\.com/[^\\s]*(?:registration|event|tickets)"
+            ],
             "evidence": "响应 URL 指向 RegFox"
           },
           {
@@ -1946,7 +2239,11 @@
         "rules": [
           {
             "name": "Greenhouse Job Board",
-            "patterns": ["url: https?://boards\\.greenhouse\\.io/", "url: https?://job-boards\\.greenhouse\\.io/", "url: https?://boards-api\\.greenhouse\\.io/"],
+            "patterns": [
+              "url: https?://boards\\.greenhouse\\.io/",
+              "url: https?://job-boards\\.greenhouse\\.io/",
+              "url: https?://boards-api\\.greenhouse\\.io/"
+            ],
             "evidence": "响应 URL 指向 Greenhouse 招聘系统"
           },
           {
@@ -1956,12 +2253,20 @@
           },
           {
             "name": "Workable",
-            "patterns": ["url: https?://apply\\.workable\\.com/", "url: https?://www\\.workable\\.com/widgets/", "url: https?://www\\.workable\\.com/api/accounts/[^\\s/]+/jobs"],
+            "patterns": [
+              "url: https?://apply\\.workable\\.com/",
+              "url: https?://www\\.workable\\.com/widgets/",
+              "url: https?://www\\.workable\\.com/api/accounts/[^\\s/]+/jobs"
+            ],
             "evidence": "响应 URL 指向 Workable 招聘系统"
           },
           {
             "name": "Ashby",
-            "patterns": ["url: https?://jobs\\.ashbyhq\\.com/", "url: https?://embed\\.ashbyhq\\.com/", "url: https?://api\\.ashbyhq\\.com/posting-api/"],
+            "patterns": [
+              "url: https?://jobs\\.ashbyhq\\.com/",
+              "url: https?://embed\\.ashbyhq\\.com/",
+              "url: https?://api\\.ashbyhq\\.com/posting-api/"
+            ],
             "evidence": "响应 URL 指向 Ashby 招聘系统"
           },
           {
@@ -1971,32 +2276,56 @@
           },
           {
             "name": "BambooHR Careers",
-            "patterns": ["url: https?://[^\\s/]+\\.bamboohr\\.com/careers/", "url: https?://www\\.bamboohr\\.com/jobs/embed2\\.php", "url: https?://api\\.bamboohr\\.com/"],
+            "patterns": [
+              "url: https?://[^\\s/]+\\.bamboohr\\.com/careers/",
+              "url: https?://www\\.bamboohr\\.com/jobs/embed2\\.php",
+              "url: https?://api\\.bamboohr\\.com/"
+            ],
             "evidence": "响应 URL 指向 BambooHR Careers"
           },
           {
             "name": "iCIMS Talent Cloud",
-            "patterns": ["url: https?://careers\\.icims\\.com/", "url: https?://[^\\s/]+\\.icims\\.com/jobs/", "url: https?://platform\\.icims\\.com/"],
+            "patterns": [
+              "url: https?://careers\\.icims\\.com/",
+              "url: https?://[^\\s/]+\\.icims\\.com/jobs/",
+              "url: https?://platform\\.icims\\.com/"
+            ],
             "evidence": "响应 URL 指向 iCIMS Talent Cloud"
           },
           {
             "name": "JazzHR",
-            "patterns": ["url: https?://applytojob\\.com/", "url: https?://jazz\\.co/apply/", "url: https?://www\\.jazzhr\\.com/[^\\s]*(?:jobs|apply)"],
+            "patterns": [
+              "url: https?://applytojob\\.com/",
+              "url: https?://jazz\\.co/apply/",
+              "url: https?://www\\.jazzhr\\.com/[^\\s]*(?:jobs|apply)"
+            ],
             "evidence": "响应 URL 指向 JazzHR"
           },
           {
             "name": "Recruitee",
-            "patterns": ["url: https?://[^\\s/]+\\.recruitee\\.com/(?:c|o)/", "url: https?://api\\.recruitee\\.com/", "url: https?://cdn\\.recruitee\\.com/"],
+            "patterns": [
+              "url: https?://[^\\s/]+\\.recruitee\\.com/(?:c|o)/",
+              "url: https?://api\\.recruitee\\.com/",
+              "url: https?://cdn\\.recruitee\\.com/"
+            ],
             "evidence": "响应 URL 指向 Recruitee"
           },
           {
             "name": "Teamtailor",
-            "patterns": ["url: https?://[^\\s/]+\\.teamtailor\\.com/jobs", "url: https?://teamtailor-cdn\\.com/", "url: https?://api\\.teamtailor\\.com/"],
+            "patterns": [
+              "url: https?://[^\\s/]+\\.teamtailor\\.com/jobs",
+              "url: https?://teamtailor-cdn\\.com/",
+              "url: https?://api\\.teamtailor\\.com/"
+            ],
             "evidence": "响应 URL 指向 Teamtailor"
           },
           {
             "name": "Comeet",
-            "patterns": ["url: https?://www\\.comeet\\.co/jobs-api/", "url: https?://www\\.comeet\\.co/careers/", "url: https?://www\\.comeet\\.co/jobs/"],
+            "patterns": [
+              "url: https?://www\\.comeet\\.co/jobs-api/",
+              "url: https?://www\\.comeet\\.co/careers/",
+              "url: https?://www\\.comeet\\.co/jobs/"
+            ],
             "evidence": "响应 URL 指向 Comeet"
           },
           {
@@ -2006,7 +2335,11 @@
           },
           {
             "name": "Personio Recruiting",
-            "patterns": ["url: https?://jobs\\.personio\\.com/", "url: https?://[^\\s/]+\\.jobs\\.personio\\.de/", "url: https?://[^\\s/]+\\.jobs\\.personio\\.com/"],
+            "patterns": [
+              "url: https?://jobs\\.personio\\.com/",
+              "url: https?://[^\\s/]+\\.jobs\\.personio\\.de/",
+              "url: https?://[^\\s/]+\\.jobs\\.personio\\.com/"
+            ],
             "evidence": "响应 URL 指向 Personio Recruiting"
           },
           {
@@ -2016,27 +2349,47 @@
           },
           {
             "name": "Breezy HR",
-            "patterns": ["url: https?://[^\\s/]+\\.breezy\\.hr/p/", "url: https?://[^\\s/]+\\.breezy\\.hr/embed/", "url: https?://api\\.breezy\\.hr/"],
+            "patterns": [
+              "url: https?://[^\\s/]+\\.breezy\\.hr/p/",
+              "url: https?://[^\\s/]+\\.breezy\\.hr/embed/",
+              "url: https?://api\\.breezy\\.hr/"
+            ],
             "evidence": "响应 URL 指向 Breezy HR"
           },
           {
             "name": "Recruiterbox",
-            "patterns": ["url: https?://[^\\s/]+\\.recruiterbox\\.com/jobs", "url: https?://[^\\s/]+\\.recruiterbox\\.com/embed", "url: https?://apply\\.recruiterbox\\.com/"],
+            "patterns": [
+              "url: https?://[^\\s/]+\\.recruiterbox\\.com/jobs",
+              "url: https?://[^\\s/]+\\.recruiterbox\\.com/embed",
+              "url: https?://apply\\.recruiterbox\\.com/"
+            ],
             "evidence": "响应 URL 指向 Recruiterbox"
           },
           {
             "name": "Workday Recruiting",
-            "patterns": ["url: https?://[^\\s/]+\\.myworkdayjobs\\.com/", "url: https?://[^\\s/]+\\.workdayjobs\\.com/", "url: https?://wd1\\.myworkdaysite\\.com/"],
+            "patterns": [
+              "url: https?://[^\\s/]+\\.myworkdayjobs\\.com/",
+              "url: https?://[^\\s/]+\\.workdayjobs\\.com/",
+              "url: https?://wd1\\.myworkdaysite\\.com/"
+            ],
             "evidence": "响应 URL 指向 Workday Recruiting"
           },
           {
             "name": "Eightfold AI Careers",
-            "patterns": ["url: https?://api\\.eightfold\\.ai/", "url: https?://cdn\\.eightfold\\.ai/", "url: https?://[^\\s/]+\\.eightfold\\.ai/[^\\s]*(?:careers|jobs)"],
+            "patterns": [
+              "url: https?://api\\.eightfold\\.ai/",
+              "url: https?://cdn\\.eightfold\\.ai/",
+              "url: https?://[^\\s/]+\\.eightfold\\.ai/[^\\s]*(?:careers|jobs)"
+            ],
             "evidence": "响应 URL 指向 Eightfold AI Careers"
           },
           {
             "name": "Fountain",
-            "patterns": ["url: https?://www\\.fountain\\.com/jobs/", "url: https?://www\\.fountain\\.com/[^\\s]*(?:applicants|apply)", "url: https?://api\\.fountain\\.com/"],
+            "patterns": [
+              "url: https?://www\\.fountain\\.com/jobs/",
+              "url: https?://www\\.fountain\\.com/[^\\s]*(?:applicants|apply)",
+              "url: https?://api\\.fountain\\.com/"
+            ],
             "evidence": "响应 URL 指向 Fountain 招聘系统"
           },
           {
@@ -2046,17 +2399,27 @@
           },
           {
             "name": "Zoho Recruit",
-            "patterns": ["url: https?://recruit\\.zoho\\.(?:com|eu|in)/", "url: https?://www\\.zohorecruit\\.com/[^\\s]*(?:jobs|recruit|career)"],
+            "patterns": [
+              "url: https?://recruit\\.zoho\\.(?:com|eu|in)/",
+              "url: https?://www\\.zohorecruit\\.com/[^\\s]*(?:jobs|recruit|career)"
+            ],
             "evidence": "响应 URL 指向 Zoho Recruit"
           },
           {
             "name": "LinkedIn Jobs",
-            "patterns": ["url: https?://www\\.linkedin\\.com/jobs/(?:view|collections)", "url: https?://www\\.linkedin\\.com/jobs-guest/jobs/api/", "url: https?://www\\.linkedin\\.com/embed/jobs/"],
+            "patterns": [
+              "url: https?://www\\.linkedin\\.com/jobs/(?:view|collections)",
+              "url: https?://www\\.linkedin\\.com/jobs-guest/jobs/api/",
+              "url: https?://www\\.linkedin\\.com/embed/jobs/"
+            ],
             "evidence": "响应 URL 指向 LinkedIn Jobs"
           },
           {
             "name": "ZipRecruiter Jobs",
-            "patterns": ["url: https?://www\\.ziprecruiter\\.com/[^\\s]*(?:jobs|job|candidate/search)", "url: https?://jobs\\.ziprecruiter\\.com/"],
+            "patterns": [
+              "url: https?://www\\.ziprecruiter\\.com/[^\\s]*(?:jobs|job|candidate/search)",
+              "url: https?://jobs\\.ziprecruiter\\.com/"
+            ],
             "evidence": "响应 URL 指向 ZipRecruiter Jobs"
           },
           {
@@ -2066,27 +2429,45 @@
           },
           {
             "name": "CATSone",
-            "patterns": ["url: https?://[^\\s/]+\\.catsone\\.com/[^\\s]*(?:careers|jobs|candidate|apply)", "url: https?://[^\\s/]+\\.catsone\\.com/js/careers"],
+            "patterns": [
+              "url: https?://[^\\s/]+\\.catsone\\.com/[^\\s]*(?:careers|jobs|candidate|apply)",
+              "url: https?://[^\\s/]+\\.catsone\\.com/js/careers"
+            ],
             "evidence": "响应 URL 指向 CATSone"
           },
           {
             "name": "JobAdder",
-            "patterns": ["url: https?://apply\\.jobadder\\.com/", "url: https?://public\\.jobadder\\.com/", "url: https?://[^\\s/]+\\.jobadder\\.com/[^\\s]*(?:jobs|widgets|apply)"],
+            "patterns": [
+              "url: https?://apply\\.jobadder\\.com/",
+              "url: https?://public\\.jobadder\\.com/",
+              "url: https?://[^\\s/]+\\.jobadder\\.com/[^\\s]*(?:jobs|widgets|apply)"
+            ],
             "evidence": "响应 URL 指向 JobAdder"
           },
           {
             "name": "Bullhorn Career Portal",
-            "patterns": ["url: https?://jobs\\.bullhorn\\.com/", "url: https?://[^\\s/]+\\.bullhornstaffing\\.com/", "url: https?://[^\\s/]+\\.bullhorn\\.com/[^\\s]*(?:career|job-board|jobs)"],
+            "patterns": [
+              "url: https?://jobs\\.bullhorn\\.com/",
+              "url: https?://[^\\s/]+\\.bullhornstaffing\\.com/",
+              "url: https?://[^\\s/]+\\.bullhorn\\.com/[^\\s]*(?:career|job-board|jobs)"
+            ],
             "evidence": "响应 URL 指向 Bullhorn Career Portal"
           },
           {
             "name": "Avature Careers",
-            "patterns": ["url: https?://[^\\s/]+\\.avature\\.net/[^\\s]*(?:careers|jobs|candidate)", "url: https?://[^\\s/]+\\.avature\\.com/[^\\s]*(?:careers|jobs)"],
+            "patterns": [
+              "url: https?://[^\\s/]+\\.avature\\.net/[^\\s]*(?:careers|jobs|candidate)",
+              "url: https?://[^\\s/]+\\.avature\\.com/[^\\s]*(?:careers|jobs)"
+            ],
             "evidence": "响应 URL 指向 Avature Careers"
           },
           {
             "name": "Phenom People",
-            "patterns": ["url: https?://cdn\\.phenompeople\\.com/", "url: https?://[^\\s/]+\\.phenompeople\\.com/[^\\s]*(?:jobs|careers|apply)", "url: https?://[^\\s/]+\\.phenompro\\.com/"],
+            "patterns": [
+              "url: https?://cdn\\.phenompeople\\.com/",
+              "url: https?://[^\\s/]+\\.phenompeople\\.com/[^\\s]*(?:jobs|careers|apply)",
+              "url: https?://[^\\s/]+\\.phenompro\\.com/"
+            ],
             "evidence": "响应 URL 指向 Phenom People"
           },
           {
@@ -2096,7 +2477,10 @@
           },
           {
             "name": "GoHire",
-            "patterns": ["url: https?://[^\\s/]+\\.gohire\\.io/[^\\s]*(?:jobs|careers|apply)", "url: https?://[^\\s/]+\\.gohire\\.com/[^\\s]*(?:jobs|careers)"],
+            "patterns": [
+              "url: https?://[^\\s/]+\\.gohire\\.io/[^\\s]*(?:jobs|careers|apply)",
+              "url: https?://[^\\s/]+\\.gohire\\.com/[^\\s]*(?:jobs|careers)"
+            ],
             "evidence": "响应 URL 指向 GoHire"
           },
           {
@@ -2111,7 +2495,11 @@
           },
           {
             "name": "Jobylon",
-            "patterns": ["url: https?://jobs\\.jobylon\\.com/", "url: https?://emp\\.jobylon\\.com/", "url: https?://www\\.jobylon\\.com/[^\\s]*(?:jobs|careers|apply)"],
+            "patterns": [
+              "url: https?://jobs\\.jobylon\\.com/",
+              "url: https?://emp\\.jobylon\\.com/",
+              "url: https?://www\\.jobylon\\.com/[^\\s]*(?:jobs|careers|apply)"
+            ],
             "evidence": "响应 URL 指向 Jobylon"
           },
           {
@@ -2131,7 +2519,11 @@
           },
           {
             "name": "Manatal",
-            "patterns": ["url: https?://careers\\.manatal\\.com/", "url: https?://api\\.manatal\\.com/", "url: https?://www\\.manatal\\.com/[^\\s]*(?:jobs|careers|apply)"],
+            "patterns": [
+              "url: https?://careers\\.manatal\\.com/",
+              "url: https?://api\\.manatal\\.com/",
+              "url: https?://www\\.manatal\\.com/[^\\s]*(?:jobs|careers|apply)"
+            ],
             "evidence": "响应 URL 指向 Manatal"
           }
         ]
@@ -2154,12 +2546,20 @@
           },
           {
             "name": "Narvar Tracking",
-            "patterns": ["url: https?://tracking\\.narvar\\.com/", "url: https?://assets\\.narvar\\.com/", "url: https?://www\\.narvar\\.com/[^\\s]*(?:tracking|returns|track)"],
+            "patterns": [
+              "url: https?://tracking\\.narvar\\.com/",
+              "url: https?://assets\\.narvar\\.com/",
+              "url: https?://www\\.narvar\\.com/[^\\s]*(?:tracking|returns|track)"
+            ],
             "evidence": "响应 URL 指向 Narvar 物流追踪 / 退货"
           },
           {
             "name": "Shippo Tracking",
-            "patterns": ["url: https?://track\\.goshippo\\.com/", "url: https?://goshippo\\.com/tracks", "url: https?://www\\.shippo\\.com/[^\\s]*(?:tracking|track)"],
+            "patterns": [
+              "url: https?://track\\.goshippo\\.com/",
+              "url: https?://goshippo\\.com/tracks",
+              "url: https?://www\\.shippo\\.com/[^\\s]*(?:tracking|track)"
+            ],
             "evidence": "响应 URL 指向 Shippo 物流追踪"
           },
           {
@@ -2169,27 +2569,42 @@
           },
           {
             "name": "ShipStation Tracking",
-            "patterns": ["url: https?://ss\\.shipstation\\.com/", "url: https?://www\\.shipstation\\.com/[^\\s]*(?:tracking|track|widgets?)"],
+            "patterns": [
+              "url: https?://ss\\.shipstation\\.com/",
+              "url: https?://www\\.shipstation\\.com/[^\\s]*(?:tracking|track|widgets?)"
+            ],
             "evidence": "响应 URL 指向 ShipStation 物流追踪"
           },
           {
             "name": "17TRACK Widget",
-            "patterns": ["url: https?://www\\.17track\\.net/[^\\s]*(?:externalcall|track|embed|widget)", "url: https?://res\\.17track\\.net/"],
+            "patterns": [
+              "url: https?://www\\.17track\\.net/[^\\s]*(?:externalcall|track|embed|widget)",
+              "url: https?://res\\.17track\\.net/"
+            ],
             "evidence": "响应 URL 指向 17TRACK 物流追踪"
           },
           {
             "name": "ParcelPanel Tracking Widget",
-            "patterns": ["url: https?://cdn\\.parcelpanel\\.com/", "url: https?://(?:www\\.)?parcelpanel\\.com/[^\\s]*(?:track|tracking|widget|apps)"],
+            "patterns": [
+              "url: https?://cdn\\.parcelpanel\\.com/",
+              "url: https?://(?:www\\.)?parcelpanel\\.com/[^\\s]*(?:track|tracking|widget|apps)"
+            ],
             "evidence": "响应 URL 指向 ParcelPanel 物流追踪"
           },
           {
             "name": "Track123",
-            "patterns": ["url: https?://cdn\\.track123\\.com/", "url: https?://(?:www\\.)?track123\\.com/[^\\s]*(?:track|tracking|apps|widget)"],
+            "patterns": [
+              "url: https?://cdn\\.track123\\.com/",
+              "url: https?://(?:www\\.)?track123\\.com/[^\\s]*(?:track|tracking|apps|widget)"
+            ],
             "evidence": "响应 URL 指向 Track123 物流追踪"
           },
           {
             "name": "Wonderment",
-            "patterns": ["url: https?://cdn\\.wonderment\\.com/", "url: https?://(?:www\\.)?wonderment\\.com/[^\\s]*(?:tracking|track|widget|apps)"],
+            "patterns": [
+              "url: https?://cdn\\.wonderment\\.com/",
+              "url: https?://(?:www\\.)?wonderment\\.com/[^\\s]*(?:tracking|track|widget|apps)"
+            ],
             "evidence": "响应 URL 指向 Wonderment 物流追踪"
           },
           {
@@ -2199,147 +2614,242 @@
           },
           {
             "name": "Loop Returns",
-            "patterns": ["url: https?://returns\\.loopreturns\\.com/", "url: https?://cdn\\.loopreturns\\.com/", "url: https?://(?:www\\.)?loopreturns\\.com/[^\\s]*(?:returns|exchange|apps)"],
+            "patterns": [
+              "url: https?://returns\\.loopreturns\\.com/",
+              "url: https?://cdn\\.loopreturns\\.com/",
+              "url: https?://(?:www\\.)?loopreturns\\.com/[^\\s]*(?:returns|exchange|apps)"
+            ],
             "evidence": "响应 URL 指向 Loop Returns"
           },
           {
             "name": "Returnly",
-            "patterns": ["url: https?://cdn\\.returnly\\.com/", "url: https?://(?:www\\.)?returnly\\.com/[^\\s]*(?:returns|exchange|portal|widget)"],
+            "patterns": [
+              "url: https?://cdn\\.returnly\\.com/",
+              "url: https?://(?:www\\.)?returnly\\.com/[^\\s]*(?:returns|exchange|portal|widget)"
+            ],
             "evidence": "响应 URL 指向 Returnly 退货售后"
           },
           {
             "name": "Happy Returns",
-            "patterns": ["url: https?://cdn\\.happyreturns\\.com/", "url: https?://(?:www\\.)?happyreturns\\.com/[^\\s]*(?:returns|return-bar|portal|widget)"],
+            "patterns": [
+              "url: https?://cdn\\.happyreturns\\.com/",
+              "url: https?://(?:www\\.)?happyreturns\\.com/[^\\s]*(?:returns|return-bar|portal|widget)"
+            ],
             "evidence": "响应 URL 指向 Happy Returns"
           },
           {
             "name": "Redo Returns",
-            "patterns": ["url: https?://app\\.redo\\.com/", "url: https?://cdn\\.redo\\.com/", "url: https?://(?:www\\.)?redo\\.com/[^\\s]*(?:returns|protection|widget)"],
+            "patterns": [
+              "url: https?://app\\.redo\\.com/",
+              "url: https?://cdn\\.redo\\.com/",
+              "url: https?://(?:www\\.)?redo\\.com/[^\\s]*(?:returns|protection|widget)"
+            ],
             "evidence": "响应 URL 指向 Redo Returns"
           },
           {
             "name": "ShippyPro",
-            "patterns": ["url: https?://cdn\\.shippypro\\.com/", "url: https?://(?:www\\.)?shippypro\\.com/[^\\s]*(?:tracking|track|returns|widget)"],
+            "patterns": [
+              "url: https?://cdn\\.shippypro\\.com/",
+              "url: https?://(?:www\\.)?shippypro\\.com/[^\\s]*(?:tracking|track|returns|widget)"
+            ],
             "evidence": "响应 URL 指向 ShippyPro 物流追踪"
           },
           {
             "name": "Sendcloud",
-            "patterns": ["url: https?://[^\\s/]+\\.sendcloud\\.sc/[^\\s]*(?:tracking|track)", "url: https?://(?:www\\.)?sendcloud\\.com/[^\\s]*(?:tracking|returns|widget)"],
+            "patterns": [
+              "url: https?://[^\\s/]+\\.sendcloud\\.sc/[^\\s]*(?:tracking|track)",
+              "url: https?://(?:www\\.)?sendcloud\\.com/[^\\s]*(?:tracking|returns|widget)"
+            ],
             "evidence": "响应 URL 指向 Sendcloud 物流追踪"
           },
           {
             "name": "Easyship",
-            "patterns": ["url: https?://cdn\\.easyship\\.com/", "url: https?://(?:www\\.)?easyship\\.com/[^\\s]*(?:tracking|track|checkout|widget)"],
+            "patterns": [
+              "url: https?://cdn\\.easyship\\.com/",
+              "url: https?://(?:www\\.)?easyship\\.com/[^\\s]*(?:tracking|track|checkout|widget)"
+            ],
             "evidence": "响应 URL 指向 Easyship 物流追踪"
           },
           {
             "name": "TrackingMore",
-            "patterns": ["url: https?://cdn\\.trackingmore\\.com/", "url: https?://(?:www\\.)?trackingmore\\.com/[^\\s]*(?:tracking|track|widget|button)"],
+            "patterns": [
+              "url: https?://cdn\\.trackingmore\\.com/",
+              "url: https?://(?:www\\.)?trackingmore\\.com/[^\\s]*(?:tracking|track|widget|button)"
+            ],
             "evidence": "响应 URL 指向 TrackingMore"
           },
           {
             "name": "Shiprocket Tracking Widget",
-            "patterns": ["url: https?://cdn\\.shiprocket\\.in/", "url: https?://(?:www\\.)?shiprocket\\.in/[^\\s]*(?:shipment-tracking|tracking|track|widget)"],
+            "patterns": [
+              "url: https?://cdn\\.shiprocket\\.in/",
+              "url: https?://(?:www\\.)?shiprocket\\.in/[^\\s]*(?:shipment-tracking|tracking|track|widget)"
+            ],
             "evidence": "响应 URL 指向 Shiprocket 物流追踪"
           },
           {
             "name": "parcelLab",
-            "patterns": ["url: https?://cdn\\.parcellab\\.com/", "url: https?://api\\.parcellab\\.com/", "url: https?://(?:www\\.)?parcellab\\.com/[^\\s]*(?:track|tracking|returns|widget)"],
+            "patterns": [
+              "url: https?://cdn\\.parcellab\\.com/",
+              "url: https?://api\\.parcellab\\.com/",
+              "url: https?://(?:www\\.)?parcellab\\.com/[^\\s]*(?:track|tracking|returns|widget)"
+            ],
             "evidence": "响应 URL 指向 parcelLab"
           },
           {
             "name": "Parcel Perform",
-            "patterns": ["url: https?://tracking\\.parcelperform\\.com/", "url: https?://cdn\\.parcelperform\\.com/", "url: https?://(?:www\\.)?parcelperform\\.com/[^\\s]*(?:track|tracking|returns|widget)"],
+            "patterns": [
+              "url: https?://tracking\\.parcelperform\\.com/",
+              "url: https?://cdn\\.parcelperform\\.com/",
+              "url: https?://(?:www\\.)?parcelperform\\.com/[^\\s]*(?:track|tracking|returns|widget)"
+            ],
             "evidence": "响应 URL 指向 Parcel Perform"
           },
           {
             "name": "Ordertracker",
-            "patterns": ["url: https?://cdn\\.ordertracker\\.com/", "url: https?://(?:www\\.)?ordertracker\\.com/[^\\s]*(?:track|tracking|widget|apps)"],
+            "patterns": [
+              "url: https?://cdn\\.ordertracker\\.com/",
+              "url: https?://(?:www\\.)?ordertracker\\.com/[^\\s]*(?:track|tracking|widget|apps)"
+            ],
             "evidence": "响应 URL 指向 Ordertracker"
           },
           {
             "name": "Shipup",
-            "patterns": ["url: https?://cdn\\.shipup\\.co/", "url: https?://api\\.shipup\\.co/", "url: https?://(?:www\\.)?shipup\\.co/[^\\s]*(?:track|tracking|returns|widget)"],
+            "patterns": [
+              "url: https?://cdn\\.shipup\\.co/",
+              "url: https?://api\\.shipup\\.co/",
+              "url: https?://(?:www\\.)?shipup\\.co/[^\\s]*(?:track|tracking|returns|widget)"
+            ],
             "evidence": "响应 URL 指向 Shipup"
           },
           {
             "name": "LateShipment.com",
-            "patterns": ["url: https?://cdn\\.lateshipment\\.com/", "url: https?://(?:www\\.)?lateshipment\\.com/[^\\s]*(?:track|tracking|returns|widget|apps)"],
+            "patterns": [
+              "url: https?://cdn\\.lateshipment\\.com/",
+              "url: https?://(?:www\\.)?lateshipment\\.com/[^\\s]*(?:track|tracking|returns|widget|apps)"
+            ],
             "evidence": "响应 URL 指向 LateShipment.com"
           },
           {
             "name": "WeSupply",
-            "patterns": ["url: https?://cdn\\.wesupplylabs\\.com/", "url: https?://(?:www\\.)?wesupplylabs\\.com/[^\\s]*(?:track|tracking|returns|widget|apps)"],
+            "patterns": [
+              "url: https?://cdn\\.wesupplylabs\\.com/",
+              "url: https?://(?:www\\.)?wesupplylabs\\.com/[^\\s]*(?:track|tracking|returns|widget|apps)"
+            ],
             "evidence": "响应 URL 指向 WeSupply"
           },
           {
             "name": "ReturnGO",
-            "patterns": ["url: https?://cdn\\.returngo\\.ai/", "url: https?://(?:www\\.)?returngo\\.ai/[^\\s]*(?:returns|exchange|portal|widget|apps)"],
+            "patterns": [
+              "url: https?://cdn\\.returngo\\.ai/",
+              "url: https?://(?:www\\.)?returngo\\.ai/[^\\s]*(?:returns|exchange|portal|widget|apps)"
+            ],
             "evidence": "响应 URL 指向 ReturnGO"
           },
           {
             "name": "Return Prime",
-            "patterns": ["url: https?://cdn\\.returnprime\\.com/", "url: https?://(?:www\\.)?returnprime\\.com/[^\\s]*(?:returns|exchange|portal|widget|apps)"],
+            "patterns": [
+              "url: https?://cdn\\.returnprime\\.com/",
+              "url: https?://(?:www\\.)?returnprime\\.com/[^\\s]*(?:returns|exchange|portal|widget|apps)"
+            ],
             "evidence": "响应 URL 指向 Return Prime"
           },
           {
             "name": "Sendle",
-            "patterns": ["url: https?://api\\.sendle\\.com/", "url: https?://(?:www\\.)?sendle\\.com/[^\\s]*(?:tracking|track|shipments|widget)"],
+            "patterns": [
+              "url: https?://api\\.sendle\\.com/",
+              "url: https?://(?:www\\.)?sendle\\.com/[^\\s]*(?:tracking|track|shipments|widget)"
+            ],
             "evidence": "响应 URL 指向 Sendle"
           },
           {
             "name": "ShipBob",
-            "patterns": ["url: https?://api\\.shipbob\\.com/", "url: https?://tracking\\.shipbob\\.com/", "url: https?://(?:www\\.)?shipbob\\.com/[^\\s]*(?:tracking|track|orders|widget)"],
+            "patterns": [
+              "url: https?://api\\.shipbob\\.com/",
+              "url: https?://tracking\\.shipbob\\.com/",
+              "url: https?://(?:www\\.)?shipbob\\.com/[^\\s]*(?:tracking|track|orders|widget)"
+            ],
             "evidence": "响应 URL 指向 ShipBob"
           },
           {
             "name": "ShipHero",
-            "patterns": ["url: https?://tracking\\.shiphero\\.com/", "url: https?://api-gateway\\.shiphero\\.com/", "url: https?://(?:www\\.)?shiphero\\.com/[^\\s]*(?:tracking|track|returns|widget)"],
+            "patterns": [
+              "url: https?://tracking\\.shiphero\\.com/",
+              "url: https?://api-gateway\\.shiphero\\.com/",
+              "url: https?://(?:www\\.)?shiphero\\.com/[^\\s]*(?:tracking|track|returns|widget)"
+            ],
             "evidence": "响应 URL 指向 ShipHero"
           },
           {
             "name": "EasyParcel",
-            "patterns": ["url: https?://cdn\\.easyparcel\\.com/", "url: https?://(?:www\\.)?easyparcel\\.com/[^\\s]*(?:tracking|track|widget|courier)"],
+            "patterns": [
+              "url: https?://cdn\\.easyparcel\\.com/",
+              "url: https?://(?:www\\.)?easyparcel\\.com/[^\\s]*(?:tracking|track|widget|courier)"
+            ],
             "evidence": "响应 URL 指向 EasyParcel"
           },
           {
             "name": "Shiptheory",
-            "patterns": ["url: https?://api\\.shiptheory\\.com/", "url: https?://(?:www\\.)?shiptheory\\.com/[^\\s]*(?:tracking|track|shipments|widget)"],
+            "patterns": [
+              "url: https?://api\\.shiptheory\\.com/",
+              "url: https?://(?:www\\.)?shiptheory\\.com/[^\\s]*(?:tracking|track|shipments|widget)"
+            ],
             "evidence": "响应 URL 指向 Shiptheory"
           },
           {
             "name": "ShipEngine",
-            "patterns": ["url: https?://api\\.shipengine\\.com/", "url: https?://(?:www\\.)?shipengine\\.com/[^\\s]*(?:tracking|track|rates|shipments)"],
+            "patterns": [
+              "url: https?://api\\.shipengine\\.com/",
+              "url: https?://(?:www\\.)?shipengine\\.com/[^\\s]*(?:tracking|track|rates|shipments)"
+            ],
             "evidence": "响应 URL 指向 ShipEngine"
           },
           {
             "name": "Metapack",
-            "patterns": ["url: https?://deliverymanager\\.metapack\\.com/", "url: https?://(?:www\\.)?metapack\\.com/[^\\s]*(?:tracking|track|delivery|returns)"],
+            "patterns": [
+              "url: https?://deliverymanager\\.metapack\\.com/",
+              "url: https?://(?:www\\.)?metapack\\.com/[^\\s]*(?:tracking|track|delivery|returns)"
+            ],
             "evidence": "响应 URL 指向 Metapack"
           },
           {
             "name": "nShift",
-            "patterns": ["url: https?://api\\.unifaun\\.com/", "url: https?://(?:www\\.)?nshift\\.com/[^\\s]*(?:tracking|track|delivery|returns|widget)"],
+            "patterns": [
+              "url: https?://api\\.unifaun\\.com/",
+              "url: https?://(?:www\\.)?nshift\\.com/[^\\s]*(?:tracking|track|delivery|returns|widget)"
+            ],
             "evidence": "响应 URL 指向 nShift"
           },
           {
             "name": "ShipMonk",
-            "patterns": ["url: https?://tracking\\.shipmonk\\.com/", "url: https?://(?:www\\.)?shipmonk\\.com/[^\\s]*(?:tracking|track|returns|widget)"],
+            "patterns": [
+              "url: https?://tracking\\.shipmonk\\.com/",
+              "url: https?://(?:www\\.)?shipmonk\\.com/[^\\s]*(?:tracking|track|returns|widget)"
+            ],
             "evidence": "响应 URL 指向 ShipMonk"
           },
           {
             "name": "ReBOUND Returns",
-            "patterns": ["url: https?://cdn\\.reboundreturns\\.com/", "url: https?://(?:www\\.)?reboundreturns\\.com/[^\\s]*(?:returns|tracking|portal|widget)"],
+            "patterns": [
+              "url: https?://cdn\\.reboundreturns\\.com/",
+              "url: https?://(?:www\\.)?reboundreturns\\.com/[^\\s]*(?:returns|tracking|portal|widget)"
+            ],
             "evidence": "响应 URL 指向 ReBOUND Returns"
           },
           {
             "name": "ClickPost Tracking",
-            "patterns": ["url: https?://api\\.clickpost\\.ai/", "url: https?://tracking\\.clickpost\\.ai/", "url: https?://(?:www\\.)?clickpost\\.ai/[^\\s]*(?:tracking|track|returns|widget)"],
+            "patterns": [
+              "url: https?://api\\.clickpost\\.ai/",
+              "url: https?://tracking\\.clickpost\\.ai/",
+              "url: https?://(?:www\\.)?clickpost\\.ai/[^\\s]*(?:tracking|track|returns|widget)"
+            ],
             "evidence": "响应 URL 指向 ClickPost Tracking"
           },
           {
             "name": "Parcel Monitor",
-            "patterns": ["url: https?://cdn\\.parcelmonitor\\.com/", "url: https?://(?:www\\.)?parcelmonitor\\.com/[^\\s]*(?:track|tracking|widget)"],
+            "patterns": [
+              "url: https?://cdn\\.parcelmonitor\\.com/",
+              "url: https?://(?:www\\.)?parcelmonitor\\.com/[^\\s]*(?:track|tracking|widget)"
+            ],
             "evidence": "响应 URL 指向 Parcel Monitor"
           }
         ]
@@ -2529,7 +3039,11 @@
           },
           {
             "name": "Fusebill",
-            "patterns": ["url: https?://secure\\.fusebill\\.com/", "url: https?://app\\.fusebill\\.com/", "url: https?://api\\.fusebill\\.com/"],
+            "patterns": [
+              "url: https?://secure\\.fusebill\\.com/",
+              "url: https?://app\\.fusebill\\.com/",
+              "url: https?://api\\.fusebill\\.com/"
+            ],
             "evidence": "响应 URL 指向 Fusebill"
           },
           {
@@ -2625,7 +3139,10 @@
           },
           {
             "name": "Adyen",
-            "patterns": ["url: https?://checkoutshopper-(?:live|test)(?:-[a-z0-9-]+)?\\.adyen\\.com/", "url: https?://pal-(?:live|test)\\.adyen\\.com/"],
+            "patterns": [
+              "url: https?://checkoutshopper-(?:live|test)(?:-[a-z0-9-]+)?\\.adyen\\.com/",
+              "url: https?://pal-(?:live|test)\\.adyen\\.com/"
+            ],
             "evidence": "响应 URL 指向 Adyen Checkout"
           },
           {
@@ -2668,7 +3185,11 @@
           },
           {
             "name": "Checkout.com",
-            "patterns": ["url: https?://cdn\\.checkout\\.com/", "url: https?://api\\.checkout\\.com/", "url: https?://frames\\.checkout\\.com/"],
+            "patterns": [
+              "url: https?://cdn\\.checkout\\.com/",
+              "url: https?://api\\.checkout\\.com/",
+              "url: https?://frames\\.checkout\\.com/"
+            ],
             "evidence": "响应 URL 指向 Checkout.com"
           },
           {
@@ -2678,7 +3199,11 @@
           },
           {
             "name": "Authorize.Net",
-            "patterns": ["url: https?://js\\.authorize\\.net/", "url: https?://accept\\.authorize\\.net/", "url: https?://api\\.authorize\\.net/"],
+            "patterns": [
+              "url: https?://js\\.authorize\\.net/",
+              "url: https?://accept\\.authorize\\.net/",
+              "url: https?://api\\.authorize\\.net/"
+            ],
             "evidence": "响应 URL 指向 Authorize.Net"
           },
           {
@@ -2688,12 +3213,20 @@
           },
           {
             "name": "2Checkout / Verifone",
-            "patterns": ["url: https?://(?:www\\.)?2checkout\\.com/", "url: https?://secure\\.2co\\.com/", "url: https?://[^\\s/]+\\.verifone\\.cloud/"],
+            "patterns": [
+              "url: https?://(?:www\\.)?2checkout\\.com/",
+              "url: https?://secure\\.2co\\.com/",
+              "url: https?://[^\\s/]+\\.verifone\\.cloud/"
+            ],
             "evidence": "响应 URL 指向 2Checkout / Verifone"
           },
           {
             "name": "PayU",
-            "patterns": ["url: https?://secure\\.payu\\.[a-z.]+/", "url: https?://checkout\\.payu\\.com/", "url: https?://secure\\.payu\\.in/"],
+            "patterns": [
+              "url: https?://secure\\.payu\\.[a-z.]+/",
+              "url: https?://checkout\\.payu\\.com/",
+              "url: https?://secure\\.payu\\.in/"
+            ],
             "evidence": "响应 URL 指向 PayU"
           },
           {
@@ -2703,27 +3236,47 @@
           },
           {
             "name": "Paystack",
-            "patterns": ["url: https?://js\\.paystack\\.co/", "url: https?://api\\.paystack\\.co/", "url: https?://checkout\\.paystack\\.com/"],
+            "patterns": [
+              "url: https?://js\\.paystack\\.co/",
+              "url: https?://api\\.paystack\\.co/",
+              "url: https?://checkout\\.paystack\\.com/"
+            ],
             "evidence": "响应 URL 指向 Paystack"
           },
           {
             "name": "Flutterwave",
-            "patterns": ["url: https?://checkout\\.flutterwave\\.com/", "url: https?://api\\.flutterwave\\.com/", "url: https?://ravemodal\\.flutterwave\\.com/"],
+            "patterns": [
+              "url: https?://checkout\\.flutterwave\\.com/",
+              "url: https?://api\\.flutterwave\\.com/",
+              "url: https?://ravemodal\\.flutterwave\\.com/"
+            ],
             "evidence": "响应 URL 指向 Flutterwave"
           },
           {
             "name": "Mercado Pago",
-            "patterns": ["url: https?://sdk\\.mercadopago\\.com/", "url: https?://api\\.mercadopago\\.com/", "url: https?://www\\.mercadopago\\.com/checkout/"],
+            "patterns": [
+              "url: https?://sdk\\.mercadopago\\.com/",
+              "url: https?://api\\.mercadopago\\.com/",
+              "url: https?://www\\.mercadopago\\.com/checkout/"
+            ],
             "evidence": "响应 URL 指向 Mercado Pago"
           },
           {
             "name": "Affirm",
-            "patterns": ["url: https?://cdn1\\.affirm\\.com/", "url: https?://cdn-assets\\.affirm\\.com/", "url: https?://api\\.affirm\\.com/"],
+            "patterns": [
+              "url: https?://cdn1\\.affirm\\.com/",
+              "url: https?://cdn-assets\\.affirm\\.com/",
+              "url: https?://api\\.affirm\\.com/"
+            ],
             "evidence": "响应 URL 指向 Affirm"
           },
           {
             "name": "Sezzle",
-            "patterns": ["url: https?://checkout-sdk\\.sezzle\\.com/", "url: https?://widget\\.sezzle\\.com/", "url: https?://gateway\\.sezzle\\.com/"],
+            "patterns": [
+              "url: https?://checkout-sdk\\.sezzle\\.com/",
+              "url: https?://widget\\.sezzle\\.com/",
+              "url: https?://gateway\\.sezzle\\.com/"
+            ],
             "evidence": "响应 URL 指向 Sezzle"
           },
           {
@@ -2753,7 +3306,11 @@
           },
           {
             "name": "Rapyd",
-            "patterns": ["url: https?://checkout\\.rapyd\\.net/", "url: https?://sandboxcheckout\\.rapyd\\.net/", "url: https?://api\\.rapyd\\.net/"],
+            "patterns": [
+              "url: https?://checkout\\.rapyd\\.net/",
+              "url: https?://sandboxcheckout\\.rapyd\\.net/",
+              "url: https?://api\\.rapyd\\.net/"
+            ],
             "evidence": "响应 URL 指向 Rapyd"
           },
           {
@@ -2763,7 +3320,11 @@
           },
           {
             "name": "Airwallex",
-            "patterns": ["url: https?://checkout\\.airwallex\\.com/", "url: https?://checkout-demo\\.airwallex\\.com/", "url: https?://static\\.airwallex\\.com/"],
+            "patterns": [
+              "url: https?://checkout\\.airwallex\\.com/",
+              "url: https?://checkout-demo\\.airwallex\\.com/",
+              "url: https?://static\\.airwallex\\.com/"
+            ],
             "evidence": "响应 URL 指向 Airwallex"
           },
           {
@@ -2773,7 +3334,10 @@
           },
           {
             "name": "Midtrans",
-            "patterns": ["url: https?://app\\.midtrans\\.com/snap/snap\\.js", "url: https?://app\\.sandbox\\.midtrans\\.com/snap/snap\\.js"],
+            "patterns": [
+              "url: https?://app\\.midtrans\\.com/snap/snap\\.js",
+              "url: https?://app\\.sandbox\\.midtrans\\.com/snap/snap\\.js"
+            ],
             "evidence": "响应 URL 指向 Midtrans"
           },
           {
@@ -2798,12 +3362,19 @@
           },
           {
             "name": "GoCardless",
-            "patterns": ["url: https?://pay\\.gocardless\\.com/", "url: https?://js\\.gocardless\\.com/", "url: https?://api\\.gocardless\\.com/"],
+            "patterns": [
+              "url: https?://pay\\.gocardless\\.com/",
+              "url: https?://js\\.gocardless\\.com/",
+              "url: https?://api\\.gocardless\\.com/"
+            ],
             "evidence": "响应 URL 指向 GoCardless"
           },
           {
             "name": "Plaid Link",
-            "patterns": ["url: https?://cdn\\.plaid\\.com/link/v2/stable/link-initialize\\.js", "url: https?://production\\.plaid\\.com/link/"],
+            "patterns": [
+              "url: https?://cdn\\.plaid\\.com/link/v2/stable/link-initialize\\.js",
+              "url: https?://production\\.plaid\\.com/link/"
+            ],
             "evidence": "响应 URL 指向 Plaid Link"
           }
         ]
@@ -2821,7 +3392,10 @@
           },
           {
             "name": "微信登录",
-            "patterns": ["url: https?://open\\.weixin\\.qq\\.com/connect/qrconnect", "url: https?://open\\.weixin\\.qq\\.com/connect/oauth2/authorize"],
+            "patterns": [
+              "url: https?://open\\.weixin\\.qq\\.com/connect/qrconnect",
+              "url: https?://open\\.weixin\\.qq\\.com/connect/oauth2/authorize"
+            ],
             "evidence": "响应 URL 指向微信 OAuth 登录"
           },
           {
@@ -2836,7 +3410,10 @@
           },
           {
             "name": "支付宝登录",
-            "patterns": ["url: https?://openauth\\.alipay\\.com/oauth2/publicAppAuthorize\\.htm", "url: https?://auth\\.alipay\\.com/login/index\\.htm"],
+            "patterns": [
+              "url: https?://openauth\\.alipay\\.com/oauth2/publicAppAuthorize\\.htm",
+              "url: https?://auth\\.alipay\\.com/login/index\\.htm"
+            ],
             "evidence": "响应 URL 指向支付宝授权登录"
           },
           {
@@ -2855,7 +3432,10 @@
           },
           {
             "name": "企业微信登录",
-            "patterns": ["url: https?://open\\.work\\.weixin\\.qq\\.com/wwopen/sso/qrConnect", "url: https?://open\\.work\\.weixin\\.qq\\.com/wwopen/sso/3rd_qrConnect"],
+            "patterns": [
+              "url: https?://open\\.work\\.weixin\\.qq\\.com/wwopen/sso/qrConnect",
+              "url: https?://open\\.work\\.weixin\\.qq\\.com/wwopen/sso/3rd_qrConnect"
+            ],
             "evidence": "响应 URL 指向企业微信登录"
           },
           {
@@ -2900,12 +3480,18 @@
           },
           {
             "name": "Apple 登录",
-            "patterns": ["url: https?://appleid\\.apple\\.com/auth/authorize", "url: https?://appleid\\.cdn-apple\\.com/appleauth/static/jsapi/appleid/"],
+            "patterns": [
+              "url: https?://appleid\\.apple\\.com/auth/authorize",
+              "url: https?://appleid\\.cdn-apple\\.com/appleauth/static/jsapi/appleid/"
+            ],
             "evidence": "响应 URL 指向 Apple 登录"
           },
           {
             "name": "Microsoft 登录",
-            "patterns": ["url: https?://login\\.microsoftonline\\.com/[^\\s]+/oauth2/v2\\.0/authorize", "url: https?://login\\.live\\.com/oauth20_authorize\\.srf"],
+            "patterns": [
+              "url: https?://login\\.microsoftonline\\.com/[^\\s]+/oauth2/v2\\.0/authorize",
+              "url: https?://login\\.live\\.com/oauth20_authorize\\.srf"
+            ],
             "evidence": "响应 URL 指向 Microsoft OAuth 登录"
           },
           {
@@ -2915,7 +3501,11 @@
           },
           {
             "name": "Twitter / X 登录",
-            "patterns": ["url: https?://twitter\\.com/i/oauth2/authorize", "url: https?://x\\.com/i/oauth2/authorize", "url: https?://api\\.twitter\\.com/oauth/"],
+            "patterns": [
+              "url: https?://twitter\\.com/i/oauth2/authorize",
+              "url: https?://x\\.com/i/oauth2/authorize",
+              "url: https?://api\\.twitter\\.com/oauth/"
+            ],
             "evidence": "响应 URL 指向 Twitter / X OAuth 登录"
           },
           {
@@ -2960,12 +3550,18 @@
           },
           {
             "name": "Okta 登录",
-            "patterns": ["url: https?://[^\\s/]+\\.okta\\.com/oauth2/[^\\s]*/v1/authorize", "url: https?://[^\\s/]+\\.okta\\.com/oauth2/v1/authorize"],
+            "patterns": [
+              "url: https?://[^\\s/]+\\.okta\\.com/oauth2/[^\\s]*/v1/authorize",
+              "url: https?://[^\\s/]+\\.okta\\.com/oauth2/v1/authorize"
+            ],
             "evidence": "响应 URL 指向 Okta OAuth 登录"
           },
           {
             "name": "Keycloak 登录",
-            "patterns": ["url: https?://[^\\s]+/realms/[^\\s/]+/protocol/openid-connect/auth", "url: https?://[^\\s]+/auth/realms/[^\\s/]+/protocol/openid-connect/auth"],
+            "patterns": [
+              "url: https?://[^\\s]+/realms/[^\\s/]+/protocol/openid-connect/auth",
+              "url: https?://[^\\s]+/auth/realms/[^\\s/]+/protocol/openid-connect/auth"
+            ],
             "evidence": "响应 URL 指向 Keycloak OpenID Connect 登录"
           },
           {
@@ -2985,7 +3581,10 @@
           },
           {
             "name": "Logto",
-            "patterns": ["url: https?://[^\\s/]+\\.logto\\.app/oidc/auth", "url: https?://[^\\s/]+\\.logto\\.app/oidc/.well-known/openid-configuration"],
+            "patterns": [
+              "url: https?://[^\\s/]+\\.logto\\.app/oidc/auth",
+              "url: https?://[^\\s/]+\\.logto\\.app/oidc/.well-known/openid-configuration"
+            ],
             "evidence": "响应 URL 指向 Logto / OIDC 登录"
           }
         ]
@@ -3039,10 +3638,7 @@
           },
           {
             "name": "SignRequest",
-            "patterns": [
-              "url: https?://signrequest\\.com/[^\\s]*(?:#/sign|document|api|embed)",
-              "url: https?://app\\.signrequest\\.com/"
-            ],
+            "patterns": ["url: https?://signrequest\\.com/[^\\s]*(?:#/sign|document|api|embed)", "url: https?://app\\.signrequest\\.com/"],
             "evidence": "响应 URL 指向 SignRequest"
           },
           {
@@ -3211,10 +3807,7 @@
           },
           {
             "name": "Icertis CLM",
-            "patterns": [
-              "url: https?://app\\.icertis\\.com/",
-              "url: https?://(?!www\\.)[a-z0-9-]+\\.icertis\\.com/(?:ICM|icm|api)"
-            ],
+            "patterns": ["url: https?://app\\.icertis\\.com/", "url: https?://(?!www\\.)[a-z0-9-]+\\.icertis\\.com/(?:ICM|icm|api)"],
             "evidence": "响应 URL 指向 Icertis CLM"
           },
           {
@@ -3440,10 +4033,7 @@
         "rules": [
           {
             "name": "Algolia",
-            "patterns": [
-              "url: https?://[a-z0-9-]+(?:-dsn)?\\.algolia\\.net/",
-              "url: https?://[a-z0-9-]+(?:-dsn)?\\.algolianet\\.com/"
-            ],
+            "patterns": ["url: https?://[a-z0-9-]+(?:-dsn)?\\.algolia\\.net/", "url: https?://[a-z0-9-]+(?:-dsn)?\\.algolianet\\.com/"],
             "evidence": "响应 URL 指向 Algolia 搜索 API"
           },
           {
@@ -3458,7 +4048,11 @@
           },
           {
             "name": "Bloomreach Discovery",
-            "patterns": ["url: https?://cdn\\.brcdn\\.com/", "url: https?://[^\\s/]*br-trk[^\\s/]*\\.js", "url: https?://[^\\s/]+\\.bloomreach\\.io/"],
+            "patterns": [
+              "url: https?://cdn\\.brcdn\\.com/",
+              "url: https?://[^\\s/]*br-trk[^\\s/]*\\.js",
+              "url: https?://[^\\s/]+\\.bloomreach\\.io/"
+            ],
             "evidence": "响应 URL 指向 Bloomreach Discovery"
           },
           {
@@ -3468,7 +4062,11 @@
           },
           {
             "name": "Searchspring",
-            "patterns": ["url: https?://cdn\\.searchspring\\.net/", "url: https?://snapui\\.searchspring\\.io/", "url: https?://api\\.searchspring\\.net/"],
+            "patterns": [
+              "url: https?://cdn\\.searchspring\\.net/",
+              "url: https?://snapui\\.searchspring\\.io/",
+              "url: https?://api\\.searchspring\\.net/"
+            ],
             "evidence": "响应 URL 指向 Searchspring"
           },
           {
@@ -3488,7 +4086,11 @@
           },
           {
             "name": "Dynamic Yield",
-            "patterns": ["url: https?://cdn\\.dynamicyield\\.com/", "url: https?://st\\.dynamicyield\\.com/", "url: https?://[^\\s/]+\\.dy-api\\.com/"],
+            "patterns": [
+              "url: https?://cdn\\.dynamicyield\\.com/",
+              "url: https?://st\\.dynamicyield\\.com/",
+              "url: https?://[^\\s/]+\\.dy-api\\.com/"
+            ],
             "evidence": "响应 URL 指向 Dynamic Yield"
           },
           {
@@ -3508,7 +4110,11 @@
           },
           {
             "name": "Algonomy",
-            "patterns": ["url: https?://recs\\.richrelevance\\.com/", "url: https?://media\\.richrelevance\\.com/", "url: https?://[^\\s/]+\\.algorecs\\.com/"],
+            "patterns": [
+              "url: https?://recs\\.richrelevance\\.com/",
+              "url: https?://media\\.richrelevance\\.com/",
+              "url: https?://[^\\s/]+\\.algorecs\\.com/"
+            ],
             "evidence": "响应 URL 指向 Algonomy / RichRelevance"
           },
           {
@@ -3523,12 +4129,20 @@
           },
           {
             "name": "Findify",
-            "patterns": ["url: https?://cdn\\.findify\\.io/", "url: https?://api\\.findify\\.io/", "url: https?://findify-assets\\.s3\\.amazonaws\\.com/"],
+            "patterns": [
+              "url: https?://cdn\\.findify\\.io/",
+              "url: https?://api\\.findify\\.io/",
+              "url: https?://findify-assets\\.s3\\.amazonaws\\.com/"
+            ],
             "evidence": "响应 URL 指向 Findify"
           },
           {
             "name": "Unbxd",
-            "patterns": ["url: https?://libraries\\.unbxdapi\\.com/", "url: https?://search\\.unbxdapi\\.com/", "url: https?://[^\\s/]+\\.unbxd\\.io/"],
+            "patterns": [
+              "url: https?://libraries\\.unbxdapi\\.com/",
+              "url: https?://search\\.unbxdapi\\.com/",
+              "url: https?://[^\\s/]+\\.unbxd\\.io/"
+            ],
             "evidence": "响应 URL 指向 Unbxd"
           },
           {
@@ -3558,7 +4172,11 @@
           },
           {
             "name": "FACT-Finder",
-            "patterns": ["url: https?://cdn\\.fact-finder\\.de/", "url: https?://api\\.fact-finder\\.de/", "url: https?://[^\\s/]+\\.fact-finder\\.(?:de|com)/"],
+            "patterns": [
+              "url: https?://cdn\\.fact-finder\\.de/",
+              "url: https?://api\\.fact-finder\\.de/",
+              "url: https?://[^\\s/]+\\.fact-finder\\.(?:de|com)/"
+            ],
             "evidence": "响应 URL 指向 FACT-Finder"
           },
           {
@@ -3573,7 +4191,11 @@
           },
           {
             "name": "Elastic Site Search / Swiftype",
-            "patterns": ["url: https?://swiftypecdn\\.com/", "url: https?://api\\.swiftype\\.com/", "url: https?://search-api\\.swiftype\\.com/"],
+            "patterns": [
+              "url: https?://swiftypecdn\\.com/",
+              "url: https?://api\\.swiftype\\.com/",
+              "url: https?://search-api\\.swiftype\\.com/"
+            ],
             "evidence": "响应 URL 指向 Elastic Site Search / Swiftype"
           },
           {
@@ -3613,7 +4235,11 @@
           },
           {
             "name": "Fast Simon",
-            "patterns": ["url: https?://assets\\.instantsearchplus\\.com/", "url: https?://api\\.instantsearchplus\\.com/", "url: https?://[^\\s/]+\\.fastsimon\\.com/"],
+            "patterns": [
+              "url: https?://assets\\.instantsearchplus\\.com/",
+              "url: https?://api\\.instantsearchplus\\.com/",
+              "url: https?://[^\\s/]+\\.fastsimon\\.com/"
+            ],
             "evidence": "响应 URL 指向 Fast Simon"
           },
           {
@@ -3661,10 +4287,7 @@
         "rules": [
           {
             "name": "Agora RTC",
-            "patterns": [
-              "url: https?://websdk\\.agora\\.io/",
-              "url: https?://download\\.agora\\.io/sdk/release/AgoraRTC"
-            ],
+            "patterns": ["url: https?://websdk\\.agora\\.io/", "url: https?://download\\.agora\\.io/sdk/release/AgoraRTC"],
             "evidence": "响应 URL 指向 Agora RTC Web SDK"
           },
           {
@@ -3698,10 +4321,7 @@
           },
           {
             "name": "Jitsi Meet External API",
-            "patterns": [
-              "url: https?://meet\\.jit\\.si/external_api\\.js",
-              "url: https?://[^\\s]+/libs/external_api(?:\\.min)?\\.js"
-            ],
+            "patterns": ["url: https?://meet\\.jit\\.si/external_api\\.js", "url: https?://[^\\s]+/libs/external_api(?:\\.min)?\\.js"],
             "evidence": "响应 URL 指向 Jitsi Meet External API"
           },
           {
@@ -3797,10 +4417,7 @@
         "rules": [
           {
             "name": "StackBlitz",
-            "patterns": [
-              "url: https?://sdk\\.stackblitz\\.com/",
-              "url: https?://stackblitz\\.com/(?:edit|fork|github|embed)/"
-            ],
+            "patterns": ["url: https?://sdk\\.stackblitz\\.com/", "url: https?://stackblitz\\.com/(?:edit|fork|github|embed)/"],
             "evidence": "响应 URL 指向 StackBlitz 在线 IDE 或嵌入"
           },
           {
@@ -3884,7 +4501,11 @@
           },
           {
             "name": "Plunker",
-            "patterns": ["url: https?://embed\\.plnkr\\.co/", "url: https?://plnkr\\.co/(?:edit|embed)/", "url: https?://run\\.plnkr\\.co/"],
+            "patterns": [
+              "url: https?://embed\\.plnkr\\.co/",
+              "url: https?://plnkr\\.co/(?:edit|embed)/",
+              "url: https?://run\\.plnkr\\.co/"
+            ],
             "evidence": "响应 URL 指向 Plunker 代码示例嵌入"
           },
           {
@@ -4011,7 +4632,11 @@
           },
           {
             "name": "Prepr CMS",
-            "patterns": ["url: https?://api\\.(?:eu1|us1)\\.prepr\\.io/", "url: https?://api\\.prepr\\.io/", "url: https?://cdn\\.prepr\\.io/"],
+            "patterns": [
+              "url: https?://api\\.(?:eu1|us1)\\.prepr\\.io/",
+              "url: https?://api\\.prepr\\.io/",
+              "url: https?://cdn\\.prepr\\.io/"
+            ],
             "evidence": "响应 URL 指向 Prepr CMS"
           },
           {
@@ -4138,7 +4763,11 @@
           },
           {
             "name": "AerisWeather",
-            "patterns": ["url: https?://cdn\\.aerisapi\\.com/", "url: https?://api\\.aerisapi\\.com/", "url: https?://maps\\.aerisapi\\.com/"],
+            "patterns": [
+              "url: https?://cdn\\.aerisapi\\.com/",
+              "url: https?://api\\.aerisapi\\.com/",
+              "url: https?://maps\\.aerisapi\\.com/"
+            ],
             "evidence": "响应 URL 指向 AerisWeather"
           },
           {
@@ -4188,7 +4817,10 @@
           },
           {
             "name": "Windguru",
-            "patterns": ["url: https?://(?:www\\.)?windguru\\.cz/[^\\s]*(?:int/iapi|widget)", "url: https?://(?:www\\.)?windguru\\.net/[^\\s]*widget"],
+            "patterns": [
+              "url: https?://(?:www\\.)?windguru\\.cz/[^\\s]*(?:int/iapi|widget)",
+              "url: https?://(?:www\\.)?windguru\\.net/[^\\s]*widget"
+            ],
             "evidence": "响应 URL 指向 Windguru 组件"
           }
         ]
@@ -4536,7 +5168,10 @@
         "rules": [
           {
             "name": "TradingView Widgets",
-            "patterns": ["url: https?://s3\\.tradingview\\.com/(?:tv\\.js|external-embedding/embed-widget)", "url: https?://widgets\\.tradingview\\.com/"],
+            "patterns": [
+              "url: https?://s3\\.tradingview\\.com/(?:tv\\.js|external-embedding/embed-widget)",
+              "url: https?://widgets\\.tradingview\\.com/"
+            ],
             "evidence": "响应 URL 指向 TradingView Widget"
           },
           {
@@ -4591,7 +5226,9 @@
           },
           {
             "name": "Twelve Data",
-            "patterns": ["url: https?://api\\.twelvedata\\.com/(?:time_series|quote|price|exchange_rate|stocks|forex_pairs|cryptocurrencies)"],
+            "patterns": [
+              "url: https?://api\\.twelvedata\\.com/(?:time_series|quote|price|exchange_rate|stocks|forex_pairs|cryptocurrencies)"
+            ],
             "evidence": "响应 URL 指向 Twelve Data API"
           },
           {
@@ -4644,9 +5281,7 @@
         "rules": [
           {
             "name": "WalletConnect",
-            "patterns": [
-              "url: (?:https?|wss?)://(?:relay|rpc|notify|explorer-api|pulse)\\.walletconnect\\.(?:com|org)"
-            ],
+            "patterns": ["url: (?:https?|wss?)://(?:relay|rpc|notify|explorer-api|pulse)\\.walletconnect\\.(?:com|org)"],
             "evidence": "响应 URL 指向 WalletConnect relay、RPC 或 SDK"
           },
           {
@@ -4821,7 +5456,10 @@
           },
           {
             "name": "Webpushr Web Push",
-            "patterns": ["url: https?://cdn\\.webpushr\\.com/", "url: https?://(?:www\\.)?webpushr\\.com/[^\\s]*(?:sw|sdk|subscriber|subscription|webpushr)"],
+            "patterns": [
+              "url: https?://cdn\\.webpushr\\.com/",
+              "url: https?://(?:www\\.)?webpushr\\.com/[^\\s]*(?:sw|sdk|subscriber|subscription|webpushr)"
+            ],
             "evidence": "响应 URL 指向 Webpushr"
           },
           {
@@ -4841,7 +5479,10 @@
           },
           {
             "name": "PushAlert",
-            "patterns": ["url: https?://cdn\\.pushalert\\.co/", "url: https?://(?:www\\.)?pushalert\\.co/[^\\s]*(?:pushalert|worker|subscription|widget)"],
+            "patterns": [
+              "url: https?://cdn\\.pushalert\\.co/",
+              "url: https?://(?:www\\.)?pushalert\\.co/[^\\s]*(?:pushalert|worker|subscription|widget)"
+            ],
             "evidence": "响应 URL 指向 PushAlert"
           },
           {
@@ -4881,7 +5522,10 @@
           },
           {
             "name": "SendPulse Web Push",
-            "patterns": ["url: https?://cdn\\.sendpulse\\.com/", "url: https?://(?:www\\.)?sendpulse\\.com/[^\\s]*(?:webpush|web-push|push|notification|worker)"],
+            "patterns": [
+              "url: https?://cdn\\.sendpulse\\.com/",
+              "url: https?://(?:www\\.)?sendpulse\\.com/[^\\s]*(?:webpush|web-push|push|notification|worker)"
+            ],
             "evidence": "响应 URL 指向 SendPulse Web Push"
           },
           {
@@ -4924,7 +5568,11 @@
           },
           {
             "name": "DialogTech",
-            "patterns": ["url: https?://js\\.dialogtech\\.com/", "url: https?://dtkwidgets\\.dialogtech\\.com/", "url: https?://secure\\.ifbyphone\\.com/"],
+            "patterns": [
+              "url: https?://js\\.dialogtech\\.com/",
+              "url: https?://dtkwidgets\\.dialogtech\\.com/",
+              "url: https?://secure\\.ifbyphone\\.com/"
+            ],
             "evidence": "响应 URL 指向 DialogTech"
           },
           {
@@ -4944,7 +5592,11 @@
           },
           {
             "name": "Infinity Call Tracking",
-            "patterns": ["url: https?://cdn\\.infinity\\.co/", "url: https?://tag\\.infinity\\.co/", "url: https?://webservices\\.infinity-tracking\\.com/"],
+            "patterns": [
+              "url: https?://cdn\\.infinity\\.co/",
+              "url: https?://tag\\.infinity\\.co/",
+              "url: https?://webservices\\.infinity-tracking\\.com/"
+            ],
             "evidence": "响应 URL 指向 Infinity Call Tracking"
           },
           {
@@ -4974,7 +5626,11 @@
           },
           {
             "name": "Convirza",
-            "patterns": ["url: https?://cdn\\.convirza\\.com/", "url: https?://scripts\\.convirza\\.com/", "url: https?://[^\\s/]+\\.logmycalls\\.com/"],
+            "patterns": [
+              "url: https?://cdn\\.convirza\\.com/",
+              "url: https?://scripts\\.convirza\\.com/",
+              "url: https?://[^\\s/]+\\.logmycalls\\.com/"
+            ],
             "evidence": "响应 URL 指向 Convirza"
           },
           {
@@ -4994,17 +5650,26 @@
           },
           {
             "name": "CallSource",
-            "patterns": ["url: https?://cdn\\.callsource\\.com/", "url: https?://(?:www\\.)?callsource\\.com/[^\\s]*(?:tracking|analytics|number|script)"],
+            "patterns": [
+              "url: https?://cdn\\.callsource\\.com/",
+              "url: https?://(?:www\\.)?callsource\\.com/[^\\s]*(?:tracking|analytics|number|script)"
+            ],
             "evidence": "响应 URL 指向 CallSource"
           },
           {
             "name": "CallScaler",
-            "patterns": ["url: https?://cdn\\.callscaler\\.com/", "url: https?://(?:www\\.)?callscaler\\.com/[^\\s]*(?:tracking|numbers|script|widget)"],
+            "patterns": [
+              "url: https?://cdn\\.callscaler\\.com/",
+              "url: https?://(?:www\\.)?callscaler\\.com/[^\\s]*(?:tracking|numbers|script|widget)"
+            ],
             "evidence": "响应 URL 指向 CallScaler"
           },
           {
             "name": "CallTrackingPro",
-            "patterns": ["url: https?://cdn\\.calltrackingpro\\.com/", "url: https?://(?:www\\.)?calltrackingpro\\.com/[^\\s]*(?:tracking|number|script|widget)"],
+            "patterns": [
+              "url: https?://cdn\\.calltrackingpro\\.com/",
+              "url: https?://(?:www\\.)?calltrackingpro\\.com/[^\\s]*(?:tracking|number|script|widget)"
+            ],
             "evidence": "响应 URL 指向 CallTrackingPro"
           }
         ]
@@ -5027,7 +5692,10 @@
           },
           {
             "name": "HERE Geocoding & Search",
-            "patterns": ["url: https?://geocode\\.search\\.hereapi\\.com/v[0-9]+/", "url: https?://discover\\.search\\.hereapi\\.com/v[0-9]+/"],
+            "patterns": [
+              "url: https?://geocode\\.search\\.hereapi\\.com/v[0-9]+/",
+              "url: https?://discover\\.search\\.hereapi\\.com/v[0-9]+/"
+            ],
             "evidence": "响应 URL 指向 HERE Geocoding & Search"
           },
           {
@@ -5110,7 +5778,10 @@
           },
           {
             "name": "Loqate Address Capture",
-            "patterns": ["url: https?://api\\.addressy\\.com/Capture/Interactive/", "url: https?://services\\.postcodeanywhere\\.co\\.uk/Capture/Interactive/"],
+            "patterns": [
+              "url: https?://api\\.addressy\\.com/Capture/Interactive/",
+              "url: https?://services\\.postcodeanywhere\\.co\\.uk/Capture/Interactive/"
+            ],
             "evidence": "响应 URL 指向 Loqate Address Capture"
           },
           {
@@ -5193,7 +5864,10 @@
           },
           {
             "name": "Browserless",
-            "patterns": ["url: https?://chrome\\.browserless\\.io/(?:pdf|screenshot|content)", "url: https?://production-[a-z0-9-]+\\.browserless\\.io/(?:pdf|screenshot|content)"],
+            "patterns": [
+              "url: https?://chrome\\.browserless\\.io/(?:pdf|screenshot|content)",
+              "url: https?://production-[a-z0-9-]+\\.browserless\\.io/(?:pdf|screenshot|content)"
+            ],
             "evidence": "响应 URL 指向 Browserless API"
           },
           {
@@ -5246,12 +5920,16 @@
           },
           {
             "name": "Azure AI Document Intelligence",
-            "patterns": ["url: https?://[^\\s/]+\\.cognitiveservices\\.azure\\.com/(?:formrecognizer|documentintelligence)/(?:documentModels|prebuilt)/"],
+            "patterns": [
+              "url: https?://[^\\s/]+\\.cognitiveservices\\.azure\\.com/(?:formrecognizer|documentintelligence)/(?:documentModels|prebuilt)/"
+            ],
             "evidence": "响应 URL 指向 Azure AI Document Intelligence"
           },
           {
             "name": "Azure Computer Vision OCR",
-            "patterns": ["url: https?://[^\\s/]+\\.cognitiveservices\\.azure\\.com/(?:vision/v[0-9.]+/(?:read|ocr)|computervision/imageanalysis:analyze)"],
+            "patterns": [
+              "url: https?://[^\\s/]+\\.cognitiveservices\\.azure\\.com/(?:vision/v[0-9.]+/(?:read|ocr)|computervision/imageanalysis:analyze)"
+            ],
             "evidence": "响应 URL 指向 Azure Computer Vision OCR"
           },
           {
@@ -5354,7 +6032,11 @@
           },
           {
             "name": "Phrase Strings",
-            "patterns": ["url: https?://ota\\.phrase\\.com/", "url: https?://api\\.phrase\\.com/v[0-9]+/", "url: https?://phraseapp\\.com/assets/in-context-editor/"],
+            "patterns": [
+              "url: https?://ota\\.phrase\\.com/",
+              "url: https?://api\\.phrase\\.com/v[0-9]+/",
+              "url: https?://phraseapp\\.com/assets/in-context-editor/"
+            ],
             "evidence": "响应 URL 指向 Phrase Strings"
           },
           {
@@ -5364,7 +6046,11 @@
           },
           {
             "name": "Crowdin In-Context",
-            "patterns": ["url: https?://(?:www\\.)?crowdin\\.com/js/crowdin-jipt", "url: https?://cdn\\.crowdin\\.com/", "url: https?://api\\.crowdin\\.com/api/v[0-9]+/"],
+            "patterns": [
+              "url: https?://(?:www\\.)?crowdin\\.com/js/crowdin-jipt",
+              "url: https?://cdn\\.crowdin\\.com/",
+              "url: https?://api\\.crowdin\\.com/api/v[0-9]+/"
+            ],
             "evidence": "响应 URL 指向 Crowdin In-Context 或 API"
           },
           {
@@ -5374,7 +6060,10 @@
           },
           {
             "name": "Google Translate Widget / API",
-            "patterns": ["url: https?://translate\\.google\\.com/translate_a/element\\.js", "url: https?://translation\\.googleapis\\.com/language/translate/"],
+            "patterns": [
+              "url: https?://translate\\.google\\.com/translate_a/element\\.js",
+              "url: https?://translation\\.googleapis\\.com/language/translate/"
+            ],
             "evidence": "响应 URL 指向 Google Translate Widget 或 API"
           },
           {
@@ -5610,7 +6299,11 @@
           },
           {
             "name": "ArcGIS Maps SDK",
-            "patterns": ["url: https?://js\\.arcgis\\.com/", "url: https?://[^\\s/]+\\.arcgis\\.com/", "url: https?://[^\\s/]+\\.arcgisonline\\.com/"],
+            "patterns": [
+              "url: https?://js\\.arcgis\\.com/",
+              "url: https?://[^\\s/]+\\.arcgis\\.com/",
+              "url: https?://[^\\s/]+\\.arcgisonline\\.com/"
+            ],
             "evidence": "响应 URL 指向 ArcGIS Maps SDK"
           },
           {
@@ -5640,7 +6333,11 @@
           },
           {
             "name": "Bing Maps",
-            "patterns": ["url: https?://www\\.bing\\.com/api/maps/mapcontrol", "url: https?://ecn\\.dev\\.virtualearth\\.net/", "url: https?://[^\\s/]+\\.virtualearth\\.net/"],
+            "patterns": [
+              "url: https?://www\\.bing\\.com/api/maps/mapcontrol",
+              "url: https?://ecn\\.dev\\.virtualearth\\.net/",
+              "url: https?://[^\\s/]+\\.virtualearth\\.net/"
+            ],
             "evidence": "响应 URL 指向 Bing Maps"
           },
           {
@@ -5670,7 +6367,10 @@
           },
           {
             "name": "Mappls / MapmyIndia",
-            "patterns": ["url: https?://apis\\.mappls\\.com/(?:advancedmaps|map_v3)", "url: https?://apis\\.mapmyindia\\.com/(?:advancedmaps|map_v3)"],
+            "patterns": [
+              "url: https?://apis\\.mappls\\.com/(?:advancedmaps|map_v3)",
+              "url: https?://apis\\.mapmyindia\\.com/(?:advancedmaps|map_v3)"
+            ],
             "evidence": "响应 URL 指向 Mappls / MapmyIndia"
           },
           {
@@ -5786,7 +6486,11 @@
           },
           {
             "name": "Drift",
-            "patterns": ["url: https?://js\\.driftt\\.com/", "url: https?://widget\\.drift\\.com/", "url: https?://event\\.api\\.drift\\.com/"],
+            "patterns": [
+              "url: https?://js\\.driftt\\.com/",
+              "url: https?://widget\\.drift\\.com/",
+              "url: https?://event\\.api\\.drift\\.com/"
+            ],
             "evidence": "响应 URL 指向 Drift"
           },
           {
@@ -5811,7 +6515,10 @@
           },
           {
             "name": "Userlike",
-            "patterns": ["url: https?://userlike-cdn-widgets\\.", "url: https?://[^\\s/]+\\.userlike\\.com/[^\\s]*(?:widget|widgets|assets)"],
+            "patterns": [
+              "url: https?://userlike-cdn-widgets\\.",
+              "url: https?://[^\\s/]+\\.userlike\\.com/[^\\s]*(?:widget|widgets|assets)"
+            ],
             "evidence": "响应 URL 指向 Userlike"
           },
           {
@@ -5859,7 +6566,10 @@
           },
           {
             "name": "LiveAgent",
-            "patterns": ["url: https?://[^\\s/]+\\.ladesk\\.com/", "url: https?://[^\\s/]+\\.liveagent\\.com/[^\\s]*(?:scripts|widget|chat)"],
+            "patterns": [
+              "url: https?://[^\\s/]+\\.ladesk\\.com/",
+              "url: https?://[^\\s/]+\\.liveagent\\.com/[^\\s]*(?:scripts|widget|chat)"
+            ],
             "evidence": "响应 URL 指向 LiveAgent"
           },
           {
@@ -5903,17 +6613,26 @@
           },
           {
             "name": "Freshdesk Support Widget",
-            "patterns": ["url: https?://assets\\.freshdesk\\.com/widget/", "url: https?://[^\\s/]+\\.freshdesk\\.com/(?:widget|support|helpdesk)"],
+            "patterns": [
+              "url: https?://assets\\.freshdesk\\.com/widget/",
+              "url: https?://[^\\s/]+\\.freshdesk\\.com/(?:widget|support|helpdesk)"
+            ],
             "evidence": "响应 URL 指向 Freshdesk"
           },
           {
             "name": "Freshservice Portal",
-            "patterns": ["url: https?://assets\\.freshservice\\.com/", "url: https?://[^\\s/]+\\.freshservice\\.com/(?:support|helpdesk|assets|widget)"],
+            "patterns": [
+              "url: https?://assets\\.freshservice\\.com/",
+              "url: https?://[^\\s/]+\\.freshservice\\.com/(?:support|helpdesk|assets|widget)"
+            ],
             "evidence": "响应 URL 指向 Freshservice"
           },
           {
             "name": "Zoho Desk ASAP",
-            "patterns": ["url: https?://desk\\.zoho\\.com/portal/api/feedbackwidget", "url: https?://zohodesk\\.com/portal/api/feedbackwidget"],
+            "patterns": [
+              "url: https?://desk\\.zoho\\.com/portal/api/feedbackwidget",
+              "url: https?://zohodesk\\.com/portal/api/feedbackwidget"
+            ],
             "evidence": "响应 URL 指向 Zoho Desk ASAP"
           },
           {
@@ -5933,17 +6652,26 @@
           },
           {
             "name": "HelpCrunch",
-            "patterns": ["url: https?://widget\\.helpcrunch\\.com/", "url: https?://[^\\s/]+\\.helpcrunch\\.com/[^\\s]*(?:sdk|widget|embed)"],
+            "patterns": [
+              "url: https?://widget\\.helpcrunch\\.com/",
+              "url: https?://[^\\s/]+\\.helpcrunch\\.com/[^\\s]*(?:sdk|widget|embed)"
+            ],
             "evidence": "响应 URL 指向 HelpCrunch"
           },
           {
             "name": "HappyFox Help Desk",
-            "patterns": ["url: https?://happyfoxchat\\.com/", "url: https?://[^\\s/]+\\.happyfox\\.com/[^\\s]*(?:widget|helpdesk|support-center)"],
+            "patterns": [
+              "url: https?://happyfoxchat\\.com/",
+              "url: https?://[^\\s/]+\\.happyfox\\.com/[^\\s]*(?:widget|helpdesk|support-center)"
+            ],
             "evidence": "响应 URL 指向 HappyFox"
           },
           {
             "name": "Groove Helpdesk",
-            "patterns": ["url: https?://assets\\.groovehq\\.com/", "url: https?://[^\\s/]+\\.groovehq\\.com/[^\\s]*(?:widgets|help|knowledge_base)"],
+            "patterns": [
+              "url: https?://assets\\.groovehq\\.com/",
+              "url: https?://[^\\s/]+\\.groovehq\\.com/[^\\s]*(?:widgets|help|knowledge_base)"
+            ],
             "evidence": "响应 URL 指向 Groove"
           },
           {
@@ -5953,7 +6681,10 @@
           },
           {
             "name": "Helpshift Web Chat",
-            "patterns": ["url: https?://webchat\\.helpshift\\.com/", "url: https?://[^\\s/]+\\.helpshift\\.com/[^\\s]*(?:webchat|sdk|embed)"],
+            "patterns": [
+              "url: https?://webchat\\.helpshift\\.com/",
+              "url: https?://[^\\s/]+\\.helpshift\\.com/[^\\s]*(?:webchat|sdk|embed)"
+            ],
             "evidence": "响应 URL 指向 Helpshift"
           },
           {
@@ -5963,7 +6694,10 @@
           },
           {
             "name": "Comm100 Live Chat",
-            "patterns": ["url: https?://chatserver\\.comm100\\.com/", "url: https?://[^\\s/]+\\.comm100\\.com/[^\\s]*(?:chatserver|livechat|visitorchat)"],
+            "patterns": [
+              "url: https?://chatserver\\.comm100\\.com/",
+              "url: https?://[^\\s/]+\\.comm100\\.com/[^\\s]*(?:chatserver|livechat|visitorchat)"
+            ],
             "evidence": "响应 URL 指向 Comm100"
           },
           {
@@ -5978,7 +6712,10 @@
           },
           {
             "name": "Deskpro",
-            "patterns": ["url: https?://cdn\\.deskpro\\.com/", "url: https?://[^\\s/]+\\.deskpro\\.com/[^\\s]*(?:widget|messenger|helpdesk)"],
+            "patterns": [
+              "url: https?://cdn\\.deskpro\\.com/",
+              "url: https?://[^\\s/]+\\.deskpro\\.com/[^\\s]*(?:widget|messenger|helpdesk)"
+            ],
             "evidence": "响应 URL 指向 Deskpro"
           },
           {
@@ -6087,7 +6824,10 @@
           },
           {
             "name": "Ultimate.ai",
-            "patterns": ["url: https?://widget\\.ultimate\\.ai/", "url: https?://[^\\s/]+\\.ultimate\\.ai/[^\\s]*(?:widget|chatbot|automation)"],
+            "patterns": [
+              "url: https?://widget\\.ultimate\\.ai/",
+              "url: https?://[^\\s/]+\\.ultimate\\.ai/[^\\s]*(?:widget|chatbot|automation)"
+            ],
             "evidence": "响应 URL 指向 Ultimate.ai"
           },
           {
@@ -6152,7 +6892,11 @@
           },
           {
             "name": "Stytch",
-            "patterns": ["url: https?://js\\.stytch\\.com/", "url: https?://api\\.stytch\\.com/v[0-9]+/", "url: https?://test\\.stytch\\.com/v[0-9]+/"],
+            "patterns": [
+              "url: https?://js\\.stytch\\.com/",
+              "url: https?://api\\.stytch\\.com/v[0-9]+/",
+              "url: https?://test\\.stytch\\.com/v[0-9]+/"
+            ],
             "evidence": "响应 URL 指向 Stytch 认证服务"
           },
           {
@@ -6172,7 +6916,10 @@
           },
           {
             "name": "Frontegg",
-            "patterns": ["url: https?://cdn\\.frontegg\\.com/", "url: https?://[^\\s/]+\\.frontegg\\.com/(?:oauth|identity|frontegg|resources)/"],
+            "patterns": [
+              "url: https?://cdn\\.frontegg\\.com/",
+              "url: https?://[^\\s/]+\\.frontegg\\.com/(?:oauth|identity|frontegg|resources)/"
+            ],
             "evidence": "响应 URL 指向 Frontegg 认证服务"
           },
           {
@@ -6182,7 +6929,10 @@
           },
           {
             "name": "Magic",
-            "patterns": ["url: https?://auth\\.magic\\.link/", "url: https?://(?:cdn\\.jsdelivr\\.net/npm|unpkg\\.com)/magic-sdk(?:@|/|[?#]|$)"],
+            "patterns": [
+              "url: https?://auth\\.magic\\.link/",
+              "url: https?://(?:cdn\\.jsdelivr\\.net/npm|unpkg\\.com)/magic-sdk(?:@|/|[?#]|$)"
+            ],
             "evidence": "响应 URL 指向 Magic 认证服务或 SDK"
           },
           {
@@ -6197,12 +6947,20 @@
           },
           {
             "name": "Dynamic.xyz Auth",
-            "patterns": ["url: https?://auth\\.dynamic\\.xyz/", "url: https?://app\\.dynamic\\.xyz/", "url: https?://(?:cdn\\.jsdelivr\\.net/npm|unpkg\\.com)/@dynamic-labs/"],
+            "patterns": [
+              "url: https?://auth\\.dynamic\\.xyz/",
+              "url: https?://app\\.dynamic\\.xyz/",
+              "url: https?://(?:cdn\\.jsdelivr\\.net/npm|unpkg\\.com)/@dynamic-labs/"
+            ],
             "evidence": "响应 URL 指向 Dynamic.xyz 认证服务或 SDK"
           },
           {
             "name": "Passage by 1Password",
-            "patterns": ["url: https?://cdn\\.passage\\.id/", "url: https?://auth\\.passage\\.id/", "url: https?://(?:cdn\\.jsdelivr\\.net/npm|unpkg\\.com)/@passageidentity/"],
+            "patterns": [
+              "url: https?://cdn\\.passage\\.id/",
+              "url: https?://auth\\.passage\\.id/",
+              "url: https?://(?:cdn\\.jsdelivr\\.net/npm|unpkg\\.com)/@passageidentity/"
+            ],
             "evidence": "响应 URL 指向 Passage 认证服务或 SDK"
           },
           {
@@ -6338,12 +7096,20 @@
           },
           {
             "name": "Mixpanel",
-            "patterns": ["url: https?://cdn\\.mxpnl\\.com/", "url: https?://api\\.mixpanel\\.com/", "url: https?://api-js\\.mixpanel\\.com/"],
+            "patterns": [
+              "url: https?://cdn\\.mxpnl\\.com/",
+              "url: https?://api\\.mixpanel\\.com/",
+              "url: https?://api-js\\.mixpanel\\.com/"
+            ],
             "evidence": "响应 URL 指向 Mixpanel"
           },
           {
             "name": "Amplitude",
-            "patterns": ["url: https?://cdn\\.amplitude\\.com/", "url: https?://api2\\.amplitude\\.com/", "url: https?://api\\.eu\\.amplitude\\.com/"],
+            "patterns": [
+              "url: https?://cdn\\.amplitude\\.com/",
+              "url: https?://api2\\.amplitude\\.com/",
+              "url: https?://api\\.eu\\.amplitude\\.com/"
+            ],
             "evidence": "响应 URL 指向 Amplitude"
           },
           {
@@ -6597,22 +7363,35 @@
           },
           {
             "name": "Cookiebot",
-            "patterns": ["url: https?://consent\\.cookiebot\\.com/(?:uc|sdk|scripts?)[^\\s]*\\.js", "url: https?://[^\\s/]*cookiebot\\.com/[^\\s]*uc\\.js"],
+            "patterns": [
+              "url: https?://consent\\.cookiebot\\.com/(?:uc|sdk|scripts?)[^\\s]*\\.js",
+              "url: https?://[^\\s/]*cookiebot\\.com/[^\\s]*uc\\.js"
+            ],
             "evidence": "响应 URL 指向 Cookiebot CMP"
           },
           {
             "name": "CookieYes",
-            "patterns": ["url: https?://cdn-cookieyes\\.com/client_data/[^\\s]*\\.js", "url: https?://cookieyes\\.com/client_data/[^\\s]*\\.js"],
+            "patterns": [
+              "url: https?://cdn-cookieyes\\.com/client_data/[^\\s]*\\.js",
+              "url: https?://cookieyes\\.com/client_data/[^\\s]*\\.js"
+            ],
             "evidence": "响应 URL 指向 CookieYes CMP"
           },
           {
             "name": "iubenda",
-            "patterns": ["url: https?://cdn\\.iubenda\\.com/(?:cs|iubenda)[^\\s]*\\.js", "url: https?://[^\\s/]*iubenda\\.com/[^\\s]*(?:cs|privacy)"],
+            "patterns": [
+              "url: https?://cdn\\.iubenda\\.com/(?:cs|iubenda)[^\\s]*\\.js",
+              "url: https?://[^\\s/]*iubenda\\.com/[^\\s]*(?:cs|privacy)"
+            ],
             "evidence": "响应 URL 指向 iubenda 合规服务"
           },
           {
             "name": "Didomi",
-            "patterns": ["url: https?://sdk\\.privacy-center\\.org/", "url: https?://notice\\.didomi\\.io/", "url: https?://[^\\s/]*didomi\\.io/[^\\s]*(?:sdk|notice)"],
+            "patterns": [
+              "url: https?://sdk\\.privacy-center\\.org/",
+              "url: https?://notice\\.didomi\\.io/",
+              "url: https?://[^\\s/]*didomi\\.io/[^\\s]*(?:sdk|notice)"
+            ],
             "evidence": "响应 URL 指向 Didomi CMP"
           },
           {
@@ -6622,7 +7401,11 @@
           },
           {
             "name": "Quantcast Choice",
-            "patterns": ["url: https?://quantcast\\.mgr\\.consensu\\.org/", "url: https?://cmp\\.quantcast\\.com/", "url: https?://choice\\.quantcast\\.com/"],
+            "patterns": [
+              "url: https?://quantcast\\.mgr\\.consensu\\.org/",
+              "url: https?://cmp\\.quantcast\\.com/",
+              "url: https?://choice\\.quantcast\\.com/"
+            ],
             "evidence": "响应 URL 指向 Quantcast Choice CMP"
           },
           {
@@ -6642,7 +7425,11 @@
           },
           {
             "name": "Sourcepoint CMP",
-            "patterns": ["url: https?://cdn\\.privacy-mgmt\\.com/", "url: https?://sourcepoint\\.mgr\\.consensu\\.org/", "url: https?://[^\\s/]*sp-prod\\.net/"],
+            "patterns": [
+              "url: https?://cdn\\.privacy-mgmt\\.com/",
+              "url: https?://sourcepoint\\.mgr\\.consensu\\.org/",
+              "url: https?://[^\\s/]*sp-prod\\.net/"
+            ],
             "evidence": "响应 URL 指向 Sourcepoint CMP"
           },
           {
@@ -6657,7 +7444,10 @@
           },
           {
             "name": "Civic Cookie Control",
-            "patterns": ["url: https?://cc\\.cdn\\.civiccomputing\\.com/", "url: https?://[^\\s/]*civiccomputing\\.com/[^\\s]*cookie-control"],
+            "patterns": [
+              "url: https?://cc\\.cdn\\.civiccomputing\\.com/",
+              "url: https?://[^\\s/]*civiccomputing\\.com/[^\\s]*cookie-control"
+            ],
             "evidence": "响应 URL 指向 Civic Cookie Control"
           },
           {
@@ -6667,12 +7457,19 @@
           },
           {
             "name": "CookieHub",
-            "patterns": ["url: https?://cdn\\.cookiehub\\.eu/", "url: https?://[^\\s/]*cookiehub\\.net/", "url: https?://[^\\s/]*cookiehub\\.com/[^\\s]*(?:cookie|consent|banner)"],
+            "patterns": [
+              "url: https?://cdn\\.cookiehub\\.eu/",
+              "url: https?://[^\\s/]*cookiehub\\.net/",
+              "url: https?://[^\\s/]*cookiehub\\.com/[^\\s]*(?:cookie|consent|banner)"
+            ],
             "evidence": "响应 URL 指向 CookieHub"
           },
           {
             "name": "CookieFirst",
-            "patterns": ["url: https?://consent\\.cookiefirst\\.com/", "url: https?://[^\\s/]*cookiefirst\\.com/[^\\s]*(?:banner|consent|cookies)"],
+            "patterns": [
+              "url: https?://consent\\.cookiefirst\\.com/",
+              "url: https?://[^\\s/]*cookiefirst\\.com/[^\\s]*(?:banner|consent|cookies)"
+            ],
             "evidence": "响应 URL 指向 CookieFirst"
           },
           {
@@ -6714,7 +7511,10 @@
         "rules": [
           {
             "name": "UserWay Widget",
-            "patterns": ["url: https?://cdn\\.userway\\.org/widget\\.js", "url: https?://(?:[a-z0-9-]+\\.)*userway\\.org/[^\\s]*(?:widget|accessibility)"],
+            "patterns": [
+              "url: https?://cdn\\.userway\\.org/widget\\.js",
+              "url: https?://(?:[a-z0-9-]+\\.)*userway\\.org/[^\\s]*(?:widget|accessibility)"
+            ],
             "evidence": "响应 URL 指向 UserWay 无障碍组件"
           },
           {
@@ -6724,17 +7524,27 @@
           },
           {
             "name": "AudioEye",
-            "patterns": ["url: https?://wsm\\.audioeye\\.com/", "url: https?://(?:[a-z0-9-]+\\.)*audioeye\\.com/[^\\s]*(?:widget|launcher|js)"],
+            "patterns": [
+              "url: https?://wsm\\.audioeye\\.com/",
+              "url: https?://(?:[a-z0-9-]+\\.)*audioeye\\.com/[^\\s]*(?:widget|launcher|js)"
+            ],
             "evidence": "响应 URL 指向 AudioEye 无障碍组件"
           },
           {
             "name": "EqualWeb",
-            "patterns": ["url: https?://cdn\\.equalweb\\.com/", "url: https?://(?:[a-z0-9-]+\\.)*equalweb\\.com/[^\\s]*(?:accessibility|widget|js)"],
+            "patterns": [
+              "url: https?://cdn\\.equalweb\\.com/",
+              "url: https?://(?:[a-z0-9-]+\\.)*equalweb\\.com/[^\\s]*(?:accessibility|widget|js)"
+            ],
             "evidence": "响应 URL 指向 EqualWeb 无障碍组件"
           },
           {
             "name": "Recite Me",
-            "patterns": ["url: https?://api\\.reciteme\\.com/", "url: https?://cdn\\.reciteme\\.com/", "url: https?://(?:[a-z0-9-]+\\.)*reciteme\\.com/[^\\s]*(?:button|toolbar|js)"],
+            "patterns": [
+              "url: https?://api\\.reciteme\\.com/",
+              "url: https?://cdn\\.reciteme\\.com/",
+              "url: https?://(?:[a-z0-9-]+\\.)*reciteme\\.com/[^\\s]*(?:button|toolbar|js)"
+            ],
             "evidence": "响应 URL 指向 Recite Me 无障碍工具栏"
           },
           {
@@ -6744,12 +7554,18 @@
           },
           {
             "name": "Allyable",
-            "patterns": ["url: https?://cdn\\.allyable\\.com/", "url: https?://(?:[a-z0-9-]+\\.)*allyable\\.com/[^\\s]*(?:widget|accessibility|js)"],
+            "patterns": [
+              "url: https?://cdn\\.allyable\\.com/",
+              "url: https?://(?:[a-z0-9-]+\\.)*allyable\\.com/[^\\s]*(?:widget|accessibility|js)"
+            ],
             "evidence": "响应 URL 指向 Allyable 无障碍组件"
           },
           {
             "name": "Monsido",
-            "patterns": ["url: https?://cdn\\.monsido\\.com/", "url: https?://(?:[a-z0-9-]+\\.)*monsido\\.com/[^\\s]*(?:tracking|script|accessibility)"],
+            "patterns": [
+              "url: https?://cdn\\.monsido\\.com/",
+              "url: https?://(?:[a-z0-9-]+\\.)*monsido\\.com/[^\\s]*(?:tracking|script|accessibility)"
+            ],
             "evidence": "响应 URL 指向 Monsido 无障碍或站点治理脚本"
           },
           {
@@ -6771,12 +7587,18 @@
           },
           {
             "name": "AccessiWay Widget",
-            "patterns": ["url: https?://cdn\\.accessiway\\.com/", "url: https?://(?:[a-z0-9-]+\\.)*accessiway\\.com/[^\\s]*(?:accesswidget|widget|accessibility)"],
+            "patterns": [
+              "url: https?://cdn\\.accessiway\\.com/",
+              "url: https?://(?:[a-z0-9-]+\\.)*accessiway\\.com/[^\\s]*(?:accesswidget|widget|accessibility)"
+            ],
             "evidence": "响应 URL 指向 AccessiWay 无障碍组件"
           },
           {
             "name": "Accessibly App",
-            "patterns": ["url: https?://cdn\\.accessiblyapp\\.com/", "url: https?://(?:[a-z0-9-]+\\.)*accessiblyapp\\.com/[^\\s]*(?:widget|app|embed|accessibility)"],
+            "patterns": [
+              "url: https?://cdn\\.accessiblyapp\\.com/",
+              "url: https?://(?:[a-z0-9-]+\\.)*accessiblyapp\\.com/[^\\s]*(?:widget|app|embed|accessibility)"
+            ],
             "evidence": "响应 URL 指向 Accessibly App"
           },
           {
@@ -6791,7 +7613,10 @@
           },
           {
             "name": "User1st",
-            "patterns": ["url: https?://(?:[a-z0-9-]+\\.)*user1st\\.info/", "url: https?://(?:[a-z0-9-]+\\.)*user1st\\.com/[^\\s]*(?:widget|accessibility|script|js)"],
+            "patterns": [
+              "url: https?://(?:[a-z0-9-]+\\.)*user1st\\.info/",
+              "url: https?://(?:[a-z0-9-]+\\.)*user1st\\.com/[^\\s]*(?:widget|accessibility|script|js)"
+            ],
             "evidence": "响应 URL 指向 User1st 无障碍组件"
           },
           {
@@ -6801,22 +7626,35 @@
           },
           {
             "name": "ReachDeck",
-            "patterns": ["url: https?://(?:[a-z0-9-]+\\.)*reachdeck\\.com/", "url: https?://(?:[a-z0-9-]+\\.)*texthelp\\.com/[^\\s]*(?:reachdeck|toolbar)"],
+            "patterns": [
+              "url: https?://(?:[a-z0-9-]+\\.)*reachdeck\\.com/",
+              "url: https?://(?:[a-z0-9-]+\\.)*texthelp\\.com/[^\\s]*(?:reachdeck|toolbar)"
+            ],
             "evidence": "响应 URL 指向 ReachDeck / Texthelp 无障碍工具栏"
           },
           {
             "name": "Silktide Accessibility",
-            "patterns": ["url: https?://static\\.silktide\\.com/", "url: https?://(?:[a-z0-9-]+\\.)*silktide\\.com/[^\\s]*(?:accessibility|toolbar|script)"],
+            "patterns": [
+              "url: https?://static\\.silktide\\.com/",
+              "url: https?://(?:[a-z0-9-]+\\.)*silktide\\.com/[^\\s]*(?:accessibility|toolbar|script)"
+            ],
             "evidence": "响应 URL 指向 Silktide Accessibility"
           },
           {
             "name": "Equally AI",
-            "patterns": ["url: https?://cdn\\.equally\\.ai/", "url: https?://app\\.equally\\.ai/", "url: https?://(?:[a-z0-9-]+\\.)*equally\\.ai/[^\\s]*(?:widget|accessibility|embed|script)"],
+            "patterns": [
+              "url: https?://cdn\\.equally\\.ai/",
+              "url: https?://app\\.equally\\.ai/",
+              "url: https?://(?:[a-z0-9-]+\\.)*equally\\.ai/[^\\s]*(?:widget|accessibility|embed|script)"
+            ],
             "evidence": "响应 URL 指向 Equally AI 无障碍组件"
           },
           {
             "name": "UserAccess Widget",
-            "patterns": ["url: https?://widget-v1\\.useraccess\\.live/", "url: https?://(?:[a-z0-9-]+\\.)*useraccess\\.live/[^\\s]*(?:widget|accessibility)"],
+            "patterns": [
+              "url: https?://widget-v1\\.useraccess\\.live/",
+              "url: https?://(?:[a-z0-9-]+\\.)*useraccess\\.live/[^\\s]*(?:widget|accessibility)"
+            ],
             "evidence": "响应 URL 指向 UserAccess 无障碍组件"
           }
         ]
@@ -6854,7 +7692,11 @@
           {
             "name": "Twitter / X Pixel",
             "category": "广告 / 营销",
-            "patterns": ["url: https?://static\\.ads-twitter\\.com/uwt\\.js", "url: https?://analytics\\.twitter\\.com/i/adsct", "url: https?://t\\.co/i/adsct"],
+            "patterns": [
+              "url: https?://static\\.ads-twitter\\.com/uwt\\.js",
+              "url: https?://analytics\\.twitter\\.com/i/adsct",
+              "url: https?://t\\.co/i/adsct"
+            ],
             "evidence": "响应 URL 指向 Twitter / X Pixel"
           },
           {
@@ -6882,13 +7724,20 @@
           {
             "name": "Google Publisher Tag",
             "category": "广告 / 营销",
-            "patterns": ["url: https?://securepubads\\.g\\.doubleclick\\.net/tag/js/gpt\\.js", "url: https?://www\\.googletagservices\\.com/tag/js/gpt\\.js"],
+            "patterns": [
+              "url: https?://securepubads\\.g\\.doubleclick\\.net/tag/js/gpt\\.js",
+              "url: https?://www\\.googletagservices\\.com/tag/js/gpt\\.js"
+            ],
             "evidence": "响应 URL 指向 Google Publisher Tag"
           },
           {
             "name": "Google Ad Manager / DoubleClick",
             "category": "广告 / 营销",
-            "patterns": ["url: https?://pubads\\.g\\.doubleclick\\.net/gampad/ads", "url: https?://ad\\.doubleclick\\.net/", "url: https?://securepubads\\.g\\.doubleclick\\.net/"],
+            "patterns": [
+              "url: https?://pubads\\.g\\.doubleclick\\.net/gampad/ads",
+              "url: https?://ad\\.doubleclick\\.net/",
+              "url: https?://securepubads\\.g\\.doubleclick\\.net/"
+            ],
             "evidence": "响应 URL 指向 Google Ad Manager / DoubleClick"
           },
           {
@@ -6900,7 +7749,11 @@
           {
             "name": "Amazon Ads",
             "category": "广告 / 营销",
-            "patterns": ["url: https?://c\\.amazon-adsystem\\.com/", "url: https?://aax\\.amazon-adsystem\\.com/", "url: https?://[^\\s/]+\\.amazon-adsystem\\.com/"],
+            "patterns": [
+              "url: https?://c\\.amazon-adsystem\\.com/",
+              "url: https?://aax\\.amazon-adsystem\\.com/",
+              "url: https?://[^\\s/]+\\.amazon-adsystem\\.com/"
+            ],
             "evidence": "响应 URL 指向 Amazon Ads"
           },
           {
@@ -6933,7 +7786,10 @@
           },
           {
             "name": "Wistia",
-            "patterns": ["url: https?://fast\\.wistia\\.com/assets/external/E-v1\\.js", "url: https?://fast\\.wistia\\.(?:com|net)/(?:embed|assets)/"],
+            "patterns": [
+              "url: https?://fast\\.wistia\\.com/assets/external/E-v1\\.js",
+              "url: https?://fast\\.wistia\\.(?:com|net)/(?:embed|assets)/"
+            ],
             "evidence": "响应 URL 指向 Wistia"
           },
           {
@@ -6958,12 +7814,20 @@
           },
           {
             "name": "Cloudflare Stream",
-            "patterns": ["url: https?://iframe\\.videodelivery\\.net/", "url: https?://[^\\s/]+\\.cloudflarestream\\.com/", "url: https?://videodelivery\\.net/"],
+            "patterns": [
+              "url: https?://iframe\\.videodelivery\\.net/",
+              "url: https?://[^\\s/]+\\.cloudflarestream\\.com/",
+              "url: https?://videodelivery\\.net/"
+            ],
             "evidence": "响应 URL 指向 Cloudflare Stream"
           },
           {
             "name": "Bunny Stream",
-            "patterns": ["url: https?://iframe\\.mediadelivery\\.net/embed/", "url: https?://video\\.bunnycdn\\.com/", "url: https?://vz-[a-z0-9-]+\\.b-cdn\\.net/"],
+            "patterns": [
+              "url: https?://iframe\\.mediadelivery\\.net/embed/",
+              "url: https?://video\\.bunnycdn\\.com/",
+              "url: https?://vz-[a-z0-9-]+\\.b-cdn\\.net/"
+            ],
             "evidence": "响应 URL 指向 Bunny Stream"
           },
           {
@@ -6993,12 +7857,20 @@
           },
           {
             "name": "JW Player Embed",
-            "patterns": ["url: https?://cdn\\.jwplayer\\.com/(?:players|libraries)/", "url: https?://content\\.jwplatform\\.com/(?:players|videos)/", "url: https?://[^\\s/]+\\.jwpsrv\\.com/"],
+            "patterns": [
+              "url: https?://cdn\\.jwplayer\\.com/(?:players|libraries)/",
+              "url: https?://content\\.jwplatform\\.com/(?:players|videos)/",
+              "url: https?://[^\\s/]+\\.jwpsrv\\.com/"
+            ],
             "evidence": "响应 URL 指向 JW Player"
           },
           {
             "name": "Dailymotion Embed",
-            "patterns": ["url: https?://geo\\.dailymotion\\.com/player/", "url: https?://www\\.dailymotion\\.com/embed/video/", "url: https?://[^\\s/]+\\.dmcdn\\.net/"],
+            "patterns": [
+              "url: https?://geo\\.dailymotion\\.com/player/",
+              "url: https?://www\\.dailymotion\\.com/embed/video/",
+              "url: https?://[^\\s/]+\\.dmcdn\\.net/"
+            ],
             "evidence": "响应 URL 指向 Dailymotion Embed"
           },
           {
@@ -7023,7 +7895,11 @@
           },
           {
             "name": "Adilo",
-            "patterns": ["url: https?://embed\\.adilo\\.com/", "url: https?://player\\.adilo\\.com/", "url: https?://adilo\\.bigcommand\\.com/"],
+            "patterns": [
+              "url: https?://embed\\.adilo\\.com/",
+              "url: https?://player\\.adilo\\.com/",
+              "url: https?://adilo\\.bigcommand\\.com/"
+            ],
             "evidence": "响应 URL 指向 Adilo"
           },
           {
@@ -7047,10 +7923,7 @@
           },
           {
             "name": "Mailchimp",
-            "patterns": [
-              "url: https?://(?:[a-z0-9-]+\\.)*chimpstatic\\.com/",
-              "url: https?://(?:[a-z0-9-]+\\.)*list-manage\\.com/"
-            ],
+            "patterns": ["url: https?://(?:[a-z0-9-]+\\.)*chimpstatic\\.com/", "url: https?://(?:[a-z0-9-]+\\.)*list-manage\\.com/"],
             "evidence": "响应 URL 指向 Mailchimp"
           },
           {
@@ -7065,10 +7938,7 @@
           },
           {
             "name": "Braze",
-            "patterns": [
-              "url: https?://js\\.appboycdn\\.com/",
-              "url: https?://(?:sdk|rest)\\.[a-z0-9-]+\\.braze\\.(?:com|eu)/"
-            ],
+            "patterns": ["url: https?://js\\.appboycdn\\.com/", "url: https?://(?:sdk|rest)\\.[a-z0-9-]+\\.braze\\.(?:com|eu)/"],
             "evidence": "响应 URL 指向 Braze"
           },
           {
@@ -7100,28 +7970,17 @@
           },
           {
             "name": "Omnisend Marketing",
-            "patterns": [
-              "url: https?://omnisnippet1\\.com/",
-              "url: https?://omnisrc\\.com/",
-              "url: https?://api\\.omnisend\\.com/"
-            ],
+            "patterns": ["url: https?://omnisnippet1\\.com/", "url: https?://omnisrc\\.com/", "url: https?://api\\.omnisend\\.com/"],
             "evidence": "响应 URL 指向 Omnisend"
           },
           {
             "name": "ActiveCampaign Tracking",
-            "patterns": [
-              "url: https?://trackcmp\\.net/",
-              "url: https?://[^\\s/]+\\.activehosted\\.com/f/embed"
-            ],
+            "patterns": ["url: https?://trackcmp\\.net/", "url: https?://[^\\s/]+\\.activehosted\\.com/f/embed"],
             "evidence": "响应 URL 指向 ActiveCampaign"
           },
           {
             "name": "Drip Marketing",
-            "patterns": [
-              "url: https?://tag\\.getdrip\\.com/",
-              "url: https?://cdn\\.getdrip\\.com/",
-              "url: https?://api\\.getdrip\\.com/"
-            ],
+            "patterns": ["url: https?://tag\\.getdrip\\.com/", "url: https?://cdn\\.getdrip\\.com/", "url: https?://api\\.getdrip\\.com/"],
             "evidence": "响应 URL 指向 Drip"
           },
           {
@@ -7144,27 +8003,17 @@
           },
           {
             "name": "Brevo Tracking",
-            "patterns": [
-              "url: https?://sibautomation\\.com/",
-              "url: https?://sibforms\\.com/",
-              "url: https?://api\\.brevo\\.com/"
-            ],
+            "patterns": ["url: https?://sibautomation\\.com/", "url: https?://sibforms\\.com/", "url: https?://api\\.brevo\\.com/"],
             "evidence": "响应 URL 指向 Brevo / Sendinblue"
           },
           {
             "name": "SendGrid Email API",
-            "patterns": [
-              "url: https?://api\\.sendgrid\\.com/v3",
-              "url: https?://(?:[a-z0-9-]+\\.)*sendgrid\\.net/"
-            ],
+            "patterns": ["url: https?://api\\.sendgrid\\.com/v3", "url: https?://(?:[a-z0-9-]+\\.)*sendgrid\\.net/"],
             "evidence": "响应 URL 指向 SendGrid"
           },
           {
             "name": "Mailgun Email API",
-            "patterns": [
-              "url: https?://api\\.mailgun\\.net/v3",
-              "url: https?://(?:[a-z0-9-]+\\.)*mailgun\\.org/"
-            ],
+            "patterns": ["url: https?://api\\.mailgun\\.net/v3", "url: https?://(?:[a-z0-9-]+\\.)*mailgun\\.org/"],
             "evidence": "响应 URL 指向 Mailgun"
           },
           {
@@ -7223,10 +8072,7 @@
           },
           {
             "name": "Campaign Monitor Forms",
-            "patterns": [
-              "url: https?://[^\\s/]+\\.createsend\\.com/",
-              "url: https?://createsend\\.com/"
-            ],
+            "patterns": ["url: https?://[^\\s/]+\\.createsend\\.com/", "url: https?://createsend\\.com/"],
             "evidence": "响应 URL 指向 Campaign Monitor"
           },
           {
@@ -7279,16 +8125,16 @@
           },
           {
             "name": "Onfido",
-            "patterns": [
-              "url: https?://sdk\\.onfido\\.com/",
-              "url: https?://assets\\.onfido\\.com/",
-              "url: https?://api\\.onfido\\.com/"
-            ],
+            "patterns": ["url: https?://sdk\\.onfido\\.com/", "url: https?://assets\\.onfido\\.com/", "url: https?://api\\.onfido\\.com/"],
             "evidence": "响应 URL 指向 Onfido"
           },
           {
             "name": "Sumsub",
-            "patterns": ["url: https?://static\\.sumsub\\.com/", "url: https?://api\\.sumsub\\.com/", "url: https?://[^\\s/]+\\.idensic\\.com/"],
+            "patterns": [
+              "url: https?://static\\.sumsub\\.com/",
+              "url: https?://api\\.sumsub\\.com/",
+              "url: https?://[^\\s/]+\\.idensic\\.com/"
+            ],
             "evidence": "响应 URL 指向 Sumsub / Idensic"
           },
           {
@@ -7316,11 +8162,7 @@
           },
           {
             "name": "Socure",
-            "patterns": [
-              "url: https?://sdk\\.socure\\.com/",
-              "url: https?://websdk\\.socure\\.com/",
-              "url: https?://api\\.socure\\.com/"
-            ],
+            "patterns": ["url: https?://sdk\\.socure\\.com/", "url: https?://websdk\\.socure\\.com/", "url: https?://api\\.socure\\.com/"],
             "evidence": "响应 URL 指向 Socure"
           },
           {
@@ -7335,10 +8177,7 @@
           },
           {
             "name": "Sift",
-            "patterns": [
-              "url: https?://(?:cdn|api[0-9]*)\\.siftscience\\.com/",
-              "url: https?://(?:cdn|api|events)\\.sift\\.com/"
-            ],
+            "patterns": ["url: https?://(?:cdn|api[0-9]*)\\.siftscience\\.com/", "url: https?://(?:cdn|api|events)\\.sift\\.com/"],
             "evidence": "响应 URL 指向 Sift"
           },
           {
@@ -7348,11 +8187,7 @@
           },
           {
             "name": "Forter",
-            "patterns": [
-              "url: https?://cdn\\.forter\\.com/",
-              "url: https?://api\\.forter\\.com/",
-              "url: https?://events\\.forter\\.com/"
-            ],
+            "patterns": ["url: https?://cdn\\.forter\\.com/", "url: https?://api\\.forter\\.com/", "url: https?://events\\.forter\\.com/"],
             "evidence": "响应 URL 指向 Forter"
           },
           {
@@ -7366,18 +8201,12 @@
           },
           {
             "name": "LexisNexis ThreatMetrix",
-            "patterns": [
-              "url: https?://(?:[^\\s/]+\\.)?online-metrix\\.net/",
-              "url: https?://(?:[^\\s/]+\\.)?h-online-metrix\\.net/"
-            ],
+            "patterns": ["url: https?://(?:[^\\s/]+\\.)?online-metrix\\.net/", "url: https?://(?:[^\\s/]+\\.)?h-online-metrix\\.net/"],
             "evidence": "响应 URL 指向 ThreatMetrix"
           },
           {
             "name": "Kount",
-            "patterns": [
-              "url: https?://(?:kaptcha|risk)\\.kount\\.net/",
-              "url: https?://(?:ssl|tst)\\.kaptcha\\.com/"
-            ],
+            "patterns": ["url: https?://(?:kaptcha|risk)\\.kount\\.net/", "url: https?://(?:ssl|tst)\\.kaptcha\\.com/"],
             "evidence": "响应 URL 指向 Kount"
           },
           {
@@ -7512,12 +8341,20 @@
           },
           {
             "name": "Retool",
-            "patterns": ["url: https?://cdn\\.tryretool\\.com/", "url: https?://[^\\s/]+\\.retool-edge\\.com/", "url: https?://[^\\s/]+\\.retool\\.com/(?:embed|apps|api|workflows)"],
+            "patterns": [
+              "url: https?://cdn\\.tryretool\\.com/",
+              "url: https?://[^\\s/]+\\.retool-edge\\.com/",
+              "url: https?://[^\\s/]+\\.retool\\.com/(?:embed|apps|api|workflows)"
+            ],
             "evidence": "响应 URL 指向 Retool 应用、CDN 或 API"
           },
           {
             "name": "Superblocks",
-            "patterns": ["url: https?://app\\.superblocks\\.com/", "url: https?://assets\\.superblocks\\.com/", "url: https?://[^\\s/]+\\.superblocks\\.com/(?:embed|applications|workflows|api)"],
+            "patterns": [
+              "url: https?://app\\.superblocks\\.com/",
+              "url: https?://assets\\.superblocks\\.com/",
+              "url: https?://[^\\s/]+\\.superblocks\\.com/(?:embed|applications|workflows|api)"
+            ],
             "evidence": "响应 URL 指向 Superblocks 应用或资源"
           },
           {
@@ -7532,7 +8369,11 @@
           },
           {
             "name": "Forest Admin",
-            "patterns": ["url: https?://app\\.forestadmin\\.com/", "url: https?://cdn\\.forestadmin\\.com/", "url: https?://api\\.forestadmin\\.com/"],
+            "patterns": [
+              "url: https?://app\\.forestadmin\\.com/",
+              "url: https?://cdn\\.forestadmin\\.com/",
+              "url: https?://api\\.forestadmin\\.com/"
+            ],
             "evidence": "响应 URL 指向 Forest Admin 应用、CDN 或 API"
           },
           {
@@ -7557,7 +8398,11 @@
           },
           {
             "name": "Pipedream",
-            "patterns": ["url: https?://api\\.pipedream\\.com/", "url: https?://[^\\s/]+\\.m\\.pipedream\\.net/", "url: https?://[^\\s/]+\\.m\\.pipedream\\.com/"],
+            "patterns": [
+              "url: https?://api\\.pipedream\\.com/",
+              "url: https?://[^\\s/]+\\.m\\.pipedream\\.net/",
+              "url: https?://[^\\s/]+\\.m\\.pipedream\\.com/"
+            ],
             "evidence": "响应 URL 指向 Pipedream API 或工作流端点"
           },
           {
@@ -7567,7 +8412,11 @@
           },
           {
             "name": "Workato",
-            "patterns": ["url: https?://app\\.workato\\.com/", "url: https?://www\\.workato\\.com/(?:oauth|api|embed)/", "url: https?://[^\\s/]+\\.workato\\.com/(?:oauth|api|embed)/"],
+            "patterns": [
+              "url: https?://app\\.workato\\.com/",
+              "url: https?://www\\.workato\\.com/(?:oauth|api|embed)/",
+              "url: https?://[^\\s/]+\\.workato\\.com/(?:oauth|api|embed)/"
+            ],
             "evidence": "响应 URL 指向 Workato 应用、API 或嵌入入口"
           },
           {
@@ -7577,17 +8426,29 @@
           },
           {
             "name": "Glide Apps",
-            "patterns": ["url: https?://go\\.glideapps\\.com/", "url: https?://[^\\s/]+\\.glide\\.page/", "url: https?://storage\\.googleapis\\.com/glide-prod/"],
+            "patterns": [
+              "url: https?://go\\.glideapps\\.com/",
+              "url: https?://[^\\s/]+\\.glide\\.page/",
+              "url: https?://storage\\.googleapis\\.com/glide-prod/"
+            ],
             "evidence": "响应 URL 指向 Glide Apps 应用或资源"
           },
           {
             "name": "Softr",
-            "patterns": ["url: https?://cdn\\.softr\\.io/", "url: https?://assets\\.softr-files\\.com/", "url: https?://[^\\s/]+\\.softr\\.app/"],
+            "patterns": [
+              "url: https?://cdn\\.softr\\.io/",
+              "url: https?://assets\\.softr-files\\.com/",
+              "url: https?://[^\\s/]+\\.softr\\.app/"
+            ],
             "evidence": "响应 URL 指向 Softr 应用或资源"
           },
           {
             "name": "Stacker",
-            "patterns": ["url: https?://app\\.stackerhq\\.com/", "url: https?://assets\\.stackerhq\\.com/", "url: https?://[^\\s/]+\\.stacker\\.app/"],
+            "patterns": [
+              "url: https?://app\\.stackerhq\\.com/",
+              "url: https?://assets\\.stackerhq\\.com/",
+              "url: https?://[^\\s/]+\\.stacker\\.app/"
+            ],
             "evidence": "响应 URL 指向 Stacker 应用或资源"
           },
           {
@@ -7602,7 +8463,11 @@
           },
           {
             "name": "WeWeb",
-            "patterns": ["url: https?://cdn\\.weweb\\.io/", "url: https?://editor\\.weweb\\.io/", "url: https?://[^\\s/]+\\.weweb-preview\\.io/"],
+            "patterns": [
+              "url: https?://cdn\\.weweb\\.io/",
+              "url: https?://editor\\.weweb\\.io/",
+              "url: https?://[^\\s/]+\\.weweb-preview\\.io/"
+            ],
             "evidence": "响应 URL 指向 WeWeb 应用、编辑器或 CDN"
           },
           {

@@ -315,7 +315,7 @@
           },
           {
             "name": "Tencent Cloud CDN",
-            "patterns": ["tencent|qcloud"]
+            "patterns": ["qcloudcdn|myqcloud|tencent-cloud|tencent-cdn|tencent-cos|tencentcs|tencentcdn"]
           },
           {
             "name": "Alibaba Cloud CDN",

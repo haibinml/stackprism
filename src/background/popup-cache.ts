@@ -126,6 +126,17 @@ const addAllTechnologies = (target: any[], items: any[]) => {
   }
 }
 
+const GENERIC_CDN_FALLBACK_NAMES = new Set(['自定义 / 私有 CDN', '未知 / 自定义 CDN'])
+
+export const suppressGenericCdnFallbacks = (technologies: any[]) => {
+  if (!Array.isArray(technologies) || !technologies.length) return technologies
+  const hasSpecificCdn = technologies.some(
+    tech => tech?.category === 'CDN / 托管' && tech?.name && !GENERIC_CDN_FALLBACK_NAMES.has(tech.name)
+  )
+  if (!hasSpecificCdn) return technologies
+  return technologies.filter(tech => tech?.category !== 'CDN / 托管' || !GENERIC_CDN_FALLBACK_NAMES.has(tech?.name))
+}
+
 export const filterTechnologiesBySettings = (technologies: any[], settings: any) => {
   const disabledCategories = new Set(cleanStringArray(settings?.disabledCategories))
   const disabledTechnologies = new Set(cleanStringArray(settings?.disabledTechnologies).map(name => normalizeTechName(name)))
@@ -238,7 +249,7 @@ const buildDisplayTechnologies = (data: any, settings: any) => {
       source: tech.source || 'JS 版权注释'
     }))
   )
-  return filterTechnologiesBySettings(mergeDisplayTechnologyRecords(all), settings)
+  return filterTechnologiesBySettings(suppressGenericCdnFallbacks(mergeDisplayTechnologyRecords(all)), settings)
 }
 
 const buildPopupResult = (data: any, settings: any, tab: any) => {
