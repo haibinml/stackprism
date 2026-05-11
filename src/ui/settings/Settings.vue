@@ -698,7 +698,7 @@
   })
 </script>
 
-<style>
+<style lang="scss">
   body {
     font-size: 14px;
     line-height: 1.5;
@@ -706,7 +706,7 @@
   }
 </style>
 
-<style scoped>
+<style lang="scss" scoped>
   .settings-shell {
     margin: 0 auto;
     max-width: 1120px;

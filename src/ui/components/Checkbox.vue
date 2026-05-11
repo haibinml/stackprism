@@ -58,7 +58,7 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .sp-checkbox {
     align-items: center;
     display: inline-flex;

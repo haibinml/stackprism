@@ -360,7 +360,7 @@ examplepay-sdk</pre
   })
 </script>
 
-<style>
+<style lang="scss">
   body {
     font-size: 15px;
     line-height: 1.65;
@@ -368,7 +368,7 @@ examplepay-sdk</pre
   }
 </style>
 
-<style scoped>
+<style lang="scss" scoped>
   .help-shell {
     margin: 0 auto;
     max-width: 720px;

@@ -64,7 +64,7 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .sp-rb {
     position: relative;
     overflow: hidden;

@@ -243,7 +243,7 @@
   })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .sp-select {
     display: block;
     position: relative;

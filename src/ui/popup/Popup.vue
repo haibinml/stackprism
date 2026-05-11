@@ -1056,7 +1056,7 @@
   })
 </script>
 
-<style>
+<style lang="scss">
   body {
     width: var(--popup-width);
     height: 600px;
@@ -1066,7 +1066,7 @@
   }
 </style>
 
-<style scoped>
+<style lang="scss" scoped>
   /* layout shell：flex column，整体高度 100vh，sections-scroller 独占滚动区 */
   .shell {
     display: flex;

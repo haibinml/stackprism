@@ -1,7 +1,7 @@
 {
   "name": "stackprism",
   "private": true,
-  "version": "1.2.98",
+  "version": "1.2.99",
   "type": "module",
   "description": "StackPrism 用于检测网页前端、后端、CDN、SaaS、广告营销、统计、登录、支付、网站程序和主题模板线索。",
   "scripts": {
@@ -25,6 +25,7 @@
     "eslint-plugin-vue": "^10.9.1",
     "lucide-vue-next": "^1.0.0",
     "prettier": "^3.8.3",
+    "sass-embedded": "^1.99.0",
     "typescript": "~5.4.5",
     "typescript-eslint": "^8.59.2",
     "vite": "^5.2.10",
