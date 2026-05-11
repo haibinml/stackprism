@@ -355,6 +355,7 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
       clipboardjs: 'clipboard',
       jquerycompat: 'jquery',
       imagesloadedjs: 'imagesloaded',
+      layerjs: 'layer',
       slickcarousel: 'slick',
       twitterbootstrap: 'bootstrap',
       vuejs: 'vue'
@@ -368,7 +369,9 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
     }
     const aliases = {
       angular: { category: '前端框架', name: 'Angular' },
-      jquerycompat: { category: '前端库', name: 'jQuery' },
+      jquery: { category: '前端框架', name: 'jQuery' },
+      jquerycompat: { category: '前端框架', name: 'jQuery' },
+      layer: { category: '前端库', name: 'Layer.js' },
       preact: { category: '前端框架', name: 'Preact' },
       react: { category: '前端框架', name: 'React' },
       svelte: { category: '前端框架', name: 'Svelte' },

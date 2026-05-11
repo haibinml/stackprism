@@ -41,6 +41,7 @@ export const normalizeDynamicFallbackTechName = (name: unknown): string => {
     clipboardjs: 'clipboard',
     jquerycompat: 'jquery',
     imagesloadedjs: 'imagesloaded',
+    layerjs: 'layer',
     slickcarousel: 'slick',
     twitterbootstrap: 'bootstrap',
     vuejs: 'vue'
@@ -53,9 +54,11 @@ export const isFrontendFallback = (item: any) => item?.category === '前端库' 
 const frontendTechnologyCategories = new Set(['前端库', '前端框架', 'UI / CSS 框架'])
 const frontendFallbackEvidencePattern = /^兜底识别：/
 
-const frontendAliasTechnologies: Record<string, { category: string; name: string }> = {
+const frontendAliasTechnologies: Record<string, { category: string; name: string; url?: string }> = {
   angular: { category: '前端框架', name: 'Angular' },
-  jquerycompat: { category: '前端库', name: 'jQuery' },
+  jquery: { category: '前端框架', name: 'jQuery' },
+  jquerycompat: { category: '前端框架', name: 'jQuery' },
+  layer: { category: '前端库', name: 'Layer.js', url: 'https://layer.layui.com' },
   preact: { category: '前端框架', name: 'Preact' },
   react: { category: '前端框架', name: 'React' },
   svelte: { category: '前端框架', name: 'Svelte' },
@@ -73,7 +76,8 @@ export const canonicalizeFrontendAliasTechnologies = (items: any[]) => {
     return {
       ...item,
       category: canonical.category,
-      name: canonical.name
+      name: canonical.name,
+      url: canonical.url || item.url
     }
   })
 }
