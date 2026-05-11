@@ -104,6 +104,16 @@
           "patterns": ["javax\\.faces|jsf\\.js|jakarta\\.faces|mojarra"]
         },
         {
+          "name": "FreeMarker",
+          "confidence": "中",
+          "matchIn": ["url", "resources", "html", "dynamic"],
+          "patterns": [
+            "freemarker",
+            "\\.ftl(?:[?#\\s\"'<>]|$)",
+            "(?:^|/)ftl(?:/|[?#\\s\"'<>]|$)"
+          ]
+        },
+        {
           "name": "Apache Wicket",
           "confidence": "中",
           "patterns": ["wicket:id|wicket-ajax|wicket\\/ajax"]
