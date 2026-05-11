@@ -58,6 +58,20 @@ const buildDynamicSnapshotSignature = snapshot =>
     ...snapshot.domMarkers
   ].join('\n')
 
+const getUrlOrigin = value => {
+  try {
+    return new URL(String(value || '')).origin
+  } catch {
+    return ''
+  }
+}
+
+const snapshotMatchesTabOrigin = (snapshot, tabUrl) => {
+  const snapshotOrigin = getUrlOrigin(snapshot?.url)
+  const tabOrigin = getUrlOrigin(tabUrl)
+  return !snapshotOrigin || !tabOrigin || snapshotOrigin === tabOrigin
+}
+
 const isLikelyDynamicLibraryFileName = name => {
   if (!name || name.length < 2 || name.length > 60) {
     return false
@@ -645,6 +659,9 @@ const processQueuedDynamicSnapshot = async tabId => {
   if (!isDetectablePageUrl(tab.url)) {
     await clearTabSession(tabId)
     clearBadge(tabId)
+    return
+  }
+  if (!snapshotMatchesTabOrigin(snapshot, tab.url)) {
     return
   }
 

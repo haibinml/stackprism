@@ -37,6 +37,22 @@ const clearTabDetectionState = (tabId: number) => {
   clearTabSession(tabId).catch(() => {})
 }
 
+const getUrlOrigin = (value: unknown): string => {
+  try {
+    return new URL(String(value || '')).origin
+  } catch {
+    return ''
+  }
+}
+
+const clearCrossOriginDynamicSnapshot = (data: any, nextUrl: string) => {
+  const dynamicOrigin = getUrlOrigin(data?.dynamic?.url)
+  const nextOrigin = getUrlOrigin(nextUrl)
+  if (dynamicOrigin && nextOrigin && dynamicOrigin !== nextOrigin) {
+    delete data.dynamic
+  }
+}
+
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   const url = changeInfo.url || tab.url || ''
   if (url && !isDetectablePageUrl(url)) {
@@ -85,6 +101,7 @@ chrome.webRequest.onHeadersReceived.addListener(
         }
         const record = buildHeaderRecord(details, rules.headers || {}, settings)
         if (details.type === 'main_frame') {
+          clearCrossOriginDynamicSnapshot(data, details.url)
           data.main = shouldMergeHeaderRecords(data.main, record) ? mergeHeaderRecords(data.main, record) : record
           data.apis = []
           data.frames = []
