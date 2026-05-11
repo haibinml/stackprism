@@ -522,9 +522,63 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
     return items.some(item => item?.category === category && normalizeRuleName(item.name) === normalizedName)
   }
 
+  const phpRuntimeTechnologyNames = new Set(
+    [
+      'WordPress',
+      'ThinkPHP',
+      'Discuz!',
+      'phpBB',
+      'Drupal',
+      'Joomla',
+      'Typecho',
+      'Z-BlogPHP',
+      'Emlog',
+      'Magento / Adobe Commerce',
+      'OpenCart',
+      'PrestaShop',
+      'DedeCMS',
+      'EmpireCMS',
+      'PHPCMS',
+      'PHPWind',
+      'BBSXP',
+      'HDWiki',
+      'MediaWiki',
+      'Laravel',
+      'Laravel Livewire',
+      'Symfony',
+      'Yii',
+      'CodeIgniter',
+      'CakePHP',
+      'Laminas / Zend Framework',
+      'Zend Framework',
+      'Swoole',
+      'OpenSwoole',
+      'FrankenPHP'
+    ].map(normalizeRuleName)
+  )
+
+  function isPhpRuntimeSourceTechnology(item) {
+    return phpRuntimeTechnologyNames.has(normalizeRuleName(item?.name))
+  }
+
+  function phpRuntimeInferenceEvidence(item) {
+    const name = String(item?.name || '').trim() || 'PHP 系技术'
+    if (item?.category === '后端 / 服务器框架') {
+      return `由 ${name} 后端框架推断 PHP 后端运行时`
+    }
+    if (item?.category === '网站程序' || item?.category === 'CMS / 电商平台') {
+      return `由 ${name} 站点程序推断 PHP 后端运行时`
+    }
+    return `由 ${name} 技术线索推断 PHP 后端运行时`
+  }
+
   function inferLanguagesFromDetectedTechnologies(add, items) {
-    if (hasTechnology(items, '网站程序', 'WordPress') && !hasTechnology(items, '开发语言 / 运行时', 'PHP')) {
-      add('开发语言 / 运行时', 'PHP', '中', '由 WordPress 站点程序推断 PHP 后端运行时')
+    if (hasTechnology(items, '开发语言 / 运行时', 'PHP')) {
+      return
+    }
+    const source = items.find(isPhpRuntimeSourceTechnology)
+    if (source) {
+      add('开发语言 / 运行时', 'PHP', '中', phpRuntimeInferenceEvidence(source))
     }
   }
 

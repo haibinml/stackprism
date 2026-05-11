@@ -4,6 +4,7 @@ import { clearBadge, clearTabSession, getPopupCache, getTabData, getTabSnapshot,
 import {
   canonicalizeFrontendAliasTechnologies,
   cleanMergedTechnologyEvidence,
+  inferRuntimeTechnologiesFromDetectedTechnologies,
   mergeTechnologyRecords,
   strongerConfidence,
   suppressDuplicateWebsiteProgramCategories,
@@ -136,9 +137,10 @@ export const filterTechnologiesBySettings = (technologies: any[], settings: any)
 
 const mergeDisplayTechnologyRecords = (items: any[]) => {
   const map = new Map()
-  for (const item of suppressDuplicateWebsiteProgramCategories(
+  const normalizedItems = suppressDuplicateWebsiteProgramCategories(
     suppressWordPressThemeDirectoryFallbacks(canonicalizeFrontendAliasTechnologies(suppressFrontendFallbackDuplicates(items)))
-  )) {
+  )
+  for (const item of inferRuntimeTechnologiesFromDetectedTechnologies(normalizedItems)) {
     if (!item?.name) continue
     const category = item.category || '其他库'
     const key = `${category}::${item.name}`.toLowerCase()

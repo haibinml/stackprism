@@ -53,6 +53,40 @@ export const isFrontendFallback = (item: any) => item?.category === '前端库' 
 
 const frontendTechnologyCategories = new Set(['前端库', '前端框架', 'UI / CSS 框架'])
 const frontendFallbackEvidencePattern = /^兜底识别：/
+const phpRuntimeTechnologyNames = new Set(
+  [
+    'WordPress',
+    'ThinkPHP',
+    'Discuz!',
+    'phpBB',
+    'Drupal',
+    'Joomla',
+    'Typecho',
+    'Z-BlogPHP',
+    'Emlog',
+    'Magento / Adobe Commerce',
+    'OpenCart',
+    'PrestaShop',
+    'DedeCMS',
+    'EmpireCMS',
+    'PHPCMS',
+    'PHPWind',
+    'BBSXP',
+    'HDWiki',
+    'MediaWiki',
+    'Laravel',
+    'Laravel Livewire',
+    'Symfony',
+    'Yii',
+    'CodeIgniter',
+    'CakePHP',
+    'Laminas / Zend Framework',
+    'Zend Framework',
+    'Swoole',
+    'OpenSwoole',
+    'FrankenPHP'
+  ].map(normalizeTechName)
+)
 
 const frontendAliasTechnologies: Record<string, { category: string; name: string; url?: string }> = {
   angular: { category: '前端框架', name: 'Angular' },
@@ -94,6 +128,38 @@ export const cleanMergedTechnologyEvidence = (items: any[]) => {
   const evidence = cleanStringArray(items)
   if (!evidence.some(item => !isFrontendFallbackEvidence(item))) return evidence
   return evidence.filter(item => !isFrontendFallbackEvidence(item))
+}
+
+const isPhpRuntimeTechnology = (item: any) =>
+  item?.category === '开发语言 / 运行时' && normalizeTechName(item?.name) === normalizeTechName('PHP')
+
+const isPhpRuntimeSourceTechnology = (item: any) => phpRuntimeTechnologyNames.has(normalizeTechName(item?.name))
+
+const phpRuntimeInferenceEvidence = (item: any) => {
+  const name = String(item?.name || '').trim() || 'PHP 系技术'
+  if (item?.category === '后端 / 服务器框架') {
+    return `由 ${name} 后端框架推断 PHP 后端运行时`
+  }
+  if (item?.category === '网站程序' || item?.category === 'CMS / 电商平台') {
+    return `由 ${name} 站点程序推断 PHP 后端运行时`
+  }
+  return `由 ${name} 技术线索推断 PHP 后端运行时`
+}
+
+export const inferRuntimeTechnologiesFromDetectedTechnologies = (items: any[]) => {
+  if (!Array.isArray(items) || !items.length || items.some(isPhpRuntimeTechnology)) return items
+  const source = items.find(isPhpRuntimeSourceTechnology)
+  if (!source) return items
+  return [
+    ...items,
+    {
+      category: '开发语言 / 运行时',
+      name: 'PHP',
+      confidence: '中',
+      evidence: [phpRuntimeInferenceEvidence(source)],
+      source: '派生推断'
+    }
+  ]
 }
 
 const isWordPressThemeDirectoryFallbackEvidence = (evidenceText: string) =>
@@ -172,9 +238,10 @@ export const suppressWordPressThemeDirectoryFallbacks = (items: any[]) => {
 
 export const mergeTechnologyRecords = (items: any[]) => {
   const map = new Map<string, any>()
-  for (const item of suppressDuplicateWebsiteProgramCategories(
+  const normalizedItems = suppressDuplicateWebsiteProgramCategories(
     suppressWordPressThemeDirectoryFallbacks(canonicalizeFrontendAliasTechnologies(suppressFrontendFallbackDuplicates(items)))
-  )) {
+  )
+  for (const item of inferRuntimeTechnologiesFromDetectedTechnologies(normalizedItems)) {
     const key = `${item.category}::${item.name}`.toLowerCase()
     const current = map.get(key) || { ...item, evidence: [] }
     if (!current.url && item.url) {
