@@ -10,7 +10,26 @@
             "name": "WordPress",
             "category": "网站程序",
             "kind": "CMS / 博客",
-            "patterns": ["/wp-admin/", "/wp-json", "/wp-content/", "/wp-includes/", "wp-emoji-release"]
+            "resourceOnly": true,
+            "matchIn": ["resources", "url"],
+            "patterns": [
+              "(?:^|/)wp-admin(?:/|[?#]|$)",
+              "(?:^|/)wp-json(?:/|[?#]|$)",
+              "(?:^|/)wp-content/",
+              "(?:^|/)wp-includes/",
+              "(?:^|/)wp-emoji-release(?:\\.min)?\\.js(?:[?#]|$)"
+            ]
+          },
+          {
+            "name": "WordPress",
+            "category": "网站程序",
+            "kind": "CMS / 博客",
+            "matchIn": ["html"],
+            "patterns": [
+              "<meta[^>]+name=[\"']?generator[\"']?[^>]+content=[\"'][^\"']*WordPress",
+              "<link[^>]+rel=[\"']https://api\\.w\\.org/[\"'][^>]+href=[\"'][^\"']*/wp-json(?:/|[?#\"'])",
+              "<link[^>]+href=[\"'][^\"']*/wp-json(?:/|[?#\"'])[^>]+rel=[\"']https://api\\.w\\.org/[\"']"
+            ]
           },
           {
             "name": "WooCommerce",
@@ -247,7 +266,23 @@
           },
           {
             "name": "VitePress",
-            "patterns": ["vitepress", "VPContent", "/assets/chunks/"]
+            "matchIn": ["html"],
+            "patterns": [
+              "<meta[^>]+name=[\"']?generator[\"']?[^>]+content=[\"'][^\"']*VitePress"
+            ]
+          },
+          {
+            "name": "VitePress",
+            "resourceOnly": true,
+            "matchIn": ["resources"],
+            "patterns": [
+              "(?:^|/)assets/chunks/[^\\s\"'<>]*vitepress[^\\s\"'<>]*\\.(?:js|css)(?:[?#]|$)",
+              "(?:^|/)assets/[^\\s\"'<>]*\\.vitepress[^\\s\"'<>]*\\.(?:js|css)(?:[?#]|$)"
+            ]
+          },
+          {
+            "name": "VitePress",
+            "globals": ["__VITEPRESS__"]
           },
           {
             "name": "VuePress",
