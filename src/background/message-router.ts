@@ -77,7 +77,7 @@ export const registerMessageRouter = () => {
           if (!isDetectablePageUrl(tab.url)) {
             return clearUnsupportedTab(tabId)
           }
-          return runActivePageDetection(tabId)
+          return runActivePageDetection(tabId, { force: true })
         })
         .catch(() => {})
       return false

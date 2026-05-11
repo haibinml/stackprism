@@ -86,7 +86,7 @@ export const refreshAllBadges = async () => {
   }
 }
 
-export const runActivePageDetection = async (tabId: number) => {
+export const runActivePageDetection = async (tabId: number, options: { force?: boolean } = {}) => {
   if (typeof tabId !== 'number' || tabId < 0) return
 
   try {
@@ -96,7 +96,15 @@ export const runActivePageDetection = async (tabId: number) => {
       clearBadge(tabId)
       return
     }
+    if (!options.force) {
+      const last = lastDetectionRunAt.get(tabId) || 0
+      if (last && Date.now() - last < DETECTION_THROTTLE_MS) {
+        console.log('[SP detection] run skipped (throttle)', tabId, 'sinceLast', Date.now() - last + 'ms')
+        return
+      }
+    }
     lastDetectionRunAt.set(tabId, Date.now())
+    console.log('[SP detection] run start', tabId, 'force:', Boolean(options.force))
     await injectContentObserver(tabId)
     const [data, rules, settings] = await Promise.all([getTabData(tabId), loadTechRules(), loadDetectorSettings()])
     const pageRules = buildEffectivePageRules(rules.page || {}, settings)
@@ -154,8 +162,10 @@ export const scheduleActivePageDetection = (tabId: number, delay = 600) => {
   if (typeof tabId !== 'number' || tabId < 0) return
   const last = lastDetectionRunAt.get(tabId) || 0
   if (last && Date.now() - last < DETECTION_THROTTLE_MS) {
+    console.log('[SP detection] schedule skipped (throttle)', tabId, 'sinceLast', Date.now() - last + 'ms')
     return
   }
+  console.log('[SP detection] schedule', tabId, 'delay', delay + 'ms')
   clearActiveDetectionTimer(tabId)
   const timer = setTimeout(() => {
     activeDetectionTimers.delete(tabId)

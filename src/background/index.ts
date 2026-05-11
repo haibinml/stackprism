@@ -78,6 +78,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   }
 
   if (changeInfo.status === 'complete') {
+    console.log('[SP detection] onUpdated complete', tabId, 'url', url)
     if (isDetectablePageUrl(url)) {
       scheduleActivePageDetection(tabId, 600)
     } else {
