@@ -1345,4 +1345,22 @@ ${html}`
 
 const __spRules = (window as any).__SP_RULES__ ?? {}
 ;(window as any).__SP_RULES__ = undefined
-export default detectPageTechnologies(__spRules)
+const __spStart = performance.now()
+const __spResult = detectPageTechnologies(__spRules)
+try {
+  if (localStorage.getItem('__sp_observer_debug__') === '1') {
+    const __spDuration = performance.now() - __spStart
+    console.log(
+      '[StackPrism page-detector] 耗时',
+      __spDuration.toFixed(1) + 'ms',
+      '| 识别',
+      __spResult?.technologies?.length || 0,
+      '项 |',
+      'resources',
+      __spResult?.resources?.total || 0
+    )
+  }
+} catch {
+  // ignore
+}
+export default __spResult
