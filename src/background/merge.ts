@@ -51,6 +51,7 @@ export const normalizeDynamicFallbackTechName = (name: unknown): string => {
 export const isFrontendFallback = (item: any) => item?.category === '前端库' && /^疑似前端库:/i.test(String(item?.name || '').trim())
 
 const frontendTechnologyCategories = new Set(['前端库', '前端框架', 'UI / CSS 框架'])
+const frontendFallbackEvidencePattern = /^兜底识别：/
 
 const frontendAliasTechnologies: Record<string, { category: string; name: string }> = {
   angular: { category: '前端框架', name: 'Angular' },
@@ -75,6 +76,20 @@ export const canonicalizeFrontendAliasTechnologies = (items: any[]) => {
       name: canonical.name
     }
   })
+}
+
+export const isFrontendFallbackEvidence = (value: unknown): boolean => frontendFallbackEvidencePattern.test(String(value || '').trim())
+
+const hasOnlyFrontendFallbackEvidence = (item: any) => {
+  if (!frontendTechnologyCategories.has(item?.category)) return false
+  const evidence = cleanStringArray(item?.evidence)
+  return Boolean(evidence.length) && evidence.every(isFrontendFallbackEvidence)
+}
+
+export const cleanMergedTechnologyEvidence = (items: any[]) => {
+  const evidence = cleanStringArray(items)
+  if (!evidence.some(item => !isFrontendFallbackEvidence(item))) return evidence
+  return evidence.filter(item => !isFrontendFallbackEvidence(item))
 }
 
 const isWordPressThemeDirectoryFallbackEvidence = (evidenceText: string) =>
@@ -105,18 +120,24 @@ const extractWordPressDirectoryThemeSlug = (item: any) => {
   return evidenceSlug || nameSlug
 }
 
-export const suppressFrontendFallbackDuplicates = (items: any[]) => {
+export const suppressFrontendFallbackDuplicates = (items: any[], additionalKnownItems: any[] = []) => {
   if (!Array.isArray(items) || !items.length) return []
 
   const knownNames = new Set(
-    items
-      .filter(item => ['前端库', '前端框架', 'UI / CSS 框架'].includes(item?.category) && !isFrontendFallback(item))
+    [...items, ...additionalKnownItems]
+      .filter(
+        item => frontendTechnologyCategories.has(item?.category) && !isFrontendFallback(item) && !hasOnlyFrontendFallbackEvidence(item)
+      )
       .map(item => normalizeDynamicFallbackTechName(item.name))
       .filter(Boolean)
   )
   if (!knownNames.size) return items
 
-  return items.filter(item => !isFrontendFallback(item) || !knownNames.has(normalizeDynamicFallbackTechName(item.name)))
+  return items.filter(item => {
+    const normalized = normalizeDynamicFallbackTechName(item.name)
+    if (!knownNames.has(normalized)) return true
+    return !isFrontendFallback(item) && !hasOnlyFrontendFallbackEvidence(item)
+  })
 }
 
 export const suppressDuplicateWebsiteProgramCategories = (items: any[]) => {
@@ -163,5 +184,8 @@ export const mergeTechnologyRecords = (items: any[]) => {
     current.confidence = strongerConfidence(current.confidence, item.confidence)
     map.set(key, current)
   }
-  return [...map.values()]
+  return [...map.values()].map(item => ({
+    ...item,
+    evidence: cleanMergedTechnologyEvidence(item.evidence)
+  }))
 }

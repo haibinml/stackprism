@@ -3,6 +3,8 @@ import { addStoredCustomHeaderRules } from './headers'
 import { clearBadge, clearTabSession, getPopupCache, getTabData, getTabSnapshot, popupStorageKey, storageKey } from './tab-store'
 import {
   canonicalizeFrontendAliasTechnologies,
+  cleanMergedTechnologyEvidence,
+  mergeTechnologyRecords,
   strongerConfidence,
   suppressDuplicateWebsiteProgramCategories,
   suppressFrontendFallbackDuplicates,
@@ -171,10 +173,31 @@ const mergeDisplayTechnologyRecords = (items: any[]) => {
       name: item.name,
       confidence: item.confidence,
       url: item.url,
-      evidence: item.evidence.slice(0, 8),
+      evidence: cleanMergedTechnologyEvidence(item.evidence).slice(0, 8),
       sources: [...item.sources]
     }))
     .sort(compareDisplayTechnologies)
+}
+
+const collectRawReferenceTechnologies = (data: any) => {
+  const items: any[] = []
+  addAllTechnologies(items, data.page?.technologies)
+  addAllTechnologies(items, data.main?.technologies)
+  for (const api of data.apis || []) addAllTechnologies(items, api.technologies)
+  for (const frame of data.frames || []) addAllTechnologies(items, frame.technologies)
+  addAllTechnologies(items, data.bundle?.technologies)
+  return items
+}
+
+const cleanRawObservationTechnologies = (items: any[], referenceItems: any[] = []) =>
+  mergeTechnologyRecords(suppressFrontendFallbackDuplicates(items || [], referenceItems))
+
+const cleanRawDynamicObservation = (dynamic: any, data: any) => {
+  if (!dynamic) return null
+  return {
+    ...dynamic,
+    technologies: cleanRawObservationTechnologies(dynamic.technologies, collectRawReferenceTechnologies(data))
+  }
 }
 
 const buildDisplayTechnologies = (data: any, settings: any) => {
@@ -249,7 +272,7 @@ export const buildPopupRawResult = async (data: any, settings: any, tab: any) =>
     apiObservations: data.apis || [],
     frameObservations: data.frames || [],
     bundleObservations: data.bundle || null,
-    dynamicObservations: data.dynamic || null,
+    dynamicObservations: cleanRawDynamicObservation(data.dynamic, data),
     notes: [
       '前端框架和 UI 框架主要通过页面运行时、DOM、资源 URL 和样式类名判断。',
       'Web 服务器、CDN 和后端框架主要依赖响应头与 Cookie 命名线索；如果站点隐藏响应头，结果会保守显示。',
