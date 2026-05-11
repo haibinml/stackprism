@@ -1,7 +1,9 @@
 // @ts-nocheck
 /* eslint-disable */
 
-const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
+const yieldToMainThread = () => new Promise(resolve => setTimeout(resolve, 0))
+
+const detectPageTechnologies = async (ruleConfig: Record<string, unknown> = {}) => {
   const technologies = []
   const ruleRegexCache = new WeakMap()
   const ruleCombinedCache = new WeakMap()
@@ -47,14 +49,19 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
     ].map(normalizeRuleName)
   )
 
+  await yieldToMainThread()
   detectFrontendFrameworks(add, resources, classTokens, documentHtmlSample, globalKeys, ruleConfig.frontendFrameworks || [])
   detectUiFrameworks(add, resources, classTokens, cssVariables, documentHtmlSample, ruleConfig.uiFrameworks || [])
   detectAdditionalFrontendTechnologies(add, resources, classTokens, documentHtmlSample, ruleConfig.frontendExtra || [])
   detectMinifiedScriptFallback(add, resources, technologies)
+
+  await yieldToMainThread()
   detectBuildAndRuntime(add, resources, documentHtmlSample, globalKeys, ruleConfig.buildRuntime || [])
   detectCdnAndHosting(add, resources, ruleConfig.cdnProviders || [])
   detectBackendFrameworkHints(add, resources, documentHtmlSample, ruleConfig.backendHints || [])
   detectCmsAndCommerce(add, resources, documentHtmlSample, ruleConfig.websitePrograms || [])
+
+  await yieldToMainThread()
   detectWebsitePrograms(add, resources, documentHtmlSample, globalKeys, ruleConfig.websitePrograms || [])
   detectCmsThemesAndSource(
     add,
@@ -67,10 +74,14 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
   )
   detectProbeTools(add, resources, documentHtmlSample, globalKeys, ruleConfig.probes || [])
   detectProgrammingLanguages(add, resources, documentHtmlSample, globalKeys, ruleConfig.languages || [])
+
+  await yieldToMainThread()
   inferLanguagesFromDetectedTechnologies(add, technologies)
   detectFeeds(add, resources, documentHtmlSample, ruleConfig.feeds || [])
   detectSaasServices(add, resources, documentHtmlSample, globalKeys, ruleConfig.saasServices || [])
   detectThirdPartyLogins(add, resources, documentHtmlSample, globalKeys, ruleConfig.thirdPartyLogins || [])
+
+  await yieldToMainThread()
   detectPaymentSystems(add, resources, documentHtmlSample, globalKeys, ruleConfig.paymentSystems || [])
   detectAnalytics(add, resources, documentHtmlSample, globalKeys, ruleConfig.analyticsProviders || [])
   detectCustomRules(add, resources, documentHtmlSample, globalKeys, ruleConfig.customRules || [])
@@ -1346,21 +1357,23 @@ ${html}`
 const __spRules = (window as any).__SP_RULES__ ?? {}
 ;(window as any).__SP_RULES__ = undefined
 const __spStart = performance.now()
-const __spResult = detectPageTechnologies(__spRules)
-try {
-  if (localStorage.getItem('__sp_observer_debug__') === '1') {
-    const __spDuration = performance.now() - __spStart
-    console.log(
-      '[StackPrism page-detector] 耗时',
-      __spDuration.toFixed(1) + 'ms',
-      '| 识别',
-      __spResult?.technologies?.length || 0,
-      '项 |',
-      'resources',
-      __spResult?.resources?.total || 0
-    )
+const __spResult = detectPageTechnologies(__spRules).then(result => {
+  try {
+    if (localStorage.getItem('__sp_observer_debug__') === '1') {
+      const __spDuration = performance.now() - __spStart
+      console.log(
+        '[StackPrism page-detector] 耗时',
+        __spDuration.toFixed(1) + 'ms',
+        '| 识别',
+        result?.technologies?.length || 0,
+        '项 |',
+        'resources',
+        result?.resources?.total || 0
+      )
+    }
+  } catch {
+    // ignore
   }
-} catch {
-  // ignore
-}
+  return result
+})
 export default __spResult
