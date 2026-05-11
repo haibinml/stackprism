@@ -20,8 +20,8 @@
         role="button"
         :title="clearTitle"
         :aria-label="clearTitle"
-        @click.stop="clear"
-        @mousedown.stop
+        @mousedown.stop.prevent="clear"
+        @click.stop
       >
         <X :size="12" :stroke-width="2" />
       </span>
@@ -47,7 +47,8 @@
         tabindex="-1"
         :title="clearTitle"
         :aria-label="clearTitle"
-        @mousedown.prevent="clear"
+        @mousedown.stop.prevent="clear"
+        @click.stop
       >
         <X :size="12" :stroke-width="2" />
       </button>
@@ -124,6 +125,7 @@
     if (props.disabled) return
     emit('update:modelValue', '')
     close()
+    suppressTriggerUntil = Date.now() + 250
     if (props.creatable) inputRef.value?.focus()
     else triggerRef.value?.focus()
   }

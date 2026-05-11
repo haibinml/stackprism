@@ -103,7 +103,10 @@ const detectFromHeaders = (headers: Record<string, string>, url: string, headerR
   applyHeaderValueRuleList(add, headerRules.poweredByProducts, poweredBy, headers['x-powered-by'], 'x-powered-by')
   applyHeaderRuleList(add, headerRules.headerPatterns, '其他库', headerBlob, 'JSON 响应头规则', () => '', lowerHeaderBlob)
 
-  if (matchesHeaderPatterns(headerRules.unknownCdnPatterns, lowerHeaderBlob) && !technologies.some(tech => tech.category === 'CDN / 托管')) {
+  if (
+    matchesHeaderPatterns(headerRules.unknownCdnPatterns, lowerHeaderBlob) &&
+    !technologies.some(tech => tech.category === 'CDN / 托管')
+  ) {
     add('CDN / 托管', '未知 / 自定义 CDN', '低', '响应头包含 CDN 或 Edge 缓存线索')
   }
 
@@ -159,6 +162,14 @@ export const fetchMainHeadersFallback = async (url: string, headerRules: any, se
   }
 }
 
+const sanitizeAllHeaders = (headers: Record<string, string>) => {
+  const out: Record<string, string> = {}
+  for (const [name, value] of Object.entries(headers)) {
+    out[name] = sanitizeHeaderValue(name, value)
+  }
+  return out
+}
+
 export const buildHeaderRecord = (details: any, headerRules: any, settings: any) => {
   const normalizedHeaders = normalizeHeaders(details.responseHeaders)
   const headers = pickHeaders(normalizedHeaders, headerRules.interestingHeaders || [])
@@ -170,6 +181,7 @@ export const buildHeaderRecord = (details: any, headerRules: any, settings: any)
     statusCode: details.statusCode,
     time: Date.now(),
     headers,
+    allHeaders: sanitizeAllHeaders(normalizedHeaders),
     headerCount: Object.keys(normalizedHeaders).length,
     technologies: detectFromHeaders(normalizedHeaders, details.url, headerRules, settings)
   }
@@ -202,6 +214,10 @@ export const mergeHeaderRecords = (previous: any, next: any) => {
     headers: {
       ...(previous.headers || {}),
       ...(next.headers || {})
+    },
+    allHeaders: {
+      ...(previous.allHeaders || {}),
+      ...(next.allHeaders || {})
     },
     headerCount: Math.max(Number(previous.headerCount || 0), Number(next.headerCount || 0)),
     technologies: mergeTechnologyRecords([...(previous.technologies || []), ...(next.technologies || [])])

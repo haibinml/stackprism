@@ -274,7 +274,7 @@ const buildPopupResult = async (data: any, settings: any, tab: any) => {
 export const buildPopupRawResult = async (data: any, settings: any, tab: any) => {
   const technologies = await attachTechnologyLinks(buildDisplayTechnologies(data, settings), settings)
   const resources = mergeResourceSummary(data.page?.resources || {}, data.dynamic || {})
-  const headers = data.main?.headers || {}
+  const headers = data.main?.allHeaders || data.main?.headers || {}
   return {
     url: data.page?.url || data.dynamic?.url || tab?.url || '',
     title: data.page?.title || data.dynamic?.title || tab?.title || '',
