@@ -8,6 +8,8 @@ import { injectContentObserver } from './content-injector'
 import { isDetectablePageUrl } from '@/utils/page-support'
 
 const activeDetectionTimers = new Map<number, ReturnType<typeof setTimeout>>()
+const lastDetectionRunAt = new Map<number, number>()
+const DETECTION_THROTTLE_MS = 30000
 
 const normalizePageUrl = (value: unknown): string => {
   try {
@@ -130,6 +132,7 @@ export const runActivePageDetection = async (tabId: number) => {
     data.updatedAt = Date.now()
     await saveTabDataAndBadge(tabId, data, settings)
     scheduleBundleLicenseDetection(tabId)
+    lastDetectionRunAt.set(tabId, Date.now())
   } catch {
     return
   }
@@ -143,8 +146,16 @@ export const clearActiveDetectionTimer = (tabId: number) => {
   }
 }
 
+export const clearDetectionThrottle = (tabId: number) => {
+  lastDetectionRunAt.delete(tabId)
+}
+
 export const scheduleActivePageDetection = (tabId: number, delay = 600) => {
   if (typeof tabId !== 'number' || tabId < 0) return
+  const last = lastDetectionRunAt.get(tabId) || 0
+  if (last && Date.now() - last < DETECTION_THROTTLE_MS) {
+    return
+  }
   clearActiveDetectionTimer(tabId)
   const timer = setTimeout(() => {
     activeDetectionTimers.delete(tabId)

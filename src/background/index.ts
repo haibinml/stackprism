@@ -2,7 +2,13 @@ import { injectContentObserverIntoOpenTabs } from './content-injector'
 import { clearBadge, clearTabSession } from './tab-store'
 import { clearDynamicSnapshotTimer, clearPendingDynamicSnapshot } from './dynamic-snapshot'
 import { buildHeaderRecord, dedupeApiRecords, mergeHeaderRecords, shouldMergeHeaderRecords } from './headers'
-import { clearActiveDetectionTimer, refreshAllBadges, saveTabDataAndBadge, scheduleActivePageDetection } from './detection'
+import {
+  clearActiveDetectionTimer,
+  clearDetectionThrottle,
+  refreshAllBadges,
+  saveTabDataAndBadge,
+  scheduleActivePageDetection
+} from './detection'
 import { getTabData, getTabSnapshot } from './tab-store'
 import { SETTINGS_STORAGE_KEY, applyDetectorSettingsUpdate, loadDetectorSettings, loadTechRules } from './detector-settings'
 import { registerMessageRouter } from './message-router'
@@ -22,6 +28,7 @@ chrome.runtime.onStartup.addListener(() => {
 
 chrome.tabs.onRemoved.addListener(tabId => {
   clearActiveDetectionTimer(tabId)
+  clearDetectionThrottle(tabId)
   clearBundleLicenseTimer(tabId)
   clearDynamicSnapshotTimer(tabId)
   clearPendingDynamicSnapshot(tabId)
@@ -30,6 +37,7 @@ chrome.tabs.onRemoved.addListener(tabId => {
 
 const clearTabDetectionState = (tabId: number) => {
   clearActiveDetectionTimer(tabId)
+  clearDetectionThrottle(tabId)
   clearBundleLicenseTimer(tabId)
   clearDynamicSnapshotTimer(tabId)
   clearPendingDynamicSnapshot(tabId)
@@ -62,6 +70,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
   if (changeInfo.status === 'loading') {
     clearActiveDetectionTimer(tabId)
+    clearDetectionThrottle(tabId)
     clearDynamicSnapshotTimer(tabId)
     clearPendingDynamicSnapshot(tabId)
     clearBadge(tabId)
