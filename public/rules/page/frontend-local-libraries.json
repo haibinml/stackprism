@@ -2736,6 +2736,18 @@
             ]
           },
           {
+            "name": "react-i18next",
+            "patterns": ["(?:^|/)react-i18next(?:@[^/\\s\"'<>]+)?/.+\\.(?:m?js|cjs)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "FormatJS",
+            "patterns": ["(?:^|/)@formatjs/(?:intl|icu-messageformat-parser|intl-messageformat|intl-localematcher|ecma402-abstract|fast-memoize|cli)(?:@[^/\\s\"'<>]+)?/.+\\.(?:m?js|cjs)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "Intl MessageFormat",
+            "patterns": ["(?:^|/)intl-messageformat(?:@[^/\\s\"'<>]+)?/.+\\.(?:m?js|cjs)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
+          },
+          {
             "name": "Turf.js",
             "patterns": [
               "(?:^|/)turf(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
@@ -2853,6 +2865,50 @@
             ]
           },
           {
+            "name": "ProseMirror",
+            "patterns": ["(?:^|/)prosemirror-(?:state|view|model|schema-basic|schema-list|commands|history|keymap|inputrules|transform|tables|menu|dropcursor|gapcursor)(?:@[^/\\s\"'<>]+)?/.+\\.(?:m?js|cjs|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "Tiptap",
+            "patterns": ["(?:^|/)@tiptap/[^/\\s\"'<>]+(?:@[^/\\s\"'<>]+)?/.+\\.(?:m?js|cjs|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "Slate",
+            "patterns": ["(?:^|/)(?:slate|slate-react|slate-history|slate-hyperscript)(?:@[^/\\s\"'<>]+)?/.+\\.(?:m?js|cjs)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "Lexical",
+            "patterns": [
+              "(?:^|/)lexical(?:@[^/\\s\"'<>]+)?/.+\\.(?:m?js|cjs)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)@lexical/[^/\\s\"'<>]+(?:@[^/\\s\"'<>]+)?/.+\\.(?:m?js|cjs|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "Milkdown",
+            "patterns": ["(?:^|/)@milkdown/[^/\\s\"'<>]+(?:@[^/\\s\"'<>]+)?/.+\\.(?:m?js|cjs|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "EasyMDE",
+            "patterns": [
+              "(?:^|/)easymde(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)easymde(?:@[^/\\s\"'<>]+)?/.+\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "SimpleMDE",
+            "patterns": [
+              "(?:^|/)simplemde(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)simplemde(?:@[^/\\s\"'<>]+)?/.+\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "StackEdit",
+            "patterns": [
+              "(?:^|/)stackedit(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)stackedit-js(?:@[^/\\s\"'<>]+)?/.+\\.(?:m?js|cjs|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
             "name": "Turndown",
             "patterns": [
               "(?:^|/)turndown(?:\\.browser)?(?:\\.umd)?(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
@@ -2864,6 +2920,13 @@
             "patterns": [
               "(?:^|/)remark(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
               "(?:^|/)remark(?:@[^/\\s\"'<>]+)?/.+\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "Shiki",
+            "patterns": [
+              "(?:^|/)shiki(?:@[^/\\s\"'<>]+)?/.+\\.(?:m?js|cjs|css|wasm)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)@shikijs/[^/\\s\"'<>]+(?:@[^/\\s\"'<>]+)?/.+\\.(?:m?js|cjs|css|wasm)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
             ]
           },
           {
