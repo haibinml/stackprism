@@ -7454,6 +7454,119 @@
       },
       {
         "defaults": {
+          "category": "低代码 / 自动化 / 内部工具",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Airtable",
+            "patterns": ["url: https?://airtable\\.com/embed/", "url: https?://api\\.airtable\\.com/v0/"],
+            "evidence": "响应 URL 指向 Airtable embed 或 API"
+          },
+          {
+            "name": "Retool",
+            "patterns": ["url: https?://cdn\\.tryretool\\.com/", "url: https?://[^\\s/]+\\.retool-edge\\.com/", "url: https?://[^\\s/]+\\.retool\\.com/(?:embed|apps|api|workflows)"],
+            "evidence": "响应 URL 指向 Retool 应用、CDN 或 API"
+          },
+          {
+            "name": "Superblocks",
+            "patterns": ["url: https?://app\\.superblocks\\.com/", "url: https?://assets\\.superblocks\\.com/", "url: https?://[^\\s/]+\\.superblocks\\.com/(?:embed|applications|workflows|api)"],
+            "evidence": "响应 URL 指向 Superblocks 应用或资源"
+          },
+          {
+            "name": "UI Bakery",
+            "patterns": ["url: https?://app\\.uibakery\\.io/", "url: https?://cdn\\.uibakery\\.io/"],
+            "evidence": "响应 URL 指向 UI Bakery 应用或 CDN"
+          },
+          {
+            "name": "Jet Admin",
+            "patterns": ["url: https?://app\\.jetadmin\\.io/", "url: https?://assets\\.jetadmin\\.io/"],
+            "evidence": "响应 URL 指向 Jet Admin 应用或资源"
+          },
+          {
+            "name": "Forest Admin",
+            "patterns": ["url: https?://app\\.forestadmin\\.com/", "url: https?://cdn\\.forestadmin\\.com/", "url: https?://api\\.forestadmin\\.com/"],
+            "evidence": "响应 URL 指向 Forest Admin 应用、CDN 或 API"
+          },
+          {
+            "name": "Internal.io",
+            "patterns": ["url: https?://app\\.internal\\.io/", "url: https?://cdn\\.internal\\.io/"],
+            "evidence": "响应 URL 指向 Internal.io 应用或 CDN"
+          },
+          {
+            "name": "DronaHQ",
+            "patterns": ["url: https?://app\\.dronahq\\.com/", "url: https?://cdn\\.dronahq\\.com/"],
+            "evidence": "响应 URL 指向 DronaHQ 应用或 CDN"
+          },
+          {
+            "name": "Zapier Interfaces",
+            "patterns": ["url: https?://interfaces\\.zapier\\.com/", "url: https?://tables\\.zapier\\.com/"],
+            "evidence": "响应 URL 指向 Zapier Interfaces 或 Tables"
+          },
+          {
+            "name": "Make.com",
+            "patterns": ["url: https?://hook(?:\\.(?:eu1|us1))?\\.make\\.com/", "url: https?://hook\\.integromat\\.com/"],
+            "evidence": "响应 URL 指向 Make.com / Integromat webhook"
+          },
+          {
+            "name": "Pipedream",
+            "patterns": ["url: https?://api\\.pipedream\\.com/", "url: https?://[^\\s/]+\\.m\\.pipedream\\.net/", "url: https?://[^\\s/]+\\.m\\.pipedream\\.com/"],
+            "evidence": "响应 URL 指向 Pipedream API 或工作流端点"
+          },
+          {
+            "name": "Parabola",
+            "patterns": ["url: https?://app\\.parabola\\.io/", "url: https?://api\\.parabola\\.io/"],
+            "evidence": "响应 URL 指向 Parabola 应用或 API"
+          },
+          {
+            "name": "Workato",
+            "patterns": ["url: https?://app\\.workato\\.com/", "url: https?://www\\.workato\\.com/(?:oauth|api|embed)/", "url: https?://[^\\s/]+\\.workato\\.com/(?:oauth|api|embed)/"],
+            "evidence": "响应 URL 指向 Workato 应用、API 或嵌入入口"
+          },
+          {
+            "name": "Tray.io",
+            "patterns": ["url: https?://cdn\\.tray\\.io/", "url: https?://app\\.tray\\.io/"],
+            "evidence": "响应 URL 指向 Tray.io 应用或 CDN"
+          },
+          {
+            "name": "Glide Apps",
+            "patterns": ["url: https?://go\\.glideapps\\.com/", "url: https?://[^\\s/]+\\.glide\\.page/", "url: https?://storage\\.googleapis\\.com/glide-prod/"],
+            "evidence": "响应 URL 指向 Glide Apps 应用或资源"
+          },
+          {
+            "name": "Softr",
+            "patterns": ["url: https?://cdn\\.softr\\.io/", "url: https?://assets\\.softr-files\\.com/", "url: https?://[^\\s/]+\\.softr\\.app/"],
+            "evidence": "响应 URL 指向 Softr 应用或资源"
+          },
+          {
+            "name": "Stacker",
+            "patterns": ["url: https?://app\\.stackerhq\\.com/", "url: https?://assets\\.stackerhq\\.com/", "url: https?://[^\\s/]+\\.stacker\\.app/"],
+            "evidence": "响应 URL 指向 Stacker 应用或资源"
+          },
+          {
+            "name": "Bubble",
+            "patterns": ["url: https?://[^\\s/]+\\.bubbleapps\\.io/", "url: https?://d1muf25xaso8hp\\.cloudfront\\.net/"],
+            "evidence": "响应 URL 指向 Bubble 应用或资源"
+          },
+          {
+            "name": "Adalo",
+            "patterns": ["url: https?://previewer\\.adalo\\.com/", "url: https?://app\\.adalo\\.com/"],
+            "evidence": "响应 URL 指向 Adalo 应用或预览器"
+          },
+          {
+            "name": "WeWeb",
+            "patterns": ["url: https?://cdn\\.weweb\\.io/", "url: https?://editor\\.weweb\\.io/", "url: https?://[^\\s/]+\\.weweb-preview\\.io/"],
+            "evidence": "响应 URL 指向 WeWeb 应用、编辑器或 CDN"
+          },
+          {
+            "name": "FlutterFlow",
+            "patterns": ["url: https?://app\\.flutterflow\\.io/", "url: https?://[^\\s/]+\\.flutterflow\\.app/"],
+            "evidence": "响应 URL 指向 FlutterFlow 应用或托管站点"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "SaaS / 第三方服务",
           "confidence": "高"
         },
