@@ -62,7 +62,13 @@
         "name": "FreeMarker",
         "kind": "后端模板语言",
         "confidence": "中",
-        "patterns": ["\\.ftl(?:\\?|#|$)", "freemarker", "FreeMarker template error", "org\\.apache\\.freemarker"]
+        "patterns": [
+          "\\.ftl(?:\\?|#|$)",
+          "(?:^|/)pay/ftl(?:/|[?#\\s\"'<>]|$)",
+          "freemarker",
+          "FreeMarker template error",
+          "org\\.apache\\.freemarker"
+        ]
       },
       {
         "name": "Java Servlet",

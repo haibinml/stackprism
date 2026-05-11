@@ -367,8 +367,13 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
       return []
     }
     const aliases = {
+      angular: { category: '前端框架', name: 'Angular' },
       jquerycompat: { category: '前端库', name: 'jQuery' },
-      twitterbootstrap: { category: 'UI / CSS 框架', name: 'Bootstrap' }
+      preact: { category: '前端框架', name: 'Preact' },
+      react: { category: '前端框架', name: 'React' },
+      svelte: { category: '前端框架', name: 'Svelte' },
+      twitterbootstrap: { category: 'UI / CSS 框架', name: 'Bootstrap' },
+      vue: { category: '前端框架', name: 'Vue' }
     }
     const frontendCategories = new Set(['前端库', '前端框架', 'UI / CSS 框架'])
     return items.map(item => {

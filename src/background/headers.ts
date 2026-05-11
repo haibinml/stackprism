@@ -38,6 +38,12 @@ const normalizeHeaders = (responseHeaders: any[]) => {
   return map
 }
 
+const collectFetchResponseHeaders = (response: Response) => {
+  const responseHeaders: Array<{ name: string; value: string }> = []
+  response.headers.forEach((value, name) => responseHeaders.push({ name, value }))
+  return responseHeaders
+}
+
 const pickHeaders = (headers: Record<string, string>, interestingNames: string[]) => {
   const picked: Record<string, string> = {}
   for (const name of interestingNames) {
@@ -129,14 +135,12 @@ export const fetchMainHeadersFallback = async (url: string, headerRules: any, se
   if (!url || !/^https?:/i.test(url)) return null
   try {
     let method = 'HEAD'
-    let response = await fetch(url, { method, credentials: 'omit', cache: 'no-store', redirect: 'follow' })
-    let responseHeaders: Array<{ name: string; value: string }> = []
-    response.headers.forEach((value, name) => responseHeaders.push({ name, value }))
-    if ((!response.ok && response.status !== 405 && response.status !== 0) || !responseHeaders.length) {
+    let response = await fetch(url, { method, credentials: 'include', cache: 'no-store', redirect: 'follow' })
+    let responseHeaders = collectFetchResponseHeaders(response)
+    if ((!response.ok && response.status !== 0) || responseHeaders.length <= 1) {
       method = 'GET'
-      response = await fetch(url, { method: 'GET', credentials: 'omit', cache: 'no-store', redirect: 'follow' })
-      responseHeaders = []
-      response.headers.forEach((value, name) => responseHeaders.push({ name, value }))
+      response = await fetch(url, { method: 'GET', credentials: 'include', cache: 'no-store', redirect: 'follow' })
+      responseHeaders = collectFetchResponseHeaders(response)
     }
     if (!responseHeaders.length) return null
     return buildHeaderRecord(

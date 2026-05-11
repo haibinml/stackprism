@@ -53,8 +53,13 @@ export const isFrontendFallback = (item: any) => item?.category === '前端库' 
 const frontendTechnologyCategories = new Set(['前端库', '前端框架', 'UI / CSS 框架'])
 
 const frontendAliasTechnologies: Record<string, { category: string; name: string }> = {
+  angular: { category: '前端框架', name: 'Angular' },
   jquerycompat: { category: '前端库', name: 'jQuery' },
-  twitterbootstrap: { category: 'UI / CSS 框架', name: 'Bootstrap' }
+  preact: { category: '前端框架', name: 'Preact' },
+  react: { category: '前端框架', name: 'React' },
+  svelte: { category: '前端框架', name: 'Svelte' },
+  twitterbootstrap: { category: 'UI / CSS 框架', name: 'Bootstrap' },
+  vue: { category: '前端框架', name: 'Vue' }
 }
 
 export const canonicalizeFrontendAliasTechnologies = (items: any[]) => {

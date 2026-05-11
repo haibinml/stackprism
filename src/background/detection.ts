@@ -1,6 +1,6 @@
 import { augmentPageWithWordPressThemeStyles } from './wordpress'
 import { buildPopupCacheRecord, cleanPageDetectionRecord } from './popup-cache'
-import { fetchMainHeadersFallback } from './headers'
+import { fetchMainHeadersFallback, mergeHeaderRecords } from './headers'
 import { clearBadge, clearTabSession, getTabData, getTabSnapshot, updateBadgeForTab, writeTabData } from './tab-store'
 import { buildEffectivePageRules, loadDetectorSettings, loadTechRules } from './detector-settings'
 import { scheduleBundleLicenseDetection } from './bundle-license'
@@ -24,7 +24,7 @@ const needsMainHeadersFallback = (record: any, currentUrl: string): boolean => {
   const recordUrl = normalizePageUrl(record.url)
   const tabUrl = normalizePageUrl(currentUrl)
   if (recordUrl && tabUrl && recordUrl !== tabUrl) return true
-  return !Number(record.headerCount || 0) && !(record.technologies || []).length
+  return Number(record.headerCount || 0) <= 1 && !Object.keys(record.headers || {}).length && !(record.technologies || []).length
 }
 
 const headerRecordMatchesUrl = (record: any, currentUrl: string): boolean => {
@@ -32,6 +32,22 @@ const headerRecordMatchesUrl = (record: any, currentUrl: string): boolean => {
   const tabUrl = normalizePageUrl(currentUrl)
   return Boolean(recordUrl && tabUrl && recordUrl === tabUrl)
 }
+
+const headerRecordSharesPagePath = (record: any, currentUrl: string): boolean => {
+  try {
+    const recordUrl = new URL(String(record?.url || ''))
+    const tabUrl = new URL(String(currentUrl || ''))
+    return recordUrl.origin === tabUrl.origin && recordUrl.pathname === tabUrl.pathname
+  } catch {
+    return false
+  }
+}
+
+const hasUsefulHeaderRecord = (record: any): boolean =>
+  Boolean(record && (Number(record.headerCount || 0) > 1 || Object.keys(record.headers || {}).length || (record.technologies || []).length))
+
+const shouldPreserveMainHeaderRecord = (record: any, currentUrl: string): boolean =>
+  headerRecordMatchesUrl(record, currentUrl) || (headerRecordSharesPagePath(record, currentUrl) && hasUsefulHeaderRecord(record))
 
 export const saveTabDataAndBadge = async (tabId: number, data: any, settings: any) => {
   const tab = await getTabSnapshot(tabId)
@@ -102,8 +118,13 @@ export const runActivePageDetection = async (tabId: number) => {
 
     if (needsMainHeadersFallback(data.main, (page as any).url || tab.url)) {
       const fallback = await fetchMainHeadersFallback((page as any).url || '', rules.headers || {}, settings)
-      if (fallback) data.main = fallback
-      else if (data.main && !headerRecordMatchesUrl(data.main, (page as any).url || tab.url)) delete data.main
+      if (fallback) {
+        data.main = shouldPreserveMainHeaderRecord(data.main, (page as any).url || tab.url)
+          ? mergeHeaderRecords(data.main, fallback)
+          : fallback
+      } else if (data.main && !shouldPreserveMainHeaderRecord(data.main, (page as any).url || tab.url)) {
+        delete data.main
+      }
     }
 
     data.updatedAt = Date.now()
