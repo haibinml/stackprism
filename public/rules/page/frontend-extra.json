@@ -168,8 +168,7 @@
           },
           {
             "name": "Syncfusion Essential JS",
-            "patterns": ["syncfusion|ej2-|ejs-"],
-            "globals": ["ej"]
+            "patterns": ["syncfusion|@syncfusion/|ej2-|ejs-|ej\\.web\\.all|ej\\.min\\.(?:js|css)"]
           },
           {
             "name": "Wijmo",

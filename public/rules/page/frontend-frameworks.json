@@ -90,7 +90,11 @@
             },
             {
               "name": "Stimulus",
-              "patterns": ["stimulus"],
+              "patterns": [
+                "stimulus",
+                "data-action=[\"'][^\"'>]*#[^\"'>]+[\"'][^>]*data-target=[\"'][^\"'>]+\\.[^\"'>]+",
+                "data-target=[\"'][^\"'>]+\\.[^\"'>]+[\"'][^>]*data-action=[\"'][^\"'>]*#[^\"'>]+"
+              ],
               "globals": ["Stimulus"],
               "selectors": ["[data-controller]"]
             },

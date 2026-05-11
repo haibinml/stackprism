@@ -8,7 +8,13 @@
         {
           "name": "Webpack",
           "confidence": "中",
-          "patterns": ["webpack", "__webpack_require__"],
+          "patterns": [
+            "webpack",
+            "__webpack_require__",
+            "(?:^|/)wp-runtime-[^\\s\"'<>/]+\\.js(?:[?#]|[\"'<>\\s]|$)",
+            "(?:^|/)runtime-helpers-[^\\s\"'<>/]+\\.js(?:[?#]|[\"'<>\\s]|$)",
+            "(?:^|/)chunk-[^\\s\"'<>/]+-[a-f0-9]{8,}\\.js(?:[?#]|[\"'<>\\s]|$)"
+          ],
           "globals": ["webpackChunk", "webpackJsonp"]
         },
         {

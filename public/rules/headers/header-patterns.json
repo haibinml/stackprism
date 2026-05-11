@@ -3744,6 +3744,24 @@
       },
       {
         "defaults": {
+          "category": "开发者工具 / 代码托管",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "GitHub.com",
+            "patterns": [
+              "server:\\s*github\\.com",
+              "x-github-request-id:",
+              "set-cookie:[^\\n]*(?:_gh_sess|_octo)",
+              "url: https?://github\\.com/"
+            ],
+            "evidence": "响应头或响应 URL 指向 GitHub.com"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "代码示例 / 在线 IDE 嵌入",
           "confidence": "高"
         },
