@@ -4,26 +4,19 @@
   const MAX_DOM_MARKERS = 120
   const MAX_MUTATION_COUNT = 5000
   const MAX_RESOURCE_COUNT = 1500
+  const MAX_PENDING_MUTATION_NODES = 200
   const SEND_DELAY = 900
   const MUTATION_BURST_WINDOW_MS = 1000
-  const MUTATION_BURST_THRESHOLD = 300
+  const MUTATION_BURST_THRESHOLD = 150
   const MUTATION_COOLDOWN_MS = 5000
+  const MUTATION_FLUSH_DELAY = 200
   const CONTEXT_INVALIDATED_PATTERN = /extension context invalidated|context invalidated/i
   const OBSERVER_INSTANCE_KEY = '__stackPrismContentObserver__'
   const SKIP_TAGS = new Set(['VIDEO', 'AUDIO', 'CANVAS', 'PICTURE', 'SOURCE', 'TRACK', 'SVG', 'IMG'])
   const SKIP_INITIATOR_TYPES = new Set(['img', 'video', 'audio', 'beacon', 'track', 'object', 'embed', 'css'])
   const SKIP_RESOURCE_EXT = /\.(ts|m4s|mp4|webm|mov|m3u8|mpd|jpg|jpeg|png|gif|webp|avif|ico|woff2?|ttf|otf|eot)(\?.*)?$/i
-  const SKIP_CONTAINER_NAMES = [
-    /danmaku/i,
-    /bullet[\s_-]*(comment|screen|chat)/i,
-    /barrage/i,
-    /(^|[\s._#-])chat([\s._#-]|$)/i,
-    /chat-?(panel|area|list|box|room|stream|window)/i,
-    /live-?chat/i,
-    /comment-?(stream|live|list)/i,
-    /(^|[\s._-])feed([\s._-]|$)/i,
-    /webcast/i
-  ]
+  const SKIP_CONTAINER_PATTERN =
+    /danmaku|bullet[\s_-]*(?:comment|screen|chat)|barrage|(?:^|[\s._#-])chat(?:[\s._#-]|$)|chat-?(?:panel|area|list|box|room|stream|window)|live-?chat|comment-?(?:stream|live|list)|(?:^|[\s._-])feed(?:[\s._-]|$)|webcast/i
   const state = {
     startedAt: Date.now(),
     updatedAt: Date.now(),
@@ -218,18 +211,10 @@
     'script[src], link[href], iframe[src], [data-v-app], [ng-version], [data-reactroot], [data-turbo], [data-controller], astro-island, astro-slot'
 
   const matchesSkipContainer = element => {
-    const tokens = []
     const id = element.id
-    if (id) tokens.push(id)
+    if (id && SKIP_CONTAINER_PATTERN.test(id)) return true
     const className = typeof element.className === 'string' ? element.className : element.getAttribute?.('class') || ''
-    if (className) {
-      for (const piece of className.split(/\s+/)) if (piece) tokens.push(piece)
-    }
-    if (!tokens.length) return false
-    for (const re of SKIP_CONTAINER_NAMES) {
-      for (const token of tokens) if (re.test(token)) return true
-    }
-    return false
+    return Boolean(className && SKIP_CONTAINER_PATTERN.test(className))
   }
 
   const collectFromElement = element => {
@@ -343,11 +328,7 @@
     stopped = true
     clearTimeout(sendTimer)
     if (pendingMutationFrame) {
-      if (typeof cancelIdleCallback === 'function') {
-        cancelIdleCallback(pendingMutationFrame)
-      } else {
-        clearTimeout(pendingMutationFrame)
-      }
+      clearTimeout(pendingMutationFrame)
       pendingMutationFrame = 0
     }
     pendingMutationNodes = []
@@ -431,19 +412,9 @@
     const nodes = pendingMutationNodes
     pendingMutationNodes = []
     if (!nodes.length) return
-    const processed = []
     let changed = false
     for (const node of nodes) {
       if (!node.isConnected) continue
-      let containedByAncestor = false
-      for (let i = 0; i < processed.length; i++) {
-        if (processed[i].contains(node)) {
-          containedByAncestor = true
-          break
-        }
-      }
-      if (containedByAncestor) continue
-      processed.push(node)
       changed = collectFromElement(node) || changed
     }
     if (changed) {
@@ -454,10 +425,15 @@
 
   const scheduleMutationFlush = () => {
     if (pendingMutationFrame || stopped) return
-    if (typeof requestIdleCallback === 'function') {
-      pendingMutationFrame = requestIdleCallback(processPendingMutationNodes, { timeout: 1000 })
-    } else {
-      pendingMutationFrame = setTimeout(processPendingMutationNodes, 200)
+    pendingMutationFrame = setTimeout(processPendingMutationNodes, MUTATION_FLUSH_DELAY)
+  }
+
+  const triggerMutationCooldown = now => {
+    mutationCooldownUntil = now + MUTATION_COOLDOWN_MS
+    pendingMutationNodes = []
+    if (pendingMutationFrame) {
+      clearTimeout(pendingMutationFrame)
+      pendingMutationFrame = 0
     }
   }
 
@@ -471,7 +447,8 @@
         mutationBurstWindowStart = now
         mutationBurstCount = 0
       }
-      for (const mutation of mutations) {
+      let pendingFull = false
+      outer: for (const mutation of mutations) {
         for (const node of mutation.addedNodes) {
           if (node.nodeType !== Node.ELEMENT_NODE) continue
           if (SKIP_TAGS.has(node.tagName)) continue
@@ -479,16 +456,14 @@
           state.mutationCount += 1
           mutationBurstCount += 1
           pendingMutationNodes.push(node)
+          if (pendingMutationNodes.length >= MAX_PENDING_MUTATION_NODES) {
+            pendingFull = true
+            break outer
+          }
         }
       }
-      if (mutationBurstCount >= MUTATION_BURST_THRESHOLD) {
-        mutationCooldownUntil = now + MUTATION_COOLDOWN_MS
-        pendingMutationNodes = []
-        if (pendingMutationFrame) {
-          if (typeof cancelIdleCallback === 'function') cancelIdleCallback(pendingMutationFrame)
-          else clearTimeout(pendingMutationFrame)
-          pendingMutationFrame = 0
-        }
+      if (pendingFull || mutationBurstCount >= MUTATION_BURST_THRESHOLD) {
+        triggerMutationCooldown(now)
         return
       }
       if (state.mutationCount >= MAX_MUTATION_COUNT) {
