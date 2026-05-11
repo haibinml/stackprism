@@ -51,17 +51,27 @@
             <span>{{ animatedTotal }}</span>
             <label>技术</label>
           </div>
-          <div>
+          <button
+            type="button"
+            :class="['summary-tile', { active: footerPanel === 'resources' }]"
+            title="查看抓取到的资源列表"
+            @click="openSummaryDetail('resources')"
+          >
             <span>{{ animatedResource }}</span>
             <label>资源</label>
-          </div>
-          <div>
+          </button>
+          <button
+            type="button"
+            :class="['summary-tile', { active: footerPanel === 'headers' }]"
+            title="查看主文档响应头"
+            @click="openSummaryDetail('headers')"
+          >
             <span>{{ animatedHeader }}</span>
             <label class="summary-label">
               响应头
               <Loader2 v-if="isDetecting" class="detection-spinner" :size="12" :stroke-width="2" />
             </label>
-          </div>
+          </button>
         </section>
 
         <nav class="filter-bar" aria-label="技术分类过滤">
@@ -166,11 +176,9 @@
     </Transition>
 
     <Transition name="footer-panel">
-      <section v-if="footerPanel" class="footer-panel" :aria-label="footerPanel === 'search' ? '网页源代码搜索' : rawPanelTitle">
+      <section v-if="footerPanel" class="footer-panel" :aria-label="footerPanelTitle">
         <header class="footer-panel-head">
-          <span class="footer-panel-title">
-            {{ footerPanel === 'search' ? '网页源代码搜索' : rawPanelTitle }}
-          </span>
+          <span class="footer-panel-title">{{ footerPanelTitle }}</span>
           <div class="footer-panel-actions">
             <RippleButton v-if="footerPanel === 'raw'" class="footer-panel-copy" title="复制原始线索" @click="copyRawOutput">
               <Copy :size="12" :stroke-width="2" />
@@ -204,6 +212,28 @@
         </div>
         <div v-else-if="footerPanel === 'raw'" class="footer-panel-body">
           <pre>{{ rawOutputText }}</pre>
+        </div>
+        <div v-else-if="footerPanel === 'resources'" class="footer-panel-body detail-body">
+          <div v-if="detailLoading" class="detail-empty">正在加载...</div>
+          <div v-else-if="!detailResources.length" class="detail-empty">未抓取到资源。</div>
+          <ul v-else class="resource-list">
+            <li v-for="url in detailResources" :key="url">
+              <button type="button" class="resource-link" :title="url" @click="openResourceLink(url)">
+                <ExternalLink class="resource-link-icon" :size="11" :stroke-width="2" />
+                <span>{{ url }}</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div v-else-if="footerPanel === 'headers'" class="footer-panel-body detail-body">
+          <div v-if="detailLoading" class="detail-empty">正在加载...</div>
+          <div v-else-if="!Object.keys(detailHeaders).length" class="detail-empty">没有主文档响应头数据；可点击"刷新"重新抓取。</div>
+          <dl v-else class="header-list">
+            <template v-for="(value, key) in detailHeaders" :key="key">
+              <dt>{{ key }}</dt>
+              <dd>{{ value }}</dd>
+            </template>
+          </dl>
         </div>
       </section>
     </Transition>
@@ -299,16 +329,27 @@
   })
   const rawOutputText = ref(RAW_PLACEHOLDER)
   const theme = ref<ThemeMode>('auto')
-  const footerPanel = ref<'search' | 'raw' | null>(null)
+  const footerPanel = ref<'search' | 'raw' | 'resources' | 'headers' | null>(null)
   const rawSourceContext = ref<{ tech: any; source: string } | null>(null)
   const sectionsScroller = ref<HTMLElement | null>(null)
   const showScrollTop = ref(false)
+  const detailLoading = ref(false)
+  const detailResources = ref<string[]>([])
+  const detailHeaders = ref<Record<string, string>>({})
 
   const rawPanelTitle = computed(() => {
     if (footerPanel.value !== 'raw') return ''
     const ctx = rawSourceContext.value
     if (!ctx) return '原始线索'
     return `原始线索 · ${ctx.tech?.name || ''} · ${ctx.source}`
+  })
+
+  const footerPanelTitle = computed(() => {
+    if (footerPanel.value === 'search') return '网页源代码搜索'
+    if (footerPanel.value === 'raw') return rawPanelTitle.value
+    if (footerPanel.value === 'resources') return `资源列表（${detailResources.value.length}）`
+    if (footerPanel.value === 'headers') return `响应头（${Object.keys(detailHeaders.value).length}）`
+    return ''
   })
 
   const toggleFooterPanel = (name: 'search' | 'raw') => {
@@ -332,6 +373,39 @@
     rawSourceContext.value = { tech, source }
     footerPanel.value = 'raw'
     renderRawOutput().catch(() => {})
+  }
+
+  const loadDetailFromRaw = async () => {
+    detailLoading.value = true
+    try {
+      const raw = state.rawResult || (state.currentTabId ? await requestPopupRawResult(state.currentTabId) : null)
+      if (raw && !state.rawResult) {
+        state.rawResult = raw
+        state.rawLoaded = true
+      }
+      detailResources.value = Array.isArray(raw?.resources?.all) ? raw.resources.all : []
+      detailHeaders.value = raw?.headers && typeof raw.headers === 'object' ? raw.headers : {}
+    } catch {
+      detailResources.value = []
+      detailHeaders.value = {}
+    } finally {
+      detailLoading.value = false
+    }
+  }
+
+  const openSummaryDetail = (kind: 'resources' | 'headers') => {
+    if (footerPanel.value === kind) {
+      footerPanel.value = null
+      return
+    }
+    rawSourceContext.value = null
+    footerPanel.value = kind
+    loadDetailFromRaw().catch(() => {})
+  }
+
+  const openResourceLink = (url: string) => {
+    if (!url) return
+    chrome.tabs.create({ url })
   }
 
   const onSectionsScroll = (event: Event) => {
@@ -529,6 +603,7 @@
     clearCacheRefreshTimer()
     if (attempt >= CACHE_REFRESH_DELAYS.length) return
     state.cacheRefreshTimer = window.setTimeout(() => {
+      state.cacheRefreshTimer = 0
       refreshCachedResultIfReady(tabId, previousUpdatedAt, attempt).catch(() => {})
     }, CACHE_REFRESH_DELAYS[attempt])
   }
@@ -1151,10 +1226,42 @@
     padding: 14px 16px;
   }
 
-  .summary > div {
+  .summary > div,
+  .summary-tile {
     align-items: baseline;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    cursor: default;
     display: flex;
+    font: inherit;
     gap: 6px;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+
+  .summary-tile {
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 2px 6px;
+    margin: -2px -6px;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .summary-tile:hover {
+    background: var(--accent-soft);
+  }
+
+  .summary-tile.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+  .summary-tile.active span {
+    color: var(--accent);
   }
 
   .summary span {
@@ -1751,6 +1858,95 @@
     flex: 1 1 auto;
     overflow-y: auto;
     padding: 12px;
+  }
+
+  .detail-body {
+    font-size: 12px;
+    padding: 8px 0;
+  }
+
+  .detail-empty {
+    color: var(--muted);
+    padding: 12px 16px;
+  }
+
+  .resource-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .resource-list li {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .resource-list li:last-child {
+    border-bottom: 0;
+  }
+
+  .resource-link {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    font: inherit;
+    font-size: 12px;
+    gap: 6px;
+    overflow: hidden;
+    padding: 8px 16px;
+    text-align: left;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
+    width: 100%;
+  }
+
+  .resource-link:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+  .resource-link span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .resource-link-icon {
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+
+  .resource-link:hover .resource-link-icon {
+    color: var(--accent);
+  }
+
+  .header-list {
+    display: grid;
+    gap: 4px 12px;
+    grid-template-columns: auto 1fr;
+    margin: 0;
+    padding: 4px 16px 12px;
+  }
+
+  .header-list dt {
+    color: var(--muted);
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    padding-top: 4px;
+    word-break: break-all;
+  }
+
+  .header-list dd {
+    color: var(--text);
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: 11px;
+    margin: 0;
+    padding-top: 4px;
+    word-break: break-all;
   }
 
   .footer-panel-enter-active,
