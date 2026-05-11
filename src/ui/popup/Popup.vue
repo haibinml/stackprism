@@ -521,7 +521,11 @@
       return cat
     },
     set: value => {
-      if (value && value !== FOCUS_CATEGORY && value !== '全部') {
+      if (!value) {
+        state.activeCategory = FOCUS_CATEGORY
+        return
+      }
+      if (value !== FOCUS_CATEGORY && value !== '全部') {
         state.activeCategory = value
       }
     }

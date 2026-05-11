@@ -110,6 +110,7 @@
   const inputRef = ref<HTMLInputElement | null>(null)
   const listRef = ref<HTMLUListElement | null>(null)
   const selectRef = ref<HTMLDivElement | null>(null)
+  let suppressTriggerUntil = 0
 
   const selectedLabel = computed(() => {
     const matched = props.options.find(o => o.value === props.modelValue)
@@ -148,11 +149,13 @@
   }
 
   const toggle = () => {
+    if (Date.now() < suppressTriggerUntil) return
     if (isOpen.value) close()
     else open()
   }
 
   const toggleFromInput = () => {
+    if (Date.now() < suppressTriggerUntil) return
     if (isOpen.value) {
       close()
     } else {
@@ -164,6 +167,7 @@
   const selectOption = (value: string) => {
     emit('update:modelValue', value)
     close()
+    suppressTriggerUntil = Date.now() + 250
     if (props.creatable) inputRef.value?.focus()
     else triggerRef.value?.focus()
   }
