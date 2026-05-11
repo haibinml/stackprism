@@ -20,7 +20,8 @@
               "wxLogin",
               "微信登录",
               "wechat login",
-              "WeixinJSBridge"
+              "WeixinJSBridge",
+              "open_oauth[^\\n]{0,1200}(?:weixin|wechat)"
             ]
           },
           {
@@ -32,7 +33,19 @@
       {
         "name": "支付宝登录",
         "kind": "国内账号登录",
-        "patterns": ["openauth\\.alipay\\.com", "auth\\.alipay\\.com", "alipay.*oauth", "支付宝登录"]
+        "patterns": [
+          "openauth\\.alipay\\.com/oauth2/",
+          "auth\\.alipay\\.com/login/",
+          "alipay\\.com/[^\\s\"'<>]*(?:oauth|authorize|auth_code)",
+          "支付宝登录"
+        ]
+      },
+      {
+        "name": "微信 JS-SDK",
+        "kind": "国内社交登录",
+        "confidence": "高",
+        "resourceOnly": true,
+        "patterns": ["res\\.wx\\.qq\\.com/open/js/jweixin-[0-9.]+\\.js"]
       },
       {
         "defaults": {

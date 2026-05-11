@@ -232,7 +232,10 @@
           },
           {
             "name": "NutUI",
-            "patterns": ["nutui|@nutui\\/|nut-"],
+            "patterns": [
+              "nutui|@nutui\\/",
+              "(?:^|[\\s\"'=])nut-(?:button|cell|popup|icon|form|input|navbar|tabbar|toast|dialog|swiper|countdown|calendar|datepicker|uploader|badge|tag|grid|avatar|overlay|skeleton|rate|steps|menu|searchbar|checkbox|radio|switch|range|progress|noticebar|actionsheet|popover|collapse|table|list|price|address|ecard|card|sku|tour|barrage|signature|video|audio|imagepreview)\\b"
+            ],
             "classPrefixes": ["nut-"]
           },
           {

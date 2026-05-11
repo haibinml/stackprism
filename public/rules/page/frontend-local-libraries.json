@@ -42,8 +42,17 @@
           },
           {
             "name": "Vuex",
-            "patterns": ["(?:^|/)vuex(?:\\.(?:global|esm-browser|cjs|runtime))?(?:\\.prod)?(?:\\.min)?\\.js(?:[?#].*)?$"],
+            "resourceHints": ["vuex"],
+            "patterns": ["(?:^|/)vuex(?:\\.(?:global|esm-browser|cjs|runtime))?(?:\\.prod)?(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"],
             "globals": ["Vuex"]
+          },
+          {
+            "name": "Vue ScrollTo",
+            "patterns": ["(?:^|/)vue-scrollto(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "LazyLoad",
+            "patterns": ["(?:^|/)(?:lazyload|lazy-load|vanilla-lazyload)(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
           },
           {
             "name": "Zooming",

@@ -154,7 +154,7 @@
           "rules": [
             {
               "name": "GraphQL",
-              "patterns": ["\\/graphql(?:\\?|\")|graphql-ws|apollo-client|relay-runtime"]
+              "patterns": ["\\/graphql(?:[/?#\"'\\s]|$)|graphql-ws|apollo-client|relay-runtime"]
             },
             {
               "name": "gRPC Web",

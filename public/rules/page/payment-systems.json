@@ -9,7 +9,14 @@
           {
             "name": "支付宝支付",
             "confidence": "高",
-            "patterns": ["openapi\\.alipay\\.com/gateway\\.do", "alipay\\.trade", "alipayjsapi", "支付宝支付", "alipay.com"]
+            "patterns": [
+              "openapi\\.alipay\\.com/gateway\\.do",
+              "alipay\\.trade",
+              "alipayjsapi",
+              "chosePayType\\(['\"]alipay['\"]\\)",
+              "b2-alipay",
+              "支付宝支付"
+            ]
           },
           {
             "name": "微信支付",

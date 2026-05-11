@@ -111,8 +111,13 @@
               },
               {
                 "name": "GraphQL",
-                "patterns": ["graphql"],
-                "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+                "patterns": [
+                  "(?:^|\\n)(?:content-type|accept):\\s*application/graphql",
+                  "(?:^|\\n)x-graphql",
+                  "url: https?://[^\\s]+/graphql(?:[/?#\\s]|$)",
+                  "graphql-ws"
+                ],
+                "evidence": "响应头或 URL 包含 GraphQL 端点线索"
               },
               {
                 "name": "gRPC",
@@ -2799,6 +2804,11 @@
             "name": "微信登录",
             "patterns": ["url: https?://open\\.weixin\\.qq\\.com/connect/qrconnect", "url: https?://open\\.weixin\\.qq\\.com/connect/oauth2/authorize"],
             "evidence": "响应 URL 指向微信 OAuth 登录"
+          },
+          {
+            "name": "微信 JS-SDK",
+            "patterns": ["url: https?://res\\.wx\\.qq\\.com/open/js/jweixin-[0-9.]+\\.js"],
+            "evidence": "响应 URL 指向微信 JS-SDK"
           },
           {
             "name": "微博登录",
