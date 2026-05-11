@@ -375,10 +375,10 @@ examplepay-sdk</pre
     padding: 24px 24px 80px;
   }
 
-  /* header：fixed 顶部，背景毛玻璃，内容靠 inner 居中 */
+  // header：fixed 顶部，背景毛玻璃，内容靠 inner 居中
   .help-header {
-    background: var(--panel-translucent);
     backdrop-filter: saturate(180%) blur(8px);
+    background: var(--panel-translucent);
     border-bottom: 1px solid var(--line);
     left: 0;
     margin: 0;
@@ -387,6 +387,13 @@ examplepay-sdk</pre
     right: 0;
     top: 0;
     z-index: 30;
+
+    > div:first-child > p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 60ch;
+    }
   }
 
   .help-header-inner {
@@ -404,45 +411,45 @@ examplepay-sdk</pre
     flex-shrink: 0;
     flex-wrap: wrap;
     gap: 6px;
-  }
 
-  .header-actions .icon-btn {
-    height: 32px;
-    justify-content: center;
-    padding: 0;
-    width: 32px;
-  }
+    .icon-btn {
+      height: 32px;
+      justify-content: center;
+      padding: 0;
+      width: 32px;
+    }
 
-  .header-actions button {
-    align-items: center;
-    background: transparent;
-    border: 0;
-    border-radius: 6px;
-    color: var(--muted);
-    cursor: pointer;
-    display: inline-flex;
-    font-size: 13px;
-    gap: 6px;
-    padding: 6px 12px;
-    transition:
-      background 0.15s ease,
-      color 0.15s ease;
-  }
+    button {
+      align-items: center;
+      background: transparent;
+      border: 0;
+      border-radius: 6px;
+      color: var(--muted);
+      cursor: pointer;
+      display: inline-flex;
+      font-size: 13px;
+      gap: 6px;
+      padding: 6px 12px;
+      transition:
+        background 0.15s ease,
+        color 0.15s ease;
 
-  .header-actions button:hover {
-    background: var(--accent-soft);
-    color: var(--accent);
-  }
+      &:hover {
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
 
-  .header-actions button.primary {
-    background: var(--accent);
-    color: #ffffff;
-    font-weight: 500;
-  }
+      &.primary {
+        background: var(--accent);
+        color: #ffffff;
+        font-weight: 500;
 
-  .header-actions button.primary:hover {
-    background: var(--accent-dark);
-    color: #ffffff;
+        &:hover {
+          background: var(--accent-dark);
+          color: #ffffff;
+        }
+      }
+    }
   }
 
   h1,
@@ -490,76 +497,63 @@ examplepay-sdk</pre
     letter-spacing: 0.02em;
   }
 
-  .help-header > div:first-child > p {
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.6;
-    max-width: 60ch;
-  }
-
-  .panel p,
   .plain-list,
   .steps {
     color: var(--muted);
+    padding-left: 20px;
+
+    li {
+      margin: 6px 0;
+    }
   }
 
-  .panel p {
-    line-height: 1.65;
-  }
-
-  /* panel：去 box-shadow + border + 圆角，仅靠间距 + 标题层级划分（长篇阅读） */
+  // panel：去 box-shadow + border + 圆角，仅靠间距 + 标题层级划分（长篇阅读）
   .panel {
     margin-bottom: 36px;
+
+    p {
+      color: var(--muted);
+      line-height: 1.65;
+    }
   }
 
-  .steps,
-  .plain-list {
-    padding-left: 20px;
-  }
-
-  .steps li,
-  .plain-list li {
-    margin: 6px 0;
-  }
-
-  /* field-grid：去单 box 边框，hairline 列分隔 */
+  // field-grid：去单 box 边框，hairline 列分隔
   .field-grid {
     display: grid;
     gap: 4px 32px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-top: 12px;
+
+    &.compact {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+
+      > div:nth-child(-n + 3) {
+        border-top: 0;
+      }
+    }
+
+    > div {
+      padding: 12px 0;
+
+      + div {
+        border-top: 1px solid var(--line);
+      }
+
+      &:nth-child(1),
+      &:nth-child(2) {
+        border-top: 0;
+      }
+
+      p {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.55;
+        margin-top: 4px;
+      }
+    }
   }
 
-  .field-grid.compact {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .field-grid > div {
-    padding: 12px 0;
-  }
-
-  .field-grid > div + div {
-    border-top: 1px solid var(--line);
-  }
-
-  /* 在 grid 多列时只对同列相邻项加 border-top — 简化做法是统一用 hairline，过渡时用 padding 让条目间留白 */
-  .field-grid > div:nth-child(1),
-  .field-grid > div:nth-child(2) {
-    border-top: 0;
-  }
-
-  .field-grid.compact > div:nth-child(-n + 3) {
-    border-top: 0;
-  }
-
-  .field-grid > div p {
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.55;
-    margin-top: 4px;
-  }
-
-  /* 行内 code */
+  // 行内 code
   code {
     background: var(--code-inline-bg);
     border-radius: 4px;
@@ -569,7 +563,7 @@ examplepay-sdk</pre
     padding: 1px 5px;
   }
 
-  /* example：保留卡片视觉（教学示例需要明显的"代码块"感） */
+  // example：保留卡片视觉（教学示例需要明显的"代码块"感）
   .example {
     background: var(--panel);
     border: 1px solid var(--line);
@@ -603,7 +597,7 @@ examplepay-sdk</pre
     border-bottom: 0;
   }
 
-  /* 代码块 pre */
+  // 代码块 pre
   pre {
     background: var(--code-bg);
     border-radius: 6px;
@@ -636,10 +630,10 @@ examplepay-sdk</pre
 
     .field-grid > div {
       border-top: 1px solid var(--line);
-    }
 
-    .field-grid > div:first-child {
-      border-top: 0;
+      &:first-child {
+        border-top: 0;
+      }
     }
 
     dt {

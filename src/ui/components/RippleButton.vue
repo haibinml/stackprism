@@ -66,44 +66,44 @@
 
 <style lang="scss" scoped>
   .sp-rb {
-    position: relative;
-    overflow: hidden;
     isolation: isolate;
+    overflow: hidden;
+    position: relative;
+
+    &--primary .sp-rb-ripple {
+      background: #ffffff;
+      opacity: 0.28;
+    }
   }
 
   .sp-rb-content {
+    align-items: center;
+    display: inline-flex;
+    gap: 6px;
     position: relative;
     z-index: 1;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
   }
 
   .sp-rb-ripples {
-    position: absolute;
     inset: 0;
     pointer-events: none;
+    position: absolute;
     z-index: 0;
   }
 
   .sp-rb-ripple {
-    position: absolute;
-    border-radius: 50%;
-    background: currentColor;
-    opacity: 0.18;
-    transform: scale(0);
     animation: sp-rb-spread 420ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  .sp-rb--primary .sp-rb-ripple {
-    background: #ffffff;
-    opacity: 0.28;
+    background: currentColor;
+    border-radius: 50%;
+    opacity: 0.18;
+    position: absolute;
+    transform: scale(0);
   }
 
   @keyframes sp-rb-spread {
     to {
-      transform: scale(1);
       opacity: 0;
+      transform: scale(1);
     }
   }
 

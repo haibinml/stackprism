@@ -248,6 +248,15 @@
     display: block;
     position: relative;
     width: 100%;
+
+    &.open .sp-select-trigger {
+      border-color: var(--accent);
+      outline: none;
+    }
+
+    &.open .sp-select-chevron {
+      color: var(--accent);
+    }
   }
 
   .sp-select-trigger {
@@ -269,20 +278,23 @@
       border-color 0.15s ease,
       color 0.15s ease;
     width: 100%;
-  }
 
-  .sp-select-trigger:hover:not(:disabled):not(.disabled),
-  .sp-select.open .sp-select-trigger,
-  .sp-select-trigger:focus-visible,
-  .sp-select-trigger:focus-within {
-    border-color: var(--accent);
-    outline: none;
-  }
+    &:hover:not(:disabled):not(.disabled),
+    &:focus-visible,
+    &:focus-within {
+      border-color: var(--accent);
+      outline: none;
+    }
 
-  .sp-select-trigger:disabled,
-  .sp-select-trigger.disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
+    &:hover:not(:disabled):not(.disabled) .sp-select-chevron {
+      color: var(--accent);
+    }
+
+    &:disabled,
+    &.disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
   }
 
   .sp-select-input-wrap {
@@ -299,10 +311,10 @@
     min-width: 0;
     outline: none;
     padding: 7px 0 7px 10px;
-  }
 
-  .sp-select-input::placeholder {
-    color: var(--muted);
+    &::placeholder {
+      color: var(--muted);
+    }
   }
 
   .sp-chevron-btn {
@@ -316,10 +328,10 @@
     justify-content: center;
     padding: 0;
     width: 24px;
-  }
 
-  .sp-chevron-btn:disabled {
-    cursor: not-allowed;
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 
   .sp-clear-btn,
@@ -339,12 +351,11 @@
       background 0.15s ease,
       color 0.15s ease;
     width: 18px;
-  }
 
-  .sp-clear-btn:hover,
-  .sp-clear-btn-input:hover {
-    background: var(--accent-soft);
-    color: var(--accent);
+    &:hover {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
   }
 
   .sp-select-value {
@@ -353,10 +364,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
 
-  .sp-select-value.placeholder {
-    color: var(--muted);
+    &.placeholder {
+      color: var(--muted);
+    }
   }
 
   .sp-select-chevron {
@@ -365,15 +376,10 @@
     transition:
       color 0.15s ease,
       transform 0.2s ease;
-  }
 
-  .sp-select-chevron.flipped {
-    transform: rotate(180deg);
-  }
-
-  .sp-select.open .sp-select-chevron,
-  .sp-select-trigger:hover:not(:disabled):not(.disabled) .sp-select-chevron {
-    color: var(--accent);
+    &.flipped {
+      transform: rotate(180deg);
+    }
   }
 
   .sp-select-list {
@@ -406,15 +412,15 @@
     transition:
       background 0.12s ease,
       color 0.12s ease;
-  }
 
-  .sp-select-option.focused {
-    background: var(--accent-soft);
-  }
+    &.focused {
+      background: var(--accent-soft);
+    }
 
-  .sp-select-option.selected {
-    color: var(--accent);
-    font-weight: 500;
+    &.selected {
+      color: var(--accent);
+      font-weight: 500;
+    }
   }
 
   .sp-fade-enter-from,
