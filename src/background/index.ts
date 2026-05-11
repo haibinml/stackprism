@@ -87,6 +87,12 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   }
 })
 
+chrome.webNavigation.onCommitted.addListener(details => {
+  if (details.frameId !== 0) return
+  console.log('[SP detection] webNav committed', details.tabId, 'transition:', details.transitionType, details.url)
+  clearDetectionThrottle(details.tabId)
+})
+
 chrome.storage.onChanged.addListener((changes, areaName) => {
   if (areaName === 'sync' && changes[SETTINGS_STORAGE_KEY]) {
     applyDetectorSettingsUpdate(changes[SETTINGS_STORAGE_KEY].newValue)
