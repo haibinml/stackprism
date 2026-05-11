@@ -96,6 +96,7 @@ export const runActivePageDetection = async (tabId: number) => {
       clearBadge(tabId)
       return
     }
+    lastDetectionRunAt.set(tabId, Date.now())
     await injectContentObserver(tabId)
     const [data, rules, settings] = await Promise.all([getTabData(tabId), loadTechRules(), loadDetectorSettings()])
     const pageRules = buildEffectivePageRules(rules.page || {}, settings)
@@ -132,7 +133,6 @@ export const runActivePageDetection = async (tabId: number) => {
     data.updatedAt = Date.now()
     await saveTabDataAndBadge(tabId, data, settings)
     scheduleBundleLicenseDetection(tabId)
-    lastDetectionRunAt.set(tabId, Date.now())
   } catch {
     return
   }
