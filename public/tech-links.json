@@ -237,6 +237,7 @@
     "Relay": "https://relay.dev",
     "React Relay": "https://relay.dev",
     "urql": "https://formidable.com/open-source/urql",
+    "React Redux": "https://react-redux.js.org",
     "Recompose": "https://github.com/acdlite/recompose",
     "React JSONSchema Form": "https://rjsf-team.github.io/react-jsonschema-form",
     "React Diagrams": "https://github.com/projectstorm/react-diagrams",
