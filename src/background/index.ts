@@ -69,8 +69,8 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   }
 
   if (changeInfo.status === 'loading') {
+    console.log('[SP detection] onUpdated loading', tabId, 'url', url)
     clearActiveDetectionTimer(tabId)
-    clearDetectionThrottle(tabId)
     clearDynamicSnapshotTimer(tabId)
     clearPendingDynamicSnapshot(tabId)
     clearBadge(tabId)
