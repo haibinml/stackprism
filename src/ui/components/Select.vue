@@ -1,5 +1,5 @@
 <template>
-  <div class="sp-select" :class="{ open: isOpen, disabled, creatable }">
+  <div ref="selectRef" class="sp-select" :class="{ open: isOpen, disabled, creatable }">
     <button
       v-if="!creatable"
       ref="triggerRef"
@@ -109,6 +109,7 @@
   const triggerRef = ref<HTMLButtonElement | null>(null)
   const inputRef = ref<HTMLInputElement | null>(null)
   const listRef = ref<HTMLUListElement | null>(null)
+  const selectRef = ref<HTMLDivElement | null>(null)
 
   const selectedLabel = computed(() => {
     const matched = props.options.find(o => o.value === props.modelValue)
@@ -222,8 +223,7 @@
   const onClickOutside = (e: MouseEvent) => {
     if (!isOpen.value) return
     const target = e.target as Node
-    if (triggerRef.value?.contains(target)) return
-    if (inputRef.value?.contains(target)) return
+    if (selectRef.value?.contains(target)) return
     if (listRef.value?.contains(target)) return
     close()
   }
@@ -342,6 +342,8 @@
   }
 
   .sp-select-value {
+    flex: 1 1 auto;
+    min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
