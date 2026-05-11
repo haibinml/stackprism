@@ -12,6 +12,40 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
   const documentHtmlSample = getHtmlSample()
   const globalKeys = safeGlobalKeys()
   const add = createCollector(technologies)
+  const phpRuntimeTechnologyNames = new Set(
+    [
+      'WordPress',
+      'ThinkPHP',
+      'Discuz!',
+      'phpBB',
+      'Drupal',
+      'Joomla',
+      'Typecho',
+      'Z-BlogPHP',
+      'Emlog',
+      'Magento / Adobe Commerce',
+      'OpenCart',
+      'PrestaShop',
+      'DedeCMS',
+      'EmpireCMS',
+      'PHPCMS',
+      'PHPWind',
+      'BBSXP',
+      'HDWiki',
+      'MediaWiki',
+      'Laravel',
+      'Laravel Livewire',
+      'Symfony',
+      'Yii',
+      'CodeIgniter',
+      'CakePHP',
+      'Laminas / Zend Framework',
+      'Zend Framework',
+      'Swoole',
+      'OpenSwoole',
+      'FrankenPHP'
+    ].map(normalizeRuleName)
+  )
 
   detectFrontendFrameworks(add, resources, classTokens, documentHtmlSample, globalKeys, ruleConfig.frontendFrameworks || [])
   detectUiFrameworks(add, resources, classTokens, cssVariables, documentHtmlSample, ruleConfig.uiFrameworks || [])
@@ -521,41 +555,6 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
     const normalizedName = normalizeRuleName(name)
     return items.some(item => item?.category === category && normalizeRuleName(item.name) === normalizedName)
   }
-
-  const phpRuntimeTechnologyNames = new Set(
-    [
-      'WordPress',
-      'ThinkPHP',
-      'Discuz!',
-      'phpBB',
-      'Drupal',
-      'Joomla',
-      'Typecho',
-      'Z-BlogPHP',
-      'Emlog',
-      'Magento / Adobe Commerce',
-      'OpenCart',
-      'PrestaShop',
-      'DedeCMS',
-      'EmpireCMS',
-      'PHPCMS',
-      'PHPWind',
-      'BBSXP',
-      'HDWiki',
-      'MediaWiki',
-      'Laravel',
-      'Laravel Livewire',
-      'Symfony',
-      'Yii',
-      'CodeIgniter',
-      'CakePHP',
-      'Laminas / Zend Framework',
-      'Zend Framework',
-      'Swoole',
-      'OpenSwoole',
-      'FrankenPHP'
-    ].map(normalizeRuleName)
-  )
 
   function isPhpRuntimeSourceTechnology(item) {
     return phpRuntimeTechnologyNames.has(normalizeRuleName(item?.name))
