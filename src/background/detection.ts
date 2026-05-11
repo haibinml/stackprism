@@ -58,7 +58,7 @@ export const saveTabDataAndBadge = async (tabId: number, data: any, settings: an
     clearBadge(tabId)
     return
   }
-  const popup = buildPopupCacheRecord(data, settings, tab)
+  const popup = await buildPopupCacheRecord(data, settings, tab)
   const { popup: _legacyPopup, ...tabData } = data || {}
   await writeTabData(tabId, tabData, popup)
   await updateBadgeForTab(tabId, popup)

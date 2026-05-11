@@ -34,7 +34,11 @@
     </div>
 
     <template v-else>
-      <section v-if="status.text" class="status" :class="{ error: status.isError }">{{ status.text }}</section>
+      <Transition name="msg-fade">
+        <div v-if="status.message" class="msg" :class="status.type" role="status" aria-live="polite">
+          {{ status.message }}
+        </div>
+      </Transition>
 
       <div v-if="isLoading" class="loading">
         <Loader2 class="loading-spinner" :size="28" :stroke-width="1.8" />
@@ -53,7 +57,10 @@
           </div>
           <div>
             <span>{{ animatedHeader }}</span>
-            <label>响应头</label>
+            <label class="summary-label">
+              响应头
+              <Loader2 v-if="isDetecting" class="detection-spinner" :size="12" :stroke-width="2" />
+            </label>
           </div>
         </section>
 
@@ -102,7 +109,7 @@
                 </h2>
                 <article v-for="tech in group.items" :key="`${tech.name}|${tech.category}`" class="tech">
                   <div class="tech-head">
-                    <span v-if="!tech.url && isFrontendFallback(tech)" class="tech-name">{{ tech.name }}</span>
+                    <span v-if="!tech.url" class="tech-name">{{ tech.name }}</span>
                     <button
                       v-else
                       type="button"
@@ -153,6 +160,10 @@
         </Transition>
       </template>
     </template>
+
+    <Transition name="footer-mask">
+      <div v-if="footerPanel" class="footer-mask" aria-hidden="true" @click="closeFooterPanel" />
+    </Transition>
 
     <Transition name="footer-panel">
       <section v-if="footerPanel" class="footer-panel" :aria-label="footerPanel === 'search' ? '网页源代码搜索' : rawPanelTitle">
@@ -247,7 +258,14 @@
   import { applyCustomCss } from '@/utils/apply-custom-css'
   import { normalizeSettings } from '@/utils/normalize-settings'
   import { buildCorrectionIssueUrl } from '@/utils/build-issue-url'
-  import { CACHE_REFRESH_DELAYS, FOCUS_CATEGORY, REPOSITORY_URL, RAW_PLACEHOLDER, SETTINGS_STORAGE_KEY } from '@/utils/constants'
+  import {
+    CACHE_REFRESH_DELAYS,
+    FOCUS_CATEGORY,
+    REPOSITORY_URL,
+    RAW_PLACEHOLDER,
+    SETTINGS_STORAGE_KEY,
+    STATUS_HIDE_DELAY
+  } from '@/utils/constants'
   import { cycleTheme, getStoredTheme, setStoredTheme, themeLabel, type ThemeMode } from '@/utils/theme'
   import { checkPageSupport } from '@/utils/page-support'
 
@@ -264,11 +282,13 @@
     pageSupported: true
   })
 
-  const status = reactive({ text: '', isError: false })
+  const status = reactive({ message: '', type: '' as 'ok' | 'error' | '' })
+  let statusTimer = 0
   const pageUrl = ref('正在检测当前标签页...')
   const unsupportedReason = ref('')
   const version = ref('')
   const isLoading = ref(true)
+  const isDetecting = computed(() => isLoading.value || Boolean(state.cacheRefreshTimer))
   const search = reactive({
     query: '',
     caseSensitive: false,
@@ -329,14 +349,24 @@
     await setStoredTheme(next)
   }
 
-  const setStatus = (message: string) => {
-    status.text = message
-    status.isError = false
+  const setStatus = (message: string, type: '' | 'ok' | 'error' = '') => {
+    status.message = message
+    status.type = type
+    if (statusTimer) {
+      clearTimeout(statusTimer)
+      statusTimer = 0
+    }
+    if (message) {
+      statusTimer = window.setTimeout(() => {
+        status.message = ''
+        status.type = ''
+        statusTimer = 0
+      }, STATUS_HIDE_DELAY)
+    }
   }
 
   const showError = (message: string) => {
-    status.text = message
-    status.isError = true
+    setStatus(message, 'error')
     state.result = null
   }
 
@@ -436,10 +466,6 @@
       .sort((a, b) => categoryIndex(a) - categoryIndex(b))
       .map(category => ({ category, items: grouped[category] }))
   })
-
-  const isFrontendFallback = (item: any) => {
-    return item?.category === '前端库' && /^疑似前端库:/i.test(String(item?.name || '').trim())
-  }
 
   const getFocusTechnologies = (technologies: any[]) => {
     const high = technologies.filter(tech => tech.confidence === '高')
@@ -582,7 +608,7 @@
         return
       }
 
-      setStatus('')
+      setStatus('检测结果已加载。', 'ok')
     } catch (error: any) {
       isLoading.value = false
       showError(`读取后台缓存失败：${String(error?.message || error)}`)
@@ -605,7 +631,7 @@
     }
 
     state.pageSupported = true
-    setStatus(force ? '已请求后台重新检测，当前结果可先使用。' : '已请求后台检测。')
+    setStatus(force ? '已请求后台重新检测，当前结果可先使用。' : '已请求后台检测。', 'ok')
     pageUrl.value = tab.url || '当前标签页'
     state.currentTabId = tab.id
 
@@ -618,31 +644,38 @@
     state.activeCategory = category
   }
 
-  const openTechnologyLink = async (tech: any) => {
-    if (tech.url) {
-      chrome.tabs.create({ url: tech.url })
-      return
-    }
-    try {
-      const response = await chrome.runtime.sendMessage({ type: 'GET_TECH_LINK', name: tech.name })
-      const url = response?.ok ? response.url || '' : ''
-      if (!url) {
-        setStatus(`暂无 ${tech.name} 的官网或仓库链接。`)
-        return
-      }
-      tech.url = url
-      chrome.tabs.create({ url })
-    } catch (error: any) {
-      setStatus(`技术链接打开失败：${String(error?.message || error)}`)
-    }
+  const openTechnologyLink = (tech: any) => {
+    if (!tech.url) return
+    chrome.tabs.create({ url: tech.url })
   }
 
-  const openCorrectionIssue = (tech: any) => {
+  const openCorrectionIssue = async (tech: any) => {
+    let rawCopied = false
+    try {
+      let raw: any = state.rawResult
+      if (!raw && state.currentTabId) {
+        raw = await requestPopupRawResult(state.currentTabId)
+        if (raw) {
+          state.rawResult = raw
+          state.rawLoaded = true
+        }
+      }
+      if (raw) {
+        await navigator.clipboard.writeText(JSON.stringify(raw, null, 2))
+        rawCopied = true
+      }
+    } catch {
+      rawCopied = false
+    }
     const ctx = {
       url: state.result?.url || '',
       title: state.result?.title || '',
       generatedAt: state.result?.generatedAt || '',
-      version: chrome.runtime.getManifest?.()?.version || ''
+      version: chrome.runtime.getManifest?.()?.version || '',
+      rawCopied
+    }
+    if (rawCopied) {
+      setStatus('完整原始线索已复制到剪贴板，跳转后可直接粘贴到议题中。', 'ok')
     }
     chrome.tabs.create({ url: buildCorrectionIssueUrl(tech, ctx) })
   }
@@ -661,28 +694,28 @@
   const copyResult = async () => {
     const url = (state.result as any)?.url || pageUrl.value
     if (!url || url === '正在检测当前标签页...') {
-      setStatus('暂无可复制的当前页 URL。')
+      setStatus('暂无可复制的当前页 URL。', 'error')
       return
     }
     try {
       await navigator.clipboard.writeText(String(url))
-      setStatus('已复制当前页 URL。')
+      setStatus('已复制当前页 URL。', 'ok')
     } catch (error: any) {
-      setStatus(`复制失败：${String(error?.message || error)}`)
+      setStatus(`复制失败：${String(error?.message || error)}`, 'error')
     }
   }
 
   const copyRawOutput = async () => {
     const text = rawOutputText.value
     if (!text || text === RAW_PLACEHOLDER || text === RAW_LOADING_TEXT) {
-      setStatus('暂无可复制的原始线索。')
+      setStatus('暂无可复制的原始线索。', 'error')
       return
     }
     try {
       await navigator.clipboard.writeText(text)
-      setStatus('已复制原始线索。')
+      setStatus('已复制原始线索。', 'ok')
     } catch (error: any) {
-      setStatus(`复制失败：${String(error?.message || error)}`)
+      setStatus(`复制失败：${String(error?.message || error)}`, 'error')
     }
   }
 
@@ -1063,18 +1096,48 @@
     color: #ffffff;
   }
 
-  /* status：去 shadow，仅 hairline */
-  .status {
-    border-bottom: 1px solid var(--line);
-    color: var(--muted);
-    flex-shrink: 0;
+  /* msg 浮动通知：与 settings 一致的悬浮提示 */
+  .msg {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    color: var(--text);
     font-size: 12px;
-    margin: 0;
-    padding: 8px 16px 10px;
+    left: 50%;
+    line-height: 1.5;
+    max-height: min(48vh, 280px);
+    max-width: calc(100% - 32px);
+    overflow: auto;
+    padding: 8px 12px;
+    position: fixed;
+    top: 16px;
+    transform: translateX(-50%);
+    white-space: pre-wrap;
+    z-index: 50;
   }
 
-  .status.error {
+  .msg.ok {
+    border-left-color: var(--ok);
+  }
+
+  .msg.error {
+    border-left-color: var(--danger);
     color: var(--danger);
+  }
+
+  .msg-fade-enter-from,
+  .msg-fade-leave-to {
+    opacity: 0;
+    transform: translate(-50%, -8px);
+  }
+
+  .msg-fade-enter-active,
+  .msg-fade-leave-active {
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
   }
 
   /* summary：主指标加重，去三盒子，inline baseline 对齐 */
@@ -1190,6 +1253,18 @@
 
   .loading p {
     margin: 0;
+  }
+
+  .summary-label {
+    align-items: center;
+    display: inline-flex;
+    gap: 4px;
+  }
+
+  .detection-spinner {
+    animation: spin 0.9s linear infinite;
+    color: var(--accent);
+    flex-shrink: 0;
   }
 
   .loading-spinner {
@@ -1582,6 +1657,32 @@
 
   .footer-repo:hover {
     color: var(--accent);
+  }
+
+  /* footer-mask：覆盖 topbar 与 app-footer 之间的主体内容，点击关闭面板 */
+  .footer-mask {
+    background: rgba(15, 23, 42, 0.32);
+    bottom: var(--popup-footer-height);
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: var(--popup-header-height);
+    z-index: 18;
+  }
+
+  [data-theme='dark'] .footer-mask {
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  .footer-mask-enter-from,
+  .footer-mask-leave-to {
+    opacity: 0;
+  }
+
+  .footer-mask-enter-active,
+  .footer-mask-leave-active {
+    transition: opacity 0.2s ease;
   }
 
   /* footer-panel：从底部抽屉式滑出，相对 .shell 绝对定位在 footer 上方 */

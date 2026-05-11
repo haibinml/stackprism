@@ -375,7 +375,7 @@ const detectTechnologiesFromLicenseText = (observations: ScriptLicenseObservatio
 
 const saveBundleLicenseDataAndBadge = async (tabId: number, data: any, settings: any, tab: any) => {
   if (!isDetectablePageUrl(tab?.url)) return
-  const popup = buildPopupCacheRecord(data, settings, tab)
+  const popup = await buildPopupCacheRecord(data, settings, tab)
   const { popup: _legacyPopup, ...tabData } = data || {}
   await writeTabData(tabId, tabData, popup)
   await updateBadgeForTab(tabId, popup)

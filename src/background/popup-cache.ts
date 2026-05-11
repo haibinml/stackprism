@@ -252,8 +252,8 @@ const buildDisplayTechnologies = (data: any, settings: any) => {
   return filterTechnologiesBySettings(suppressGenericCdnFallbacks(mergeDisplayTechnologyRecords(all)), settings)
 }
 
-const buildPopupResult = (data: any, settings: any, tab: any) => {
-  const technologies = buildDisplayTechnologies(data, settings)
+const buildPopupResult = async (data: any, settings: any, tab: any) => {
+  const technologies = await attachTechnologyLinks(buildDisplayTechnologies(data, settings), settings)
   const resources = mergeResourceSummary(data.page?.resources || {}, data.dynamic || {})
   const main = data.main || {}
   const headerCount =
@@ -295,11 +295,11 @@ export const buildPopupRawResult = async (data: any, settings: any, tab: any) =>
   }
 }
 
-export const buildPopupCacheRecord = (data: any, settings: any, tab: any) => {
+export const buildPopupCacheRecord = async (data: any, settings: any, tab: any) => {
   const hydrated = addStoredCustomHeaderRules(data || {}, settings)
   const sourceUpdatedAt = getStoredUpdatedAt(hydrated)
   return {
-    ...buildPopupResult(hydrated, settings, tab),
+    ...(await buildPopupResult(hydrated, settings, tab)),
     cacheVersion: POPUP_CACHE_SCHEMA_VERSION,
     settingsKey: buildSettingsCacheKey(settings),
     hasCache: hasStoredDetection(hydrated),
@@ -338,7 +338,7 @@ export const getPopupResultResponse = async (tabId: number) => {
   }
 
   const data = await getTabData(tabId)
-  const popup = buildPopupCacheRecord(data, settings, tab)
+  const popup = await buildPopupCacheRecord(data, settings, tab)
   if (hasStoredDetection(data)) {
     const { popup: legacyPopup, ...tabData } = data || {}
     const nextStorage: Record<string, unknown> = { [popupStorageKey(tabId)]: popup }

@@ -14,6 +14,17 @@
       <span :class="['sp-select-value', { placeholder: !selectedLabel }]">
         {{ selectedLabel || placeholder || '请选择' }}
       </span>
+      <span
+        v-if="showClearButton"
+        class="sp-clear-btn"
+        role="button"
+        :title="clearTitle"
+        :aria-label="clearTitle"
+        @click.stop="clear"
+        @mousedown.stop
+      >
+        <X :size="12" :stroke-width="2" />
+      </span>
       <ChevronDown class="sp-select-chevron" :class="{ flipped: isOpen }" :size="14" :stroke-width="2" />
     </button>
 
@@ -29,6 +40,17 @@
         @focus="open"
         @keydown="onKeyDown"
       />
+      <button
+        v-if="showClearButton"
+        type="button"
+        class="sp-clear-btn-input"
+        tabindex="-1"
+        :title="clearTitle"
+        :aria-label="clearTitle"
+        @mousedown.prevent="clear"
+      >
+        <X :size="12" :stroke-width="2" />
+      </button>
       <button type="button" class="sp-chevron-btn" tabindex="-1" :disabled="disabled" @mousedown.prevent="toggleFromInput">
         <ChevronDown class="sp-select-chevron" :class="{ flipped: isOpen }" :size="14" :stroke-width="2" />
       </button>
@@ -55,20 +77,28 @@
 
 <script setup lang="ts">
   import { ref, computed, onBeforeUnmount, onMounted } from 'vue'
-  import { Check, ChevronDown } from 'lucide-vue-next'
+  import { Check, ChevronDown, X } from 'lucide-vue-next'
 
   interface SelectOption {
     value: string
     label: string
   }
 
-  const props = defineProps<{
-    modelValue: string
-    options: SelectOption[]
-    placeholder?: string
-    disabled?: boolean
-    creatable?: boolean
-  }>()
+  const props = withDefaults(
+    defineProps<{
+      modelValue: string
+      options: SelectOption[]
+      placeholder?: string
+      disabled?: boolean
+      creatable?: boolean
+      clearable?: boolean
+      clearTitle?: string
+    }>(),
+    {
+      clearable: true,
+      clearTitle: '清除选择'
+    }
+  )
 
   const emit = defineEmits<{
     'update:modelValue': [value: string]
@@ -85,6 +115,16 @@
     if (matched) return matched.label
     return props.modelValue || ''
   })
+
+  const showClearButton = computed(() => props.clearable && !props.disabled && Boolean(props.modelValue))
+
+  const clear = () => {
+    if (props.disabled) return
+    emit('update:modelValue', '')
+    close()
+    if (props.creatable) inputRef.value?.focus()
+    else triggerRef.value?.focus()
+  }
 
   const filteredOptions = computed(() => {
     if (!props.creatable) return props.options
@@ -274,6 +314,31 @@
 
   .sp-chevron-btn:disabled {
     cursor: not-allowed;
+  }
+
+  .sp-clear-btn,
+  .sp-clear-btn-input {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: 4px;
+    color: var(--muted);
+    cursor: pointer;
+    display: inline-flex;
+    flex-shrink: 0;
+    height: 18px;
+    justify-content: center;
+    padding: 0;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
+    width: 18px;
+  }
+
+  .sp-clear-btn:hover,
+  .sp-clear-btn-input:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
   }
 
   .sp-select-value {

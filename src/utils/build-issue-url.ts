@@ -6,11 +6,16 @@ export interface CorrectionContext {
   title?: string
   generatedAt?: string
   version?: string
+  rawCopied?: boolean
 }
 
 export const buildCorrectionIssueUrl = (tech: TechnologyRecord, ctx: CorrectionContext = {}): string => {
   const title = `识别纠正：${tech.name || '未知技术'}`
   const evidenceLines = tech.evidence?.length ? tech.evidence.slice(0, 8).map(item => `- ${item}`) : ['- 无']
+
+  const supplementSection = ctx.rawCopied
+    ? ['完整原始线索 JSON 已复制到你的剪贴板，请在下方粘贴（Ctrl+V / Cmd+V），便于排查规则误判位置：', '', '```json', '', '```']
+    : ['请粘贴页面源码片段、资源 URL、响应头、截图或其他可以帮助修正规则的信息。']
 
   const body = [
     '## 需要纠正的识别结果',
@@ -36,7 +41,7 @@ export const buildCorrectionIssueUrl = (tech: TechnologyRecord, ctx: CorrectionC
     '',
     '## 补充线索',
     '',
-    '请粘贴页面源码片段、资源 URL、响应头、截图或其他可以帮助修正规则的信息。'
+    ...supplementSection
   ].join('\n')
 
   const issueUrl = new URL(`${REPOSITORY_URL}/issues/new`)
