@@ -47,21 +47,23 @@
 
       <template v-else>
         <section class="summary" aria-label="检测概览">
-          <div>
+          <RippleButton
+            :class="['summary-tile', { active: state.activeCategory === FOCUS_CATEGORY && !footerPanel }]"
+            title="返回重点列表"
+            @click="focusTechnologyList"
+          >
             <span>{{ animatedTotal }}</span>
             <label>技术</label>
-          </div>
-          <button
-            type="button"
+          </RippleButton>
+          <RippleButton
             :class="['summary-tile', { active: footerPanel === 'resources' }]"
             title="查看抓取到的资源列表"
             @click="openSummaryDetail('resources')"
           >
             <span>{{ animatedResource }}</span>
             <label>资源</label>
-          </button>
-          <button
-            type="button"
+          </RippleButton>
+          <RippleButton
             :class="['summary-tile', { active: footerPanel === 'headers' }]"
             title="查看主文档响应头"
             @click="openSummaryDetail('headers')"
@@ -71,7 +73,7 @@
               响应头
               <Loader2 v-if="isDetecting" class="detection-spinner" :size="12" :stroke-width="2" />
             </label>
-          </button>
+          </RippleButton>
         </section>
 
         <nav class="filter-bar" aria-label="技术分类过滤">
@@ -195,15 +197,15 @@
           </div>
           <div class="search-options">
             <label>
-              <input v-model="search.caseSensitive" type="checkbox" />
+              <Checkbox v-model="search.caseSensitive" />
               区分大小写
             </label>
             <label>
-              <input v-model="search.wholeWord" type="checkbox" />
+              <Checkbox v-model="search.wholeWord" />
               全字匹配
             </label>
             <label>
-              <input v-model="search.useRegex" type="checkbox" />
+              <Checkbox v-model="search.useRegex" />
               正则表达式
             </label>
           </div>
@@ -283,6 +285,7 @@
     X
   } from 'lucide-vue-next'
   import Select from '@/ui/components/Select.vue'
+  import Checkbox from '@/ui/components/Checkbox.vue'
   import RippleButton from '@/ui/components/RippleButton.vue'
   import { categoryIndex, confidenceClass, confidenceRank } from '@/utils/category-order'
   import { applyCustomCss } from '@/utils/apply-custom-css'
@@ -721,6 +724,12 @@
 
   const selectCategory = (category: string) => {
     state.activeCategory = category
+  }
+
+  const focusTechnologyList = () => {
+    closeFooterPanel()
+    state.activeCategory = FOCUS_CATEGORY
+    sectionsScroller.value?.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const openTechnologyLink = (tech: any) => {

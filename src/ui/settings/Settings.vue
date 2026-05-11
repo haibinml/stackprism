@@ -47,7 +47,7 @@
       </div>
       <div class="category-grid">
         <label v-for="cat in CATEGORY_ORDER" :key="cat" class="toggle-item">
-          <input v-model="enabledCategories[cat]" type="checkbox" :value="cat" @change="collectCategorySettings" />
+          <Checkbox v-model="enabledCategories[cat]" :value="cat" @change="collectCategorySettings" />
           {{ cat }}
         </label>
       </div>
@@ -109,7 +109,7 @@
 
       <div class="match-targets" aria-label="匹配范围">
         <label v-for="target in MATCH_TARGETS" :key="target.value">
-          <input v-model="form.matchIn" type="checkbox" :value="target.value" />
+          <Checkbox v-model="form.matchIn" :value="target.value" />
           {{ target.label }}
         </label>
       </div>
@@ -178,6 +178,7 @@
   import { onMounted, reactive, ref, watch, computed } from 'vue'
   import { BookOpen, ExternalLink, Inbox, Monitor, Moon, Pencil, RotateCcw, Save, Sun, Trash2 } from 'lucide-vue-next'
   import Select from '@/ui/components/Select.vue'
+  import Checkbox from '@/ui/components/Checkbox.vue'
   import RippleButton from '@/ui/components/RippleButton.vue'
   import { CATEGORY_ORDER } from '@/utils/category-order'
   import { applyCustomCss } from '@/utils/apply-custom-css'
