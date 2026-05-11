@@ -22,6 +22,11 @@
               "selectors": ["[data-v-app]", "#app.__vue__"]
             },
             {
+              "name": "San",
+              "patterns": ["(?:^|/)san(?:\\.dev)?(?:\\.min)?\\.js(?:[?#]|$)", "#_san_\\d+"],
+              "selectors": ["[id^=\"_san_\"]"]
+            },
+            {
               "name": "Angular / AngularJS",
               "patterns": ["angular(?:\\.min)?\\.js", "@angular"],
               "globals": ["angular"],

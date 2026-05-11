@@ -54,12 +54,13 @@ const applyHeaderRuleList = (
   defaultCategory: string,
   headerBlob: string,
   sourceLabel: string,
-  evidencePrefix: (rule: any) => string = () => ''
+  evidencePrefix: (rule: any) => string = () => '',
+  prefilterBlob: string = lower(headerBlob)
 ) => {
   if (!Array.isArray(rules) || !rules.length) return
 
   for (const rule of rules) {
-    if (!passesRulePrefilter(rule, headerBlob)) continue
+    if (!passesRulePrefilter(rule, prefilterBlob)) continue
     const matched = getCompiledRulePatterns(rule, rule.patterns).some(pattern => {
       pattern.lastIndex = 0
       return pattern.test(headerBlob)
@@ -86,27 +87,39 @@ const detectFromHeaders = (headers: Record<string, string>, url: string, headerR
   const add = createCollector(technologies, '响应头')
   const server = lower(headers.server)
   const poweredBy = lower(headers['x-powered-by'])
-  const headerBlob = lower(
+  const headerBlob =
     Object.entries(headers)
       .map(([name, value]) => `${name}: ${value}`)
       .join('\n') + `\nurl: ${url || ''}`
-  )
+  const lowerHeaderBlob = lower(headerBlob)
 
   applyHeaderValueRuleList(add, headerRules.serverProducts, server, headers.server, 'server')
   applyHeaderValueRuleList(add, headerRules.poweredByProducts, poweredBy, headers['x-powered-by'], 'x-powered-by')
-  applyHeaderRuleList(add, headerRules.headerPatterns, '其他库', headerBlob, 'JSON 响应头规则')
+  applyHeaderRuleList(add, headerRules.headerPatterns, '其他库', headerBlob, 'JSON 响应头规则', () => '', lowerHeaderBlob)
 
-  if (matchesHeaderPatterns(headerRules.unknownCdnPatterns, headerBlob) && !technologies.some(tech => tech.category === 'CDN / 托管')) {
+  if (matchesHeaderPatterns(headerRules.unknownCdnPatterns, lowerHeaderBlob) && !technologies.some(tech => tech.category === 'CDN / 托管')) {
     add('CDN / 托管', '未知 / 自定义 CDN', '低', '响应头包含 CDN 或 Edge 缓存线索')
   }
 
-  applyHeaderRuleList(add, headerRules.cdnProviders, 'CDN / 托管', headerBlob, 'JSON CDN 响应头规则')
-  applyHeaderRuleList(add, headerRules.languages, '开发语言 / 运行时', headerBlob, 'JSON 语言响应头规则')
-  applyHeaderRuleList(add, headerRules.websitePrograms, '网站程序', headerBlob, 'JSON 网站程序响应头规则', rule =>
-    rule.kind ? `${rule.kind}：` : ''
+  applyHeaderRuleList(add, headerRules.cdnProviders, 'CDN / 托管', headerBlob, 'JSON CDN 响应头规则', () => '', lowerHeaderBlob)
+  applyHeaderRuleList(add, headerRules.languages, '开发语言 / 运行时', headerBlob, 'JSON 语言响应头规则', () => '', lowerHeaderBlob)
+  applyHeaderRuleList(
+    add,
+    headerRules.websitePrograms,
+    '网站程序',
+    headerBlob,
+    'JSON 网站程序响应头规则',
+    rule => (rule.kind ? `${rule.kind}：` : ''),
+    lowerHeaderBlob
   )
-  applyHeaderRuleList(add, filterCustomRulesForTarget(settings.customRules, 'headers'), '其他库', headerBlob, '自定义响应头规则', rule =>
-    rule.kind ? `${rule.kind}：` : ''
+  applyHeaderRuleList(
+    add,
+    filterCustomRulesForTarget(settings.customRules, 'headers'),
+    '其他库',
+    headerBlob,
+    '自定义响应头规则',
+    rule => (rule.kind ? `${rule.kind}：` : ''),
+    lowerHeaderBlob
   )
 
   return technologies

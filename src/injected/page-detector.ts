@@ -33,6 +33,7 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
   )
   detectProbeTools(add, resources, documentHtmlSample, globalKeys, ruleConfig.probes || [])
   detectProgrammingLanguages(add, resources, documentHtmlSample, globalKeys, ruleConfig.languages || [])
+  inferLanguagesFromDetectedTechnologies(add, technologies)
   detectFeeds(add, resources, documentHtmlSample, ruleConfig.feeds || [])
   detectSaasServices(add, resources, documentHtmlSample, globalKeys, ruleConfig.saasServices || [])
   detectThirdPartyLogins(add, resources, documentHtmlSample, globalKeys, ruleConfig.thirdPartyLogins || [])
@@ -349,7 +350,10 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
       .replace(/(?:[._-]pkgd)$/i, '')
       .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '')
     const aliases = {
-      slickcarousel: 'slick'
+      clipboardjs: 'clipboard',
+      imagesloadedjs: 'imagesloaded',
+      slickcarousel: 'slick',
+      vuejs: 'vue'
     }
     return aliases[normalized] || normalized
   }
@@ -361,7 +365,7 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
 
     const knownNames = new Set(
       items
-        .filter(item => item?.category === '前端库' && !isFrontendFallback(item))
+        .filter(item => ['前端库', '前端框架', 'UI / CSS 框架'].includes(item?.category) && !isFrontendFallback(item))
         .map(item => normalizeFallbackTechName(item.name))
         .filter(Boolean)
     )
@@ -475,6 +479,17 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
     return String(name || '')
       .toLowerCase()
       .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '')
+  }
+
+  function hasTechnology(items, category, name) {
+    const normalizedName = normalizeRuleName(name)
+    return items.some(item => item?.category === category && normalizeRuleName(item.name) === normalizedName)
+  }
+
+  function inferLanguagesFromDetectedTechnologies(add, items) {
+    if (hasTechnology(items, '网站程序', 'WordPress') && !hasTechnology(items, '开发语言 / 运行时', 'PHP')) {
+      add('开发语言 / 运行时', 'PHP', '中', '由 WordPress 站点程序推断 PHP 后端运行时')
+    }
   }
 
   function suppressDuplicateWebsiteProgramCategories(items) {
@@ -880,9 +895,9 @@ ${html}`
   function compileRulePattern(pattern, rule) {
     try {
       if (rule?.matchType === 'keyword') {
-        return new RegExp(escapeRegExp(pattern), 'i')
+        return new RegExp(escapeRegExp(pattern), rule?.caseSensitive ? '' : 'i')
       }
-      return new RegExp(pattern, 'i')
+      return new RegExp(pattern, rule?.caseSensitive ? '' : 'i')
     } catch {
       return null
     }

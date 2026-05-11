@@ -52,8 +52,14 @@
               },
               {
                 "name": "Django",
-                "patterns": ["django|csrftoken"],
+                "patterns": ["(?:^|\\n)(?:x-powered-by|server|x-framework|x-generator):[^\\n]*\\bdjango\\b"],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
+              },
+              {
+                "name": "Django",
+                "caseSensitive": true,
+                "patterns": ["(?:^|\\n)set-cookie:[^\\n]*(?:^|[;,\\s])csrftoken(?:=|[,;\\s]|$)"],
+                "evidence": "Set-Cookie 包含 Django csrftoken 特征"
               },
               {
                 "name": "Flask",
@@ -67,7 +73,11 @@
               },
               {
                 "name": "Laravel",
-                "patterns": ["laravel|laravel_session|xsrf-token"],
+                "patterns": [
+                  "(?:^|\\n)(?:x-powered-by|x-framework|x-generator):[^\\n]*\\blaravel\\b",
+                  "(?:^|\\n)set-cookie:[^\\n]*(?:^|[;,\\s])laravel_session(?:=|[,;\\s]|$)",
+                  "(?:^|\\n)(?:set-cookie|cookie):[^\\n]*(?:^|[;,\\s])XSRF-TOKEN(?:=|[,;\\s]|$)"
+                ],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
               {
@@ -98,7 +108,7 @@
               {
                 "name": "Go",
                 "patterns": [
-                  "gorilla\\.csrf|go-http-client|golang|(?:^|\\n)(?:server|x-powered-by):.*(?:gin|fiber|echo|beego|hertz|cloudwego|goframe|go\\s*frame|go-kratos|kratos|\\biris\\b|gobuffalo|\\bbuffalo\\b)"
+                  "gorilla\\.csrf|go-http-client|golang|(?:^|\\n)(?:server|x-powered-by):.*(?:\\bgin(?:/\\d+(?:\\.\\d+)*)?\\b|\\bfiber(?:/\\d+(?:\\.\\d+)*)?\\b|\\becho(?:/\\d+(?:\\.\\d+)*)?\\b|\\bbeego\\b|\\bhertz(?:/\\d+(?:\\.\\d+)*)?\\b|cloudwego|goframe|go\\s*frame|go-kratos|\\bkratos\\b|\\biris\\b|gobuffalo|\\bbuffalo\\b)"
                 ],
                 "evidence": "响应头、Cookie 名称或 URL 包含后端框架线索"
               },
@@ -294,8 +304,13 @@
               },
               {
                 "name": "Baidu Cloud CDN",
-                "patterns": ["x-bce-|baidu|bcebos|yunjiasu"],
+                "patterns": ["bdstatic|baidustatic|bdimg|yunjiasu|x-bce-cdn"],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
+              },
+              {
+                "name": "Baidu BCE Object Storage / 百度智能云 BOS",
+                "patterns": ["bcebos\\.com|x-bce-request-id|x-bce-content-crc32"],
+                "evidence": "响应头、Via、Server 或 URL 包含百度智能云 BOS 特征"
               },
               {
                 "name": "Huawei Cloud CDN",
@@ -334,7 +349,11 @@
               },
               {
                 "name": "UCloud CDN",
-                "patterns": ["ucloud|ufileos"],
+                "patterns": [
+                  "ucloud\\.cn|ufileos\\.com|ucloudstack\\.com|ucache\\.io",
+                  "(?:^|\\n)(?:server|via):[^\\n]*\\bucache\\b",
+                  "(?:^|\\n)x-ucloud-"
+                ],
                 "evidence": "响应头、Via、Server 或 URL 包含 CDN 厂商特征"
               },
               {
@@ -7978,7 +7997,10 @@
               },
               {
                 "name": "Laravel",
-                "patterns": ["set-cookie:.*(?:laravel_session|xsrf-token)"],
+                "patterns": [
+                  "set-cookie:.*(?:^|[;,\\s])laravel_session(?:=|[,;\\s]|$)",
+                  "(?:set-cookie|cookie):.*(?:^|[;,\\s])XSRF-TOKEN(?:=|[,;\\s]|$)"
+                ],
                 "evidence": "Set-Cookie 包含 Laravel 会话特征"
               },
               {
@@ -7998,8 +8020,14 @@
               },
               {
                 "name": "Django",
-                "patterns": ["set-cookie:.*(?:django|csrftoken)"],
+                "patterns": ["set-cookie:.*(?:^|[;,\\s])django(?:=|[,;\\s]|$)"],
                 "evidence": "Set-Cookie 包含 Django/csrftoken 特征"
+              },
+              {
+                "name": "Django",
+                "caseSensitive": true,
+                "patterns": ["set-cookie:.*(?:^|[;,\\s])csrftoken(?:=|[,;\\s]|$)"],
+                "evidence": "Set-Cookie 包含 Django csrftoken 特征"
               }
             ]
           },

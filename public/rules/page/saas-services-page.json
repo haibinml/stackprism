@@ -3882,6 +3882,16 @@
               ]
             },
             {
+              "category": "安全与协议",
+              "name": "Baidu Risk Control / 百度风控指纹",
+              "kind": "反爬 / 设备指纹",
+              "resourceOnly": true,
+              "patterns": [
+                "wappass\\.baidu\\.com/[^\\s\"'<>]*(?:moonshad|mkd|fingerprint)\\.js",
+                "passport\\.baidu\\.com/[^\\s\"'<>]*(?:moonshad|mkd|fingerprint)\\.js"
+              ]
+            },
+            {
               "name": "GeeTest",
               "patterns": ["static\\.geetest\\.com|api\\.geetest\\.com|get\\.geetest\\.com|geetest\\.com/[^\\s\"'<>]*(?:gt|captcha|static)"]
             },

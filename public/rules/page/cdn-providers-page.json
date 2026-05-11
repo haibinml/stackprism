@@ -212,7 +212,11 @@
         },
         {
           "name": "Baidu Cloud CDN",
-          "patterns": ["bdstatic\\.com|baidustatic\\.com|bdimg\\.com|bcebos\\.com|yunjiasu-cdn\\.net"]
+          "patterns": ["bdstatic\\.com|baidustatic\\.com|bdimg\\.com|yunjiasu-cdn\\.net"]
+        },
+        {
+          "name": "Baidu BCE Object Storage / 百度智能云 BOS",
+          "patterns": ["bcebos\\.com"]
         },
         {
           "name": "Huawei Cloud CDN",
@@ -244,7 +248,7 @@
         },
         {
           "name": "UCloud CDN",
-          "patterns": ["ucloud\\.cn|ufileos\\.com|ucloudstack\\.com"]
+          "patterns": ["ucloud\\.cn|ufileos\\.com|ucloudstack\\.com|ucache\\.io"]
         },
         {
           "name": "JD Cloud CDN",

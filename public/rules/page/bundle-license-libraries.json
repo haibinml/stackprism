@@ -61,6 +61,16 @@
             "patterns": ["jQuery\\s+v?\\d+\\.\\d+|jquery(?:\\.min)?\\.js|jquery\\.org/license"]
           },
           {
+            "name": "clipboard.js",
+            "url": "https://clipboardjs.com",
+            "patterns": ["clipboard\\.js|clipboard(?:\\.min)?\\.js|zenorocha/clipboard\\.js"]
+          },
+          {
+            "name": "imagesLoaded",
+            "url": "https://imagesloaded.desandro.com",
+            "patterns": ["imagesLoaded|imagesloaded(?:\\.pkgd)?(?:\\.min)?\\.js|desandro/imagesloaded"]
+          },
+          {
             "name": "Lodash",
             "url": "https://lodash.com",
             "patterns": ["\\bLodash\\b|lodash(?:\\.min)?\\.js|lodash\\.com"]

@@ -20,6 +20,10 @@
                 "patterns": ["vue(?:\\.runtime)?(?:\\.global)?(?:\\.prod)?(?:\\.min)?\\.js", "vue-router", "pinia", "data-v-app"]
               },
               {
+                "name": "San",
+                "patterns": ["(?:^|/)san(?:\\.dev)?(?:\\.min)?\\.js(?:[?#]|$)", "#_san_\\d+"]
+              },
+              {
                 "name": "Angular / AngularJS",
                 "patterns": ["angular(?:\\.min)?\\.js", "@angular", "ng-version", "ng-app"]
               }

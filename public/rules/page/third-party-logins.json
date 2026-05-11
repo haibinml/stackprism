@@ -3,17 +3,16 @@
     "thirdPartyLogins": [
       {
         "defaults": {
-          "kind": "国内社交登录"
+          "kind": "国内社交登录",
+          "confidence": "高"
         },
         "rules": [
           {
             "name": "QQ 登录",
-            "confidence": "高",
             "patterns": ["graph\\.qq\\.com/oauth2\\.0/authorize", "connect\\.qq\\.com", "QC\\.Login", "QQ登录", "qqlogin", "qqConnect"]
           },
           {
             "name": "微信登录",
-            "confidence": "高",
             "patterns": [
               "open\\.weixin\\.qq\\.com/connect/qrconnect",
               "snsapi_login",
@@ -164,7 +163,13 @@
           },
           {
             "name": "百度帐号登录",
-            "patterns": ["openapi\\.baidu\\.com/oauth/2\\.0/authorize", "passport\\.baidu\\.com", "百度登录"]
+            "patterns": [
+              "openapi\\.baidu\\.com/oauth/2\\.0/authorize",
+              "passport\\.baidu\\.com",
+              "passport\\.baidu\\.com/static/phoenix/scripts/jssdk/all\\.js",
+              "hercules\\.cdn\\.bcebos\\.com/pass/bundle\\.js",
+              "百度登录"
+            ]
           }
         ]
       },

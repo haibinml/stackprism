@@ -32,6 +32,20 @@
             "globals": ["_hmt"]
           },
           {
+            "category": "探针 / 监控",
+            "name": "Baidu BadJS / 百度前端错误监控",
+            "kind": "前端错误监控",
+            "resourceOnly": true,
+            "patterns": ["badjs-sdk(?:-min)?(?:\\.min)?\\.js", "staticiot\\.cdn\\.bcebos\\.com/union/badjs-sdk"]
+          },
+          {
+            "category": "探针 / 监控",
+            "name": "Baidu Spy Client / 百度性能监控",
+            "kind": "前端性能监控",
+            "resourceOnly": true,
+            "patterns": ["(?:^|/)spy-client(?:\\.iife)?(?:\\.min)?\\.js(?:[?#]|$)"]
+          },
+          {
             "name": "CNZZ / Umeng Analytics",
             "kind": "商用 / 国内知名统计",
             "patterns": ["cnzz\\.com", "s\\d+\\.cnzz\\.com/z_stat\\.php", "z_stat\\.php", "umeng\\.com", "umtrack", "_czc"],

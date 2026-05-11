@@ -252,6 +252,19 @@
                 "(?=[\\s\\S]*(?:聚合登录\\s*-\\s*接口测试|/user/test\\.php(?:[?#\\s\"'<>]|$)))(?=[\\s\\S]*(?:name=[\"']alipayment[\"']|submitLogin\\s*\\(|ajax\\.php\\?act=test))"
               ],
               "matchIn": ["html"]
+            },
+            {
+              "name": "百度网盘 / Baidu Netdisk",
+              "kind": "网盘 / 文件协作",
+              "url": "https://pan.baidu.com",
+              "matchType": "regex",
+              "patterns": [
+                "pan\\.baidu\\.com",
+                "bdstoken",
+                "netdisk-vip|bp_web_buy_center",
+                "百度网盘"
+              ],
+              "matchIn": ["url", "html", "resources"]
             }
           ]
         },

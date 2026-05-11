@@ -36,7 +36,10 @@ export const normalizeDynamicFallbackTechName = (name: unknown): string => {
     .replace(/[^a-z0-9一-龥]+/g, '')
 
   const aliases: Record<string, string> = {
-    slickcarousel: 'slick'
+    clipboardjs: 'clipboard',
+    imagesloadedjs: 'imagesloaded',
+    slickcarousel: 'slick',
+    vuejs: 'vue'
   }
   return aliases[normalized] || normalized
 }
@@ -61,13 +64,13 @@ const extractWordPressDirectoryThemeSlug = (item: any) => {
   if (String(item?.category || '') !== '主题 / 模板') return ''
   const nameMatch = String(item?.name || '').match(/^WordPress 主题:\s*(.+)$/i)
   if (!nameMatch) return ''
+  if (extractWordPressStyleThemeSlug(item)) return ''
 
   const evidenceText = cleanStringArray(item?.evidence).join('\n')
-  if (!isWordPressThemeDirectoryFallbackEvidence(evidenceText)) return ''
-
   const nameSlug = normalizeWordPressThemeSlug(nameMatch[1])
   const evidenceSlug = normalizeWordPressThemeSlug(evidenceText.match(/\/wp-content\/themes\/([^/?#"' <>)]+)/i)?.[1])
   if (nameSlug && evidenceSlug && nameSlug !== evidenceSlug) return ''
+  if (!isWordPressThemeDirectoryFallbackEvidence(evidenceText) && !evidenceSlug) return nameSlug
   return evidenceSlug || nameSlug
 }
 
@@ -76,7 +79,7 @@ export const suppressFrontendFallbackDuplicates = (items: any[]) => {
 
   const knownNames = new Set(
     items
-      .filter(item => item?.category === '前端库' && !isFrontendFallback(item))
+      .filter(item => ['前端库', '前端框架', 'UI / CSS 框架'].includes(item?.category) && !isFrontendFallback(item))
       .map(item => normalizeDynamicFallbackTechName(item.name))
       .filter(Boolean)
   )

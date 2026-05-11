@@ -6,9 +6,9 @@ export const escapeRegExp = (value: unknown): string => String(value).replace(/[
 
 export const compileRulePattern = (pattern: string, rule: any): RegExp => {
   if (rule?.matchType === 'keyword') {
-    return new RegExp(escapeRegExp(pattern), 'i')
+    return new RegExp(escapeRegExp(pattern), rule?.caseSensitive ? '' : 'i')
   }
-  return new RegExp(pattern, 'i')
+  return new RegExp(pattern, rule?.caseSensitive ? '' : 'i')
 }
 
 export const getCompiledRulePatterns = (rule: any, patterns: unknown): RegExp[] => {
