@@ -10,7 +10,7 @@ import {
   passesRulePrefilter
 } from './rule-matcher'
 import { clearBadge, clearTabSession, getTabData, getTabSnapshot } from './tab-store'
-import { saveTabDataAndBadge, scheduleActivePageDetection } from './detection'
+import { saveTabDataAndBadge } from './detection'
 import { buildEffectivePageRules, loadDetectorSettings, loadTechRules } from './detector-settings'
 import { scheduleBundleLicenseDetection } from './bundle-license'
 
@@ -670,7 +670,6 @@ const processQueuedDynamicSnapshot = async tabId => {
   data.updatedAt = Date.now()
   await saveTabDataAndBadge(tabId, data, settings)
   scheduleBundleLicenseDetection(tabId)
-  scheduleActivePageDetection(tabId, 900)
 }
 
 export const clearDynamicSnapshotTimer = tabId => {
