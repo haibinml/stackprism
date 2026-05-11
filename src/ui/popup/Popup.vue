@@ -192,7 +192,7 @@
         </header>
         <div v-if="footerPanel === 'search'" class="footer-panel-body">
           <div class="search-row">
-            <input v-model="search.query" type="search" placeholder="输入关键词或正则表达式" @keydown.enter="searchPageSourceFromPopup" />
+            <Input v-model="search.query" type="search" placeholder="输入关键词或正则表达式" @keydown="onSearchKeydown" />
             <RippleButton @click="searchPageSourceFromPopup">搜索</RippleButton>
           </div>
           <div class="search-options">
@@ -286,6 +286,7 @@
   } from 'lucide-vue-next'
   import Select from '@/ui/components/Select.vue'
   import Checkbox from '@/ui/components/Checkbox.vue'
+  import Input from '@/ui/components/Input.vue'
   import RippleButton from '@/ui/components/RippleButton.vue'
   import { categoryIndex, confidenceClass, confidenceRank } from '@/utils/category-order'
   import { applyCustomCss } from '@/utils/apply-custom-css'
@@ -918,6 +919,13 @@
       }
     } catch (error: any) {
       rawOutputText.value = `原始线索生成失败：${String(error?.message || error)}`
+    }
+  }
+
+  const onSearchKeydown = (event: KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      searchPageSourceFromPopup()
     }
   }
 

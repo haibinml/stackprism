@@ -57,17 +57,12 @@
       <div>
         <h2>禁用指定技术</h2>
         <p class="hint">每行一个技术名称。名称匹配后不会在结果里显示。</p>
-        <textarea
-          v-model="disabledTechnologiesText"
-          rows="9"
-          spellcheck="false"
-          placeholder="例如：&#10;Google Analytics&#10;WordPress 插件: akismet"
-        ></textarea>
+        <Textarea v-model="disabledTechnologiesText" :rows="9" placeholder="例如：&#10;Google Analytics&#10;WordPress 插件: akismet" />
       </div>
       <div>
         <h2>自定义样式 CSS</h2>
         <p class="hint">保存后会应用到弹窗和设置页。留空则不覆盖样式。</p>
-        <textarea v-model="customCssText" rows="9" spellcheck="false" placeholder=".tech-name { color: #0f766e; }"></textarea>
+        <Textarea v-model="customCssText" :rows="9" placeholder=".tech-name { color: #0f766e; }" />
       </div>
     </section>
 
@@ -83,7 +78,7 @@
       <div class="rule-form">
         <label>
           <span>技术名称</span>
-          <input v-model="form.name" type="text" placeholder="例如：MyCMS" />
+          <Input v-model="form.name" placeholder="例如：MyCMS" />
         </label>
         <label>
           <span>分类</span>
@@ -91,7 +86,7 @@
         </label>
         <label>
           <span>类型说明</span>
-          <input v-model="form.kind" type="text" placeholder="例如：自定义 CMS" />
+          <Input v-model="form.kind" placeholder="例如：自定义 CMS" />
         </label>
         <label>
           <span>置信度</span>
@@ -103,7 +98,7 @@
         </label>
         <label>
           <span>官网 / 仓库 URL</span>
-          <input v-model="form.url" type="url" placeholder="https://example.com" />
+          <Input v-model="form.url" type="url" placeholder="https://example.com" />
         </label>
       </div>
 
@@ -117,20 +112,15 @@
       <div class="rule-textareas">
         <label>
           <span>匹配规则，每行一个</span>
-          <textarea
-            v-model="form.patterns"
-            rows="7"
-            spellcheck="false"
-            placeholder="wp-content/themes/my-theme&#10;X-Generator: MyCMS"
-          ></textarea>
+          <Textarea v-model="form.patterns" :rows="7" placeholder="wp-content/themes/my-theme&#10;X-Generator: MyCMS" />
         </label>
         <label>
           <span>CSS 选择器，每行一个</span>
-          <textarea v-model="form.selectors" rows="7" spellcheck="false" placeholder="[data-powered-by='mycms']&#10;.mycms-root"></textarea>
+          <Textarea v-model="form.selectors" :rows="7" placeholder="[data-powered-by='mycms']&#10;.mycms-root" />
         </label>
         <label>
           <span>全局变量，每行一个</span>
-          <textarea v-model="form.globals" rows="7" spellcheck="false" placeholder="MyCMS&#10;myApp.version"></textarea>
+          <Textarea v-model="form.globals" :rows="7" placeholder="MyCMS&#10;myApp.version" />
         </label>
       </div>
 
@@ -169,7 +159,7 @@
           <RippleButton @click="formatRulesJson">格式化</RippleButton>
         </div>
       </div>
-      <textarea v-model="rulesJsonText" rows="13" spellcheck="false"></textarea>
+      <Textarea v-model="rulesJsonText" :rows="13" />
     </section>
   </main>
 </template>
@@ -179,6 +169,8 @@
   import { BookOpen, ExternalLink, Inbox, Monitor, Moon, Pencil, RotateCcw, Save, Sun, Trash2 } from 'lucide-vue-next'
   import Select from '@/ui/components/Select.vue'
   import Checkbox from '@/ui/components/Checkbox.vue'
+  import Input from '@/ui/components/Input.vue'
+  import Textarea from '@/ui/components/Textarea.vue'
   import RippleButton from '@/ui/components/RippleButton.vue'
   import { CATEGORY_ORDER } from '@/utils/category-order'
   import { applyCustomCss } from '@/utils/apply-custom-css'
