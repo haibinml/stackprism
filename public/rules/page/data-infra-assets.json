@@ -345,7 +345,11 @@
               "name": "Apache NiFi",
               "kind": "数据流处理",
               "resourceHints": ["nifi"],
-              "patterns": ["(?:^|/)nifi/(?:assets|css|js|images)(?:/|[?#]|$)", "nifi[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+              "patterns": [
+                "(?:^|/)nifi/(?:assets|css|js|images)(?:/|[?#]|$)",
+                "(?:^|/)apache[-_.]?nifi[^\\s\"'<>/]*\\.(?:js|css|svg|png)(?:[?#]|$)",
+                "(?:^|/)nifi[-_.][^\\s\"'<>/]*\\.(?:js|css|svg|png)(?:[?#]|$)"
+              ]
             },
             {
               "name": "Apache Flink Dashboard",

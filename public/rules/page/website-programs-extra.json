@@ -241,6 +241,17 @@
               "matchType": "regex",
               "patterns": ["spring-plus\\.net", "Pu!mdHd"],
               "matchIn": ["url", "html"]
+            },
+            {
+              "name": "彩虹聚合登录",
+              "kind": "聚合登录系统",
+              "url": "https://u.cccyun.cc",
+              "matchType": "regex",
+              "patterns": [
+                "彩虹聚合登录",
+                "(?=[\\s\\S]*(?:聚合登录\\s*-\\s*接口测试|/user/test\\.php(?:[?#\\s\"'<>]|$)))(?=[\\s\\S]*(?:name=[\"']alipayment[\"']|submitLogin\\s*\\(|ajax\\.php\\?act=test))"
+              ],
+              "matchIn": ["html"]
             }
           ]
         },

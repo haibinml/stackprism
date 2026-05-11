@@ -174,8 +174,10 @@
               },
               {
                 "name": "Layui",
-                "patterns": ["layui"],
-                "classPrefixes": ["layui-"],
+                "patterns": [
+                  "(?:^|/)layui(?:\\.all)?(?:\\.min)?\\.(?:js|css)(?:[?#]|[\"'<>\\s]|$)",
+                  "(?:^|/)layui/(?:layui|css/layui)[^\\s\"'<>]*\\.(?:js|css)(?:[?#]|[\"'<>\\s]|$)"
+                ],
                 "classNames": ["layui-btn", "layui-form"]
               }
             ]

@@ -27,13 +27,19 @@ export const shortHeaderUrl = (raw: unknown): string => {
   }
 }
 
-export const normalizeDynamicFallbackTechName = (name: unknown): string =>
-  String(name || '')
+export const normalizeDynamicFallbackTechName = (name: unknown): string => {
+  const normalized = String(name || '')
     .toLowerCase()
     .replace(/^疑似前端库:\s*/, '')
     .replace(/(?:\.js|js)$/i, '')
     .replace(/(?:[._-]pkgd)$/i, '')
     .replace(/[^a-z0-9一-龥]+/g, '')
+
+  const aliases: Record<string, string> = {
+    slickcarousel: 'slick'
+  }
+  return aliases[normalized] || normalized
+}
 
 export const isFrontendFallback = (item: any) => item?.category === '前端库' && /^疑似前端库:/i.test(String(item?.name || '').trim())
 

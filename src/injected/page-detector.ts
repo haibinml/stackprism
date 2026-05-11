@@ -342,12 +342,16 @@ const detectPageTechnologies = (ruleConfig: Record<string, unknown> = {}) => {
   }
 
   function normalizeFallbackTechName(name) {
-    return String(name || '')
+    const normalized = String(name || '')
       .toLowerCase()
       .replace(/^疑似前端库:\s*/, '')
       .replace(/(?:\.js|js)$/i, '')
       .replace(/(?:[._-]pkgd)$/i, '')
       .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '')
+    const aliases = {
+      slickcarousel: 'slick'
+    }
+    return aliases[normalized] || normalized
   }
 
   function suppressFrontendFallbackDuplicates(items) {
@@ -1159,18 +1163,39 @@ ${html}`
 
   function scoreTailwind(classes) {
     const tokens = Object.keys(classes)
-    let score = 0
+    let utilityScore = 0
+    let specificScore = 0
+    let bootstrapScore = 0
+    let distinctUtilityCount = 0
     let count = 0
     const TAILWIND_PATTERN =
       /^(?:sm|md|lg|xl|2xl):|^-?(?:m|p|mt|mr|mb|ml|mx|my|pt|pr|pb|pl|px|py)-|^(?:text|bg|border|ring|shadow|rounded|grid|flex|items|justify|gap|space|w|h|min-w|max-w|min-h|max-h)-|^(?:hover|focus|active|disabled|dark):|\[[^\]]+\]/
+    const TAILWIND_SPECIFIC_PATTERN =
+      /^(?:sm|md|lg|xl|2xl|hover|focus|active|disabled|dark):|^\[[^\]]+\]$|^(?:text|bg|border|ring|from|to|via)-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950)$|^(?:grid-cols|grid-rows|gap|space-x|space-y)-\d+$|^(?:w|h|min-w|max-w|min-h|max-h)-(?:screen|full|fit|min|max|\d+\/\d+)$/
+    const BOOTSTRAP_PATTERN =
+      /^(?:container(?:-(?:fluid|sm|md|lg|xl|xxl))?|row|col(?:-\d+|-(?:sm|md|lg|xl|xxl)(?:-\d+)?)?|btn(?:-.+)?|navbar(?:-.+)?|card(?:-.+)?|dropdown(?:-.+)?|modal(?:-.+)?|form(?:-.+)?|input-group(?:-.+)?|table(?:-.+)?|alert(?:-.+)?|badge(?:-.+)?|d-(?:none|inline|inline-block|block|grid|table|flex|inline-flex)|justify-content-.+|align-items-.+|text-(?:center|start|end|left|right|muted|primary|secondary|success|danger|warning|info|light|dark|white|body|black-50|white-50)|(?:m|p)[tblrxy]?-(?:[0-5]|auto)|mdi(?:-.+)?)$/
     for (const token of tokens) {
       if (count++ >= 5000) break
+      if (BOOTSTRAP_PATTERN.test(token)) {
+        const c = classes[token]
+        bootstrapScore += c < 3 ? c : 3
+      }
       if (TAILWIND_PATTERN.test(token)) {
         const c = classes[token]
-        score += c < 3 ? c : 3
+        utilityScore += c < 3 ? c : 3
+        distinctUtilityCount += 1
+        if (TAILWIND_SPECIFIC_PATTERN.test(token)) {
+          specificScore += c < 3 ? c : 3
+        }
       }
     }
-    return score
+    if (specificScore < 3 && bootstrapScore >= 8) {
+      return 0
+    }
+    if (specificScore < 2 && (distinctUtilityCount < 14 || utilityScore < 24)) {
+      return 0
+    }
+    return utilityScore + specificScore * 4
   }
 
   function getMetaContent(name) {

@@ -27,6 +27,83 @@
           {
             "name": "微博登录",
             "patterns": ["api\\.weibo\\.com/oauth2/authorize", "WB2\\.anyWhere", "SinaWeibo", "微博登录", "weibo login"]
+          },
+          {
+            "name": "抖音登录",
+            "patterns": ["open\\.douyin\\.com/platform/oauth/connect", "douyin\\.com/[^\\s\"'<>]*(?:oauth|authorize|login)", "抖音登录"]
+          },
+          {
+            "name": "哔哩哔哩登录",
+            "patterns": ["passport\\.bilibili\\.com", "bilibili\\.com/[^\\s\"'<>]*(?:oauth|authorize|login)", "哔哩哔哩登录", "Bilibili登录"]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "kind": "聚合登录图标",
+          "confidence": "高",
+          "resourceOnly": true
+        },
+        "rules": [
+          {
+            "name": "QQ 登录",
+            "patterns": ["(?:^|/)assets/icon/qq\\.(?:png|svg|webp)(?:[?#]|[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "微信登录",
+            "patterns": ["(?:^|/)assets/icon/(?:wx|wechat|weixin)\\.(?:png|svg|webp)(?:[?#]|[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "微博登录",
+            "patterns": ["(?:^|/)assets/icon/(?:sina|weibo)\\.(?:png|svg|webp)(?:[?#]|[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "支付宝登录",
+            "patterns": ["(?:^|/)assets/icon/alipay\\.(?:png|svg|webp)(?:[?#]|[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "百度帐号登录",
+            "patterns": ["(?:^|/)assets/icon/baidu\\.(?:png|svg|webp)(?:[?#]|[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "华为帐号登录",
+            "patterns": ["(?:^|/)assets/icon/huawei\\.(?:png|svg|webp)(?:[?#]|[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "小米帐号登录",
+            "patterns": ["(?:^|/)assets/icon/xiaomi\\.(?:png|svg|webp)(?:[?#]|[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "抖音登录",
+            "patterns": ["(?:^|/)assets/icon/douyin\\.(?:png|svg|webp)(?:[?#]|[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "哔哩哔哩登录",
+            "patterns": ["(?:^|/)assets/icon/bilibili\\.(?:png|svg|webp)(?:[?#]|[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "钉钉登录",
+            "patterns": ["(?:^|/)assets/icon/dingtalk\\.(?:png|svg|webp)(?:[?#]|[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "飞书 / Lark 登录",
+            "patterns": ["(?:^|/)assets/icon/(?:feishu|lark)\\.(?:png|svg|webp)(?:[?#]|[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "GitHub 登录",
+            "patterns": ["(?:^|/)assets/icon/github\\.(?:png|svg|webp)(?:[?#]|[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "Gitee 登录",
+            "patterns": ["(?:^|/)assets/icon/gitee\\.(?:png|svg|webp)(?:[?#]|[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "Google 登录",
+            "patterns": ["(?:^|/)assets/icon/google\\.(?:png|svg|webp)(?:[?#]|[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "Microsoft 登录",
+            "patterns": ["(?:^|/)assets/icon/(?:microsoft|ms)\\.(?:png|svg|webp)(?:[?#]|[\"'<>\\s]|$)"]
           }
         ]
       },

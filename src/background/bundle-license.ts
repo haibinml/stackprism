@@ -6,7 +6,7 @@ import { matchesCompiledRulePatterns, matchesRuleTextHints } from './rule-matche
 import { isDetectablePageUrl } from '@/utils/page-support'
 import { cleanTechnologyUrl } from '@/utils/url'
 
-const BUNDLE_LICENSE_SCHEMA_VERSION = 3
+const BUNDLE_LICENSE_SCHEMA_VERSION = 4
 const BUNDLE_LICENSE_SOURCE = 'JS 版权注释'
 const MAX_CANDIDATE_SCRIPTS = 5
 const MAX_FETCH_BYTES = 384 * 1024
@@ -142,6 +142,32 @@ const collectCandidateScripts = (data: any, tabUrl: string): string[] => {
 }
 
 const buildBundleSignature = (scripts: string[]): string => scripts.join('\n')
+
+const comparablePageUrl = (value: unknown): string => {
+  try {
+    const url = new URL(String(value || ''))
+    url.hash = ''
+    return url.href
+  } catch {
+    return ''
+  }
+}
+
+const getBundlePageIdentity = (data: any, tab: any): { url: string; title: string } => {
+  const tabUrl = String(tab?.url || '')
+  const pageUrl = String(data?.page?.url || '')
+  const pageMatchesTab = pageUrl && comparablePageUrl(pageUrl) === comparablePageUrl(tabUrl)
+  if (pageMatchesTab) {
+    return {
+      url: pageUrl,
+      title: String(data?.page?.title || tab?.title || '')
+    }
+  }
+  return {
+    url: tabUrl,
+    title: String(tab?.title || '')
+  }
+}
 
 const readLimitedResponseText = async (response: Response, maxBytes: number): Promise<string> => {
   if (!response.body) {
@@ -378,12 +404,13 @@ export const runBundleLicenseDetection = async (tabId: number): Promise<void> =>
   }
 
   const technologies = detectTechnologiesFromLicenseText(observations, pageRules.bundleLicenseLibraries || [])
+  const pageIdentity = getBundlePageIdentity(data, tab)
 
   data.bundle = {
     schemaVersion: BUNDLE_LICENSE_SCHEMA_VERSION,
     signature,
-    url: tab.url,
-    title: tab.title,
+    url: pageIdentity.url,
+    title: pageIdentity.title,
     updatedAt: Date.now(),
     scripts: observations.map(observation => ({
       url: observation.url,
