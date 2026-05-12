@@ -83,14 +83,17 @@ const applyHeaderValueRuleList = (add: any, rules: any[], value: string, rawValu
 
   // Server / X-Powered-By 字段正常只对应一个产品；带逗号往往是反代叠加或伪造
   // 只匹配第一段，避免被「openresty, Microsoft-IIS/10.0」这种伪造糊弄
-  const primaryValue = headerName === 'server' || headerName === 'x-powered-by' ? value.split(',')[0].trim() : value
+  const isSplitField = headerName === 'server' || headerName === 'x-powered-by'
+  const primaryValue = isSplitField ? value.split(',')[0].trim() : value
   if (!primaryValue) return
+  // evidence 也只显示首段，避免用户看到「server: openresty, Microsoft-IIS/10.0」误以为 IIS 也被采信
+  const displayValue = isSplitField ? (rawValue?.split(',')[0]?.trim() ?? rawValue) : rawValue
 
   for (const rule of rules) {
     if (!matchesHeaderPatterns(rule.patterns, primaryValue, rule)) continue
-    const evidence = rule.evidence || `${headerName}: ${rawValue}`
+    const evidence = rule.evidence || `${headerName}: ${displayValue}`
     add(rule.category || '其他库', rule.name, rule.confidence || '高', evidence)
-    if (headerName === 'server' || headerName === 'x-powered-by') break // 这两个字段正常只标识一种产品
+    if (isSplitField) break // 这两个字段正常只标识一种产品
   }
 }
 

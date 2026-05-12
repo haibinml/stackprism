@@ -429,6 +429,9 @@ const detectPageTechnologies = async (ruleConfig: Record<string, unknown> = {}) 
       'requirejs',
       'system',
       'systemjs',
+      // 文档站 / 内容站常见的搜索 worker 文件名（mkdocs / docusaurus / vitepress 等都叫这名），
+      // 真实的搜索库（Lunr / FlexSearch / Pagefind / Algolia）会通过专用规则或版权注释命中
+      'search',
       // 站点自身的内部脚本，不是公共库
       'tgwallpaper'
     ])
