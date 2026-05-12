@@ -320,6 +320,48 @@
             "patterns": ["(?:^|/)jquery\\.datetimepicker(?:\\.full)?(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
           },
           {
+            "name": "air-datepicker",
+            "patterns": [
+              "(?:^|/)air-datepicker(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)air-datepicker(?:@[^/\\s\"'<>]+)?/.+\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "litepicker",
+            "patterns": [
+              "(?:^|/)litepicker(?:\\.umd)?(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)litepicker(?:@[^/\\s\"'<>]+)?/.+\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "easepick",
+            "patterns": [
+              "(?:^|/)easepick(?:\\.bundle|\\.umd)?(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)@easepick/[^/\\s\"'<>]+(?:@[^/\\s\"'<>]+)?/.+\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "vanillajs-datepicker",
+            "patterns": [
+              "(?:^|/)vanillajs-datepicker(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)vanillajs-datepicker(?:@[^/\\s\"'<>]+)?/.+\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "pickadate.js",
+            "patterns": [
+              "(?:^|/)pickadate(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)pickadate(?:\\.js)?(?:@[^/\\s\"'<>]+)?/.+\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "Duet Date Picker",
+            "patterns": [
+              "(?:^|/)duet-date-picker(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)@duetds/date-picker(?:@[^/\\s\"'<>]+)?/.+\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
             "name": "chosen",
             "patterns": [
               "(?:^|/)chosen(?:\\.jquery|\\.proto)?(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
