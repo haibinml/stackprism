@@ -1440,6 +1440,35 @@
             ]
           },
           {
+            "name": "Swagger Editor",
+            "patterns": [
+              "(?:^|/)swagger-editor(?:-bundle|-standalone-preset)?(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)swagger-editor-dist(?:@[^/\\s\"'<>]+)?/.+\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "Redoc",
+            "patterns": [
+              "(?:^|/)redoc(?:\\.standalone)?(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)@redocly/redoc(?:@[^/\\s\"'<>]+)?/.+\\.(?:m?js|cjs|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "RapiDoc",
+            "patterns": [
+              "(?:^|/)rapidoc(?:-min|\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)rapi-doc(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)rapidoc(?:@[^/\\s\"'<>]+)?/.+\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "Stoplight Elements",
+            "patterns": [
+              "(?:^|/)stoplight-elements(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)@stoplight/elements(?:@[^/\\s\"'<>]+)?/.+\\.(?:m?js|cjs|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
             "name": "graphiql",
             "patterns": [
               "(?:^|/)graphiql(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
