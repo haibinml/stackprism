@@ -203,11 +203,11 @@ const extractWordPressDirectoryThemeSlug = (item: any) => {
 export const suppressFrontendFallbackDuplicates = (items: any[], additionalKnownItems: any[] = []) => {
   if (!Array.isArray(items) || !items.length) return []
 
+  // 任何已识别的技术（包括 SaaS / 统计 / 第三方登录 / 支付 等非前端类目）都用来消重，
+  // 比如 filestack.min.js 被 SaaS / Filestack 高置信识别后，动态监控兜底里「疑似前端库: filestack」就应该消失
   const knownNames = new Set(
     [...items, ...additionalKnownItems]
-      .filter(
-        item => frontendTechnologyCategories.has(item?.category) && !isFrontendFallback(item) && !hasOnlyFrontendFallbackEvidence(item)
-      )
+      .filter(item => !isFrontendFallback(item) && !hasOnlyFrontendFallbackEvidence(item))
       .map(item => normalizeDynamicFallbackTechName(item.name))
       .filter(Boolean)
   )

@@ -5,7 +5,7 @@
   const MAX_MUTATION_COUNT = 5000
   const MAX_RESOURCE_COUNT = 1500
   const MAX_PENDING_MUTATION_NODES = 200
-  const SEND_DELAY = 900
+  const SEND_DELAY = 400
   const MUTATION_BURST_WINDOW_MS = 1000
   const MUTATION_BURST_THRESHOLD = 150
   const MUTATION_COOLDOWN_MS = 5000
@@ -197,11 +197,20 @@
     }
   }
 
+  // 与 page-detector 保持一致：排除 oembed 等非 feed 协议，必须命中真正的 feed 类型 / 路径
+  const FEED_HREF_TYPE_PATTERN =
+    /(?:rss|atom|jsonfeed|feed\+json|json\+feed|application\/feed|\.rss\b|\.atom\b|\/feed(?:\/|\.json|$|\?)|\/rss(?:\/|$|\?)|\/atom(?:\/|$|\?))/
+  const isFeedHrefAndType = (href, type) => {
+    const value = `${type} ${href}`.toLowerCase()
+    if (/oembed/.test(value)) return false
+    return FEED_HREF_TYPE_PATTERN.test(value)
+  }
+
   const collectFeedLinks = root => {
     for (const link of root.querySelectorAll?.("link[rel~='alternate']") || []) {
       const href = link.href || link.getAttribute('href')
       const type = String(link.type || '').toLowerCase()
-      if (href && /rss|atom|feed|json/.test(`${type} ${href}`.toLowerCase())) {
+      if (href && isFeedHrefAndType(href, type)) {
         addFeedLink(href, type, link.title || '')
       }
     }

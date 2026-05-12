@@ -430,12 +430,31 @@ const detectPageTechnologies = async (ruleConfig: Record<string, unknown> = {}) 
       'system',
       'systemjs',
       // 文档站 / 内容站常见的搜索 worker 文件名（mkdocs / docusaurus / vitepress 等都叫这名），
-      // 真实的搜索库（Lunr / FlexSearch / Pagefind / Algolia）会通过专用规则或版权注释命中
+      // 真实的搜索库（Lunr / FlexSearch / Pagefind / Algolia）会通过专用规则或官方版权注释命中
       'search',
+      // 通用名，几乎所有站点都有但不属于公共库
+      'sdk',
+      'analytics',
+      'tracker',
+      'tracking',
+      'beacon',
+      'pixel',
       // 站点自身的内部脚本，不是公共库
-      'tgwallpaper'
+      'tgwallpaper',
+      'jsbin'
     ])
-    return !genericNames.has(name.toLowerCase())
+    if (genericNames.has(name.toLowerCase())) {
+      return false
+    }
+    // vscode.dev / 微软系站点的内部脚本：ms.core / ms.post / ms.deploy 等
+    if (/^ms\.[a-z0-9_-]+$/i.test(name)) {
+      return false
+    }
+    // Microsoft AB-test 客户端、Read the Docs 广告脚本、通用 svg loader 等不是公共库
+    if (/^(?:tas-client|ethicalads|svg-loader)$/i.test(name)) {
+      return false
+    }
+    return true
   }
 
   function normalizeFallbackTechName(name) {
@@ -493,9 +512,11 @@ const detectPageTechnologies = async (ruleConfig: Record<string, unknown> = {}) 
       return []
     }
 
+    // 任何已识别的技术都用来消重，避免 SaaS / 统计 / 第三方登录 / 支付 类目里已经命中的库
+    // 同名脚本（如 filestack.min.js 已识别为 Filestack SaaS）还被兜底再加一条「疑似前端库」
     const knownNames = new Set(
       items
-        .filter(item => ['前端库', '前端框架', 'UI / CSS 框架'].includes(item?.category) && !isFrontendFallback(item))
+        .filter(item => !isFrontendFallback(item))
         .map(item => normalizeFallbackTechName(item.name))
         .filter(Boolean)
     )
