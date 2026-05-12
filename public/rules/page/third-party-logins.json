@@ -33,7 +33,12 @@
           },
           {
             "name": "哔哩哔哩登录",
-            "patterns": ["passport\\.bilibili\\.com", "bilibili\\.com/[^\\s\"'<>]*(?:oauth|authorize|login)", "哔哩哔哩登录", "Bilibili登录"]
+            "patterns": [
+              "passport\\.bilibili\\.com",
+              "bilibili\\.com/[^\\s\"'<>]*(?:oauth|authorize|login)",
+              "哔哩哔哩登录",
+              "Bilibili登录"
+            ]
           }
         ]
       },
@@ -197,6 +202,15 @@
           {
             "name": "Bitbucket 登录",
             "patterns": ["bitbucket\\.org/site/oauth2/authorize", "Bitbucket login"]
+          },
+          {
+            "name": "linux.do 登录",
+            "patterns": [
+              "connect\\.linux\\.do/oauth2/authorize",
+              "linux\\.do/oauth2?/authorize",
+              "linux\\.do/session/sso_provider",
+              "(?:使用 |Sign in with )?linux\\.do 登录"
+            ]
           }
         ]
       },
@@ -239,6 +253,44 @@
           {
             "name": "LinkedIn 登录",
             "patterns": ["linkedin\\.com/oauth/v2/authorization", "Sign in with LinkedIn"]
+          },
+          {
+            "name": "Instagram 登录",
+            "patterns": ["api\\.instagram\\.com/oauth/authorize", "(?:www\\.)?instagram\\.com/oauth/authorize", "Sign in with Instagram"]
+          },
+          {
+            "name": "Reddit 登录",
+            "patterns": [
+              "(?:www\\.|old\\.|new\\.)?reddit\\.com/api/v1/authorize",
+              "(?:www\\.)?reddit\\.com/login/?\\?dest=",
+              "Sign in with Reddit"
+            ]
+          },
+          {
+            "name": "Pinterest 登录",
+            "patterns": ["(?:www\\.)?pinterest\\.com/oauth/?\\?", "api\\.pinterest\\.com/oauth/", "Sign in with Pinterest"]
+          },
+          {
+            "name": "TikTok 登录",
+            "patterns": [
+              "open-api\\.tiktok\\.com/platform/oauth/connect",
+              "business-api\\.tiktok\\.com/portal/auth",
+              "(?:www\\.)?tiktok\\.com/v[0-9]+/auth/authorize",
+              "(?:www\\.)?tiktok\\.com/auth/authorize",
+              "Sign in with TikTok"
+            ]
+          },
+          {
+            "name": "Snapchat 登录",
+            "patterns": [
+              "accounts\\.snapchat\\.com/(?:[a-z-]+/)?oauth2/auth",
+              "accounts\\.snapchat\\.com/login/oauth2/authorize",
+              "Login with Snapchat"
+            ]
+          },
+          {
+            "name": "Tumblr 登录",
+            "patterns": ["(?:www\\.)?tumblr\\.com/oauth2/authorize", "Sign in with Tumblr"]
           }
         ]
       },
@@ -272,6 +324,539 @@
           {
             "name": "Naver 登录",
             "patterns": ["nid\\.naver\\.com/oauth2\\.0/authorize", "Naver Login"]
+          },
+          {
+            "name": "Samsung Account 登录",
+            "patterns": [
+              "account\\.samsung\\.com/(?:accounts|mobile)/oauth2/(?:authorize|signinid)",
+              "account\\.samsung\\.com/(?:[a-z-]+/)?accounts/v1/(?:STATIC|client)/authorize",
+              "Sign in with Samsung Account"
+            ]
+          },
+          {
+            "name": "PAYCO 登录",
+            "patterns": ["id\\.payco\\.com/oauth2\\.0/authorize", "id\\.payco\\.com/login", "PAYCO 로그인"]
+          },
+          {
+            "name": "VKontakte 登录",
+            "patterns": ["oauth\\.vk\\.com/authorize", "id\\.vk\\.com/auth", "Войти через ВКонтакте"]
+          },
+          {
+            "name": "Yandex 登录",
+            "patterns": [
+              "oauth\\.yandex\\.(?:com|ru|by|kz|com\\.tr)/authorize",
+              "passport\\.yandex\\.(?:com|ru|by|kz)/auth",
+              "Авторизоваться через Яндекс"
+            ]
+          },
+          {
+            "name": "Odnoklassniki 登录",
+            "patterns": ["connect\\.ok\\.ru/oauth/authorize", "Войти через Одноклассники"]
+          },
+          {
+            "name": "Mail.ru 登录",
+            "patterns": ["connect\\.mail\\.ru/oauth/authorize", "Войти через Mail\\.ru"]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "kind": "日语圈社交登录"
+        },
+        "rules": [
+          {
+            "name": "Rakuten 登录",
+            "patterns": [
+              "login\\.account\\.rakuten\\.com/sso/authorize",
+              "app\\.rakuten\\.co\\.jp/services/authorize",
+              "Sign in with Rakuten",
+              "楽天会員でログイン"
+            ]
+          },
+          {
+            "name": "mixi 登录",
+            "patterns": ["mixi\\.jp/connect_authorize\\.pl", "secure\\.mixi-platform\\.com/connect/connect_authorize", "mixi でログイン"]
+          },
+          {
+            "name": "ニコニコ 登录",
+            "patterns": [
+              "account\\.nicovideo\\.jp/(?:login|oauth/authorize|api/v1/oauth2/authorize)",
+              "secure\\.nicovideo\\.jp/secure/login",
+              "ニコニコでログイン"
+            ]
+          },
+          {
+            "name": "Hatena 登录",
+            "patterns": [
+              "(?:www\\.)?hatena\\.ne\\.jp/oauth/(?:initiate|authorize)",
+              "hatena\\.ne\\.jp/(?:OAuth|login)/authorize",
+              "はてなでログイン"
+            ]
+          },
+          {
+            "name": "PlayStation Network 登录",
+            "patterns": [
+              "auth\\.api\\.sonyentertainmentnetwork\\.com/[0-9.]+/oauth/authorize",
+              "(?:web|m)\\.np\\.playstation\\.(?:com|net)/api/session/v[0-9]+/signin",
+              "Sign in with PlayStation Network"
+            ]
+          },
+          {
+            "name": "Nintendo Account 登录",
+            "patterns": [
+              "accounts\\.nintendo\\.com/connect/[0-9.]+/api/authorize",
+              "accounts\\.nintendo\\.com/login",
+              "Sign in with Nintendo Account"
+            ]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "kind": "法语圈社交登录"
+        },
+        "rules": [
+          {
+            "name": "FranceConnect",
+            "patterns": [
+              "(?:app|auth)\\.franceconnect\\.gouv\\.fr/api/v[0-9]+/authorize",
+              "fcp\\.integ01\\.dev-franceconnect\\.fr",
+              "S'identifier avec FranceConnect"
+            ]
+          },
+          {
+            "name": "Dailymotion 登录",
+            "patterns": ["(?:api\\.|www\\.)?dailymotion\\.com/oauth/authorize", "Sign in with Dailymotion"]
+          },
+          {
+            "name": "Deezer 登录",
+            "patterns": [
+              "connect\\.deezer\\.com/oauth/(?:auth|access_token)\\.php",
+              "(?:www\\.)?deezer\\.com/login/oauth",
+              "Se connecter avec Deezer"
+            ]
+          },
+          {
+            "name": "Orange Connect 登录",
+            "patterns": ["api\\.orange\\.com/oauth/v[0-9]+/authorize", "Se connecter avec Orange"]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "kind": "东南亚社交登录"
+        },
+        "rules": [
+          {
+            "name": "Zalo 登录",
+            "patterns": ["oauth\\.zaloapp\\.com/v[0-9]+/permission", "id\\.zalo\\.me/account/authen", "Đăng nhập với Zalo"]
+          },
+          {
+            "name": "Grab 登录",
+            "patterns": ["idp\\.grab\\.com/v[0-9]+/oauth2/authorize", "Sign in with Grab"]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "kind": "亚洲国民身份登录"
+        },
+        "rules": [
+          {
+            "name": "Singpass",
+            "patterns": [
+              "(?:stg-|test-)?id\\.singpass\\.gov\\.sg/(?:oauth|authorize)",
+              "stg-saml\\.singpass\\.gov\\.sg",
+              "(?:Sign in with|Log in with) Singpass"
+            ]
+          },
+          {
+            "name": "iAM Smart 登录",
+            "patterns": ["(?:www\\.)?iamsmart\\.gov\\.hk/.+(?:oidc|oauth|authorize)", "iAM Smart 登入"]
+          },
+          {
+            "name": "TrueID 登录",
+            "patterns": [
+              "id\\.truedigital\\.com/oauth(?:2)?/authorize",
+              "(?:www\\.)?trueid\\.net/oauth(?:2)?/authorize",
+              "Sign in with TrueID"
+            ]
+          },
+          {
+            "name": "DigiLocker 登录",
+            "patterns": [
+              "(?:api\\.|www\\.)?digitallocker\\.gov\\.in/public/oauth2/[0-9]/authorize",
+              "(?:api\\.|www\\.)?digilocker\\.gov\\.in/public/oauth2/[0-9]/authorize",
+              "Sign in with DigiLocker"
+            ]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "kind": "欧洲国民身份登录"
+        },
+        "rules": [
+          {
+            "name": "SPID (意大利)",
+            "patterns": [
+              "spid\\.gov\\.it",
+              "(?:idp|login)\\.(?:agid|spid|infocert|posteid|aruba|sielte|namirial|tim|register|teamsystem|intesa|lepida)\\.it/saml2/sso",
+              "Entra con SPID"
+            ]
+          },
+          {
+            "name": "Cl@ve (西班牙)",
+            "patterns": ["(?:as|se)\\.clave\\.gob\\.es/(?:Pasarela|Proxy2/ServiceProvider)", "Acceder con Cl@ve"]
+          },
+          {
+            "name": "DigiD (荷兰)",
+            "patterns": ["(?:was-)?digid\\.nl/(?:saml/idp/request_authentication|oidc/authorize)", "Inloggen met DigiD"]
+          },
+          {
+            "name": "itsme (比利时)",
+            "patterns": ["merchant\\.itsme\\.be/oidc/authorization", "merchant\\.(?:e2e\\.)?itsme\\.be", "Aanmelden met itsme"]
+          },
+          {
+            "name": "BankID (瑞典 / 挪威)",
+            "patterns": [
+              "auth\\.bankid\\.(?:com|no)",
+              "appapi[0-9]+\\.bankid\\.com",
+              "csbankid\\.swedbank\\.se",
+              "Sign in with BankID",
+              "Logga in med BankID"
+            ]
+          },
+          {
+            "name": "MitID (丹麦)",
+            "patterns": [
+              "(?:pp\\.|test\\.)?mitid\\.dk/(?:auth|connect)/(?:authorize|oidc)",
+              "(?:netsidbroker|broker)\\.mitid\\.dk",
+              "Log på med MitID"
+            ]
+          },
+          {
+            "name": "GOV.UK One Login",
+            "patterns": ["oidc\\.account\\.gov\\.uk/(?:authorize|logout)", "signin\\.account\\.gov\\.uk", "Sign in to GOV\\.UK"]
+          },
+          {
+            "name": "AusweisIDent / BundID (德国)",
+            "patterns": [
+              "(?:test\\.|cdn\\.)?(?:id\\.)?bund\\.de/(?:eIDClientCore|oidc/authorize)",
+              "ausweisident\\.de/oidc/authorize",
+              "Mit BundID anmelden"
+            ]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "kind": "非洲身份验证服务"
+        },
+        "rules": [
+          {
+            "name": "Smile Identity",
+            "patterns": [
+              "(?:testapi|api)\\.smileidentity\\.com/v[0-9]+/(?:partner|smile_identity_core)",
+              "(?:portal|cloud)\\.smileidentity\\.com",
+              "Verify with Smile Identity"
+            ]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "kind": "北美洲政府 / 身份服务"
+        },
+        "rules": [
+          {
+            "name": "Login.gov",
+            "patterns": [
+              "(?:secure|idp)\\.login\\.gov/openid_connect/authorize",
+              "(?:secure|idp)\\.login\\.gov/(?:saml/auth|oauth/authorize)",
+              "Sign in with Login\\.gov"
+            ]
+          },
+          {
+            "name": "Interac Sign-In 服务",
+            "patterns": ["psp\\.interac\\.ca/(?:oauth|saml/sso)", "(?:www\\.)?interac\\.ca/.+sign-in-service", "Sign in with Interac"]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "kind": "南美洲社交 / 政府身份登录"
+        },
+        "rules": [
+          {
+            "name": "Mercado Libre 登录",
+            "patterns": [
+              "auth\\.mercadolibre\\.com\\.(?:ar|br|mx|cl|co|pe|uy|ve)/authorization",
+              "(?:www\\.)?mercadolibre\\.com/oauth/authorize",
+              "Iniciar sesión con Mercado Libre"
+            ]
+          },
+          {
+            "name": "gov.br (巴西)",
+            "patterns": [
+              "sso\\.(?:staging\\.)?acesso\\.gov\\.br/authorize",
+              "(?:idp|servicos)\\.acesso\\.gov\\.br/(?:authorize|account)",
+              "Entrar com gov\\.br"
+            ]
+          },
+          {
+            "name": "Globo 登录",
+            "patterns": ["(?:www\\.)?sso\\.globo\\.com/(?:login|authorize)", "id\\.globo\\.com/login", "Entrar com sua Conta Globo"]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "kind": "大洋洲政府身份登录"
+        },
+        "rules": [
+          {
+            "name": "myID / myGovID (澳大利亚)",
+            "patterns": [
+              "(?:authn\\.|login\\.)?mygovid\\.gov\\.au/(?:authorize|oidc)",
+              "(?:authn\\.|login\\.)?myid\\.gov\\.au/(?:authorize|oidc)",
+              "Sign in with myID",
+              "Sign in with myGovID"
+            ]
+          },
+          {
+            "name": "RealMe (新西兰)",
+            "patterns": ["(?:www\\.)?realme\\.govt\\.nz/saml/SSO/.+sso", "(?:i|login)\\.realme\\.govt\\.nz", "Login with RealMe"]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "kind": "国际账号登录"
+        },
+        "rules": [
+          {
+            "name": "Yahoo 登录",
+            "patterns": [
+              "api\\.login\\.yahoo\\.com/oauth2/request_auth",
+              "login\\.yahoo\\.com/(?:account)?/?(?:authorize|consent)",
+              "Sign in with Yahoo"
+            ]
+          },
+          {
+            "name": "Amazon 登录",
+            "patterns": [
+              "(?:[a-z-]+\\.)?account\\.amazon\\.com/ap/oa",
+              "(?:www\\.)?amazon\\.(?:com|co\\.jp|de|co\\.uk|com\\.au)/ap/oa",
+              "apis\\.amazon\\.com/auth/o2/",
+              "Login with Amazon"
+            ]
+          },
+          {
+            "name": "WordPress.com 登录",
+            "patterns": [
+              "public-api\\.wordpress\\.com/oauth2/authorize",
+              "(?:public-api\\.)?wordpress\\.com/oauth2/authenticate",
+              "Sign in with WordPress\\.com"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Dropbox 登录",
+        "kind": "云存储登录",
+        "patterns": ["(?:www\\.)?dropbox\\.com/oauth2/authorize", "(?:www\\.)?dropbox\\.com/1/oauth2/authorize", "Sign in with Dropbox"]
+      },
+      {
+        "defaults": {
+          "kind": "支付服务登录"
+        },
+        "rules": [
+          {
+            "name": "PayPal 登录",
+            "patterns": [
+              "(?:www\\.)?paypal\\.com/connect/?\\?",
+              "(?:www\\.)?paypal\\.com/signin/authorize",
+              "paypalobjects\\.com/.+oauth2",
+              "Log in with PayPal"
+            ]
+          },
+          {
+            "name": "Stripe Connect 登录",
+            "patterns": ["connect\\.stripe\\.com/oauth/authorize", "connect\\.stripe\\.com/express/oauth/authorize"]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "kind": "游戏 / 直播登录"
+        },
+        "rules": [
+          {
+            "name": "Steam OpenID 登录",
+            "patterns": ["steamcommunity\\.com/openid/login", "Sign in through Steam"]
+          },
+          {
+            "name": "Battle.net 登录",
+            "patterns": [
+              "(?:oauth|us|eu|kr|tw)\\.battle\\.net/(?:oauth/)?authorize",
+              "(?:eu\\.|us\\.|kr\\.|tw\\.)?battle\\.net/oauth/authorize",
+              "Sign in with Battle\\.net"
+            ]
+          },
+          {
+            "name": "Epic Games 登录",
+            "patterns": [
+              "(?:www\\.)?epicgames\\.com/id/(?:api/)?(?:oauth|authorize)",
+              "(?:www\\.)?epicgames\\.com/account/api/oauth/",
+              "Sign in with Epic Games"
+            ]
+          },
+          {
+            "name": "EA / Origin 登录",
+            "patterns": ["accounts\\.ea\\.com/connect/auth", "signin\\.ea\\.com/p/(?:juno|web2)/login", "Sign in with EA"]
+          },
+          {
+            "name": "Twitch 登录",
+            "patterns": ["id\\.twitch\\.tv/oauth2/authorize", "Sign in with Twitch", "Connect with Twitch"]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "kind": "内容平台登录"
+        },
+        "rules": [
+          {
+            "name": "Spotify 登录",
+            "patterns": ["accounts\\.spotify\\.com/(?:[a-z-]+/)?authorize", "Sign in with Spotify", "Login with Spotify"]
+          },
+          {
+            "name": "Vimeo 登录",
+            "patterns": ["(?:api\\.)?vimeo\\.com/oauth/authorize", "(?:api\\.)?vimeo\\.com/oauth2/authorize", "Sign in with Vimeo"]
+          }
+        ]
+      },
+      {
+        "name": "Strava 登录",
+        "kind": "运动健康登录",
+        "patterns": ["(?:www\\.)?strava\\.com/oauth/authorize", "Connect with Strava"]
+      },
+      {
+        "name": "Zoom 登录",
+        "kind": "会议协作登录",
+        "patterns": ["zoom\\.us/oauth/authorize", "zoom\\.us/oauth2/authorize", "Sign in with Zoom"]
+      },
+      {
+        "defaults": {
+          "kind": "企业 SaaS 登录"
+        },
+        "rules": [
+          {
+            "name": "Salesforce 登录",
+            "patterns": [
+              "(?:test|login)\\.salesforce\\.com/services/oauth2/authorize",
+              "[a-z0-9-]+\\.(?:my\\.)?salesforce\\.com/services/oauth2/authorize",
+              "Sign in with Salesforce"
+            ]
+          },
+          {
+            "name": "HubSpot 登录",
+            "patterns": ["app(?:-[a-z0-9]+)?\\.hubspot\\.com/oauth/authorize", "Sign in with HubSpot"]
+          },
+          {
+            "name": "Atlassian 账号登录",
+            "patterns": ["auth\\.atlassian\\.com/authorize", "(?:id|admin)\\.atlassian\\.com/(?:login|oauth)", "Sign in with Atlassian"]
+          },
+          {
+            "name": "Shopify 商家登录",
+            "patterns": [
+              "accounts\\.shopify\\.com/oauth/authorize",
+              "[a-z0-9-]+\\.myshopify\\.com/admin/oauth/authorize",
+              "Sign in with Shopify"
+            ]
+          },
+          {
+            "name": "Notion 登录",
+            "patterns": ["api\\.notion\\.com/v1/oauth/authorize", "Sign in with Notion"]
+          },
+          {
+            "name": "Figma 登录",
+            "patterns": ["(?:www\\.)?figma\\.com/oauth(?:[?#/]|$)", "(?:www\\.)?figma\\.com/api/oauth/authorize", "Sign in with Figma"]
+          },
+          {
+            "name": "Asana 登录",
+            "patterns": ["app\\.asana\\.com/-/oauth_authorize", "Sign in with Asana"]
+          },
+          {
+            "name": "Trello 登录",
+            "patterns": ["(?:www\\.)?trello\\.com/1/(?:OAuth|authorize)", "Sign in with Trello"]
+          },
+          {
+            "name": "Mailchimp 登录",
+            "patterns": ["login\\.mailchimp\\.com/oauth2/authorize", "Sign in with Mailchimp"]
+          },
+          {
+            "name": "Zoho 登录",
+            "patterns": [
+              "accounts\\.zoho\\.(?:com|com\\.cn|eu|in)/oauth/v2/auth",
+              "accounts\\.zoho\\.(?:com|com\\.cn|eu|in)/signin",
+              "Sign in with Zoho"
+            ]
+          }
+        ]
+      },
+      {
+        "defaults": {
+          "kind": "身份服务 SaaS"
+        },
+        "rules": [
+          {
+            "name": "Amazon Cognito 登录",
+            "patterns": [
+              "cognito-idp\\.[a-z0-9-]+\\.amazonaws\\.com",
+              "[a-z0-9-]+\\.auth\\.[a-z0-9-]+\\.amazoncognito\\.com/(?:oauth2|login)",
+              "amazoncognito\\.com/oauth2/authorize"
+            ]
+          },
+          {
+            "name": "Clerk 登录",
+            "patterns": [
+              "[a-z0-9-]+\\.clerk\\.accounts\\.dev",
+              "clerk\\.[a-z0-9.-]+/v1/(?:client|oauth)",
+              "@clerk/(?:clerk-js|nextjs|react)"
+            ],
+            "globals": ["Clerk"]
+          },
+          {
+            "name": "WorkOS 登录",
+            "patterns": [
+              "api\\.workos\\.com/(?:sso|user_management)/authorize",
+              "(?:[a-z0-9-]+\\.)?workos\\.com/(?:login|sso)",
+              "Sign in with WorkOS"
+            ]
+          },
+          {
+            "name": "Stytch 登录",
+            "patterns": [
+              "(?:[a-z0-9-]+\\.)?stytch\\.com/v1/(?:oauth|public)",
+              "(?:test|live)\\.stytch\\.com/v[0-9]+/",
+              "@stytch/(?:vanilla-js|react|nextjs)"
+            ]
+          },
+          {
+            "name": "Magic Link 登录",
+            "patterns": ["auth\\.magic\\.link/v[0-9]+/oauth2?", "(?:[a-z0-9-]+\\.)?magic\\.link/(?:oauth|connect)", "magic-sdk"],
+            "globals": ["Magic"]
+          },
+          {
+            "name": "Supabase Auth 登录",
+            "patterns": ["[a-z0-9-]+\\.supabase\\.co/auth/v1/authorize", "@supabase/(?:auth-js|supabase-js)", "Sign in with Supabase"]
+          },
+          {
+            "name": "Firebase Authentication 登录",
+            "patterns": ["identitytoolkit\\.googleapis\\.com/v[0-9]+/accounts:", "(?:[a-z0-9-]+\\.)?firebaseapp\\.com/__/auth/handler"],
+            "globals": ["firebase"]
           }
         ]
       },
