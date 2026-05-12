@@ -153,7 +153,7 @@
         "name": "Adobe Analytics",
         "kind": "商用 / 企业统计",
         "patterns": ["adobedtm\\.com", "assets\\.adobedtm\\.com", "omniture", "s_code", "AppMeasurement"],
-        "globals": ["s", "AppMeasurement"]
+        "globals": ["AppMeasurement", "s_account"]
       },
       {
         "name": "Adobe Launch",
