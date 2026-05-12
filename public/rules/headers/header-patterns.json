@@ -208,6 +208,26 @@
             "name": "LiteSpeed",
             "patterns": ["(?:^|\\n)x-litespeed-(?:cache|tag|purge|vary|crawler):"],
             "evidence": "响应头包含 LiteSpeed 专属缓存线索"
+          },
+          {
+            "name": "Nginx",
+            "patterns": ["(?:^|\\n)x-accel-(?:buffering|redirect|expires|limit-rate|charset):"],
+            "evidence": "响应头包含 Nginx X-Accel 线索"
+          },
+          {
+            "name": "OpenResty",
+            "patterns": ["(?:^|\\n)x-openresty-"],
+            "evidence": "响应头包含 OpenResty 专属线索"
+          },
+          {
+            "name": "Traefik",
+            "patterns": ["(?:^|\\n)x-traefik-", "(?:^|\\n)via:[^\\n]*\\btraefik\\b"],
+            "evidence": "响应头包含 Traefik 代理线索"
+          },
+          {
+            "name": "HAProxy",
+            "patterns": ["(?:^|\\n)x-haproxy-", "(?:^|\\n)via:[^\\n]*\\bhaproxy\\b"],
+            "evidence": "响应头包含 HAProxy 代理线索"
           }
         ]
       },
