@@ -3,24 +3,27 @@ import { buildEffectivePageRules, loadDetectorSettings, loadTechRules } from './
 import { mergeTechnologyRecords, shortHeaderUrl } from './merge'
 import { getTabData, getTabSnapshot, updateBadgeForTab, writeTabData } from './tab-store'
 import { matchesCompiledRulePatterns, matchesRuleTextHints } from './rule-matcher'
+import { withTabWriteLock } from './tab-write-lock'
 import { isDetectablePageUrl } from '@/utils/page-support'
 import { cleanTechnologyUrl } from '@/utils/url'
 
-const BUNDLE_LICENSE_SCHEMA_VERSION = 4
+const BUNDLE_LICENSE_SCHEMA_VERSION = 7
 const BUNDLE_LICENSE_SOURCE = 'JS 版权注释'
 const MAX_CANDIDATE_SCRIPTS = 5
 const MAX_FETCH_BYTES = 384 * 1024
 const MAX_RANGE_SAMPLE_BYTES = 160 * 1024
-const MAX_TOTAL_SAMPLE_BYTES = 2 * 1024 * 1024
+// 5 个候选 × 384KB head = 1.92MB,再加 index 类大文件的 range 采样,budget 设到 4MB 才够
+const MAX_TOTAL_SAMPLE_BYTES = 4 * 1024 * 1024
 const MIN_SAMPLE_BYTES = 24 * 1024
-const MAX_RANGE_SAMPLES_PER_SCRIPT = 6
-const MAX_RANGE_SAMPLES_PER_SCAN = 10
+// 减到 3:对 OAuth URL / 内嵌 license 来说,首段 384KB 加 3 个尾段采样足够,留预算给其他候选
+const MAX_RANGE_SAMPLES_PER_SCRIPT = 3
+const MAX_RANGE_SAMPLES_PER_SCAN = 8
 const MAX_SIDECAR_BYTES = 160 * 1024
 const MAX_LICENSE_TEXT_CHARS = 180_000
 const FETCH_TIMEOUT_MS = 6000
-const MAX_SCAN_MS = 8000
-const SCAN_DELAY_MS = 1400
-const RANGE_SAMPLE_RATIOS = [0.25, 0.5, 0.8, 0.835, 0.9, 1] as const
+const MAX_SCAN_MS = 12000
+const SCAN_DELAY_MS = 600
+const RANGE_SAMPLE_RATIOS = [0.25, 0.5, 1] as const
 
 const bundleLicenseTimers = new Map<number, ReturnType<typeof setTimeout>>()
 
@@ -34,6 +37,11 @@ type ScriptLicenseObservation = {
   commentCount: number
   text: string
   sidecarUrl?: string
+  // JS 包体里嵌入的 OAuth / SSO / 登录端点 URL：SPA 把这种 URL 写在 bundle 里，
+  // HTML / 资源列表 / 响应头里看不到，需要单独走第三方登录规则匹配
+  embeddedAuthUrls?: string[]
+  // 实际拉到的字节数：用来在 popup 原始线索里诊断脚本是否真的被 fetch 到了
+  sourceLength?: number
 }
 
 type RangeFetchResult = {
@@ -227,8 +235,10 @@ const fetchTextRange = async (url: string, start: number, maxBytes: number, budg
       cache: 'force-cache',
       credentials: 'omit',
       headers: { Range: `bytes=${safeStart}-${end}` },
-      signal: controller.signal
-    })
+      signal: controller.signal,
+      // 让 Chrome 把 bundle 扫描的请求排到页面资源后面，不抢用户的关键带宽
+      priority: 'low'
+    } as RequestInit)
     if (!response.ok) return { rangeSupported: false, text: '' }
     if (!isTextLikeResponse(url, response)) return { rangeSupported: false, text: '' }
 
@@ -290,6 +300,23 @@ const trimLicenseText = (text: string): string => {
 
 const looksLikeHtmlDocument = (text: string): boolean => /^\s*(?:<!doctype\s+html|<html[\s>])/i.test(text)
 
+// 匹配 JS 包体里嵌入的 OAuth / SSO 形态 URL，常见于 SPA 里的「使用 X 登录」按钮回调
+// 抓到的 URL 会跑一遍第三方登录规则匹配，覆盖 HTML / 资源列表 / 响应头都拿不到的盲区
+const EMBEDDED_AUTH_URL_PATTERN =
+  /https?:\/\/[a-z0-9][a-z0-9.-]{2,}\.[a-z]{2,}\/(?:[^\s'"`<>]*?\/)?(?:oauth2?|authorize|connect|sso|openid[-_/]?connect|saml|signin|sign-in|login\/oauth)\b[^\s'"`<>)\]}]{0,200}/gi
+
+const extractEmbeddedAuthUrls = (source: string): string[] => {
+  if (!source) return []
+  const seen = new Set<string>()
+  for (const match of source.matchAll(EMBEDDED_AUTH_URL_PATTERN)) {
+    const url = match[0].replace(/[)\];,.}'`"]+$/, '').trim()
+    if (url.length < 14 || url.length > 240) continue
+    seen.add(url)
+    if (seen.size >= 60) break
+  }
+  return [...seen]
+}
+
 const extractLicenseComments = (source: string): string[] => {
   const comments: string[] = []
   let commentChars = 0
@@ -336,17 +363,22 @@ const fetchSidecarLicenseText = async (sidecarUrl: string, budget: ScanBudget): 
 
 const scanScriptLicense = async (scriptUrl: string, budget: ScanBudget): Promise<ScriptLicenseObservation | null> => {
   const source = await fetchSampledScriptText(scriptUrl, budget)
+  const sourceLength = source?.length || 0
   const comments = unique(source ? extractLicenseComments(source) : [])
+  const embeddedAuthUrls = source ? extractEmbeddedAuthUrls(source) : []
   const sidecarUrl = buildSidecarLicenseUrl(scriptUrl)
   const sidecarText = sidecarUrl && comments.length < 12 && hasScanBudget(budget) ? await fetchSidecarLicenseText(sidecarUrl, budget) : ''
   const text = trimLicenseText([...comments, sidecarText].filter(Boolean).join('\n\n'))
 
-  if (!text) return null
+  // 没拿到任何字节也保留 observation，方便用户在原始线索里看到「fetch 失败」而不是悄无声息
+  if (!sourceLength && !text && !embeddedAuthUrls.length) return null
   return {
     url: scriptUrl,
     commentCount: comments.length + (sidecarText ? 1 : 0),
     text,
-    sidecarUrl: sidecarText ? sidecarUrl : undefined
+    sidecarUrl: sidecarText ? sidecarUrl : undefined,
+    embeddedAuthUrls: embeddedAuthUrls.length ? embeddedAuthUrls : undefined,
+    sourceLength: sourceLength || undefined
   }
 }
 
@@ -373,12 +405,48 @@ const detectTechnologiesFromLicenseText = (observations: ScriptLicenseObservatio
   return mergeTechnologyRecords(technologies).slice(0, 80)
 }
 
+// 用第三方登录规则跑一遍 bundle 里抓出的 OAuth URL：
+// SPA 把「使用 linux.do / GitHub / Google 登录」的回调 URL 写在 bundle 里时
+// HTML / 资源 URL / 响应头都看不到，只能扫包体抓 URL 后再走规则匹配
+const detectAuthProvidersFromBundles = (observations: ScriptLicenseObservation[], rules: any[]): any[] => {
+  if (!Array.isArray(rules) || !rules.length || !observations.length) return []
+
+  const technologies: any[] = []
+  for (const observation of observations) {
+    if (!observation.embeddedAuthUrls?.length) continue
+    const urlBlob = observation.embeddedAuthUrls.join('\n')
+    for (const rule of rules) {
+      if (!rule?.name) continue
+      if (!matchesCompiledRulePatterns(rule, urlBlob)) continue
+      const matched = observation.embeddedAuthUrls.find(u => matchesCompiledRulePatterns(rule, u)) || observation.embeddedAuthUrls[0]
+      const kindPrefix = rule.kind ? `${rule.kind}：` : ''
+      technologies.push({
+        category: rule.category || '第三方登录 / OAuth',
+        name: rule.name,
+        confidence: rule.confidence || '高',
+        evidence: [`${kindPrefix}JS 包体内嵌 OAuth 入口 ${shortHeaderUrl(matched)}`],
+        source: BUNDLE_LICENSE_SOURCE,
+        url: cleanTechnologyUrl(rule.url)
+      })
+    }
+  }
+
+  return mergeTechnologyRecords(technologies).slice(0, 40)
+}
+
 const saveBundleLicenseDataAndBadge = async (tabId: number, data: any, settings: any, tab: any) => {
   if (!isDetectablePageUrl(tab?.url)) return
-  const popup = await buildPopupCacheRecord(data, settings, tab)
-  const { popup: _legacyPopup, ...tabData } = data || {}
-  await writeTabData(tabId, tabData, popup)
-  await updateBadgeForTab(tabId, popup)
+  // 走 per-tab 写锁:bundle 扫描跑 1-2s,期间 detection / dynamic / headers 都可能在并发写;
+  // 进入锁后再 re-read 最新 storage,只覆盖自己的 bundle 字段,其他字段保留最新
+  await withTabWriteLock(tabId, async () => {
+    const latest = (await getTabData(tabId)) || {}
+    latest.bundle = data.bundle
+    latest.updatedAt = data.updatedAt || Date.now()
+    const popup = await buildPopupCacheRecord(latest, settings, tab)
+    const { popup: _legacyPopup, ...tabData } = latest
+    await writeTabData(tabId, tabData, popup)
+    await updateBadgeForTab(tabId, popup)
+  })
 }
 
 export const runBundleLicenseDetection = async (tabId: number): Promise<void> => {
@@ -395,15 +463,26 @@ export const runBundleLicenseDetection = async (tabId: number): Promise<void> =>
   if (data.bundle?.schemaVersion === BUNDLE_LICENSE_SCHEMA_VERSION && data.bundle?.signature === signature) return
 
   const budget = createScanBudget()
+  // 并发扫候选脚本，但限制同时 fetch 数为 3：完全并行会一次性占 5 条网络连接，
+  // 跟页面自身资源抢带宽；3 个一组既能压住扫描总耗时,又不挤占用户的页面加载。
+  const SCRIPT_SCAN_CONCURRENCY = 3
   const observations: ScriptLicenseObservation[] = []
-  for (const script of scripts) {
+  for (let i = 0; i < scripts.length; i += SCRIPT_SCAN_CONCURRENCY) {
     if (!hasScanBudget(budget)) break
-    const observation = await scanScriptLicense(script, budget)
-    if (observation) observations.push(observation)
+    const batch = scripts.slice(i, i + SCRIPT_SCAN_CONCURRENCY)
+    const batchResults = await Promise.all(
+      batch.map(script => (hasScanBudget(budget) ? scanScriptLicense(script, budget) : Promise.resolve(null)))
+    )
+    for (const observation of batchResults) {
+      if (observation) observations.push(observation)
+    }
     await yieldToEventLoop()
   }
 
-  const technologies = detectTechnologiesFromLicenseText(observations, pageRules.bundleLicenseLibraries || [])
+  const technologies = mergeTechnologyRecords([
+    ...detectTechnologiesFromLicenseText(observations, pageRules.bundleLicenseLibraries || []),
+    ...detectAuthProvidersFromBundles(observations, pageRules.thirdPartyLogins || [])
+  ])
   const pageIdentity = getBundlePageIdentity(data, tab)
 
   data.bundle = {
@@ -415,7 +494,9 @@ export const runBundleLicenseDetection = async (tabId: number): Promise<void> =>
     scripts: observations.map(observation => ({
       url: observation.url,
       sidecarUrl: observation.sidecarUrl || '',
-      commentCount: observation.commentCount
+      commentCount: observation.commentCount,
+      sourceLength: observation.sourceLength || 0,
+      embeddedAuthUrls: observation.embeddedAuthUrls || []
     })),
     technologies
   }
