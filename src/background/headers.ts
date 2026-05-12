@@ -142,6 +142,19 @@ const markSpoofedHeaderDetections = (technologies: any[], headers: Record<string
   }
 }
 
+// 这些 header 是「允许列表」性质（CSP 列出可加载的源、Report-To 列出错误上报通道等），
+// 内容是一长串第三方域名 / 类型字面量，不代表站点实际在用这些技术；扫描时跳过它们能避免误报
+const ALLOWLIST_STYLE_HEADERS = new Set([
+  'content-security-policy',
+  'content-security-policy-report-only',
+  'report-to',
+  'reporting-endpoints',
+  'permissions-policy',
+  'feature-policy',
+  'expect-ct',
+  'nel'
+])
+
 const detectFromHeaders = (headers: Record<string, string>, url: string, headerRules: any = {}, settings: any = {}) => {
   const technologies: any[] = []
   const add = createCollector(technologies, '响应头')
@@ -149,6 +162,7 @@ const detectFromHeaders = (headers: Record<string, string>, url: string, headerR
   const poweredBy = lower(headers['x-powered-by'])
   const headerBlob =
     Object.entries(headers)
+      .filter(([name]) => !ALLOWLIST_STYLE_HEADERS.has(name.toLowerCase()))
       .map(([name, value]) => `${name}: ${value}`)
       .join('\n') + `\nurl: ${url || ''}`
   const lowerHeaderBlob = lower(headerBlob)

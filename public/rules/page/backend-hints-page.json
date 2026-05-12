@@ -65,11 +65,7 @@
         {
           "name": "ThinkPHP",
           "confidence": "中",
-          "patterns": [
-            "thinkphp",
-            "index\\.php\\?s=",
-            "(?:^|/)index/(?:index|home|pay|user|api)/[a-z0-9_-]+(?:[?#\\s\"'<>]|$)"
-          ]
+          "patterns": ["thinkphp", "index\\.php\\?s=", "(?:^|/)index/(?:index|home|pay|user|api)/[a-z0-9_-]+(?:[?#\\s\"'<>]|$)"]
         },
         {
           "name": "CakePHP",
@@ -107,11 +103,7 @@
           "name": "FreeMarker",
           "confidence": "中",
           "matchIn": ["url", "resources", "html", "dynamic"],
-          "patterns": [
-            "freemarker",
-            "\\.ftl(?:[?#\\s\"'<>]|$)",
-            "(?:^|/)ftl(?:/|[?#\\s\"'<>]|$)"
-          ]
+          "patterns": ["freemarker", "\\.ftl(?:[?#\\s\"'<>]|$)", "(?:^|/)ftl(?:/|[?#\\s\"'<>]|$)"]
         },
         {
           "name": "Apache Wicket",
@@ -137,7 +129,7 @@
             },
             {
               "name": "Play Framework",
-              "patterns": ["play-framework|play\\.api|csrfToken.*play"]
+              "patterns": ["play-framework", "play\\.api\\.mvc", "playframework\\.com", "play_session"]
             }
           ]
         },

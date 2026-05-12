@@ -428,7 +428,9 @@ const detectPageTechnologies = async (ruleConfig: Record<string, unknown> = {}) 
       'require',
       'requirejs',
       'system',
-      'systemjs'
+      'systemjs',
+      // 站点自身的内部脚本，不是公共库
+      'tgwallpaper'
     ])
     return !genericNames.has(name.toLowerCase())
   }
@@ -859,7 +861,15 @@ ${html}`
         type: (link.type || '').toLowerCase(),
         title: link.title || ''
       }))
-      .filter(link => link.href && /rss|atom|feed|json/.test(`${link.type} ${link.href}`.toLowerCase()))
+      // 只接受真正的 feed 类型，避免 application/json+oembed 这种非 feed 的备用链接被误算成 JSON Feed
+      .filter(
+        link =>
+          link.href &&
+          !/oembed/.test(`${link.type} ${link.href}`.toLowerCase()) &&
+          /(?:rss|atom|jsonfeed|feed\+json|json\+feed|application\/feed|\.rss\b|\.atom\b|\/feed(?:\/|\.json|$|\?)|\/rss(?:\/|$|\?)|\/atom(?:\/|$|\?))/.test(
+            `${link.type} ${link.href}`.toLowerCase()
+          )
+      )
 
     for (const link of feedLinks.slice(0, 20)) {
       const name = feedNameFromType(link.type, link.href)

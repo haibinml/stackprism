@@ -127,8 +127,7 @@
           },
           {
             "name": "Fluent UI / Fabric",
-            "patterns": ["@fluentui|office-ui-fabric|ms-Fabric|ms-Button"],
-            "classPrefixes": ["ms-"]
+            "patterns": ["@fluentui|office-ui-fabric|ms-Fabric|ms-Button"]
           },
           {
             "name": "Blueprint",
@@ -212,7 +211,7 @@
           },
           {
             "name": "Framework7",
-            "patterns": ["framework7(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)|f7-"],
+            "patterns": ["framework7(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)"],
             "globals": ["Framework7"],
             "classPrefixes": ["f7-"]
           },
@@ -240,7 +239,7 @@
           },
           {
             "name": "Varlet",
-            "patterns": ["varlet|@varlet\\/|var-"]
+            "patterns": ["varlet|@varlet\\/|varletjs"]
           },
           {
             "name": "Semi Design",

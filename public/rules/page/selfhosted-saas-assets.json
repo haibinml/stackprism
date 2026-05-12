@@ -370,8 +370,8 @@
         {
           "name": "Outline Wiki",
           "kind": "知识库 / 文档",
-          "resourceHints": ["outline"],
-          "patterns": ["outline[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+          "resourceHints": ["getoutline", "outline-wiki", "outlinewiki", "/outline/"],
+          "patterns": ["getoutline\\.com", "(?:^|/)outline(?:-wiki|wiki)?[._-][^\\s\"'<>]*\\.(?:js|css)", "/outline/"]
         },
         {
           "name": "Wiki.js",

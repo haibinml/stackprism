@@ -315,6 +315,10 @@
           "patterns": ["githubusercontent\\.com"]
         },
         {
+          "name": "Telegram CDN",
+          "patterns": ["telesco\\.pe", "cdn[0-9]*\\.telesco\\.pe"]
+        },
+        {
           "name": "GitLab Pages",
           "patterns": ["gitlab\\.io"]
         },

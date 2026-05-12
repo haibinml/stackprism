@@ -150,7 +150,9 @@ const isLikelyDynamicLibraryFileName = name => {
     'require',
     'requirejs',
     'system',
-    'systemjs'
+    'systemjs',
+    // 站点自身的内部脚本，不是公共库
+    'tgwallpaper'
   ])
   return !genericNames.has(name.toLowerCase())
 }

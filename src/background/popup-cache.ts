@@ -137,6 +137,21 @@ export const suppressGenericCdnFallbacks = (technologies: any[]) => {
   return technologies.filter(tech => tech?.category !== 'CDN / 托管' || !GENERIC_CDN_FALLBACK_NAMES.has(tech?.name))
 }
 
+// 同名技术既被识别为 UI / CSS 框架（或前端框架），又被归到「前端库」类目时，去掉后者的重复条目
+// 例：Bootstrap 同时进了「UI / CSS 框架」和「前端库」，只保留前者
+const SPECIFIC_CATEGORIES_OVER_GENERIC_LIB = new Set(['UI / CSS 框架', '前端框架', '构建与运行时'])
+export const suppressGenericFrontendLibDuplicates = (technologies: any[]) => {
+  if (!Array.isArray(technologies) || !technologies.length) return technologies
+  const specificNames = new Set<string>()
+  for (const tech of technologies) {
+    if (tech?.category && SPECIFIC_CATEGORIES_OVER_GENERIC_LIB.has(tech.category) && tech.name) {
+      specificNames.add(normalizeTechName(tech.name))
+    }
+  }
+  if (!specificNames.size) return technologies
+  return technologies.filter(tech => tech?.category !== '前端库' || !specificNames.has(normalizeTechName(tech.name)))
+}
+
 export const filterTechnologiesBySettings = (technologies: any[], settings: any) => {
   const disabledCategories = new Set(cleanStringArray(settings?.disabledCategories))
   const disabledTechnologies = new Set(cleanStringArray(settings?.disabledTechnologies).map(name => normalizeTechName(name)))
@@ -290,7 +305,11 @@ const buildDisplayTechnologies = (data: any, settings: any, suppressMap: Record<
   )
   const pageUrl = data.page?.url || data.dynamic?.url || data.main?.url || ''
   return filterTechnologiesBySettings(
-    suppressSelfHostTechs(suppressGenericCdnFallbacks(mergeDisplayTechnologyRecords(all)), pageUrl, suppressMap),
+    suppressSelfHostTechs(
+      suppressGenericFrontendLibDuplicates(suppressGenericCdnFallbacks(mergeDisplayTechnologyRecords(all))),
+      pageUrl,
+      suppressMap
+    ),
     settings
   )
 }
