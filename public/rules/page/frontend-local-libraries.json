@@ -1471,6 +1471,55 @@
             ]
           },
           {
+            "name": "Heroicons",
+            "patterns": [
+              "(?:^|/)heroicons(?:\\.min)?\\.(?:js|css|svg)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)@heroicons/(?:react|vue|solid)(?:@[^/\\s\"'<>]+)?/.+\\.(?:m?js|cjs|svg)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "Lucide",
+            "patterns": [
+              "(?:^|/)lucide(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)lucide(?:-react|-vue-next|-svelte|-preact|-angular)?(?:@[^/\\s\"'<>]+)?/.+\\.(?:m?js|cjs|svg)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "Phosphor Icons",
+            "patterns": [
+              "(?:^|/)phosphor(?:-icons)?(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)@phosphor-icons/(?:web|react|vue|svelte)(?:@[^/\\s\"'<>]+)?/.+\\.(?:m?js|cjs|css|svg)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "Iconify",
+            "patterns": [
+              "(?:^|/)iconify(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)@iconify/(?:iconify|iconify-icon|react|vue|svelte|utils)(?:@[^/\\s\"'<>]+)?/.+\\.(?:m?js|cjs|css|svg)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "Boxicons",
+            "patterns": [
+              "(?:^|/)boxicons(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)boxicons(?:@[^/\\s\"'<>]+)?/.+\\.(?:js|css|svg|woff2?)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "Line Awesome",
+            "patterns": [
+              "(?:^|/)line-awesome(?:\\.min)?\\.css(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)line-awesome(?:@[^/\\s\"'<>]+)?/.+\\.(?:css|svg|woff2?)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "Academicons",
+            "patterns": [
+              "(?:^|/)academicons(?:\\.min)?\\.css(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)academicons(?:@[^/\\s\"'<>]+)?/.+\\.(?:css|svg|woff2?)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
             "name": "flag-icon-css",
             "patterns": [
               "(?:^|/)flag-icon(?:\\.min)?\\.css(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
