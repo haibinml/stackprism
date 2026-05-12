@@ -3,9 +3,16 @@ import { augmentPageWithWordPressThemeStyles, detectWordPressThemeStylesFromPage
 import { clearBadge, clearTabSession, getTabData, getTabSnapshot } from './tab-store'
 import { queueDynamicSnapshot } from './dynamic-snapshot'
 import { addStoredCustomHeaderRules } from './headers'
-import { buildPopupRawResult, cleanPageDetectionRecord, cleanTechnologyRecords, getPopupResultResponse } from './popup-cache'
+import {
+  buildPopupRawResult,
+  cleanPageDetectionRecord,
+  cleanTechnologyRecords,
+  getPopupResultResponse,
+  mergePageDetectionRecord
+} from './popup-cache'
 import { runActivePageDetection, saveTabDataAndBadge } from './detection'
 import { loadDetectorSettings } from './detector-settings'
+import { withTabWriteLock } from './tab-write-lock'
 import { checkPageSupport, isDetectablePageUrl } from '@/utils/page-support'
 
 const clearUnsupportedTab = async (tabId: number) => {
@@ -115,16 +122,21 @@ export const registerMessageRouter = () => {
         sendResponse({ ok: false, error: '缺少有效 tabId' })
         return false
       }
-      Promise.all([getTabData(tabId), loadDetectorSettings(), getTabSnapshot(tabId)])
-        .then(async ([data, settings, tab]) => {
+      Promise.all([loadDetectorSettings(), getTabSnapshot(tabId)])
+        .then(async ([settings, tab]) => {
           if (!isDetectablePageUrl(tab.url)) {
             await clearUnsupportedTab(tabId)
             return
           }
           const page = await augmentPageWithWordPressThemeStyles(message.page)
-          data.page = cleanPageDetectionRecord(page)
-          data.updatedAt = Date.now()
-          return saveTabDataAndBadge(tabId, data, settings)
+          const freshClean = cleanPageDetectionRecord(page)
+          // 进 per-tab 锁:跟 detection / dynamic / bundle / webRequest 串行,避免互相覆盖字段
+          await withTabWriteLock(tabId, async () => {
+            const latest = (await getTabData(tabId)) || {}
+            latest.page = mergePageDetectionRecord(latest.page, freshClean)
+            latest.updatedAt = Date.now()
+            await saveTabDataAndBadge(tabId, latest, settings)
+          })
         })
         .then(() => sendResponse({ ok: true }))
         .catch(error => sendResponse({ ok: false, error: String(error) }))

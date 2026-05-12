@@ -13,6 +13,7 @@ import { getTabData, getTabSnapshot } from './tab-store'
 import { SETTINGS_STORAGE_KEY, applyDetectorSettingsUpdate, loadDetectorSettings, loadTechRules } from './detector-settings'
 import { registerMessageRouter } from './message-router'
 import { clearBundleLicenseTimer } from './bundle-license'
+import { clearTabWriteLock, withTabWriteLock } from './tab-write-lock'
 import { isDetectablePageUrl, isObservableRequestUrl } from '@/utils/page-support'
 
 registerMessageRouter()
@@ -41,6 +42,7 @@ const clearTabDetectionState = (tabId: number) => {
   clearBundleLicenseTimer(tabId)
   clearDynamicSnapshotTimer(tabId)
   clearPendingDynamicSnapshot(tabId)
+  clearTabWriteLock(tabId)
   clearBadge(tabId)
   clearTabSession(tabId).catch(() => {})
 }
@@ -105,8 +107,8 @@ chrome.webRequest.onHeadersReceived.addListener(
     if (details.tabId < 0 || !details.responseHeaders) return
     if (!isObservableRequestUrl(details.url)) return
 
-    Promise.all([getTabData(details.tabId), loadTechRules(), loadDetectorSettings(), getTabSnapshot(details.tabId)])
-      .then(([data, rules, settings, tab]) => {
+    Promise.all([loadTechRules(), loadDetectorSettings(), getTabSnapshot(details.tabId)])
+      .then(async ([rules, settings, tab]) => {
         if (details.type === 'main_frame' && !isDetectablePageUrl(details.url)) {
           clearTabDetectionState(details.tabId)
           return
@@ -116,18 +118,22 @@ chrome.webRequest.onHeadersReceived.addListener(
           return
         }
         const record = buildHeaderRecord(details, rules.headers || {}, settings)
-        if (details.type === 'main_frame') {
-          clearCrossOriginDynamicSnapshot(data, details.url)
-          data.main = shouldMergeHeaderRecords(data.main, record) ? mergeHeaderRecords(data.main, record) : record
-          data.apis = []
-          data.frames = []
-        } else if (details.type === 'xmlhttprequest' || (details.type as string) === 'fetch' || details.type === 'websocket') {
-          data.apis = dedupeApiRecords([record, ...(data.apis || [])])
-        } else if (details.type === 'sub_frame') {
-          data.frames = dedupeApiRecords([record, ...(data.frames || [])]).slice(0, 10)
-        }
-        data.updatedAt = Date.now()
-        return saveTabDataAndBadge(details.tabId, data, settings)
+        // 进 per-tab 锁:concurrent webRequest 事件不能并发 read-modify-write,否则会互相覆盖彼此的 apis / frames / main
+        await withTabWriteLock(details.tabId, async () => {
+          const latest = (await getTabData(details.tabId)) || {}
+          if (details.type === 'main_frame') {
+            clearCrossOriginDynamicSnapshot(latest, details.url)
+            latest.main = shouldMergeHeaderRecords(latest.main, record) ? mergeHeaderRecords(latest.main, record) : record
+            latest.apis = []
+            latest.frames = []
+          } else if (details.type === 'xmlhttprequest' || (details.type as string) === 'fetch' || details.type === 'websocket') {
+            latest.apis = dedupeApiRecords([record, ...(latest.apis || [])])
+          } else if (details.type === 'sub_frame') {
+            latest.frames = dedupeApiRecords([record, ...(latest.frames || [])]).slice(0, 10)
+          }
+          latest.updatedAt = Date.now()
+          await saveTabDataAndBadge(details.tabId, latest, settings)
+        })
       })
       .catch(() => {})
   },

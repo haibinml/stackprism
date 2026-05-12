@@ -1,10 +1,11 @@
 import { augmentPageWithWordPressThemeStyles } from './wordpress'
-import { buildPopupCacheRecord, cleanPageDetectionRecord } from './popup-cache'
+import { buildPopupCacheRecord, cleanPageDetectionRecord, mergePageDetectionRecord } from './popup-cache'
 import { fetchMainHeadersFallback, mergeHeaderRecords } from './headers'
 import { clearBadge, clearTabSession, getTabData, getTabSnapshot, updateBadgeForTab, writeTabData } from './tab-store'
 import { buildEffectivePageRules, loadDetectorSettings, loadTechRules } from './detector-settings'
 import { scheduleBundleLicenseDetection } from './bundle-license'
 import { injectContentObserver } from './content-injector'
+import { withTabWriteLock } from './tab-write-lock'
 import { isDetectablePageUrl } from '@/utils/page-support'
 
 const activeDetectionTimers = new Map<number, ReturnType<typeof setTimeout>>()
@@ -106,7 +107,9 @@ export const runActivePageDetection = async (tabId: number, options: { force?: b
     lastDetectionRunAt.set(tabId, Date.now())
     console.log('[SP detection] run start', tabId, 'force:', Boolean(options.force))
     await injectContentObserver(tabId)
-    const [data, rules, settings] = await Promise.all([getTabData(tabId), loadTechRules(), loadDetectorSettings()])
+    // 这里不再预读 data —— page-detector 注入要 500ms+,期间其他 writer 会写过 storage;
+    // 等 detector 跑完再统一 re-read 最新 data 再做合并写回
+    const [rules, settings] = await Promise.all([loadTechRules(), loadDetectorSettings()])
     const pageRules = buildEffectivePageRules(rules.page || {}, settings)
     await chrome.scripting.executeScript({
       target: { tabId },
@@ -125,21 +128,36 @@ export const runActivePageDetection = async (tabId: number, options: { force?: b
     if (!page) return
 
     const augmentedPage = await augmentPageWithWordPressThemeStyles(page)
-    data.page = cleanPageDetectionRecord(augmentedPage)
+    const freshClean = cleanPageDetectionRecord(augmentedPage)
 
-    if (needsMainHeadersFallback(data.main, (page as any).url || tab.url)) {
-      const fallback = await fetchMainHeadersFallback((page as any).url || '', rules.headers || {}, settings)
-      if (fallback) {
-        data.main = shouldPreserveMainHeaderRecord(data.main, (page as any).url || tab.url)
-          ? mergeHeaderRecords(data.main, fallback)
-          : fallback
-      } else if (data.main && !shouldPreserveMainHeaderRecord(data.main, (page as any).url || tab.url)) {
-        delete data.main
-      }
+    // 进 per-tab 锁:read-modify-write 段必须跟其他 writer 串行,避免 dynamic/bundle/headers 并发读到同一份旧快照,
+    // 互相把对方刚写好的字段覆盖掉(popup 上数字回落)
+    let fallbackForMain: any = null
+    const needsFallback = await withTabWriteLock(tabId, async () => {
+      const peek = (await getTabData(tabId)) || {}
+      return needsMainHeadersFallback(peek.main, (page as any).url || tab.url)
+    })
+    if (needsFallback) {
+      fallbackForMain = await fetchMainHeadersFallback((page as any).url || '', rules.headers || {}, settings)
     }
 
-    data.updatedAt = Date.now()
-    await saveTabDataAndBadge(tabId, data, settings)
+    await withTabWriteLock(tabId, async () => {
+      const latest = (await getTabData(tabId)) || {}
+      latest.page = mergePageDetectionRecord(latest.page, freshClean)
+
+      if (needsMainHeadersFallback(latest.main, (page as any).url || tab.url)) {
+        if (fallbackForMain) {
+          latest.main = shouldPreserveMainHeaderRecord(latest.main, (page as any).url || tab.url)
+            ? mergeHeaderRecords(latest.main, fallbackForMain)
+            : fallbackForMain
+        } else if (latest.main && !shouldPreserveMainHeaderRecord(latest.main, (page as any).url || tab.url)) {
+          delete latest.main
+        }
+      }
+
+      latest.updatedAt = Date.now()
+      await saveTabDataAndBadge(tabId, latest, settings)
+    })
     scheduleBundleLicenseDetection(tabId)
   } catch {
     return

@@ -522,3 +522,39 @@ export const cleanPageDetectionRecord = (page: any) => ({
   technologies: cleanTechnologyRecords(page?.technologies),
   resources: cleanPageResources(page?.resources)
 })
+
+// 同一 URL 下 page detection 多次重跑（SPA 异步渲染、tab 复用、用户在页面停留期间触发再扫描）时
+// 合并技术列表 + 资源 URL,而不是直接整段替换；可以避免新一轮抓得少导致 popup 上检测项闪烁式回落
+export const mergePageDetectionRecord = (previous: any, fresh: any) => {
+  if (!fresh) return previous || null
+  if (!previous || !previous.url || previous.url !== fresh.url) return fresh
+  const previousTechs = Array.isArray(previous.technologies) ? previous.technologies : []
+  const freshTechs = Array.isArray(fresh.technologies) ? fresh.technologies : []
+  const previousResources = previous.resources || {}
+  const freshResources = fresh.resources || {}
+  const mergeUrlList = (a: any, b: any, limit: number) => {
+    const seen = new Set<string>()
+    const out: string[] = []
+    for (const value of [...(Array.isArray(a) ? a : []), ...(Array.isArray(b) ? b : [])]) {
+      const url = typeof value === 'string' ? value : ''
+      if (!url || seen.has(url)) continue
+      seen.add(url)
+      out.push(url)
+      if (out.length >= limit) break
+    }
+    return out
+  }
+  return {
+    ...fresh,
+    technologies: mergeTechnologyRecords([...previousTechs, ...freshTechs]),
+    resources: {
+      ...previousResources,
+      ...freshResources,
+      scripts: mergeUrlList(previousResources.scripts, freshResources.scripts, 200),
+      stylesheets: mergeUrlList(previousResources.stylesheets, freshResources.stylesheets, 200),
+      resourceTiming: mergeUrlList(previousResources.resourceTiming, freshResources.resourceTiming, 400),
+      all: mergeUrlList(previousResources.all, freshResources.all, 400),
+      themeAssetUrls: mergeUrlList(previousResources.themeAssetUrls, freshResources.themeAssetUrls, 120)
+    }
+  }
+}

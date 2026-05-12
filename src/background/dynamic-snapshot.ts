@@ -13,9 +13,10 @@ import { clearBadge, clearTabSession, getTabData, getTabSnapshot } from './tab-s
 import { saveTabDataAndBadge } from './detection'
 import { buildEffectivePageRules, loadDetectorSettings, loadTechRules } from './detector-settings'
 import { scheduleBundleLicenseDetection } from './bundle-license'
+import { withTabWriteLock } from './tab-write-lock'
 
 const DYNAMIC_FAST_LOOKUP_RULE_MIN = 1000
-const DYNAMIC_SNAPSHOT_PROCESS_DELAY = 800
+const DYNAMIC_SNAPSHOT_PROCESS_DELAY = 400
 
 const dynamicFrontendRuleKeyCache = new WeakMap()
 const dynamicFrontendHintsFlagCache = new WeakMap()
@@ -152,12 +153,29 @@ const isLikelyDynamicLibraryFileName = name => {
     'system',
     'systemjs',
     // 文档站 / 内容站常见的搜索 worker 文件名（mkdocs / docusaurus / vitepress 等都叫这名），
-    // 真实的搜索库（Lunr / FlexSearch / Pagefind / Algolia）会通过专用规则或版权注释命中
+    // 真实的搜索库（Lunr / FlexSearch / Pagefind / Algolia）会通过专用规则或官方版权注释命中
     'search',
+    // 通用名，几乎所有站点都有但不属于公共库
+    'sdk',
+    'analytics',
+    'tracker',
+    'tracking',
+    'beacon',
+    'pixel',
     // 站点自身的内部脚本，不是公共库
-    'tgwallpaper'
+    'tgwallpaper',
+    'jsbin'
   ])
-  return !genericNames.has(name.toLowerCase())
+  if (genericNames.has(name.toLowerCase())) {
+    return false
+  }
+  if (/^ms\.[a-z0-9_-]+$/i.test(name)) {
+    return false
+  }
+  if (/^(?:tas-client|ethicalads|svg-loader)$/i.test(name)) {
+    return false
+  }
+  return true
 }
 
 const compileOptionalDynamicPattern = pattern => {
@@ -670,10 +688,15 @@ const processQueuedDynamicSnapshot = async tabId => {
     return
   }
 
-  const [data, rules, settings] = await Promise.all([getTabData(tabId), loadTechRules(), loadDetectorSettings()])
-  data.dynamic = normalizeDynamicSnapshot(snapshot, buildEffectivePageRules(rules.page || {}, settings), data.dynamic)
-  data.updatedAt = Date.now()
-  await saveTabDataAndBadge(tabId, data, settings)
+  const [rules, settings] = await Promise.all([loadTechRules(), loadDetectorSettings()])
+  const pageRulesForDynamic = buildEffectivePageRules(rules.page || {}, settings)
+  // 进 per-tab 锁:跟 detection / bundle / webRequest 串行做 read-modify-write,避免并发覆盖
+  await withTabWriteLock(tabId, async () => {
+    const latest = (await getTabData(tabId)) || {}
+    latest.dynamic = normalizeDynamicSnapshot(snapshot, pageRulesForDynamic, latest.dynamic)
+    latest.updatedAt = Date.now()
+    await saveTabDataAndBadge(tabId, latest, settings)
+  })
   scheduleBundleLicenseDetection(tabId)
 }
 
