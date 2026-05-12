@@ -213,6 +213,81 @@ const cleanRawDynamicObservation = (dynamic: any, data: any) => {
   }
 }
 
+// 站点自身的「品牌识别」抑制：当用户就在 github.com 时不再把 GitHub.com 当作一项「使用了的技术」
+// 显示给他，那是 URL 栏里已经告诉他的事情
+const SELF_HOST_SUPPRESS: Record<string, readonly string[]> = {
+  'github.com': ['GitHub.com', 'GitHub'],
+  'gitlab.com': ['GitLab.com', 'GitLab'],
+  'bitbucket.org': ['Bitbucket'],
+  'codeberg.org': ['Codeberg'],
+  'gitee.com': ['Gitee'],
+  'huggingface.co': ['Hugging Face'],
+  'stackoverflow.com': ['Stack Overflow'],
+  'stackexchange.com': ['Stack Exchange'],
+  'npmjs.com': ['npm', 'npm 包注册中心'],
+  'pypi.org': ['PyPI'],
+  'crates.io': ['crates.io'],
+  'rubygems.org': ['RubyGems'],
+  'packagist.org': ['Packagist'],
+  'twitter.com': ['Twitter', 'X (Twitter)'],
+  'x.com': ['Twitter', 'X (Twitter)'],
+  'facebook.com': ['Facebook'],
+  'instagram.com': ['Instagram'],
+  'linkedin.com': ['LinkedIn'],
+  'youtube.com': ['YouTube'],
+  'tiktok.com': ['TikTok'],
+  'reddit.com': ['Reddit'],
+  'discord.com': ['Discord'],
+  'slack.com': ['Slack'],
+  'telegram.org': ['Telegram'],
+  'whatsapp.com': ['WhatsApp'],
+  'medium.com': ['Medium'],
+  'substack.com': ['Substack'],
+  'notion.so': ['Notion'],
+  'figma.com': ['Figma'],
+  'linear.app': ['Linear'],
+  'asana.com': ['Asana'],
+  'trello.com': ['Trello'],
+  'monday.com': ['monday.com', 'Monday'],
+  'airtable.com': ['Airtable'],
+  'shopify.com': ['Shopify Admin'],
+  'replit.com': ['Replit'],
+  'codepen.io': ['CodePen'],
+  'stackblitz.com': ['StackBlitz'],
+  'codesandbox.io': ['CodeSandbox'],
+  'jsfiddle.net': ['JSFiddle'],
+  'google.com': ['Google Search'],
+  'bing.com': ['Bing'],
+  'duckduckgo.com': ['DuckDuckGo'],
+  'baidu.com': ['百度', 'Baidu'],
+  'zhihu.com': ['知乎', 'Zhihu'],
+  'weibo.com': ['微博', 'Weibo'],
+  'bilibili.com': ['哔哩哔哩', 'Bilibili']
+}
+
+const extractRegistrableHost = (url: string): string => {
+  try {
+    return new URL(url).hostname.toLowerCase().replace(/^www\./, '')
+  } catch {
+    return ''
+  }
+}
+
+const suppressSelfHostTechs = (technologies: any[], pageUrl: string): any[] => {
+  const host = extractRegistrableHost(pageUrl)
+  if (!host) return technologies
+  // 主域匹配：github.com 时也抑制；gist.github.com 时按完整 host 找不到，回退取末两段
+  const parts = host.split('.')
+  const candidates = [host, parts.slice(-2).join('.')]
+  const suppressNames = new Set<string>()
+  for (const candidate of candidates) {
+    const list = SELF_HOST_SUPPRESS[candidate]
+    if (list) for (const name of list) suppressNames.add(name)
+  }
+  if (!suppressNames.size) return technologies
+  return technologies.filter(tech => !suppressNames.has(String(tech?.name || '')))
+}
+
 const buildDisplayTechnologies = (data: any, settings: any) => {
   const all: any[] = []
   addAllTechnologies(all, data.page?.technologies)
@@ -249,7 +324,11 @@ const buildDisplayTechnologies = (data: any, settings: any) => {
       source: tech.source || 'JS 版权注释'
     }))
   )
-  return filterTechnologiesBySettings(suppressGenericCdnFallbacks(mergeDisplayTechnologyRecords(all)), settings)
+  const pageUrl = data.page?.url || data.dynamic?.url || data.main?.url || ''
+  return filterTechnologiesBySettings(
+    suppressSelfHostTechs(suppressGenericCdnFallbacks(mergeDisplayTechnologyRecords(all)), pageUrl),
+    settings
+  )
 }
 
 const buildPopupResult = async (data: any, settings: any, tab: any) => {
