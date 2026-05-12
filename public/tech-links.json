@@ -21089,6 +21089,8 @@
     "Drupal 8 Parallax Theme": "https://www.drupal.org/project/drupal8_parallax_theme",
     "Contacts Admin Theme": "https://www.drupal.org/project/contacts_theme",
     "Studio1 - a Paragraphs integrated theme": "https://www.drupal.org/project/studio1",
-    "Management Theme": "https://www.drupal.org/project/management"
+    "Management Theme": "https://www.drupal.org/project/management",
+    "HTTPS": "https://developer.mozilla.org/zh-CN/docs/Glossary/HTTPS",
+    "Content Security Policy": "https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP"
   }
 }
