@@ -81,10 +81,62 @@ const applyHeaderRuleList = (
 const applyHeaderValueRuleList = (add: any, rules: any[], value: string, rawValue: string, headerName: string) => {
   if (!value || !Array.isArray(rules) || !rules.length) return
 
+  // Server / X-Powered-By 字段正常只对应一个产品；带逗号往往是反代叠加或伪造
+  // 只匹配第一段，避免被「openresty, Microsoft-IIS/10.0」这种伪造糊弄
+  const primaryValue = headerName === 'server' || headerName === 'x-powered-by' ? value.split(',')[0].trim() : value
+  if (!primaryValue) return
+
   for (const rule of rules) {
-    if (!matchesHeaderPatterns(rule.patterns, value, rule)) continue
+    if (!matchesHeaderPatterns(rule.patterns, primaryValue, rule)) continue
     const evidence = rule.evidence || `${headerName}: ${rawValue}`
     add(rule.category || '其他库', rule.name, rule.confidence || '高', evidence)
+    if (headerName === 'server' || headerName === 'x-powered-by') break // 这两个字段正常只标识一种产品
+  }
+}
+
+// 主体身份响应头：每一项理论上只对应一种栈，集齐很多个不同身份就是被伪造的强信号
+const SPOOF_INDICATOR_HEADERS = [
+  'server',
+  'x-powered-by',
+  'x-aspnet-version',
+  'x-aspnetmvc-version',
+  'x-drupal-cache',
+  'x-drupal-dynamic-cache',
+  'x-generator',
+  'x-powered-cms',
+  'x-varnish',
+  'x-rails-version',
+  'x-runtime',
+  'x-php-version',
+  'x-jenkins',
+  'x-cocoon-version'
+]
+
+const SPOOF_PRONE_CATEGORIES = new Set(['Web 服务器', '网站程序', '后端 / 服务器框架', '开发语言 / 运行时', 'CMS / 电商平台'])
+
+const countSpoofIndicators = (headers: Record<string, string>): number => {
+  let count = 0
+  for (const name of SPOOF_INDICATOR_HEADERS) {
+    const value = headers[name]
+    if (typeof value === 'string' && value.trim()) count += 1
+  }
+  return count
+}
+
+const SPOOF_NOTICE = '响应头里同时出现多种不同主体身份字段，识别结果可能被伪造'
+
+const markSpoofedHeaderDetections = (technologies: any[], headers: Record<string, string>): void => {
+  const indicatorCount = countSpoofIndicators(headers)
+  // server 自身就带多个产品 / 出现 4+ 个不同身份字段：视为伪造
+  const serverHasMultiple = typeof headers.server === 'string' && headers.server.includes(',')
+  if (indicatorCount < 4 && !serverHasMultiple) return
+  for (const tech of technologies) {
+    if (!SPOOF_PRONE_CATEGORIES.has(tech.category)) continue
+    tech.confidence = '低'
+    const evidence: string[] = Array.isArray(tech.evidence) ? tech.evidence : tech.evidence ? [tech.evidence] : []
+    if (!evidence.some((line: string) => typeof line === 'string' && line.includes(SPOOF_NOTICE))) {
+      tech.evidence = [SPOOF_NOTICE, ...evidence]
+    }
   }
 }
 
@@ -130,6 +182,8 @@ const detectFromHeaders = (headers: Record<string, string>, url: string, headerR
     rule => (rule.kind ? `${rule.kind}：` : ''),
     lowerHeaderBlob
   )
+
+  markSpoofedHeaderDetections(technologies, headers)
 
   return technologies
 }
