@@ -29,15 +29,15 @@
           "rules": [
             {
               "name": "Astra Theme",
-              "patterns": ["/wp-content/themes/astra/", "astra-theme", "ast-container", "astra-addon"]
+              "patterns": ["/wp-content/themes/astra/", "/wp-content/plugins/astra-addon/"]
             },
             {
               "name": "GeneratePress",
-              "patterns": ["/wp-content/themes/generatepress/", "generatepress", "inside-article", "generateblocks"]
+              "patterns": ["/wp-content/themes/generatepress/", "/wp-content/plugins/generateblocks/"]
             },
             {
               "name": "OceanWP",
-              "patterns": ["/wp-content/themes/oceanwp/", "oceanwp", "oceanwp-theme"]
+              "patterns": ["/wp-content/themes/oceanwp/"]
             }
           ]
         },
@@ -60,7 +60,7 @@
         {
           "name": "Blocksy",
           "kind": "WordPress 主题",
-          "patterns": ["/wp-content/themes/blocksy/", "blocksy", "ct-container"]
+          "patterns": ["/wp-content/themes/blocksy/"]
         },
         {
           "name": "Bricks Builder",

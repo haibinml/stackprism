@@ -170,7 +170,13 @@
       {
         "name": "Confluence",
         "kind": "知识库",
-        "patterns": ["confluence", "atlassian", "/s/en_GB/"]
+        "patterns": [
+          "<meta[^>]+name=[\"']?generator[\"']?[^>]+content=[\"'][^\"']*confluence",
+          "(?:^|/)confluence/(?:download|plugins|images|s/)",
+          "atlassian-comment-",
+          "ajs-page-id\\s*=\\s*\"\\d",
+          "data-aui-version="
+        ]
       },
       {
         "name": "Moodle",
@@ -267,9 +273,7 @@
           {
             "name": "VitePress",
             "matchIn": ["html"],
-            "patterns": [
-              "<meta[^>]+name=[\"']?generator[\"']?[^>]+content=[\"'][^\"']*VitePress"
-            ]
+            "patterns": ["<meta[^>]+name=[\"']?generator[\"']?[^>]+content=[\"'][^\"']*VitePress"]
           },
           {
             "name": "VitePress",

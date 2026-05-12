@@ -5174,7 +5174,7 @@
           "patterns": ["wp-content/plugins/wp-menu-icons(?:/|[?#]|$)"]
         },
         {
-          "name": "Product Gallery Slider, Additional Variation Images, Product Video, Product Image Zoom and Lightbox ",
+          "name": "Product Gallery Slider, Additional Variation Images, Product Video, Product Image Zoom and Lightbox",
           "patterns": ["wp-content/plugins/gallery-slider-for-woocommerce(?:/|[?#]|$)"]
         },
         {
