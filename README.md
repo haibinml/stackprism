@@ -134,4 +134,4 @@ pnpm run docs:dev     # VitePress 文档站本地预览
 
 ## 开源协议
 
-本项目基于 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/) 协议授权 —— **允许非商业自由使用与二次修改,必须署名且衍生作品采用同一协议**。完整法律文本见 [LICENSE](LICENSE)。
+本项目基于 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 协议授权 —— **允许非商业自由使用与二次修改,必须署名且衍生作品采用同一协议**。完整法律文本见 [LICENSE](LICENSE)。
