@@ -836,17 +836,18 @@
     const isBundle = trimmed.startsWith('JS 版权注释')
     const isHeader = !isHeaderApi && !isHeaderFrame && trimmed.startsWith('响应头')
 
+    // 响应头无论 source 是哪个都带上：spoof 场景下排查时方便交叉对照
     const baseInfo = {
       url: raw?.url || '',
       title: raw?.title || '',
       technology: tech?.name || '',
-      source: trimmed
+      source: trimmed,
+      headers: raw?.headers || {}
     }
 
     if (isHeader) {
       return {
         ...baseInfo,
-        headers: raw?.headers || {},
         technologies: (raw?.technologies || []).filter(matchTech)
       }
     }
