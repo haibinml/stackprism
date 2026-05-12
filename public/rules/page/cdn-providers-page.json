@@ -303,8 +303,16 @@
           "patterns": ["firebaseapp\\.com|web\\.app"]
         },
         {
-          "name": "GitHub Pages / GitHub Assets",
-          "patterns": ["github\\.io|githubusercontent\\.com|githubassets\\.com"]
+          "name": "GitHub Pages",
+          "patterns": ["github\\.io"]
+        },
+        {
+          "name": "GitHub Assets",
+          "patterns": ["githubassets\\.com"]
+        },
+        {
+          "name": "GitHub Raw Content",
+          "patterns": ["githubusercontent\\.com"]
         },
         {
           "name": "GitLab Pages",

@@ -216,8 +216,10 @@ const cleanRawDynamicObservation = (dynamic: any, data: any) => {
 // 站点自身的「品牌识别」抑制：当用户就在 github.com 时不再把 GitHub.com 当作一项「使用了的技术」
 // 显示给他，那是 URL 栏里已经告诉他的事情
 const SELF_HOST_SUPPRESS: Record<string, readonly string[]> = {
-  'github.com': ['GitHub.com', 'GitHub'],
+  'github.com': ['GitHub.com', 'GitHub', 'GitHub Pages', 'GitHub Assets', 'GitHub Raw Content'],
+  'github.io': ['GitHub Pages', 'GitHub Assets', 'GitHub Raw Content'],
   'gitlab.com': ['GitLab.com', 'GitLab'],
+  'gitlab.io': ['GitLab Pages'],
   'bitbucket.org': ['Bitbucket'],
   'codeberg.org': ['Codeberg'],
   'gitee.com': ['Gitee'],
