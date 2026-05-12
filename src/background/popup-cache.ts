@@ -267,10 +267,59 @@ const suppressSelfHostTechs = (technologies: any[], pageUrl: string, suppressMap
   return technologies.filter(tech => !suppressNames.has(String(tech?.name || '')))
 }
 
+// 从所有 webRequest 记录里收集 HTTP 协议版本，比注入脚本里读 PerformanceResourceTiming.nextHopProtocol
+// 可靠得多——跨域资源没有 Timing-Allow-Origin 时浏览器把 nextHopProtocol 置空，而 statusLine 是请求发起时浏览器自己写的
+const collectHttpProtocolTechs = (data: any): any[] => {
+  const protocols = new Set<string>()
+  const sampleByProto = new Map<string, string>()
+  const consume = (record: any) => {
+    const proto = String(record?.httpProtocol || '').toLowerCase()
+    if (!proto) return
+    protocols.add(proto)
+    if (!sampleByProto.has(proto)) sampleByProto.set(proto, String(record?.url || ''))
+  }
+  consume(data?.main)
+  for (const api of data?.apis || []) consume(api)
+  for (const frame of data?.frames || []) consume(frame)
+  const out: any[] = []
+  const has3 = ['3', '3.0', 'h3'].some(v => protocols.has(v))
+  const has2 = ['2', '2.0', 'h2', 'h2c'].some(v => protocols.has(v))
+  if (has3) {
+    out.push({
+      category: '安全与协议',
+      name: 'HTTP/3',
+      confidence: '高',
+      evidence: [`资源使用 HTTP/3 协议（如 ${shortHostFromUrl(sampleByProto.get('3') || sampleByProto.get('h3') || '')}）`],
+      source: '响应头'
+    })
+  }
+  if (has2) {
+    out.push({
+      category: '安全与协议',
+      name: 'HTTP/2',
+      confidence: '高',
+      evidence: [
+        `资源使用 HTTP/2 协议（如 ${shortHostFromUrl(sampleByProto.get('2') || sampleByProto.get('2.0') || sampleByProto.get('h2') || '')}）`
+      ],
+      source: '响应头'
+    })
+  }
+  return out
+}
+
+const shortHostFromUrl = (url: string): string => {
+  try {
+    return new URL(url).host || url
+  } catch {
+    return url
+  }
+}
+
 const buildDisplayTechnologies = (data: any, settings: any, suppressMap: Record<string, string[]>) => {
   const all: any[] = []
   addAllTechnologies(all, data.page?.technologies)
   addAllTechnologies(all, data.main?.technologies)
+  addAllTechnologies(all, collectHttpProtocolTechs(data))
   for (const api of data.apis || []) {
     addAllTechnologies(
       all,

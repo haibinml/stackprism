@@ -240,6 +240,13 @@ const sanitizeAllHeaders = (headers: Record<string, string>) => {
   return out
 }
 
+// 从 webRequest 的 statusLine 拿协议版本 — "HTTP/2 200" / "HTTP/3 200" 这种
+// 比 PerformanceResourceTiming.nextHopProtocol 可靠：不需要 Timing-Allow-Origin，请求时刻就拿到
+const extractHttpProtocol = (statusLine: unknown): string => {
+  const match = /^HTTP\/([0-9.]+)/i.exec(String(statusLine || ''))
+  return match ? match[1].toLowerCase() : ''
+}
+
 export const buildHeaderRecord = (details: any, headerRules: any, settings: any) => {
   const normalizedHeaders = normalizeHeaders(details.responseHeaders)
   const headers = pickHeaders(normalizedHeaders, headerRules.interestingHeaders || [])
@@ -249,6 +256,7 @@ export const buildHeaderRecord = (details: any, headerRules: any, settings: any)
     type: details.type,
     method: details.method,
     statusCode: details.statusCode,
+    httpProtocol: extractHttpProtocol(details.statusLine),
     time: Date.now(),
     headers,
     allHeaders: sanitizeAllHeaders(normalizedHeaders),
