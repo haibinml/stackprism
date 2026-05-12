@@ -755,8 +755,8 @@
             {
               "name": "Plex",
               "confidence": "中",
-              "resourceHints": ["plex"],
-              "patterns": ["(?:^|[\\/._-])plex(?:[\\/._-]|[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$))"]
+              "resourceHints": ["plex.tv", "plex-media", "plex-web", "/plex/"],
+              "patterns": ["plex\\.tv", "(?:^|/)plex/", "plex-(?:media|web)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"]
             },
             {
               "name": "Emby",

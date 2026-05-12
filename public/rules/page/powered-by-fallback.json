@@ -191,14 +191,25 @@
               "url": "https://www.11ty.dev",
               "patterns": ["built with eleventy", "powered by eleventy", "built with 11ty"]
             },
-            { "name": "Gatsby", "url": "https://www.gatsbyjs.com", "patterns": ["built with gatsby", "powered by gatsby"] },
+            {
+              "name": "Gatsby",
+              "category": "前端框架",
+              "url": "https://www.gatsbyjs.com",
+              "patterns": ["built with gatsby", "powered by gatsby"]
+            },
             {
               "name": "Next.js",
+              "category": "前端框架",
               "url": "https://nextjs.org",
               "patterns": ["powered by next.js", "built with next.js", "built with nextjs"]
             },
-            { "name": "Nuxt", "url": "https://nuxt.com", "patterns": ["powered by nuxt", "built with nuxt"] },
-            { "name": "SvelteKit", "url": "https://svelte.dev/docs/kit", "patterns": ["powered by sveltekit", "built with sveltekit"] },
+            { "name": "Nuxt", "category": "前端框架", "url": "https://nuxt.com", "patterns": ["powered by nuxt", "built with nuxt"] },
+            {
+              "name": "SvelteKit",
+              "category": "前端框架",
+              "url": "https://svelte.dev/docs/kit",
+              "patterns": ["powered by sveltekit", "built with sveltekit"]
+            },
             {
               "name": "Astro Starlight",
               "url": "https://starlight.astro.build",

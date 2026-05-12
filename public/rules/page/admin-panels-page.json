@@ -738,7 +738,9 @@
               "confidence": "中",
               "patterns": [
                 "<title>\\s*Plex(?:\\s*</title>|\\s+-)",
-                "(?:^|[\\/._-])plex(?:[\\/._-]|[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$))"
+                "plex\\.tv",
+                "(?:^|/)plex/",
+                "plex-(?:media|web)[^\\s\"'<>]*\\.(?:js|css|svg|png|webp)(?:\\?|$)"
               ]
             },
             {
