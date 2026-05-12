@@ -229,8 +229,8 @@
           {
             "name": "Varnish",
             "confidence": "中",
-            "patterns": ["via:.*varnish", "x-cache:.*varnish"],
-            "evidence": "via/x-cache 包含 Varnish"
+            "patterns": ["via:.*varnish", "x-cache:.*varnish", "(?:^|\\n)x-varnish:\\s*\\d"],
+            "evidence": "响应头包含 Varnish 线索"
           },
           {
             "defaults": {

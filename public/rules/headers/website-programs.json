@@ -12,6 +12,11 @@
         "patterns": ["x-drupal-cache", "x-generator:.*drupal"]
       },
       {
+        "name": "Joomla",
+        "kind": "CMS",
+        "patterns": ["(?:^|\\n)x-content-encoded-by:[^\\n]*joomla", "(?:^|\\n)x-powered-cms:[^\\n]*joomla", "x-generator:.*joomla"]
+      },
+      {
         "name": "Shopify",
         "kind": "SaaS 电商",
         "patterns": ["myshopify.com", "cdn.shopify.com", "x-shopid"]
