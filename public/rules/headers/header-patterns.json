@@ -4538,6 +4538,15 @@
             "evidence": "响应 URL 指向 GitHub Gist 嵌入脚本"
           },
           {
+            "name": "VS Code for Web",
+            "patterns": [
+              "url: https?://(?:insiders\\.)?vscode\\.dev(?:/|$)",
+              "url: https?://(?:[^/\\s]+\\.)?github\\.dev(?:/|$)",
+              "url: https?://[^/\\s]+\\.app\\.github\\.dev(?:/|$)"
+            ],
+            "evidence": "响应 URL 指向 VS Code for Web 应用(vscode.dev / github.dev / Codespaces)"
+          },
+          {
             "name": "Replit",
             "patterns": [
               "url: https?://replit\\.com/embed/",
