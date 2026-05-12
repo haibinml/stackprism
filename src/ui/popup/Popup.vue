@@ -182,6 +182,9 @@
         <header class="footer-panel-head">
           <span class="footer-panel-title">{{ footerPanelTitle }}</span>
           <div class="footer-panel-actions">
+            <RippleButton v-if="footerPanel === 'raw'" class="footer-panel-copy" title="下载原始线索" @click="downloadRawOutput">
+              <Download :size="12" :stroke-width="2" />
+            </RippleButton>
             <RippleButton v-if="footerPanel === 'raw'" class="footer-panel-copy" title="复制原始线索" @click="copyRawOutput">
               <Copy :size="12" :stroke-width="2" />
             </RippleButton>
@@ -270,6 +273,7 @@
     ArrowUp,
     Ban,
     Copy,
+    Download,
     ExternalLink,
     FileCode,
     Flag,
@@ -805,6 +809,56 @@
       setStatus('已复制原始线索。', 'ok')
     } catch (error: any) {
       setStatus(`复制失败：${String(error?.message || error)}`, 'error')
+    }
+  }
+
+  const sanitizeFilenameSegment = (input: string) => {
+    const cleaned = String(input || '')
+      .trim()
+      .replace(/[\s/\\:*?"<>|]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+    return cleaned.slice(0, 64)
+  }
+
+  const buildRawDownloadFilename = () => {
+    let host = 'page'
+    try {
+      const target = state.result?.url || state.rawResult?.url || ''
+      if (target) host = new URL(target).hostname.replace(/^www\./, '')
+    } catch {
+      // ignore parse error, fall back to default host
+    }
+    const ctx = rawSourceContext.value
+    const parts = ['stackprism', host || 'page']
+    if (ctx) {
+      const techPart = sanitizeFilenameSegment(ctx.tech?.name || '')
+      const sourcePart = sanitizeFilenameSegment(ctx.source || '')
+      if (techPart) parts.push(techPart)
+      if (sourcePart) parts.push(sourcePart)
+    }
+    parts.push(new Date().toISOString().replace(/[:.]/g, '-').replace(/Z$/, ''))
+    return `${parts.filter(Boolean).join('_')}.json`
+  }
+
+  const downloadRawOutput = () => {
+    const text = rawOutputText.value
+    if (!text || text === RAW_PLACEHOLDER || text === RAW_LOADING_TEXT) {
+      setStatus('暂无可下载的原始线索。', 'error')
+      return
+    }
+    try {
+      const blob = new Blob([text], { type: 'application/json;charset=utf-8' })
+      const objectUrl = URL.createObjectURL(blob)
+      const anchor = document.createElement('a')
+      anchor.href = objectUrl
+      anchor.download = buildRawDownloadFilename()
+      document.body.appendChild(anchor)
+      anchor.click()
+      anchor.remove()
+      setTimeout(() => URL.revokeObjectURL(objectUrl), 1000)
+      setStatus(rawSourceContext.value ? '已下载来源详情。' : '已下载完整原始线索。', 'ok')
+    } catch (error: any) {
+      setStatus(`下载失败：${String(error?.message || error)}`, 'error')
     }
   }
 
