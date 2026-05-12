@@ -220,6 +220,7 @@ const SELF_HOST_SUPPRESS: Record<string, readonly string[]> = {
   'github.io': ['GitHub Pages', 'GitHub Assets', 'GitHub Raw Content'],
   'gitlab.com': ['GitLab.com', 'GitLab'],
   'gitlab.io': ['GitLab Pages'],
+  'npmmirror.com': ['npmmirror CDN', 'npmmirror'],
   'bitbucket.org': ['Bitbucket'],
   'codeberg.org': ['Codeberg'],
   'gitee.com': ['Gitee'],
