@@ -112,7 +112,9 @@ const SPOOF_INDICATOR_HEADERS = [
   'x-cocoon-version'
 ]
 
-const SPOOF_PRONE_CATEGORIES = new Set(['Web 服务器', '网站程序', '后端 / 服务器框架', '开发语言 / 运行时', 'CMS / 电商平台'])
+// Web 服务器 通过 server 首段判断（已隔离逗号后伪造段），不参与降级
+// 开发语言 / 运行时 大量来自 server 首段（如 Lua / OpenResty 命中 server:openresty），同样不降级
+const SPOOF_PRONE_CATEGORIES = new Set(['网站程序', '后端 / 服务器框架', 'CMS / 电商平台'])
 
 const countSpoofIndicators = (headers: Record<string, string>): number => {
   let count = 0

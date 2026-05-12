@@ -133,7 +133,17 @@ export const cleanMergedTechnologyEvidence = (items: any[]) => {
 const isPhpRuntimeTechnology = (item: any) =>
   item?.category === '开发语言 / 运行时' && normalizeTechName(item?.name) === normalizeTechName('PHP')
 
-const isPhpRuntimeSourceTechnology = (item: any) => phpRuntimeTechnologyNames.has(normalizeTechName(item?.name))
+const SPOOF_EVIDENCE_MARK = '响应头里同时出现多种不同主体身份字段'
+
+const isSpoofTaintedTechnology = (item: any): boolean => {
+  if (!item) return false
+  if (item.confidence === '低') return true
+  if (!Array.isArray(item.evidence)) return false
+  return item.evidence.some((line: unknown) => typeof line === 'string' && line.includes(SPOOF_EVIDENCE_MARK))
+}
+
+const isPhpRuntimeSourceTechnology = (item: any) =>
+  phpRuntimeTechnologyNames.has(normalizeTechName(item?.name)) && !isSpoofTaintedTechnology(item)
 
 const phpRuntimeInferenceEvidence = (item: any) => {
   const name = String(item?.name || '').trim() || 'PHP 系技术'
