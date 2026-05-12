@@ -21093,6 +21093,8 @@
     "Studio1 - a Paragraphs integrated theme": "https://www.drupal.org/project/studio1",
     "Management Theme": "https://www.drupal.org/project/management",
     "HTTPS": "https://developer.mozilla.org/zh-CN/docs/Glossary/HTTPS",
+    "HTTP/2": "https://developer.mozilla.org/zh-CN/docs/Glossary/HTTP_2",
+    "HTTP/3": "https://developer.mozilla.org/zh-CN/docs/Glossary/HTTP_3",
     "Content Security Policy": "https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP"
   }
 }

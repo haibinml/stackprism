@@ -1242,6 +1242,36 @@ ${html}`
     if (csp) {
       add('安全与协议', 'Content Security Policy', '中', '页面包含 CSP meta 标签')
     }
+    detectHttpProtocolVersion(add)
+  }
+
+  function detectHttpProtocolVersion(add) {
+    let entries
+    try {
+      entries = performance.getEntriesByType('resource')
+    } catch {
+      return
+    }
+    if (!entries || !entries.length) return
+    const protocols = new Set()
+    for (const entry of entries) {
+      const protocol = String(entry?.nextHopProtocol || '').toLowerCase()
+      if (protocol) protocols.add(protocol)
+    }
+    // 取一个最具代表性的样本 URL（便于 evidence 显示）
+    const sampleFor = wanted => {
+      for (const entry of entries) {
+        if (String(entry?.nextHopProtocol || '').toLowerCase() === wanted) return entry.name
+      }
+      return ''
+    }
+    if (protocols.has('h3') || protocols.has('h3-29') || protocols.has('h3-Q050')) {
+      add('安全与协议', 'HTTP/3', '高', `资源使用 HTTP/3 协议（如 ${shortUrl(sampleFor('h3'))}）`)
+    }
+    if (protocols.has('h2') || protocols.has('h2c')) {
+      add('安全与协议', 'HTTP/2', '高', `资源使用 HTTP/2 协议（如 ${shortUrl(sampleFor('h2'))}）`)
+    }
+    // 注意：浏览器对 HTTP/1.x 不再单独标，避免噪音
   }
 
   function createCollector(target) {
