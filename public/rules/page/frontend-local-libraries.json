@@ -969,6 +969,13 @@
             ]
           },
           {
+            "name": "Hopscotch",
+            "patterns": [
+              "(?:^|/)hopscotch(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)hopscotch(?:@[^/\\s\"'<>]+)?/.+\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
             "name": "screenfull",
             "patterns": ["(?:^|/)screenfull(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
           },
@@ -1983,6 +1990,20 @@
             ]
           },
           {
+            "name": "Floating UI",
+            "patterns": [
+              "(?:^|/)floating-ui\\.(?:core|dom|react|vue)(?:\\.umd)?(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)@floating-ui/(?:core|dom|react|vue)(?:@[^/\\s\"'<>]+)?/.+\\.(?:m?js|cjs)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "Tooltipster",
+            "patterns": [
+              "(?:^|/)tooltipster(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)tooltipster/.+\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
             "name": "antd",
             "patterns": [
               "(?:^|/)antd/.+\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
@@ -2616,6 +2637,27 @@
           {
             "name": "dragula",
             "patterns": ["(?:^|/)dragula(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "Draggabilly",
+            "patterns": [
+              "(?:^|/)draggabilly(?:\\.pkgd)?(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)draggabilly(?:@[^/\\s\"'<>]+)?/.+\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "html5sortable",
+            "patterns": [
+              "(?:^|/)html5sortable(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)html5sortable(?:@[^/\\s\"'<>]+)?/.+\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "jQuery Sortable",
+            "patterns": [
+              "(?:^|/)jquery\\.sortable(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)jquery-sortable(?:@[^/\\s\"'<>]+)?/.+\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
           },
           {
             "name": "nestedSortable",
