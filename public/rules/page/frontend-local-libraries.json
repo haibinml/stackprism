@@ -439,6 +439,20 @@
             "patterns": ["(?:^|/)jquery\\.maskedinput(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
           },
           {
+            "name": "imask",
+            "patterns": [
+              "(?:^|/)imask(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)imask(?:@[^/\\s\"'<>]+)?/.+\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "jquery-maskmoney",
+            "patterns": [
+              "(?:^|/)jquery\\.mask[Mm]oney(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)jquery-maskmoney(?:@[^/\\s\"'<>]+)?/.+\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
             "name": "bootstrap-tagsinput",
             "patterns": [
               "(?:^|/)bootstrap-tagsinput(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
@@ -448,6 +462,34 @@
           {
             "name": "jquery-tagsinput",
             "patterns": ["(?:^|/)jquery\\.tagsinput(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"]
+          },
+          {
+            "name": "tagify",
+            "patterns": [
+              "(?:^|/)(?:tagify|[Jj][Qq]uery\\.tagify)(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)(?:@yaireo/)?tagify(?:@[^/\\s\"'<>]+)?/.+\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "tributejs",
+            "patterns": [
+              "(?:^|/)tribute(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)tributejs(?:@[^/\\s\"'<>]+)?/.+\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "jquery.textcomplete",
+            "patterns": [
+              "(?:^|/)jquery\\.textcomplete(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)jquery\\.textcomplete(?:@[^/\\s\"'<>]+)?/.+\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "Caret.js",
+            "patterns": [
+              "(?:^|/)jquery\\.caret(?:\\.min)?\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)Caret\\.js(?:@[^/\\s\"'<>]+)?/.+\\.js(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
           },
           {
             "name": "summernote",
@@ -475,6 +517,20 @@
             "patterns": [
               "(?:^|/)medium-editor(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
               "(?:^|/)medium-editor/.+\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "medium-editor-insert-plugin",
+            "patterns": [
+              "(?:^|/)medium-editor-insert-plugin(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)medium-editor-insert-plugin(?:@[^/\\s\"'<>]+)?/.+\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
+            ]
+          },
+          {
+            "name": "Trumbowyg",
+            "patterns": [
+              "(?:^|/)trumbowyg(?:\\.min)?\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)",
+              "(?:^|/)trumbowyg(?:@[^/\\s\"'<>]+)?/.+\\.(?:js|css)(?:[?#][^\\s\"'<>]*)?(?:[\"'<>\\s]|$)"
             ]
           },
           {
