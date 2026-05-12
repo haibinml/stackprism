@@ -161,6 +161,58 @@
       },
       {
         "defaults": {
+          "category": "Web 服务器",
+          "confidence": "高"
+        },
+        "rules": [
+          {
+            "name": "Envoy",
+            "patterns": [
+              "(?:^|\\n)x-envoy-(?:upstream-service-time|attempt-count|external-address|decorator-operation):",
+              "(?:^|\\n)via:[^\\n]*\\benvoy\\b"
+            ],
+            "evidence": "响应头包含 Envoy 代理线索"
+          },
+          {
+            "name": "Apache Traffic Server",
+            "patterns": [
+              "(?:^|\\n)via:[^\\n]*(?:apachetrafficserver|traffic\\s+server|\\bats(?:/\\d+(?:\\.\\d+)*)?\\b)",
+              "(?:^|\\n)x-cache:[^\\n]*\\b(?:hit|miss)\\s+from\\s+[^\\n]*(?:apachetrafficserver|trafficserver|\\bats\\b)"
+            ],
+            "evidence": "响应头包含 Apache Traffic Server 缓存代理线索"
+          },
+          {
+            "name": "Squid",
+            "patterns": [
+              "(?:^|\\n)via:[^\\n]*\\bsquid\\b",
+              "(?:^|\\n)x-squid-error:",
+              "(?:^|\\n)x-cache:[^\\n]*\\b(?:hit|miss)\\s+from\\s+[^\\n]*\\bsquid\\b"
+            ],
+            "evidence": "响应头包含 Squid 缓存代理线索"
+          },
+          {
+            "name": "Kong Gateway",
+            "patterns": [
+              "(?:^|\\n)x-kong-(?:proxy-latency|upstream-latency|request-id):",
+              "(?:^|\\n)kong-request-id:",
+              "(?:^|\\n)via:[^\\n]*\\bkong\\b"
+            ],
+            "evidence": "响应头包含 Kong Gateway 线索"
+          },
+          {
+            "name": "Apache APISIX",
+            "patterns": ["(?:^|\\n)x-apisix-", "(?:^|\\n)via:[^\\n]*\\bapisix\\b"],
+            "evidence": "响应头包含 Apache APISIX 网关线索"
+          },
+          {
+            "name": "LiteSpeed",
+            "patterns": ["(?:^|\\n)x-litespeed-(?:cache|tag|purge|vary|crawler):"],
+            "evidence": "响应头包含 LiteSpeed 专属缓存线索"
+          }
+        ]
+      },
+      {
+        "defaults": {
           "category": "CDN / 托管"
         },
         "rules": [

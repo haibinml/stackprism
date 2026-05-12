@@ -20,7 +20,7 @@
           },
           {
             "name": "Apache HTTP Server",
-            "patterns": ["apache"]
+            "patterns": ["\\bapache(?:/\\d+(?:\\.\\d+)*)?\\b(?![-\\s]*(?:traffic\\s*server|coyote))(?!-)"]
           },
           {
             "name": "Microsoft IIS",
@@ -51,8 +51,20 @@
             "patterns": ["varnish"]
           },
           {
+            "name": "Squid",
+            "patterns": ["^squid(?:/\\d+(?:\\.\\d+)*)?$"]
+          },
+          {
             "name": "Apache Traffic Server",
-            "patterns": ["trafficserver|ats"]
+            "patterns": ["^(?:apache\\s*traffic\\s*server|apachetrafficserver|traffic\\s*server|trafficserver|ats)(?:/\\d+(?:\\.\\d+)*)?$"]
+          },
+          {
+            "name": "Kong Gateway",
+            "patterns": ["^kong(?:/\\d+(?:\\.\\d+)*)?$"]
+          },
+          {
+            "name": "Apache APISIX",
+            "patterns": ["^apisix(?:/\\d+(?:\\.\\d+)*)?$"]
           },
           {
             "name": "Jetty",
