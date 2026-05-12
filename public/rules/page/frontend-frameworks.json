@@ -110,22 +110,31 @@
             },
             {
               "name": "Preact",
-              "patterns": ["preact"],
+              "patterns": [
+                "(?:^|/)preact(?:@[\\d.]+)?(?:/[^\\s\"'<>]+)?\\.(?:m?js|cjs)(?:[?#\"'<>\\s]|$)",
+                "\\bpreact/(?:hooks|compat|signals|debug)\\b"
+              ],
               "globals": ["preact"]
             },
             {
               "name": "SolidJS",
-              "patterns": ["solid-js", "solidjs"],
+              "patterns": ["(?:^|/)solid-js(?:[@/])", "/solidjs/"],
               "globals": ["Solid"]
             },
             {
               "name": "Mithril",
-              "patterns": ["mithril"],
-              "globals": ["Mithril"]
+              "patterns": [
+                "(?:^|/)mithril(?:@[\\d.]+)?(?:\\.min)?\\.js(?:[?#\"'<>\\s]|$)",
+                "(?:^|/)mithril/(?:stream|querystring|hyperscript)\\b"
+              ]
             },
             {
               "name": "Polymer",
-              "patterns": ["polymer"],
+              "patterns": [
+                "(?:^|/)polymer(?:@[\\d.]+)?(?:/.+?)?\\.(?:m?js|html)(?:[?#\"'<>\\s]|$)",
+                "(?:^|/)@polymer/",
+                "(?:^|/)polymer-(?:element|cli)(?:[@/])"
+              ],
               "globals": ["Polymer"],
               "selectors": ["dom-module"]
             }
@@ -134,8 +143,7 @@
         {
           "name": "Svelte",
           "confidence": "低",
-          "patterns": ["svelte"],
-          "globals": ["Svelte"],
+          "patterns": ["(?:^|/)svelte(?:@[\\d.]+)?(?:/.+?)?\\.(?:m?js|cjs)(?:[?#\"'<>\\s]|$)", "(?:^|/)@sveltejs/", "/_app/immutable/"],
           "classPrefixes": ["svelte-"]
         }
       ]

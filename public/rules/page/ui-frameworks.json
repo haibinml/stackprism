@@ -139,7 +139,11 @@
           {
             "name": "Ionic",
             "confidence": "高",
-            "patterns": ["@ionic", "ionic"],
+            "patterns": [
+              "(?:^|/)ionic(?:\\.bundle)?(?:\\.min)?\\.(?:js|css)(?:[?#\"'<>\\s]|$)",
+              "@ionic\\/(?:core|angular|react|vue)(?:[@/])",
+              "(?:^|/)assets\\/ionic\\/"
+            ],
             "selectors": ["ion-app", "ion-content", "ion-button"]
           },
           {
@@ -160,10 +164,7 @@
               },
               {
                 "name": "Vant",
-                "patterns": [
-                  "(?:^|[\\/@._-])vant(?:\\.min)?\\.(?:js|css)(?:[?#]|$)",
-                  "(?:^|[\\/@])vant(?:@|/es/|/lib/|/dist/)"
-                ],
+                "patterns": ["(?:^|[\\/@._-])vant(?:\\.min)?\\.(?:js|css)(?:[?#]|$)", "(?:^|[\\/@])vant(?:@|/es/|/lib/|/dist/)"],
                 "classPrefixes": ["van-"]
               },
               {
