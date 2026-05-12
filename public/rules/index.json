@@ -50,6 +50,7 @@
     "headers/unknown-cdn-patterns.json",
     "headers/cdn-providers.json",
     "headers/languages.json",
-    "headers/website-programs.json"
+    "headers/website-programs.json",
+    "self-host-suppress.json"
   ]
 }

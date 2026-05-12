@@ -11,7 +11,7 @@ import {
   suppressFrontendFallbackDuplicates,
   suppressWordPressThemeDirectoryFallbacks
 } from './merge'
-import { loadDetectorSettings } from './detector-settings'
+import { loadDetectorSettings, loadTechRules } from './detector-settings'
 import { categoryIndex, confidenceRank } from '@/utils/category-order'
 import { cleanTechnologyUrl } from '@/utils/url'
 import { cleanStringArray } from '@/utils/normalize-settings'
@@ -214,60 +214,8 @@ const cleanRawDynamicObservation = (dynamic: any, data: any) => {
 }
 
 // 站点自身的「品牌识别」抑制：当用户就在 github.com 时不再把 GitHub.com 当作一项「使用了的技术」
-// 显示给他，那是 URL 栏里已经告诉他的事情
-const SELF_HOST_SUPPRESS: Record<string, readonly string[]> = {
-  'github.com': ['GitHub.com', 'GitHub', 'GitHub Pages', 'GitHub Assets', 'GitHub Raw Content'],
-  'github.io': ['GitHub Pages', 'GitHub Assets', 'GitHub Raw Content'],
-  'gitlab.com': ['GitLab.com', 'GitLab'],
-  'gitlab.io': ['GitLab Pages'],
-  'npmmirror.com': ['npmmirror CDN', 'npmmirror'],
-  'bitbucket.org': ['Bitbucket'],
-  'codeberg.org': ['Codeberg'],
-  'gitee.com': ['Gitee'],
-  'huggingface.co': ['Hugging Face'],
-  'stackoverflow.com': ['Stack Overflow'],
-  'stackexchange.com': ['Stack Exchange'],
-  'npmjs.com': ['npm', 'npm 包注册中心'],
-  'pypi.org': ['PyPI'],
-  'crates.io': ['crates.io'],
-  'rubygems.org': ['RubyGems'],
-  'packagist.org': ['Packagist'],
-  'twitter.com': ['Twitter', 'X (Twitter)'],
-  'x.com': ['Twitter', 'X (Twitter)'],
-  'facebook.com': ['Facebook'],
-  'instagram.com': ['Instagram'],
-  'linkedin.com': ['LinkedIn'],
-  'youtube.com': ['YouTube'],
-  'tiktok.com': ['TikTok'],
-  'reddit.com': ['Reddit'],
-  'discord.com': ['Discord'],
-  'slack.com': ['Slack'],
-  'telegram.org': ['Telegram'],
-  'whatsapp.com': ['WhatsApp'],
-  'medium.com': ['Medium'],
-  'substack.com': ['Substack'],
-  'notion.so': ['Notion'],
-  'figma.com': ['Figma'],
-  'linear.app': ['Linear'],
-  'asana.com': ['Asana'],
-  'trello.com': ['Trello'],
-  'monday.com': ['monday.com', 'Monday'],
-  'airtable.com': ['Airtable'],
-  'shopify.com': ['Shopify Admin'],
-  'replit.com': ['Replit'],
-  'codepen.io': ['CodePen'],
-  'stackblitz.com': ['StackBlitz'],
-  'codesandbox.io': ['CodeSandbox'],
-  'jsfiddle.net': ['JSFiddle'],
-  'google.com': ['Google Search'],
-  'bing.com': ['Bing'],
-  'duckduckgo.com': ['DuckDuckGo'],
-  'baidu.com': ['百度', 'Baidu'],
-  'zhihu.com': ['知乎', 'Zhihu'],
-  'weibo.com': ['微博', 'Weibo'],
-  'bilibili.com': ['哔哩哔哩', 'Bilibili']
-}
-
+// 展示出来——那是 URL 栏已经告诉他的事情。映射表本身放在 public/rules/self-host-suppress.json
+// 里，方便添加新条目而不动代码
 const extractRegistrableHost = (url: string): string => {
   try {
     return new URL(url).hostname.toLowerCase().replace(/^www\./, '')
@@ -276,22 +224,35 @@ const extractRegistrableHost = (url: string): string => {
   }
 }
 
-const suppressSelfHostTechs = (technologies: any[], pageUrl: string): any[] => {
+const collectSuppressMap = (rules: any): Record<string, string[]> => {
+  const raw = rules?.selfHostSuppress
+  if (!raw || typeof raw !== 'object') return {}
+  const out: Record<string, string[]> = {}
+  for (const host of Object.keys(raw)) {
+    const list = raw[host]
+    if (!Array.isArray(list)) continue
+    const names = list.filter((name: unknown): name is string => typeof name === 'string' && Boolean(name))
+    if (names.length) out[host.toLowerCase()] = names
+  }
+  return out
+}
+
+const suppressSelfHostTechs = (technologies: any[], pageUrl: string, suppressMap: Record<string, string[]>): any[] => {
   const host = extractRegistrableHost(pageUrl)
   if (!host) return technologies
-  // 主域匹配：github.com 时也抑制；gist.github.com 时按完整 host 找不到，回退取末两段
+  // 主域匹配：github.com 时直接命中；gist.github.com 时按末两段 github.com 回退
   const parts = host.split('.')
   const candidates = [host, parts.slice(-2).join('.')]
   const suppressNames = new Set<string>()
   for (const candidate of candidates) {
-    const list = SELF_HOST_SUPPRESS[candidate]
+    const list = suppressMap[candidate]
     if (list) for (const name of list) suppressNames.add(name)
   }
   if (!suppressNames.size) return technologies
   return technologies.filter(tech => !suppressNames.has(String(tech?.name || '')))
 }
 
-const buildDisplayTechnologies = (data: any, settings: any) => {
+const buildDisplayTechnologies = (data: any, settings: any, suppressMap: Record<string, string[]>) => {
   const all: any[] = []
   addAllTechnologies(all, data.page?.technologies)
   addAllTechnologies(all, data.main?.technologies)
@@ -329,13 +290,14 @@ const buildDisplayTechnologies = (data: any, settings: any) => {
   )
   const pageUrl = data.page?.url || data.dynamic?.url || data.main?.url || ''
   return filterTechnologiesBySettings(
-    suppressSelfHostTechs(suppressGenericCdnFallbacks(mergeDisplayTechnologyRecords(all)), pageUrl),
+    suppressSelfHostTechs(suppressGenericCdnFallbacks(mergeDisplayTechnologyRecords(all)), pageUrl, suppressMap),
     settings
   )
 }
 
 const buildPopupResult = async (data: any, settings: any, tab: any) => {
-  const technologies = await attachTechnologyLinks(buildDisplayTechnologies(data, settings), settings)
+  const suppressMap = collectSuppressMap(await loadTechRules())
+  const technologies = await attachTechnologyLinks(buildDisplayTechnologies(data, settings, suppressMap), settings)
   const resources = mergeResourceSummary(data.page?.resources || {}, data.dynamic || {})
   const main = data.main || {}
   const headerCount =
@@ -354,7 +316,8 @@ const buildPopupResult = async (data: any, settings: any, tab: any) => {
 }
 
 export const buildPopupRawResult = async (data: any, settings: any, tab: any) => {
-  const technologies = await attachTechnologyLinks(buildDisplayTechnologies(data, settings), settings)
+  const suppressMap = collectSuppressMap(await loadTechRules())
+  const technologies = await attachTechnologyLinks(buildDisplayTechnologies(data, settings, suppressMap), settings)
   const resources = mergeResourceSummary(data.page?.resources || {}, data.dynamic || {})
   const headers = data.main?.allHeaders || data.main?.headers || {}
   return {
