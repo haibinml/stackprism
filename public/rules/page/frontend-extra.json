@@ -33,7 +33,7 @@
           },
           {
             "name": "Knockout.js",
-            "patterns": ["knockout(?:\\.min)?\\.js|data-bind="],
+            "patterns": ["(?:^|/)knockout(?:-(?:\\d|debug|min))?(?:\\.min)?\\.js(?:[?#\"'<>\\s]|$)"],
             "globals": ["ko"]
           },
           {
@@ -43,18 +43,24 @@
           },
           {
             "name": "Ext JS / Sencha",
-            "patterns": ["ext-all(?:\\.min)?\\.js|sencha|extjs"],
+            "patterns": [
+              "(?:^|/)ext-all(?:-debug)?(?:\\.min)?\\.js(?:[?#\"'<>\\s]|$)",
+              "(?:^|/)sencha-(?:touch|cmd|inspector)/",
+              "(?:^|/)ext-(?:base|theme-classic|theme-neptune)/"
+            ],
             "globals": ["Ext"]
           },
           {
             "name": "Ractive.js",
-            "patterns": ["ractive(?:\\.min)?\\.js"],
+            "patterns": ["(?:^|/)ractive(?:@[\\d.]+)?(?:\\.min)?\\.js(?:[?#\"'<>\\s]|$)"],
             "globals": ["Ractive"]
           },
           {
             "name": "CanJS",
-            "patterns": ["canjs|can(?:\\.min)?\\.js"],
-            "globals": ["can"]
+            "patterns": [
+              "(?:^|/)canjs(?:@[\\d.]+)?(?:/.+?)?\\.(?:m?js|cjs)(?:[?#\"'<>\\s]|$)",
+              "(?:^|/)can/(?:view|control|model|component)/"
+            ]
           },
           {
             "name": "Inferno",
@@ -123,7 +129,10 @@
           },
           {
             "name": "daisyUI",
-            "patterns": ["daisyui|data-theme=\"(?:light|dark|cupcake|bumblebee|emerald|corporate|synthwave|retro|cyberpunk)"]
+            "patterns": [
+              "(?:^|/)daisyui(?:@[\\d.]+)?(?:/.+?)?\\.(?:css|js|m?js)(?:[?#\"'<>\\s]|$)",
+              "data-theme=\"(?:cupcake|bumblebee|emerald|corporate|synthwave|retro|cyberpunk|valentine|halloween|garden|forest|aqua|lofi|pastel|fantasy|wireframe|black|luxury|dracula|cmyk|autumn|business|acid|lemonade|night|coffee|winter|dim|nord|sunset)\""
+            ]
           },
           {
             "name": "Fluent UI / Fabric",
@@ -272,7 +281,7 @@
           },
           {
             "name": "Moment.js",
-            "patterns": ["moment(?:\\.min)?\\.js"],
+            "patterns": ["(?:^|/)moment(?:-with-locales|-timezone|@[\\d.]+)?(?:\\.min)?\\.js(?:[?#\"'<>\\s]|$)"],
             "globals": ["moment"]
           },
           {
@@ -454,7 +463,11 @@
           },
           {
             "name": "Video.js",
-            "patterns": ["video(?:\\.min)?\\.js|videojs"],
+            "patterns": [
+              "(?:^|/)video(?:@[\\d.]+)?(?:\\.min)?\\.js(?:[?#\"'<>\\s]|$)",
+              "(?:^|/)videojs(?:@[\\d.]+)?(?:/.+?)?\\.(?:m?js|css)(?:[?#\"'<>\\s]|$)",
+              "/video-js(?:\\.min)?\\.css"
+            ],
             "globals": ["videojs"]
           },
           {
@@ -588,11 +601,15 @@
           },
           {
             "name": "Rollup",
-            "patterns": ["rollup(?:\\.config)?|\\/rollup\\/"]
+            "patterns": [
+              "(?:^|/)rollup(?:\\.config)?\\.(?:m?js|ts|cjs)(?:[?#\"'<>\\s]|$)",
+              "/rollup(?:-plugin-[^/]+)?(?:@[\\d.]+)?(?:/.+?)?\\.(?:m?js|cjs)(?:[?#\"'<>\\s]|$)",
+              "/@rollup/"
+            ]
           },
           {
             "name": "esbuild",
-            "patterns": ["esbuild|\\/esbuild\\/"]
+            "patterns": ["(?:^|/)esbuild(?:@[\\d.]+)?(?:/.+?)?\\.(?:m?js|cjs|wasm)(?:[?#\"'<>\\s]|$)", "/esbuild-wasm/", "/@esbuild/"]
           },
           {
             "name": "SWC",
