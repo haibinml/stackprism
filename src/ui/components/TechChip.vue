@@ -1,5 +1,5 @@
 <template>
-  <span :class="['tech-chip', chipClass]" aria-hidden="true">
+  <span :class="['tech-chip', chipClass, { 'tech-chip-loaded': iconState === 'loaded' }]" aria-hidden="true">
     <img v-show="iconState === 'loaded'" class="tech-chip-img" :src="iconUrl" alt="" @load="onLoad" @error="onError" />
     <span v-show="iconState !== 'loaded'" class="tech-chip-initial">{{ initial }}</span>
   </span>
@@ -135,6 +135,13 @@
     }
     &.tech-chip-slate {
       --tech-chip-bg: #6b7280;
+    }
+
+    // 拿到 simpleicons 的 SVG 后:SVG 本身透明,色块底色会从镂空处透出来很丑;
+    // 这时候撤掉色块底色和圆角,让品牌图标原样显示
+    &.tech-chip-loaded {
+      background: transparent;
+      border-radius: 0;
     }
   }
 
