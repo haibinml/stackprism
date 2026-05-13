@@ -119,22 +119,24 @@
                   <span>{{ group.category }}</span>
                   <span class="count">{{ group.items.length }} 项</span>
                 </h2>
-                <button
-                  v-for="tech in group.items"
-                  :key="`${tech.name}|${tech.category}`"
-                  type="button"
-                  class="tech-row"
-                  :title="`查看 ${tech.name} 详情`"
-                  @click="openTechDetail(tech)"
-                >
-                  <span :class="['tech-chip', techChipClass(tech)]" aria-hidden="true">{{ techInitial(tech) }}</span>
-                  <span class="tech-row-name">{{ tech.name }}</span>
-                  <span
-                    :class="['confidence-dot', confidenceClass(tech.confidence)]"
-                    :title="`${tech.confidence}置信度`"
-                    aria-hidden="true"
-                  ></span>
-                </button>
+                <div class="tech-grid">
+                  <button
+                    v-for="tech in group.items"
+                    :key="`${tech.name}|${tech.category}`"
+                    type="button"
+                    class="tech-row"
+                    :title="`查看 ${tech.name} 详情`"
+                    @click="openTechDetail(tech)"
+                  >
+                    <span :class="['tech-chip', techChipClass(tech)]" aria-hidden="true">{{ techInitial(tech) }}</span>
+                    <span class="tech-row-name">{{ tech.name }}</span>
+                    <span
+                      :class="['confidence-dot', confidenceClass(tech.confidence)]"
+                      :title="`${tech.confidence}置信度`"
+                      aria-hidden="true"
+                    ></span>
+                  </button>
+                </div>
               </section>
             </section>
           </Transition>
@@ -1626,33 +1628,29 @@
     text-transform: none;
   }
 
-  // 紧凑技术行:整行 button,左侧色块图标 + 名字 + 右侧置信度小点。
-  // hairline 用 ::before 自绘 1px 横线,避免 border 让 hover 高亮看起来错位。
+  // 同类目里多个技术按 grid 排开:每个单元宽度自适应 140px+,popup 默认宽度下能塞下 2~3 列
+  .tech-grid {
+    display: grid;
+    gap: 4px;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+
+  // 单个技术 chip:色块图标 + 名字 + 置信度状态点
   .tech-row {
     align-items: center;
     background: transparent;
     border: 0;
+    border-radius: 5px;
     color: var(--text);
     cursor: pointer;
     display: grid;
     font: inherit;
-    gap: 10px;
-    grid-template-columns: 22px 1fr auto;
-    padding: 7px 10px;
-    position: relative;
+    gap: 6px;
+    grid-template-columns: 18px 1fr 7px;
+    min-width: 0;
+    padding: 4px 8px;
     text-align: left;
     transition: background 0.15s ease;
-    width: 100%;
-
-    + .tech-row::before {
-      background: var(--tech-divider);
-      content: '';
-      height: 1px;
-      left: 10px;
-      position: absolute;
-      right: 10px;
-      top: 0;
-    }
 
     &:hover {
       background: var(--accent-soft);
@@ -1677,17 +1675,17 @@
   .tech-chip {
     align-items: center;
     background: var(--tech-chip-bg, var(--accent));
-    border-radius: 5px;
+    border-radius: 4px;
     color: #fff;
     display: inline-flex;
     flex-shrink: 0;
     font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 600;
-    height: 22px;
+    height: 18px;
     justify-content: center;
     line-height: 1;
-    width: 22px;
+    width: 18px;
 
     &.tech-chip-blue {
       --tech-chip-bg: #4f7ab8;
