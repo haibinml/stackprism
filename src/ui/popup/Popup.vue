@@ -119,47 +119,22 @@
                   <span>{{ group.category }}</span>
                   <span class="count">{{ group.items.length }} 项</span>
                 </h2>
-                <article v-for="tech in group.items" :key="`${tech.name}|${tech.category}`" class="tech">
-                  <div class="tech-head">
-                    <span v-if="!tech.url" class="tech-name">{{ tech.name }}</span>
-                    <button
-                      v-else
-                      type="button"
-                      class="tech-name tech-link"
-                      :title="`打开 ${tech.name} 官网或仓库`"
-                      @click="openTechnologyLink(tech)"
-                    >
-                      <span>{{ tech.name }}</span>
-                      <ExternalLink class="tech-link-icon" :size="12" :stroke-width="2" />
-                    </button>
-                    <span :class="['confidence', confidenceClass(tech.confidence)]">{{ tech.confidence }}置信度</span>
-                  </div>
-                  <ul v-if="tech.evidence?.length" class="evidence">
-                    <li v-for="(ev, i) in tech.evidence.slice(0, 4)" :key="i">{{ ev }}</li>
-                  </ul>
-                  <div v-if="tech.sources?.length" class="source">
-                    来源：
-                    <button
-                      v-for="src in tech.sources"
-                      :key="src"
-                      type="button"
-                      class="source-link"
-                      :title="`查看 ${src} 来源的原始数据`"
-                      @click="openSourceRaw(tech, src)"
-                    >
-                      {{ src }}
-                    </button>
-                  </div>
-                  <button
-                    type="button"
-                    class="correction-link"
-                    title="打开 GitHub 议题并自动填写这条识别结果"
-                    @click="openCorrectionIssue(tech)"
-                  >
-                    <Flag :size="11" :stroke-width="2" />
-                    <span>识别不准确，点击纠正</span>
-                  </button>
-                </article>
+                <button
+                  v-for="tech in group.items"
+                  :key="`${tech.name}|${tech.category}`"
+                  type="button"
+                  class="tech-row"
+                  :title="`查看 ${tech.name} 详情`"
+                  @click="openTechDetail(tech)"
+                >
+                  <span :class="['tech-chip', techChipClass(tech)]" aria-hidden="true">{{ techInitial(tech) }}</span>
+                  <span class="tech-row-name">{{ tech.name }}</span>
+                  <span
+                    :class="['confidence-dot', confidenceClass(tech.confidence)]"
+                    :title="`${tech.confidence}置信度`"
+                    aria-hidden="true"
+                  ></span>
+                </button>
               </section>
             </section>
           </Transition>
@@ -239,6 +214,58 @@
               <dd>{{ value }}</dd>
             </template>
           </dl>
+        </div>
+        <div v-else-if="footerPanel === 'tech' && selectedTech" class="footer-panel-body tech-detail-body">
+          <div class="tech-detail-head">
+            <span :class="['tech-chip', 'tech-chip-large', techChipClass(selectedTech)]" aria-hidden="true">
+              {{ techInitial(selectedTech) }}
+            </span>
+            <div class="tech-detail-meta">
+              <span class="tech-detail-category">{{ selectedTech.category }}</span>
+              <span class="tech-detail-name">{{ selectedTech.name }}</span>
+            </div>
+            <span :class="['confidence', confidenceClass(selectedTech.confidence)]">{{ selectedTech.confidence }}置信度</span>
+          </div>
+          <button
+            v-if="selectedTech.url"
+            type="button"
+            class="tech-detail-link"
+            :title="`打开 ${selectedTech.name} 官网或仓库`"
+            @click="openTechnologyLink(selectedTech)"
+          >
+            <ExternalLink :size="12" :stroke-width="2" />
+            <span>{{ selectedTech.url }}</span>
+          </button>
+          <section v-if="selectedTech.evidence?.length" class="tech-detail-section">
+            <h3>识别依据</h3>
+            <ul class="tech-detail-evidence">
+              <li v-for="(ev, i) in selectedTech.evidence" :key="i">{{ ev }}</li>
+            </ul>
+          </section>
+          <section v-if="selectedTech.sources?.length" class="tech-detail-section">
+            <h3>来源(点击查看原始数据)</h3>
+            <div class="tech-detail-sources">
+              <button
+                v-for="src in selectedTech.sources"
+                :key="src"
+                type="button"
+                class="tech-detail-source"
+                :title="`查看 ${src} 来源的原始数据`"
+                @click="openSourceRaw(selectedTech, src)"
+              >
+                {{ src }}
+              </button>
+            </div>
+          </section>
+          <button
+            type="button"
+            class="tech-detail-correction"
+            title="打开 GitHub 议题并自动填写这条识别结果"
+            @click="openCorrectionIssue(selectedTech)"
+          >
+            <Flag :size="12" :stroke-width="2" />
+            <span>识别不准确，点击纠正</span>
+          </button>
         </div>
       </section>
     </Transition>
@@ -337,8 +364,9 @@
   })
   const rawOutputText = ref(RAW_PLACEHOLDER)
   const theme = ref<ThemeMode>('auto')
-  const footerPanel = ref<'search' | 'raw' | 'resources' | 'headers' | null>(null)
+  const footerPanel = ref<'search' | 'raw' | 'resources' | 'headers' | 'tech' | null>(null)
   const rawSourceContext = ref<{ tech: any; source: string } | null>(null)
+  const selectedTech = ref<any>(null)
   const sectionsScroller = ref<HTMLElement | null>(null)
   const showScrollTop = ref(false)
   const detailLoading = ref(false)
@@ -357,8 +385,50 @@
     if (footerPanel.value === 'raw') return rawPanelTitle.value
     if (footerPanel.value === 'resources') return `资源列表（${detailResources.value.length}）`
     if (footerPanel.value === 'headers') return `响应头（${Object.keys(detailHeaders.value).length}）`
+    if (footerPanel.value === 'tech') return selectedTech.value?.name || '技术详情'
     return ''
   })
+
+  // 技术列表条目的颜色块:基于名字哈希到一组克制的中性色,避免外部 favicon 请求泄露用户行为
+  const TECH_CHIP_PALETTE = [
+    'tech-chip-blue',
+    'tech-chip-emerald',
+    'tech-chip-amber',
+    'tech-chip-rose',
+    'tech-chip-violet',
+    'tech-chip-cyan',
+    'tech-chip-slate'
+  ] as const
+
+  const hashTechName = (name: string): number => {
+    let hash = 0
+    for (let i = 0; i < name.length; i++) {
+      hash = (hash * 31 + name.charCodeAt(i)) | 0
+    }
+    return Math.abs(hash)
+  }
+
+  const techChipClass = (tech: any) => {
+    const name = String(tech?.name || '')
+    if (!name) return TECH_CHIP_PALETTE[0]
+    return TECH_CHIP_PALETTE[hashTechName(name) % TECH_CHIP_PALETTE.length]
+  }
+
+  const techInitial = (tech: any) => {
+    const raw = String(tech?.name || '').trim()
+    if (!raw) return '?'
+    // 中文 / 日文 / 韩文取第一个字符
+    if (/^[぀-ヿ㐀-鿿]/.test(raw)) return raw.charAt(0)
+    // 跳过常见前缀(@、/),取第一个字母
+    const letter = raw.replace(/^[^a-zA-Z0-9]+/, '').charAt(0)
+    return (letter || raw.charAt(0)).toUpperCase()
+  }
+
+  const openTechDetail = (tech: any) => {
+    selectedTech.value = tech
+    rawSourceContext.value = null
+    footerPanel.value = 'tech'
+  }
 
   const toggleFooterPanel = (name: 'search' | 'raw') => {
     if (footerPanel.value === name && !rawSourceContext.value) {
@@ -1556,80 +1626,118 @@
     text-transform: none;
   }
 
-  // tech 列表条目化：hairline 分隔，hover 整行高亮
-  // content-visibility: auto 让浏览器跳过屏幕外条目的 layout/paint，
-  // contain-intrinsic-size 给屏幕外占位高度，列表很长时主线程压力锐减
-  .tech {
-    border-radius: 6px;
-    contain-intrinsic-size: 0 64px;
-    content-visibility: auto;
-    padding: 8px 10px;
-    transition: background 0.15s ease;
-
-    + .tech {
-      border-top: 1px solid var(--tech-divider);
-    }
-
-    &:hover {
-      background: var(--accent-soft);
-
-      .tech-link-icon {
-        opacity: 1;
-      }
-
-      .correction-link {
-        opacity: 1;
-      }
-    }
-  }
-
-  .tech-head {
-    align-items: center;
-    display: flex;
-    gap: 8px;
-    justify-content: space-between;
-  }
-
-  .tech-name {
-    font-size: 13px;
-    font-weight: 600;
-  }
-
-  .tech-link {
+  // 紧凑技术行:整行 button,左侧色块图标 + 名字 + 右侧置信度小点。
+  // hairline 用 ::before 自绘 1px 横线,避免 border 让 hover 高亮看起来错位。
+  .tech-row {
     align-items: center;
     background: transparent;
     border: 0;
     color: var(--text);
     cursor: pointer;
-    display: inline-flex;
+    display: grid;
     font: inherit;
-    gap: 4px;
-    padding: 0;
+    gap: 10px;
+    grid-template-columns: 22px 1fr auto;
+    padding: 7px 10px;
+    position: relative;
     text-align: left;
-    text-decoration: none;
-    transition: color 0.15s ease;
+    transition: background 0.15s ease;
+    width: 100%;
+
+    + .tech-row::before {
+      background: var(--tech-divider);
+      content: '';
+      height: 1px;
+      left: 10px;
+      position: absolute;
+      right: 10px;
+      top: 0;
+    }
 
     &:hover {
-      color: var(--accent);
-
-      .tech-link-icon {
-        color: var(--accent);
-      }
+      background: var(--accent-soft);
     }
 
-    &:focus-visible .tech-link-icon {
-      opacity: 1;
+    &:focus-visible {
+      background: var(--accent-soft);
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
     }
   }
 
-  .tech-link-icon {
-    color: var(--muted);
-    opacity: 0;
-    transition:
-      color 0.15s ease,
-      opacity 0.15s ease;
+  .tech-row-name {
+    font-size: 13px;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
+  // 圆角小色块,首字母在中间。哈希到 7 个调度过的中性色,避免饱和过高
+  .tech-chip {
+    align-items: center;
+    background: var(--tech-chip-bg, var(--accent));
+    border-radius: 5px;
+    color: #fff;
+    display: inline-flex;
+    flex-shrink: 0;
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    height: 22px;
+    justify-content: center;
+    line-height: 1;
+    width: 22px;
+
+    &.tech-chip-blue {
+      --tech-chip-bg: #4f7ab8;
+    }
+    &.tech-chip-emerald {
+      --tech-chip-bg: #3f8f6b;
+    }
+    &.tech-chip-amber {
+      --tech-chip-bg: #b58435;
+    }
+    &.tech-chip-rose {
+      --tech-chip-bg: #b95a6a;
+    }
+    &.tech-chip-violet {
+      --tech-chip-bg: #7a6cb5;
+    }
+    &.tech-chip-cyan {
+      --tech-chip-bg: #4a8a9b;
+    }
+    &.tech-chip-slate {
+      --tech-chip-bg: #6b7280;
+    }
+  }
+
+  .tech-chip-large {
+    border-radius: 8px;
+    font-size: 16px;
+    height: 36px;
+    width: 36px;
+  }
+
+  // 置信度状态点:6px 圆点,颜色继承 confidence-* token
+  .confidence-dot {
+    border-radius: 50%;
+    flex-shrink: 0;
+    height: 7px;
+    width: 7px;
+
+    &.high {
+      background: var(--confidence-high-text);
+    }
+    &.medium {
+      background: var(--confidence-medium-text);
+    }
+    &.low {
+      background: var(--confidence-low-text);
+    }
+  }
+
+  // 详情面板里仍保留的彩色置信度徽章(详情视图里信息密度低,徽章撑得开)
   .confidence {
     border-radius: 4px;
     font-size: 11px;
@@ -1642,63 +1750,138 @@
       background: var(--confidence-high-bg);
       color: var(--confidence-high-text);
     }
-
     &.medium {
       background: var(--confidence-medium-bg);
       color: var(--confidence-medium-text);
     }
-
     &.low {
       background: var(--confidence-low-bg);
       color: var(--confidence-low-text);
     }
   }
 
-  .evidence {
+  // tech-detail 面板:点击 .tech-row 后从底部滑上来,展示完整 evidence / sources / 纠错入口
+  .tech-detail-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 14px 16px 16px;
+  }
+
+  .tech-detail-head {
+    align-items: center;
+    display: flex;
+    gap: 12px;
+  }
+
+  .tech-detail-meta {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .tech-detail-category {
     color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.02em;
+  }
+
+  .tech-detail-name {
+    font-size: 15px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .tech-detail-link {
+    align-items: center;
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    color: var(--muted);
+    cursor: pointer;
+    display: inline-flex;
+    font: inherit;
+    font-size: 11px;
+    gap: 6px;
+    overflow: hidden;
+    padding: 6px 10px;
+    text-overflow: ellipsis;
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease;
+    white-space: nowrap;
+
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+  }
+
+  .tech-detail-section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    h3 {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      margin: 0;
+      text-transform: uppercase;
+    }
+  }
+
+  .tech-detail-evidence {
+    color: var(--text);
     font-size: 12px;
-    margin: 4px 0 0;
+    line-height: 1.55;
+    margin: 0;
     padding-left: 16px;
 
     li {
-      margin: 1px 0;
+      margin: 2px 0;
       overflow-wrap: anywhere;
     }
   }
 
-  // source 行：每个来源是 button，点击打开 raw 面板查看 JSON
-  .source {
-    color: var(--muted);
+  .tech-detail-sources {
     display: flex;
     flex-wrap: wrap;
-    font-size: 11px;
-    gap: 4px;
-    margin-top: 4px;
+    gap: 6px;
   }
 
-  .source-link {
+  .tech-detail-source {
     background: transparent;
-    border: 0;
-    border-bottom: 1px dashed var(--line);
-    border-radius: 0;
+    border: 1px solid var(--line);
+    border-radius: 4px;
     color: var(--muted);
     cursor: pointer;
     font: inherit;
     font-size: 11px;
-    padding: 0 1px;
+    padding: 3px 8px;
     transition:
       border-color 0.15s ease,
       color 0.15s ease;
 
     &:hover {
-      border-bottom-color: var(--accent);
+      border-color: var(--accent);
       color: var(--accent);
     }
   }
 
-  // correction-link：默认低调，hover .tech 时显现
-  .correction-link {
+  .tech-detail-correction {
     align-items: center;
+    align-self: flex-start;
     background: transparent;
     border: 0;
     color: var(--muted);
@@ -1706,17 +1889,9 @@
     display: inline-flex;
     font-size: 11px;
     gap: 4px;
-    margin-top: 6px;
-    opacity: 0;
+    margin-top: 2px;
     padding: 0;
-    text-align: left;
-    transition:
-      opacity 0.15s ease,
-      color 0.15s ease;
-
-    &:focus-visible {
-      opacity: 1;
-    }
+    transition: color 0.15s ease;
 
     &:hover {
       color: var(--accent);
