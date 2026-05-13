@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
   import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-  import localIconManifest from './local-icon-manifest.json'
+  import skillsIndexFile from './skills-index.json'
 
   const props = defineProps<{
     name: string
@@ -47,40 +47,40 @@
     return (letter || raw.charAt(0)).toUpperCase()
   })
 
-  // 跟 build-scripts/extract-wappalyzer-icons.mjs 里的 slugify 保持一致:
-  // 用 ` / `(带空格)拆别名(Magento / Adobe Commerce → Magento),保留 HTTP/2 这种纯版本号写法
-  const toSlug = (raw: string): string => {
-    return String(raw || '')
-      .split(' / ')[0]
+  // 跟 build-scripts/extract-wappalyzer-icons.mjs / issue#6 的 normalize 保持一致:
+  // 小写 + `&`→`and` + `+`→`plus`,保留 [a-z0-9] 和 CJK 统一表意文字
+  const normalize = (raw: string): string =>
+    String(raw || '')
       .toLowerCase()
-      .replace(/[^a-z0-9]/g, '')
-  }
+      .replace(/&/g, 'and')
+      .replace(/\+/g, 'plus')
+      .replace(/[^a-z0-9一-龥]+/g, '')
 
-  // SimpleIcons slug 规则:`.` → `dot`、`+` → `plus`、`&` → `and`,其它非字母数字删除
-  const toSimpleIconsSlug = (raw: string): string => {
-    return String(raw || '')
+  // 用 ` / `(带空格)拆别名,保留 HTTP/2 这种纯版本号写法
+  const primaryName = (raw: string): string =>
+    String(raw || '')
       .split(' / ')[0]
       .trim()
-      .toLowerCase()
-      .replace(/\./g, 'dot')
-      .replace(/\+/g, 'plus')
-      .replace(/&/g, 'and')
-      .replace(/[^a-z0-9]/g, '')
+
+  // SimpleIcons CDN 用的是英文 slug,直接给 normalize 完的 ascii 部分
+  const toCdnSlug = (raw: string): string => {
+    const slug = normalize(primaryName(raw))
+    // 剔除 CJK,只留 ascii 字母数字
+    return slug.replace(/[^a-z0-9]/g, '')
   }
 
-  // manifest 把规则 slug 映射到物理文件名,多个 slug 别名可共用一个文件(节省体积)
-  const manifest = localIconManifest as Record<string, string>
+  const skillsIndex = skillsIndexFile.skillsIndex as Record<string, string>
 
   // 链式 fallback:本地图标 → cdn.simpleicons.org → 文字色块
   const buildSources = (): string[] => {
     const sources: string[] = []
-    const localSlug = toSlug(props.name)
-    const filename = localSlug ? manifest[localSlug] : undefined
+    const localKey = normalize(primaryName(props.name))
+    const filename = localKey ? skillsIndex[localKey] : undefined
     if (filename) {
-      // 在扩展内 popup / settings / help 页面下,chrome.runtime.getURL 给出绝对 chrome-extension:// URL
-      sources.push(chrome.runtime.getURL(`icons/tech/${filename}`))
+      // popup / settings / help 都跑在 chrome-extension:// 下,chrome.runtime.getURL 给出绝对 URL
+      sources.push(chrome.runtime.getURL(`skills/${filename}`))
     }
-    const cdnSlug = toSimpleIconsSlug(props.name)
+    const cdnSlug = toCdnSlug(props.name)
     if (cdnSlug) sources.push(`https://cdn.simpleicons.org/${cdnSlug}`)
     return sources
   }
@@ -105,7 +105,7 @@
   }
 
   const onError = () => {
-    // 当前 source 加载失败,尝试下一档兜底;全失败就回落文字色块
+    // 当前 source 失败,尝试下一档兜底;全失败就回落文字色块
     if (sourceIndex.value < sources.length - 1) {
       sourceIndex.value++
       return
