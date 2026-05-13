@@ -47,10 +47,11 @@
     return (letter || raw.charAt(0)).toUpperCase()
   })
 
-  // 跟 build-scripts/extract-wappalyzer-icons.mjs 里的 slugify 保持一致:取 / 之前的部分,小写 + 去掉所有非字母数字
+  // 跟 build-scripts/extract-wappalyzer-icons.mjs 里的 slugify 保持一致:
+  // 用 ` / `(带空格)拆别名(Magento / Adobe Commerce → Magento),保留 HTTP/2 这种纯版本号写法
   const toSlug = (raw: string): string => {
     return String(raw || '')
-      .split('/')[0]
+      .split(' / ')[0]
       .toLowerCase()
       .replace(/[^a-z0-9]/g, '')
   }
@@ -58,7 +59,7 @@
   // SimpleIcons slug 规则:`.` → `dot`、`+` → `plus`、`&` → `and`,其它非字母数字删除
   const toSimpleIconsSlug = (raw: string): string => {
     return String(raw || '')
-      .split('/')[0]
+      .split(' / ')[0]
       .trim()
       .toLowerCase()
       .replace(/\./g, 'dot')
@@ -67,16 +68,17 @@
       .replace(/[^a-z0-9]/g, '')
   }
 
-  const manifest = localIconManifest as Record<string, 'svg' | 'png'>
+  // manifest 把规则 slug 映射到物理文件名,多个 slug 别名可共用一个文件(节省体积)
+  const manifest = localIconManifest as Record<string, string>
 
   // 链式 fallback:本地图标 → cdn.simpleicons.org → 文字色块
   const buildSources = (): string[] => {
     const sources: string[] = []
     const localSlug = toSlug(props.name)
-    if (localSlug && manifest[localSlug]) {
-      const ext = manifest[localSlug]
+    const filename = localSlug ? manifest[localSlug] : undefined
+    if (filename) {
       // 在扩展内 popup / settings / help 页面下,chrome.runtime.getURL 给出绝对 chrome-extension:// URL
-      sources.push(chrome.runtime.getURL(`icons/tech/${localSlug}.${ext}`))
+      sources.push(chrome.runtime.getURL(`icons/tech/${filename}`))
     }
     const cdnSlug = toSimpleIconsSlug(props.name)
     if (cdnSlug) sources.push(`https://cdn.simpleicons.org/${cdnSlug}`)

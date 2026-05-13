@@ -14,6 +14,10 @@ const DEFAULT_DIR =
 const ICON_DIR = process.env.WAPPALYZER_ICON_DIR || DEFAULT_DIR
 const RULES_DIR = path.join(repoRoot, 'public', 'rules')
 const OUTPUT_DIR = path.join(repoRoot, 'public', 'icons', 'tech')
+const CUSTOM_DIR = path.join(__dirname, 'custom-icons')
+
+// service worker / page-detector 在运行时硬编码塞到识别结果里、不在 rules JSON 中出现的技术名
+const EXTRA_NAMES = ['HTTP/2', 'HTTP/3', 'HTTPS']
 
 if (!fs.existsSync(ICON_DIR)) {
   console.error(`找不到 Wappalyzer 图标目录:${ICON_DIR}`)
@@ -45,7 +49,13 @@ const slugify = raw =>
     .toLowerCase()
     .replace(/[^a-z0-9]/g, '')
 
-// 收 Wappalyzer 图标库:filename → [候选文件名(可能多种扩展名)]
+// 跟 TechChip 里的 toSlug 保持一致:用 ` / `(带空格)拆别名,保留 HTTP/2 这类纯版本号写法
+const primaryName = raw =>
+  String(raw || '')
+    .split(' / ')[0]
+    .trim()
+
+// 收 Wappalyzer 图标库:slug → [候选文件名(可能多种扩展名)]
 const iconBySlug = new Map()
 for (const f of fs.readdirSync(ICON_DIR)) {
   if (!f.endsWith('.svg') && !f.endsWith('.png')) continue
@@ -55,8 +65,8 @@ for (const f of fs.readdirSync(ICON_DIR)) {
   iconBySlug.get(slug).push(f)
 }
 
-// 收我们 rules 里所有 name
-const ruleNames = new Set()
+// 收我们 rules 里所有 name + EXTRA_NAMES
+const ruleNames = new Set(EXTRA_NAMES)
 for (const f of walk(RULES_DIR)) {
   try {
     collectNames(JSON.parse(fs.readFileSync(f, 'utf8')), ruleNames)
@@ -69,30 +79,75 @@ for (const f of walk(RULES_DIR)) {
 if (fs.existsSync(OUTPUT_DIR)) fs.rmSync(OUTPUT_DIR, { recursive: true, force: true })
 fs.mkdirSync(OUTPUT_DIR, { recursive: true })
 
-let copied = 0
+// 给定一个 name,返回命中的 Wappalyzer slug(可能跟 localKey 不同,例如 cloudflarewebanalytics → cloudflare)
+const matchWappalyzerSlug = name => {
+  const base = primaryName(name)
+  const fullSlug = slugify(base)
+  if (iconBySlug.has(fullSlug)) return fullSlug
+  // 首词兜底:"Cloudflare Web Analytics" → "Cloudflare" → cloudflare;
+  // "Microsoft Teams" → "Microsoft"。会用品牌主 logo,牺牲一点准确度换覆盖率
+  const firstWord = base.split(/\s+/)[0]
+  if (!firstWord) return null
+  const firstSlug = slugify(firstWord)
+  if (firstSlug && firstSlug !== fullSlug && iconBySlug.has(firstSlug)) return firstSlug
+  return null
+}
+
+let mappedKeys = 0
+let prefixMatched = 0
 let svgCount = 0
 let pngCount = 0
+let customCount = 0
 let totalBytes = 0
+// manifest:localKey(规则名 slug) → 实际磁盘文件名(可能多个 key 共用一个文件,节省体积)
 const manifest = {}
-const seenSlugs = new Set()
-for (const name of ruleNames) {
-  // 跟我们 TechChip 里的 slugify 算法保持一致:取 / 之前的部分,小写 + 去掉所有非字母数字
-  const slug = slugify(name.split('/')[0])
-  if (!slug || seenSlugs.has(slug)) continue
-  const candidates = iconBySlug.get(slug)
-  if (!candidates) continue
+// 已写到磁盘的 Wappalyzer slug → 文件名,避免重复写
+const writtenFiles = new Map()
+const seenLocalKeys = new Set()
 
-  // 优先 svg
-  const file = candidates.find(c => c.endsWith('.svg')) || candidates[0]
-  const ext = path.extname(file).toLowerCase().slice(1)
-  const dst = path.join(OUTPUT_DIR, slug + '.' + ext)
-  fs.copyFileSync(path.join(ICON_DIR, file), dst)
-  seenSlugs.add(slug)
-  manifest[slug] = ext
-  copied++
-  totalBytes += fs.statSync(dst).size
-  if (ext === 'svg') svgCount++
-  else pngCount++
+for (const name of ruleNames) {
+  const localKey = slugify(primaryName(name))
+  if (!localKey || seenLocalKeys.has(localKey)) continue
+  const matchedSlug = matchWappalyzerSlug(name)
+  if (!matchedSlug) continue
+
+  let filename = writtenFiles.get(matchedSlug)
+  if (!filename) {
+    // 第一次见这个 Wappalyzer slug,落盘一份;优先 svg
+    const candidates = iconBySlug.get(matchedSlug)
+    const file = candidates.find(c => c.endsWith('.svg')) || candidates[0]
+    const ext = path.extname(file).toLowerCase().slice(1)
+    filename = matchedSlug + '.' + ext
+    const dst = path.join(OUTPUT_DIR, filename)
+    fs.copyFileSync(path.join(ICON_DIR, file), dst)
+    writtenFiles.set(matchedSlug, filename)
+    totalBytes += fs.statSync(dst).size
+    if (ext === 'svg') svgCount++
+    else pngCount++
+  }
+
+  seenLocalKeys.add(localKey)
+  manifest[localKey] = filename
+  mappedKeys++
+  if (matchedSlug !== localKey) prefixMatched++
+}
+
+// 自定义图标:覆盖 Wappalyzer 没有的(HTTPS 锁、未来补充的)。
+// 自定义图标比 Wappalyzer 优先
+if (fs.existsSync(CUSTOM_DIR)) {
+  for (const f of fs.readdirSync(CUSTOM_DIR)) {
+    if (!f.endsWith('.svg') && !f.endsWith('.png')) continue
+    const slug = slugify(f.replace(/\.(svg|png)$/i, ''))
+    if (!slug) continue
+    const ext = path.extname(f).toLowerCase().slice(1)
+    const filename = slug + '.' + ext
+    const dst = path.join(OUTPUT_DIR, filename)
+    fs.copyFileSync(path.join(CUSTOM_DIR, f), dst)
+    if (!manifest[slug]) mappedKeys++
+    manifest[slug] = filename
+    customCount++
+    totalBytes += fs.statSync(dst).size
+  }
 }
 
 // 写出 manifest,运行时 TechChip 用它判断本地是否有图标、是 svg 还是 png,避免无意义 404
@@ -101,7 +156,10 @@ for (const slug of Object.keys(manifest).sort()) sortedManifest[slug] = manifest
 const manifestPath = path.join(repoRoot, 'src', 'ui', 'components', 'local-icon-manifest.json')
 fs.writeFileSync(manifestPath, JSON.stringify(sortedManifest) + '\n', 'utf8')
 
-console.log(`抽取完成:${copied} 个图标 (svg: ${svgCount}, png: ${pngCount})`)
+console.log(
+  `抽取完成:${mappedKeys} 个映射 → ${writtenFiles.size + customCount} 个物理文件 ` +
+    `(svg: ${svgCount}, png: ${pngCount}, custom: ${customCount}, 首词兜底: ${prefixMatched})`
+)
 console.log(`输出目录:${OUTPUT_DIR}`)
 console.log(`总大小:${(totalBytes / 1024 / 1024).toFixed(2)} MB`)
 console.log(`manifest:${manifestPath}`)
