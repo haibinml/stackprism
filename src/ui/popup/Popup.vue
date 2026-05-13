@@ -128,7 +128,7 @@
                     :title="`查看 ${tech.name} 详情`"
                     @click="openTechDetail(tech)"
                   >
-                    <span :class="['tech-chip', techChipClass(tech)]" aria-hidden="true">{{ techInitial(tech) }}</span>
+                    <TechChip :name="tech.name" />
                     <span class="tech-row-name">{{ tech.name }}</span>
                   </button>
                 </div>
@@ -214,9 +214,7 @@
         </div>
         <div v-else-if="footerPanel === 'tech' && selectedTech" class="footer-panel-body tech-detail-body">
           <div class="tech-detail-head">
-            <span :class="['tech-chip', 'tech-chip-large', techChipClass(selectedTech)]" aria-hidden="true">
-              {{ techInitial(selectedTech) }}
-            </span>
+            <TechChip :name="selectedTech.name" large />
             <div class="tech-detail-meta">
               <span class="tech-detail-category">{{ selectedTech.category }}</span>
               <span class="tech-detail-name">{{ selectedTech.name }}</span>
@@ -316,6 +314,7 @@
   import Checkbox from '@/ui/components/Checkbox.vue'
   import Input from '@/ui/components/Input.vue'
   import RippleButton from '@/ui/components/RippleButton.vue'
+  import TechChip from '@/ui/components/TechChip.vue'
   import { categoryIndex, confidenceClass, confidenceRank } from '@/utils/category-order'
   import { applyCustomCss } from '@/utils/apply-custom-css'
   import { normalizeSettings } from '@/utils/normalize-settings'
@@ -385,41 +384,6 @@
     if (footerPanel.value === 'tech') return selectedTech.value?.name || '技术详情'
     return ''
   })
-
-  // 技术列表条目的颜色块:基于名字哈希到一组克制的中性色,避免外部 favicon 请求泄露用户行为
-  const TECH_CHIP_PALETTE = [
-    'tech-chip-blue',
-    'tech-chip-emerald',
-    'tech-chip-amber',
-    'tech-chip-rose',
-    'tech-chip-violet',
-    'tech-chip-cyan',
-    'tech-chip-slate'
-  ] as const
-
-  const hashTechName = (name: string): number => {
-    let hash = 0
-    for (let i = 0; i < name.length; i++) {
-      hash = (hash * 31 + name.charCodeAt(i)) | 0
-    }
-    return Math.abs(hash)
-  }
-
-  const techChipClass = (tech: any) => {
-    const name = String(tech?.name || '')
-    if (!name) return TECH_CHIP_PALETTE[0]
-    return TECH_CHIP_PALETTE[hashTechName(name) % TECH_CHIP_PALETTE.length]
-  }
-
-  const techInitial = (tech: any) => {
-    const raw = String(tech?.name || '').trim()
-    if (!raw) return '?'
-    // 中文 / 日文 / 韩文取第一个字符
-    if (/^[぀-ヿ㐀-鿿]/.test(raw)) return raw.charAt(0)
-    // 跳过常见前缀(@、/),取第一个字母
-    const letter = raw.replace(/^[^a-zA-Z0-9]+/, '').charAt(0)
-    return (letter || raw.charAt(0)).toUpperCase()
-  }
 
   const openTechDetail = (tech: any) => {
     selectedTech.value = tech
@@ -1662,52 +1626,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
-
-  // 圆角小色块,首字母在中间。哈希到 7 个调度过的中性色,避免饱和过高
-  .tech-chip {
-    align-items: center;
-    background: var(--tech-chip-bg, var(--accent));
-    border-radius: 4px;
-    color: #fff;
-    display: inline-flex;
-    flex-shrink: 0;
-    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-    font-size: 10px;
-    font-weight: 600;
-    height: 18px;
-    justify-content: center;
-    line-height: 1;
-    width: 18px;
-
-    &.tech-chip-blue {
-      --tech-chip-bg: #4f7ab8;
-    }
-    &.tech-chip-emerald {
-      --tech-chip-bg: #3f8f6b;
-    }
-    &.tech-chip-amber {
-      --tech-chip-bg: #b58435;
-    }
-    &.tech-chip-rose {
-      --tech-chip-bg: #b95a6a;
-    }
-    &.tech-chip-violet {
-      --tech-chip-bg: #7a6cb5;
-    }
-    &.tech-chip-cyan {
-      --tech-chip-bg: #4a8a9b;
-    }
-    &.tech-chip-slate {
-      --tech-chip-bg: #6b7280;
-    }
-  }
-
-  .tech-chip-large {
-    border-radius: 8px;
-    font-size: 16px;
-    height: 36px;
-    width: 36px;
   }
 
   // 详情面板里仍保留的彩色置信度徽章(详情视图里信息密度低,徽章撑得开)
