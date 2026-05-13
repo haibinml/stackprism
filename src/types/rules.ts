@@ -39,6 +39,7 @@ export interface TechnologyRecord {
   sources?: string[]
   source?: string
   url?: string
+  version?: string
 }
 
 export interface ResourceDomain {

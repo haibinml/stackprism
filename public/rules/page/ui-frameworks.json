@@ -201,7 +201,38 @@
         "name": "styled-components",
         "confidence": "高",
         "patterns": ["data-styled="],
-        "selectors": ["style[data-styled]"]
+        "selectors": ["style[data-styled-version]", "style[data-styled]"],
+        "versionFromAttribute": "data-styled-version"
+      },
+      {
+        "category": "UI / CSS 框架",
+        "name": "shadcn-vue",
+        "url": "https://www.shadcn-vue.com",
+        "confidence": "中",
+        "matchIn": ["resources"],
+        "minPatternMatches": 5,
+        "patterns": [
+          "(?:^|/)Card\\.vue_vue_type_script_setup",
+          "(?:^|/)(?:Dialog|Sheet)(?:Title|Content|Description|Footer|ScrollContent)?\\.vue_vue_type_script_setup",
+          "(?:^|/)Tabs(?:Trigger|Content|List)?\\.vue_vue_type_script_setup",
+          "(?:^|/)DropdownMenu(?:Trigger|Content|Item|Separator|CheckboxItem|RadioItem)?\\.vue_vue_type_script_setup",
+          "(?:^|/)Popover(?:Trigger|Content)?\\.vue_vue_type_script_setup",
+          "(?:^|/)Tooltip(?:Trigger|Content|Provider)?\\.vue_vue_type_script_setup",
+          "(?:^|/)Avatar(?:Image|Fallback)?\\.vue_vue_type_script_setup",
+          "(?:^|/)Separator\\.vue_vue_type_script_setup",
+          "(?:^|/)Input\\.vue_vue_type_script_setup",
+          "(?:^|/)Label\\.vue_vue_type_script_setup",
+          "(?:^|/)Checkbox\\.vue_vue_type_script_setup",
+          "(?:^|/)Switch\\.vue_vue_type_script_setup",
+          "(?:^|/)Skeleton\\.vue_vue_type_script_setup",
+          "(?:^|/)Sidebar(?:Provider|Trigger|Content|Header|Footer)?\\.vue_vue_type_script_setup",
+          "(?:^|/)Collapsible(?:Trigger|Content)?\\.vue_vue_type_script_setup",
+          "(?:^|/)Combobox(?:Trigger|Content|Item|Input)?\\.vue_vue_type_script_setup",
+          "(?:^|/)MultiSelect\\.vue_vue_type_script_setup",
+          "(?:^|/)RadioGroup(?:Item)?\\.vue_vue_type_script_setup",
+          "(?:^|/)Table(?:Head|Header|Body|Row|Cell|Pagination)?\\.vue_vue_type_script_setup",
+          "(?:^|/)Textarea\\.vue_vue_type_script_setup"
+        ]
       }
     ]
   }

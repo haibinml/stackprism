@@ -2,7 +2,7 @@ import { buildPopupCacheRecord } from './popup-cache'
 import { buildEffectivePageRules, loadDetectorSettings, loadTechRules } from './detector-settings'
 import { mergeTechnologyRecords, shortHeaderUrl } from './merge'
 import { getTabData, getTabSnapshot, updateBadgeForTab, writeTabData } from './tab-store'
-import { matchesCompiledRulePatterns, matchesRuleTextHints } from './rule-matcher'
+import { extractVersionFromBundleText, matchesCompiledRulePatterns, matchesRuleTextHints } from './rule-matcher'
 import { withTabWriteLock } from './tab-write-lock'
 import { isDetectablePageUrl } from '@/utils/page-support'
 import { cleanTechnologyUrl } from '@/utils/url'
@@ -391,14 +391,17 @@ const detectTechnologiesFromLicenseText = (observations: ScriptLicenseObservatio
     for (const rule of rules) {
       if (!rule?.name || !matchesRuleTextHints(rule, lowerText)) continue
       if (!matchesCompiledRulePatterns(rule, observation.text)) continue
-      technologies.push({
+      const version = extractVersionFromBundleText(rule, observation.text)
+      const tech: any = {
         category: rule.category || '前端库',
         name: rule.name,
         confidence: rule.confidence || '中',
         evidence: [`JS 版权注释匹配 ${shortHeaderUrl(observation.url)}`],
         source: BUNDLE_LICENSE_SOURCE,
         url: cleanTechnologyUrl(rule.url)
-      })
+      }
+      if (version) tech.version = version
+      technologies.push(tech)
     }
   }
 

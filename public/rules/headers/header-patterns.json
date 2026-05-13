@@ -7460,6 +7460,18 @@
             "name": "Tggl",
             "patterns": ["url: https?://api\\.tggl\\.io/", "url: https?://cdn\\.tggl\\.io/"],
             "evidence": "响应 URL 指向 Tggl"
+          },
+          {
+            "name": "AWS",
+            "__hints": ["cloudfront", "x-amz-cf-", "x-amzn-", "amazons3", "awselb"],
+            "patterns": [
+              "(?:^|\\n)x-amz-(?:cf-(?:id|pop)|request-id|id-2|bucket-region|trace-id|server-side-encryption|version-id|delete-marker):",
+              "(?:^|\\n)x-amzn-(?:requestid|trace-id|errortype|remapped-x-amzn-requestid|cors-allowed-origin):",
+              "via:.*\\bcloudfront\\b",
+              "x-cache:.*\\bcloudfront\\b",
+              "server:\\s*(?:awselb|amazons3|amazon)\\b"
+            ],
+            "evidence": "响应头包含 AWS 服务特征(CloudFront / S3 / API Gateway / ELB 等)"
           }
         ]
       },
@@ -9065,6 +9077,12 @@
             "name": "WebSocket",
             "patterns": ["url:\\s*wss?://|(?:^|\\n)upgrade:\\s*websocket|(?:^|\\n)sec-websocket-accept:"],
             "evidence": "WebSocket 握手或 ws/wss 请求 URL"
+          },
+          {
+            "name": "HTTP/3",
+            "confidence": "中",
+            "patterns": ["(?:^|\\n)alt-svc:[^\\n]*\\bh3(?:-\\d+)?="],
+            "evidence": "alt-svc 响应头通告 HTTP/3 支持"
           }
         ]
       },

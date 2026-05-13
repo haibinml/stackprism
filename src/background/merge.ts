@@ -246,6 +246,23 @@ export const suppressWordPressThemeDirectoryFallbacks = (items: any[]) => {
   })
 }
 
+// 按 semver 数字段比较版本号(避免 "3.10.0" 字典序 < "3.9.0" 的坑)
+const compareSemver = (a: string, b: string): number => {
+  const parse = (s: string) =>
+    String(s || '')
+      .split('.')
+      .map(x => parseInt(x, 10) || 0)
+  const aa = parse(a)
+  const bb = parse(b)
+  const len = Math.max(aa.length, bb.length)
+  for (let i = 0; i < len; i++) {
+    const av = aa[i] || 0
+    const bv = bb[i] || 0
+    if (av !== bv) return av - bv
+  }
+  return 0
+}
+
 export const mergeTechnologyRecords = (items: any[]) => {
   const map = new Map<string, any>()
   const normalizedItems = suppressDuplicateWebsiteProgramCategories(
@@ -256,6 +273,10 @@ export const mergeTechnologyRecords = (items: any[]) => {
     const current = map.get(key) || { ...item, evidence: [] }
     if (!current.url && item.url) {
       current.url = item.url
+    }
+    // 多次扫描合并:取数值更大的版本号(按 semver 比较)
+    if (item.version && (!current.version || compareSemver(item.version, current.version) > 0)) {
+      current.version = item.version
     }
     for (const evidence of item.evidence || []) {
       if (!current.evidence.includes(evidence)) {

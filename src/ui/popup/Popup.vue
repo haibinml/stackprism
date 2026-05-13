@@ -128,8 +128,11 @@
                     :title="`查看 ${tech.name} 详情`"
                     @click="openTechDetail(tech)"
                   >
-                    <TechChip :name="tech.name" />
-                    <span class="tech-row-name">{{ tech.name }}</span>
+                    <TechChip :name="tech.name" :url="tech.url" />
+                    <span class="tech-row-name">
+                      {{ tech.name }}
+                      <span v-if="tech.version" class="tech-row-version">{{ tech.version }}</span>
+                    </span>
                   </button>
                 </div>
               </section>
@@ -214,7 +217,7 @@
         </div>
         <div v-else-if="footerPanel === 'tech' && selectedTech" class="footer-panel-body tech-detail-body">
           <div class="tech-detail-head">
-            <TechChip :name="selectedTech.name" large />
+            <TechChip :name="selectedTech.name" :url="selectedTech.url" large />
             <div class="tech-detail-meta">
               <span class="tech-detail-category">{{ selectedTech.category }}</span>
               <span class="tech-detail-name">{{ selectedTech.name }}</span>
@@ -1626,6 +1629,14 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .tech-row-version {
+    color: var(--muted);
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 400;
+    margin-left: 4px;
   }
 
   // 详情面板里仍保留的彩色置信度徽章(详情视图里信息密度低,徽章撑得开)

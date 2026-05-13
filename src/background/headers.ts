@@ -73,7 +73,8 @@ const applyHeaderRuleList = (
     })
     if (matched) {
       const evidence = rule.evidence || `${sourceLabel} 匹配`
-      add(rule.category || defaultCategory, rule.name, rule.confidence || '中', `${evidencePrefix(rule)}${evidence}`)
+      const extras = rule.url ? { url: rule.url } : undefined
+      add(rule.category || defaultCategory, rule.name, rule.confidence || '中', `${evidencePrefix(rule)}${evidence}`, extras)
     }
   }
 }
@@ -92,7 +93,8 @@ const applyHeaderValueRuleList = (add: any, rules: any[], value: string, rawValu
   for (const rule of rules) {
     if (!matchesHeaderPatterns(rule.patterns, primaryValue, rule)) continue
     const evidence = rule.evidence || `${headerName}: ${displayValue}`
-    add(rule.category || '其他库', rule.name, rule.confidence || '高', evidence)
+    const extras = rule.url ? { url: rule.url } : undefined
+    add(rule.category || '其他库', rule.name, rule.confidence || '高', evidence, extras)
     if (isSplitField) break // 这两个字段正常只标识一种产品
   }
 }
@@ -158,6 +160,36 @@ const ALLOWLIST_STYLE_HEADERS = new Set([
   'nel'
 ])
 
+// 从 server: nginx/1.29.8 / x-powered-by: PHP/8.2.10 这种带斜杠 + 版本号的字段抽版本号
+const extractServerVersion = (value: string): string => {
+  const match = /\/(\d+(?:\.\d+){1,3})/.exec(String(value || ''))
+  return match ? match[1] : ''
+}
+
+// 把版本号附到 Source 命中本响应头的那条 tech 上(让 popup 显示 "Nginx 1.29.8")
+// 只从首段(逗号前)抽,避免「Server: nginx, Microsoft-IIS/10.0」把 IIS 的 10.0 错挂给 nginx
+const attachServerVersion = (techs: any[], rawHeaderValue: string, headerName: 'server' | 'x-powered-by') => {
+  if (!rawHeaderValue) return
+  const primarySegment = String(rawHeaderValue).split(',')[0]?.trim() || ''
+  if (!primarySegment) return
+  const version = extractServerVersion(primarySegment)
+  if (!version) return
+  const prefix = headerName + ':'
+  for (const tech of techs) {
+    if (tech.version) continue
+    const evidence = Array.isArray(tech.evidence) ? tech.evidence : []
+    if (
+      evidence.some((e: string) =>
+        String(e || '')
+          .toLowerCase()
+          .startsWith(prefix)
+      )
+    ) {
+      tech.version = version
+    }
+  }
+}
+
 const detectFromHeaders = (headers: Record<string, string>, url: string, headerRules: any = {}, settings: any = {}) => {
   const technologies: any[] = []
   const add = createCollector(technologies, '响应头')
@@ -172,6 +204,9 @@ const detectFromHeaders = (headers: Record<string, string>, url: string, headerR
 
   applyHeaderValueRuleList(add, headerRules.serverProducts, server, headers.server, 'server')
   applyHeaderValueRuleList(add, headerRules.poweredByProducts, poweredBy, headers['x-powered-by'], 'x-powered-by')
+  // server: nginx/1.29.8 / x-powered-by: PHP/8.2.10 这种带版本号的,把版本附到对应 tech 上
+  attachServerVersion(technologies, headers.server, 'server')
+  attachServerVersion(technologies, headers['x-powered-by'], 'x-powered-by')
   applyHeaderRuleList(add, headerRules.headerPatterns, '其他库', headerBlob, 'JSON 响应头规则', () => '', lowerHeaderBlob)
 
   if (

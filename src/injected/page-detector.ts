@@ -933,7 +933,111 @@ ${html}`
       }
       const confidence = match.confidence || context.confidence || rule.confidence || '中'
       const prefix = typeof context.evidencePrefix === 'function' ? context.evidencePrefix(rule) : context.evidencePrefix || ''
-      add(rule.category || context.defaultCategory || '其他库', rule.name, confidence, `${prefix}${match.evidence}`)
+      const extras: { version?: string; url?: string } = {}
+      if (match.version) extras.version = match.version
+      if (rule.url) extras.url = rule.url
+      add(
+        rule.category || context.defaultCategory || '其他库',
+        rule.name,
+        confidence,
+        `${prefix}${match.evidence}`,
+        Object.keys(extras).length ? extras : undefined
+      )
+    }
+  }
+
+  // 从命中的资源 URL 里抽版本号:覆盖 cdn / npm / 自托管几种常见 URL 形态
+  // 例:cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js → 3.6.0
+  //     unpkg.com/react@18.3.1/umd/react.production.min.js → 18.3.1
+  //     /assets/swiper-bundle-9.4.1.min.js → 9.4.1
+  function extractVersionFromUrl(rule, url) {
+    if (!url || typeof url !== 'string') return ''
+    const name = String(rule?.name || '').trim()
+    if (!name) return ''
+    const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const npmToken = name
+      .toLowerCase()
+      .replace(/\.js$/i, '')
+      .replace(/\s*\/\s*.*$/, '')
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9@_-]/gi, '')
+    const tokens = [npmToken, name.toLowerCase()].filter(Boolean)
+    for (const token of tokens) {
+      const esc = escape(token)
+      // 形式 1:`<token>@X.Y.Z`(unpkg / jsdelivr)
+      const m1 = new RegExp('[/@]' + esc + '@(\\d+\\.\\d+(?:\\.\\d+)?)', 'i').exec(url)
+      if (m1) return m1[1]
+      // 形式 2:`/<token>/X.Y.Z/`(cdnjs 风格)
+      const m2 = new RegExp('/' + esc + '/(\\d+\\.\\d+(?:\\.\\d+)?)/', 'i').exec(url)
+      if (m2) return m2[1]
+      // 形式 3:`/<token>-X.Y.Z.(?:min\\.)?js`(自托管直接命名)
+      const m3 = new RegExp('/' + esc + '[-._](\\d+\\.\\d+(?:\\.\\d+)?)\\.(?:min\\.)?(?:m?js|css)', 'i').exec(url)
+      if (m3) return m3[1]
+    }
+    return ''
+  }
+
+  // 比较两个 semver 字符串("3.10.0" > "3.9.0",字典序则相反):用作 sort comparator
+  function compareSemver(a, b) {
+    const parse = (s: string) =>
+      String(s || '')
+        .split('.')
+        .map(x => parseInt(x, 10) || 0)
+    const aa = parse(a)
+    const bb = parse(b)
+    const len = Math.max(aa.length, bb.length)
+    for (let i = 0; i < len; i++) {
+      const av = aa[i] || 0
+      const bv = bb[i] || 0
+      if (av !== bv) return av - bv
+    }
+    return 0
+  }
+
+  // 命中 globals 时,从 window.<path> 智能抽版本号:
+  // 1) value 本身是版本号字符串
+  // 2) 对象上有 .version / .VERSION 字符串字段
+  // 3) lit-html: window.litHtmlVersions 是数组 ["1.1.2", "2.8.0"],push 进去的版本字符串
+  // 4) 数组里的元素是版本号字符串
+  // 5) 兜底:扫一层自身属性找符合严格 semver(\d+\.\d+\.\d+)的字符串
+  function extractGlobalVersion(globalPath) {
+    try {
+      let value: any = window
+      for (const key of globalPath.split('.')) {
+        if (value == null) return ''
+        value = value[key]
+      }
+      if (value == null) return ''
+      if (typeof value === 'string' && /^\d+\.\d+/.test(value)) return value
+      if (typeof value !== 'object' && typeof value !== 'function') return ''
+      if (Array.isArray(value)) {
+        // 数组元素可能是版本号字符串(lit-html: ["2.8.0"]),也可能是带 .version 字段的对象
+        // (core-js: __core-js_shared__.versions = [{version: "3.46.0", mode: "global"}, ...])
+        const versions = value
+          .map(item => {
+            if (typeof item === 'string') return item
+            if (item && typeof item === 'object' && typeof item.version === 'string') return item.version
+            return ''
+          })
+          .filter(v => typeof v === 'string' && /^\d+\.\d+/.test(v))
+        if (!versions.length) return ''
+        // 按 semver 数字比较,避免 "3.10.0" 字典序 < "3.9.0" 的坑
+        return versions.slice().sort(compareSemver).pop() || ''
+      }
+      if (typeof value.version === 'string' && /^\d+\.\d+/.test(value.version)) return value.version
+      if (typeof value.VERSION === 'string' && /^\d+\.\d+/.test(value.VERSION)) return value.VERSION
+      // 兜底:遍历自身属性找 semver 字符串(\d+\.\d+\.\d+)
+      try {
+        for (const key of Object.keys(value)) {
+          const v = value[key]
+          if (typeof v === 'string' && v.length < 20 && /^\d+\.\d+\.\d+$/.test(v)) return v
+        }
+      } catch {
+        // 跨 origin / Proxy 阻止访问属性时静默忽略
+      }
+      return ''
+    } catch {
+      return ''
     }
   }
 
@@ -941,7 +1045,10 @@ ${html}`
     const ruleResourceOnly = rule?.resourceOnly === true
     const globalName = !ruleResourceOnly && shouldMatchTarget(rule, 'globals') ? (rule.globals || []).find(name => hasGlobal(name)) : null
     if (globalName) {
-      return { confidence: '高', evidence: `存在 window.${globalName}` }
+      // 优先看规则上的 versionFrom 显式路径(jQuery.fn.jquery 这种非标准位置),
+      // 否则用通用启发(.version / .VERSION / 数组元素)
+      const version = (rule.versionFrom && extractGlobalVersion(rule.versionFrom)) || extractGlobalVersion(globalName)
+      return { confidence: '高', evidence: `存在 window.${globalName}`, version }
     }
 
     const selector =
@@ -949,7 +1056,19 @@ ${html}`
         ? (rule.selectors || []).find(selectorText => hasSelector(selectorText))
         : null
     if (selector) {
-      return { confidence: '高', evidence: `DOM 匹配 ${selector}` }
+      // 规则可声明 versionFromAttribute(例如 styled-components 把版本写在 <style data-styled-version="5.2.3">),
+      // 命中后从首个匹配元素抽属性值作为版本号
+      let version = ''
+      if (rule.versionFromAttribute) {
+        try {
+          const el = document.querySelector(selector)
+          const raw = el ? el.getAttribute(rule.versionFromAttribute) : ''
+          if (raw && /^\d+\.\d+/.test(raw)) version = raw
+        } catch {
+          // 选择器异常静默忽略
+        }
+      }
+      return { confidence: '高', evidence: `DOM 匹配 ${selector}`, version }
     }
 
     const classPrefix = !ruleResourceOnly
@@ -994,6 +1113,30 @@ ${html}`
     const formatUrlEvidence = resource =>
       resource === location.href ? `页面 URL 匹配 ${shortUrl(resource)}` : `资源 URL 匹配 ${shortUrl(resource)}`
 
+    // minPatternMatches=N:要求 N 条 patterns 都至少命中一个资源(组合 heuristic,e.g. shadcn-vue 需要至少 5 个标志性组件 chunk 同时出现才算)
+    // 这种 AND 检测必须绕过 combined optimization(combined 把 patterns OR 在一起,无法计数)
+    const minPatternMatches = Number(rule.minPatternMatches) || 0
+    if (minPatternMatches > 0) {
+      if (!matchResource) return null
+      const patterns = getCompiledRulePatterns(rule)
+      const hits: string[] = []
+      for (const pattern of patterns) {
+        for (const url of allResources) {
+          pattern.lastIndex = 0
+          if (pattern.test(url)) {
+            hits.push(url)
+            break
+          }
+        }
+      }
+      if (hits.length < minPatternMatches) return null
+      return {
+        confidence: rule.confidence || context.resourceConfidence || '中',
+        evidence: `资源 URL 匹配 ${shortUrl(hits[0])} 等 ${hits.length} 个`,
+        version: extractVersionFromUrl(rule, hits[0])
+      }
+    }
+
     const combined = getCompiledCombinedPattern(rule)
     if (combined) {
       if (matchResource) {
@@ -1004,7 +1147,8 @@ ${html}`
         if (resource) {
           return {
             confidence: rule.confidence || context.resourceConfidence || '高',
-            evidence: formatUrlEvidence(resource)
+            evidence: formatUrlEvidence(resource),
+            version: extractVersionFromUrl(rule, resource)
           }
         }
       }
@@ -1027,7 +1171,8 @@ ${html}`
         if (resource) {
           return {
             confidence: rule.confidence || context.resourceConfidence || '高',
-            evidence: formatUrlEvidence(resource)
+            evidence: formatUrlEvidence(resource),
+            version: extractVersionFromUrl(rule, resource)
           }
         }
       }
@@ -1309,14 +1454,21 @@ ${html}`
   }
 
   function createCollector(target) {
-    return function add(category, name, confidence, evidence) {
-      target.push({
+    return function add(category, name, confidence, evidence, extras) {
+      const tech: any = {
         category,
         name,
         confidence,
         evidence: evidence ? [String(evidence)] : [],
         source: '页面扫描'
-      })
+      }
+      if (extras && typeof extras.version === 'string' && extras.version) {
+        tech.version = extras.version
+      }
+      if (extras && typeof extras.url === 'string' && extras.url) {
+        tech.url = extras.url
+      }
+      target.push(tech)
     }
   }
 

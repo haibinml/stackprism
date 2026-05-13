@@ -231,6 +231,85 @@ export const matchesCompiledRulePatterns = (rule: any, text: string): boolean =>
   })
 }
 
+// bundle-license 扫到命中的 tech 后,从同一段文本里抽版本号
+// 优先用规则上声明的 versionPattern 抽 capture group[1];没声明就走通用启发(从 rule.name 推 token)
+const versionPatternCache = new WeakMap<any, RegExp | null>()
+const genericVersionPatternCache = new WeakMap<any, RegExp[] | null>()
+const REGEX_ESCAPE = /[.*+?^${}()|[\]\\]/g
+
+const buildGenericVersionPatterns = (rule: any): RegExp[] => {
+  const name = String(rule?.name || '').trim()
+  if (!name) return []
+  const patterns: RegExp[] = []
+  const escapedName = name.replace(REGEX_ESCAPE, '\\$&')
+  // 形式 1:`<Name> v?X.Y.Z`(license 注释最常见):React v18.3.0 / Day.js 1.11.0
+  try {
+    patterns.push(new RegExp(escapedName + '[\\s@:v]+v?(\\d+\\.\\d+(?:\\.\\d+)?)', 'i'))
+  } catch {
+    // ignore
+  }
+  // 形式 2:`<npm-token>@X.Y.Z`(npm 风格):react-router@7.12.0 / @vue/runtime-core@3.4.0
+  const npmToken = name
+    .toLowerCase()
+    .replace(/\.js$/i, '')
+    .replace(/\s*\/\s*.*$/, '') // 取 / 前主名:"飞书 / Lark 登录" → "飞书"
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9@/_-]/gi, '')
+  if (npmToken && npmToken !== name.toLowerCase()) {
+    try {
+      patterns.push(new RegExp('\\b' + npmToken.replace(REGEX_ESCAPE, '\\$&') + '@(\\d+\\.\\d+(?:\\.\\d+)?)', 'i'))
+    } catch {
+      // ignore
+    }
+  } else if (npmToken) {
+    try {
+      patterns.push(new RegExp('\\b' + npmToken.replace(REGEX_ESCAPE, '\\$&') + '@(\\d+\\.\\d+(?:\\.\\d+)?)', 'i'))
+    } catch {
+      // ignore
+    }
+  }
+  return patterns
+}
+
+export const extractVersionFromBundleText = (rule: any, text: string): string => {
+  if (!rule || !text) return ''
+  // 优先:规则上显式 versionPattern(精确)
+  if (typeof rule.versionPattern === 'string' && rule.versionPattern) {
+    let compiled = versionPatternCache.get(rule)
+    if (compiled === undefined) {
+      try {
+        compiled = new RegExp(rule.versionPattern, 'i')
+      } catch {
+        compiled = null
+      }
+      versionPatternCache.set(rule, compiled)
+    }
+    if (compiled) {
+      compiled.lastIndex = 0
+      const m = compiled.exec(text)
+      if (m) {
+        for (let i = 1; i < m.length; i++) {
+          const g = m[i]
+          if (typeof g === 'string' && /^\d+\.\d+/.test(g)) return g
+        }
+      }
+    }
+  }
+  // 回退:从 rule.name 自动推 token 跑通用版本号正则
+  let generic = genericVersionPatternCache.get(rule)
+  if (generic === undefined) {
+    generic = buildGenericVersionPatterns(rule)
+    genericVersionPatternCache.set(rule, generic.length ? generic : null)
+  }
+  if (!generic || !generic.length) return ''
+  for (const pattern of generic) {
+    pattern.lastIndex = 0
+    const m = pattern.exec(text)
+    if (m && typeof m[1] === 'string' && /^\d+\.\d+/.test(m[1])) return m[1]
+  }
+  return ''
+}
+
 export const matchesHeaderPatterns = (patterns: unknown, text: string, rule: any = {}): boolean => {
   if (!Array.isArray(patterns) || !patterns.length) {
     return false
@@ -253,14 +332,22 @@ export const matchesRuleTextHints = (rule: any, contextOrText: any): boolean => 
 }
 
 export const createCollector =
-  (target: any[], defaultSource?: string) => (category: string, name: string, confidence: string, evidence?: string) => {
-    target.push({
+  (target: any[], defaultSource?: string) =>
+  (category: string, name: string, confidence: string, evidence?: string, extras?: { version?: string; url?: string }) => {
+    const tech: any = {
       category,
       name,
       confidence,
       evidence: evidence ? [String(evidence)] : [],
       source: defaultSource
-    })
+    }
+    if (extras && typeof extras.version === 'string' && extras.version) {
+      tech.version = extras.version
+    }
+    if (extras && typeof extras.url === 'string' && extras.url) {
+      tech.url = extras.url
+    }
+    target.push(tech)
   }
 
 export const lower = (value: unknown): string => String(value || '').toLowerCase()

@@ -204,7 +204,7 @@
             "patterns": ["bitbucket\\.org/site/oauth2/authorize", "Bitbucket login"]
           },
           {
-            "name": "linux.do 登录",
+            "name": "LINUX DO 登录",
             "patterns": [
               "connect\\.linux\\.do/oauth2/authorize",
               "linux\\.do/oauth2?/authorize",

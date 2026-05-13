@@ -146,8 +146,13 @@
         {
           "name": "Teleport",
           "kind": "零信任访问 / 堡垒机",
-          "resourceHints": ["teleport"],
-          "patterns": ["teleport[^\\s\"'<>]*\\.(?:js|css|svg|png)(?:\\?|$)"]
+          "resourceHints": ["goteleport", "teleport.sh"],
+          "patterns": [
+            "(?:^|//)(?:[a-z0-9-]+\\.)*goteleport\\.com[/\"']",
+            "(?:^|//)[a-z0-9-]+\\.teleport\\.sh[/\"']",
+            "Teleport\\s+Cluster",
+            "(?:^|/)teleport-icon\\.(?:png|svg)(?:[?#\"'<>\\s]|$)"
+          ]
         },
         {
           "name": "Headscale",

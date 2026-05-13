@@ -81,7 +81,8 @@
           "name": "jQuery",
           "confidence": "高",
           "patterns": ["jquery(?:-\\d|\\.)"],
-          "globals": ["jQuery"]
+          "globals": ["jQuery"],
+          "versionFrom": "jQuery.fn.jquery"
         },
         {
           "defaults": {

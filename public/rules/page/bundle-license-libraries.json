@@ -11,24 +11,24 @@
           {
             "name": "React",
             "url": "https://react.dev",
-            "patterns": ["@license\\s+React\\b|react(?:\\.production|\\.development)?(?:\\.min)?\\.js|React\\s+v?\\d+\\.\\d+"]
-          },
-          {
-            "name": "React DOM",
-            "url": "https://react.dev",
-            "patterns": ["react-dom(?:\\.production|\\.development)?(?:\\.min)?\\.js|@license\\s+React[\\s\\S]{0,120}react-dom"]
+            "patterns": [
+              "@license\\s+React\\b|react(?:\\.production|\\.development)?(?:\\.min)?\\.js|React\\s+v?\\d+\\.\\d+|react-dom(?:\\.production|\\.development)?(?:\\.min)?\\.js"
+            ],
+            "versionPattern": "React\\s+v?(\\d+\\.\\d+(?:\\.\\d+)?)"
           },
           {
             "name": "Vue",
             "url": "https://vuejs.org",
             "patterns": [
               "Vue\\.js\\s+v?\\d+\\.\\d+|@vue/(?:runtime|shared|reactivity)|vue(?:\\.runtime)?(?:\\.global)?(?:\\.prod)?(?:\\.min)?\\.js"
-            ]
+            ],
+            "versionPattern": "Vue(?:\\.js)?\\s+v?(\\d+\\.\\d+(?:\\.\\d+)?)|@vue/(?:runtime|shared|reactivity)[^@\\s]*@(\\d+\\.\\d+(?:\\.\\d+)?)"
           },
           {
             "name": "Angular",
             "url": "https://angular.dev",
-            "patterns": ["@angular/(?:core|common|router)|Angular\\s+v?\\d+\\.\\d+"]
+            "patterns": ["@angular/(?:core|common|router)|Angular\\s+v?\\d+\\.\\d+"],
+            "versionPattern": "Angular\\s+v?(\\d+\\.\\d+(?:\\.\\d+)?)|@angular/(?:core|common|router)[^@\\s]*@(\\d+\\.\\d+(?:\\.\\d+)?)"
           },
           {
             "name": "Svelte",
@@ -48,7 +48,8 @@
           {
             "name": "Lit",
             "url": "https://lit.dev",
-            "patterns": ["@lit/(?:reactive-element|html)|\\bLit\\b[\\s\\S]{0,80}(?:license|copyright)"]
+            "patterns": ["@lit/(?:reactive-element|html)|\\bLit\\b[\\s\\S]{0,80}(?:license|copyright)"],
+            "versionPattern": "lit-html@(\\d+\\.\\d+(?:\\.\\d+)?)|lit-element@(\\d+\\.\\d+(?:\\.\\d+)?)|@lit/(?:reactive-element|html)[^@\\s]*@(\\d+\\.\\d+(?:\\.\\d+)?)"
           },
           {
             "name": "Alpine.js",
@@ -58,7 +59,8 @@
           {
             "name": "jQuery",
             "url": "https://jquery.com",
-            "patterns": ["jQuery\\s+v?\\d+\\.\\d+|jquery(?:\\.min)?\\.js|jquery\\.org/license"]
+            "patterns": ["jQuery\\s+v?\\d+\\.\\d+|jquery(?:\\.min)?\\.js|jquery\\.org/license"],
+            "versionPattern": "jQuery(?:\\s+JavaScript\\s+Library)?\\s+v?(\\d+\\.\\d+(?:\\.\\d+)?)"
           },
           {
             "name": "clipboard.js",
@@ -73,12 +75,14 @@
           {
             "name": "Lodash",
             "url": "https://lodash.com",
-            "patterns": ["\\bLodash\\b|lodash(?:\\.min)?\\.js|lodash\\.com"]
+            "patterns": ["\\bLodash\\b|lodash(?:\\.min)?\\.js|lodash\\.com"],
+            "versionPattern": "Lodash[^\\d]{0,20}(\\d+\\.\\d+(?:\\.\\d+)?)|lodash@(\\d+\\.\\d+(?:\\.\\d+)?)"
           },
           {
             "name": "Underscore.js",
             "url": "https://underscorejs.org",
-            "patterns": ["Underscore\\.js|underscore(?:\\.min)?\\.js|underscorejs\\.org"]
+            "patterns": ["Underscore\\.js|underscore(?:\\.min)?\\.js|underscorejs\\.org"],
+            "versionPattern": "Underscore\\.js[^\\d]{0,20}(\\d+\\.\\d+(?:\\.\\d+)?)|underscore@(\\d+\\.\\d+(?:\\.\\d+)?)"
           },
           {
             "name": "RxJS",
@@ -88,7 +92,8 @@
           {
             "name": "Axios",
             "url": "https://axios-http.com",
-            "patterns": ["\\bAxios\\b\\s+v?\\d+\\.\\d+|axios(?:\\.min)?\\.js|axios is freely distributable"]
+            "patterns": ["\\bAxios\\b\\s+v?\\d+\\.\\d+|axios(?:\\.min)?\\.js|axios is freely distributable"],
+            "versionPattern": "Axios\\s+v?(\\d+\\.\\d+(?:\\.\\d+)?)|axios@(\\d+\\.\\d+(?:\\.\\d+)?)"
           },
           {
             "name": "date-fns",
@@ -175,7 +180,8 @@
           {
             "name": "GSAP",
             "url": "https://gsap.com",
-            "patterns": ["GreenSock|GSAP|gsap(?:\\.min)?\\.js"]
+            "patterns": ["GreenSock|GSAP|gsap(?:\\.min)?\\.js"],
+            "versionPattern": "GSAP\\s+v?(\\d+\\.\\d+(?:\\.\\d+)?)|gsap@(\\d+\\.\\d+(?:\\.\\d+)?)"
           },
           {
             "name": "Swiper",
@@ -185,7 +191,8 @@
           {
             "name": "Redux",
             "url": "https://redux.js.org",
-            "patterns": ["\\bRedux\\b|redux(?:\\.min)?\\.js"]
+            "patterns": ["\\bRedux\\b|redux(?:\\.min)?\\.js"],
+            "versionPattern": "Redux\\s+v?(\\d+\\.\\d+(?:\\.\\d+)?)|redux@(\\d+\\.\\d+(?:\\.\\d+)?)"
           },
           {
             "name": "Zustand",
@@ -200,7 +207,8 @@
           {
             "name": "React Router",
             "url": "https://reactrouter.com",
-            "patterns": ["react-router|React Router"]
+            "patterns": ["react-router|React Router"],
+            "versionPattern": "React Router\\s+v?(\\d+\\.\\d+(?:\\.\\d+)?)|react-router(?:-dom)?@(\\d+\\.\\d+(?:\\.\\d+)?)"
           },
           {
             "name": "Radix UI",
@@ -347,7 +355,8 @@
             "category": "UI / CSS 框架",
             "name": "styled-components",
             "url": "https://styled-components.com",
-            "patterns": ["styled-components|styled-components\\.com"]
+            "patterns": ["styled-components|styled-components\\.com"],
+            "versionPattern": "styled-components@(\\d+\\.\\d+(?:\\.\\d+)?)|styled-components\\s+v?(\\d+\\.\\d+(?:\\.\\d+)?)"
           },
           {
             "category": "UI / CSS 框架",
@@ -535,17 +544,20 @@
           {
             "name": "Vue Router",
             "url": "https://router.vuejs.org",
-            "patterns": ["vue-router|Vue Router|router\\.vuejs\\.org"]
+            "patterns": ["vue-router|Vue Router|router\\.vuejs\\.org"],
+            "versionPattern": "Vue Router\\s+v?(\\d+\\.\\d+(?:\\.\\d+)?)|vue-router@(\\d+\\.\\d+(?:\\.\\d+)?)"
           },
           {
             "name": "Pinia",
             "url": "https://pinia.vuejs.org",
-            "patterns": ["\\bPinia\\b|pinia\\.vuejs\\.org|vuejs/pinia"]
+            "patterns": ["\\bPinia\\b|pinia\\.vuejs\\.org|vuejs/pinia"],
+            "versionPattern": "Pinia\\s+v?(\\d+\\.\\d+(?:\\.\\d+)?)|pinia@(\\d+\\.\\d+(?:\\.\\d+)?)"
           },
           {
             "name": "Vuex",
             "url": "https://vuex.vuejs.org",
-            "patterns": ["\\bVuex\\b|vuex\\.vuejs\\.org|vuejs/vuex"]
+            "patterns": ["\\bVuex\\b|vuex\\.vuejs\\.org|vuejs/vuex"],
+            "versionPattern": "Vuex\\s+v?(\\d+\\.\\d+(?:\\.\\d+)?)|vuex@(\\d+\\.\\d+(?:\\.\\d+)?)"
           },
           {
             "name": "VueUse",

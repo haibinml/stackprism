@@ -124,6 +124,19 @@
             "patterns": ["@radix-ui|data-radix|radix-"]
           },
           {
+            "name": "Reka UI",
+            "url": "https://reka-ui.com",
+            "patterns": [
+              "(?:^|/)(?:reka-ui|radix-vue)(?:@[\\d.]+)?(?:/[^?#\"'<>\\s]+)?\\.(?:js|m?js)(?:[?#\"'<>\\s]|$)",
+              "@reka-ui/|@radix-vue/",
+              "data-reka-",
+              "(?:^|/)useGraceArea-[A-Za-z0-9_-]+\\.js",
+              "(?:^|/)useForwardExpose-[A-Za-z0-9_-]+\\.js",
+              "(?:^|/)useTypeahead-[A-Za-z0-9_-]+\\.js",
+              "(?:^|/)useFocusGuards-[A-Za-z0-9_-]+\\.js"
+            ]
+          },
+          {
             "name": "Headless UI",
             "patterns": ["headlessui|data-headlessui-state"]
           },
@@ -268,7 +281,23 @@
         "rules": [
           {
             "name": "Lodash",
-            "patterns": ["lodash(?:\\.min)?\\.js|lodash-es"]
+            "patterns": ["lodash(?:\\.min)?\\.js|lodash-es"],
+            "globals": ["_.runInContext"],
+            "versionFrom": "_.VERSION"
+          },
+          {
+            "name": "Hammer.js",
+            "url": "https://hammerjs.github.io",
+            "patterns": ["(?:^|/)hammer(?:\\.min)?\\.js(?:[?#\"'<>\\s]|$)|hammerjs"],
+            "globals": ["Hammer"],
+            "versionFrom": "Hammer.VERSION"
+          },
+          {
+            "name": "core-js",
+            "url": "https://github.com/zloirock/core-js",
+            "patterns": ["(?:^|/)core-js(?:[@/])"],
+            "globals": ["__core-js_shared__"],
+            "versionFrom": "__core-js_shared__.versions"
           },
           {
             "name": "Underscore.js",
@@ -426,7 +455,15 @@
           {
             "name": "GSAP",
             "patterns": ["gsap(?:\\.min)?\\.js|greensock"],
-            "globals": ["gsap", "TweenMax"]
+            "globals": ["gsap", "TweenMax", "TweenLite"]
+          },
+          {
+            "name": "React Router",
+            "url": "https://reactrouter.com",
+            "patterns": [
+              "(?:^|/)react-router(?:-dom)?(?:@[\\d.]+)?(?:/[^\\s\"'<>]+)?\\.(?:m?js|cjs)(?:[?#\"'<>\\s]|$)"
+            ],
+            "globals": ["ReactRouter", "ReactRouterDOM"]
           },
           {
             "name": "Anime.js",
@@ -577,6 +614,27 @@
             "name": "Ably JS",
             "patterns": ["cdn\\.ably\\.com|ably(?:\\.min)?\\.js"],
             "globals": ["Ably"]
+          },
+          {
+            "name": "Prism",
+            "patterns": [
+              "(?:^|/)prism(?:-[a-z0-9-]+)?(?:\\.min)?\\.js(?:[?#\"'<>\\s]|$)",
+              "prismjs/components",
+              "@license[\\s\\S]{0,80}prismjs"
+            ],
+            "globals": ["Prism"],
+            "selectors": ["pre[class*=\"language-\"]", "code[class*=\"language-\"]"]
+          },
+          {
+            "name": "Lucide",
+            "patterns": [
+              "(?:^|/)lucide(?:-(?:react|vue|svelte|angular|preact|solid))?(?:@[\\d.]+)?(?:\\.min)?\\.js(?:[?#\"'<>\\s]|$)",
+              "(?:^|/)lucide-static/",
+              "@lucide\\/",
+              "unpkg\\.com/lucide"
+            ],
+            "globals": ["lucide"],
+            "selectors": ["svg.lucide", "svg[class*=\"lucide-\"]"]
           }
         ]
       },

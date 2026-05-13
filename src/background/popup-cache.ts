@@ -36,6 +36,23 @@ export const getStoredUpdatedAt = (data: any) =>
 
 const unique = (items: any[]) => [...new Set(items.filter(Boolean))]
 
+// 按 semver 数字段比较版本号("3.10.0" > "3.9.0",避免字典序坑)
+const compareVersions = (a: string, b: string): number => {
+  const parse = (s: string) =>
+    String(s || '')
+      .split('.')
+      .map(x => parseInt(x, 10) || 0)
+  const aa = parse(a)
+  const bb = parse(b)
+  const len = Math.max(aa.length, bb.length)
+  for (let i = 0; i < len; i++) {
+    const av = aa[i] || 0
+    const bv = bb[i] || 0
+    if (av !== bv) return av - bv
+  }
+  return 0
+}
+
 const buildSettingsCacheKey = (settings: any = {}) =>
   JSON.stringify({
     disabledCategories: cleanStringArray(settings.disabledCategories),
@@ -68,14 +85,20 @@ const compareDisplayTechnologies = (a: any, b: any) => {
   return a.name.localeCompare(b.name)
 }
 
-const cleanPopupTechnology = (tech: any) => ({
-  category: String(tech?.category || '其他库').slice(0, 80),
-  name: String(tech?.name || '').slice(0, 160),
-  confidence: ['高', '中', '低'].includes(tech?.confidence) ? tech.confidence : '中',
-  evidence: cleanStringArray(tech?.evidence).slice(0, 8),
-  sources: cleanStringArray(tech?.sources).slice(0, 8),
-  url: cleanTechnologyUrl(tech?.url)
-})
+const cleanPopupTechnology = (tech: any) => {
+  const out: any = {
+    category: String(tech?.category || '其他库').slice(0, 80),
+    name: String(tech?.name || '').slice(0, 160),
+    confidence: ['高', '中', '低'].includes(tech?.confidence) ? tech.confidence : '中',
+    evidence: cleanStringArray(tech?.evidence).slice(0, 8),
+    sources: cleanStringArray(tech?.sources).slice(0, 8),
+    url: cleanTechnologyUrl(tech?.url)
+  }
+  if (tech?.version && typeof tech.version === 'string') {
+    out.version = String(tech.version).slice(0, 32)
+  }
+  return out
+}
 
 const buildTechnologyCounts = (technologies: any[]) => ({
   total: technologies.length,
@@ -177,10 +200,15 @@ const mergeDisplayTechnologyRecords = (items: any[]) => {
       evidence: [] as string[],
       evidenceSet: new Set<string>(),
       sources: new Set<string>(),
-      url: item.url || ''
+      url: item.url || '',
+      version: item.version || ''
     }
     if (!current.url && item.url) {
       current.url = item.url
+    }
+    // 同一 tech 多次命中:取数值更大的版本号(按 semver 比较)
+    if (item.version && (!current.version || compareVersions(item.version, current.version) > 0)) {
+      current.version = item.version
     }
     current.confidence = strongerConfidence(current.confidence, item.confidence || '低')
     for (const evidence of item.evidence || []) {
@@ -196,14 +224,18 @@ const mergeDisplayTechnologyRecords = (items: any[]) => {
   }
 
   return [...map.values()]
-    .map(item => ({
-      category: item.category,
-      name: item.name,
-      confidence: item.confidence,
-      url: item.url,
-      evidence: cleanMergedTechnologyEvidence(item.evidence).slice(0, 8),
-      sources: [...item.sources]
-    }))
+    .map(item => {
+      const out: any = {
+        category: item.category,
+        name: item.name,
+        confidence: item.confidence,
+        url: item.url,
+        evidence: cleanMergedTechnologyEvidence(item.evidence).slice(0, 8),
+        sources: [...item.sources]
+      }
+      if (item.version) out.version = item.version
+      return out
+    })
     .sort(compareDisplayTechnologies)
 }
 
@@ -503,14 +535,20 @@ const cleanPageResources = (resources: any) => ({
 export const cleanTechnologyRecords = (items: any) => {
   if (!Array.isArray(items)) return []
   return items
-    .map(item => ({
-      category: String(item?.category || '其他库').slice(0, 80),
-      name: String(item?.name || '').slice(0, 160),
-      confidence: ['高', '中', '低'].includes(item?.confidence) ? item.confidence : '中',
-      evidence: cleanStringArray(item?.evidence).slice(0, 12),
-      source: String(item?.source || '页面扫描').slice(0, 80),
-      url: cleanTechnologyUrl(item?.url)
-    }))
+    .map(item => {
+      const out: any = {
+        category: String(item?.category || '其他库').slice(0, 80),
+        name: String(item?.name || '').slice(0, 160),
+        confidence: ['高', '中', '低'].includes(item?.confidence) ? item.confidence : '中',
+        evidence: cleanStringArray(item?.evidence).slice(0, 12),
+        source: String(item?.source || '页面扫描').slice(0, 80),
+        url: cleanTechnologyUrl(item?.url)
+      }
+      if (item?.version && typeof item.version === 'string') {
+        out.version = String(item.version).slice(0, 32)
+      }
+      return out
+    })
     .filter(item => item.name)
     .slice(0, 400)
 }

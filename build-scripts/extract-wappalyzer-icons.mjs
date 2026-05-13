@@ -21,6 +21,25 @@ const MANIFEST_PATH = path.join(repoRoot, 'src', 'ui', 'components', 'skills-ind
 // service worker / page-detector 在运行时硬编码塞到识别结果里、不在 rules JSON 中出现的技术名
 const EXTRA_NAMES = ['HTTP/2', 'HTTP/3', 'HTTPS']
 
+// 规则 name → Wappalyzer 图标文件 basename(不带后缀)的手写别名。
+// 用在自动 slug 匹配 + 首词兜底都查不到 Wappalyzer 图标时,作为最后一档兜底。
+// key 是我们规则里的 tech.name(原文,大小写区分);value 是 Wappalyzer images/icons/ 下的文件名
+const ICON_NAME_ALIASES = {
+  'Hotwire Turbo': 'Turbo',
+  AWS: 'Amazon Web Services',
+  'AWS CloudFront': 'Amazon Cloudfront',
+  'AWS S3 / Static Hosting': 'Amazon S3',
+  'shadcn-vue': 'shadcn-ui',
+  'Tencent EdgeOne': 'EdgeOne'
+}
+
+// 首词品牌别名:把我们规则常用的简写品牌前缀映射到 Wappalyzer 命名风格,
+// 让首词兜底也能正确命中(AWS Bedrock / AWS Amplify / AWS Textract 等都走 Amazon Web Services 主 logo)
+const BRAND_FIRST_WORD_ALIASES = {
+  AWS: 'Amazon Web Services',
+  Alibaba: 'Alibaba Cloud'
+}
+
 if (!fs.existsSync(ICON_DIR)) {
   console.error(`找不到 Wappalyzer 图标目录:${ICON_DIR}`)
   console.error('请设置环境变量 WAPPALYZER_ICON_DIR 指向本地安装的 images/icons 目录')
@@ -87,6 +106,12 @@ fs.mkdirSync(OUTPUT_DIR, { recursive: true })
 
 // 给定一个 name,返回命中的 Wappalyzer slug(可能跟 localKey 不同,例如 cloudflarewebanalytics → cloudflare)
 const matchWappalyzerSlug = name => {
+  // 0. 手写 alias 优先:Hotwire Turbo → Turbo 之类拼接 / 复合命名的特殊情况
+  const aliased = ICON_NAME_ALIASES[name]
+  if (aliased) {
+    const aliasSlug = normalize(aliased)
+    if (aliasSlug && iconBySlug.has(aliasSlug)) return aliasSlug
+  }
   const base = primaryName(name)
   const fullSlug = normalize(base)
   if (iconBySlug.has(fullSlug)) return fullSlug
@@ -94,7 +119,9 @@ const matchWappalyzerSlug = name => {
   // "Microsoft Teams" → "Microsoft"。会用品牌主 logo,牺牲一点准确度换覆盖率
   const firstWord = base.split(/\s+/)[0]
   if (!firstWord) return null
-  const firstSlug = normalize(firstWord)
+  // 先经过品牌别名(AWS → Amazon Web Services),再走 slug 匹配
+  const brandAliased = BRAND_FIRST_WORD_ALIASES[firstWord] || firstWord
+  const firstSlug = normalize(brandAliased)
   if (firstSlug && firstSlug !== fullSlug && iconBySlug.has(firstSlug)) return firstSlug
   return null
 }
@@ -142,8 +169,8 @@ for (const name of ruleNames) {
 // 自定义图标比 Wappalyzer 优先
 if (fs.existsSync(CUSTOM_DIR)) {
   for (const f of fs.readdirSync(CUSTOM_DIR)) {
-    if (!f.endsWith('.svg') && !f.endsWith('.png')) continue
-    const slug = normalize(f.replace(/\.(svg|png)$/i, ''))
+    if (!/\.(svg|png|ico)$/i.test(f)) continue
+    const slug = normalize(f.replace(/\.(svg|png|ico)$/i, ''))
     if (!slug) continue
     const ext = path.extname(f).toLowerCase().slice(1)
     const filename = slug + '.' + ext

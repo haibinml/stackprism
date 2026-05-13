@@ -60,6 +60,18 @@
           "selectors": ["link[rel=\"manifest\"]"]
         },
         {
+          "name": "Open Graph",
+          "url": "https://ogp.me",
+          "confidence": "高",
+          "selectors": ["meta[property^=\"og:\"]"]
+        },
+        {
+          "name": "Priority Hints",
+          "url": "https://developer.mozilla.org/docs/Web/HTML/Attributes/fetchpriority",
+          "confidence": "高",
+          "selectors": ["[fetchpriority]"]
+        },
+        {
           "category": "安全与协议",
           "name": "WebSocket",
           "confidence": "中",

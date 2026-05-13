@@ -12,7 +12,45 @@
   const props = defineProps<{
     name: string
     large?: boolean
+    url?: string
   }>()
+
+  // 这些域名是"非品牌官网"集散地,拉 favicon 等于拿 GitHub/npm/MDN 的章鱼/方块图,没意义
+  const FAVICON_HOST_BLOCKLIST = new Set([
+    'github.com',
+    'gitlab.com',
+    'bitbucket.org',
+    'codeberg.org',
+    'sourceforge.net',
+    'npmjs.com',
+    'www.npmjs.com',
+    'wordpress.org',
+    'drupal.org',
+    'packagist.org',
+    'cdnjs.com',
+    'unpkg.com',
+    'jsdelivr.com',
+    'cdn.jsdelivr.net',
+    'yarnpkg.com',
+    'pypi.org',
+    'mvnrepository.com',
+    'nuget.org',
+    'rubygems.org',
+    'crates.io',
+    'hex.pm',
+    'pkg.go.dev',
+    'pub.dev',
+    'developer.mozilla.org',
+    'w3.org',
+    'www.w3.org',
+    'spec.whatwg.org',
+    'tc39.es',
+    'caniuse.com',
+    'web.dev',
+    'developers.google.com',
+    'docs.microsoft.com',
+    'learn.microsoft.com'
+  ])
 
   const TIMEOUT_MS = 2000
 
@@ -71,7 +109,20 @@
 
   const skillsIndex = skillsIndexFile.skillsIndex as Record<string, string>
 
-  // 链式 fallback:本地图标 → cdn.simpleicons.org → 文字色块
+  // 从 tech 的官网 URL 推出 favicon 兜底地址。github/npm/wordpress 等"非品牌官网"集散地直接放弃
+  const buildFaviconUrl = (rawUrl: string | undefined): string => {
+    if (!rawUrl) return ''
+    try {
+      const u = new URL(rawUrl)
+      if (!/^https?:$/.test(u.protocol)) return ''
+      if (FAVICON_HOST_BLOCKLIST.has(u.host.toLowerCase())) return ''
+      return `${u.origin}/favicon.ico`
+    } catch {
+      return ''
+    }
+  }
+
+  // 链式 fallback:本地图标 → cdn.simpleicons.org → 官网 favicon → 文字色块
   const buildSources = (): string[] => {
     const sources: string[] = []
     const localKey = normalize(primaryName(props.name))
@@ -82,13 +133,66 @@
     }
     const cdnSlug = toCdnSlug(props.name)
     if (cdnSlug) sources.push(`https://cdn.simpleicons.org/${cdnSlug}`)
+    const favicon = buildFaviconUrl(props.url)
+    if (favicon) sources.push(favicon)
     return sources
   }
 
-  const sources = buildSources()
+  // popup 进程级 cache:同一个 origin 只 fetch 一次 HTML,避免重复网络请求
+  // (popup 关闭就丢,反正下次重开会重新拉,缓存语义足够)
+  // 返回 [iconUrl, appleTouchUrl]:对应 fallback 链第 4 / 第 5 档
+  const faviconResolveCache = new Map<string, Promise<[string, string]>>()
+
+  const resolveFaviconFromHtml = (origin: string): Promise<[string, string]> => {
+    if (faviconResolveCache.has(origin)) return faviconResolveCache.get(origin)!
+    const promise = (async (): Promise<[string, string]> => {
+      try {
+        const res = await fetch(origin, { credentials: 'omit', cache: 'force-cache' })
+        if (!res.ok) return ['', '']
+        const html = await res.text()
+        const iconCandidates: Array<{ url: string; score: number }> = []
+        const appleCandidates: Array<{ url: string; score: number }> = []
+        const linkRe = /<link\b[^>]+>/gi
+        let m: RegExpExecArray | null
+        while ((m = linkRe.exec(html))) {
+          const tag = m[0]
+          const rel = /\brel\s*=\s*["']([^"']+)["']/i.exec(tag)?.[1] || ''
+          const href = /\bhref\s*=\s*["']([^"']+)["']/i.exec(tag)?.[1] || ''
+          if (!href) continue
+          const lowerRel = rel.toLowerCase()
+          const isApple = lowerRel.includes('apple-touch-icon')
+          const isIcon = !isApple && /\bicon\b|mask-icon/.test(lowerRel)
+          if (!isIcon && !isApple) continue
+          const sizes = /\bsizes\s*=\s*["']([^"']+)["']/i.exec(tag)?.[1] || ''
+          const sizeM = /(\d+)x(\d+)/i.exec(sizes)
+          const size = sizeM ? Math.min(Number(sizeM[1]), Number(sizeM[2])) : 0
+          let abs: string
+          try {
+            abs = new URL(href, origin).toString()
+          } catch {
+            continue
+          }
+          // 同类型内:SVG 矢量最优,然后按 size 排
+          let score = size
+          if (/\.svg(?:$|[?#])/i.test(abs)) score += 1000
+          ;(isApple ? appleCandidates : iconCandidates).push({ url: abs, score })
+        }
+        iconCandidates.sort((a, b) => b.score - a.score)
+        appleCandidates.sort((a, b) => b.score - a.score)
+        return [iconCandidates[0]?.url || '', appleCandidates[0]?.url || '']
+      } catch {
+        return ['', '']
+      }
+    })()
+    faviconResolveCache.set(origin, promise)
+    return promise
+  }
+
+  const sources = ref<string[]>(buildSources())
   const sourceIndex = ref(0)
-  const iconUrl = computed(() => sources[sourceIndex.value] || '')
-  const iconState = ref<'pending' | 'loaded' | 'failed'>(sources.length > 0 ? 'pending' : 'failed')
+  const iconUrl = computed(() => sources.value[sourceIndex.value] || '')
+  const iconState = ref<'pending' | 'loaded' | 'failed'>(sources.value.length > 0 ? 'pending' : 'failed')
+  let triedHtmlResolve = false
 
   let timeoutHandle: ReturnType<typeof setTimeout> | null = null
 
@@ -104,14 +208,44 @@
     iconState.value = 'loaded'
   }
 
+  // 当前 source 失败,尝试下一档;预设兜底全跑完后,异步去 fetch HTML 解析 link[rel=icon] 找真正 favicon
+  const tryHtmlResolve = async (): Promise<boolean> => {
+    if (triedHtmlResolve) return false
+    triedHtmlResolve = true
+    if (!props.url) return false
+    let origin = ''
+    try {
+      const u = new URL(props.url)
+      if (!/^https?:$/.test(u.protocol)) return false
+      if (FAVICON_HOST_BLOCKLIST.has(u.host.toLowerCase())) return false
+      origin = u.origin
+    } catch {
+      return false
+    }
+    const [iconUrl, appleUrl] = await resolveFaviconFromHtml(origin)
+    // 严格按用户要求的优先级:link[rel=icon] 在前(第 4 档),link[rel=apple-touch-icon] 在后(第 5 档)
+    const added: string[] = []
+    if (iconUrl && !sources.value.includes(iconUrl)) added.push(iconUrl)
+    if (appleUrl && !sources.value.includes(appleUrl)) added.push(appleUrl)
+    if (!added.length) return false
+    sources.value.push(...added)
+    sourceIndex.value = sources.value.length - added.length
+    iconState.value = 'pending'
+    return true
+  }
+
   const onError = () => {
-    // 当前 source 失败,尝试下一档兜底;全失败就回落文字色块
-    if (sourceIndex.value < sources.length - 1) {
+    if (sourceIndex.value < sources.value.length - 1) {
       sourceIndex.value++
       return
     }
-    clearTimer()
-    iconState.value = 'failed'
+    // 所有预设源失败:开 HTML 解析兜底(只做一次,异步)
+    tryHtmlResolve().then(ok => {
+      if (!ok) {
+        clearTimer()
+        iconState.value = 'failed'
+      }
+    })
   }
 
   onMounted(() => {
