@@ -130,11 +130,6 @@
                   >
                     <span :class="['tech-chip', techChipClass(tech)]" aria-hidden="true">{{ techInitial(tech) }}</span>
                     <span class="tech-row-name">{{ tech.name }}</span>
-                    <span
-                      :class="['confidence-dot', confidenceClass(tech.confidence)]"
-                      :title="`${tech.confidence}置信度`"
-                      aria-hidden="true"
-                    ></span>
                   </button>
                 </div>
               </section>
@@ -1628,14 +1623,14 @@
     text-transform: none;
   }
 
-  // 同类目里多个技术按 grid 排开:每个单元宽度自适应 140px+,popup 默认宽度下能塞下 2~3 列
+  // 同类目里多个技术用 flex-wrap 排开:按内容宽度自然换行,密度更高
   .tech-grid {
-    display: grid;
-    gap: 4px;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
   }
 
-  // 单个技术 chip:色块图标 + 名字 + 置信度状态点
+  // 单个技术 chip:色块图标 + 名字
   .tech-row {
     align-items: center;
     background: transparent;
@@ -1643,11 +1638,9 @@
     border-radius: 5px;
     color: var(--text);
     cursor: pointer;
-    display: grid;
+    display: inline-flex;
     font: inherit;
     gap: 6px;
-    grid-template-columns: 18px 1fr 7px;
-    min-width: 0;
     padding: 4px 8px;
     text-align: left;
     transition: background 0.15s ease;
@@ -1715,24 +1708,6 @@
     font-size: 16px;
     height: 36px;
     width: 36px;
-  }
-
-  // 置信度状态点:6px 圆点,颜色继承 confidence-* token
-  .confidence-dot {
-    border-radius: 50%;
-    flex-shrink: 0;
-    height: 7px;
-    width: 7px;
-
-    &.high {
-      background: var(--confidence-high-text);
-    }
-    &.medium {
-      background: var(--confidence-medium-text);
-    }
-    &.low {
-      background: var(--confidence-low-text);
-    }
   }
 
   // 详情面板里仍保留的彩色置信度徽章(详情视图里信息密度低,徽章撑得开)
