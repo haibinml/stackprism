@@ -1,0 +1,107 @@
+#!/usr/bin/env node
+// 从本地安装的 Wappalyzer 扩展抽取与我们 rules name 命中的图标,放到 public/icons/tech/<slug>.{svg,png}
+// 用法:WAPPALYZER_ICON_DIR=<wappalyzer 安装目录的 images/icons> node build-scripts/extract-wappalyzer-icons.mjs
+// 默认到百分浏览器(Cent Browser)的 Wappalyzer 6.12.2 安装路径找
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const repoRoot = path.resolve(__dirname, '..')
+
+const DEFAULT_DIR =
+  'C:/Users/19622/AppData/Local/CentBrowser/User Data/Default/Extensions/gppongmhjkpfnbhagpmjfkannfbllamg/6.12.2_0/images/icons'
+const ICON_DIR = process.env.WAPPALYZER_ICON_DIR || DEFAULT_DIR
+const RULES_DIR = path.join(repoRoot, 'public', 'rules')
+const OUTPUT_DIR = path.join(repoRoot, 'public', 'icons', 'tech')
+
+if (!fs.existsSync(ICON_DIR)) {
+  console.error(`找不到 Wappalyzer 图标目录:${ICON_DIR}`)
+  console.error('请设置环境变量 WAPPALYZER_ICON_DIR 指向本地安装的 images/icons 目录')
+  process.exit(1)
+}
+
+const collectNames = (node, out) => {
+  if (!node || typeof node !== 'object') return
+  if (Array.isArray(node)) {
+    for (const i of node) collectNames(i, out)
+    return
+  }
+  if (typeof node.name === 'string') out.add(node.name.trim())
+  for (const v of Object.values(node)) collectNames(v, out)
+}
+
+const walk = (dir, files = []) => {
+  for (const e of fs.readdirSync(dir)) {
+    const p = path.join(dir, e)
+    if (fs.statSync(p).isDirectory()) walk(p, files)
+    else if (e.endsWith('.json')) files.push(p)
+  }
+  return files
+}
+
+const slugify = raw =>
+  String(raw || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '')
+
+// 收 Wappalyzer 图标库:filename → [候选文件名(可能多种扩展名)]
+const iconBySlug = new Map()
+for (const f of fs.readdirSync(ICON_DIR)) {
+  if (!f.endsWith('.svg') && !f.endsWith('.png')) continue
+  const slug = slugify(f.replace(/\.(svg|png)$/i, ''))
+  if (!slug) continue
+  if (!iconBySlug.has(slug)) iconBySlug.set(slug, [])
+  iconBySlug.get(slug).push(f)
+}
+
+// 收我们 rules 里所有 name
+const ruleNames = new Set()
+for (const f of walk(RULES_DIR)) {
+  try {
+    collectNames(JSON.parse(fs.readFileSync(f, 'utf8')), ruleNames)
+  } catch {
+    // ignore parse errors
+  }
+}
+
+// 清掉旧的输出目录,重新抽
+if (fs.existsSync(OUTPUT_DIR)) fs.rmSync(OUTPUT_DIR, { recursive: true, force: true })
+fs.mkdirSync(OUTPUT_DIR, { recursive: true })
+
+let copied = 0
+let svgCount = 0
+let pngCount = 0
+let totalBytes = 0
+const manifest = {}
+const seenSlugs = new Set()
+for (const name of ruleNames) {
+  // 跟我们 TechChip 里的 slugify 算法保持一致:取 / 之前的部分,小写 + 去掉所有非字母数字
+  const slug = slugify(name.split('/')[0])
+  if (!slug || seenSlugs.has(slug)) continue
+  const candidates = iconBySlug.get(slug)
+  if (!candidates) continue
+
+  // 优先 svg
+  const file = candidates.find(c => c.endsWith('.svg')) || candidates[0]
+  const ext = path.extname(file).toLowerCase().slice(1)
+  const dst = path.join(OUTPUT_DIR, slug + '.' + ext)
+  fs.copyFileSync(path.join(ICON_DIR, file), dst)
+  seenSlugs.add(slug)
+  manifest[slug] = ext
+  copied++
+  totalBytes += fs.statSync(dst).size
+  if (ext === 'svg') svgCount++
+  else pngCount++
+}
+
+// 写出 manifest,运行时 TechChip 用它判断本地是否有图标、是 svg 还是 png,避免无意义 404
+const sortedManifest = {}
+for (const slug of Object.keys(manifest).sort()) sortedManifest[slug] = manifest[slug]
+const manifestPath = path.join(repoRoot, 'src', 'ui', 'components', 'local-icon-manifest.json')
+fs.writeFileSync(manifestPath, JSON.stringify(sortedManifest) + '\n', 'utf8')
+
+console.log(`抽取完成:${copied} 个图标 (svg: ${svgCount}, png: ${pngCount})`)
+console.log(`输出目录:${OUTPUT_DIR}`)
+console.log(`总大小:${(totalBytes / 1024 / 1024).toFixed(2)} MB`)
+console.log(`manifest:${manifestPath}`)

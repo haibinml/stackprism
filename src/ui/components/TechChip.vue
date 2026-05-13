@@ -7,6 +7,7 @@
 
 <script setup lang="ts">
   import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+  import localIconManifest from './local-icon-manifest.json'
 
   const props = defineProps<{
     name: string
@@ -46,12 +47,19 @@
     return (letter || raw.charAt(0)).toUpperCase()
   })
 
-  // 走 cdn.simpleicons.org/<slug> 拉 SVG 图标。
-  // SimpleIcons slug 规则:小写、空格/特殊字符删掉、`.` → `dot`、`+` → `plus`、`&` → `and`。
-  // 没收录的(中文名 / 站点自家脚本 / 兜底「疑似前端库」)slug 为空或 404,2s 超时回落文字色块
+  // 跟 build-scripts/extract-wappalyzer-icons.mjs 里的 slugify 保持一致:取 / 之前的部分,小写 + 去掉所有非字母数字
   const toSlug = (raw: string): string => {
-    const baseName = raw.split('/')[0].trim()
-    return baseName
+    return String(raw || '')
+      .split('/')[0]
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, '')
+  }
+
+  // SimpleIcons slug 规则:`.` → `dot`、`+` → `plus`、`&` → `and`,其它非字母数字删除
+  const toSimpleIconsSlug = (raw: string): string => {
+    return String(raw || '')
+      .split('/')[0]
+      .trim()
       .toLowerCase()
       .replace(/\./g, 'dot')
       .replace(/\+/g, 'plus')
@@ -59,13 +67,26 @@
       .replace(/[^a-z0-9]/g, '')
   }
 
-  const iconUrl = computed(() => {
-    const slug = toSlug(String(props.name || ''))
-    if (!slug) return ''
-    return `https://cdn.simpleicons.org/${slug}`
-  })
+  const manifest = localIconManifest as Record<string, 'svg' | 'png'>
 
-  const iconState = ref<'pending' | 'loaded' | 'failed'>(iconUrl.value ? 'pending' : 'failed')
+  // 链式 fallback:本地图标 → cdn.simpleicons.org → 文字色块
+  const buildSources = (): string[] => {
+    const sources: string[] = []
+    const localSlug = toSlug(props.name)
+    if (localSlug && manifest[localSlug]) {
+      const ext = manifest[localSlug]
+      // 在扩展内 popup / settings / help 页面下,chrome.runtime.getURL 给出绝对 chrome-extension:// URL
+      sources.push(chrome.runtime.getURL(`icons/tech/${localSlug}.${ext}`))
+    }
+    const cdnSlug = toSimpleIconsSlug(props.name)
+    if (cdnSlug) sources.push(`https://cdn.simpleicons.org/${cdnSlug}`)
+    return sources
+  }
+
+  const sources = buildSources()
+  const sourceIndex = ref(0)
+  const iconUrl = computed(() => sources[sourceIndex.value] || '')
+  const iconState = ref<'pending' | 'loaded' | 'failed'>(sources.length > 0 ? 'pending' : 'failed')
 
   let timeoutHandle: ReturnType<typeof setTimeout> | null = null
 
@@ -82,6 +103,11 @@
   }
 
   const onError = () => {
+    // 当前 source 加载失败,尝试下一档兜底;全失败就回落文字色块
+    if (sourceIndex.value < sources.length - 1) {
+      sourceIndex.value++
+      return
+    }
     clearTimer()
     iconState.value = 'failed'
   }
@@ -137,8 +163,8 @@
       --tech-chip-bg: #6b7280;
     }
 
-    // 拿到 simpleicons 的 SVG 后:SVG 本身透明,色块底色会从镂空处透出来很丑;
-    // 这时候撤掉色块底色和圆角,让品牌图标原样显示
+    // 拿到 SVG 后:本身透明,色块底色会从镂空处透出来很丑;
+    // 撤掉底色和圆角,让品牌图标原样显示
     &.tech-chip-loaded {
       background: transparent;
       border-radius: 0;
@@ -152,7 +178,6 @@
     width: 36px;
   }
 
-  // favicon 拉到后,img 充满 chip 容器覆盖文字
   .tech-chip-img {
     height: 100%;
     object-fit: contain;
