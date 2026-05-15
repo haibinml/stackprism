@@ -108,7 +108,7 @@ Chrome 扩展有四种执行环境，StackPrism 全部用上：
 | ----------------------------- | ------------- | ------------------------------------ |
 | `GET_HEADER_DATA`             | popup → bg    | 拉取响应头记录                       |
 | `GET_POPUP_RESULT`            | popup → bg    | 拉取轻量缓存（弹窗主显示）           |
-| `GET_POPUP_RAW_RESULT`        | popup → bg    | 拉取完整 raw（原始线索 / 复制 JSON） |
+| `GET_POPUP_RAW_RESULT`        | popup → bg    | 拉取完整 raw（原始线索 / 纠错反馈）  |
 | `GET_TECH_LINK`               | popup → bg    | 兜底查询某技术的官网链接             |
 | `START_BACKGROUND_DETECTION`  | popup → bg    | 「刷新」按钮触发主动检测             |
 | `GET_WORDPRESS_THEME_DETAILS` | bg internal   | 抓取主题 style.css header            |

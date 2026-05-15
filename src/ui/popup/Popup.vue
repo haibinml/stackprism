@@ -286,6 +286,10 @@
           <FileCode :size="13" :stroke-width="2" />
           <span>原始线索</span>
         </RippleButton>
+        <RippleButton class="footer-tool-btn" title="复制全部技术栈报告" @click="copyTechStackReport">
+          <ClipboardList :size="13" :stroke-width="2" />
+          <span>复制全部</span>
+        </RippleButton>
       </div>
       <a class="footer-repo" :href="REPOSITORY_URL" target="_blank" rel="noreferrer" @click="openRepository">GitHub</a>
     </footer>
@@ -297,6 +301,7 @@
   import {
     ArrowUp,
     Ban,
+    ClipboardList,
     Copy,
     Download,
     ExternalLink,
@@ -332,6 +337,7 @@
   } from '@/utils/constants'
   import { cycleTheme, getStoredTheme, setStoredTheme, themeLabel, type ThemeMode } from '@/utils/theme'
   import { checkPageSupport } from '@/utils/page-support'
+  import { formatTechStackReport } from '@/utils/format-tech-stack'
 
   const RAW_LOADING_TEXT = '正在请求原始线索...'
 
@@ -841,6 +847,24 @@
     try {
       await navigator.clipboard.writeText(text)
       setStatus('已复制原始线索。', 'ok')
+    } catch (error: any) {
+      setStatus(`复制失败：${String(error?.message || error)}`, 'error')
+    }
+  }
+
+  const copyTechStackReport = async () => {
+    const result = state.result
+    if (!result) {
+      setStatus('暂无可复制的技术栈信息。', 'error')
+      return
+    }
+    if (!navigator.clipboard?.writeText) {
+      setStatus('当前浏览器不支持直接复制技术栈报告。', 'error')
+      return
+    }
+    try {
+      await navigator.clipboard.writeText(formatTechStackReport(result))
+      setStatus('已复制完整技术栈报告。', 'ok')
     } catch (error: any) {
       setStatus(`复制失败：${String(error?.message || error)}`, 'error')
     }
