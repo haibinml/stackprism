@@ -119,7 +119,7 @@ openssl genrsa -out extension.pem 2048
 - [ ] `pnpm run typecheck` 通过
 - [ ] `pnpm run lint` 通过
 - [ ] `pnpm run build` 通过
-- [ ] 在 chrome 里加载 `dist/` 手动测试关键路径（弹窗打开、识别一个站点、刷新、复制 JSON、设置页加规则）
+- [ ] 在 chrome 里加载 `dist/` 手动测试关键路径（弹窗打开、识别一个站点、刷新、复制完整技术栈报告、设置页加规则）
 - [ ] 把 `package.json` 的 version bump
 - [ ] git commit + push
 - [ ] 如果版本符合 release 节点，在 GitHub UI 发布 release（tag 为 `v{version}`，与 package.json 对齐）
