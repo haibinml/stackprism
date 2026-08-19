@@ -140,7 +140,7 @@ pnpm run docs:dev     # VitePress 文档站本地预览
 
 如果觉得有帮助,欢迎点 Star 让更多人看到这个项目。
 
-<img src="https://api.star-history.com/svg?repos=setube/stackprism&type=Date" style="width: 60%; height: auto;" alt="Star History">
+<img src="https://star-history.dera.page/svg?repos=setube/stackprism&type=Date" style="width: 60%; height: auto;" alt="Star History">
 
 ## 开源协议
 
